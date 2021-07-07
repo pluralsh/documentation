@@ -11,3 +11,4 @@ Plural is a unified application delivery platform built on kubernetes.  It aims 
 
 - [Getting Started](docs/GettingStarted.md)
 - [Secret Management](docs/SecretManagement.md)
+- [Admin Console Setup](docs/AdminConsole.md)

@@ -17,6 +17,7 @@ Finally, you'll want to install the plural cli.  This can actually be found usin
 
 ```bash
 curl -L https://app.plural.sh/artifacts/plural/plural?platform=${plat}&arch=${arch} > /on/your/path/plural
+chmod +x /on/your/path/plural
 ```
 
 Current values of (plat, arch) are:
@@ -100,7 +101,7 @@ The full `plural build && plural deploy` commands are only necessary if you have
 
 ```bash
 plural build --only ${app}
-plural deploy ${app}
+plural deploy
 git add . && git commit -m "updated ${app}" # don't forget to commit and push your changes!
 git push
 ```

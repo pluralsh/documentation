@@ -35,11 +35,11 @@ This will do a few things:
 * register all the users who have access in a yaml file under `${REPO_ROOT}/.plural-crypt`
 * age encrypt the file using all this information and store it under `${REPO_ROOT}/.plural-crypt`
 
-If you have the plural console deploy, it's also recommended you run:
+If you have the plural console deployed, it's also recommended you run:
 
 ```bash
 plural build --only console
-plural deploy console
+plural deploy
 git add . && git commit -m "set up age"
 git push
 ```
