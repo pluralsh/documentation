@@ -8,14 +8,14 @@ Before getting started with plural, you'll need to install a few dependencies:
 
 In addition, we require a few helm plugins to add additional features (like authenticated chartmuseum and diffing):
 
-```bash
+```shell
 helm plugin install https://github.com/chartmuseum/helm-push
 helm plugin install https://github.com/databus23/helm-diff
 ```
 
 Finally, you'll want to install the plural cli.  This can actually be found using plural's artifact registry here:
 
-```bash
+```shell
 curl -L https://app.plural.sh/artifacts/plural/plural?platform=${plat}&arch=${arch} > /on/your/path/plural
 chmod +x /on/your/path/plural
 ```
@@ -48,7 +48,7 @@ The state of your installation is stored in a fresh git repo.  Currently we're l
 
 Once your repo has been cloned, run:
 
-```bash
+```shell
 plural init
 ```
 
@@ -59,7 +59,7 @@ to log into plural, set the git attributes to configure encryption, and configur
 
 To install applications on plural, the preferred method is to use our installation bundles, which provide a wizard-like installation process across an apps entire dependency tree.  You can view the available bundles by navigating to the app on https://app.plural.sh or listing them via the cli using:
 
-```bash
+```shell
 plural bundle list <app-name>
 ```
 
@@ -67,7 +67,7 @@ If the app is paid, you should click on the bundle in the interface to ensure yo
 
 Once you've found the bundle you want and are ready to go, run this in the root of your repo:
 
-```bash
+```shell
 plural bundle install <app-name> <bundle-name>
 ```
 
@@ -77,7 +77,7 @@ You should be asked a lot of questions about how your app will be configured, wh
 
 With all bundles installed, simply run:
 
-```bash
+```shell
 plural build
 plural deploy
 ```
@@ -86,7 +86,7 @@ This will generate all deployment artifacts in the repo, then deploy them in dep
 
 Once you're finished, commit your changes and push them upstream.  This will be needed in case you use our admin console, which also uses git for state management:
 
-```bash
+```shell
 git add . && git commit -m "Initial plural setup"
 git push
 ```
@@ -99,7 +99,7 @@ Once `plural deploy` has completed, you should be ready to log in.  The login cr
 
 The full `plural build && plural deploy` commands are only necessary if you have a queue of multiple apps to be deployed that you need assistance with sequencing the installations.  If there's just a single targeted application to deploy, simply do:
 
-```bash
+```shell
 plural build --only ${app}
 plural deploy
 git add . && git commit -m "updated ${app}" # don't forget to commit and push your changes!
