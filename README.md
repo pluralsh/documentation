@@ -1,6 +1,6 @@
 # What is Plural?
 
-Plural is a unified application deployment platform that makes it easy to run open-source software on kubernetes. It aims to make applications as portable as possible, without sacrificing the ability for the users to own the applications they desire to use. Some key features of the platform include:
+Plural is a unified application deployment platform that makes it easy to run open-source software on Kubernetes. It aims to make applications as portable as possible, without sacrificing the ability for the users to own the applications they desire to use. Some key features of the platform include:
 
 * Automated Upgrades
 * Cross-tool dependency management
