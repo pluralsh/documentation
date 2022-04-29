@@ -18,28 +18,20 @@ The brew tap will install plural, alongside terraform, helm and kubectl for you.
 {% endtab %}
 
 {% tab title="curl" %}
-You can also download any of our vendored binaries via curl:
+You can download the binaries attached to our github releases here: [https://github.com/pluralsh/plural-cli/releases](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
+
+
+
+For example, you can download v0.2.57 for Darwin arm64 via:
 
 ```
-curl -L -o plural.o 'https://app.plural.sh/artifacts/plural/plural?platform={{plat}}&arch={{arch}}'
-chmod +x plural.o
-mv plural.o /usr/local/bin/plural
+curl -L -o plural.tgz 'https://github.com/pluralsh/plural-cli/releases/download/v0.2.57/plural-cli_0.2.57_Darwin_arm64.tar.gz'
+tar -xvf plural.tgz
+chmod +x plural
+mv plural /usr/local/bin/plural
 ```
 
 
-
-replace \{{plat\}} and \{{arch\}} with any of:
-
-| plat    | arch  |
-| ------- | ----- |
-| mac     | amd64 |
-| mac     | arm64 |
-| windows | amd64 |
-| linux   | amd64 |
-
-
-
-All binaries can also be viewed in the [artifacts tab ](https://app.plural.sh/repositories/b4ea03b9-d51f-4934-b030-ff864b720df6/artifacts)of the plural repo on app.plural.sh.  You can also find sha256 checksums for each there to guarantee file integrity
 
 You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here\
 

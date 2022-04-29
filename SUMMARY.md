@@ -5,8 +5,6 @@
 
 ## Introduction <a href="#quickstart" id="quickstart"></a>
 
-***
-
 * [Getting Started](getting-started/README.md)
   * [Cloud Shell](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
