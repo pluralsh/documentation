@@ -45,8 +45,3 @@
 * [Introduction](api/introduction/README.md)
   * [Plural API](api/introduction/plural-api.md)
   * [Console API](api/introduction/console-api.md)
-
-## Reference
-
-* [Glossary](reference/glossary.md)
-* [FAQ](reference/faq.md)
