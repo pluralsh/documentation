@@ -28,10 +28,10 @@ Finally it also provides the toolchain for publishing applications to the plural
 
 ### Plural Console
 
-The Plural Console is the operational hub for all applications managed by plural.  It is deployed in-cluster alongside applications and provides a few key features:
+The Plural Console is the operational hub for all applications managed by Plural.  It is deployed in-cluster alongside applications and provides a few key features:
 
 * Automated upgrades - by subscribing to the API's upgrade websocket
-* Observability - leveraging the dashboard and logging kuberentes CRDs deployed alongside plural applications
+* Observability - leveraging the dashboard and logging Kubernetes CRDs deployed alongside Plural applications
 * Support - in-person support can be handled in our chat interface available directly in the admin console, with a lot of nice features like direct zoom integration
 
 It's deployed as a highly available, scalable web service, with postgres as its datastore.  It also directly integrates with Plural's OIDC for login and user management.&#x20;
