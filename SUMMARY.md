@@ -8,7 +8,7 @@
 * [Getting Started](getting-started/README.md)
   * [Cloud Shell](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
-  * [Adding Kubecost for cost analysis](getting-started/adding-kubecost-for-cost-analysis.md)
+  * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
   * [Setting Up Third Party as DNS Provider](getting-started/dns-setup/README.md)
     * [Creating DNS Zone in Your Cloud Provider Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
   * [Common Errors](getting-started/troubleshooting.md)

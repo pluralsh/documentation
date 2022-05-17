@@ -11,7 +11,5 @@ Plural is an open-source, unified, application deployment platform that makes it
 * GitOps workflow with batteries-included transparent secret encryption
 * Built on common open source tools, so if you don't like us, you can always eject your application from Plural and use it as you please.
 
-## Quickstart
-
 Head to [this page](getting-started/README.md) to get started with Plural.
 
