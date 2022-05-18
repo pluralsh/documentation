@@ -7,6 +7,7 @@
 
 * [Getting Started](getting-started/README.md)
   * [Cloud Shell](getting-started/cloud-shell.md)
+  * [Cloud Shell Quickstart](getting-started/cloud-shell-quickstart.md)  
   * [Getting Started With Plural Console](getting-started/admin-console.md)
   * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
   * [Setting Up Third Party as DNS Provider](getting-started/dns-setup/README.md)
@@ -18,6 +19,10 @@
   * [Getting Started With Runbooks](integrate-with-plural/getting-started-with-runbooks/README.md)
     * [Runbook XML](integrate-with-plural/getting-started-with-runbooks/runbook-xml.md)
     * [Runbook Yaml](integrate-with-plural/getting-started-with-runbooks/runbook-yaml.md)
+
+## Repositories
+* [Airflow](repositories/airflow.md)
+* [Console](repositories/console.md)
 
 ## Workspace
 
