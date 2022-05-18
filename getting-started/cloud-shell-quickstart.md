@@ -55,7 +55,7 @@ There should be a repository with an initial commit with the name that you confi
 
 Now that we're in, let's install two applications:
 
-- The Plural console, so that we can monitor our applications and deployments.
+- The Plural console, so that we can upgrade/monitor our applications and deployments.
 - An Airflow instance.
 
 ### Install the Console
@@ -143,7 +143,7 @@ Accessing other applications deployed on Plural will work exactly the same way.
 Now that we've set up a running cluster with Plural, we can add and remove applications to our existing cluster
 as we so choose.
 
-### Leaving the Shell
+### Leaving the Shell Experience
 
 If you want to start using the CLI locally, just [install the Plural CLI](../getting-started/README.md#1.-install-plural-cli-and-dependencies) and run:
 
@@ -153,4 +153,14 @@ This will sync your local installation with the Cloud Shell. You can then procee
 
 ```plural shell purge```
 
-### 
+### Uninstalling Applications
+
+To uninstall an application from your cluster, run:
+
+```plural destroy <app-name>```
+
+### Feedback
+
+If you have any feedback or questions about the experience, [head over to our community Discord](https://discord.com/invite/bEBAMXV64s) and drop us some feedback. The
+Cloud Shell is still in development and we are dedicated to perfecting the user experience, so any feedback would be immensely helpful to us.
+
