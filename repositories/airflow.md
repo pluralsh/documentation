@@ -32,7 +32,7 @@ We currently support this repository on the following infrastructure providers:
 
 ## Setup Configuration
 
-`airflowBucket`: We want store our logs in a S3-like bucket for easy access. Use the default by pressing [Enter] unless it's 
+`airflowBucket`: We want to store your Airflow logs in a S3-like bucket for easy access. Use the default by pressing [Enter] unless it's 
 been used before. This configuration step is **not idempotent**, if you have to redo configuration
 for any reason, you'll need to create a new bucket. Alternatively you can directly edit the `context.yaml` file to use
 the existing bucket that you create in this step.

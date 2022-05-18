@@ -11,5 +11,6 @@ Check out the full list of our onboarded applications and their related artifact
 
 ## Guides
 
+- [Installing Airbyte](airbyte.md)
 - [Installing Airflow](airflow.md)
 - [Installing Plural Console](console.md)
