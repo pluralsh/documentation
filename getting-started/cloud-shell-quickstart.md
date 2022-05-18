@@ -20,14 +20,14 @@ Directly navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to acces
 with GitHub. We're just getting your permission to create a GitHub repository for Plural configuration on your behalf.
 Give your repository a name, being sure to select the right organization or individual account on the left.
 
-![](../.gitbook/assets/cloud-shell-quickstart-image-1.png)
+![](../.gitbook/assets/cloud-shell-quickstart/image-1.png)
 
 ### Set up a Cloud Provider
 
 You now have two options. If you're just trying out Plural, you can have a free demo cluster on the house that will last
 for 6 hours. Just keep in mind that this option will be only available once.
 
-![](../.gitbook/assets/cloud-shell-quickstart-image-2.png)
+![](../.gitbook/assets/cloud-shell-quickstart/image-2.png)
 
 To set up with your own cloud provider, provide your credentials in the following screen.
 
@@ -40,18 +40,18 @@ We'll now start setting up your Kubernetes cluster configuration. Here's a guide
 **bucket prefix**: We provision S3 buckets for storing logs and state. Just enter any string to help us uniquely name your buckets.
 
 **subdomain**: We'll provision a subdomain for you to host your cluster and applications under. For example, if you choose
-`nintendo` as your subdomain and spin up an instance of Airflow, it will be available at airflow.nintendo.onplural.sh.
+`nintendo` as your subdomain and spin up an instance of Airflow, it will be available at `airflow.nintendo.onplural.sh`.
 
 You should hit the following verification screen afterward. Hit `Create` once you're ready to go!
 
-![](../.gitbook/assets/cloud-shell-quickstart-image-3.png)
+![](../.gitbook/assets/cloud-shell-quickstart/image-3.png)
 
 While your Cloud Shell is provisioning, double check that your repository was initialized by checking your GitHub repos.
 There should be a repository with an initial commit with the name that you configured.
 
 ## Configure Applications and Kubernetes Cluster
 
-![](../.gitbook/assets/cloud-shell-quickstart-image-4.png)
+![](../.gitbook/assets/cloud-shell-quickstart/image-4.png)
 
 Now that we're in, let's install two applications:
 
@@ -94,7 +94,7 @@ Install Airflow with the following one-liner:
 Similarly to the console, you'll be guided through a setup wizard for Airflow. For help with configuration, refer to [this guide](../repositories/airflow.md).
 
 Both the console and Airflow support [Plural OIDC](../identity-and-access-management/openid-connect.md), so as long as you're logged
-in to app.plural.sh, you can directly access both applications.
+in to `app.plural.sh`, you can directly access both applications.
 
 ## Provision the Kubernetes Cluster and Install Applications
 
@@ -112,4 +112,45 @@ This will do two things:
 - Push your configuration files created in the Cloud Shell to your newly created repository
 - Deploy your Kubernetes cluster and the applications you've configured
 
-## 
+Now grab a coffee or your favorite hot beverage while we wait for your cloud provider to provision your infrastructure.
+
+## Check out your Deployments
+
+### Plural Console
+
+Head over to `console.YOUR_WORKSPACE.onplural.sh` (or the hostname you picked) to view the console that you have provisioned. If you enabled Plural OIDC, you'll
+be able to quickly login using your Plural account. 
+
+Here, you'll be able to check node health, Pod health, logs, pre-built dashboards tailored for Airflow, and more.
+
+![](../.gitbook/assets/cloud-shell-quickstart/image-5.png)
+
+![](../.gitbook/assets/cloud-shell-quickstart/image-6.png)
+
+### Airflow / Other Applications
+
+To access your Airflow installation, access it similarly to the console at `airflow.YOUR_WORKSPACE.onplural.sh`
+
+![](../.gitbook/assets/cloud-shell-quickstart/image-7.png)
+
+You can now access your DAGs from the GitHub repo that you set up earlier. Just add any DAGs you want to use the repo and a sync 
+will run every 5 minutes or so to pull them in.
+
+Accessing other applications deployed on Plural will work exactly the same way.
+
+## Wrapping Up
+
+Now that we've set up a running cluster with Plural, we can add and remove applications to our existing cluster
+as we so choose.
+
+### Leaving the Shell
+
+If you want to start using the CLI locally, just [install the Plural CLI](../getting-started/README.md#1.-install-plural-cli-and-dependencies) and run:
+
+```plural shell sync```
+
+This will sync your local installation with the Cloud Shell. You can then proceed to purge the shell if you wish to spin it down:
+
+```plural shell purge```
+
+### 

@@ -65,5 +65,10 @@ compliance reasons for this file not existing here.
 `public_key`: Similar to `private_key`, this makes sure that your admin account has Read/Write access to the DAG repo. We recommend you stick with the default, unless you have
 compliance reasons for this file not existing here.
 
+`Enable plural OIDC`: Enabling Plural OIDC means that you won't need to worry about authenticating into this app if you're logged into Plural. We highly recommend this
+as long as you don't have any specific security requirements.
+
+## Auth Configuration
+
 `git_user`: Plural will perform Git operations on your behalf to manage your config repository. Just use your GitHub
 username here, unless you have a dedicated user for Ops.

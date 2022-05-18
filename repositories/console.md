@@ -45,9 +45,10 @@ the existing bucket that you create in this step.
 
 `console_dns`: This will be where your console is hosted. Generally, use `console.$YOUR_ORG_NAME.onplural.sh`.
 
-`Enable plural OIDC`: Plural OIDC means that you won't need to worry about authenticating into your console if you're logged into our app.
+`Enable plural OIDC`: Enabling Plural OIDC means that you won't need to worry about authenticating into this app if you're logged into Plural. We highly recommend this
+as long as you don't have any specific security requirements.
 
-## Auth Configuration for non-OIDC Deployments
+## Auth Configuration
 
 `git_user`: Plural will perform Git operations on your behalf to manage your config repository. Just use your GitHub
 username here, unless you have a dedicated user for Ops.
