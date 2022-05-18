@@ -21,6 +21,7 @@
     * [Runbook Yaml](integrate-with-plural/getting-started-with-runbooks/runbook-yaml.md)
 
 ## Repositories
+* [Airbyte](repositories/airbyte.md)
 * [Airflow](repositories/airflow.md)
 * [Console](repositories/console.md)
 
