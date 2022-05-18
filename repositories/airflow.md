@@ -32,6 +32,13 @@ We currently support this repository on the following infrastructure providers:
 
 ## Setup Configuration
 
+`vpc_name`: We need an isolated VPC to launch your resources in, so we create one for you. Stick with `plural` for
+most cases. This is a cluster-level setting that we only ask for once. Once you've set this up, you won't need to do it again.
+
+`wal_bucket`: Plural uses Postgres as the backing database for cluster information. We need to store the WAL logs
+somewhere to backup and restore from. This is a cluster-level setting that we only ask for once. Once you've set this up, you won't need to do it again unless you destroy
+all existing applications.
+
 `airflowBucket`: We want to store your Airflow logs in a S3-like bucket for easy access. Use the default by pressing [Enter] unless it's 
 been used before. This configuration step is **not idempotent**, if you have to redo configuration
 for any reason, you'll need to create a new bucket. Alternatively you can directly edit the `context.yaml` file to use
@@ -45,11 +52,6 @@ one now or use an existing DAG repository. Then grab the SSH URL from the `Code`
 `branchName`: If you have an existing DAG repository, you may want to sync your existing dags into and from a specific 
 branch. This will be the branch that Plural stays up to date with, so use `main` unless you want to prevent direct changes
 to the repository.
-
-`wal_bucket`: Plural uses Postgres as the backing database for cluster information. We need to store the WAL logs
-somewhere to backup and restore from. This configuration step is **not idempotent**, if you have to redo configuration
-for any reason, you'll need to create a new bucket. Alternatively you can directly edit the `context.yaml` file to use
-the existing bucket that you create in this step.
 
 `adminUsername`: Use your naming preference for admin accounts. No need to reinvent the wheel, `admin` is fine too.
 

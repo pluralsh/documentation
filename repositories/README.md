@@ -9,6 +9,11 @@ docs for a handful of applications, but we will be adding them for our most used
 
 Check out the full list of our onboarded applications and their related artifacts [here](https://github.com/pluralsh/plural-artifacts). 
 
+## General Configuration 
+
+
+
+
 ## Guides
 
 - [Installing Airbyte](airbyte.md)
