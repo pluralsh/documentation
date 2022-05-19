@@ -1,4 +1,4 @@
-# Creating DNS Zone in Your Cloud Provider Console
+# Creating a DNS Zone in Your Cloud Provider Console
 
 {% tabs %}
 {% tab title="AWS Route53" %}
