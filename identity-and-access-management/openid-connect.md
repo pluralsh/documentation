@@ -12,6 +12,7 @@ Applications that currently support Plural OIDC are:
 
 * Plural console - includes group provisioning as well
 * Airflow
+* Airbyte  
 * Sentry
 * GitLab
 * Grafana

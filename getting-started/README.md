@@ -4,6 +4,11 @@ description: Setting up your first cluster
 
 # Getting Started
 
+## Overview
+
+This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser
+Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
+
 ## 1. Install Plural cli and dependencies
 
 The Plural cli and dependencies are available using a package manager for your system. For Mac, we recommend using Homebrew, although our Docker image should be usable on virtually any platform
