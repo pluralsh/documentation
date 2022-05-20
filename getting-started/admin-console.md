@@ -41,7 +41,7 @@ Then once you've found an eligible bundle to install, do:
 plural bundle install console <bundle-name>
 ```
 
-You will be asked a number of questions around how the console will be configured, including your Git information.
+You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](../repositories/console.md).
 
 Once the bundle has installed, run:&#x20;
 

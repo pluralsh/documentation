@@ -1,29 +1,33 @@
 # Table of contents
 
-* [What is Plural?](README.md)
-* [Architecture](architecture-1.md)
-
 ## Introduction <a href="#quickstart" id="quickstart"></a>
 
-* [Getting Started](getting-started/README.md)
-  * [Cloud Shell](getting-started/cloud-shell.md)
-  * [Cloud Shell Quickstart](getting-started/cloud-shell-quickstart.md)  
+* [What is Plural?](README.md)
+* [Quickstart (CLI)](getting-started/README.md)
+* [Quickstart (Cloud Shell)](getting-started/cloud-shell-quickstart.md)
+* [Architecture](architecture-1.md)
+
+## Setup & Deployment
+* [Operator Guides]
+  * [What is the Cloud Shell?](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
   * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
-  * [Setting Up Third Party as DNS Provider](getting-started/dns-setup/README.md)
-    * [Creating DNS Zone in Your Cloud Provider Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
-  * [Common Errors](getting-started/troubleshooting.md)
-* [Integrate with Plural](integrate-with-plural/README.md)
-  * [Plural Custom Resources](integrate-with-plural/plural-custom-resources.md)
-  * [Module Library](integrate-with-plural/module-library.md)
-  * [Getting Started With Runbooks](integrate-with-plural/getting-started-with-runbooks/README.md)
-    * [Runbook XML](integrate-with-plural/getting-started-with-runbooks/runbook-xml.md)
-    * [Runbook Yaml](integrate-with-plural/getting-started-with-runbooks/runbook-yaml.md)
+* [Setting Up a Third Party DNS Provider](getting-started/dns-setup/README.md)
+  * [Creating a DNS Zone in Your Cloud Provider Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
+* [Common Errors](getting-started/troubleshooting.md)
 
-## Repositories
-* [Airbyte](repositories/airbyte.md)
-* [Airflow](repositories/airflow.md)
-* [Console](repositories/console.md)
+## Applications
+
+* [Application Catalog](repositories/README.md)
+  * [Airbyte](repositories/airbyte.md)
+  * [Airflow](repositories/airflow.md)
+  * [Console](repositories/console.md)
+* [Adding a New Application](adding-new-application/README.md)
+  * [Plural Custom Resources](adding-new-application/plural-custom-resources.md)
+  * [Module Library](adding-new-application/module-library.md)
+  * [Getting Started With Runbooks](adding-new-application/getting-started-with-runbooks/README.md)
+    * [Runbook XML](adding-new-application/getting-started-with-runbooks/runbook-xml.md)
+    * [Runbook Yaml](adding-new-application/getting-started-with-runbooks/runbook-yaml.md)
 
 ## Workspace
 
@@ -46,7 +50,7 @@
 * [Proxies](debugging/proxies.md)
 * [Logs](debugging/logs.md)
 
-## API
+## Developer Tools / API
 
 * [Introduction](api/introduction/README.md)
   * [Plural API](api/introduction/plural-api.md)

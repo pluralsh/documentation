@@ -2,7 +2,7 @@
 description: Registering and setting up a domain
 ---
 
-# Setting Up Third Party as DNS Provider
+# Setting Up a Third Party DNS Provider
 
 {% tabs %}
 {% tab title="New Domain" %}
