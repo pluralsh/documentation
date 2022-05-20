@@ -1,5 +1,5 @@
 ---
-description: Setting up your first cluster
+description: Setting up your first cluster in your terminal.
 ---
 
 # Getting Started
