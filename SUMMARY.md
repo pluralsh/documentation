@@ -8,7 +8,7 @@
 * [Architecture](architecture-1.md)
 
 ## Setup & Deployment
-* [Operator Guides]
+* [Operator Guides](operator-guides/README.md)
   * [What is the Cloud Shell?](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
   * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
