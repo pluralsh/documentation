@@ -1,3 +1,7 @@
+---
+description: Setting up your first cluster in browser.
+---
+
 # Quickstart (Cloud Shell)
 
 ## Overview
