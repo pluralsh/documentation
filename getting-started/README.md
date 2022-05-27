@@ -2,12 +2,11 @@
 description: Setting up your first cluster in your terminal.
 ---
 
-# Getting Started
+# Quickstart (CLI)
 
 ## Overview
 
-This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser
-Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
+This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
 
 ## 1. Install Plural cli and dependencies
 
@@ -19,13 +18,11 @@ The Plural cli and dependencies are available using a package manager for your s
 brew install pluralsh/plural/plural
 ```
 
-The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+The brew tap will install plural, alongside terraform, helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 {% endtab %}
 
 {% tab title="curl" %}
 You can download the binaries attached to our github releases here: [https://github.com/pluralsh/plural-cli/releases](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
-
-
 
 For example, you can download v0.2.57 for Darwin arm64 via:
 
@@ -38,25 +35,23 @@ mv plural /usr/local/bin/plural
 
 
 
-You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here\
+{% hint style="info" %}
+Be sure to download the CLI version for your target OS/architecture, the above example is only valid for ARM Mac's
+{% endhint %}
 
+
+
+You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here\\
 
 | Tool      | Installer                                                                                                                  |
 | --------- | -------------------------------------------------------------------------------------------------------------------------- |
 | helm      | [https://helm.sh/docs/intro/install/](https://helm.sh/docs/intro/install/)                                                 |
 | terraform | [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli) |
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
-
-Once these are installed, you'll also need to add the helm push plugin like so
-
-```
-helm plugin install https://github.com/pluralsh/helm-push
-```
 {% endtab %}
 
 {% tab title="Docker" %}
-We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud.  We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session.  The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:\
-
+We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:\\
 
 ```
 docker run -it --volume $HOME/.aws:/home/plural/aws \
@@ -70,24 +65,25 @@ Once you're in the container's zsh, you'll want to clone the repo you'll use for
 {% endtab %}
 
 {% tab title="EC2 AMI" %}
-We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\
-
+We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\\
 
 If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a github issue.
 
-This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/).  You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to chose the one for the appropriate region.&#x20;
+This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/). You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
 {% endtab %}
 {% endtabs %}
 
 
 
+
+
 ## 2. Install and Configure Cloud Provider CLI
 
-You should now install and configure your cloud provider cli ([awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), [gcloud](https://cloud.google.com/sdk/docs/install), [az](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) if you have not done so already. This is also a good time to take care of some cloud setup tasks from your provider's console. Follow the provider-specific instructions below.&#x20;
+You should now install and configure your cloud provider cli ([awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), [gcloud](https://cloud.google.com/sdk/docs/install), [az](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) if you have not done so already. This is also a good time to take care of some cloud setup tasks from your provider's console. Follow the provider-specific instructions below.
 
 {% tabs %}
 {% tab title="GCP" %}
-* Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud cli.&#x20;
+* Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud cli.
 * Verify that the cli has been added to your `$PATH`
 * Create a new project in gcp via the cli:
 
@@ -111,7 +107,6 @@ disable_usage_reporting = True
 project = example-project-name
 
 Your active configuration is: [example-project-name]
-
 ```
 
 * If you have multiple projects in GCP and previously have configured your gcloud cli to point to a different project, run
@@ -120,11 +115,11 @@ Your active configuration is: [example-project-name]
 gcloud auth application-default login
 ```
 
-&#x20;   to reset the application default credential and re-authorize the browser. Failure to do this could result in `project requested not found` errors further along.
+to reset the application default credential and re-authorize the browser. Failure to do this could result in `project requested not found` errors further along.
 {% endtab %}
 
 {% tab title="AWS" %}
-* Follow the instructions [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) to install your AWS cli.&#x20;
+* Follow the instructions [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) to install your AWS cli.
 * Verify that the cli has been added to your `$PATH`
 * Follow the instructions [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) to configure your cli and connect it to your aws console
 * Verify that your cli has been properly configured by running
@@ -143,8 +138,6 @@ access_key     ****************RUG2 shared-credentials-file
 secret_key     ****************hJUU shared-credentials-file    
     region                us-east-2      config-file    ~/.aws/config
 ```
-
-
 {% endtab %}
 
 {% tab title="Azure" %}
@@ -157,7 +150,7 @@ secret_key     ****************hJUU shared-credentials-file
 
 You need a registered domain that your Plural applications can be deployed to. You may use either:
 
-1. `onplural.sh` subdomain backed by the Plural Domain Service (recommended). If you are choosing to use the Plural domain service, you don't need to do anything extra now. Simply follow the prompts further down.&#x20;
+1. `onplural.sh` subdomain backed by the Plural Domain Service (recommended). If you are choosing to use the Plural domain service, you don't need to do anything extra now. Simply follow the prompts further down.
 2.  your own domain or subdomain backed by one of the dns service providers we currently support:
 
     1. Route53
@@ -168,10 +161,10 @@ You need a registered domain that your Plural applications can be deployed to. Y
 
 ## 4. Create and Initialize Plural Repo
 
-[Create a new Git repo](https://docs.github.com/en/get-started/quickstart/create-a-repo) to store your Plural installation in and name it whatever you want.&#x20;
+[Create a new Git repo](https://docs.github.com/en/get-started/quickstart/create-a-repo) to store your Plural installation in and name it whatever you want.
 
 {% hint style="info" %}
-Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed.  We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
 {% endhint %}
 
 Clone your repo and then run from inside the repo:
@@ -180,7 +173,7 @@ Clone your repo and then run from inside the repo:
 plural init
 ```
 
-to log into plural, set the git attributes to configure encryption, and configure your cloud provider for this installation.&#x20;
+to log into plural, set the git attributes to configure encryption, and configure your cloud provider for this installation.
 
 You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. Here's an example of what it looks like below:
 
@@ -191,13 +184,9 @@ What do you want to use as your subdomain, must be a subdomain under onplural.sh
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
 
-
-
-
-
 ## 5. Install Plural Applications
 
-To view the applications you can install on Plural,  navigate to the explore tab at [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public).
+To view the applications you can install on Plural, navigate to the explore tab at [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public).
 
 To actually install applications on Plural, the preferred method is to use our installation bundles. You can view the available bundles by navigating to the specific app on [https://app.plural.sh](https://app.plural.sh) or listing them via the cli using:
 
@@ -219,7 +208,7 @@ You should be asked a lot of questions about how your app will be configured, in
 
 Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to log into all Plural-deployed applications.
 
-Ultimately all the values you input at this step will be stored in a file called `context.yaml` at the root of your repo.&#x20;
+Ultimately all the values you input at this step will be stored in a file called `context.yaml` at the root of your repo.
 
 ## 6. Build and Deploy Plural Applications
 
@@ -233,7 +222,7 @@ plural deploy --commit "initial deploy"
 This will generate all deployment artifacts in the repo, then deploy them in dependency order.
 
 {% hint style="info" %}
-`plural deploy` can take a fair amount of time, and network disconnects can cause potential issues as a result.  If you're running on a spotty network, or would like to step out while it's running we recommend running it in [tmux](https://github.com/tmux/tmux/wiki)
+`plural deploy` can take a fair amount of time, and network disconnects can cause potential issues as a result. If you're running on a spotty network, or would like to step out while it's running we recommend running it in [tmux](https://github.com/tmux/tmux/wiki)
 {% endhint %}
 
 ## 7. Install Plural Admin Console
@@ -253,7 +242,7 @@ The admin console is separate from [app.plural.sh](https://app.plural.sh) which 
 
 ## 8. Log In to Plural Application
 
-Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.&#x20;
+Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
 The application urls will have been printed out to the terminal at the end of the `plural deploy` logs.
 
@@ -278,11 +267,8 @@ To uninstall applications, you can use
 plural destroy <app-name>
 ```
 
-This will do things like destroying terraform resources and emptying k8s namespaces, but it won't remove the application builds from your local repo, or the application configuration values from `context.yaml.`&#x20;
-
-
+This will do things like destroying terraform resources and emptying k8s namespaces, but it won't remove the application builds from your local repo, or the application configuration values from `context.yaml.`
 
 ## 11. Working in Teams
 
 The getting started instructions here refer to a single user managing Plural installations for multiple applications. If you want to turn over management of your Plural-installed applications to a whole team, follow the instructions in the guide [here](../identity-and-access-management/identity-and-installations/sharing-existing-plural-installation-repos.md).
-
