@@ -252,6 +252,19 @@ You can validate your changes locally using the `plural link` command.  You'll n
 plural link helm <app-name> --path ../path/to/helm --name <chart-name>
 ```
 
+Next step is to build and deploy with the new changes:
+
+```
+plural build --only <app-name> && plural deploy
+```
+
+To make sure change detection is working properly, you can also use the --force option of plural build command
+
+```
+plural build --only <app-name> --force
+plural deploy
+```
+
 ## 5. Push your local changes and open a PR in `plural-artifacts`
 
 Assuming that you have been working on a branch `add-hasura` you should now commit your changes and open up a PR on Github.
