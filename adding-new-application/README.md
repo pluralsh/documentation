@@ -258,7 +258,7 @@ Next step is to build and deploy with the new changes:
 plural build --only <app-name> && plural deploy
 ```
 
-To make sure the change detection is working properly, you can also use the --force option of plural build command
+To make sure change detection is working properly, you can also use the --force option of plural build command
 
 ```
 plural build --only <app-name> --force
