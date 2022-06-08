@@ -8,7 +8,7 @@ description: Setting up your first cluster in your terminal.
 
 This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
 
-## 1. Install Plural cli and dependencies
+## 1. Install Plural CLI and dependencies
 
 The Plural cli and dependencies are available using a package manager for your system. For Mac, we recommend using Homebrew, although our Docker image should be usable on virtually any platform
 
@@ -161,19 +161,20 @@ You need a registered domain that your Plural applications can be deployed to. Y
 
 ## 4. Create and Initialize Plural Repo
 
-[Create a new Git repo](https://docs.github.com/en/get-started/quickstart/create-a-repo) to store your Plural installation in and name it whatever you want.
-
-{% hint style="info" %}
-Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
-{% endhint %}
-
-Clone your repo and then run from inside the repo:
+Run this command within a directory that you want to store your configuration repository in: 
 
 ```
 plural init
 ```
 
-to log into plural, set the git attributes to configure encryption, and configure your cloud provider for this installation.
+The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf. If you don't want the Plural CLI
+to do this automatically, then create a repository [manually](https://docs.github.com/en/get-started/quickstart/create-a-repo) and run `plural init` at the root of the repo.
+
+{% hint style="info" %}
+Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+{% endhint %}
+
+Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
 
 You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. Here's an example of what it looks like below:
 
