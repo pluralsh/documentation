@@ -106,6 +106,7 @@ Now it's time for Plural to write all the Helm and Terraform required to bring u
 config that you've entered. You can do that by running:
 
 ```plural build```
+
 ```plural build --only airflow```
 
 Do a quick `ls` to check out the files we've created for you. We're now ready to deploy. Do that by running:
