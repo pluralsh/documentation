@@ -10,7 +10,7 @@ At a high level, the interactions between all three components look something li
 
 ![](<.gitbook/assets/Flow Chart.jpg>)
 
-### Plural API
+## Plural API
 
 The primary responsibility of the Plural API is to store the packages needed for application installation - terraform, helm - and ingesting high-level dependency information about them.  This allows us to properly sequence installations.  It also serves as a publish-subscribe layer to communicate updates to clusters that have installed those applications, and can leverage the dependency information ingested to delay updates until a cluster has caught up with all the necessary dependencies.
 
@@ -18,7 +18,7 @@ It also can serve as an identity provider for any Plural application, delegating
 
 Finally it handles billing and licensing, supporting all the common constructs seen in modern SaaS billing
 
-### Plural CLI
+## Plural CLI
 
 The Plural CLI effectively uses the Plural API as a package manager, and works as a higher level build tool on top of the DevOps packages it supports.  It will handle things like running installations in dependency order, detecting changes between runs, and templating out a workspace from scratch. &#x20;
 
@@ -26,7 +26,7 @@ It also is responsible for managing secret encryption of all application state i
 
 Finally it also provides the toolchain for publishing applications to the plural API.
 
-### Plural Console
+## Plural Console
 
 The Plural Console is the operational hub for all applications managed by Plural.  It is deployed in-cluster alongside applications and provides a few key features:
 
