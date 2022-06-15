@@ -1,278 +1,165 @@
----
-description: >-
-  This guide is for open-source project owners who would like to offer their
-  project as a Plural application.
----
+# How Plural works
 
-# Integrate with Plural
+The two main functionalities that make Plural work are dependency tracking between DevOps tools
+(Helm and Terraform) and templating.
 
-## 1. Create a new directory in plural-artifacts
+When a user sets up a new Plural workspace in a git repository a `workspace.yaml` file is created
+that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
+Next, the user can install an application using the `plural bundle <app_name> <bundle>` CLI command.
+The CLI will then prompt the user for for inputs needed to setup that application, along with
+any dependencies of the application. These inputs are saved in the `context.yaml` file.
 
-Clone the [plural-artifacts](https://github.com/pluralsh/plural-artifacts) repository
+Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module.
+The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and
+Terraform module(s) it gets from the Plural API, which the CLI downloads.
+The CLI will then generate the `values.yaml` for the wrapper helm chart and `main.tf`
+for the wrapper Terraform module using the values saved in the `context.yaml` using its
+templating engine.
 
-```
-git clone github.com/pluralsh/plural-artifacts
-```
+## Plural application artifacts
 
-For this getting started guide, let's pretend that we are onboarding Hasura. We have a useful make target to scaffold some of the necessary stubs for integrating with Plural.
+As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each
+installed application and inputs the user defined values for that installation.
+Some extra files are necessary in Helm charts and Terraform modules for Plural to be able to
+understand their dependencies and run them through its templating engine.
+Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module,
+and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
 
-```
-plural create
-```
+The `values.yaml.tpl` and `terraform.tfvars` files are run through the Plural templating engine,
+which is similar to that of Helm, and are used to generate the `values.yaml` for the wrapper
+helm chart and `main.tf` for the wrapper Terraform module.
 
-The repository structure after running the `make` command should look something like this:
+The next example is a snippet of the `values.yaml.tpl` file for Grafana:
 
-```
-hasura/
-    Pluralfile
-    helm
-    plural
-    repository.yaml
-    terraform
-```
-
-In the steps below we will go through and fill out the stubs.
-
-## 2. Add your helm chart
-
-This section assumes familiarity with helm, the Kubernetes package manager. If you have not worked with helm before, it's strongly recommended that you read through the helm docs to understand core helm concepts, particularly [helm templates](https://helm.sh/docs/chart\_template\_guide/getting\_started/) and helm template values.&#x20;
-
-### Getting Started with Helm
-
-From the root of your newly created `hasura` directory, navigate to the helm chart.
-
-```
-cd helm/hasura
-```
-
-A helm chart is organized as a collection of files inside of a directory:
-
-```
-hasura/
-  Chart.yaml          # A YAML file containing information about the chart
-  values.yaml         # The default configuration values for this chart
-  values.schema.json  # OPTIONAL: A JSON Schema for imposing a structure on the values.yaml file
-  charts/             # A directory containing any charts upon which this chart depends.
-  templates/          # A directory of templates that, when combined with values,
-                      # will generate valid Kubernetes manifest files.
+```yaml
+grafana:
+  admin:
+    password: {{ dedupe . "grafana.grafana.admin.password" (randAlphaNum 14) }}
+    user: admin
+  ingress:
+    tls:
+    - hosts:
+      - {{ .Values.hostname }}
+      secretName: grafana-tls
+    hosts:
+    - {{ .Values.hostname }}
 ```
 
-The `Chart.yaml` file contains a description of the chart. You can access it from within a template.&#x20;
+In the above example, the hostname a for Grafana that is saved in the `context.yaml` will
+be set in the ingress for Grafana by `{{ .Values.hostname }}`. It also showcases `dedupe`,
+which is one of the templating functions available in the Plural CLI.
 
-The `templates/` directory is for template files. When Helm evaluates a chart, it will send all of the files in the `templates/` directory through the template rendering engine. It then collects the results of those templates and sends them on to Kubernetes.
+We are using the `dedupe` function so that a new random password for the Grafana admin
+is not generated if it has already been set. The reason `grafana.grafana.admin.password`
+is specified for the path, is because the CLI will create a wrapper Helm chart named `grafana`
+in a user's installation workspace. Please see [this section](https://helm.sh/docs/chart_template_guide/subcharts_and_globals/#overriding-values-from-a-parent-chart)
+of the Helm docs for an explanation on how to pass values to a subchart.
 
-The `values.yaml` file is also important to templates. This file contains the _default values_ for a chart. These values may be overridden by users during `helm install` or `helm upgrade`.
+The next snippet shows a part of the `terraform.tfvars` for the AWS bootstrap terraform module:
 
-You should also see a `deps.yaml` file. This is a Plural file used to track dependencies and sequence order of installations and upgrades.
-
-
-
-### 1. Fill out `Chart.yaml`
-
-Open up the `Chart.yaml` file.
-
-`Chart.yaml` is a yaml file containing information about the chart. You can refer to the helm documentation for [a comprehensive list of fields](https://helm.sh/docs/topics/charts/#the-chartyaml-file) in the chart.
-
-The yaml is largely self-documenting. The field to pay attention to is the field at the end, `dependencies.` If your open source project has an existing helm chart (for example on ArtifactHub), this is where you'll want to link it.
-
-```
-dependencies:
-  - name: hasura
-    version: 1.1.6
-    repository: https://charts.platy.plus
+```hcl
+vpc_name = {{ .Values.vpc_name | quote }}
+cluster_name = {{ .Cluster | quote }}
 ```
 
+Except for the user's application inputs from the `context.yaml` and the aforementioned `dedupe`
+function, Plural includes a lot of other values and functions that make it possible to
+simplify otherwise complex application configurations.
 
+### Templating reference
 
-### 2. Fill out `templates/`
+Along with the standard functions available in the Go templating language, the following
+Plural specific functions can be used.
 
-Next, let's fill out the `templates/` directory. Recall that the `templates/` directory is for template files. When Helm evaluates a chart, it will send all of the files in the `templates/` directory through the template rendering engine. It then collects the results of those templates and sends them on to Kubernetes.
+Functions:
 
-The Plural platform includes a number of custom resources that you might find useful to fully productionize your application and can copy and paste over for your own use:
+| Function    | Input (type) | Returned value | Description |
+| ----------- | ------------ | -------------- | ----------- |
+| fileExists | Path (string) | Boolean | Checks if a file exists |
+| pathJoin | Parts ([]string) | String | Joins parts of a path |
+| repoRoot | X | String | Returns the path of the installation repository |
+| repoName | X | String | Returns the base path of repoRoot |
+| repoUrl | X | String | Returns the `remote.origin.url` of the installation repository |
+| branchName | X | String | Returns the name of the branch used for the installation repository |
+| dumpConfig | X | String, Error | Returns the Plural CLI config |
+| dumpAesKey | X | String, Error | Returns the AES keys used for the installation repository |
+| readFile | Path (strong) | String | Returns the contents of a file as a string |
+| readLine | Prompt (string) | String, Error | Prompts the user for input and returns the inputted string |
+| readPassword | Prompt (string) | String, Error | Prompts the user for a password input and returns the inputted string |
+| readLineDefault | Prompt, Default (string) | string, error | Prompts the user for input and returns the inputted string or the default value if input is empty |
+| homeDir | Parts ([]string) | string, error | Returns the path of the user's home directory with the path parts appended to it |
+| knownHosts | X | string, error | Returns the contents of the `.ssh/known_hosts` file in the user's home directory |
+| probe | Object (interface{}), Path (string) | interface{}, error | Checks if the object exists at the input path |
+| dedupe | Object (interface{}), Path, Value (string) | string | Returns Object if it exists at the input Path, otherwise returns Value as a string |
+| dedupeObj | Object (interface{}), Path (string), Value (interface{}) | interface{} | Returns Object if it exists at the input Path, otherwise returns Value as an interface{}. Used for complex data types |
+| namespace | Name (string) | string | Returns the namespace for an application |
+| secret | Namespace, Name (string) | map[string]interface{} | Returns the content of a Kubernetes secret |
+| importValue | Tool, Path (string) | string | Returns the value from another tool at the given path. An example use case is to use a value from the Terraform output in the Helm chart |
+| toYaml | Value (interface{}) | string, error | Formats the input value as YAML |
+| eabCredential | Cluster, Provider (string) | `api.EabCredential`, error | Creates a new set of EAB credentials in the Plural API for when using cert-manager with the Plural DNS |
 
-* [dashboard.yaml](plural-custom-resources.md#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
-* [runbook.yaml](getting-started-with-runbooks/runbook-yaml.md) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](getting-started-with-runbooks/).
-* [proxies.yaml](plural-custom-resources.md#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
-* [configurationOverlay.yaml](plural-custom-resources.md#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
+Template values:
 
-![](../.gitbook/assets/image.png)
+| Path | Description |
+| ---- | ----------- |
+| .Values | The (recipe) values a user inputted for the given application |
+| .Configuration | Allows for getting values from other applications stored in the `context.yaml` file. For example, to use the hostname configured for Grafana in another application `{{ .Configuration.grafana.hostname }}` can be used. |
+| .License | The License for this application installation |
+| .Config | The Plural CLI configuration object. Please see below for a detailed explanation |
+| .OIDC | The OIDC configuration object for an application. Please see below for a detailed explanation |
+| .Region | The cloud region configured for the workspace of the installation |
+| .Project | The cloud project configured for the workspace of the installation |
+| .Cluster | The name of the cluster configured for the workspace of the installation |
+| .Provider | The name of the cloud provider configured for the workspace of the installation |
+| .Context | The context map of the Plural cloud provider config for the workspace of the installation |
+| .SMTP | The SMTP configuration of the workspace. Please see below for a detailed explanation |
+| .Applications.HelmValues | Function that can be used to get the Helm values from another application. This differs from `.Configuration` as this can access all Helm values for an application, not only those stored in the `context.yaml`. For example, to use the generated Grafana admin password in another application you can do `{{ $grafanaValues := .Applications.HelmValues "grafana" }}` then `{{ $grafanaValues.grafana.grafana.admin.password }}`. |
+| .Applications.TerraformValues | Function that can be used to get the Terraform outputs from another application. Usage is similar to `.Applications.HelmValues`. For example, to get the Terraform outputs of the bootstrap application you can use `{{ $bootstrapOutputs := .Applications.TerraformValues "bootstrap" }}` |
+| .Acme.KeyId | The ACME key ID for to the application when using Plural DNS |
+| .Acme.Secret | The ACME secret for to the application when using Plural DNS |
 
-* logfilter.yaml
+`.Config` values:
 
-### 3. Fill out`deps.yaml`
+| Path | Description |
+| ---- | ----------- |
+| .Config.Email | The user email address of the current CLI user |
+| .Config.Token | The Plural token of the current CLI user |
+| .Config.NamespacePrefix | The prefix to add to namespaces created for Plural applications |
+| .Config.Endpoint | The Plural endpoint the CLI will use |
+| .Config.LockProfile |  |
+| .Config.ReportErrors | If CLI errors should be reported back to Plural |
+| .COnfig.metadata.Name | Name of the CLI config that is currently being used |
 
-The `deps.yaml` file is a Plural file that is used for determining the sequence of installations and updates. It should look something like this:
+`.OIDC` values:
+| Path | Description |
+| ---- | ----------- |
+| .OIDC.Id | The ID of the OIDC provider for the application |
+| .OIDC.ClientId | The Client ID for the OIDC provider of the application |
+| .OIDC.ClientSecret | The Client Secret for the OIDC provider of the application |
+| .OIDC.RedirectUris | List of redirect URIs for the OIDC provider of the application |
+| .OIDC.Bindings | List of bindings for the OIDC provider of the application. Please see below for a detailed explanation |
+| .OIDC.OAuthConfiguration.Issuer | The Issuer of the OIDC provider for the application |
+| .OIDC.OAuthConfiguration.AuthorizationEndpoint | The Authorization endpoint of the OIDC provider for the application |
+| .OIDC.OAuthConfiguration.TokenEndpoint | The Token endpoint of the OIDC provider for the application |
+| .OIDC.OAuthConfiguration.JwksUri | The JWKS URI of the OIDC provider for the application |
+| .OIDC.OAuthConfiguration.UserinfoEndpoint | The endpoint exposing user info of the OIDC provider for the application |
 
-```
-apiVersion: plural.sh/v1alpha1
-kind: Dependencies
-metadata:
-  application: true
-  description: Deploys hasura crafted for the target cloud
-spec:
-  dependencies:
-    - type: helm
-      name: bootstrap
-      repo: bootstrap
-      version: ">= 0.5.1"
-    - type: helm
-      name: ingress-nginx
-      repo: ingress-nginx
-      version: ">= 0.1.2"
-    - type: helm
-      name: postgres
-      repo: postgres
-      version: ">= 0.1.6"
-    - type: terraform
-      name: aws
-      repo: hasura
-      version: ">= 0.1.0"
-      optional: true
-    - type: terraform
-      name: azure
-      repo: hasura
-      version: ">= 0.1.0"
-      optional: true
-    - type: terraform
-      name: gcp
-      repo: hasura
-      version: ">= 0.1.0"
-      optional: true
-
-```
-
-## 2. Add your cloud config
-
-From the root of the `plural-artifacts/` directory, navigate to the `terraform/` directory. Terraform is a tool for creating, updating, and destroying cloud infrastructure via configuration rather than a graphical user interface. If you are not familiar with it, we suggest reading through the [Terraform docs](https://www.terraform.io/language). The files that are located inside this directory are responsible for creating various cloud objects  -- i.e. Kubernetes namespaces, AWS IAM roles, and service accounts.
-
-```
-cd terraform
-```
-
-You should see three folders:
-
-```
-terraform
-  aws
-  azure
-  gcp
-```
-
-They each have the same structure:
-
-```
-terraform/aws
-  deps.yaml
-  main.tf
-  terraform.tfvars
-  variables.tf
-```
-
-* [`main.tf`](https://learn.hashicorp.com/tutorials/terraform/module-create?in=terraform/modules#main-tf) will contain the main set of configuration for your Terraform module. You can also create other configuration files and organize them however it makes sense for your project. It will look something like this:
-
-```
-resource "kubernetes_namespace" "hasura" {
-  metadata {
-    name = var.namespace
-    labels = {
-      "app.kubernetes.io/managed-by" = "plural"
-      "app.plural.sh/name" = "hasura"
-    }
-  }
-}
-
-data "aws_iam_role" "postgres" {
-  name = "${var.cluster_name}-postgres"
-}
-
-resource "kubernetes_service_account" "postgres" {
-  metadata {
-    name      = "postgres-pod"
-    namespace = var.namespace
-
-    annotations = {
-      "eks.amazonaws.com/role-arn" = data.aws_iam_role.postgres.arn
-    }
-  }
-
-  depends_on = [
-    kubernetes_namespace.superset
-  ]
-}
-```
-
-* [`variables.tf`](https://learn.hashicorp.com/tutorials/terraform/module-create?in=terraform/modules#variables-tf) will contain the variable definitions for your terraform module (the variables are used in `main.tf`
-
-
-
-## 3. Add your Plural config&#x20;
-
-Finally, let's look at how to set up the config that will go to Plural.
-
-From the root of `plural-artifacts/`, navigate to `plural/recipes.`
-
-```
-plural/recipes
-  hasura-aws.yaml
-  hasura-azure.yaml
-  hasura-gcp.yaml
-```
-
-Here, you will specify the other Plural packages that must be installed alongside this package, as well as configuration and documentation for parameters that you will be asking users to input.
-
-```
-name: hasura-aws
-description: Installs hasura on an EKS cluster
-provider: AWS
-dependencies: # Other Plural packages that must be installed alongside this bundle
-  - repo: bootstrap
-    name: aws-k8s
-  - repo: ingress-nginx
-    name: ingress-nginx-aws
-  - repo: postgres
-    name: aws-postgres
-sections:
-  - name: hasura
-    items:
-      - type: TERRAFORM
-        name: aws
-      - type: HELM
-        name: hasura
-    configuration: # Users will be asked to input values for these parameters
-      - name: hostname
-        documentation: Fully Qualified Domain Name to use for your hasura installation, eg hasura.topleveldomain.com if topleveldomain.com is the domain you inputed for dns_domain above.
-        type: DOMAIN
-```
-
-## 4. Testing Locally
-
-You can validate your changes locally using the `plural link` command.  You'll need to have your packages pushed to plural first, then installed in an installation repo.  Once done, you can link your local version of a helm or terraform package using:
-
-```
-plural link helm <app-name> --path ../path/to/helm --name <chart-name>
-```
-
-Next step is to build and deploy with the new changes:
-
-```
-plural build --only <app-name> && plural deploy
-```
-
-To make sure change detection is working properly, you can also use the --force option of plural build command
-
-```
-plural build --only <app-name> --force
-plural deploy
-```
-
-## 5. Push your local changes and open a PR in `plural-artifacts`
-
-Assuming that you have been working on a branch `add-hasura` you should now commit your changes and open up a PR on Github.
-
-```
-git add .
-git commit -m "Integrate hasura changes"
-git push
-```
+`.OIDC.Bindings` values:
+| Path | Description |
+| ---- | ----------- |
+| .OIDC.Bindings.User.Id | The ID of the user that's bound to the application's OIDC provider |
+| .OIDC.Bindings.User.Email | The Email of the user that's bound to the application's OIDC provider |
+| .OIDC.Bindings.User.Name | The Name of the user that's bound to the application's OIDC provider |
+| .OIDC.Bindings.Group.Id | The ID of the group that's bound to the application's OIDC provider |
+| .OIDC.Bindings.Group.Name | The Name of the group that's bound to the application's OIDC provider |
 
 You may add @[**michaeljguarino**](https://github.com/michaeljguarino) as a reviewer on the PR.
+`.SMTP` values:
+| Path | Description |
+| ---- | ----------- |
+| .SMTP.Service |  |
+| .SMTP.Server | The SMTP server configured for the workspace |
+| .SMTP.Port | The SMTP port configured for the workspace |
+| .SMTP.Sender | The SMTP sender to use for the application |
+| .SMTP.User | The username used to login to the SMTP server |
+| .SMTP.Password | The password used to login to the SMTP server |
