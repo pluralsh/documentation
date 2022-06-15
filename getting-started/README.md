@@ -1,4 +1,4 @@
-ß---
+---
 description: Setting up your first cluster in your terminal.
 ---
 
