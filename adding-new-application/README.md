@@ -153,7 +153,6 @@ Template values:
 | .OIDC.Bindings.Group.Id | The ID of the group that's bound to the application's OIDC provider |
 | .OIDC.Bindings.Group.Name | The Name of the group that's bound to the application's OIDC provider |
 
-You may add @[**michaeljguarino**](https://github.com/michaeljguarino) as a reviewer on the PR.
 `.SMTP` values:
 | Path | Description |
 | ---- | ----------- |
