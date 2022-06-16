@@ -138,11 +138,11 @@ Template values:
 | .OIDC.ClientSecret | The Client Secret for the OIDC provider of the application |
 | .OIDC.RedirectUris | List of redirect URIs for the OIDC provider of the application |
 | .OIDC.Bindings | List of bindings for the OIDC provider of the application. Please see below for a detailed explanation |
-| .OIDC.OAuthConfiguration.Issuer | The Issuer of the OIDC provider for the application |
-| .OIDC.OAuthConfiguration.AuthorizationEndpoint | The Authorization endpoint of the OIDC provider for the application |
-| .OIDC.OAuthConfiguration.TokenEndpoint | The Token endpoint of the OIDC provider for the application |
-| .OIDC.OAuthConfiguration.JwksUri | The JWKS URI of the OIDC provider for the application |
-| .OIDC.OAuthConfiguration.UserinfoEndpoint | The endpoint exposing user info of the OIDC provider for the application |
+| .OIDC.Configuration.Issuer | The Issuer of the OIDC provider for the application |
+| .OIDC.Configuration.AuthorizationEndpoint | The Authorization endpoint of the OIDC provider for the application |
+| .OIDC.Configuration.TokenEndpoint | The Token endpoint of the OIDC provider for the application |
+| .OIDC.Configuration.JwksUri | The JWKS URI of the OIDC provider for the application |
+| .OIDC.Configuration.UserinfoEndpoint | The endpoint exposing user info of the OIDC provider for the application |
 
 `.OIDC.Bindings` values:
 | Path | Description |
