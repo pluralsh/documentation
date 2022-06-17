@@ -131,7 +131,7 @@ plural deploy
 Finally, she push up these changes up to the installation repo Github
 
 ```
-git commit -m "Change owner of repo
+git commit -m "Change owner of repo"
 git push
 ```
 
