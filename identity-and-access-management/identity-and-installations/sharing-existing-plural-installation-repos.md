@@ -65,7 +65,7 @@ We offer a docker image with the plural cli installed along with all cli depende
 
 ```
 docker run -it --volume $HOME/.aws:/root/aws \
-               --volume $HOME/.plural:/root/.plural \ 
+               --volume $HOME/.plural:/root/.plural \
                --volume $HOME/.ssh:/root/.ssh \
     gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
@@ -75,7 +75,7 @@ docker run -it --volume $HOME/.aws:/root/aws \
 We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\
 
 
-If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a github issue.
+If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a GitHub issue.
 
 This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/).  You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to chose the one for the appropriate region.&#x20;
 {% endtab %}
@@ -131,7 +131,7 @@ plural deploy
 Finally, she push up these changes up to the installation repo Github
 
 ```
-git commit -m "Change owner of repo 
+git commit -m "Change owner of repo
 git push
 ```
 
@@ -174,4 +174,3 @@ plural init --service-account ml-infra@plural.sh
 ### 13. Profit!
 
 From this point on, any of Alice, Bob, or Cory can install, build, and deploy new applications and have it be reflected under the `ml-infra@plural.sh` service account. They should always remember to push up their changes in Git, and to pull down any new changes that their teammates may have made prior to making new installations.
-
