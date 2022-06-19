@@ -41,7 +41,7 @@ Be sure to download the CLI version for your target OS/architecture, the above e
 
 
 
-You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here\\
+You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here
 
 | Tool      | Installer                                                                                                                  |
 | --------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -51,7 +51,7 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 {% endtab %}
 
 {% tab title="Docker" %}
-We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:\\
+We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
 
 ```
 docker run -it --volume $HOME/.aws:/home/plural/aws \
@@ -65,7 +65,7 @@ Once you're in the container's zsh, you'll want to clone the repo you'll use for
 {% endtab %}
 
 {% tab title="EC2 AMI" %}
-We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\\
+We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)
 
 If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a github issue.
 
