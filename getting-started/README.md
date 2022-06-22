@@ -245,6 +245,10 @@ The admin console is separate from [app.plural.sh](https://app.plural.sh) which 
 
 Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
+{% hint style="warning" %}
+You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
+{% endhint %}
+
 The application urls will have been printed out to the terminal at the end of the `plural deploy` logs.
 
 If you selected (Y) to using Plural's OIDC above, then you should be able to login with your `app.plural.sh` login credentials.
