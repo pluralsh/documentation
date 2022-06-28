@@ -211,19 +211,11 @@ This will generate all deployment artifacts in the repo, then deploy them in dep
 `plural deploy` can take a fair amount of time, and network disconnects can cause potential issues as a result. If you're running on a spotty network, or would like to step out while it's running we recommend running it in [tmux](https://github.com/tmux/tmux/wiki)
 {% endhint %}
 
-## Log into your Applications
-
 Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
 {% hint style="warning" %}
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
 {% endhint %}
-
-The application urls will have been printed out to the terminal at the end of the `plural deploy` logs.
-
-If you selected (Y) to using Plural's OIDC above, then you should be able to login with your `app.plural.sh` login credentials.
-
-If you selected (N) to using Plural's OIDC, login credentials are available at`{app-name}/helm/{app-name}/values.yaml.` The key name should be pretty self-descriptive, for instance the initial admin password for the plural console is in a key named: `console.secrets.admin_password`.
 
 ## Uninstall Applications
 
