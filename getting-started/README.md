@@ -57,7 +57,7 @@ We offer a docker image with the plural cli installed along with all cli depende
 docker run -it --volume $HOME/.aws:/home/plural/aws \
                --volume $HOME/.plural:/home/plural/.plural \
                --volume $HOME/.ssh:/home/plural/.ssh \
-               --volume $HOME/path/to/installation/repo:/home/plural/workspace \ # optional if you want to manage git via a volume
+               --volume $HOME/PATH/TO/INSTALLATION/REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
                gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
 
