@@ -1,16 +1,17 @@
 # Summary
 
 * [Get Started](README.md)
-* [Quickstart](getting-started/README.md)
+* [Quickstart](basic-setup-and-deployment/README.md)
 
 ## Basic Setup & Deployment
-* [Deploying Plural in the Cloud Shell](getting-started/cloud-shell-quickstart.md)
-* [Uninstalling Plural](getting-started/uninstall.md)  
-* [Operator Guides](operator-guides/README.md)
-  * [What is the Cloud Shell?](getting-started/cloud-shell.md)
-  * [Getting Started With Plural Console](getting-started/admin-console.md)
-  * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
-* [Common Errors](getting-started/troubleshooting.md)
+* [Deploying Plural in the Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
+* [Plural OIDC](basic-setup-and-deployment/openid-connect.md)  
+* [Uninstalling Plural](basic-setup-and-deployment/uninstall.md)  
+* [Operator Guides](basic-setup-and-deployment/operator-guides/README.md)
+  * [What is the Cloud Shell?](basic-setup-and-deployment/cloud-shell.md)
+  * [Getting Started With Plural Console](basic-setup-and-deployment/admin-console.md)
+  * [Adding Kubecost for Cost Analysis](basic-setup-and-deployment/adding-kubecost-for-cost-analysis.md)
+* [Common Errors](basic-setup-and-deployment/troubleshooting.md)
 
 ## Applications
 
@@ -28,8 +29,8 @@
 
 ## Reference and Advanced Ops
 * [Architecture](architecture-1.md)
-* [Setting up Third Party DNS](getting-started/dns-setup/README.md)
-  * [Creating a DNS Zone in Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
+* [Setting up Third Party DNS](basic-setup-and-deployment/dns-setup/README.md)
+  * [Creating a DNS Zone in Console](basic-setup-and-deployment/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
 * [Workspaces](reference/workspace/README.md)
   * [Workspace Layout](reference/workspace/workspace-layout.md)
   * [Secret Management](reference/workspace/secret-management.md)
