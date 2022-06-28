@@ -158,12 +158,8 @@ Currently we're limited to a one cluster to one repo mapping, but eventually tha
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
 
-You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. Here's an example of what it looks like below:
-
-```
-Do you want to use plural's dns provider: [Yn] Y
-What do you want to use as your subdomain, must be a subdomain under onplural.sh: singular.onplural.sh
-```
+You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. We recommend that you use our DNS service if you don't have any security reasons that prevent you from doing so.
+The hostname that you configure with us will determine where your applications are hosted. For example, if you enter `singular.onplural.sh`, your applications will be available at `$APP_NAME.singular.onplural.sh`.
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
 
@@ -195,10 +191,7 @@ We can try this out by installing the Plural Console, a powerful Kubernetes cont
 
 {% endtabs %}
 
-You should be asked a lot of questions about how your app will be configured, including whether you want to enable Plural OIDC (single sign-on):
-
-![](<../.gitbook/assets/Screen Shot 2021-11-11 at 7.55.50 PM.png>)
-
+You should be asked a lot of questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on).
 Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to log into all Plural-deployed applications.
 
 Ultimately all the values you input at this step will be stored in a file called `context.yaml` at the root of your repo.
