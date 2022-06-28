@@ -9,8 +9,6 @@
   * [What is the Cloud Shell?](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
   * [Adding Kubecost for Cost Analysis](getting-started/adding-kubecost-for-cost-analysis.md)
-* [Setting Up a Third Party DNS Provider](getting-started/dns-setup/README.md)
-  * [Creating a DNS Zone in Your Cloud Provider Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
 * [Common Errors](getting-started/troubleshooting.md)
 
 ## Applications
@@ -29,6 +27,8 @@
 
 ## Reference and Advanced Ops
 * [Architecture](architecture-1.md)
+* [Setting up Third Party DNS](getting-started/dns-setup/README.md)
+  * [Creating a DNS Zone in Console](getting-started/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
 * [Workspaces](reference/workspace/README.md)
   * [Workspace Layout](reference/workspace/workspace-layout.md)
   * [Secret Management](reference/workspace/secret-management.md)
