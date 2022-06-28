@@ -4,6 +4,10 @@ description: Troubleshooting
 
 # Common Errors
 
+## error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1
+
+You might see this when attempting to sync crds or run helm commands in a run of `plural deploy`.  It's due to legacy versions of the aws cli generating deprecated kubeconfigs, if you upgrade your cli and rerun `plural deploy` it should be able to proceed successfully.
+
 ## Error 404: The requested project was not found., notFound
 
 If you are running `plural build` and encounter a `project requested not found` error it's possible that your application default credential is set to the wrong gcp project. Run:

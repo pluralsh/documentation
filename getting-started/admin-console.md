@@ -1,5 +1,20 @@
 # Getting Started With Plural Console
 
+## Introduction
+
+The plural admin console is a web application that serves as a control panel for all your plural applications. It:
+
+* manages automated upgrades delivered from the Kubernetes api
+* serves as a thin Grafana to visualize application metrics and logs
+* serves as a built-in k8s dashboard for all plural apps in the cluster, along with providing app-level health checking
+* is the touchpoint at which incidents can be filed with the owner of an application
+
+The console is not a strict dependency, but it is highly recommended to install it. It can be installed and deployed like any other application on Plural. For more detailed instructions, please refer to [this guide](admin-console.md).
+
+{% hint style="info" %}
+The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
+{% endhint %}
+
 ## Installation
 
 #### 1. Check whether your Plural installation repo uses https or ssh for Git authentication
