@@ -6,7 +6,7 @@ description: A quick guide to getting up and running with the Plural CLI.
 
 ## Overview
 
-This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](basic-setup-and-deployment/cloud-shell-quickstart.md).
+This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
 
 ## Install Plural CLI and dependencies
 

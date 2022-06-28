@@ -1,7 +1,7 @@
 # Summary
 
 * [Get Started](README.md)
-* [Quickstart](quickstart.md)
+* [Quickstart](basic-setup-and-deployment/quickstart.md)
 
 ## Basic Setup & Deployment
 * [Deploying Plural in the Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)

@@ -15,7 +15,7 @@ Plural is an open-source, unified, application deployment platform that makes it
 
 You can deploy Plural in two ways:
 
-* [Using the Plural CLI on your Machine](quickstart.md)
+* [Using the Plural CLI on your Machine](basic-setup-and-deployment/quickstart.md)
   * Click here if you want to manage configuration locally and prefer working out of your terminal.
 * [Using our in-browser Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
   * Click here if you want a more visual in-browser experience or if you want to try out Plural for free.
