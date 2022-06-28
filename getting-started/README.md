@@ -217,23 +217,6 @@ Once `plural deploy` has completed, you should be ready to log in to your applic
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
 {% endhint %}
 
-## Uninstall Applications
-
-To uninstall applications, use:
-
-```
-plural destroy <app-name>
-```
-
-This will do things like destroying terraform resources and emptying k8s namespaces, but it won't remove the application builds from your local repo, or the application configuration values from `context.yaml.`
-
-To uninstall your entire Plural installation and Kubernetes cluster, run:
-
-```
-plural destroy
-```
-
-{% hint style="danger" %}
-Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
-{% endhint %}
+**And you are done!** You now have a fully-configured Kubernetes cluster and are free to install applications on it to your heart's content. If you want to take down any of your individual applications, run `plural destroy <APP-NAME>`. If you're just testing 
+us out and want to take down the entire thing, run `plural destroy`. 
 

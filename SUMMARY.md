@@ -5,6 +5,7 @@
 
 ## Basic Setup & Deployment
 * [Deploying Plural in the Cloud Shell](getting-started/cloud-shell-quickstart.md)
+* [Uninstalling Plural](getting-started/uninstall.md)  
 * [Operator Guides](operator-guides/README.md)
   * [What is the Cloud Shell?](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
