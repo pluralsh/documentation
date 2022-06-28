@@ -44,7 +44,7 @@ In all cases externaldns is configured to use pod assigned, temporary credential
 
 ## Git setup
 
-The state of your installation is stored in a fresh git repo.  Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed.  Additionally, the best supported method of authenticating to git using plural is via passphraseless ssh keys.  Both gitlab and github support this mode of operation, and you can always choose to use `https://gitlab.plural.sh` if your organization has no existing git-based SCM.
+The state of your installation is stored in a fresh git repo.  Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed.  Additionally, the best supported method of authenticating to git using plural is via passphraseless ssh keys.  Both GitLab and GitHub support this mode of operation, and you can always choose to use `https://gitlab.plural.sh` if your organization has no existing git-based SCM.
 
 Once your repo has been cloned, run:
 
@@ -107,4 +107,3 @@ git push
 ```
 
 For the most part, plural console will do all of this for you if you chose to install it.
-

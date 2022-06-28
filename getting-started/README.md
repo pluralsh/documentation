@@ -22,7 +22,7 @@ The brew tap will install plural, alongside terraform, helm and kubectl for you.
 {% endtab %}
 
 {% tab title="curl" %}
-You can download the binaries attached to our github releases here: [https://github.com/pluralsh/plural-cli/releases](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
+You can download the binaries attached to our GitHub releases here: [https://github.com/pluralsh/plural-cli/releases](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
 
 For example, you can download v0.2.57 for Darwin arm64 via:
 
@@ -55,7 +55,7 @@ We offer a docker image with the plural cli installed along with all cli depende
 
 ```
 docker run -it --volume $HOME/.aws:/home/plural/aws \
-               --volume $HOME/.plural:/home/plural/.plural \ 
+               --volume $HOME/.plural:/home/plural/.plural \
                --volume $HOME/.ssh:/home/plural/.ssh \
                --volume $HOME/<path-to-installation-repo:/home/plural/workspace \ # optional if you want to manage git via a volume
     gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
@@ -67,7 +67,7 @@ Once you're in the container's zsh, you'll want to clone the repo you'll use for
 {% tab title="EC2 AMI" %}
 We have EC2 AMI's with plural cli installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)
 
-If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a github issue.
+If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a GitHub issue.
 
 This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/). You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
 {% endtab %}
@@ -134,8 +134,8 @@ aws configure list
       Name                    Value             Type    Location
       ----                    -----             ----    --------
    profile                <not set>             None    None
-access_key     ****************RUG2 shared-credentials-file    
-secret_key     ****************hJUU shared-credentials-file    
+access_key     ****************RUG2 shared-credentials-file
+secret_key     ****************hJUU shared-credentials-file
     region                us-east-2      config-file    ~/.aws/config
 ```
 {% endtab %}
@@ -161,7 +161,7 @@ You need a registered domain that your Plural applications can be deployed to. Y
 
 ## 4. Create and Initialize Plural Repo
 
-Run this command within a directory that you want to store your configuration repository in: 
+Run this command within a directory that you want to store your configuration repository in:
 
 ```
 plural init
