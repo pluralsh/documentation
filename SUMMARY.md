@@ -1,13 +1,10 @@
-# Table of contents
+# Summary
 
-## Introduction <a href="#quickstart" id="quickstart"></a>
+* [Get Started](README.md)
+* [Quickstart](getting-started/README.md)
 
-* [What is Plural?](README.md)
-* [Quickstart (CLI)](getting-started/README.md)
-* [Quickstart (Cloud Shell)](getting-started/cloud-shell-quickstart.md)
-* [Architecture](architecture-1.md)
-
-## Setup & Deployment
+## Basic Setup & Deployment
+* [Deploying Plural in the Cloud Shell](getting-started/cloud-shell-quickstart.md)
 * [Operator Guides](operator-guides/README.md)
   * [What is the Cloud Shell?](getting-started/cloud-shell.md)
   * [Getting Started With Plural Console](getting-started/admin-console.md)
@@ -30,29 +27,23 @@
     * [Runbook XML](adding-new-application/getting-started-with-runbooks/runbook-xml.md)
     * [Runbook Yaml](adding-new-application/getting-started-with-runbooks/runbook-yaml.md)
 
-## Workspace
-
-* [Workspace Layout](workspace/workspace-layout.md)
-* [Secret Management](workspace/secret-management.md)
-
-## Identity and Access Management
-
-* [Introduction](identity-and-access-management/introduction.md)
-* [OpenID Connect](identity-and-access-management/openid-connect.md)
-* [API Tokens](identity-and-access-management/api-tokens.md)
-* [Advanced Topics](identity-and-access-management/identity-and-installations/README.md)
-  * [Sharing Existing Plural Installation Repos](identity-and-access-management/identity-and-installations/sharing-existing-plural-installation-repos.md)
-  * [Service Accounts](identity-and-access-management/identity-and-installations/service-accounts.md)
-  * [Audit Logging](identity-and-access-management/identity-and-installations/audit-logging.md)
-
-## Debugging
-
-* [Health Checks](debugging/health-checks.md)
-* [Proxies](debugging/proxies.md)
-* [Logs](debugging/logs.md)
-
-## Developer Tools / API
-
-* [Introduction](api/introduction/README.md)
-  * [Plural API](api/introduction/plural-api.md)
-  * [Console API](api/introduction/console-api.md)
+## Reference and Advanced Ops
+* [Architecture](architecture-1.md)
+* [Workspaces](reference/workspace/README.md)
+  * [Workspace Layout](reference/workspace/workspace-layout.md)
+  * [Secret Management](reference/workspace/secret-management.md)
+* [Identity and Access Management](reference/identity-and-access-management/README.md)
+  * [Introduction](reference/identity-and-access-management/introduction.md)
+  * [OpenID Connect](reference/identity-and-access-management/openid-connect.md)
+  * [API Tokens](reference/identity-and-access-management/api-tokens.md)
+  * [Advanced Topics](reference/identity-and-access-management/identity-and-installations/README.md)
+    * [Sharing Existing Plural Installation Repos](reference/identity-and-access-management/identity-and-installations/sharing-existing-plural-installation-repos.md)
+    * [Service Accounts](reference/identity-and-access-management/identity-and-installations/service-accounts.md)
+    * [Audit Logging](reference/identity-and-access-management/identity-and-installations/audit-logging.md)
+* [Debugging](reference/debugging/README.md)
+  * [Health Checks](reference/debugging/health-checks.md)
+  * [Proxies](reference/debugging/proxies.md)
+  * [Logs](reference/debugging/logs.md)
+* [Developer Tools / API](reference/api/introduction/README.md)
+  * [Plural API](reference/api/introduction/plural-api.md)
+  * [Console API](reference/api/introduction/console-api.md)

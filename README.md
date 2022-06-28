@@ -11,4 +11,12 @@ Plural is an open-source, unified, application deployment platform that makes it
 * GitOps workflow with batteries-included transparent secret encryption
 * Built on common open source tools, so if you don't like us, you can always eject your application from Plural and use it as you please.
 
-Head to [this page](getting-started/README.md) to get started with Plural.
+# Deployment Options
+
+You can deploy Plural in two ways:
+
+* [Using the Plural CLI on your Machine](getting-started/README.md)
+  * Click here if you want to manage configuration locally and prefer working out of your terminal.
+* [Using our in-browser Cloud Shell](getting-started/cloud-shell-quickstart.md)
+  * Click here if you want a more visual in-browser experience or if you want to try out Plural for free.
+
