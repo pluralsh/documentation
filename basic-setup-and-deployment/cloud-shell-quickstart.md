@@ -155,7 +155,7 @@ as we so choose.
 
 ### Leaving the Shell Experience
 
-If you want to start using the CLI locally, just [install the Plural CLI](../getting-started/README.md#1.-install-plural-cli-and-dependencies) and run:
+If you want to start using the CLI locally, just [install the Plural CLI](/README.md#1.-install-plural-cli-and-dependencies) and run:
 
 ```plural shell sync```
 
