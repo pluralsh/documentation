@@ -1,4 +1,10 @@
-# Configuring Cloud Provider CLI
+---
+description: >-
+  Make sure that your cloud provider CLI is properly set up before installing
+  Plural.
+---
+
+# ☁ Cloud Provider CLI Setup
 
 Before you can start installing your Kubernetes cluster and applications with the Plural CLI, you will need to make sure that your cloud provider CLI is set up correctly.
 
@@ -70,5 +76,5 @@ to reset the application default credential and re-authorize the browser. Failur
 {% tab title="Azure" %}
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) to install your Azure cli.
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
-  {% endtab %}
-  {% endtabs %}
+{% endtab %}
+{% endtabs %}

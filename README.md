@@ -1,7 +1,7 @@
 ---
 description: >-
-  Plural empowers you to build and maintain production-ready
-  applications on Kubernetes in minutes with no management overhead.
+  Plural empowers you to build and maintain production-ready applications on
+  Kubernetes in minutes with no management overhead.
 ---
 
 # 👋 Introduction
@@ -12,7 +12,7 @@ Plural is an open-source, unified, application deployment platform that makes it
 
 ![](<.gitbook/assets/image (1).png>)
 
-We aim to make applications as portable as possible, without sacrificing the ability for the users to own the applications they desire to use.&#x20;
+We aim to make applications as portable as possible, without sacrificing the ability for the users to own the applications they desire to use.
 
 Some key features of the platform include:
 
@@ -35,6 +35,4 @@ We have created a Cloud Shell with all of the tools and dependencies needed to r
 
 * [Using our in-browser Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
 
-## Support / Community
-
-We offer support getting your Plural deployment up and running in our community Discord. Join [here!](https://discord.gg/pluralsh)
+If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.gg/pluralsh)
