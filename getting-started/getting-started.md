@@ -78,74 +78,9 @@ This doc gives more details on launching AMIs if you are unfamiliar: [https://aw
 {% endtab %}
 {% endtabs %}
 
-## Configure Cloud Provider CLI
-
-You should now install and configure your cloud provider cli ([awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), [gcloud](https://cloud.google.com/sdk/docs/install), [az](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) if you have not done so already. This is also a good time to take care of some cloud setup tasks from your provider's console. Follow the provider-specific instructions below.
-
-{% tabs %}
-{% tab title="AWS" %}
-* Follow the instructions [here](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) to install your AWS cli.
-* Verify that the cli has been added to your `$PATH`
-* Follow the instructions [here](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html) to configure your cli and connect it to your aws console
-* Verify that your cli has been properly configured by running
-
-```
-aws configure list
-```
-
-* You should see a set of values that looks like this:
-
-```
-      Name                    Value             Type    Location
-      ----                    -----             ----    --------
-   profile                <not set>             None    None
-access_key     ****************RUG2 shared-credentials-file    
-secret_key     ****************hJUU shared-credentials-file    
-    region                us-east-2      config-file    ~/.aws/config
-```
-{% endtab %}
-
-{% tab title="GCP" %}
-* Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud cli.
-* Verify that the cli has been added to your `$PATH`
-* Create a new project in gcp via the cli:
-
-```
-gcloud projects create example-project-name
-```
-
-* [Enable the Kubernetes Engine API](https://cloud.google.com/kubernetes-engine/docs/quickstart) for the project you just created.
-* [Enable the Google DNS API](https://excelnotes.com/enable-cloud-dns-api/) for the project you just created.
-* Run `gcloud init` and follow the prompts to configure the gcloud cli and connect it to the project you just created.
-* Verify that your cli has been properly configured. It should look something like this. Make sure that your active configuration is set to the project you just created.
-
-```
-> gcloud config list
-[compute]
-region = us-east1
-zone = us-east1-b
-[core]
-account = yirenlu92@gmail.com
-disable_usage_reporting = True
-project = example-project-name
-
-Your active configuration is: [example-project-name]
-```
-
-* If you have multiple projects in GCP and previously have configured your gcloud cli to point to a different project, run
-
-```
-gcloud auth application-default login
-```
-
-to reset the application default credential and re-authorize the browser. Failure to do this could result in `project requested not found` errors further along.
-{% endtab %}
-
-{% tab title="Azure" %}
-* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) to install your Azure cli.
-* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
-{% endtab %}
-{% endtabs %}
+{% hint style="warning" %}
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../basic-setup-and-deployment/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+{% endhint %}
 
 ## Create your Plural Repo
 
