@@ -159,9 +159,7 @@ plural deploy --commit "initial deploy"
 
 This will generate all deployment artifacts in the repo, then deploy them in dependency order.
 
-{% hint style="info" %}
-`plural deploy` can take a fair amount of time, and network disconnects can cause potential issues as a result. If you're running on a spotty network, or would like to step out while it's running we recommend running it in [tmux](https://github.com/tmux/tmux/wiki)
-{% endhint %}
+It is common for `plural deploy` to take a fair amount of time, as is the case with most Terraform and cloud infrastructure deployments. Network disconnects can cause potential issues as a result. If you're running on a spotty network, or would like to step out while it's running we recommend running it in [tmux](https://github.com/tmux/tmux/wiki).
 
 Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
