@@ -171,5 +171,5 @@ To uninstall an application from your cluster, run:
 
 ### Feedback
 
-If you have any feedback or questions about the experience, [head over to our community Discord](https://discord.com/invite/bEBAMXV64s) and drop us some feedback. The
+If you have any feedback or questions about the experience, [head over to our community Discord](https://discord.gg/pluralsh) and drop us some feedback. The
 Cloud Shell is still in development and we are dedicated to perfecting the user experience, so any feedback would be immensely helpful to us.
