@@ -1,4 +1,4 @@
-# Creating a DNS Zone in Your Cloud Provider Console
+# Creating a DNS Zone in Console
 
 {% tabs %}
 {% tab title="AWS Route53" %}
@@ -27,7 +27,7 @@
 
 ![](<../../.gitbook/assets/Screen Shot 2021-08-18 at 12.39.37 PM.png>)
 
-###
+####
 {% endtab %}
 
 {% tab title="Azure DNS" %}
@@ -42,4 +42,3 @@
 ![List of name servers](https://docs.microsoft.com/en-us/azure/dns/media/dns-delegate-domain-azure-dns/viewzonens500.png)
 {% endtab %}
 {% endtabs %}
-

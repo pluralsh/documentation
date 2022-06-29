@@ -1,17 +1,16 @@
-# Summary
+# Table of contents
 
-* [Get Started](README.md)
-* [Quickstart](basic-setup-and-deployment/quickstart.md)
+## Getting Started
+
+* [👋 Introduction](README.md)
+* [🏁 Quickstart](getting-started/getting-started.md)
 
 ## Basic Setup & Deployment
-* [Deploying Plural in the Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
-* [Plural OIDC](basic-setup-and-deployment/openid-connect.md)  
-* [Uninstalling Plural](basic-setup-and-deployment/uninstall.md)  
-* [Operator Guides](basic-setup-and-deployment/operator-guides/README.md)
-  * [What is the Cloud Shell?](basic-setup-and-deployment/cloud-shell.md)
-  * [Getting Started With Plural Console](basic-setup-and-deployment/admin-console.md)
-  * [Adding Kubecost for Cost Analysis](basic-setup-and-deployment/adding-kubecost-for-cost-analysis.md)
-* [Common Errors](basic-setup-and-deployment/troubleshooting.md)
+
+* [Installing Plural Console](basic-setup-and-deployment/admin-console.md)
+* [Using Plural OIDC](basic-setup-and-deployment/openid-connect.md)
+* [Deploying with Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
+* [Uninstalling Plural](basic-setup-and-deployment/uninstall.md)
 
 ## Applications
 
@@ -19,7 +18,7 @@
   * [Airbyte](repositories/airbyte.md)
   * [Airflow](repositories/airflow.md)
   * [Console](repositories/console.md)
-* [Adding a New Application](adding-new-application/README.md)
+* [Add an Application](adding-new-application/README.md)
   * [Guide](adding-new-application/guide.md)
   * [Plural Custom Resources](adding-new-application/plural-custom-resources.md)
   * [Module Library](adding-new-application/module-library.md)
@@ -27,25 +26,29 @@
     * [Runbook XML](adding-new-application/getting-started-with-runbooks/runbook-xml.md)
     * [Runbook Yaml](adding-new-application/getting-started-with-runbooks/runbook-yaml.md)
 
-## Reference and Advanced Ops
-* [Architecture](architecture-1.md)
-* [Setting up Third Party DNS](basic-setup-and-deployment/dns-setup/README.md)
-  * [Creating a DNS Zone in Console](basic-setup-and-deployment/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
-* [Workspaces](reference/workspace/README.md)
-  * [Workspace Layout](reference/workspace/workspace-layout.md)
-  * [Secret Management](reference/workspace/secret-management.md)
-* [Identity and Access Management](reference/identity-and-access-management/README.md)
-  * [Introduction](reference/identity-and-access-management/introduction.md)
-  * [OpenID Connect](reference/identity-and-access-management/openid-connect.md)
-  * [API Tokens](reference/identity-and-access-management/api-tokens.md)
-  * [Advanced Topics](reference/identity-and-access-management/identity-and-installations/README.md)
-    * [Sharing Existing Plural Installation Repos](reference/identity-and-access-management/identity-and-installations/sharing-existing-plural-installation-repos.md)
-    * [Service Accounts](reference/identity-and-access-management/identity-and-installations/service-accounts.md)
-    * [Audit Logging](reference/identity-and-access-management/identity-and-installations/audit-logging.md)
-* [Debugging](reference/debugging/README.md)
-  * [Health Checks](reference/debugging/health-checks.md)
-  * [Proxies](reference/debugging/proxies.md)
-  * [Logs](reference/debugging/logs.md)
-* [Developer Tools / API](reference/api/introduction/README.md)
-  * [Plural API](reference/api/introduction/plural-api.md)
-  * [Console API](reference/api/introduction/console-api.md)
+## Advanced Topics
+
+* [Security](advanced-topics/security.md)
+* [IAM / RBAC](advanced-topics/identity-and-access-management/README.md)
+  * [Introduction](advanced-topics/identity-and-access-management/introduction.md)
+  * [OpenID Connect](advanced-topics/identity-and-access-management/openid-connect.md)
+  * [API Tokens](advanced-topics/identity-and-access-management/api-tokens.md)
+* [Configuring DNS](advanced-topics/dns-setup/README.md)
+  * [Creating a DNS Zone in Console](advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
+* [Debugging](advanced-topics/debugging/README.md)
+  * [Health Checks](advanced-topics/debugging/health-checks.md)
+  * [Proxies](advanced-topics/debugging/proxies.md)
+  * [Logs](advanced-topics/debugging/logs.md)
+
+## Reference
+
+* [🪛 Troubleshooting](reference/troubleshooting.md)
+* [📚 Operator Guides](reference/operator-guides/README.md)
+  * [Cloud Shell](reference/operator-guides/cloud-shell.md)
+  * [Adding Kubecost for Cost Analysis](reference/operator-guides/adding-kubecost-for-cost-analysis.md)
+* [🏗 Architecture](reference/architecture-1.md)
+* [🖥 Workspaces](reference/workspace.md)
+* [👩💻 Developer Tools / API](reference/introduction/README.md)
+  * [Plural API](reference/introduction/plural-api.md)
+  * [Console API](reference/introduction/console-api.md)
+* [◼ Cloud Provider CLI Setup](reference/cloud-provider-cli-setup.md)

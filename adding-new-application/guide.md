@@ -4,7 +4,7 @@ description: >-
   project as a Plural application.
 ---
 
-# Integrate with Plural
+# Guide
 
 ## 1. Create a new directory in plural-artifacts
 
@@ -35,7 +35,7 @@ In the steps below we will go through and fill out the stubs.
 
 ## 2. Add your helm chart
 
-This section assumes familiarity with helm, the Kubernetes package manager. If you have not worked with helm before, it's strongly recommended that you read through the helm docs to understand core helm concepts, particularly [helm templates](https://helm.sh/docs/chart\_template\_guide/getting\_started/) and helm template values.&#x20;
+This section assumes familiarity with helm, the Kubernetes package manager. If you have not worked with helm before, it's strongly recommended that you read through the helm docs to understand core helm concepts, particularly [helm templates](https://helm.sh/docs/chart\_template\_guide/getting\_started/) and helm template values.
 
 ### Getting Started with Helm
 
@@ -57,15 +57,13 @@ hasura/
                       # will generate valid Kubernetes manifest files.
 ```
 
-The `Chart.yaml` file contains a description of the chart. You can access it from within a template.&#x20;
+The `Chart.yaml` file contains a description of the chart. You can access it from within a template.
 
 The `templates/` directory is for template files. When Helm evaluates a chart, it will send all of the files in the `templates/` directory through the template rendering engine. It then collects the results of those templates and sends them on to Kubernetes.
 
 The `values.yaml` file is also important to templates. This file contains the _default values_ for a chart. These values may be overridden by users during `helm install` or `helm upgrade`.
 
 You should also see a `deps.yaml` file. This is a Plural file used to track dependencies and sequence order of installations and upgrades.
-
-
 
 ### 1. Fill out `Chart.yaml`
 
@@ -82,8 +80,6 @@ dependencies:
     repository: https://charts.platy.plus
 ```
 
-
-
 ### 2. Fill out `templates/`
 
 Next, let's fill out the `templates/` directory. Recall that the `templates/` directory is for template files. When Helm evaluates a chart, it will send all of the files in the `templates/` directory through the template rendering engine. It then collects the results of those templates and sends them on to Kubernetes.
@@ -95,7 +91,7 @@ The Plural platform includes a number of custom resources that you might find us
 * [proxies.yaml](plural-custom-resources.md#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
 * [configurationOverlay.yaml](plural-custom-resources.md#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
 
-![](../.gitbook/assets/image.png)
+![](<../.gitbook/assets/image (2).png>)
 
 * logfilter.yaml
 
@@ -138,12 +134,11 @@ spec:
       repo: hasura
       version: ">= 0.1.0"
       optional: true
-
 ```
 
 ## 2. Add your cloud config
 
-From the root of the `plural-artifacts/` directory, navigate to the `terraform/` directory. Terraform is a tool for creating, updating, and destroying cloud infrastructure via configuration rather than a graphical user interface. If you are not familiar with it, we suggest reading through the [Terraform docs](https://www.terraform.io/language). The files that are located inside this directory are responsible for creating various cloud objects  -- i.e. Kubernetes namespaces, AWS IAM roles, and service accounts.
+From the root of the `plural-artifacts/` directory, navigate to the `terraform/` directory. Terraform is a tool for creating, updating, and destroying cloud infrastructure via configuration rather than a graphical user interface. If you are not familiar with it, we suggest reading through the [Terraform docs](https://www.terraform.io/language). The files that are located inside this directory are responsible for creating various cloud objects -- i.e. Kubernetes namespaces, AWS IAM roles, and service accounts.
 
 ```
 cd terraform
@@ -203,9 +198,7 @@ resource "kubernetes_service_account" "postgres" {
 
 * [`variables.tf`](https://learn.hashicorp.com/tutorials/terraform/module-create?in=terraform/modules#variables-tf) will contain the variable definitions for your terraform module (the variables are used in `main.tf`
 
-
-
-## 3. Add your Plural config&#x20;
+## 3. Add your Plural config
 
 Finally, let's look at how to set up the config that will go to Plural.
 
@@ -246,7 +239,7 @@ sections:
 
 ## 4. Testing Locally
 
-You can validate your changes locally using the `plural link` command.  You'll need to have your packages pushed to plural first, then installed in an installation repo.  Once done, you can link your local version of a helm or terraform package using:
+You can validate your changes locally using the `plural link` command. You'll need to have your packages pushed to plural first, then installed in an installation repo. Once done, you can link your local version of a helm or terraform package using:
 
 ```
 plural link helm <app-name> --path ../path/to/helm --name <chart-name>

@@ -1,28 +1,37 @@
 ---
-description: A quick guide to getting up and running with the Plural CLI.
+description: >-
+  A quickstart guide to getting up and running with Plural using our CLI. Time
+  required is less than 30 minutes.
 ---
 
-# Quickstart
+# 🏁 Quickstart
 
 ## Overview
 
-This is a guide on how to get Plural running on your own machines using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our quickstart guide [here](cloud-shell-quickstart.md).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](broken-reference).
+
+## You Will Need
+
+You will need the following things to successfully get up and running with Plural:
+
+* **A cloud account**: Plural will deploy into your cloud. We current support AWS, GCP and Azure.
+* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places.  If you need to ...&#x20;
 
 ## Install Plural CLI and dependencies
 
-The Plural CLI and its dependencies are available using a package manager for your system. For Mac, we recommend using Homebrew, although our Docker image should be usable on virtually any platform.
+The Plural CLI and its dependencies are available using a package manager for your system. For Mac, we recommend using [Homebrew](https://brew.sh/), although our Docker image should be usable on virtually any platform.
 
 {% tabs %}
 {% tab title="Mac" %}
+The brew tap will install plural, alongside Terraform, Helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+
 ```
 brew install pluralsh/plural/plural
 ```
-
-The brew tap will install plural, alongside Terraform, Helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 {% endtab %}
 
-{% tab title="curl" %}
-You can download the binaries attached to our GitHub releases here: [https://github.com/pluralsh/plural-cli/releases](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
+{% tab title="Curl" %}
+You can download the binaries attached to our GitHub releases [here](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
 
 For example, you can download v0.2.57 for Darwin arm64 via:
 
@@ -33,13 +42,9 @@ chmod +x plural
 mv plural /usr/local/bin/plural
 ```
 
-
-
 {% hint style="info" %}
 Be sure to download the CLI version for your target OS/architecture, the above example is only valid for ARM Mac's
 {% endhint %}
-
-
 
 You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here
 
@@ -51,14 +56,14 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 {% endtab %}
 
 {% tab title="Docker" %}
-We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
+We offer a docker image with the plural CLI installed along with all CLI dependencies: terraform, helm, kubectl, and all the major cloud CLI's: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
 
 ```
 docker run -it --volume $HOME/.aws:/home/plural/aws \
                --volume $HOME/.plural:/home/plural/.plural \
                --volume $HOME/.ssh:/home/plural/.ssh \
-               --volume $HOME/PATH/TO/INSTALLATION/REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
-               gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
+               --volume $HOME/<path-to-installation-repo:/home/plural/workspace \ # optional if you want to manage git via a volume
+    gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
 
 Once you're in the container's zsh, you'll want to clone the repo you'll use for your installations state there, or alternatively you can clone it outside your container and mount another volume pointing to it.
@@ -141,10 +146,10 @@ to reset the application default credential and re-authorize the browser. Failur
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
 {% endtab %}
 {% endtabs %}
-  
+
 ## Create your Plural Repo
 
-Run this command within a directory that you want to store your configuration repository in:
+Plural will store all the application configuration artifacts in a directory. Run this command within the directory that you want to store your configuration in:
 
 ```
 plural init
@@ -158,16 +163,29 @@ Currently we're limited to a one cluster to one repo mapping, but eventually tha
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
 
-You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. We recommend that you use our DNS service if you don't have any security reasons that prevent you from doing so.
-The hostname that you configure with us will determine where your applications are hosted. For example, if you enter `singular.onplural.sh`, your applications will be available at `$APP_NAME.singular.onplural.sh`.
+You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. We recommend that you use our DNS service if you don't have any security reasons that prevent you from doing so. The hostname that you configure with us will determine where your applications are hosted. For example, if you enter `singular.onplural.sh`, your applications will be available at `$APP_NAME.singular.onplural.sh`.
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
 
 ## Install Plural Applications
 
-To view the applications you can install on Plural, navigate to the explore tab at [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public).
+### Viewing available applications
 
-Run `plural bundle list <app-name>` to find installation commands and information about each application available for install.
+![The Plural Marketplace](../.gitbook/assets/image.png)
+
+To view the applications you can install on Plural, point your browser to [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public)
+
+Or run `plural repos list` from the CLI or Cloud Shell.
+
+
+
+### Installing applications
+
+Run `plural bundle list <app-name>` to find installation commands and information about each application available for install. For example, to list the bundle information for the Plural console, a powerful Kubernetes control plane:
+
+```
+plural bundle list console
+```
 
 To install applications on Plural, run:
 
@@ -175,24 +193,23 @@ To install applications on Plural, run:
 plural bundle install <app-name> <bundle-name>
 ```
 
-We can try this out by installing the Plural Console, a powerful Kubernetes control plane:
+We can try this out by installing the Plural Console:
 
 {% tabs %}
-
 {% tab title="AWS" %}
-```plural bundle install console console-aws```
-{% endtab %}
-{% tab title="GCP" %}
-```plural bundle install console console-gcp```
-{% endtab %}
-{% tab title="Azure" %}
-```plural bundle install console console-azure```
+`plural bundle install console console-aws`
 {% endtab %}
 
+{% tab title="GCP" %}
+`plural bundle install console console-gcp`
+{% endtab %}
+
+{% tab title="Azure" %}
+`plural bundle install console console-azure`
+{% endtab %}
 {% endtabs %}
 
-You should be asked a lot of questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on).
-Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to log into all Plural-deployed applications.
+You should be asked a lot of questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to log into all Plural-deployed applications.
 
 Ultimately all the values you input at this step will be stored in a file called `context.yaml` at the root of your repo.
 
@@ -217,6 +234,4 @@ Once `plural deploy` has completed, you should be ready to log in to your applic
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
 {% endhint %}
 
-**And you are done!** You now have a fully-configured Kubernetes cluster and are free to install applications on it to your heart's content. If you want to take down any of your individual applications, run `plural destroy <APP-NAME>`. If you're just testing 
-us out and want to take down the entire thing, run `plural destroy`. 
-
+**And you are done!** You now have a fully-configured Kubernetes cluster and are free to install applications on it to your heart's content. If you want to take down any of your individual applications, run `plural destroy <APP-NAME>`. If you're just testing us out and want to take down the entire thing, run `plural destroy`.
