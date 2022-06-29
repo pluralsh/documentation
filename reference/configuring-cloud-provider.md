@@ -8,7 +8,9 @@ description: >-
 
 Before you can start installing your Kubernetes cluster and applications with the Plural CLI, you will need to make sure that your cloud provider CLI is set up correctly.
 
+{% hint style="info" %}
 If you have already configured and installed your cloud provider CLI and are still seeing errors, make sure that you are on the latest version of the CLI.
+{% endhint %}
 
 ## Installation
 
@@ -78,3 +80,21 @@ to reset the application default credential and re-authorize the browser. Failur
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
 {% endtab %}
 {% endtabs %}
+
+## Permissions
+
+{% tabs %}
+{% tab title="AWS" %}
+_No special permissions necessary._
+{% endtab %}
+
+{% tab title="GCP" %}
+*
+{% endtab %}
+
+{% tab title="Azure" %}
+_No special permissions necessary._
+{% endtab %}
+{% endtabs %}
+
+__
