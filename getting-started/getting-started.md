@@ -79,7 +79,7 @@ This doc gives more details on launching AMIs if you are unfamiliar: [https://aw
 {% endtabs %}
 
 {% hint style="warning" %}
-Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../basic-setup-and-deployment/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/operator-guides/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% endhint %}
 
 ## Create your Plural Repo
