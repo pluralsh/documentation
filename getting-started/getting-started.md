@@ -104,16 +104,21 @@ This process will generate a `workspace.yaml` file at the root of your repo that
 
 ## Install Plural Applications
 
-![The Plural Marketplace](../.gitbook/assets/image.png)
-
-To view the applications you can install on Plural, point your browser to [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public)
+To view the applications you can install on Plural, head to [this link](https://app.plural.sh/explore/public).&#x20;
 
 Alternatively, you can run `plural repos list` on the CLI or Cloud Shell.
 
 Run `plural bundle list <app-name>` to find installation commands and information about each application available for install. For example, to list the bundle information for the Plural console, a powerful Kubernetes control plane:
 
+Here's what we get from running `plural bundle list console`:
+
 ```
-plural bundle list console
++-------------+--------------------------------+----------+--------------------------------+
+|    NAME     |          DESCRIPTION           | PROVIDER |        INSTALL COMMAND         |
++-------------+--------------------------------+----------+--------------------------------+
+| console-aws | Deploys console on an EKS      | AWS      | plural bundle install console  |
+|             | cluster                        |          | console-aws                    |
++-------------+--------------------------------+----------+--------------------------------+
 ```
 
 To install applications on Plural, run:
