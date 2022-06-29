@@ -50,7 +50,7 @@
 * [🖥 Workspaces](reference/workspaces/README.md)
   * [Secret Management](reference/workspaces/secret-management.md)
   * [Workspace Structure](reference/workspaces/workspace-structure.md)
-* [👩💻 👩💻 Developer Tools / API](reference/api/README.md)
+* [👩💻 Developer Tools / API](reference/api/README.md)
   * [Plural API](reference/api/plural-api.md)
   * [Console API](reference/api/console-api.md)
 * [◼ Cloud Provider CLI Setup](reference/cloud-provider-cli-setup.md)
