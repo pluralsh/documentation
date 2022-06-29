@@ -8,7 +8,7 @@ description: Addressing security concerns and learn about what Plural has access
 
 ### Plural CLI
 
-Plural **does not** have access to any cloud environments when deployed through the CLI. We generate deployment manifests in the Plural Git repository and then use your configured cloud provider's CLI on your behalf. We cannot&#x20;
+Plural **does not** have access to any cloud environments when deployed through the CLI. We generate deployment manifests in the Plural Git repository and then use your configured cloud provider's CLI on your behalf. We cannot perform anything outside of deploying and managing the manifests that are created in your Plural Git repository.
 
 ### Plural Cloud Shell
 
