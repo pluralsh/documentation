@@ -1,36 +1,35 @@
 ---
 description: >-
-  A quickstart guide to getting up and running with Plural using our CLI. Time
-  required is less than 30 minutes.
+  A quickstart guide to getting up and running with Plural using our CLI [_< 20 minutes_]
 ---
 
 # 🏁 Quickstart
 
 ## Overview
 
-This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](broken-reference).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](../basic-setup-and-deployment/cloud-shell-quickstart.md).
 
-## You Will Need
+## Prerequisites
 
 You will need the following things to successfully get up and running with Plural:
 
-* **A cloud account**: Plural will deploy into your cloud. We current support AWS, GCP and Azure.
-* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places.  If you need to ...&#x20;
+* **A cloud account**: Plural will deploy into your cloud. We currently support AWS, GCP and Azure.
+* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places.
 
 ## Install Plural CLI and dependencies
 
-The Plural CLI and its dependencies are available using a package manager for your system. For Mac, we recommend using [Homebrew](https://brew.sh/), although our Docker image should be usable on virtually any platform.
+The Plural CLI and its dependencies are available using a package manager for your system. For Mac, we recommend using [Homebrew](https://brew.sh/). For other operating systems, curl and our Docker image should work universally.
 
 {% tabs %}
 {% tab title="Mac" %}
-The brew tap will install plural, alongside Terraform, Helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+The brew tap will install Plural, alongside Terraform, Helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 
 ```
 brew install pluralsh/plural/plural
 ```
 {% endtab %}
 
-{% tab title="Curl" %}
+{% tab title="curl" %}
 You can download the binaries attached to our GitHub releases [here](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
 
 For example, you can download v0.2.57 for Darwin arm64 via:
@@ -62,7 +61,7 @@ We offer a docker image with the plural CLI installed along with all CLI depende
 docker run -it --volume $HOME/.aws:/home/plural/aws \
                --volume $HOME/.plural:/home/plural/.plural \
                --volume $HOME/.ssh:/home/plural/.ssh \
-               --volume $HOME/<path-to-installation-repo:/home/plural/workspace \ # optional if you want to manage git via a volume
+               --volume $HOME/PATH_TO_INSTALLATION_REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
     gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
 
@@ -149,7 +148,7 @@ to reset the application default credential and re-authorize the browser. Failur
 
 ## Create your Plural Repo
 
-Plural will store all the application configuration artifacts in a directory. Run this command within the directory that you want to store your configuration in:
+Plural stores all configuration artifacts within a Git repository that we will create on your behalf. Run this command within the directory that you want to store your configuration in:
 
 ```
 plural init
@@ -169,17 +168,11 @@ This process will generate a `workspace.yaml` file at the root of your repo that
 
 ## Install Plural Applications
 
-### Viewing available applications
-
 ![The Plural Marketplace](../.gitbook/assets/image.png)
 
 To view the applications you can install on Plural, point your browser to [https://app.plural.sh/explore/public](https://app.plural.sh/explore/public)
 
-Or run `plural repos list` from the CLI or Cloud Shell.
-
-
-
-### Installing applications
+Alternatively, you can run `plural repos list` on the CLI or Cloud Shell.
 
 Run `plural bundle list <app-name>` to find installation commands and information about each application available for install. For example, to list the bundle information for the Plural console, a powerful Kubernetes control plane:
 
@@ -197,19 +190,25 @@ We can try this out by installing the Plural Console:
 
 {% tabs %}
 {% tab title="AWS" %}
-`plural bundle install console console-aws`
+```
+plural bundle install console console-aws
+```
 {% endtab %}
 
 {% tab title="GCP" %}
-`plural bundle install console console-gcp`
+```
+plural bundle install console console-gcp
+```
 {% endtab %}
 
 {% tab title="Azure" %}
-`plural bundle install console console-azure`
+```
+plural bundle install console console-azure
+```
 {% endtab %}
 {% endtabs %}
 
-You should be asked a lot of questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to log into all Plural-deployed applications.
+After running the install command, you will be asked a few questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to access Plural-deployed applications. This will add an extra layer of security for applications without built-in authentication.
 
 Ultimately all the values you input at this step will be stored in a file called `context.yaml` at the root of your repo.
 

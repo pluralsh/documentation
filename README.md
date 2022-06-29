@@ -1,7 +1,7 @@
 ---
 description: >-
-  Plural empowers you to build and maintain cloud-native and production-ready
-  open source infrastructure on Kubernetes in minutes.
+  Plural empowers you to build and maintain production-ready
+  applications on Kubernetes in minutes with no management overhead.
 ---
 
 # 👋 Introduction
