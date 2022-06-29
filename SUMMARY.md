@@ -48,6 +48,7 @@
 
 * [🪛 Troubleshooting](reference/troubleshooting.md)
 * [📚 Operator Guides](reference/operator-guides/README.md)
+  * [Configuring your Cloud Provider CLI](reference/operator-guides/configuring-cloud-provider.md)
   * [Cloud Shell](reference/operator-guides/cloud-shell.md)
   * [Adding Kubecost for Cost Analysis](reference/operator-guides/adding-kubecost-for-cost-analysis.md)
 * [🏗 Architecture](reference/architecture-1.md)
