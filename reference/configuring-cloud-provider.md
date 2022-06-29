@@ -84,12 +84,23 @@ to reset the application default credential and re-authorize the browser. Failur
 ## Permissions
 
 {% tabs %}
-{% tab title="AWS" %}
-_No special permissions necessary._
+{% tab title="GCP" %}
+#### **Service Account Permissions**
+
+When deploying via GCP, you may run into a Terraform error around permissions. Plural will need to create a various set of resources in order to make sure that your Kubernetes cluster is configured correctly. We recommend attaching the following permission roles to the service account associated with your CLI or Cloud Shell:
+
+####
+
+* `owner`
+* `storage.admin`
+
+
+
+Follow [these steps](https://cloud.google.com/sdk/docs/authorizing#authorize\_with\_a\_service\_account) to authorize your GCloud CLI with a new or existing Service Account.
 {% endtab %}
 
-{% tab title="GCP" %}
-*
+{% tab title="AWS" %}
+_No special permissions necessary._
 {% endtab %}
 
 {% tab title="Azure" %}
@@ -97,4 +108,5 @@ _No special permissions necessary._
 {% endtab %}
 {% endtabs %}
 
-__
+
+
