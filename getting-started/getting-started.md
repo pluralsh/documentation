@@ -1,6 +1,7 @@
 ---
 description: >-
-  A quickstart guide to getting up and running with Plural using our CLI [_< 20 minutes_]
+  A guide to getting up and running with Plural using our CLI in under 30
+  minutes.
 ---
 
 # 🏁 Quickstart
@@ -16,7 +17,7 @@ You will need the following things to successfully get up and running with Plura
 * **A cloud account**: Plural will deploy into your cloud. We currently support AWS, GCP and Azure.
 * **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places.
 
-## Install Plural CLI and dependencies
+## Install Plural CLI
 
 The Plural CLI and its dependencies are available using a package manager for your system. For Mac, we recommend using [Homebrew](https://brew.sh/). For other operating systems, curl and our Docker image should work universally.
 
@@ -77,7 +78,7 @@ This doc gives more details on launching AMIs if you are unfamiliar: [https://aw
 {% endtab %}
 {% endtabs %}
 
-## Configure Cloud Provider CLI and Settings
+## Configure Cloud Provider CLI
 
 You should now install and configure your cloud provider cli ([awscli](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html), [gcloud](https://cloud.google.com/sdk/docs/install), [az](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli)) if you have not done so already. This is also a good time to take care of some cloud setup tasks from your provider's console. Follow the provider-specific instructions below.
 
