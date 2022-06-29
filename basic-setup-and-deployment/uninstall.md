@@ -1,5 +1,9 @@
 # Uninstalling Plural
 
+## Overview
+
+Uninstalling any Plural application or an entire Plural installation is a one-liner in your terminal. If you want to delete your Plural installation, make sure to run `plural destroy` before deleting your Git repository. If you delete your Git repository first, you will have to manually clean up all the resources that Plural has provisioned for you.&#x20;
+
 ## Uninstalling Individual Applications
 
 To uninstall applications, use:
