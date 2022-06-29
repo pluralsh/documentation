@@ -49,7 +49,7 @@
 * [🏗 Architecture](reference/architecture-1.md)
 * [🖥 Workspaces](reference/workspaces/README.md)
   * [Secret Management]
-* [👩💻 Developer Tools / API](reference/introduction/README.md)
-  * [Plural API](reference/introduction/plural-api.md)
-  * [Console API](reference/introduction/console-api.md)
+* [👩💻 Developer Tools / API](reference/api/README.md)
+  * [Plural API](reference/api/plural-api.md)
+  * [Console API](reference/api/console-api.md)
 * [◼ Cloud Provider CLI Setup](reference/cloud-provider-cli-setup.md)
