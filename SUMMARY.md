@@ -48,7 +48,8 @@
   * [Adding Kubecost for Cost Analysis](reference/operator-guides/adding-kubecost-for-cost-analysis.md)
 * [🏗 Architecture](reference/architecture-1.md)
 * [🖥 Workspaces](reference/workspaces/README.md)
-  * [Secret Management]
+  * [Secret Management](reference/workspaces/secret-management.md)
+  * [Workspace Structure](reference/workspaces/workspace-structure.md)
 * [👩💻 Developer Tools / API](reference/api/README.md)
   * [Plural API](reference/api/plural-api.md)
   * [Console API](reference/api/console-api.md)
