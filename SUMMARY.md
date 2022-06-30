@@ -4,6 +4,7 @@
 
 * [👋 Introduction](README.md)
 * [🏁 Quickstart](getting-started/getting-started.md)
+* [📽 Video: Installing with CLI](getting-started/video-installing-with-cli.md)
 
 ## Basic Setup & Deployment
 
