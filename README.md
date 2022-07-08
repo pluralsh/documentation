@@ -8,7 +8,7 @@ description: >-
 
 ## What is Plural?
 
-Plural is an open-source, unified, application deployment platform that makes it easy to run open-source software on Kubernetes. Our marketplace has dozens of top tier applications ready to deply.
+Plural is an open-source, unified, application deployment platform that makes it easy to run open-source software on Kubernetes. Our marketplace has dozens of top tier applications ready to deploy.
 
 ![](<.gitbook/assets/image (1).png>)
 
