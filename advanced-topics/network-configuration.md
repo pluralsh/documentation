@@ -49,7 +49,7 @@ subnet_prefixes = ["your.cidr.pref"]
 
 ## Configuring VPC Peering
 
-Plural creates a fresh VPC and Kubernetes cluster for deploying your applications into. This ensures that we have a clean environment to deploy into and minimizes disruption to existing systems. It does come with the tradeoff of slightly increased network complexity, but most cloud providers can bridge this using VPC peering. This is a technology that effectively allows you to combine the address spaces of two VPCs in the cloud you operate in.
+Plural creates a fresh VPC and Kubernetes cluster for deploying applications. This ensures that we have a clean environment to deploy into and minimizes disruption to existing systems. It does come with the tradeoff of slightly increased network complexity, but most cloud providers can bridge this using VPC peering. This is a technology that effectively allows you to combine the address spaces of two VPCs in the cloud you operate in.
 
 **There is a caveat:** the VPCs should have no overlapping subnets in addition to some other complexities per cloud provider. Refer to the guide above on subnet configuration before proceeding.
 
