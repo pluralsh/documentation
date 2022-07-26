@@ -28,7 +28,7 @@
 
 ## Advanced Topics
 
-* [Networking](advanced-topics/network-configuration.md)
+* [Network Configuration](advanced-topics/network-configuration.md)
 * [Security](advanced-topics/security.md)
 * [IAM / RBAC](advanced-topics/identity-and-access-management/README.md)
   * [Introduction](advanced-topics/identity-and-access-management/introduction.md)
