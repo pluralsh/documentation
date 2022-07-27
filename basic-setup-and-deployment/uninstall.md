@@ -1,3 +1,7 @@
+---
+description: How do I bring things down safely?
+---
+
 # Uninstalling Plural
 
 ## Overview

@@ -8,6 +8,7 @@
 
 ## Basic Setup & Deployment
 
+* [Setting up GitOps](basic-setup-and-deployment/setting-up-gitops.md)
 * [Installing Plural Console](basic-setup-and-deployment/admin-console.md)
 * [Using Plural OIDC](basic-setup-and-deployment/openid-connect.md)
 * [Deploying with Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)

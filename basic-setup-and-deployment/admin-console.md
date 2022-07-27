@@ -1,4 +1,8 @@
-# Getting Started With Plural Console
+---
+description: Supercharge your day two operations.
+---
+
+# Installing Plural Console
 
 ## Introduction
 
@@ -28,7 +32,7 @@ If the remote urls start with `git@github.com` then you're using ssh
 
 If the remote urls start with `https` then you're using https.
 
-#### 2.  Setup for Git authentication
+#### 2. Setup for Git authentication
 
 {% tabs %}
 {% tab title="Https" %}
@@ -36,7 +40,7 @@ Follow the instructions [here](https://docs.github.com/en/github/authenticating-
 {% endtab %}
 
 {% tab title="SSH" %}
-Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using Github to generate a ssh key and add it to your ssh-agent and Github account.&#x20;
+Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using Github to generate a ssh key and add it to your ssh-agent and Github account.
 
 Keep track of the path where you've stored your ssh key (most likely in \~/.ssh/id\_rsa); you will need this later.
 {% endtab %}
@@ -58,14 +62,14 @@ plural bundle install console <bundle-name>
 
 You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](../repositories/console.md).
 
-Once the bundle has installed, run:&#x20;
+Once the bundle has installed, run:
 
 ```
 plural build
 ```
 
 \
-The console takes over the gitops flow of managing plural apps for you. You will be asked for the git authentication credentials you created at Step 1.&#x20;
+The console takes over the gitops flow of managing plural apps for you. You will be asked for the git authentication credentials you created at Step 1.
 
 #### 4. Deploy Console
 
@@ -83,7 +87,7 @@ Once the deploy finishes, it will output the url that the console has been deplo
 
 If you selected (y) to OIDC, one-login has already been configured, and you'll be able to sign in with the same credentials you use for `app.plural.sh`.
 
-If you didn't select (y) to OIDC, your login credentials for this console are different from your login credentials for `app.plural.sh`. You can find them in`console/helm/console/values.yaml` under the `console.secrets.admin_username` and `console.secrets.admin_password` keys.&#x20;
+If you didn't select (y) to OIDC, your login credentials for this console are different from your login credentials for `app.plural.sh`. You can find them in`console/helm/console/values.yaml` under the `console.secrets.admin_username` and `console.secrets.admin_password` keys.
 
 ## Console Highlights
 
@@ -98,8 +102,3 @@ For example, the Airflow scaling runbook det
 ails how to look the Airflow CPU and memory usage graphs and compute your reservation appropriately. It then allows you to make that reservation directly from the runbook.
 
 {% embed url="https://www.loom.com/share/61ae5014daec4b1fabec8c689eec7b18" %}
-
-
-
-
-
