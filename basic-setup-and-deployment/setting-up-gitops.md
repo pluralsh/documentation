@@ -52,11 +52,17 @@ If everything goes well, it should look like this:
 
 ### Manual Git Setup
 
-To set up a Git repository yourself, follow these steps:
+To set up a Git repository yourself, you'll need a fresh repository with the following requirements:
+
+* Cloned with SSH
+* Must have an initial commit
+* Must be in sync with the upstream/origin repository
+
+If the requirements aren't fulfilled, you'll hit an error in the `plural init` setup process. To get started, follow these steps:
 
 1. &#x20;Go to your version control provider and create a fresh repository.&#x20;
 2. Clone the repository to the machine that you'll be running the Plural CLI on.
-3. Make sure that the repository has an initial commit (a README works).
+3. Make sure that the repository has an initial commit (a README works). GitHub and GitLab provide the option to add an initial commit on creation, so choose that.
 4. Run `plural init` from the root of the repository.
 
 And you should be good to go!
