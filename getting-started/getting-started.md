@@ -32,7 +32,6 @@ brew install pluralsh/plural/plural
 {% hint style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% endhint %}
-
 {% endtab %}
 
 {% tab title="curl" %}
@@ -62,7 +61,6 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 {% hint style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% endhint %}
-
 {% endtab %}
 
 {% tab title="Docker" %}
@@ -90,14 +88,15 @@ This doc gives more details on launching AMIs if you are unfamiliar: [https://aw
 
 ## Create your Plural Repo
 
-Plural stores all configuration artifacts within a Git repository that we will create on your behalf. 
-Run this command within the directory that you want to store your configuration in:
+Plural stores all configuration artifacts within a Git repository that we will create on your behalf. Run this command within the directory that you want to store your configuration in:
 
 ```
 plural init
 ```
 
-The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf.
+The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf. \
+\
+_Note, that if you are running in **Azure**, Plural does not automatically create a default resource group for you to place objects into. Make sure to create one beforehand for Plural to use._
 
 {% hint style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
@@ -111,7 +110,7 @@ This process will generate a `workspace.yaml` file at the root of your repo that
 
 ## Install Plural Applications
 
-To view the applications you can install on Plural, head to [this link](https://app.plural.sh/explore/public).&#x20;
+To view the applications you can install on Plural, head to [this link](https://app.plural.sh/explore/public).
 
 Alternatively, you can run `plural repos list` on the CLI or Cloud Shell.
 
