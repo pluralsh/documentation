@@ -28,6 +28,11 @@ The brew tap will install Plural, alongside Terraform, Helm and kubectl for you.
 ```
 brew install pluralsh/plural/plural
 ```
+
+{% hint style="warning" %}
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+{% endhint %}
+
 {% endtab %}
 
 {% tab title="curl" %}
@@ -53,6 +58,11 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 | helm      | [https://helm.sh/docs/intro/install/](https://helm.sh/docs/intro/install/)                                                 |
 | terraform | [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli) |
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
+
+{% hint style="warning" %}
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+{% endhint %}
+
 {% endtab %}
 
 {% tab title="Docker" %}
@@ -77,10 +87,6 @@ If there's interest in images for GCP and Azure, feel free to leave feedback in 
 This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/). You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
 {% endtab %}
 {% endtabs %}
-
-{% hint style="warning" %}
-Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-{% endhint %}
 
 ## Create your Plural Repo
 
