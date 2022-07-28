@@ -12,7 +12,7 @@
 * [Installing Plural Console](basic-setup-and-deployment/admin-console.md)
 * [Using Plural OIDC](basic-setup-and-deployment/openid-connect.md)
 * [Deploying with Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
-* [Uninstalling Plural](basic-setup-and-deployment/uninstall.md)
+* [Safely Destroy the Cluster](basic-setup-and-deployment/uninstall.md)
 
 ## Applications
 
@@ -31,8 +31,10 @@
 ## Advanced Topics
 
 * [Network Configuration](advanced-topics/network-configuration.md)
-* [Security](advanced-topics/security.md)
-* [IAM / RBAC](advanced-topics/identity-and-access-management/README.md)
+* [Setting up Third Party DNS](advanced-topics/dns-setup/README.md)
+  * [Creating a DNS Zone in Console](advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
+* [Security Concepts](advanced-topics/security.md)
+* [Auth & Access Control](advanced-topics/identity-and-access-management/README.md)
   * [Introduction](advanced-topics/identity-and-access-management/introduction.md)
   * [OpenID Connect](advanced-topics/identity-and-access-management/openid-connect.md)
   * [API Tokens](advanced-topics/identity-and-access-management/api-tokens.md)
@@ -40,8 +42,6 @@
     * [Audit Logging](advanced-topics/identity-and-access-management/identity-and-installations/audit-logging.md)
     * [Service Accounts](advanced-topics/identity-and-access-management/identity-and-installations/service-accounts.md)
     * [Sharing Existing Repos](advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos.md)
-* [Setting up Third Party DNS](advanced-topics/dns-setup/README.md)
-  * [Creating a DNS Zone in Console](advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console.md)
 * [Debugging](advanced-topics/debugging/README.md)
   * [Health Checks](advanced-topics/debugging/health-checks.md)
   * [Proxies](advanced-topics/debugging/proxies.md)
