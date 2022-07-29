@@ -135,7 +135,15 @@ git commit -m "Change owner of repo"
 git push
 ```
 
+{% hint style="info" %}
+If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes.  This is just a matter of finding the relevant pods in the console and clicking the trash icon.  For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
+
+If you'd like help with this process feel free to reach out to us on discord as well!
+{% endhint %}
+
 ### 9. Alice, Bob, and Cory set up cryptographic keys for sharing
+
+The next step is sharing the repository's cryptography layer with any users you expect to need to use the repo locally.  If you want to learn more about how Plural encrypts your repository's state, we'd definitely recommend you read our docs [here](reference/workspaces/secret-management.md)
 
 Alice, Bob, and Cory should each run:
 
