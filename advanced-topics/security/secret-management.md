@@ -23,11 +23,13 @@ This will generate a new age keypair, and automatically register the public key 
 
 ### Share a repo
 
-To share a repo, simply run:
+To share a repo, use the following command:
 
 ```shell
 plural crypto share --email <email1> --email <email2>
 ```
+
+_**Note**:  `--email` refers to a user's email associated with their Plural account_
 
 This will do a few things:
 
@@ -48,7 +50,7 @@ to ensure it now uses age to manage its encryption key.
 
 ### Cloning a shared repo
 
-If you're cloning a repo that's just been shared, you'll need to initialize plural cryptography locally.  Fortunately, this is all done via:
+If you're cloning a repo that's just been shared, you'll need to initialize plural cryptography locally. Fortunately, this is all done via:
 
 ```shell
 plural crypto init
