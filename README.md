@@ -36,3 +36,9 @@ We have created a Cloud Shell with all of the tools and dependencies needed to r
 * [Using our in-browser Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
 
 If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.gg/pluralsh)
+
+## Docs Translations
+
+### Japanese
+
+The wonderful team at [St-Hakky](https://www.about.st-hakky.com/) has translated most of our docs to Japanese on their website. To view the [translated docs, click here](https://book.st-hakky.com/docs/plural-overview).
