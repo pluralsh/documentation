@@ -12,7 +12,7 @@
 * [Installing Plural Console](basic-setup-and-deployment/admin-console.md)
 * [Using Plural OIDC](basic-setup-and-deployment/openid-connect.md)
 * [Deploying with Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
-* [Safely Destroy the Cluster](basic-setup-and-deployment/uninstall.md)
+* [Destroying the Cluster Safely](basic-setup-and-deployment/uninstall.md)
 
 ## Applications
 

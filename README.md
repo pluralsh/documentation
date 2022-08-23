@@ -42,3 +42,5 @@ If you need support getting your Plural deployment up and running, join the [Plu
 ### Japanese
 
 The wonderful team at [St-Hakky](https://www.about.st-hakky.com/) has translated most of our docs to Japanese on their website. To view the [translated docs, click here](https://book.st-hakky.com/docs/plural-overview).
+
+St-Hakky のすばらしいチームが、ウェブサイトでほとんどのドキュメントを日本語に翻訳してくれました。 翻訳されたドキュメントを表示するには、ここをクリックしてください。
