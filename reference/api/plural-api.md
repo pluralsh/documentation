@@ -2,8 +2,6 @@
 
 You can explore the plural API in more depth using our graphiql console, viewable at [https://app.plural.sh/graphiql](https://app.plural.sh/graphiql).
 
-![](https://github.com/pluralsh/documentation/blob/sam/quicker-start/reference/.gitbook/assets/Screen%20Shot%202021-07-23%20at%2012.02.37%20AM.png)
-
 You'll need to do two things to allow the graphiql interface to be functional:
 
 * Configure the endpoint to point to [https://app.plural.sh/gql](https://app.plural.sh/gql)
