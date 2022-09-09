@@ -13,8 +13,8 @@ import '../public/globals.css'
 
 import type { AppProps } from 'next/app'
 
-const TITLE = 'Markdoc';
-const DESCRIPTION = 'A powerful, flexible, Markdown-based authoring framework';
+const TITLE = 'Plural Documentation';
+const DESCRIPTION = 'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.';
 
 function collectHeadings(node, sections = []) {
   if (node) {
@@ -61,6 +61,11 @@ export default function MyApp({ Component, pageProps }: AppProps) {
     <>
       <Head>
         <title>{title}</title>
+        <link
+          rel="preconnect"
+          href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
+          crossOrigin=""
+        />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta name="referrer" content="strict-origin" />
         <meta name="title" content={title} />
