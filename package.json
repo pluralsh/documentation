@@ -6,12 +6,14 @@
     "start": "next start"
   },
   "dependencies": {
+    "@loomhq/loom-embed": "^1.5.0",
     "@markdoc/markdoc": "latest",
     "@markdoc/next.js": "latest",
     "next": "latest",
     "prismjs": "latest",
     "react": "latest",
-    "react-dom": "latest"
+    "react-dom": "latest",
+    "react-embed": "^3.6.0"
   },
   "devDependencies": {
     "@types/node": "latest",
