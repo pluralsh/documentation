@@ -9,8 +9,10 @@
     "@loomhq/loom-embed": "^1.5.0",
     "@markdoc/markdoc": "latest",
     "@markdoc/next.js": "latest",
+    "algoliasearch": "^4.14.2",
     "next": "latest",
     "prismjs": "latest",
+    "qs": "^6.11.0",
     "react": "latest",
     "react-dom": "latest",
     "react-embed": "^3.6.0"
