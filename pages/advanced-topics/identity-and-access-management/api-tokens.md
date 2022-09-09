@@ -19,4 +19,4 @@ Plural captures access logs for all token usage, including IP information, avail
 
 {% hint style="info" %}
 Revoking a token while an instance of the plural console is using it will prevent it from receiving upgrades, but once the token is rotated, it will pick back up and apply the upgrades as normal.
-{% endhint %}
+{% /hint %}

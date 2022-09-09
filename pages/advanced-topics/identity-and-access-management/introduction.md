@@ -12,7 +12,7 @@ When you sign up to plural, you'll immediately be allocated an account. You can 
 
 {% hint style="info" %}
 The only users eligible for sharing repo encryption keys are also those users in your account .
-{% endhint %}
+{% /hint %}
 
 ### RBAC Basics
 

@@ -22,10 +22,10 @@ Go back to where you registered `pluraldemo.com`and add the nameservers from Ste
 
 {% hint style="info" %}
 The domain name registrars will typically provide default name servers and also the ability to set up custom name servers. For example, in Google Domains, you can set custom name servers under the DNS tab once you click into a specific domain name.
-{% endhint %}
+{% /hint %}
 
 ![](<../../.gitbook/assets/Screen Shot 2021-08-18 at 1.00.00 PM.png>)
-{% endtab %}
+{% /tab %}
 
 {% tab title="Subdomain of Existing Domain" %}
 The more likely scenario is that you will have an existing company domain, i.e. `pinterest.com` and you will want to create a subdomain under which you can consolidate all your plural applications, eg `plural.pinterest.com`
@@ -61,5 +61,5 @@ resource "aws_route53_record" "test-ns" {
   records = aws_route53_zone.test.name_servers
 }
 ```
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}

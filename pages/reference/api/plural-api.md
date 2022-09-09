@@ -9,4 +9,4 @@ You'll need to do two things to allow the graphiql interface to be functional:
 
 {% hint style="info" %}
 You can use the docs [here](../../advanced-topics/identity-and-access-management/api-tokens.md) to learn how to create API tokens
-{% endhint %}
+{% /hint %}

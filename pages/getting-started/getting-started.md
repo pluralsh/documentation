@@ -32,8 +32,8 @@ brew install pluralsh/plural/plural
 
 {% hint style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-{% endhint %}
-{% endtab %}
+{% /hint %}
+{% /tab %}
 
 {% tab title="curl" %}
 You can download the binaries attached to our GitHub releases [here](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
@@ -49,7 +49,7 @@ mv plural /usr/local/bin/plural
 
 {% hint style="info" %}
 Be sure to download the CLI version for your target OS/architecture, the above example is only valid for ARM Mac's
-{% endhint %}
+{% /hint %}
 
 You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here
 
@@ -61,8 +61,8 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 
 {% hint style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-{% endhint %}
-{% endtab %}
+{% /hint %}
+{% /tab %}
 
 {% tab title="Docker" %}
 We offer a docker image with the plural CLI installed along with all CLI dependencies: terraform, helm, kubectl, and all the major cloud CLI's: gcr.io/pluralsh/plural-cli:0.1.1-cloud. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
@@ -76,7 +76,7 @@ docker run -it --volume $HOME/.aws:/home/plural/aws \
 ```
 
 Once you're in the container's zsh, you'll want to clone the repo you'll use for your installations state there, or alternatively you can clone it outside your container and mount another volume pointing to it.
-{% endtab %}
+{% /tab %}
 
 {% tab title="EC2 AMI" %}
 We have EC2 AMI's with the Plural CLI installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)
@@ -84,8 +84,8 @@ We have EC2 AMI's with the Plural CLI installed, along with all cloud provider c
 If there's interest in images for GCP and Azure, feel free to leave feedback in our [Discord](https://discord.gg/pluralsh) or open a [GitHub issue](https://github.com/pluralsh/plural/issues/new/choose).
 
 This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/). You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 ## Create your Plural Repo
 
@@ -101,7 +101,7 @@ _Note, that if you are running in **Azure**, Plural does not automatically creat
 
 {% hint style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
-{% endhint %}
+{% /hint %}
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
 
@@ -141,20 +141,20 @@ We can try this out by installing the Plural Console:
 ```
 plural bundle install console console-aws
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 ```
 plural bundle install console console-gcp
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure" %}
 ```
 plural bundle install console console-azure
 ```
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 After running the install command, you will be asked a few questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to access Plural-deployed applications. This will add an extra layer of security for applications without built-in authentication.
 
@@ -177,6 +177,6 @@ Once `plural deploy` has completed, you should be ready to log in to your applic
 
 {% hint style="warning" %}
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
-{% endhint %}
+{% /hint %}
 
 **And you are done!** You now have a fully-configured Kubernetes cluster and are free to install applications on it to your heart's content. If you want to take down any of your individual applications, run `plural destroy <APP-NAME>`. If you're just testing us out and want to take down the entire thing, run `plural destroy`.

@@ -17,18 +17,18 @@ We currently support this repository on the following infrastructure providers:
 
 {% tab title="AWS" %}
 ```plural bundle install airbyte airbyte-aws```
-{% endtab %}
+{% /tab %}
 {% tab title="GCP" %}
 ```plural bundle install airbyte airbyte-gcp```
-{% endtab %}
+{% /tab %}
 {% tab title="Azure" %}
 ```plural bundle install airbyte airbyte-azure```
-{% endtab %}
+{% /tab %}
 {% tab title="KinD" %}
 ```plural bundle install airflow airbyte airbyte-kind```
-{% endtab %}
+{% /tab %}
 
-{% endtabs %}
+{% /tabs %}
 
 ## Setup Configuration
 
