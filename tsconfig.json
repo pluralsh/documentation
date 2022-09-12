@@ -2,11 +2,7 @@
   "compilerOptions": {
     "baseUrl": "src",
     "target": "ES6",
-    "lib": [
-      "dom",
-      "dom.iterable",
-      "ESNext"
-    ],
+    "lib": ["dom", "dom.iterable", "ESNext"],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -14,15 +10,15 @@
     "strict": true,
     "forceConsistentCasingInFileNames": true,
     "noFallthroughCasesInSwitch": true,
-    "module": "ES2022",
+    "module": "esnext",
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx",
+    "jsx": "preserve",
     "noImplicitAny": false,
+    "incremental": true
   },
-  "include": [
-    "src"
-  ]
+  "include": ["components", "pages", "markdoc"],
+  "exclude": ["node_modules"]
 }
