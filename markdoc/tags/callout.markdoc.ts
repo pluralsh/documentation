@@ -1,4 +1,4 @@
-import {Callout} from '../../components';
+import { Callout } from '../../components/Callout'
 
 export const callout = {
   render: Callout,
@@ -10,4 +10,4 @@ export const callout = {
       description: 'The title displayed at the top of the callout',
     },
   },
-};
+}
