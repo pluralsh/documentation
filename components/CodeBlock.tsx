@@ -1,35 +1,34 @@
-import Prism from 'prismjs';
+import Prism from 'prismjs'
 
-import * as React from 'react';
+import * as React from 'react'
+import styled from 'styled-components'
 
-export function CodeBlock({children, language}) {
-  const ref = React.useRef(null);
+export const CodeBlock = styled(({ children, language }) => {
+  const ref = React.useRef(null)
 
   React.useEffect(() => {
-    if (ref.current) Prism.highlightElement(ref.current, false);
-  }, [children]);
+    if (ref.current) Prism.highlightElement(ref.current, false)
+  }, [children])
 
   return (
-    <div className="code" aria-live="polite">
+    <div
+      className="code"
+      aria-live="polite"
+    >
       <pre
         ref={ref}
         className={`language-${language}`}
       >
         {children}
       </pre>
-      <style jsx>
-        {`
-          .code {
-            position: relative;
-          }
-
-          /* Override Prism styles */
-          .code :global(pre[class*='language-']) {
-            text-shadow: none;
-            border-radius: 4px;
-          }
-        `}
-      </style>
     </div>
-  );
-}
+  )
+})`
+  position: relative;
+
+  /* Override Prism styles */
+  & :global(pre[class*='language-']) {
+    text-shadow: none;
+    border-radius: 4px;
+  }
+`
