@@ -3,8 +3,7 @@ import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 // import Link from 'next/link'
-// import { styledTheme } from "pluralsh-design-system";
-import styled from 'styled-components'
+import styled, { ThemeProvider } from 'styled-components'
 
 import 'prismjs'
 // Import other Prism themes here
@@ -63,7 +62,7 @@ const Page = styled.div`
   }
 `
 
-const MyApp = styled(({ Component, pageProps }: AppPropsPlusMd) => {
+function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
   // console.log("markdoc", markdoc);
 
@@ -84,7 +83,7 @@ const MyApp = styled(({ Component, pageProps }: AppPropsPlusMd) => {
     : []
 
   const app = (
-    <>
+    <ThemeProvider theme={{ hello: 'stuff' }}>
       <Head>
         <title>{title}</title>
         <link
@@ -125,12 +124,10 @@ const MyApp = styled(({ Component, pageProps }: AppPropsPlusMd) => {
         </main>
         <TableOfContents toc={toc} />
       </Page>
-    </>
+    </ThemeProvider>
   )
 
   return app
-
-  // return <ThemeProvider >{app}</ThemeProvider>;
-})``
+}
 
 export default MyApp

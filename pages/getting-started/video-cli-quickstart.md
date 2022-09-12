@@ -11,4 +11,4 @@ In under 10 minutes, you will learn to:
 * Install an instance of the Plural console
 * Install an instance of Airbyte on your cluster
 
-{% embed url="https://www.youtube.com/watch?v=suvTJyJ6PzI" /%}
+{% embed url="https://www.youtube.com/watch?v=suvTJyJ6PzI" aspectRatio="16 / 9" /%}

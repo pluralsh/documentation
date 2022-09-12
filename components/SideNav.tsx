@@ -6,6 +6,9 @@ const LinkList = styled<any>(props => <ul {...props} />)(_p => ({
   margin: 0,
   padding: 0,
   listStyle: 'none',
+  '& > &': {
+    marginLeft: '1em',
+  },
 }))
 
 const TocLink = styled(({ className, ...props }: ComponentProps<typeof Link>) => (
@@ -36,9 +39,7 @@ export const SideNav = styled(props => (
     <TocSection title="Getting Started">
       <LinkList>
         <TocLink href="/">👋 Introduction</TocLink>
-        <TocLink href="/getting-started/getting-started">
-          🏁 Quickstart
-        </TocLink>
+        <TocLink href="/getting-started/getting-started">🏁 Quickstart</TocLink>
         <TocLink href="/getting-started/video-cli-quickstart">
           📽 Video: CLI Quickstart
         </TocLink>
