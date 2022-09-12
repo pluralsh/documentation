@@ -1,6 +1,7 @@
 :root {
   --top-nav-height: 51px;
   --border-color: #dce6e9;
+  --color-text: #EBEFF0;
 }
 
 *,
@@ -10,10 +11,9 @@
 }
 
 body {
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, 'Noto Sans', sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  color: rgba(60, 66, 87, 1);
+  font-family: "Inter", "Helvetica", "Arial", "sans-serif";
+  background-color: #171A21;
+  color: var(--color-text);
   margin: 0;
 }
 
@@ -30,6 +30,93 @@ h2 {
   margin: 1.5em 0;
 }
 
-a {
-  color: rgba(75, 85, 99, 1);
+a:any-link {
+  color: #99DAFF;
+}
+a:any-link:hover {
+  color: #4DBEFF;
+}
+a:visited {
+  color: #747AF6;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-regular.otf") format("opentype");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-medium.woff") format("woff");
+  font-weight: 450;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-medium.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-bold.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-regular-italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-medium-italic.woff") format("woff");
+  font-weight: 500;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Monument';
+  src: url("/fonts/monument-bold-italic.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: 'Monument Semi-Mono';
+  src: url("/fonts/ABCMonumentGroteskSemi-Mono-Regular.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Monument Semi-Mono';
+  src: url("/fonts/ABCMonumentGroteskSemi-Mono-Medium.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Monument Semi-Mono';
+  src: url("/fonts/ABCMonumentGroteskSemi-Mono-Heavy.woff") format("woff");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: 'Monument Mono';
+  src: url("/fonts/ABCMonumentGroteskMono-Regular.woff") format("woff");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: 'Monument Mono';
+  src: url("/fonts/ABCMonumentGroteskMono-Medium.woff") format("woff");
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: 'Monument Mono';
+  src: url("/fonts/ABCMonumentGroteskMono-Heavy.woff") format("woff");
+  font-weight: 600;
 }

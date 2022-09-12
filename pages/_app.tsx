@@ -1,14 +1,9 @@
 import React from 'react'
 import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
-
-// import Link from 'next/link'
-import styled, { ThemeProvider } from 'styled-components'
-
-import 'prismjs'
-// Import other Prism themes here
-import 'prismjs/components/prism-bash.min'
-import 'prismjs/themes/prism.css'
+import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import { GlobalStyle, styledTheme, theme } from 'pluralsh-design-system'
+import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 
 import '../public/globals.css'
 
@@ -18,11 +13,19 @@ import { SideNav } from '../components/SideNav'
 import { TableOfContents } from '../components/TableOfContents'
 import { TopNav } from '../components/TopNav'
 
+const honorableTheme = mergeTheme(theme, {
+  // global: [
+  //   // This provides the mp spacing props to honorable
+  //   // DEPRECATED in favor of the semantic spacing system
+  //   mpRecipe(),
+  // ],
+})
+
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
 
 const TITLE = 'Plural Documentation'
-const DESCRIPTION
-  = 'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
+const DESCRIPTION =
+  'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
 
 function collectHeadings(node, sections: any[] = []) {
   if (node) {
@@ -83,47 +86,42 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <ThemeProvider theme={{ hello: 'stuff' }}>
-      <Head>
-        <title>{title}</title>
-        <link
-          rel="preconnect"
-          href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-          crossOrigin=""
-        />
-        <meta
-          name="viewport"
-          content="width=device-width, initial-scale=1.0"
-        />
-        <meta
-          name="referrer"
-          content="strict-origin"
-        />
-        <meta
-          name="title"
-          content={title}
-        />
-        <meta
-          name="description"
-          content={description}
-        />
-        <link
-          rel="shortcut icon"
-          href="/favicon.ico"
-        />
-        <link
-          rel="icon"
-          href="/favicon.ico"
-        />
-      </Head>
-      <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
-      <Page>
-        <SideNav />
-        <main className="flex column">
-          <Component {...pageProps} />
-        </main>
-        <TableOfContents toc={toc} />
-      </Page>
+    <ThemeProvider theme={{}}>
+      <StyledThemeProvider theme={styledTheme}>
+        <CssBaseline />
+        <GlobalStyle />
+        <Head>
+          <title>{title}</title>
+          <link
+            rel="preconnect"
+            href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
+            crossOrigin=""
+          />
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1.0"
+          />
+          <meta name="referrer" content="strict-origin" />
+          <meta name="title" content={title} />
+          <meta name="description" content={description} />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="icon" href="/favicon.ico" />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+            rel="stylesheet"
+          />
+        </Head>
+        <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
+        <Page>
+          <SideNav />
+          <main className="flex column">
+            <Component {...pageProps} />
+          </main>
+          <TableOfContents toc={toc} />
+        </Page>
+      </StyledThemeProvider>
     </ThemeProvider>
   )
 
