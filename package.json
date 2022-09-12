@@ -6,7 +6,6 @@
     "start": "next start",
     "lint": "eslint {components,markdoc,pages} --ext ts,tsx,js,jsx",
     "fix": "eslint {components,markdoc,pages} --ext ts,tsx,js,jsx --fix"
-
   },
   "dependencies": {
     "@emotion/react": "11.10.4",
@@ -19,8 +18,9 @@
     "honorable": "0.139.0",
     "honorable-theme-default": "0.65.0",
     "next": "12.3.0",
+    "next-compose-plugins": "^2.2.1",
+    "next-transpile-modules": "9.0.0",
     "pluralsh-design-system": "1.202.0",
-    "prismjs": "1.29.0",
     "qs": "6.11.0",
     "raw-loader": "4.0.2",
     "react": "18.2.0",

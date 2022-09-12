@@ -27,11 +27,14 @@ const TocSection = styled(({ title, children, ...props }) => (
     <h2>{title}</h2>
     {children}
   </li>
-))(_p => ({
+))(({theme}) => ({
   display: 'block',
   margin: 0,
   padding: 0,
   listStyle: 'none',
+  'h2': {
+    ...theme.partials.text.subtitle2,
+  }
 }))
 
 export const SideNav = styled(props => (
@@ -179,13 +182,17 @@ export const SideNav = styled(props => (
       </TocLink>
     </TocSection>
   </nav>
-))`
-  position: sticky;
-  top: var(--top-nav-height);
-  height: calc(100vh - var(--top-nav-height));
-  flex: 0 0 auto;
-  overflow-y: auto;
-  padding: 2.5rem 2rem 2rem;
-  border-right: 1px solid var(--border-color);
-  max-width: 300px;
-`
+))(({theme}) => {
+  return {
+    ...theme.partials.body2,
+    backgroundColor: theme.colors['fill-one'],
+    color: theme.colors['text'],
+    position: 'sticky',
+    top: 'var(--top-nav-height)',
+    height: 'calc(100vh - var(--top-nav-height))',
+    flex: '0 0 auto',
+    overflowY: 'auto',
+    padding: '2.5rem 2rem 2rem',
+    maxWidth: '300px',
+  }
+})
