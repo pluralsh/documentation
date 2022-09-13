@@ -2,16 +2,17 @@ import React from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-export const TopNav = styled(({ children, ...props }) => {
-  return (
-    <nav {...props}>
-      <Link href="/" className="flex">
-        Home
-      </Link>
-      <section>{children}</section>
-    </nav>
-  )
-})(({ theme }) => ({
+export const TopNav = styled(({ children, ...props }) => (
+  <nav {...props}>
+    <Link
+      href="/"
+      className="flex"
+    >
+      Home
+    </Link>
+    <section>{children}</section>
+  </nav>
+))(({ theme }) => ({
   top: 0,
   position: 'fixed',
   height: 'var(--top-nav-height)',
