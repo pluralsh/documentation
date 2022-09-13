@@ -42,8 +42,6 @@ function Embed({ url, aspectRatio = '16 / 9', ...props }) {
     setLoomEmbed(result)
   }, [])
 
-  console.log('aspect', aspectRatio)
-
   if (loomEmbed) {
     return (
       <AspectRatio
