@@ -86,7 +86,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <ThemeProvider theme={{}}>
+    <ThemeProvider theme={honorableTheme}>
       <StyledThemeProvider theme={styledTheme}>
         <CssBaseline />
         <GlobalStyle />
