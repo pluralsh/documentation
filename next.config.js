@@ -7,7 +7,7 @@ const withMarkdoc = require('@markdoc/next.js')(
 const withTM = require('next-transpile-modules')(
   ['pluralsh-design-system', 'honorable', 'honorable-theme-default'],
   {
-    debug: true,
+    debug: false,
   }
 )
 
