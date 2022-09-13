@@ -24,8 +24,8 @@ const honorableTheme = mergeTheme(theme, {
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
 
 const TITLE = 'Plural Documentation'
-const DESCRIPTION =
-  'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
+const DESCRIPTION
+  = 'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
 
 function collectHeadings(node, sections: any[] = []) {
   if (node) {
@@ -92,22 +92,39 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         <GlobalStyle />
         <Head>
           <title>{title}</title>
-          <link
-            rel="preconnect"
-            href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-            crossOrigin=""
-          />
           <meta
             name="viewport"
             content="width=device-width, initial-scale=1.0"
           />
-          <meta name="referrer" content="strict-origin" />
-          <meta name="title" content={title} />
-          <meta name="description" content={description} />
-          <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="icon" href="/favicon.ico" />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="" />
+          <meta
+            name="referrer"
+            content="strict-origin"
+          />
+          <meta
+            name="title"
+            content={title}
+          />
+          <meta
+            name="description"
+            content={description}
+          />
+          <link
+            rel="shortcut icon"
+            href="/favicon.ico"
+          />
+          <link
+            rel="icon"
+            href="/favicon.ico"
+          />
+          <link
+            rel="preconnect"
+            href="https://fonts.googleapis.com"
+          />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            crossOrigin=""
+          />
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
             rel="stylesheet"
