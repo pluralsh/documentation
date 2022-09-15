@@ -1,8 +1,7 @@
 ---
+title: "📽 Video: Installing with CLI"
 description: A short video on installing applications on Plural with the CLI
 ---
-
-# 📽 Video: Installing with CLI
 
 In under 10 minutes, you will learn to:
 

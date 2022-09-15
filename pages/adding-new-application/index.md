@@ -1,11 +1,10 @@
 ---
+title: Add an Application
 description: >-
   Is something missing from the Plural marketplace? Are you a vendor who wants
   to add your solution? We'd love for you to onboard your application! This
   guide outlines the process.
 ---
-
-# Add an Application
 
 The two main functionalities that make Plural work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
 

@@ -1,8 +1,7 @@
 ---
+title: Airflow
 description: A DAG-based, dependency-aware job scheduler.
 ---
-
-# Airflow
 
 ## Description
 

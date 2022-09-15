@@ -1,4 +1,6 @@
-# Plural Custom Resources
+---
+title: Plural Custom Resources
+---
 
 ## dashboards.yaml
 

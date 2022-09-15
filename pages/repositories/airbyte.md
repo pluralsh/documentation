@@ -1,8 +1,7 @@
 ---
+title: Airbyte
 description: Open-source ELT platform.
 ---
-
-# Airbyte
 
 ## Description
 

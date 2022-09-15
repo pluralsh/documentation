@@ -1,8 +1,7 @@
 ---
+title: Installing Plural Console
 description: Supercharge your day two operations.
 ---
-
-# Installing Plural Console
 
 ## Introduction
 

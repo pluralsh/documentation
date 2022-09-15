@@ -1,8 +1,7 @@
 ---
+title: OpenID Connect
 description: What is OIDC and how do you set it up?
 ---
-
-# OpenID Connect
 
 When you run `plural bundle install` to install an application, you may be asked about whether or not you want to enable Plural OIDC for that application.
 

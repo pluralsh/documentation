@@ -1,4 +1,6 @@
-# Plural API
+---
+title: Plural API
+---
 
 You can explore the plural API in more depth using our graphiql console, viewable at [https://app.plural.sh/graphiql](https://app.plural.sh/graphiql).
 

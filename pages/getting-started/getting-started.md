@@ -1,10 +1,9 @@
 ---
+title: 🏁 Quickstart
 description: >-
   A guide to getting up and running with Plural using our CLI in under 30
   minutes.
 ---
-
-# 🏁 Quickstart
 
 ## Overview
 

@@ -1,4 +1,6 @@
-# Getting Started using Plural
+---
+title: Getting Started using Plural
+---
 
 Before getting started with plural, you'll need to install a few dependencies:
 

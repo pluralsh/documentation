@@ -1,4 +1,6 @@
-# Creating a DNS Zone in Console
+---
+title: Creating a DNS Zone in Console
+---
 
 {% tabs %}
 {% tab title="AWS Route53" %}

@@ -1,4 +1,6 @@
-# Secret Management
+---
+title: Secret Management
+---
 
 Plural reimplements [git-crypt](https://github.com/AGWA/git-crypt) in its management of secret data within git. This provides transparent file access to users with the repo's AES key, along with full support for tooling like diffs locally, while still providing full obfuscation of secret data when pushed to remote.
 

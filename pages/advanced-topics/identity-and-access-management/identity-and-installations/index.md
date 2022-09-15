@@ -1,4 +1,6 @@
-# Advanced Topics
+---
+title: Advanced Topics
+---
 
 ### Installation
 

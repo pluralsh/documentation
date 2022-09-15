@@ -65,21 +65,16 @@ const Page = styled.div`
   }
 `
 
+const PageHeader = styled.div(({ theme }) => ({
+  marginBottom: theme.spacing.xlarge,
+  borderBottom: theme.borders.default,
+}))
+
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
-  // console.log("markdoc", markdoc);
 
-  let title = TITLE
-  let description = DESCRIPTION
-
-  if (markdoc) {
-    if (markdoc.frontmatter.title) {
-      title = markdoc.frontmatter.title
-    }
-    if (markdoc.frontmatter.description) {
-      description = markdoc.frontmatter.description
-    }
-  }
+  const title = markdoc?.frontmatter?.title || TITLE
+  const description = markdoc?.frontmatter?.description || DESCRIPTION
 
   const toc = pageProps.markdoc?.content
     ? collectHeadings(pageProps.markdoc.content)
@@ -134,6 +129,17 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         <Page>
           <SideNav />
           <main className="flex column">
+            {(markdoc?.frontmatter?.title
+              || markdoc?.frontmatter?.description) && (
+              <PageHeader>
+                {markdoc?.frontmatter?.title && (
+                  <h1>{markdoc?.frontmatter.title}</h1>
+                )}
+                {markdoc?.frontmatter?.description && (
+                  <p>{markdoc?.frontmatter.description}</p>
+                )}
+              </PageHeader>
+            )}
             <Component {...pageProps} />
           </main>
           <TableOfContents toc={toc} />

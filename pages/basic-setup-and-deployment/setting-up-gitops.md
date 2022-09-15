@@ -1,8 +1,7 @@
 ---
+title: Setting up GitOps
 description: Configuring your version control management to work with Plural.
 ---
-
-# Setting up GitOps
 
 ## Overview
 
