@@ -20,6 +20,12 @@
     "incremental": true,
     "jsxImportSource": "@emotion/react"
   },
-  "include": ["next-env.d.ts", "components", "pages", "markdoc", "types"],
+  "include": [
+    "next-env.d.ts",
+    "components/**/*",
+    "pages/**/*",
+    "markdoc/**/*",
+    "types/**/*"
+  ],
   "exclude": ["node_modules"]
 }
