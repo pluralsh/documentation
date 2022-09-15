@@ -17,8 +17,9 @@
     "noEmit": true,
     "jsx": "preserve",
     "noImplicitAny": false,
-    "incremental": true
+    "incremental": true,
+    "jsxImportSource": "@emotion/react"
   },
-  "include": ["components", "pages", "markdoc"],
+  "include": ["next-env.d.ts", "components", "pages", "markdoc", "types"],
   "exclude": ["node_modules"]
 }
