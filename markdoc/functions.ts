@@ -15,3 +15,8 @@ export const upper = {
     return typeof string === 'string' ? string.toUpperCase() : string
   },
 }
+
+export default {
+  upper,
+  includes,
+}
