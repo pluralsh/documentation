@@ -1,4 +1,6 @@
-# Console API
+---
+title: Console API
+---
 
 While the console API is not public facing, it's still available for you to explore and use if you wish. It has a built in graphiql interface like Plural itself, accessible at `https://console.domain.com/graphiql`, with the actual graphql api available at `https://console.domain.com/gql`.
 

@@ -1,4 +1,6 @@
-# Runbook Yaml
+---
+title: Runbook Yaml
+---
 
 ```
 apiVersion: platform.plural.sh/v1alpha1

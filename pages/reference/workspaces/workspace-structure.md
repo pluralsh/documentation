@@ -1,4 +1,6 @@
-# Workspace Structure
+---
+title: Workspace Structure
+---
 
 Plural ensures the state of all installed applications are stored in a git repository, under a common format. A typical workspace should have a similar layout to the following example (Please click to expand):
 

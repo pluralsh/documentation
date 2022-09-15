@@ -1,10 +1,9 @@
 ---
+title: ☁ Cloud Provider CLI Setup
 description: >-
   Make sure that your cloud provider CLI is properly set up before installing
   Plural.
 ---
-
-# ☁ Cloud Provider CLI Setup
 
 Before you can start installing your Kubernetes cluster and applications with the Plural CLI, you will need to make sure that your cloud provider CLI is set up correctly.
 

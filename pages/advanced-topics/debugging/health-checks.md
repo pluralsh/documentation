@@ -1,4 +1,6 @@
-# Health Checks
+---
+title: Health Checks
+---
 
 Every application has a general application-level health check, which aggregates the statuses of all core kubernetes components and generates a digestable summary for human consumption.  These are viewable in the application switcher in the admin console, or by running:
 

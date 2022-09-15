@@ -1,8 +1,7 @@
 ---
+title: Deploying with Cloud Shell
 description: Setting up your first cluster in browser.
 ---
-
-# Deploying with Cloud Shell
 
 ## Overview
 

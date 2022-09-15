@@ -1,4 +1,6 @@
-# Sharing Existing Plural Installation Repos
+---
+title: Sharing Existing Plural Installation Repos
+---
 
 Let's say that you have an existing Plural installation repo and you would like to share it with other users. A common scenario might be an individual developer playing around with Plural who would then like to expand Plural adoption across their team or company. Below, we show how to do this.
 

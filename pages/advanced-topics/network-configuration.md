@@ -1,4 +1,6 @@
-# Network Configuration
+---
+title: Network Configuration
+---
 
 In your infrastructure, Plural will create a VPC, a public ingress controller, and a private ingress controller. Sometimes your organization or project will want to change our networking defaults to better suit your deployment.
 

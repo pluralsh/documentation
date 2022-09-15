@@ -1,10 +1,9 @@
 ---
+title: Guide
 description: >-
   This guide is for open-source project owners who would like to offer their
   project as a Plural application.
 ---
-
-# Guide
 
 ## 1. Create a new directory in plural-artifacts
 

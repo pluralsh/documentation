@@ -1,4 +1,6 @@
-# Plural Workspace Layout
+---
+title: Plural Workspace Layout
+---
 
 Plural ensures the state of all installed applications are stored in a git repository, under a common format.  Broadly, a working workspace should look like
 

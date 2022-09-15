@@ -1,4 +1,6 @@
-# Getting Started With Runbooks
+---
+title: Getting Started With Runbooks
+---
 
 Plural Runbooks are meant to be installed alongside your open source applications and serve as interactive tutorials for how to perform common maintenance tasks.&#x20;
 

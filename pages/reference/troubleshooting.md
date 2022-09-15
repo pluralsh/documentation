@@ -1,11 +1,10 @@
 ---
+title: 🪛 Troubleshooting
 description: >-
   Here is a non-exhaustive list of common issues or errors during the install or
   operation of Plural. If you see an error not listed here or get stuck in
   general, just hop into our Discord for help.
 ---
-
-# 🪛 Troubleshooting
 
 ## error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1
 

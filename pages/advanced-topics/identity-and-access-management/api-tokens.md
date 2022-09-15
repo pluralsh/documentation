@@ -1,4 +1,6 @@
-# API Tokens
+---
+title: API Tokens
+---
 
 In addition to the temporary JWTs the API issues on login, it's possible to create persistent access tokens to access the API.  This is also the common way credentials are managed when using the plural CLI, with the `plural login` command either creating or fetching a recent access token to use for all API calls.
 

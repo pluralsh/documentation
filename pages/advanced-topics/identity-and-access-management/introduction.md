@@ -1,4 +1,6 @@
-# Introduction
+---
+title: Introduction
+---
 
 Plural comes pre-built with a lot of the core concepts needed for IAM at any organizational scale. These include:
 

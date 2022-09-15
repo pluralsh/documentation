@@ -1,4 +1,6 @@
-# Table of contents
+---
+title: Table of contents
+---
 
 ## Getting Started
 

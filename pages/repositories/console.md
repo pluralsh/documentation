@@ -1,8 +1,7 @@
 ---
+title: Plural Console
 description: A Plural admin console for monitoring and ops.
 ---
-
-# Plural Console
 
 ## Description
 

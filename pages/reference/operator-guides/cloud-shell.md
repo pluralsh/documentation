@@ -1,8 +1,7 @@
 ---
+title: Cloud Shell
 description: This page gives an overview of what the Cloud Shell is.
 ---
-
-# Cloud Shell
 
 ## Quickstart
 

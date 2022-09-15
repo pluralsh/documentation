@@ -1,4 +1,6 @@
-# Plural Admin Console
+---
+title: Plural Admin Console
+---
 
 The plural admin console serves a number of different roles
 
