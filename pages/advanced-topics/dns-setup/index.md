@@ -1,8 +1,7 @@
 ---
+title: Configuring DNS
 description: Registering and setting up a domain
 ---
-
-# Configuring DNS
 
 {% tabs %}
 {% tab title="New Domain" %}

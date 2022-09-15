@@ -1,4 +1,6 @@
-# Module Library
+---
+title: Module Library
+---
 
 We have a number of helper terraform modules and helm charts to encapsulate some of the common tasks in applications available at [pluralsh/module-library](https://github.com/pluralsh/module-library).  Some of the more common usecases here are:
 

@@ -1,4 +1,6 @@
-# Service Accounts
+---
+title: Service Accounts
+---
 
 Service Accounts are assumable identities, specifically meant to facilitate group management of a set of installations.  We recommend using them if you want a team to manage a group of plural applications instead of an individual user.
 

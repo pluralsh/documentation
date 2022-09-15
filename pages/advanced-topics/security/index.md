@@ -1,8 +1,7 @@
 ---
+title: Security Concepts
 description: Addressing security concerns and learn about what Plural has access to.
 ---
-
-# Security Concepts
 
 ## Cloud Access
 

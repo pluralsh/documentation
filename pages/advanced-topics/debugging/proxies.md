@@ -1,4 +1,6 @@
-# Proxies
+---
+title: Proxies
+---
 
 Plural also helps with discovering useful proxy commands for inspecting core resources.  This is done via the `Proxy` crd.  A decent example is the proxy to the admin consoles underlying Postgres database:
 
