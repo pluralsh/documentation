@@ -40,7 +40,7 @@ export const SideCarContainer = styled.div(({ theme }) => ({
 }))
 
 export const ContentContainer = styled.main(({ theme }) => ({
-  flex: '1 1 100%',
+  flex: '1 1',
   marginRight: theme.spacing.large,
   marginLeft: theme.spacing.large,
   [mqs.twoColumn]: {
