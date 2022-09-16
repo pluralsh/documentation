@@ -12,6 +12,12 @@ import type { AppProps } from 'next/app'
 import { SideNav } from '../components/SideNav'
 import { TableOfContents } from '../components/TableOfContents'
 import { TopNav } from '../components/TopNav'
+import {
+  ContentContainer,
+  PageGrid,
+  SideCarContainer,
+  SideNavContainer,
+} from '../components/PageGrid'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [
@@ -51,18 +57,8 @@ function collectHeadings(node, sections: any[] = []) {
 }
 
 const Page = styled.div`
-  position: fixed;
-  top: var(--top-nav-height);
-  display: flex;
-  width: 100vw;
-  flex-grow: 1;
-  main {
-    overflow: auto;
-    height: calc(100vh - var(--top-nav-height));
-    flex-grow: 1;
-    font-size: 16px;
-    padding: 0 2rem 2rem;
-  }
+  /* display: flex;
+  flex-grow: 1; */
 `
 
 const PageHeader = styled.div(({ theme }) => ({
@@ -127,22 +123,28 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         </Head>
         <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
         <Page>
-          <SideNav />
-          <main className="flex column">
-            {(markdoc?.frontmatter?.title
-              || markdoc?.frontmatter?.description) && (
-              <PageHeader>
-                {markdoc?.frontmatter?.title && (
-                  <h1>{markdoc?.frontmatter.title}</h1>
-                )}
-                {markdoc?.frontmatter?.description && (
-                  <p>{markdoc?.frontmatter.description}</p>
-                )}
-              </PageHeader>
-            )}
-            <Component {...pageProps} />
-          </main>
-          <TableOfContents toc={toc} />
+          <PageGrid>
+            <SideNavContainer>
+              <SideNav />
+            </SideNavContainer>
+            <ContentContainer>
+              {(markdoc?.frontmatter?.title
+                || markdoc?.frontmatter?.description) && (
+                <PageHeader>
+                  {markdoc?.frontmatter?.title && (
+                    <h1>{markdoc?.frontmatter.title}</h1>
+                  )}
+                  {markdoc?.frontmatter?.description && (
+                    <p>{markdoc?.frontmatter.description}</p>
+                  )}
+                </PageHeader>
+              )}
+              <Component {...pageProps} />
+            </ContentContainer>
+            <SideCarContainer>
+              <TableOfContents toc={toc} />
+            </SideCarContainer>
+          </PageGrid>
         </Page>
       </StyledThemeProvider>
     </ThemeProvider>
