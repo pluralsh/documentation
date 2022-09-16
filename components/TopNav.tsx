@@ -14,8 +14,9 @@ export const TopNav = styled(({ children, ...props }) => (
   </nav>
 ))(({ theme }) => ({
   top: 0,
-  position: 'fixed',
+  position: 'sticky',
   height: 'var(--top-nav-height)',
+  background: theme.colors['fill-zero'],
   width: '100%',
   zIndex: '100',
   display: 'flex',
