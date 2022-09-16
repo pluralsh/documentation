@@ -16,6 +16,7 @@
     "@loomhq/loom-embed": "1.5.0",
     "@markdoc/markdoc": "0.1.7",
     "@markdoc/next.js": "0.1.6",
+    "@react-aria/ssr": "3.3.0",
     "algoliasearch": "4.14.2",
     "honorable": "0.139.0",
     "honorable-theme-default": "0.65.0",
