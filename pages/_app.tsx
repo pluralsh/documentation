@@ -4,6 +4,7 @@ import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { GlobalStyle, styledTheme, theme } from 'pluralsh-design-system'
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
+import { SSRProvider } from '@react-aria/ssr'
 
 import '../public/globals.css'
 
@@ -77,77 +78,79 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <ThemeProvider theme={honorableTheme}>
-      <StyledThemeProvider theme={styledTheme}>
-        <CssBaseline />
-        <GlobalStyle />
-        <Head>
-          <title>{title}</title>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          />
-          <meta
-            name="referrer"
-            content="strict-origin"
-          />
-          <meta
-            name="title"
-            content={title}
-          />
-          <meta
-            name="description"
-            content={description}
-          />
-          <link
-            rel="shortcut icon"
-            href="/favicon.ico"
-          />
-          <link
-            rel="icon"
-            href="/favicon.ico"
-          />
-          <link
-            rel="preconnect"
-            href="https://fonts.googleapis.com"
-          />
-          <link
-            rel="preconnect"
-            href="https://fonts.gstatic.com"
-            crossOrigin=""
-          />
-          <link
-            href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
-            rel="stylesheet"
-          />
-        </Head>
-        <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
-        <Page>
-          <PageGrid>
-            <SideNavContainer>
-              <SideNav />
-            </SideNavContainer>
-            <ContentContainer>
-              {(markdoc?.frontmatter?.title
+    <SSRProvider>
+      <ThemeProvider theme={honorableTheme}>
+        <StyledThemeProvider theme={styledTheme}>
+          <CssBaseline />
+          <GlobalStyle />
+          <Head>
+            <title>{title}</title>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1.0"
+            />
+            <meta
+              name="referrer"
+              content="strict-origin"
+            />
+            <meta
+              name="title"
+              content={title}
+            />
+            <meta
+              name="description"
+              content={description}
+            />
+            <link
+              rel="shortcut icon"
+              href="/favicon.ico"
+            />
+            <link
+              rel="icon"
+              href="/favicon.ico"
+            />
+            <link
+              rel="preconnect"
+              href="https://fonts.googleapis.com"
+            />
+            <link
+              rel="preconnect"
+              href="https://fonts.gstatic.com"
+              crossOrigin=""
+            />
+            <link
+              href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap"
+              rel="stylesheet"
+            />
+          </Head>
+          <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
+          <Page>
+            <PageGrid>
+              <SideNavContainer>
+                <SideNav />
+              </SideNavContainer>
+              <ContentContainer>
+                {(markdoc?.frontmatter?.title
                 || markdoc?.frontmatter?.description) && (
-                <PageHeader>
-                  {markdoc?.frontmatter?.title && (
-                    <h1>{markdoc?.frontmatter.title}</h1>
-                  )}
-                  {markdoc?.frontmatter?.description && (
-                    <p>{markdoc?.frontmatter.description}</p>
-                  )}
-                </PageHeader>
-              )}
-              <Component {...pageProps} />
-            </ContentContainer>
-            <SideCarContainer>
-              <TableOfContents toc={toc} />
-            </SideCarContainer>
-          </PageGrid>
-        </Page>
-      </StyledThemeProvider>
-    </ThemeProvider>
+                  <PageHeader>
+                    {markdoc?.frontmatter?.title && (
+                      <h1>{markdoc?.frontmatter.title}</h1>
+                    )}
+                    {markdoc?.frontmatter?.description && (
+                      <p>{markdoc?.frontmatter.description}</p>
+                    )}
+                  </PageHeader>
+                )}
+                <Component {...pageProps} />
+              </ContentContainer>
+              <SideCarContainer>
+                <TableOfContents toc={toc} />
+              </SideCarContainer>
+            </PageGrid>
+          </Page>
+        </StyledThemeProvider>
+      </ThemeProvider>
+    </SSRProvider>
   )
 
   return app
