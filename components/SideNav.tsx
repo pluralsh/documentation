@@ -23,10 +23,10 @@ const TocLink = styled(({ className, ...props }: ComponentProps<typeof Link>) =>
 }))
 
 const TocSection = styled(({ title, children, ...props }) => (
-  <li {...props}>
+  <div {...props}>
     <h2>{title}</h2>
     {children}
-  </li>
+  </div>
 ))(({ theme }) => ({
   display: 'block',
   margin: 0,

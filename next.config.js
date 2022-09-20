@@ -15,9 +15,9 @@ module.exports = () => {
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: true,
     compiler: {
-      // see https://styled-components.com/docs/tooling#babel-plugin for more info on the options.
-      emotion: true,
+      // https://nextjs.org/docs/advanced-features/compiler#styled-components
       styledComponents: true,
+      emotion: true,
     },
     i18n: {
       locales: ['en-US'],
