@@ -1682,7 +1682,7 @@
     "@react-stately/selection" "^3.10.3"
     "@react-types/shared" "^3.14.1"
 
-"@react-aria/ssr@^3.3.0":
+"@react-aria/ssr@3.3.0", "@react-aria/ssr@^3.3.0":
   version "3.3.0"
   resolved "https://registry.yarnpkg.com/@react-aria/ssr/-/ssr-3.3.0.tgz#25e81daf0c7a270a4a891159d8d984578e4512d8"
   integrity sha512-yNqUDuOVZIUGP81R87BJVi/ZUZp/nYOBXbPsRe7oltJOfErQZD+UezMpw4vM2KRz18cURffvmC8tJ6JTeyDtaQ==
