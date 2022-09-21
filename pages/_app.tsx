@@ -2,13 +2,13 @@ import React from 'react'
 import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { GlobalStyle, styledTheme, theme } from 'pluralsh-design-system'
+import { GlobalStyle as PluralGlobalStyle, styledTheme, theme } from 'pluralsh-design-system'
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
-
+import { useRouter } from 'next/router'
 import '../public/globals.css'
-
 import type { AppProps } from 'next/app'
+import { DocSearch } from '@docsearch/react'
 
 import { SideNav } from '../components/SideNav'
 import { TableOfContents } from '../components/TableOfContents'
@@ -19,6 +19,7 @@ import {
   SideCarContainer,
   SideNavContainer,
 } from '../components/PageGrid'
+import GlobalStyle from '../components/DocSearchStyle'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [
@@ -69,6 +70,7 @@ const PageHeader = styled.div(({ theme }) => ({
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
+  const router = useRouter()
 
   const title = markdoc?.frontmatter?.title || TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
@@ -82,6 +84,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
       <ThemeProvider theme={honorableTheme}>
         <StyledThemeProvider theme={styledTheme}>
           <CssBaseline />
+          <PluralGlobalStyle />
           <GlobalStyle />
           <Head>
             <title>{title}</title>
@@ -118,9 +121,27 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               href="https://fonts.gstatic.com"
               crossOrigin=""
             />
-
+            <link
+              rel="preconnect"
+              href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
+              crossOrigin=""
+            />
           </Head>
-          <TopNav>{/* <Link href="/docs">Docs</Link> */}</TopNav>
+          <TopNav>
+            <DocSearch
+              appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
+              indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
+              apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
+              placeholder="Search Plural docs"
+              navigator={{
+                navigate: ({ itemUrl }) => {
+                  router.push(itemUrl)
+                },
+
+              }}
+              getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
+            />
+          </TopNav>
           <Page>
             <PageGrid>
               <SideNavContainer>
@@ -128,7 +149,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               </SideNavContainer>
               <ContentContainer>
                 {(markdoc?.frontmatter?.title
-                || markdoc?.frontmatter?.description) && (
+                  || markdoc?.frontmatter?.description) && (
                   <PageHeader>
                     {markdoc?.frontmatter?.title && (
                       <h1>{markdoc?.frontmatter.title}</h1>
