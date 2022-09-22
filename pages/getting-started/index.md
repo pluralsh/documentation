@@ -4,4 +4,4 @@ description: >-
   Kubernetes in minutes with no management overhead.
 ---
 
-{% partial file="../../README.md" /%}
+{% partial file="../../../README.md" /%}
