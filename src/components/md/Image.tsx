@@ -2,11 +2,8 @@ import styled from 'styled-components'
 
 export const commonCfg = { shouldForwardProp: () => true }
 
-const ImageWrap = styled(({ className, ...props }) => (
-  <div className={className}>
-    <Image {...props} />
-  </div>
-)).withConfig(commonCfg)(({ theme }) => ({
+const StyledWrap = styled.span.withConfig(commonCfg)(({ theme }) => ({
+  display: 'block',
   width: '100%',
   paddingLeft: theme.spacing.large,
   paddingRight: theme.spacing.large,
@@ -14,7 +11,7 @@ const ImageWrap = styled(({ className, ...props }) => (
   marginBottom: theme.spacing.medium,
 }))
 
-const Image = styled.img.withConfig(commonCfg)(({ theme }) => ({
+const StyledImg = styled.img.withConfig(commonCfg)(({ theme }) => ({
   display: 'block',
   maxWidth: '100%',
   border: theme.borders.default,
@@ -22,4 +19,12 @@ const Image = styled.img.withConfig(commonCfg)(({ theme }) => ({
   overflow: 'hidden',
 }))
 
-export default ImageWrap
+function Image({ ...props }) {
+  return (
+    <StyledWrap>
+      <StyledImg {...props} />
+    </StyledWrap>
+  )
+}
+
+export default Image
