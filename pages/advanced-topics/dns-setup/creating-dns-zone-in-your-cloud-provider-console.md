@@ -27,7 +27,7 @@ title: Creating a DNS Zone in Console
 7. Click **Create** to create a zone populated with the NS and SOA records.
 8. On the **Zone details** page, retrieve the **Name server (NS)** records. You need these records to proceed with Step 3.
 
-![](<../../.gitbook/assets/Screen Shot 2021-08-18 at 12.39.37 PM.png>)
+![](</assets/Screen Shot 2021-08-18 at 12.39.37 PM.png>)
 
 ####
 {% /tab %}
