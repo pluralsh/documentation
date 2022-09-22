@@ -7,6 +7,9 @@ const DocSearchStyles = createGlobalStyle(({ theme }) => ({
   'a:focus-visible': {
     ...theme.partials.focus.default,
   },
+  body: {
+    ...theme.partials.marketingText.body2,
+  },
   ':root': {
     '--docsearch-primary-color': theme.colors['action-primary'],
     '--docsearch-text-color': 'rgb(28, 30, 33)',

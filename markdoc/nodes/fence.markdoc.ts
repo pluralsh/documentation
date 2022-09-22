@@ -1,13 +1,20 @@
-import { CodeBlock } from '../../components/CodeBlock'
+import { Tag } from '@markdoc/markdoc'
+
+import Fence from '../../components/md/Fence'
 
 export const fence = {
-  render: CodeBlock,
+  render: Fence,
   attributes: {
-    content: { type: String },
-    language: {
-      type: String,
-      description:
-        'The programming language of the code block. Place it after the backticks.',
-    },
+    content: { type: String, render: false, required: true },
+    language: { type: String, render: 'data-language' },
+    process: { type: Boolean, render: false, default: true },
+  },
+  transform(node, config) {
+    const attributes = node.transformAttributes(config)
+    const children = node.children.length
+      ? node.transformChildren(config)
+      : [node.attributes.content]
+
+    return new Tag(this.render as any, attributes, children)
   },
 }

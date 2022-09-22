@@ -2,7 +2,11 @@ import React from 'react'
 import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { GlobalStyle as PluralGlobalStyle, styledTheme, theme } from 'pluralsh-design-system'
+import {
+  GlobalStyle as PluralGlobalStyle,
+  styledTheme,
+  theme,
+} from 'pluralsh-design-system'
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import { useRouter } from 'next/router'
@@ -20,6 +24,10 @@ import {
   SideNavContainer,
 } from '../components/PageGrid'
 import GlobalStyle from '../components/DocSearchStyle'
+import MainContent from '../components/MainContent'
+import { DESCRIPTION, TITLE } from '../consts'
+
+import { PagePropsContext } from './PagePropsContext'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [
@@ -30,10 +38,6 @@ const honorableTheme = mergeTheme(theme, {
 })
 
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
-
-const TITLE = 'Plural Documentation'
-const DESCRIPTION
-  = 'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
 
 function collectHeadings(node, sections: any[] = []) {
   if (node) {
@@ -63,11 +67,6 @@ const Page = styled.div`
   flex-grow: 1; */
 `
 
-const PageHeader = styled.div(({ theme }) => ({
-  marginBottom: theme.spacing.xlarge,
-  borderBottom: theme.borders.default,
-}))
-
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
   const router = useRouter()
@@ -80,95 +79,85 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <SSRProvider>
-      <ThemeProvider theme={honorableTheme}>
-        <StyledThemeProvider theme={styledTheme}>
-          <CssBaseline />
-          <PluralGlobalStyle />
-          <GlobalStyle />
-          <Head>
-            <title>{title}</title>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1.0"
-            />
-            <meta
-              name="referrer"
-              content="strict-origin"
-            />
-            <meta
-              name="title"
-              content={title}
-            />
-            <meta
-              name="description"
-              content={description}
-            />
-            <link
-              rel="shortcut icon"
-              href="/favicon.ico"
-            />
-            <link
-              rel="icon"
-              href="/favicon.ico"
-            />
-            <link
-              rel="preconnect"
-              href="https://fonts.googleapis.com"
-            />
-            <link
-              rel="preconnect"
-              href="https://fonts.gstatic.com"
-              crossOrigin=""
-            />
-            <link
-              rel="preconnect"
-              href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-              crossOrigin=""
-            />
-          </Head>
-          <TopNav>
-            <DocSearch
-              appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-              indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-              apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-              placeholder="Search Plural docs"
-              navigator={{
-                navigate: ({ itemUrl }) => {
-                  router.push(itemUrl)
-                },
-
-              }}
-              getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
-            />
-          </TopNav>
-          <Page>
-            <PageGrid>
-              <SideNavContainer>
-                <SideNav />
-              </SideNavContainer>
-              <ContentContainer>
-                {(markdoc?.frontmatter?.title
-                  || markdoc?.frontmatter?.description) && (
-                  <PageHeader>
-                    {markdoc?.frontmatter?.title && (
-                      <h1>{markdoc?.frontmatter.title}</h1>
-                    )}
-                    {markdoc?.frontmatter?.description && (
-                      <p>{markdoc?.frontmatter.description}</p>
-                    )}
-                  </PageHeader>
-                )}
-                <Component {...pageProps} />
-              </ContentContainer>
-              <SideCarContainer>
-                <TableOfContents toc={toc} />
-              </SideCarContainer>
-            </PageGrid>
-          </Page>
-        </StyledThemeProvider>
-      </ThemeProvider>
-    </SSRProvider>
+    <PagePropsContext.Provider value={pageProps}>
+      <SSRProvider>
+        <ThemeProvider theme={honorableTheme}>
+          <StyledThemeProvider theme={styledTheme}>
+            <CssBaseline />
+            <PluralGlobalStyle />
+            <GlobalStyle />
+            <Head>
+              <title>{title}</title>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1.0"
+              />
+              <meta
+                name="referrer"
+                content="strict-origin"
+              />
+              <meta
+                name="title"
+                content={title}
+              />
+              <meta
+                name="description"
+                content={description}
+              />
+              <link
+                rel="shortcut icon"
+                href="/favicon.ico"
+              />
+              <link
+                rel="icon"
+                href="/favicon.ico"
+              />
+              <link
+                rel="preconnect"
+                href="https://fonts.googleapis.com"
+              />
+              <link
+                rel="preconnect"
+                href="https://fonts.gstatic.com"
+                crossOrigin=""
+              />
+              <link
+                rel="preconnect"
+                href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
+                crossOrigin=""
+              />
+            </Head>
+            <TopNav>
+              <DocSearch
+                appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
+                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
+                apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
+                placeholder="Search Plural docs"
+                navigator={{
+                  navigate: ({ itemUrl }) => {
+                    router.push(itemUrl)
+                  },
+                }}
+                getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
+              />
+            </TopNav>
+            <Page>
+              <PageGrid>
+                <SideNavContainer>
+                  <SideNav />
+                </SideNavContainer>
+                <ContentContainer>
+                  <MainContent Component={Component} />
+                </ContentContainer>
+                <SideCarContainer>
+                  <TableOfContents toc={toc} />
+                </SideCarContainer>
+              </PageGrid>
+            </Page>
+          </StyledThemeProvider>
+        </ThemeProvider>
+      </SSRProvider>
+    </PagePropsContext.Provider>
   )
 
   return app
