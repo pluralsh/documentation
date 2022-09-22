@@ -20,6 +20,6 @@ The only users eligible for sharing repo encryption keys are also those users in
 
 Each Plural role is configurable using the role creation form at [https://app.plural.sh/accounts/edit/roles](https://app.plural.sh/accounts/edit/roles):
 
-![](../../reference/assets/Screen%20Shot%202021-07-23%20at%205.47.19%20PM.png)
+![](/assets/Screen%20Shot%202021-07-23%20at%205.47.19%20PM.png)
 
 The permissions are fairly self explanatory, but you do have the ability to map a role to whatever identity grouping you'd want to use, and filter the roles application to a list of repositories (or a regex on repository name). The latter mode is helpful if you'd like a certain role to only be able to install, say, airflow and sentry.
