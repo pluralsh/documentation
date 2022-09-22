@@ -1,4 +1,4 @@
-import { Callout } from '../../components/Callout'
+import { Callout } from '../../components/md/Callout'
 
 export const callout = {
   render: Callout,

@@ -1,6 +1,6 @@
 import { Tag } from '@markdoc/markdoc'
 
-import { Heading } from '../../components/Heading'
+import { Heading } from '../../components/md/Heading'
 
 function generateID(children, attributes) {
   if (attributes.id && typeof attributes.id === 'string') {

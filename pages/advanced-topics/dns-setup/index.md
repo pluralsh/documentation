@@ -23,7 +23,7 @@ Go back to where you registered `pluraldemo.com`and add the nameservers from Ste
 The domain name registrars will typically provide default name servers and also the ability to set up custom name servers. For example, in Google Domains, you can set custom name servers under the DNS tab once you click into a specific domain name.
 {% /hint %}
 
-![](<../../.gitbook/assets/Screen Shot 2021-08-18 at 1.00.00 PM.png>)
+![](</assets/Screen Shot 2021-08-18 at 1.00.00 PM.png>)
 {% /tab %}
 
 {% tab title="Subdomain of Existing Domain" %}
@@ -39,7 +39,7 @@ Record the nameservers corresponding to this zone.
 
 Go back to where you registered `pinterest.com` and add a `NS` record that corresponds to the `plural.pinterest.com` subdomain -- for the data field of the record, input the nameservers from step 1.
 
-![](<../../.gitbook/assets/Screen Shot 2021-08-30 at 3.36.34 PM.png>)
+![](</assets/Screen Shot 2021-08-30 at 3.36.34 PM.png>)
 
 These are the terraform snippets for reference:
 
