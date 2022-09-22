@@ -82,7 +82,7 @@ plural deploy --commit "installed console"
 
 Once the deploy finishes, it will output the url that the console has been deployed to. Navigate to that url and it will show a login screen that looks like this:
 
-![](<../.gitbook/assets/Screen Shot 2021-08-19 at 3.54.54 PM.png>)
+![](</assets/Screen Shot 2021-08-19 at 3.54.54 PM.png>)
 
 If you selected (y) to OIDC, one-login has already been configured, and you'll be able to sign in with the same credentials you use for `app.plural.sh`.
 

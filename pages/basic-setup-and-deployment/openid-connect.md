@@ -10,11 +10,11 @@ When you run `plural bundle install` to install an application, you may be asked
 OpenID Connect is a form of [SSO](https://www.onelogin.com/learn/how-single-sign-on-works) that enables Plural users to add an authentication layer on top of any apps they deploy with Plural. Instead of using the application's normal login screen,
 you are instead prompted to login with Plural. This login is connected to your login at [app.plural.sh](https://app.plural.sh). For example, if you have enabled OIDC, if you are logged in and try to access `airbyte.$YOUR_WORKSPACE.onplural.sh`, this pops up:
 
-![](../.gitbook/assets/setup-oidc/image-1.png)
+![](</assets/setup-oidc/image-1.png>)
 
 If you aren't logged in, you'll see this screen when you navigate to your application:
 
-![](../.gitbook/assets/setup-oidc/image-2.png)
+![](</assets/setup-oidc/image-2.png>)
 
 All Plural applications have the capability to create a custom OIDC provider for a user's installation.  This allows Plural to become a unified identity management solution for your entire open source portfolio. We have even automated upgrades for OIDC configuration changes, so the setup process is entirely turnkey.&#x20;
 

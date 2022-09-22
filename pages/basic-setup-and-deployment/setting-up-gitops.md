@@ -47,7 +47,7 @@ Enter `Y`, pick your version control provider of choice, and you will receive an
 
 If everything goes well, it should look like this:
 
-![](<../.gitbook/assets/Screen Shot 2022-07-27 at 5.11.01 PM.png>)
+![](</assets/Screen Shot 2022-07-27 at 5.11.01 PM.png>)
 
 ### Manual Git Setup
 
