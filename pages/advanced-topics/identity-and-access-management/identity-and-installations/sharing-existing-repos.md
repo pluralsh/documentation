@@ -93,13 +93,13 @@ Alice follows the instructions [here](service-accounts.md) to create a Plural se
 
 She can find which bundles she has installed at [https://app.plural.sh/explore/installed](https://app.plural.sh/explore/installed)
 
-![](<../../../.gitbook/assets/Screen Shot 2022-02-22 at 2.58.10 PM.png>)
+![](</assets/Screen Shot 2022-02-22 at 2.58.10 PM.png>)
 
 ### 5. Alice changes the owner of the Plural installation repo
 
 Alice goes to `workspace.yaml` in the root of her installation repo, and changes the owner to `ml-infra@plural.sh`.&#x20;
 
-![](<../../../.gitbook/assets/Screen Shot 2022-02-22 at 2.53.09 PM.png>)
+![](</assets/Screen Shot 2022-02-22 at 2.53.09 PM.png>)
 
 ### 6. Alice initializes Plural as service account
 
