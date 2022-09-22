@@ -27,7 +27,7 @@ import GlobalStyle from '../components/DocSearchStyle'
 import MainContent from '../components/MainContent'
 import { DESCRIPTION, TITLE } from '../consts'
 
-import { PagePropsContext } from './PagePropsContext'
+import { PagePropsContext } from '../components/PagePropsContext'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [

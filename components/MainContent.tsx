@@ -2,7 +2,8 @@ import { useContext } from 'react'
 import styled from 'styled-components'
 
 import { DESCRIPTION, TITLE } from '../consts'
-import { PagePropsContext } from '../pages/PagePropsContext'
+
+import { PagePropsContext } from './PagePropsContext'
 
 const ContentWrapper = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xlarge,
