@@ -20,13 +20,13 @@ Head over to [app.plural.sh](https://app.plural.sh) and set up an account.
 
 Directly navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to access the Cloud Shell. You'll be prompted to OAuth with GitHub. We're just getting your permission to create a GitHub repository for Plural configuration on your behalf. Give your repository a name, being sure to select the right organization or individual account on the left.
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-1.png)
+![](</assets/cloud-shell-quickstart/image-1.png>)
 
 ### Set up a Cloud Provider
 
 You now have two options. If you're just trying out Plural, you can have a free demo cluster on the house that will last for 6 hours. Just keep in mind that this option will be only available once.
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-2.png)
+![](</assets/cloud-shell-quickstart/image-2.png>)
 
 To set up with your own cloud provider, provide your credentials in the following screen.
 
@@ -42,13 +42,13 @@ We'll now start setting up your Kubernetes cluster configuration. Here's a guide
 
 You should hit the following verification screen afterward. Hit `Create` once you're ready to go!
 
-![Thankfully, Abhi remembered to deactivate the key before publishing this image.](../.gitbook/assets/cloud-shell-quickstart/image-3.png)
+![Thankfully, Abhi remembered to deactivate the key before publishing this image.](</assets/cloud-shell-quickstart/image-3.png>)
 
 While your Cloud Shell is provisioning, double check that your repository was initialized by checking your GitHub repos. There should be a repository with an initial commit with the name that you configured.
 
 ## Configure Applications and Kubernetes Cluster
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-4.png)
+![](</assets/cloud-shell-quickstart/image-4.png>)
 
 Now that we're in, let's install two applications:
 
@@ -120,15 +120,15 @@ You may experience a delayed creation of your SSL certs for your applications. Z
 
 Here, you'll be able to check node health, Pod health, logs, pre-built dashboards tailored for Airflow, and more.
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-5.png)
+![](</assets/cloud-shell-quickstart/image-5.png>)
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-6.png)
+![](</assets/cloud-shell-quickstart/image-6.png>)
 
 ### Airflow / Other Applications
 
 To access your Airflow installation, access it similarly to the console at `airflow.YOUR_WORKSPACE.onplural.sh`
 
-![](../.gitbook/assets/cloud-shell-quickstart/image-7.png)
+![](</assets/cloud-shell-quickstart/image-7.png>)
 
 You can now access your DAGs from the GitHub repo that you set up earlier. Just add any DAGs you want to use the repo and a sync will run every 5 minutes or so to pull them in.
 

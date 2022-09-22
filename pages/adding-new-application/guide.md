@@ -90,7 +90,7 @@ The Plural platform includes a number of custom resources that you might find us
 * [proxies.yaml](plural-custom-resources.md#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
 * [configurationOverlay.yaml](plural-custom-resources.md#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
 
-![](<../.gitbook/assets/image (2).png>)
+![](</assets/image (2).png>)
 
 * logfilter.yaml
 
