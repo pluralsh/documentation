@@ -1,5 +1,11 @@
 import { NavData } from 'components/SideNav'
-import { CloudIcon } from 'pluralsh-design-system'
+import {
+  CloudIcon,
+  CraneIcon,
+  RocketIcon,
+  TerminalIcon,
+  // RunBookIcon,
+} from 'pluralsh-design-system'
 
 const data: NavData = [
   {
@@ -8,11 +14,13 @@ const data: NavData = [
       { href: '/', title: '👋 Introduction' },
       {
         href: '/getting-started/getting-started',
-        title: '🏁 Quickstart',
+        icon: <RocketIcon />,
+        title: 'Quickstart',
       },
       {
         href: '/getting-started/video-cli-quickstart',
-        title: '📽 Video: CLI Quickstart',
+        title: 'Video: CLI Quickstart', // 📽
+        icon: <TerminalIcon />,
       },
     ],
   },
@@ -69,6 +77,7 @@ const data: NavData = [
           {
             href: '/adding-new-application/getting-started-with-runbooks/',
             title: 'Getting Started With Runbooks',
+            // icon: <RunBookIcon />,
             sections: [
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
@@ -188,7 +197,11 @@ const data: NavData = [
           },
         ],
       },
-      { href: '/reference/architecture-1', title: '🏗 Architecture' },
+      {
+        href: '/reference/architecture-1',
+        title: 'Architecture',
+        icon: <CraneIcon />,
+      },
       {
         href: '/reference/workspaces/',
         title: '🖥 Workspaces',
@@ -215,8 +228,8 @@ const data: NavData = [
       },
       {
         href: '/reference/configuring-cloud-provider',
-        icon: CloudIcon,
-        title: '☁ Cloud Provider CLI Setup',
+        icon: <CloudIcon />,
+        title: 'Cloud Provider CLI Setup',
       },
     ],
   },

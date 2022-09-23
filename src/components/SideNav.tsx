@@ -2,6 +2,7 @@ import React, {
   ComponentProps,
   ReactElement,
   createContext,
+  useCallback,
   useContext,
   useMemo,
   useState,
@@ -12,6 +13,8 @@ import { useRouter } from 'next/router'
 import { removeTrailingSlashes } from 'utils/text'
 import { CaretRightIcon } from 'pluralsh-design-system'
 import classNames from 'classnames'
+import { animated, useSpring } from 'react-spring'
+import useMeasure from 'react-use-measure'
 
 export type NavItem = {
   title: string
@@ -44,21 +47,29 @@ const LinkList = styled.ul<{ $indentLevel: number }>(({ theme, $indentLevel }) =
 }))
 
 const LinkA = styled.a<{ $isSelected?: boolean }>(({ $isSelected = false, theme }) => ({
-  display: 'block',
+  display: 'flex',
+  gap: theme.spacing.small,
   cursor: 'pointer',
   flexGrow: 1,
   margin: 0,
   padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
+  ...theme.partials.marketingText.body2,
+  color: theme.colors['text-light'],
+  '&:hover': {
+    color: theme.colors.text,
+  },
 }))
 
 type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
   isSelected?: boolean
+  icon?: ReactElement
 }
 
 function LinkBase({
   className,
   isSelected = false,
   children,
+  icon,
   href,
 }: // ...props
 LinkBaseProps) {
@@ -67,6 +78,7 @@ LinkBaseProps) {
       className={className}
       $isSelected={isSelected}
     >
+      {icon && icon}
       {children}
     </LinkA>
   )
@@ -78,10 +90,11 @@ LinkBaseProps) {
   return content
 }
 
-const CaretButton = styled(({ isOpen: _isOpen = false, className }) => (
+const CaretButton = styled(({ isOpen: _isOpen = false, className, ...props }) => (
   <button
     type="button"
     className={className}
+    {...props}
   >
     <CaretRightIcon className="icon" />
   </button>
@@ -91,8 +104,11 @@ const CaretButton = styled(({ isOpen: _isOpen = false, className }) => (
   alignItems: 'center',
   justifyContent: 'center',
   paddingRight: theme.spacing.large,
-  paddingLeft: theme.spacing.large,
+  paddingLeft: theme.spacing.medium,
   cursor: 'pointer',
+  color: theme.colors['text-light'],
+  '&:hover': theme.colors.text,
+  transition: 'color 0.1s ease',
   ...(isOpen
     ? {
       '.icon': {
@@ -114,12 +130,14 @@ const NavLink = styled(({
   className,
   isSubSection = false,
   isOpen = false,
+  onToggleOpen,
   icon,
   ...props
 }: {
     isSubSection?: boolean
     isOpen?: boolean
     icon?: ReactElement
+    onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
   const router = useRouter()
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
@@ -136,11 +154,15 @@ const NavLink = styled(({
     <li className={classNames(className, { isSelected })}>
       <LinkBase
         isSelected={isSelected}
-        isOpen={isOpen}
         icon={icon}
         {...props}
       />
-      {isSubSection && <CaretButton isOpen={isOpen} />}
+      {isSubSection && (
+        <CaretButton
+          isOpen={isOpen}
+          onClick={onToggleOpen}
+        />
+      )}
     </li>
   )
 })(({ theme }) => ({
@@ -165,6 +187,9 @@ const NavLink = styled(({
 }))
 
 const TopHeading = styled.h1(({ theme }) => ({
+  paddingLeft: theme.spacing.medium,
+  paddingTop: theme.spacing.xsmall,
+  paddingBottom: theme.spacing.xsmall,
   marginTop: theme.spacing.large,
   ...theme.partials.marketingText.label,
 }))
@@ -192,12 +217,33 @@ function SubSection({
   indentLevel = 1,
 }: NavItem & { indentLevel?: number }) {
   const [_isActiveSection, setIsActiveSection] = useState(false)
+  const [isOpen, setIsOpen] = useState(false)
   const contextValue = useMemo(() => ({
     setActiveLink: () => {
       setIsActiveSection(true)
     },
   }),
   [])
+  const toggleOpen = useCallback(() => {
+    setIsOpen(!isOpen)
+  }, [isOpen])
+  const [measureRef, { height }] = useMeasure()
+
+  const expand = useSpring({
+    height: isOpen ? `${height}px` : '0px',
+    config: isOpen
+      ? {
+        mass: 0.6,
+        tension: 280,
+        velocity: 0.02,
+      }
+      : {
+        mass: 0.6,
+        tension: 400,
+        velocity: 0.02,
+        restVelocity: 0.1,
+      },
+  })
 
   return (
     <SubSectionContext.Provider value={contextValue}>
@@ -205,18 +251,25 @@ function SubSection({
         isSubSection={!!sections}
         href={href}
         icon={icon}
+        isOpen={isOpen}
+        onToggleOpen={toggleOpen}
       >
         {title}
       </NavLink>
       {sections && (
-        <LinkList $indentLevel={indentLevel}>
-          {sections.map(subSection => (
-            <SubSection
-              {...subSection}
-              indentLevel={2}
-            />
-          ))}
-        </LinkList>
+        <animated.div style={{ ...expand, overflow: 'hidden' }}>
+          <LinkList
+            ref={measureRef}
+            $indentLevel={indentLevel}
+          >
+            {sections.map(subSection => (
+              <SubSection
+                {...subSection}
+                indentLevel={2}
+              />
+            ))}
+          </LinkList>
+        </animated.div>
       )}
     </SubSectionContext.Provider>
   )
@@ -229,6 +282,7 @@ const NavWrap = styled.nav(({ theme }) => ({
   height: 'calc(100vh - var(--top-nav-height))',
   overflowY: 'auto',
   // flex: '0 0 auto',
+  paddingBottom: theme.spacing.xlarge,
 
   // style
   backgroundColor: theme.colors['fill-one'],
@@ -246,9 +300,15 @@ export function SideNav({ navData, ...props }: SideNavProps) {
   return (
     <NavWrap {...props}>
       {navData.map(({ title, sections }) => (
-        <TopSection title={title}>
+        <TopSection
+          title={title}
+          key={title}
+        >
           {sections.map(subSection => (
-            <SubSection {...subSection} />
+            <SubSection
+              key={`${subSection.href || ''}-${subSection.title || ''}`}
+              {...subSection}
+            />
           ))}
         </TopSection>
       ))}
