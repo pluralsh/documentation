@@ -46,7 +46,7 @@ const LinkList = styled.ul<{ $indentLevel: number }>(({ theme, $indentLevel }) =
     : {}),
 }))
 
-const LinkA = styled.a<{ $isSelected?: boolean }>(({ $isSelected = false, theme }) => ({
+const LinkA = styled.a(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   cursor: 'pointer',
@@ -61,23 +61,18 @@ const LinkA = styled.a<{ $isSelected?: boolean }>(({ $isSelected = false, theme 
 }))
 
 type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
-  isSelected?: boolean
   icon?: ReactElement
 }
 
 function LinkBase({
   className,
-  isSelected = false,
   children,
   icon,
   href,
 }: // ...props
 LinkBaseProps) {
   const content = (
-    <LinkA
-      className={className}
-      $isSelected={isSelected}
-    >
+    <LinkA className={className}>
       {icon && icon}
       {children}
     </LinkA>
@@ -153,7 +148,6 @@ const NavLink = styled(({
   return (
     <li className={classNames(className, { isSelected })}>
       <LinkBase
-        isSelected={isSelected}
         icon={icon}
         {...props}
       />

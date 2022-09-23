@@ -1,5 +1,5 @@
 import HorizontalRule from '../../components/md/HorizontalRule'
 
-export const hr: Schema = {
+export const hr = {
   render: HorizontalRule,
 }
