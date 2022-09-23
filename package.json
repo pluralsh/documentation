@@ -7,8 +7,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint {components,markdoc,pages} --ext ts,tsx,js,jsx",
-    "fix": "eslint {components,markdoc,pages} --ext ts,tsx,js,jsx --fix"
+    "lint": "eslint {src,pages} --ext ts,tsx,js,jsx",
+    "fix": "eslint {src,pages} --ext ts,tsx,js,jsx --fix"
   },
   "dependencies": {
     "@docsearch/react": "3",

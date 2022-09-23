@@ -22,10 +22,8 @@
   },
   "include": [
     "next-env.d.ts",
-    "components/**/*",
     "pages/**/*",
-    "markdoc/**/*",
-    "types/**/*"
+    "src/**/*",
   ],
   "exclude": ["node_modules"]
 }
