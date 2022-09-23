@@ -1,11 +1,6 @@
 import styled from 'styled-components'
 
-const mqs = {
-  twoColumn: '@media screen and (min-width: 1000px)',
-  threeColumn: '@media screen and (min-width: 1280px)',
-  threeColumnLoose: '@media screen and (min-width: 1280px)',
-  maxWidth: '@media screen and (min-width: 1588px)',
-}
+import { mqs } from './GlobalStyles'
 
 export const PageGrid = styled.div(_p => ({
   display: 'flex',
