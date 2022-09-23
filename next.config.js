@@ -2,7 +2,7 @@
 // eslint-disable-next-line function-paren-newline
 const withMarkdoc = require('@markdoc/next.js')(
   /* config: https://markdoc.io/docs/nextjs#options */ {
-    schemaPath: './markdoc',
+    schemaPath: './src/markdoc',
   })
 const withTM = require('next-transpile-modules')(['pluralsh-design-system', 'honorable', 'honorable-theme-default'],
   {

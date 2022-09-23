@@ -1,6 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-const DocSearchStyles = createGlobalStyle(({ theme }) => ({
+const GlobalStyles = createGlobalStyle(({ theme }) => ({
   '*:focus': {
     outline: 'none',
   },
@@ -116,4 +116,4 @@ const DocSearchStyles = createGlobalStyle(({ theme }) => ({
   },
 }))
 
-export default DocSearchStyles
+export default GlobalStyles
