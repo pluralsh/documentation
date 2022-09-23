@@ -1,49 +1,7 @@
-:root {
-  --top-nav-height: 51px;
-  --border-color: #dce6e9;
-  --color-text: #EBEFF0;
-}
-
 *,
 *::before,
 *::after {
   box-sizing: border-box;
-}
-
-* {
-  scroll-margin-top: calc(var(--top-nav-height) + 10px);
-}
-
-body {
-  font-family: "Inter", "Helvetica", "Arial", "sans-serif";
-  background-color: #171A21;
-  color: var(--color-text);
-  margin: 0;
-  overflow-x: hidden;
-  overflow-y: scroll;
-}
-
-p {
-  line-height: 1.5em;
-}
-
-
-h1 {
-  font-size: 40px;
-}
-
-h2 {
-  margin: 1.5em 0;
-}
-
-a:any-link {
-  color: #99DAFF;
-}
-a:any-link:hover {
-  color: #4DBEFF;
-}
-a:visited {
-  color: #747AF6;
 }
 
 @font-face {

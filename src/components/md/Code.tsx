@@ -1,8 +1,6 @@
 import styled from 'styled-components'
 
 function Code({ ...props }) {
-  console.log('code props', props)
-
   return <code {...props} />
 }
 
