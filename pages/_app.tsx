@@ -9,7 +9,7 @@ import {
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import { useRouter } from 'next/router'
-import '../public/globals.css'
+import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { DocSearch } from '@docsearch/react'
 
@@ -22,11 +22,13 @@ import {
   SideCarContainer,
   SideNavContainer,
 } from '../src/components/PageGrid'
-import GlobalStyle from '../src/components/GlobalStyles'
+import GlobalStyles from '../src/components/GlobalStyles'
+import DocSearchStyles from '../src/components/DocSearchStyles'
 import MainContent from '../src/components/MainContent'
 import { DESCRIPTION, TITLE } from '../src/consts'
 
 import { PagePropsContext } from '../src/components/PagePropsContext'
+import navData from '../src/NavData'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [
@@ -70,7 +72,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
   const router = useRouter()
 
-  const title = markdoc?.frontmatter?.title || TITLE
+  const title = `Plural | ${markdoc?.frontmatter?.title}` || TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
 
   const toc = pageProps.markdoc?.content
@@ -83,7 +85,8 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         <StyledThemeProvider theme={styledTheme}>
           <CssBaseline />
           <PluralGlobalStyle />
-          <GlobalStyle />
+          <GlobalStyles />
+          <DocSearchStyles />
           <PagePropsContext.Provider value={pageProps}>
             <Head>
               <title>{title}</title>
@@ -102,6 +105,37 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               <meta
                 name="description"
                 content={description}
+              />
+              <link
+                rel="icon"
+                href="/favicon-57.png"
+                sizes="16x16"
+              />
+              <link
+                rel="icon"
+                href="/favicon-32.png"
+                sizes="32x32"
+              />
+
+              <link
+                rel="icon"
+                href="/favicon-128.png"
+                sizes="128x128"
+              />
+              <link
+                rel="icon"
+                href="/favicon-192.png"
+                sizes="192x192"
+              />
+              <link
+                rel="icon"
+                href="/favicon-192.png"
+                sizes="192x192"
+              />
+              <link
+                rel="icon"
+                href="/favicon-228.png"
+                sizes="228x228"
               />
               <link
                 rel="shortcut icon"
@@ -143,7 +177,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
             <Page>
               <PageGrid>
                 <SideNavContainer>
-                  <SideNav />
+                  <SideNav navData={navData} />
                 </SideNavContainer>
                 <ContentContainer>
                   <MainContent Component={Component} />
