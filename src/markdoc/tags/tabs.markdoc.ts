@@ -8,7 +8,6 @@ export const tabs = {
   children: ['tab'],
   attributes: {},
   transform(node, config) {
-    console.log('tab node', node)
     const titles = node
       .transformChildren(config)
       .filter(child => child && child.name === 'Tab')
