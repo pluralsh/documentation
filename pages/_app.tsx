@@ -1,4 +1,3 @@
-import React from 'react'
 import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
@@ -14,20 +13,20 @@ import '../public/globals.css'
 import type { AppProps } from 'next/app'
 import { DocSearch } from '@docsearch/react'
 
-import { SideNav } from '../components/SideNav'
-import { TableOfContents } from '../components/TableOfContents'
-import { TopNav } from '../components/TopNav'
+import { SideNav } from '../src/components/SideNav'
+import { TableOfContents } from '../src/components/TableOfContents'
+import { TopNav } from '../src/components/TopNav'
 import {
   ContentContainer,
   PageGrid,
   SideCarContainer,
   SideNavContainer,
-} from '../components/PageGrid'
-import GlobalStyle from '../components/DocSearchStyle'
-import MainContent from '../components/MainContent'
-import { DESCRIPTION, TITLE } from '../consts'
+} from '../src/components/PageGrid'
+import GlobalStyle from '../src/components/GlobalStyles'
+import MainContent from '../src/components/MainContent'
+import { DESCRIPTION, TITLE } from '../src/consts'
 
-import { PagePropsContext } from '../components/PagePropsContext'
+import { PagePropsContext } from '../src/components/PagePropsContext'
 
 const honorableTheme = mergeTheme(theme, {
   // global: [
