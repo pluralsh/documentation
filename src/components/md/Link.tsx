@@ -1,6 +1,6 @@
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ComponentProps } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { isRelativeUrl, removeTrailingSlashes } from 'utils/text'
 
@@ -14,7 +14,14 @@ const stripMdExtension = url => {
   return url
 }
 
-function Link({ href, children, ...props }: ComponentProps<typeof NextLink>) {
+function Link({
+  href,
+  children,
+  ...props
+}: {
+  href: string
+  children?: ReactNode
+}) {
   const router = useRouter()
 
   href = stripMdExtension(href)
@@ -24,7 +31,14 @@ function Link({ href, children, ...props }: ComponentProps<typeof NextLink>) {
 
   return (
     <NextLink href={href}>
-      <a {...props}>{children}</a>
+      <a
+        {...props}
+        {...(isExternalUrl(href)
+          ? { target: '_blank', rel: 'nofollow noopener' }
+          : {})}
+      >
+        {children}
+      </a>
     </NextLink>
   )
 }
