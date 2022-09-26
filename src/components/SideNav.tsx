@@ -20,7 +20,7 @@ import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 
 export type NavItem = {
-  title: string
+  title?: string
   href?: string
   icon?: ReactElement
   sections?: NavItem[]
@@ -261,13 +261,17 @@ function SubSection({
 
   const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
   const prevPathname = usePrevious(pathname)
-  const isSelected = useMemo(() => pathname === removeTrailingSlashes(href), [pathname, href])
+  const isSelected = useMemo(() => pathname === removeTrailingSlashes(href),
+    [pathname, href])
 
   useEffect(() => {
-    if (prevPathname !== pathname && isSelected) {
+    if (
+      prevPathname !== pathname
+      && isPathnameInSections(pathname, [{ href, sections }])
+    ) {
       setIsOpen(true)
     }
-  }, [prevPathname, pathname, isSelected])
+  }, [prevPathname, pathname, isSelected, href, sections])
 
   const expand = useSpring({
     height: isOpen ? `${height}px` : '0px',
