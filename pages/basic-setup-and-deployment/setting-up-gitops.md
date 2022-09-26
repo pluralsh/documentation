@@ -7,7 +7,7 @@ description: Configuring your version control management to work with Plural.
 
 Plural defines all of your infrastructure as code, using Helm, Terraform, and YAML files to denote what is being deployed into your cloud provider or on-prem environment. To manage versioning safely, we use a GitOps practice that requires you to store these files in their own Git repository.&#x20;
 
-If you are using the [**Plural Cloud Shell**](https://app.plural.sh/shell), we handle setting this up for you.
+If you are using the **[Plural Cloud Shell](https://app.plural.sh/shell)**, we handle setting this up for you.
 
 {% hint style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
