@@ -8,6 +8,7 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from 'react'
 import Link from 'next/link'
@@ -18,6 +19,7 @@ import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
+import { useInViewRef, useMergeRefs } from 'rooks'
 
 export type NavItem = {
   title?: string
@@ -35,8 +37,12 @@ export type SideNavProps = {
   navData: NavData
 }
 
-const NavContext = createContext<{ optimisticPathname: null | string }>({
+const NavContext = createContext<{
+  optimisticPathname: null | string
+  scrollRef: MutableRefObject<HTMLDivElement | null>
+}>({
   optimisticPathname: null,
+  scrollRef: { current: null },
 })
 
 const LinkA = styled.a(({ theme }) => ({
@@ -130,11 +136,25 @@ const NavLink = styled(({
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
   const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
   const isSelected = useMemo(() => pathname === href, [pathname, href])
+  const wasSelected = usePrevious(isSelected)
+  const [inViewRef, isInView] = useInViewRef(undefined, { threshold: [1, 1] })
+  const eltRef = useRef<HTMLLIElement>(null)
+  const ref = useMergeRefs(inViewRef, eltRef)
+
+  useEffect(() => {
+    if (isSelected && !wasSelected && eltRef?.current && !isInView) {
+      eltRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    }
+  }, [isInView, isSelected, wasSelected])
 
   return (
-    <li className={classNames(className, { isSelected })}>
+    <li
+      ref={ref}
+      className={classNames(className, { isSelected })}
+    >
       <LinkBase
         icon={icon}
+        ref={ref}
         {...props}
       />
       {isSubSection && (
@@ -321,21 +341,41 @@ function SubSection({
 }
 
 const NavWrap = styled.nav(({ theme }) => ({
-  // layout,
   position: 'sticky',
-  top: 'var(--top-nav-height)',
   height: 'calc(100vh - var(--top-nav-height))',
-  overflowY: 'auto',
-  paddingBottom: theme.spacing.xlarge,
-  // style
-  backgroundColor: theme.colors['fill-one'],
-  borderRight: theme.borders['fill-one'],
+  top: 'var(--top-nav-height)',
+  '&::before': {
+    content: '""',
+    position: 'absolute',
+    display: 'block',
+    left: -9999,
+    top: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: theme.colors['fill-one'],
+  },
+
+  '.navInner': {
+    // layout,
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+    overflowY: 'auto',
+    paddingBottom: theme.spacing.xlarge,
+    // style
+    backgroundColor: theme.colors['fill-one'],
+    borderRight: theme.borders['fill-one'],
+  },
 }))
 
 export function SideNav({ navData, ...props }: SideNavProps) {
   const router = useRouter()
   const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
+  const scrollRef = useRef<HTMLDivElement>(null)
   const contextValue = useMemo(() => ({
+    scrollRef,
     optimisticPathname:
         optimisticPathname === null ? router.pathname : optimisticPathname,
   }),
@@ -369,14 +409,19 @@ export function SideNav({ navData, ...props }: SideNavProps) {
   return (
     <NavContext.Provider value={contextValue}>
       <NavWrap {...props}>
-        {navData.map(({ title, sections }) => (
-          <TopSection
-            title={title}
-            key={title}
-          >
-            <SubSectionsList sections={sections} />
-          </TopSection>
-        ))}
+        <div
+          className="navInner"
+          ref={scrollRef}
+        >
+          {navData.map(({ title, sections }) => (
+            <TopSection
+              title={title}
+              key={title}
+            >
+              <SubSectionsList sections={sections} />
+            </TopSection>
+          ))}
+        </div>
       </NavWrap>
     </NavContext.Provider>
   )
