@@ -33,6 +33,7 @@
     "react-embed": "3.6.0",
     "react-spring": "9.5.4",
     "react-use-measure": "2.1.1",
+    "rooks": "7.4.0",
     "styled-components": "5.3.5"
   },
   "devDependencies": {
