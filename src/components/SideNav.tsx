@@ -1,9 +1,12 @@
 import React, {
   ComponentProps,
+  MutableRefObject,
   ReactElement,
   createContext,
+  forwardRef,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
 } from 'react'
@@ -11,7 +14,7 @@ import Link from 'next/link'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import { removeTrailingSlashes } from 'utils/text'
-import { CaretRightIcon } from 'pluralsh-design-system'
+import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
@@ -32,19 +35,9 @@ export type SideNavProps = {
   navData: NavData
 }
 
-const SubSectionContext = createContext({ setActiveLink: () => {} })
-
-const LinkList = styled.ul<{ $indentLevel: number }>(({ theme, $indentLevel }) => ({
-  margin: 0,
-  padding: 0,
-  listStyle: 'none',
-  ...($indentLevel
-    ? {
-      paddingLeft:
-            $indentLevel >= 2 ? theme.spacing.xsmall : theme.spacing.medium,
-    }
-    : {}),
-}))
+const NavContext = createContext<{ optimisticPathname: null | string }>({
+  optimisticPathname: null,
+})
 
 const LinkA = styled.a(({ theme }) => ({
   display: 'flex',
@@ -134,16 +127,9 @@ const NavLink = styled(({
     icon?: ReactElement
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
-  const router = useRouter()
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
-  const pathname = useMemo(() => removeTrailingSlashes(router.pathname),
-    [router.pathname])
+  const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
   const isSelected = useMemo(() => pathname === href, [pathname, href])
-  const subSectionContext = useContext(SubSectionContext)
-
-  if (isSelected) {
-    subSectionContext.setActiveLink()
-  }
 
   return (
     <li className={classNames(className, { isSelected })}>
@@ -203,28 +189,89 @@ const TopSection = styled(({ title, children, ...props }) => (
   },
 }))
 
+function isPathnameInSections(routerPathname,
+  sections: NavItem[] | undefined,
+  depth = 0) {
+  routerPathname = removeTrailingSlashes(routerPathname)
+  for (const section of sections || []) {
+    if (routerPathname === removeTrailingSlashes(section.href)) {
+      return true
+    }
+    if (isPathnameInSections(routerPathname, section.sections, depth + 1)) {
+      return true
+    }
+  }
+
+  return false
+}
+
+const SubSectionsList = styled(forwardRef<
+    HTMLUListElement,
+    { sections: NavItem[]; indentLevel?: number; className?: string }
+  >(({ className, sections, indentLevel = 0 }, ref) => {
+    const router = useRouter()
+
+    return (
+      <ul
+        ref={ref}
+        className={className}
+      >
+        {sections.map(subSection => {
+          const defaultOpen = isPathnameInSections(router.pathname, [
+            subSection,
+          ])
+
+          return (
+            <SubSection
+              key={`${subSection.href || ''}-${subSection.title || ''}`}
+              defaultOpen={defaultOpen}
+              {...subSection}
+              indentLevel={indentLevel + 1}
+            />
+          )
+        })}
+      </ul>
+    )
+  }))(({ theme, indentLevel }) => ({
+  margin: 0,
+  padding: 0,
+  listStyle: 'none',
+  ...(indentLevel
+    ? {
+      paddingLeft:
+          indentLevel >= 2 ? theme.spacing.xsmall : theme.spacing.medium,
+    }
+    : {}),
+}))
+
 function SubSection({
   title,
   href,
   sections,
   icon,
   indentLevel = 1,
-}: NavItem & { indentLevel?: number }) {
-  const [_isActiveSection, setIsActiveSection] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
-  const contextValue = useMemo(() => ({
-    setActiveLink: () => {
-      setIsActiveSection(true)
-    },
-  }),
-  [])
+  defaultOpen = false,
+}: NavItem & { indentLevel?: number; defaultOpen: boolean }) {
+  const [isOpen, setIsOpen] = useState(defaultOpen)
   const toggleOpen = useCallback(() => {
     setIsOpen(!isOpen)
   }, [isOpen])
   const [measureRef, { height }] = useMeasure()
+  const prevHeight = usePrevious(height)
+
+  const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
+  const prevPathname = usePrevious(pathname)
+  const isSelected = useMemo(() => pathname === removeTrailingSlashes(href), [pathname, href])
+
+  useEffect(() => {
+    if (prevPathname !== pathname && isSelected) {
+      setIsOpen(true)
+    }
+  }, [prevPathname, pathname, isSelected])
 
   const expand = useSpring({
     height: isOpen ? `${height}px` : '0px',
+    immediate: !prevHeight,
     config: isOpen
       ? {
         mass: 0.6,
@@ -240,7 +287,7 @@ function SubSection({
   })
 
   return (
-    <SubSectionContext.Provider value={contextValue}>
+    <>
       <NavLink
         isSubSection={!!sections}
         href={href}
@@ -251,21 +298,21 @@ function SubSection({
         {title}
       </NavLink>
       {sections && (
-        <animated.div style={{ ...expand, overflow: 'hidden' }}>
-          <LinkList
-            ref={measureRef}
-            $indentLevel={indentLevel}
-          >
-            {sections.map(subSection => (
-              <SubSection
-                {...subSection}
-                indentLevel={2}
-              />
-            ))}
-          </LinkList>
+        <animated.div
+          className="sturf"
+          style={{
+            ...(prevHeight ? expand : { height: isOpen ? 'auto' : '0' }),
+            overflow: 'hidden',
+          }}
+        >
+          <SubSectionsList
+            sections={sections}
+            ref={measureRef as unknown as MutableRefObject<any>}
+            indentLevel={indentLevel}
+          />
         </animated.div>
       )}
-    </SubSectionContext.Provider>
+    </>
   )
 }
 
@@ -275,37 +322,58 @@ const NavWrap = styled.nav(({ theme }) => ({
   top: 'var(--top-nav-height)',
   height: 'calc(100vh - var(--top-nav-height))',
   overflowY: 'auto',
-  // flex: '0 0 auto',
   paddingBottom: theme.spacing.xlarge,
-
   // style
   backgroundColor: theme.colors['fill-one'],
   borderRight: theme.borders['fill-one'],
-  // ...theme.partials.marketingText.body2,
-
-  // borderRight: theme,
 }))
 
 export function SideNav({ navData, ...props }: SideNavProps) {
   const router = useRouter()
+  const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
+  const contextValue = useMemo(() => ({
+    optimisticPathname:
+        optimisticPathname === null ? router.pathname : optimisticPathname,
+  }),
+  [optimisticPathname, router.pathname])
 
-  console.log('router', router)
+  useEffect(() => {
+    if (!router?.events?.on) {
+      return
+    }
+    const handleRouteChangeStart = url => {
+      setOptimisticPathname(url)
+    }
+    const handleRouteChangeComplete = _url => {
+      setOptimisticPathname(null)
+    }
+    const handleRouteChangeError = (_err, _url) => {
+      setOptimisticPathname(null)
+    }
+
+    router.events.on('routeChangeStart', handleRouteChangeStart)
+    router.events.on('routeChangeComplete', handleRouteChangeComplete)
+    router.events.on('routeChangeError', handleRouteChangeError)
+
+    return () => {
+      router.events.off('routeChangeStart', handleRouteChangeStart)
+      router.events.off('routeChangeComplete', handleRouteChangeComplete)
+      router.events.off('routeChangeError', handleRouteChangeError)
+    }
+  }, [router.events])
 
   return (
-    <NavWrap {...props}>
-      {navData.map(({ title, sections }) => (
-        <TopSection
-          title={title}
-          key={title}
-        >
-          {sections.map(subSection => (
-            <SubSection
-              key={`${subSection.href || ''}-${subSection.title || ''}`}
-              {...subSection}
-            />
-          ))}
-        </TopSection>
-      ))}
-    </NavWrap>
+    <NavContext.Provider value={contextValue}>
+      <NavWrap {...props}>
+        {navData.map(({ title, sections }) => (
+          <TopSection
+            title={title}
+            key={title}
+          >
+            <SubSectionsList sections={sections} />
+          </TopSection>
+        ))}
+      </NavWrap>
+    </NavContext.Provider>
   )
 }
