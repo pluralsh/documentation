@@ -6,7 +6,7 @@ import { DESCRIPTION, TITLE } from '../consts'
 import { PagePropsContext } from './PagePropsContext'
 
 const ContentWrapper = styled.div(({ theme }) => ({
-  marginTop: theme.spacing.xlarge,
+  marginTop: theme.spacing.large,
 }))
 
 const PageHeader = styled.div(({ theme }) => ({
@@ -15,6 +15,7 @@ const PageHeader = styled.div(({ theme }) => ({
 
 const Title = styled.h1(({ theme }) => ({
   ...theme.partials.marketingText.hero2,
+  margin: 0,
   marginBottom: theme.spacing.small,
 }))
 
