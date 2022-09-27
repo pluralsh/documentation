@@ -40,10 +40,8 @@ export const ContentContainer = styled.main(({ theme }) => ({
   marginRight: theme.spacing.large,
   marginLeft: theme.spacing.large,
   paddingTop: theme.spacing.xlarge,
-  [mqs.twoColumn]: {
-    maxWidth: 896,
-  },
   [mqs.threeColumnLoose]: {
+    maxWidth: 896,
     marginRight: theme.spacing.xlarge,
     marginLeft: theme.spacing.xlarge,
   },
