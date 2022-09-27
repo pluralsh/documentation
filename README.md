@@ -26,13 +26,13 @@ Some key features of the platform include:
 
 This is the current standard deployment method. Click below for a quickstart to managing configuration locally.
 
-* [Quickstart: Using the Plural CLI on your Machine](getting-started/getting-started.md)
+* [Quickstart: Using the Plural CLI on your Machine](/getting-started/getting-started)
 
 ### Plural Cloud Shell
 
 We have created a Cloud Shell with all of the tools and dependencies needed to run Plural. This is available [here](https://app.plural.sh/shell) to try out. If you want to **try out Plural without entering cloud credentials**, we offer a Kubernetes deployment and Cloud Shell deployment on the house that lasts for 6 hours.
 
-* [Using our in-browser Cloud Shell](basic-setup-and-deployment/cloud-shell-quickstart.md)
+* [Using our in-browser Cloud Shell](/basic-setup-and-deployment/cloud-shell-quickstart)
 
 If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.gg/pluralsh)
 

@@ -7,14 +7,14 @@ description: >-
 
 ## Overview
 
-This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](../basic-setup-and-deployment/cloud-shell-quickstart.md). If you'd prefer a video walkthrough, check out our video tutorial [here](video-cli-quickstart.md).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/basic-setup-and-deployment/cloud-shell-quickstart). If you'd prefer a video walkthrough, check out our video tutorial [here](/getting-started/video-cli-quickstart).
 
 ## Prerequisites
 
 You will need the following things to successfully get up and running with Plural:
 
-* **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](../reference/configuring-cloud-provider.md) to make sure it's set up correctly.
-* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](../reference/configuring-cloud-provider.md).
+* **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
+* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
 * **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
 
 ## Install Plural CLI
@@ -30,7 +30,7 @@ brew install pluralsh/plural/plural
 ```
 
 {% hint style="warning" %}
-Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% /hint %}
 {% /tab %}
 
@@ -59,7 +59,7 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
 
 {% hint style="warning" %}
-Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](../reference/configuring-cloud-provider.md). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% /hint %}
 {% /tab %}
 

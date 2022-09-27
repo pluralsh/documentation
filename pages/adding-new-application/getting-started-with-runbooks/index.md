@@ -12,8 +12,8 @@ You can create a runbook just for your own use in your Plural installation, or y
 
 {% tabs %}
 {% tab title="Create Runbook For Your Personal Installation" %}
-1. After you have deployed your application with Plural, go to `my-plural-repo/<app-name>/helm/<app-name>/templates` and create a file called `runbooks.yaml`. For more information about how to write a `runbooks.yaml` please refer to the guide [here](runbook-yaml.md).
-2. Go to `my-plural-repo/<app-name>/helm/<app-name>/runbooks` and create an  `xml` file for the runbook display. For more information on how to write `xml` for the runbook, please refer to the guide [here](runbook-xml.md).
+1. After you have deployed your application with Plural, go to `my-plural-repo/<app-name>/helm/<app-name>/templates` and create a file called `runbooks.yaml`. For more information about how to write a `runbooks.yaml` please refer to the guide [here](/adding-new-application/getting-started-with-runbooks/runbook-yaml).
+2. Go to `my-plural-repo/<app-name>/helm/<app-name>/runbooks` and create an  `xml` file for the runbook display. For more information on how to write `xml` for the runbook, please refer to the guide [here](/adding-new-application/getting-started-with-runbooks/runbook-xml).
 {% /tab %}
 
 {% tab title="Create Runbook for Publication on Plural Platform" %}
@@ -27,7 +27,7 @@ You can create a runbook just for your own use in your Plural installation, or y
 {% /tab %}
 {% /tabs %}
 
-You can access the runbooks through the Plural admin console; i.e. you must first [install the Plural admin console](../../basic-setup-and-deployment/admin-console.md) in order to use the runbooks.
+You can access the runbooks through the Plural admin console; i.e. you must first [install the Plural admin console](/basic-setup-and-deployment/admin-console) in order to use the runbooks.
 
 
 

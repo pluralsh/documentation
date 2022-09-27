@@ -43,7 +43,7 @@ subnet_prefixes = ["your.cidr.pref"]
 {% /tabs %}
 
 {% hint style="warning" %}
-💡 Note that updating these will likely cause the VPC to be replaced, which will recreate your cluster. We recommend that you [destroy your cluster](../basic-setup-and-deployment/uninstall.md) before applying network config modifications to it.
+💡 Note that updating these will likely cause the VPC to be replaced, which will recreate your cluster. We recommend that you [destroy your cluster](/basic-setup-and-deployment/uninstall) before applying network config modifications to it.
 {% /hint %}
 
 ## Configuring VPC Peering

@@ -12,7 +12,7 @@ The plural admin console is a web application that serves as a control panel for
 * serves as a built-in k8s dashboard for all plural apps in the cluster, along with providing app-level health checking
 * is the touchpoint at which incidents can be filed with the owner of an application
 
-The console is not a strict dependency, but it is highly recommended to install it. It can be installed and deployed like any other application on Plural. For more detailed instructions, please refer to [this guide](admin-console.md).
+The console is not a strict dependency, but it is highly recommended to install it. It can be installed and deployed like any other application on Plural.
 
 {% hint style="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
@@ -59,7 +59,7 @@ Then once you've found an eligible bundle to install, do:
 plural bundle install console <bundle-name>
 ```
 
-You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](../repositories/console.md).
+You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](/repositories/console).
 
 Once the bundle has installed, run:
 
