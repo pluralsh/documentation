@@ -66,18 +66,15 @@ type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
   icon?: ReactElement
 }
 
-function LinkBase({
-  className,
-  children,
-  icon,
-  href,
-}: // ...props
-LinkBaseProps) {
+const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
+  className, children, icon, href,
+}, ref) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
   const content = (
     <LinkA
       className={className}
       tabIndex={keyboardNavigable ? 0 : -1}
+      ref={ref}
     >
       {icon && icon}
       {children}
@@ -96,7 +93,7 @@ LinkBaseProps) {
   }
 
   return content
-}
+})
 
 const CaretButton = styled(({ isOpen = false, className, ...props }) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
@@ -164,12 +161,18 @@ const NavLink = styled(({
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
-  const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
-  const isSelected = useMemo(() => pathname === href, [pathname, href])
-  const wasSelected = usePrevious(isSelected)
+  const optimisticPathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
+  const isSelectedOptimistic = useMemo(() => optimisticPathname === href, [optimisticPathname, href])
   const [inViewRef, isInView] = useInViewRef(undefined, { threshold: [1, 1] })
   const eltRef = useRef<HTMLLIElement>(null)
   const ref = useMergeRefs(inViewRef, eltRef)
+
+  // Scroll into view gets interrupted by page transitions, so we only start
+  // scrolling when the actual pathname changes instead of using optimisticPathname
+  // like everything else
+  const pathname = removeTrailingSlashes(useRouter().pathname)
+  const isSelected = useMemo(() => pathname === href, [pathname, href])
+  const wasSelected = usePrevious(isSelected)
 
   useEffect(() => {
     if (isSelected && !wasSelected && eltRef?.current && !isInView) {
@@ -181,8 +184,8 @@ const NavLink = styled(({
     <li
       ref={ref}
       className={classNames(className, {
-        selected: isSelected,
-        selectedSecondary: childIsSelected && !isSelected,
+        selected: isSelectedOptimistic,
+        selectedSecondary: childIsSelected && !isSelectedOptimistic,
       })}
     >
       <LinkBase
