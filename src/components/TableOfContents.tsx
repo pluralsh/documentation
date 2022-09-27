@@ -73,6 +73,9 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
       ? `3px solid ${theme.colors['border-primary']}`
       : 'none',
   },
+  '&:focus, &:focus-visible': {
+    boxShadow: 'none',
+  },
   '&:focus-visible::after': {
     ...theme.partials.focus.insetAbsolute,
     zIndex: 1,
