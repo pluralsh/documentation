@@ -65,6 +65,11 @@ const LinkA = styled.a(({ theme }) => ({
     outline: 'none',
     boxShadow: 'none',
   },
+  '&:focus-visible::after': {
+    borderStartStartRadius: theme.borderRadiuses.medium,
+    borderEndStartRadius: theme.borderRadiuses.medium,
+    ...theme.partials.focus.insetAbsolute,
+  },
 }))
 
 type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
@@ -206,6 +211,7 @@ const NavLink = styled(({
 })(({ theme }) => ({
   display: 'flex',
   flexDirection: 'row',
+  position: 'relative',
   gap: theme.spacing.medium,
   alignItems: 'stretch',
   justifyContent: 'space-between',
@@ -215,12 +221,7 @@ const NavLink = styled(({
 
   borderStartStartRadius: theme.borderRadiuses.medium,
   borderEndStartRadius: theme.borderRadiuses.medium,
-  position: 'relative',
-  '&:focus-within::after': {
-    borderStartStartRadius: theme.borderRadiuses.medium,
-    borderEndStartRadius: theme.borderRadiuses.medium,
-    ...theme.partials.focus.insetAbsolute,
-  },
+
   '&:hover': {
     backgroundColor: theme.colors['fill-one-hover'],
   },
