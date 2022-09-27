@@ -45,6 +45,12 @@ const NavContext = createContext<{
   scrollRef: { current: null },
 })
 
+const KeyboardNavContext = createContext<{
+  keyboardNavigable: boolean
+}>({
+  keyboardNavigable: true,
+})
+
 const LinkA = styled.a(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
@@ -53,9 +59,11 @@ const LinkA = styled.a(({ theme }) => ({
   margin: 0,
   padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
   ...theme.partials.marketingText.body2,
+  textDecoration: 'none',
   color: theme.colors['text-light'],
-  '&:hover': {
-    color: theme.colors.text,
+  '&:focus, &:focus-visible': {
+    outline: 'none',
+    boxShadow: 'none',
   },
 }))
 
@@ -70,29 +78,46 @@ function LinkBase({
   href,
 }: // ...props
 LinkBaseProps) {
+  const { keyboardNavigable } = useContext(KeyboardNavContext)
   const content = (
-    <LinkA className={className}>
+    <LinkA
+      className={className}
+      tabIndex={keyboardNavigable ? 0 : -1}
+    >
       {icon && icon}
       {children}
     </LinkA>
   )
 
   if (href) {
-    return <Link href={href}>{content}</Link>
+    return (
+      <Link
+        href={href}
+        passHref
+      >
+        {content}
+      </Link>
+    )
   }
 
   return content
 }
 
-const CaretButton = styled(({ isOpen: _isOpen = false, className, ...props }) => (
-  <button
-    type="button"
-    className={className}
-    {...props}
-  >
-    <CaretRightIcon className="icon" />
-  </button>
-))(({ theme, isOpen }) => ({
+const CaretButton = styled(({ isOpen = false, className, ...props }) => {
+  const { keyboardNavigable } = useContext(KeyboardNavContext)
+
+  return (
+    <button
+      tabIndex={keyboardNavigable ? 0 : -1}
+      type="button"
+      className={className}
+      aria-label={isOpen ? 'Collapse' : 'Expand'}
+      {...props}
+    >
+      <CaretRightIcon className="icon" />
+    </button>
+  )
+})(({ theme, isOpen }) => ({
   ...theme.partials.reset.button,
   display: 'flex',
   alignItems: 'center',
@@ -101,8 +126,16 @@ const CaretButton = styled(({ isOpen: _isOpen = false, className, ...props }) =>
   paddingLeft: theme.spacing.medium,
   cursor: 'pointer',
   color: theme.colors['text-light'],
-  '&:hover': theme.colors.text,
   transition: 'color 0.1s ease',
+  position: 'relative',
+  '&:focus-visible::before': {
+    ...theme.partials.focus.insetAbsolute,
+    borderRadius: theme.borderRadiuses.medium,
+    top: theme.spacing.xsmall,
+    left: theme.spacing.xsmall,
+    right: theme.spacing.xsmall + theme.spacing.xsmall,
+    bottom: theme.spacing.xsmall,
+  },
   ...(isOpen
     ? {
       '.icon': {
@@ -124,12 +157,14 @@ const NavLink = styled(({
   className,
   isSubSection = false,
   isOpen = false,
+  childIsSelected = false,
   onToggleOpen,
   icon,
   ...props
 }: {
     isSubSection?: boolean
     isOpen?: boolean
+    childIsSelected: boolean
     icon?: ReactElement
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
@@ -150,7 +185,10 @@ const NavLink = styled(({
   return (
     <li
       ref={ref}
-      className={classNames(className, { isSelected })}
+      className={classNames(className, {
+        selected: isSelected,
+        selectedSecondary: childIsSelected && !isSelected,
+      })}
     >
       <LinkBase
         icon={icon}
@@ -177,10 +215,20 @@ const NavLink = styled(({
 
   borderStartStartRadius: theme.borderRadiuses.medium,
   borderEndStartRadius: theme.borderRadiuses.medium,
+  position: 'relative',
+  '&:focus-within::after': {
+    borderStartStartRadius: theme.borderRadiuses.medium,
+    borderEndStartRadius: theme.borderRadiuses.medium,
+    ...theme.partials.focus.insetAbsolute,
+  },
   '&:hover': {
     backgroundColor: theme.colors['fill-one-hover'],
   },
-  '&.isSelected': {
+  '&.selectedSecondary': {
+    backgroundColor: theme.colors['fill-one-selected'],
+    '&:hover': { backgroundColor: theme.colors['fill-one-selected'] },
+  },
+  '&.selected': {
     backgroundColor: theme.colors['action-primary'],
     '&:hover': { backgroundColor: theme.colors['action-primary-hover'] },
   },
@@ -229,7 +277,7 @@ const SubSectionsList = styled(forwardRef<
     HTMLUListElement,
     { sections: NavItem[]; indentLevel?: number; className?: string }
   >(({ className, sections, indentLevel = 0 }, ref) => {
-    const router = useRouter()
+    const pathname = useContext(NavContext).optimisticPathname
 
     return (
       <ul
@@ -237,9 +285,7 @@ const SubSectionsList = styled(forwardRef<
         className={className}
       >
         {sections.map(subSection => {
-          const defaultOpen = isPathnameInSections(router.pathname, [
-            subSection,
-          ])
+          const defaultOpen = isPathnameInSections(pathname, [subSection])
 
           return (
             <SubSection
@@ -310,6 +356,8 @@ function SubSection({
       },
   })
 
+  const contextValue = useMemo(() => ({ keyboardNavigable: isOpen }), [isOpen])
+
   return (
     <>
       <NavLink
@@ -317,6 +365,7 @@ function SubSection({
         href={href}
         icon={icon}
         isOpen={isOpen}
+        childIsSelected={defaultOpen}
         onToggleOpen={toggleOpen}
       >
         {title}
@@ -329,11 +378,13 @@ function SubSection({
             overflow: 'hidden',
           }}
         >
-          <SubSectionsList
-            sections={sections}
-            ref={measureRef as unknown as MutableRefObject<any>}
-            indentLevel={indentLevel}
-          />
+          <KeyboardNavContext.Provider value={contextValue}>
+            <SubSectionsList
+              sections={sections}
+              ref={measureRef as unknown as MutableRefObject<any>}
+              indentLevel={indentLevel}
+            />
+          </KeyboardNavContext.Provider>
         </animated.div>
       )}
     </>
