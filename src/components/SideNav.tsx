@@ -21,17 +21,7 @@ import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import { useInViewRef, useMergeRefs } from 'rooks'
 
-export type NavItem = {
-  title?: string
-  href?: string
-  icon?: ReactElement
-  sections?: NavItem[]
-}
-
-export type NavData = {
-  title: string
-  sections: NavItem[]
-}[]
+import { NavData, NavItem } from '../NavData'
 
 export type SideNavProps = {
   navData: NavData
@@ -392,7 +382,7 @@ function SubSection({
   )
 }
 
-const NavWrap = styled.nav(({ theme }) => ({
+const Nav = styled.nav(({ theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
@@ -460,7 +450,10 @@ export function SideNav({ navData, ...props }: SideNavProps) {
 
   return (
     <NavContext.Provider value={contextValue}>
-      <NavWrap {...props}>
+      <Nav
+        aria-label="Main"
+        {...props}
+      >
         <div
           className="navInner"
           ref={scrollRef}
@@ -470,11 +463,11 @@ export function SideNav({ navData, ...props }: SideNavProps) {
               title={title}
               key={title}
             >
-              <SubSectionsList sections={sections} />
+              {sections && <SubSectionsList sections={sections} />}
             </TopSection>
           ))}
         </div>
-      </NavWrap>
+      </Nav>
     </NavContext.Provider>
   )
 }

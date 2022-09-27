@@ -1,4 +1,8 @@
 export function removeTrailingSlashes(str) {
+  if (typeof str !== 'string') {
+    return str
+  }
+
   return str.replace(/\/+$/, '')
 }
 

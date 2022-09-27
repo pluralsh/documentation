@@ -1,4 +1,3 @@
-import { NavData } from 'components/SideNav'
 import {
   CloudIcon,
   CraneIcon,
@@ -6,6 +5,16 @@ import {
   TerminalIcon,
   // RunBookIcon,
 } from 'pluralsh-design-system'
+import { ReactElement } from 'react'
+
+export type NavItem = {
+  title?: string
+  href?: string
+  icon?: ReactElement
+  sections?: NavItem[]
+}
+
+export type NavData = NavItem[]
 
 const data: NavData = [
   {

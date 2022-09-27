@@ -13,6 +13,8 @@ import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 import { DocSearch } from '@docsearch/react'
 
+import Breadcrumbs from 'components/Breadcrumbs'
+
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
 import { TopNav } from '../src/components/TopNav'
@@ -63,10 +65,8 @@ function collectHeadings(node, sections: any[] = []) {
   return sections
 }
 
-const Page = styled.div`
-  /* display: flex;
-  flex-grow: 1; */
-`
+const Page = styled.div(() => ({
+}))
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
@@ -180,6 +180,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                   <SideNav navData={navData} />
                 </SideNavContainer>
                 <ContentContainer>
+                  <Breadcrumbs />
                   <MainContent Component={Component} />
                 </ContentContainer>
                 <SideCarContainer>

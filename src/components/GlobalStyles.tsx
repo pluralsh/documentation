@@ -7,6 +7,12 @@ const mqs = {
   maxWidth: '@media screen and (min-width: 1588px)',
 }
 
+const fillAvailable = prop => ({
+  [`${prop} `]: '-webkit-fill-available',
+  [`${prop}  `]: '-moz-available',
+  [`${prop}   `]: '-fill-available',
+})
+
 const GlobalStyles = createGlobalStyle(({ theme }) => ({
   '::selection': {
     background: theme.colors['text-primary-accent'],
@@ -21,18 +27,22 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   ':root': {
     '--top-nav-height': '90px',
   },
+  html: {
+    ...fillAvailable('height'),
+  },
   body: {
     margin: 0,
     overflowX: 'hidden',
     overflowY: 'scroll',
     color: theme.colors.text,
     backgroundColor: theme.colors['fill-zero'],
+    ...fillAvailable('minHeight'),
   },
-
   '*': {
-    scrollMarginTop: `calc(var(--top-nav-height) + ${theme.spacing.medium})`,
+    scrollMarginTop: `calc(var(--top-nav-height) + ${theme.spacing.medium}px)`,
+    scrollPaddingTop: `calc(var(--top-nav-height) + ${theme.spacing.xlarge}px)`,
   },
 }))
 
 export default GlobalStyles
-export { mqs }
+export { mqs, fillAvailable }
