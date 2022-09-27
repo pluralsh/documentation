@@ -254,4 +254,4 @@ git commit -m "Integrate hasura changes"
 git push
 ```
 
-You may add @[**michaeljguarino**](https://github.com/michaeljguarino) as a reviewer on the PR.
+You may add **[@michaeljguarino](https://github.com/michaeljguarino)** as a reviewer on the PR.
