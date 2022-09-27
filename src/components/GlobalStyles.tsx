@@ -8,6 +8,10 @@ const mqs = {
 }
 
 const GlobalStyles = createGlobalStyle(({ theme }) => ({
+  '::selection': {
+    background: theme.colors['text-primary-accent'],
+    color: theme.colors['fill-one'],
+  },
   '*:focus': {
     outline: 'none',
   },
@@ -31,6 +35,4 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
 }))
 
 export default GlobalStyles
-export {
-  mqs,
-}
+export { mqs }
