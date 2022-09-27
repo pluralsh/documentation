@@ -1,5 +1,5 @@
 ---
-title: ☁ Cloud Provider CLI Setup
+title: Cloud Provider CLI Setup
 description: >-
   Make sure that your cloud provider CLI is properly set up before installing
   Plural.

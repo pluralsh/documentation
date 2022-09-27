@@ -1,5 +1,5 @@
 ---
-title: "📽 Video: Installing with CLI"
+title: "Video: Installing with CLI"
 description: A short video on installing applications on Plural with the CLI
 ---
 

@@ -11,7 +11,7 @@ const data: NavData = [
   {
     title: 'Getting Started',
     sections: [
-      { href: '/', title: '👋 Introduction' },
+      { href: '/', title: 'Introduction' },
       {
         href: '/getting-started/getting-started',
         icon: <RocketIcon />,
@@ -181,11 +181,11 @@ const data: NavData = [
     sections: [
       {
         href: '/reference/troubleshooting',
-        title: '🪛 Troubleshooting',
+        title: 'Troubleshooting',
       },
       {
         href: '/reference/operator-guides/',
-        title: '📚 Operator Guides',
+        title: 'Operator Guides',
         sections: [
           {
             href: '/reference/operator-guides/cloud-shell',
@@ -204,7 +204,7 @@ const data: NavData = [
       },
       {
         href: '/reference/workspaces/',
-        title: '🖥 Workspaces',
+        title: 'Workspaces',
         sections: [
           {
             href: '/reference/workspaces/workspace-structure',
@@ -214,7 +214,7 @@ const data: NavData = [
       },
       {
         href: '/reference/api/',
-        title: '🛠 Developer Tools / API',
+        title: 'Developer Tools / API',
         sections: [
           {
             href: '/reference/api/plural-api',
