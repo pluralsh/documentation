@@ -65,8 +65,7 @@ function collectHeadings(node, sections: any[] = []) {
   return sections
 }
 
-const Page = styled.div(() => ({
-}))
+const Page = styled.div(() => ({}))
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
@@ -108,7 +107,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               />
               <link
                 rel="icon"
-                href="/favicon-57.png"
+                href="/favicon-16.png"
                 sizes="16x16"
               />
               <link
@@ -116,7 +115,6 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 href="/favicon-32.png"
                 sizes="32x32"
               />
-
               <link
                 rel="icon"
                 href="/favicon-128.png"
@@ -124,18 +122,13 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               />
               <link
                 rel="icon"
-                href="/favicon-192.png"
-                sizes="192x192"
-              />
+                href="/favicon-180.png"
+                sizes="180x180"
+              />{' '}
               <link
                 rel="icon"
                 href="/favicon-192.png"
                 sizes="192x192"
-              />
-              <link
-                rel="icon"
-                href="/favicon-228.png"
-                sizes="228x228"
               />
               <link
                 rel="shortcut icon"
