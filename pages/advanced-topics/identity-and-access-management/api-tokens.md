@@ -19,6 +19,6 @@ to grab the token configured at login.
 
 Plural captures access logs for all token usage, including IP information, available by inspecting the token in the [access tokens page](https://app.plural.sh/me/edit/tokens).  You are also free to revoke a token at any time, although this might require you to rotate the keys used by your plural installations manually, so it's recommended to check the logs for that token before doing so to understand your exposure
 
-{% hint style="info" %}
+{% callout style="info" %}
 Revoking a token while an instance of the plural console is using it will prevent it from receiving upgrades, but once the token is rotated, it will pick back up and apply the upgrades as normal.
-{% /hint %}
+{% /callout %}

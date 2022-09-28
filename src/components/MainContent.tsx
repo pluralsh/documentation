@@ -1,8 +1,6 @@
 import { useContext } from 'react'
 import styled from 'styled-components'
 
-import { DESCRIPTION, TITLE } from '../consts'
-
 import Breadcrumbs from './Breadcrumbs'
 
 import { PagePropsContext } from './PagePropsContext'
@@ -34,10 +32,9 @@ const Description = styled.p(({ theme }) => ({
 export default function MainContent({ Component }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps
-  //   const router = useRouter()
 
-  const title = markdoc?.frontmatter?.title || TITLE
-  const description = markdoc?.frontmatter?.description || DESCRIPTION
+  const title = markdoc?.frontmatter?.title
+  const description = markdoc?.frontmatter?.description
 
   return (
     <>

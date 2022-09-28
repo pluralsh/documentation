@@ -66,7 +66,7 @@ const Page = styled.div(() => ({}))
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
 
-  const title = `Plural | ${markdoc?.frontmatter?.title}` || TITLE
+  const title = markdoc?.frontmatter?.title ? `Plural | ${markdoc?.frontmatter?.title}` : TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
 
   const toc = pageProps.markdoc?.content

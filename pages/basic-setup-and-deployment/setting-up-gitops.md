@@ -9,9 +9,9 @@ Plural defines all of your infrastructure as code, using Helm, Terraform, and YA
 
 If you are using the **[Plural Cloud Shell](https://app.plural.sh/shell)**, we handle setting this up for you.
 
-{% hint style="info" %}
+{% callout style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
-{% /hint %}
+{% /callout %}
 
 Plural currently supports the following version control providers:
 
