@@ -8,12 +8,8 @@ import {
 } from 'pluralsh-design-system'
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
-import { useRouter } from 'next/router'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { DocSearch } from '@docsearch/react'
-
-import Breadcrumbs from 'components/Breadcrumbs'
 
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
@@ -69,7 +65,6 @@ const Page = styled.div(() => ({}))
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
-  const router = useRouter()
 
   const title = `Plural | ${markdoc?.frontmatter?.title}` || TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
@@ -153,27 +148,13 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 crossOrigin=""
               />
             </Head>
-            <TopNav>
-              <DocSearch
-                appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-                apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-                placeholder="Search Plural docs"
-                navigator={{
-                  navigate: ({ itemUrl }) => {
-                    router.push(itemUrl)
-                  },
-                }}
-                getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
-              />
-            </TopNav>
+            <TopNav />
             <Page>
               <PageGrid>
                 <SideNavContainer>
                   <SideNav navData={navData} />
                 </SideNavContainer>
                 <ContentContainer>
-                  <Breadcrumbs />
                   <MainContent Component={Component} />
                 </ContentContainer>
                 <SideCarContainer>

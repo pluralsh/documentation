@@ -39,7 +39,6 @@ export const ContentContainer = styled.main(({ theme }) => ({
   flex: '1 1',
   marginRight: theme.spacing.large,
   marginLeft: theme.spacing.large,
-  paddingTop: theme.spacing.xlarge,
   [mqs.threeColumnLoose]: {
     maxWidth: 896,
     marginRight: theme.spacing.xlarge,

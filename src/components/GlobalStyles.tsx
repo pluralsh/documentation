@@ -2,6 +2,8 @@ import { createGlobalStyle } from 'styled-components'
 
 const mqs = {
   twoColumn: '@media screen and (min-width: 1000px)',
+  fullHeader: '@media screen and (min-width: 1000px)',
+  fullHeaderLoose: '@media screen and (min-width: 1080px)',
   threeColumn: '@media screen and (min-width: 1280px)',
   threeColumnLoose: '@media screen and (min-width: 1280px)',
   maxWidth: '@media screen and (min-width: 1588px)',
@@ -25,7 +27,7 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     ...theme.partials.focus.default,
   },
   ':root': {
-    '--top-nav-height': '90px',
+    '--top-nav-height': '72px',
   },
   html: {
     ...fillAvailable('height'),
@@ -41,6 +43,11 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   '*': {
     scrollMarginTop: `calc(var(--top-nav-height) + ${theme.spacing.medium}px)`,
     scrollPaddingTop: `calc(var(--top-nav-height) + ${theme.spacing.xlarge}px)`,
+  },
+  [mqs.twoColumn]: {
+    ':root': {
+      '--top-nav-height': '80px',
+    },
   },
 }))
 

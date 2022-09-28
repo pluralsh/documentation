@@ -69,7 +69,7 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
 
   /* Overrides */
   '.DocSearch': {
-    ...theme.partials.text.body2,
+    ...theme.partials.marketingText.body2,
   },
   '.DocSearch-Button-Keys, .DocSearch-Commands, .DocSearch-Button-Placeholder':
     {
@@ -80,7 +80,7 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     boxShadow: theme.boxShadows.focused,
   },
   '.DocSearch-Hit-source': {
-    ...theme.partials.text.subtitle2,
+    ...theme.partials.marketingText.subtitle2,
     color: theme.colors.text,
     background: 'transparent',
     marginBottom: theme.spacing.xsmall,
@@ -95,18 +95,56 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     marginLeft: theme.spacing.medium,
   },
   '.DocSearch-Hit-title': {
-    ...theme.partials.text.body1Bold,
+    ...theme.partials.marketingText.body1Bold,
     color: theme.colors['text-light'],
   },
   '.DocSearch-Hit-path': {
-    ...theme.partials.text.body2,
+    ...theme.partials.marketingText.body2,
     color: theme.colors['text-xlight'],
   },
   '.DocSearch-Modal': {
     border: theme.borders['fill-one'],
   },
+  '.DocSearch-Form': {
+    paddingLeft: theme.spacing.medium,
+    paddingRight: theme.spacing.medium,
+  },
   '.DocSearch-Input': {
-    ...theme.partials.text.body1,
+    ...theme.partials.marketingText.body1,
+    paddingLeft: theme.spacing.small,
+
+  },
+  '.DocSearch-Button': {
+    borderRadius: theme.borderRadiuses.medium,
+    border: theme.borders.default,
+    width: 40,
+    height: 40,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: 'transparent',
+    '&:hover': {
+      backgroundColor: theme.colors['fill-zero-hover'],
+      outline: 'none',
+      boxShadow: 'none',
+    },
+    '&:focus, &:focus-visible': {
+      outline: 'none',
+      boxShadow: 'none',
+    },
+    '&:focus-visible': {
+      ...theme.partials.focus.default,
+    },
+  },
+  '.DocSearch-Button-Container, .DocSearch-MagnifierLabel': {
+    display: 'block',
+    width: 16,
+    height: 16,
+    backgroundImage: 'url(/images/search-icon.svg)',
+    backgroundSize: 'contain',
+  },
+  '.DocSearch-Search-Icon': {
+    display: 'none',
   },
 }))
 
