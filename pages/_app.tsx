@@ -8,10 +8,8 @@ import {
 } from 'pluralsh-design-system'
 import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
-import { useRouter } from 'next/router'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
-import { DocSearch } from '@docsearch/react'
 
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
@@ -63,14 +61,10 @@ function collectHeadings(node, sections: any[] = []) {
   return sections
 }
 
-const Page = styled.div`
-  /* display: flex;
-  flex-grow: 1; */
-`
+const Page = styled.div(() => ({}))
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
-  const router = useRouter()
 
   const title = `Plural | ${markdoc?.frontmatter?.title}` || TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
@@ -108,7 +102,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               />
               <link
                 rel="icon"
-                href="/favicon-57.png"
+                href="/favicon-16.png"
                 sizes="16x16"
               />
               <link
@@ -116,7 +110,6 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 href="/favicon-32.png"
                 sizes="32x32"
               />
-
               <link
                 rel="icon"
                 href="/favicon-128.png"
@@ -124,18 +117,13 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               />
               <link
                 rel="icon"
-                href="/favicon-192.png"
-                sizes="192x192"
-              />
+                href="/favicon-180.png"
+                sizes="180x180"
+              />{' '}
               <link
                 rel="icon"
                 href="/favicon-192.png"
                 sizes="192x192"
-              />
-              <link
-                rel="icon"
-                href="/favicon-228.png"
-                sizes="228x228"
               />
               <link
                 rel="shortcut icon"
@@ -160,20 +148,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 crossOrigin=""
               />
             </Head>
-            <TopNav>
-              <DocSearch
-                appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-                indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-                apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-                placeholder="Search Plural docs"
-                navigator={{
-                  navigate: ({ itemUrl }) => {
-                    router.push(itemUrl)
-                  },
-                }}
-                getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
-              />
-            </TopNav>
+            <TopNav />
             <Page>
               <PageGrid>
                 <SideNavContainer>

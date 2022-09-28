@@ -21,17 +21,7 @@ import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import { useInViewRef, useMergeRefs } from 'rooks'
 
-export type NavItem = {
-  title?: string
-  href?: string
-  icon?: ReactElement
-  sections?: NavItem[]
-}
-
-export type NavData = {
-  title: string
-  sections: NavItem[]
-}[]
+import { NavData, NavItem } from '../NavData'
 
 export type SideNavProps = {
   navData: NavData
@@ -76,18 +66,15 @@ type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
   icon?: ReactElement
 }
 
-function LinkBase({
-  className,
-  children,
-  icon,
-  href,
-}: // ...props
-LinkBaseProps) {
+const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
+  className, children, icon, href,
+}, ref) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
   const content = (
     <LinkA
       className={className}
       tabIndex={keyboardNavigable ? 0 : -1}
+      ref={ref}
     >
       {icon && icon}
       {children}
@@ -106,7 +93,7 @@ LinkBaseProps) {
   }
 
   return content
-}
+})
 
 const CaretButton = styled(({ isOpen = false, className, ...props }) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
@@ -174,12 +161,18 @@ const NavLink = styled(({
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
-  const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
-  const isSelected = useMemo(() => pathname === href, [pathname, href])
-  const wasSelected = usePrevious(isSelected)
+  const optimisticPathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
+  const isSelectedOptimistic = useMemo(() => optimisticPathname === href, [optimisticPathname, href])
   const [inViewRef, isInView] = useInViewRef(undefined, { threshold: [1, 1] })
   const eltRef = useRef<HTMLLIElement>(null)
   const ref = useMergeRefs(inViewRef, eltRef)
+
+  // Scroll into view gets interrupted by page transitions, so we only start
+  // scrolling when the actual pathname changes instead of using optimisticPathname
+  // like everything else
+  const pathname = removeTrailingSlashes(useRouter().pathname)
+  const isSelected = useMemo(() => pathname === href, [pathname, href])
+  const wasSelected = usePrevious(isSelected)
 
   useEffect(() => {
     if (isSelected && !wasSelected && eltRef?.current && !isInView) {
@@ -191,8 +184,8 @@ const NavLink = styled(({
     <li
       ref={ref}
       className={classNames(className, {
-        selected: isSelected,
-        selectedSecondary: childIsSelected && !isSelected,
+        selected: isSelectedOptimistic,
+        selectedSecondary: childIsSelected && !isSelectedOptimistic,
       })}
     >
       <LinkBase
@@ -392,7 +385,7 @@ function SubSection({
   )
 }
 
-const NavWrap = styled.nav(({ theme }) => ({
+const Nav = styled.nav(({ theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
@@ -460,7 +453,10 @@ export function SideNav({ navData, ...props }: SideNavProps) {
 
   return (
     <NavContext.Provider value={contextValue}>
-      <NavWrap {...props}>
+      <Nav
+        aria-label="Main"
+        {...props}
+      >
         <div
           className="navInner"
           ref={scrollRef}
@@ -470,11 +466,11 @@ export function SideNav({ navData, ...props }: SideNavProps) {
               title={title}
               key={title}
             >
-              <SubSectionsList sections={sections} />
+              {sections && <SubSectionsList sections={sections} />}
             </TopSection>
           ))}
         </div>
-      </NavWrap>
+      </Nav>
     </NavContext.Provider>
   )
 }

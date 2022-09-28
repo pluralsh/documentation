@@ -2,19 +2,15 @@
 title: Workspace Structure
 ---
 
-Plural ensures the state of all installed applications are stored in a git repository, under a common format. A typical workspace should have a similar layout to the following example (Please click to expand):
+Plural ensures the state of all installed applications are stored in a git repository, under a common format. A typical workspace should have a similar layout to the following example:
 
-<details>
-
-<summary>📦installation-repository<br></summary>
-
-┣ 📜.gitattributes\
-┣ 📜.gitignore\
-┣ 📜context.yaml\
-┗ 📜workspace.yaml\
-
-
-</details>
+```
+📦installation-repository
+┣ 📜.gitattributes
+┣ 📜.gitignore
+┣ 📜context.yaml
+┗ 📜workspace.yaml
+```
 
 ***
 

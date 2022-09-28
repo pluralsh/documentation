@@ -85,9 +85,9 @@ This doc gives more details on launching AMIs if you are unfamiliar: [https://aw
 
 The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 
-### 3. Alice creates a [Plural service account](service-accounts.md)
+### 3. Alice creates a [Plural service account](/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts)
 
-Alice follows the instructions [here](service-accounts.md) to create a Plural service account under the `ml-infra@plural.sh` email.
+Alice follows the instructions [here](/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts) to create a Plural service account under the `ml-infra@plural.sh` email.
 
 ### 4. Alice copies down which bundles she has installed for later reference
 
@@ -149,7 +149,7 @@ If you'd like help with this process feel free to reach out to us on discord as 
 
 ### 9. Alice, Bob, and Cory set up cryptographic keys for sharing
 
-The next step is sharing the repository's cryptography layer with any users you expect to need to use the repo locally.  If you want to learn more about how Plural encrypts your repository's state, we'd definitely recommend you read our docs [here](reference/workspaces/secret-management.md)
+The next step is sharing the repository's cryptography layer with any users you expect to need to use the repo locally.  If you want to learn more about how Plural encrypts your repository's state, we'd definitely recommend you read our docs [here](/advanced-topics/security/secret-management)
 
 Alice, Bob, and Cory should each run:
 
