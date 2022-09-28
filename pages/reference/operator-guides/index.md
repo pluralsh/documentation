@@ -1,5 +1,5 @@
 ---
-title: 📚 Operator Guides
+title: Operator Guides
 description: Tutorials and Ops Workflows.
 ---
 

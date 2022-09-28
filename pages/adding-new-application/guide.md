@@ -85,10 +85,10 @@ Next, let's fill out the `templates/` directory. Recall that the `templates/` di
 
 The Plural platform includes a number of custom resources that you might find useful to fully productionize your application and can copy and paste over for your own use:
 
-* [dashboard.yaml](plural-custom-resources.md#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
-* [runbook.yaml](getting-started-with-runbooks/runbook-yaml.md) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](getting-started-with-runbooks/).
-* [proxies.yaml](plural-custom-resources.md#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
-* [configurationOverlay.yaml](plural-custom-resources.md#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
+* [dashboard.yaml](/adding-new-application/plural-custom-resources#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
+* [runbook.yaml](/adding-new-application/getting-started-with-runbooks/runbook-yaml) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](/adding-new-application/getting-started-with-runbooks).
+* [proxies.yaml](/adding-new-application/plural-custom-resources#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
+* [configurationOverlay.yaml](/adding-new-application/plural-custom-resources#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
 
 ![](</assets/image (2).png>)
 

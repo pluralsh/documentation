@@ -1,8 +1,8 @@
-import React from 'react'
+import React, { useId } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 
-const Title = styled.h3(({ theme }) => ({
+const Title = styled.h2(({ theme }) => ({
   ...theme.partials.marketingText.label,
   marginTop: theme.spacing.large,
   marginBottom: theme.spacing.medium,
@@ -73,40 +73,64 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
       ? `3px solid ${theme.colors['border-primary']}`
       : 'none',
   },
+  '&:focus, &:focus-visible': {
+    boxShadow: 'none',
+  },
   '&:focus-visible::after': {
     ...theme.partials.focus.insetAbsolute,
     zIndex: 1,
   },
 }))
 
-export const TableOfContents = styled(({ toc, ...props }) => {
+export const ScrollContainer = styled.div(({ theme: _ }) => ({
+  overflowY: 'auto',
+  maxHeight: '-webkit-fill-available',
+
+}))
+
+function TableOfContentsBase({ toc, ...props }) {
   const items = toc.filter(item => item.id && (item.level === 2 || item.level === 3))
+  const labelId = `nav-label-${useId()}`
 
   if (items.length <= 1) {
     return null
   }
 
   return (
-    <nav {...props}>
-      <Title>On this page</Title>
-      <List>
-        {items.map(item => {
-          const href = `#${item.id}`
-          const active
+    <nav
+      aria-labelledby={labelId}
+      {...props}
+    >
+      <Title id={labelId}>On this page</Title>
+      <ScrollContainer>
+        <List>
+          {items.map(item => {
+            const href = `#${item.id}`
+            const active
             = typeof window !== 'undefined' && window.location.hash === href
 
-          return (
-            <ListItem key={item.title}>
-              <Link
-                href={href}
-                passHref
-              >
-                <LinkA $active={active}>{item.title}</LinkA>
-              </Link>
-            </ListItem>
-          )
-        })}
-      </List>
+            return (
+              <ListItem key={item.title}>
+                <Link
+                  href={href}
+                  passHref
+                >
+                  <LinkA $active={active}>{item.title}</LinkA>
+                </Link>
+              </ListItem>
+            )
+          })}
+        </List>
+      </ScrollContainer>
     </nav>
   )
-})(() => ({}))
+}
+
+export const TableOfContents = styled(TableOfContentsBase)(({ theme: _ }) => ({
+  display: 'flex',
+  flexDirection: 'column',
+  position: 'absolute',
+  top: 0,
+  bottom: 0,
+  width: '100%',
+}))

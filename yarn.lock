@@ -3393,6 +3393,11 @@ get-symbol-description@^1.0.0:
     call-bind "^1.0.2"
     get-intrinsic "^1.1.1"
 
+github-buttons@^2.22.0:
+  version "2.22.0"
+  resolved "https://registry.yarnpkg.com/github-buttons/-/github-buttons-2.22.0.tgz#b2669f8504ce5496ab37b7ce53e8ed01db9818bc"
+  integrity sha512-N5bk01s1WgK1FVtoeSUVkRkJpkaSu8yHMPcjye+PTa0jsRjMRNrYqVLgpUf2RA5Kvec05DfHYAT6/68fwkdqPw==
+
 glob-parent@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/glob-parent/-/glob-parent-5.1.2.tgz#869832c58034fe68a4093c17dc15e8340d8401c4"
@@ -4507,10 +4512,10 @@ picomatch@^2.3.0, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pluralsh-design-system@1.214.0:
-  version "1.214.0"
-  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.214.0.tgz#ddbeca88130317537037f8f20f669e47ba5cea4d"
-  integrity sha512-pH+ees6FTxyBOGzT/91fKmR/aiQU66f1e8GOAqQ+JClO9hZfrd3ZusF8X7/nwzltS/WNT0bHk4mJanA8JmBsAQ==
+pluralsh-design-system@1.218.0:
+  version "1.218.0"
+  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.218.0.tgz#30d53427d60524610783795617b62f25713ea980"
+  integrity sha512-L0Sfj359PDi0xm2KdZJELSMCTuFpPj8kR3R8k1RAmfQMBp29XCZJffjsa03d+YSb955UNVRMWsWgdd9kXAl5qA==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.8.1"
     "@react-aria/button" "3.6.1"
@@ -4639,6 +4644,13 @@ react-embed@3.6.0:
     react-simple-player "^1.1.0"
     react-youtube "^7.13.1"
     scriptjs "^2.5.9"
+
+react-github-btn@1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/react-github-btn/-/react-github-btn-1.4.0.tgz#92654107e92658e60dd977c7a92b212f806da78d"
+  integrity sha512-lV4FYClAfjWnBfv0iNlJUGhamDgIq6TayD0kPZED6VzHWdpcHmPfsYOZ/CFwLfPv4Zp+F4m8QKTj0oy2HjiGXg==
+  dependencies:
+    github-buttons "^2.22.0"
 
 react-instagram-embed@^1.5.0:
   version "1.5.0"
