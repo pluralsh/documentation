@@ -12,12 +12,13 @@ export const PageGrid = styled.div(_p => ({
   position: 'relative',
 }))
 
-export const SideNavContainer = styled.div(_p => ({
+export const SideNavContainer = styled.div(({ theme }) => ({
   display: 'none',
   [mqs.twoColumn]: {
     display: 'block',
     flex: '0 0 300px',
     marginRight: 'auto',
+    marginLeft: theme.spacing.large,
   },
 }))
 

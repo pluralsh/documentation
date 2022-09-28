@@ -13,6 +13,7 @@ export default styled(Code)(({ theme }) => ({
   paddingLeft: theme.spacing.xxsmall,
   paddingTop: '1px',
   paddingBottom: '2px',
+  color: theme.colors['text-light'],
   backgroundColor: theme.colors['fill-one'],
   '* ~ &': {
     marginLeft: theme.spacing.xxsmall,
