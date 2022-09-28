@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react'
 import Link from 'next/link'
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
 import { removeTrailingSlashes } from 'utils/text'
 import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
@@ -20,6 +20,8 @@ import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import { useInViewRef, useMergeRefs } from 'rooks'
+
+import scrollIntoContainerView from 'utils/scrollIntoContainerView'
 
 import { NavData, NavItem } from '../NavData'
 
@@ -161,11 +163,14 @@ const NavLink = styled(({
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
-  const optimisticPathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
-  const isSelectedOptimistic = useMemo(() => optimisticPathname === href, [optimisticPathname, href])
+  const { scrollRef, ...navContext } = useContext(NavContext)
+  const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
+  const isSelectedOptimistic = useMemo(() => optimisticPathname === href,
+    [optimisticPathname, href])
   const [inViewRef, isInView] = useInViewRef(undefined, { threshold: [1, 1] })
   const eltRef = useRef<HTMLLIElement>(null)
   const ref = useMergeRefs(inViewRef, eltRef)
+  const theme = useTheme()
 
   // Scroll into view gets interrupted by page transitions, so we only start
   // scrolling when the actual pathname changes instead of using optimisticPathname
@@ -175,10 +180,28 @@ const NavLink = styled(({
   const wasSelected = usePrevious(isSelected)
 
   useEffect(() => {
-    if (isSelected && !wasSelected && eltRef?.current && !isInView) {
-      eltRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
+    if (
+      isSelected
+        && !wasSelected
+        && eltRef?.current
+        && scrollRef?.current
+        && !isInView
+    ) {
+      scrollIntoContainerView(eltRef.current, scrollRef.current, {
+        behavior: 'smooth',
+        block: 'start',
+        blockOffset: theme.spacing.xlarge,
+      })
+        // eltRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-  }, [isInView, isSelected, wasSelected])
+  }, [
+    isInView,
+    isSelected,
+    wasSelected,
+    scrollRef,
+    eltRef,
+    theme.spacing.xlarge,
+  ])
 
   return (
     <li
@@ -384,35 +407,29 @@ function SubSection({
     </>
   )
 }
+const navLeftOffset = 1000
 
-const Nav = styled.nav(({ theme }) => ({
+const NavPositionWrapper = styled.nav(({ theme: _theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
-  '&::before': {
-    content: '""',
-    position: 'absolute',
-    display: 'block',
-    left: -9999,
-    top: 0,
-    right: 0,
-    bottom: 0,
-    backgroundColor: theme.colors['fill-one'],
-  },
+  marginLeft: -navLeftOffset,
+}))
 
-  '.navInner': {
-    // layout,
-    position: 'absolute',
-    top: 0,
-    left: 0,
-    width: '100%',
-    height: '100%',
-    overflowY: 'auto',
-    paddingBottom: theme.spacing.xlarge,
-    // style
-    backgroundColor: theme.colors['fill-one'],
-    borderRight: theme.borders['fill-one'],
-  },
+const NavScrollContainer = styled.div(({ theme }) => ({
+  position: 'absolute',
+  top: 0,
+  left: 0,
+  right: 0,
+  bottom: 0,
+  overflowY: 'auto',
+  backgroundColor: theme.colors['fill-one'],
+  borderRight: theme.borders['fill-one'],
+  paddingBottom: theme.spacing.xlarge,
+}))
+
+const Nav = styled.nav(({ theme: _theme }) => ({
+  marginLeft: navLeftOffset,
 }))
 
 export function SideNav({ navData, ...props }: SideNavProps) {
@@ -453,24 +470,23 @@ export function SideNav({ navData, ...props }: SideNavProps) {
 
   return (
     <NavContext.Provider value={contextValue}>
-      <Nav
+      <NavPositionWrapper
         aria-label="Main"
         {...props}
       >
-        <div
-          className="navInner"
-          ref={scrollRef}
-        >
-          {navData.map(({ title, sections }) => (
-            <TopSection
-              title={title}
-              key={title}
-            >
-              {sections && <SubSectionsList sections={sections} />}
-            </TopSection>
-          ))}
-        </div>
-      </Nav>
+        <NavScrollContainer ref={scrollRef}>
+          <Nav>
+            {navData.map(({ title, sections }) => (
+              <TopSection
+                title={title}
+                key={title}
+              >
+                {sections && <SubSectionsList sections={sections} />}
+              </TopSection>
+            ))}
+          </Nav>
+        </NavScrollContainer>
+      </NavPositionWrapper>
     </NavContext.Provider>
   )
 }
