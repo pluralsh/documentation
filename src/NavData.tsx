@@ -1,26 +1,44 @@
-import { NavData } from 'components/SideNav'
 import {
+  ApiIcon,
+  ArchitectureIcon,
+  BookIcon,
   CloudIcon,
-  CraneIcon,
-  RocketIcon,
-  TerminalIcon,
+  DocumentIcon,
+  MagicWandIcon,
+  ToolIcon,
+  VideoIcon,
+  WorkspaceIcon,
   // RunBookIcon,
 } from 'pluralsh-design-system'
+import { ReactElement } from 'react'
+
+export type NavItem = {
+  title?: string
+  href?: string
+  icon?: ReactElement
+  sections?: NavItem[]
+}
+
+export type NavData = NavItem[]
 
 const data: NavData = [
   {
     title: 'Getting Started',
     sections: [
-      { href: '/', title: '👋 Introduction' },
       {
-        href: '/getting-started/getting-started',
-        icon: <RocketIcon />,
+        title: 'Introduction',
+        href: '/',
+        icon: <DocumentIcon />,
+      },
+      {
         title: 'Quickstart',
+        href: '/getting-started/getting-started',
+        icon: <MagicWandIcon />,
       },
       {
         href: '/getting-started/video-cli-quickstart',
-        title: 'Video: CLI Quickstart', // 📽
-        icon: <TerminalIcon />,
+        title: 'Video: CLI Quickstart',
+        icon: <VideoIcon />,
       },
     ],
   },
@@ -101,7 +119,7 @@ const data: NavData = [
         title: 'Network Configuration',
       },
       {
-        href: '/advanced-topics/dns-setup/',
+        href: '/advanced-topics/dns-setup',
         title: 'Setting up Third Party DNS',
         sections: [
           {
@@ -111,7 +129,7 @@ const data: NavData = [
         ],
       },
       {
-        href: '/advanced-topics/security/',
+        href: '/advanced-topics/security',
         title: 'Security Concepts',
         sections: [
           {
@@ -121,7 +139,7 @@ const data: NavData = [
         ],
       },
       {
-        href: '/advanced-topics/identity-and-access-management/',
+        href: '/advanced-topics/identity-and-access-management',
         title: 'Auth & Access Control',
         sections: [
           {
@@ -137,7 +155,7 @@ const data: NavData = [
             title: 'API Tokens',
           },
           {
-            href: '/advanced-topics/identity-and-access-management/identity-and-installations/',
+            href: '/advanced-topics/identity-and-access-management/identity-and-installations',
             title: 'Identity and Installations',
             sections: [
               {
@@ -157,7 +175,7 @@ const data: NavData = [
         ],
       },
       {
-        href: '/advanced-topics/debugging/',
+        href: '/advanced-topics/debugging',
         title: 'Debugging',
         sections: [
           {
@@ -180,56 +198,60 @@ const data: NavData = [
     title: 'Reference',
     sections: [
       {
+        title: 'Troubleshooting',
         href: '/reference/troubleshooting',
-        title: '🪛 Troubleshooting',
+        icon: <ToolIcon />,
       },
       {
+        title: 'Operator Guides',
         href: '/reference/operator-guides/',
-        title: '📚 Operator Guides',
+        icon: <BookIcon />,
         sections: [
           {
-            href: '/reference/operator-guides/cloud-shell',
             title: 'Cloud Shell',
+            href: '/reference/operator-guides/cloud-shell',
           },
           {
-            href: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
             title: 'Adding Kubecost for Cost Analysis',
+            href: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
           },
         ],
       },
       {
-        href: '/reference/architecture-1',
         title: 'Architecture',
-        icon: <CraneIcon />,
+        href: '/reference/architecture-1',
+        icon: <ArchitectureIcon />,
       },
       {
-        href: '/reference/workspaces/',
-        title: '🖥 Workspaces',
+        title: 'Workspaces',
+        href: '/reference/workspaces',
+        icon: <WorkspaceIcon />,
         sections: [
           {
-            href: '/reference/workspaces/workspace-structure',
             title: 'Workspace Structure',
+            href: '/reference/workspaces/workspace-structure',
           },
         ],
       },
       {
-        href: '/reference/api/',
-        title: '🛠 Developer Tools / API',
+        title: 'Developer Tools / API',
+        href: '/reference/api',
+        icon: <ApiIcon />,
         sections: [
           {
             href: '/reference/api/plural-api',
             title: 'Plural API',
           },
           {
-            href: '/reference/api/console-api',
             title: 'Console API',
+            href: '/reference/api/console-api',
           },
         ],
       },
       {
+        title: 'Cloud Provider CLI Setup',
         href: '/reference/configuring-cloud-provider',
         icon: <CloudIcon />,
-        title: 'Cloud Provider CLI Setup',
       },
     ],
   },

@@ -5,7 +5,7 @@ description: This page gives an overview of what the Cloud Shell is.
 
 ## Quickstart
 
-For a guide on how to get up and running with the Cloud Shell, click [here](broken-reference).
+For a guide on how to get up and running with the Cloud Shell, click [here](/basic-setup-and-deployment/cloud-shell-quickstart).
 
 ## Overview
 

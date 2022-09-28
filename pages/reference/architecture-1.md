@@ -1,5 +1,5 @@
 ---
-title: 🏗 Architecture
+title: Architecture
 ---
 
 The Plural architecture has three main components:

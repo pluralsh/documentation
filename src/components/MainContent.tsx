@@ -3,10 +3,16 @@ import styled from 'styled-components'
 
 import { DESCRIPTION, TITLE } from '../consts'
 
+import Breadcrumbs from './Breadcrumbs'
+
 import { PagePropsContext } from './PagePropsContext'
 
 const ContentWrapper = styled.div(({ theme }) => ({
-  marginTop: theme.spacing.large,
+  marginTop: theme.spacing.xlarge,
+}))
+
+const BreadcrumbsWrapper = styled.div(({ theme }) => ({
+  marginTop: theme.spacing.xlarge,
 }))
 
 const PageHeader = styled.div(({ theme }) => ({
@@ -34,14 +40,19 @@ export default function MainContent({ Component }) {
   const description = markdoc?.frontmatter?.description || DESCRIPTION
 
   return (
-    <ContentWrapper>
-      {(markdoc?.frontmatter?.title || markdoc?.frontmatter?.description) && (
-        <PageHeader>
-          {title && <Title>{title}</Title>}
-          {description && <Description>{description}</Description>}
-        </PageHeader>
-      )}
-      <Component {...pageProps} />
-    </ContentWrapper>
+    <>
+      <BreadcrumbsWrapper>
+        <Breadcrumbs />
+      </BreadcrumbsWrapper>
+      <ContentWrapper>
+        {(markdoc?.frontmatter?.title || markdoc?.frontmatter?.description) && (
+          <PageHeader>
+            {title && <Title>{title}</Title>}
+            {description && <Description>{description}</Description>}
+          </PageHeader>
+        )}
+        <Component {...pageProps} />
+      </ContentWrapper>
+    </>
   )
 }
