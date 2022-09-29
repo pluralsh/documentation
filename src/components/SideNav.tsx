@@ -19,7 +19,6 @@ import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
-import { useInViewRef, useMergeRefs } from 'rooks'
 
 import scrollIntoContainerView from 'utils/scrollIntoContainerView'
 
@@ -170,9 +169,7 @@ const NavLink = styled(({
   const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
   const isSelectedOptimistic = useMemo(() => optimisticPathname === href,
     [optimisticPathname, href])
-  const [inViewRef, isInView] = useInViewRef(undefined, { threshold: [1, 1] })
-  const eltRef = useRef<HTMLLIElement>(null)
-  const ref = useMergeRefs(inViewRef, eltRef)
+  const liRef = useRef<HTMLLIElement>(null)
   const theme = useTheme()
 
   // Scroll into view gets interrupted by page transitions, so we only start
@@ -183,32 +180,19 @@ const NavLink = styled(({
   const wasSelected = usePrevious(isSelected)
 
   useEffect(() => {
-    if (
-      isSelected
-        && !wasSelected
-        && eltRef?.current
-        && scrollRef?.current
-        && !isInView
-    ) {
-      scrollIntoContainerView(eltRef.current, scrollRef.current, {
+    if (isSelected && !wasSelected && liRef?.current && scrollRef?.current) {
+      scrollIntoContainerView(liRef.current, scrollRef.current, {
         behavior: 'smooth',
         block: 'start',
         blockOffset: theme.spacing.xlarge,
+        preventIfVisible: true,
       })
-        // eltRef.current.scrollIntoView({ behavior: 'smooth', block: 'center' })
     }
-  }, [
-    isInView,
-    isSelected,
-    wasSelected,
-    scrollRef,
-    eltRef,
-    theme.spacing.xlarge,
-  ])
+  }, [isSelected, wasSelected, scrollRef, liRef, theme.spacing.xlarge])
 
   return (
     <li
-      ref={ref}
+      ref={liRef}
       className={classNames(className, {
         selected: isSelectedOptimistic,
         selectedSecondary: childIsSelected && !isSelectedOptimistic,
@@ -216,7 +200,6 @@ const NavLink = styled(({
     >
       <LinkBase
         icon={icon}
-        ref={ref}
         {...props}
       />
       {isSubSection && (
