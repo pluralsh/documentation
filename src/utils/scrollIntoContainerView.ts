@@ -28,6 +28,7 @@ type Config = {
   inline?: 'start' | 'center' | 'end' | 'nearest'
   blockOffset?: number
   inlineOffset?: number
+  preventIfVisible?: boolean
 }
 
 function getNewScrollPos({
@@ -73,7 +74,7 @@ function scrollIntoContainerView(child: Element,
     ...config,
   }
   const {
-    block, inline, behavior, blockOffset, inlineOffset,
+    block, inline, behavior, blockOffset, inlineOffset, preventIfVisible,
   } = config
   const overshoot = getRelativeOvershoots(parent, child)
 
@@ -86,7 +87,10 @@ function scrollIntoContainerView(child: Element,
   if (behavior) {
     scrollToOptions.behavior = behavior
   }
-  if (block) {
+  if (
+    block
+    && !(preventIfVisible && overshoot.top <= 0 && overshoot.bottom <= 0)
+  ) {
     scrollToOptions.top = getNewScrollPos({
       overshootStart: overshoot.top,
       overshootEnd: overshoot.bottom,
@@ -95,7 +99,10 @@ function scrollIntoContainerView(child: Element,
       offset: blockOffset,
     })
   }
-  if (inline) {
+  if (
+    inline
+    && !(preventIfVisible && overshoot.left <= 0 && overshoot.right <= 0)
+  ) {
     scrollToOptions.left = getNewScrollPos({
       overshootStart: overshoot.left,
       overshootEnd: overshoot.right,
