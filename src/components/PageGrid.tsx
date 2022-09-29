@@ -40,6 +40,9 @@ export const ContentContainer = styled.main(({ theme }) => ({
   flex: '1 1',
   marginRight: theme.spacing.large,
   marginLeft: theme.spacing.large,
+  // Don't remove this min width, or it will paradoxically allow
+  // the content to stretch wider than the flex container
+  minWidth: '100px',
   [mqs.threeColumnLoose]: {
     maxWidth: 896,
     marginRight: theme.spacing.xlarge,
