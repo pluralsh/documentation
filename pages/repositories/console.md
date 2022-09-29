@@ -17,21 +17,21 @@ We currently support this repository on the following infrastructure providers:
 
 {% tab title="AWS" %}
 ```plural bundle install console console-aws```
-{% endtab %}
+{% /tab %}
 {% tab title="GCP" %}
 ```plural bundle install console console-gcp```
-{% endtab %}
+{% /tab %}
 {% tab title="Azure" %}
 ```plural bundle install console console-azure```
-{% endtab %}
+{% /tab %}
 {% tab title="Equinix" %}
 ```plural bundle install console console-equinix```
-{% endtab %}
+{% /tab %}
 {% tab title="KinD" %}
 ```plural bundle install console console-kind```
-{% endtab %}
+{% /tab %}
 
-{% endtabs %}
+{% /tabs %}
 
 ## Setup Configuration
 

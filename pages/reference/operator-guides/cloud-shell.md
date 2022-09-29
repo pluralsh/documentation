@@ -14,7 +14,7 @@ We provide a fully managed cloud shell environment with plural cli and all depen
 
 {% hint style="warning" %}
 Note that you **must** to manually push any uncommitted changes as your shell might not be persisted through restarts
-{% endhint %}
+{% /hint %}
 
 ![I](<../../.gitbook/assets/Screen Shot 2022-02-18 at 1.01.22 PM.png>)
 

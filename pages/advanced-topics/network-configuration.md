@@ -17,7 +17,7 @@ public_subnets = ["your.cidr.pub.1", "your.cidr.pub.2", "your.cidr.pub.3"]
 private_subnets = ["your.cidr.priv.1", "your.cidr.priv.2", "your.cidr.priv.3"]
 worker_private_subnets = ["your.cidr.worker.1", "your.cidr.worker.2", "your.cidr.worker.3"]
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 On GCP, update the `gcp-bootstrap` modules configuration with:
@@ -28,7 +28,7 @@ vpc_subnetwork_cidr_range = "your.cidr"
 # you might also want to update cluster_secondary_range_cidr 
 # and services_secondary_range_cidr
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure" %}
 With Azure, update the `azure-bootstrap` modules configuration with:
@@ -37,12 +37,12 @@ With Azure, update the `azure-bootstrap` modules configuration with:
 address_space = "your.cidr"
 subnet_prefixes = ["your.cidr.pref"]
 ```
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 {% hint style="warning" %}
 💡 Note that updating these will likely cause the VPC to be replaced, which will recreate your cluster. We recommend that you [destroy your cluster](../basic-setup-and-deployment/uninstall.md) before applying network config modifications to it.
-{% endhint %}
+{% /hint %}
 
 ## Configuring VPC Peering
 
@@ -61,7 +61,7 @@ resource "aws_vpc_peering_connection" "foo" {
    vpc_id        = module.aws-bootstrap.vpc.id
 }
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 ```bash
@@ -75,7 +75,7 @@ resource "google_compute_network_peering" "peering1" {
    peer_network = data.google_compute_network.peer.self_link
 }
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure" %}
 ```bash
@@ -91,12 +91,12 @@ resource "azurerm_virtual_network_peering" "example-1" {
    remote_virtual_network_id = data.azurerm_virtual_network.peer.id
 }
 ```
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 {% hint style="warning" %}
 💡 As mentioned earlier, consult the section on customizing subnets to ensure your vpc subnets don’t overlap when attempting to peer to existing networks.
-{% endhint %}
+{% /hint %}
 
 ## Adding an IP Allowlist to the Public Ingress Controller
 
@@ -139,4 +139,4 @@ We’ll also build out configuration overlays in our console in the “Configura
 
 {% hint style="warning" %}
 💡 We’ve occasionally seen it take some time for the ingress controllers to swap classes. If you want to accelerate that, you can run `kubectl delete ingress <ingress-name> -n <app-name>` then `plural bounce <app-name>` to speed things along. You can usually find the ingresses in the components tab in our console.
-{% endhint %}
+{% /hint %}

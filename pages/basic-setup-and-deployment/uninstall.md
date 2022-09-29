@@ -28,4 +28,4 @@ plural destroy
 
 {% hint style="danger" %}
 Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
-{% endhint %}
+{% /hint %}

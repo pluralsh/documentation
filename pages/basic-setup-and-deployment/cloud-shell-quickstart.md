@@ -63,12 +63,12 @@ Install the Console with the following one-liner:
 {% tabs %}
 {% tab title="AWS" %}
 `plural bundle install console console-aws`
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 `plural bundle install console console-gcp`
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 You'll now be guided through a setup wizard for the console. For help with configuration, refer to [this guide](../repositories/console.md) for explanations on each step.
 
@@ -79,12 +79,12 @@ Install Airflow with the following one-liner:
 {% tabs %}
 {% tab title="AWS" %}
 `plural bundle install airflow aws-airflow`
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 `plural bundle install airflow gcp-airflow`
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 Similarly to the console, you'll be guided through a setup wizard for Airflow. For help with configuration, refer to [this guide](../repositories/airflow.md).
 
@@ -117,7 +117,7 @@ Head over to `console.YOUR_WORKSPACE.onplural.sh` (or the hostname you picked) t
 
 {% hint style="warning" %}
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
-{% endhint %}
+{% /hint %}
 
 Here, you'll be able to check node health, Pod health, logs, pre-built dashboards tailored for Airflow, and more.
 

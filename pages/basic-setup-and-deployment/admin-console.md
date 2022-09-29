@@ -17,7 +17,7 @@ The console is not a strict dependency, but it is highly recommended to install 
 
 {% hint style="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
-{% endhint %}
+{% /hint %}
 
 ## Installation
 
@@ -37,14 +37,14 @@ If the remote urls start with `https` then you're using https.
 {% tabs %}
 {% tab title="Https" %}
 Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to generate a revokable personal access token. The access token needs to have write permissions. Keep track of this access token, you will need it later in the console install process.
-{% endtab %}
+{% /tab %}
 
 {% tab title="SSH" %}
 Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using Github to generate a ssh key and add it to your ssh-agent and Github account.
 
 Keep track of the path where you've stored your ssh key (most likely in \~/.ssh/id\_rsa); you will need this later.
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 #### 3. Install Console bundle && build
 
@@ -101,4 +101,4 @@ For example, the Airflow scaling runbook det
 
 ails how to look the Airflow CPU and memory usage graphs and compute your reservation appropriately. It then allows you to make that reservation directly from the runbook.
 
-{% embed url="https://www.loom.com/share/61ae5014daec4b1fabec8c689eec7b18" %}
+{% embed url="https://www.loom.com/share/61ae5014daec4b1fabec8c689eec7b18" /%}

@@ -12,7 +12,7 @@ If you are using the [**Plural Cloud Shell**](https://app.plural.sh/shell), we h
 
 {% hint style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
-{% endhint %}
+{% /hint %}
 
 Plural currently supports the following version control providers:
 

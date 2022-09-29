@@ -11,7 +11,7 @@
 5. Choose **Create hosted zone**.
 6. Now in the navigation pane, click **Hosted zones**. On the **Hosted zones** page, choose the radio button (not the name) for the hosted zone, then choose **View details**.
 7. On the details page for the hosted zone, choose **Hosted zone details**. Make note of the four servers listed for **Name servers**. You will need these records to proceed with Step 3.
-{% endtab %}
+{% /tab %}
 
 {% tab title="Google Cloud DNS" %}
 1. In your Google Cloud Console, go to your Plural project and [enable the Cloud DNS API](https://console.cloud.google.com/flows/enableapi?apiid=dns&\_ga=2.143906805.1313565175.1629139974-335821397.1624570886).
@@ -28,7 +28,7 @@
 ![](<../../.gitbook/assets/Screen Shot 2021-08-18 at 12.39.37 PM.png>)
 
 ####
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure DNS" %}
 1. In your Azure console, at upper left, select **Create a resource**, then **Networking**, and then **DNS zone**.
@@ -40,5 +40,5 @@
 5. Retrieve the name servers from the DNS zone page. In this example, the zone `contoso.net` has been assigned name servers `ns1-01.azure-dns.com`, `ns2-01.azure-dns.net`, \*`ns3-01.azure-dns.org`, and `ns4-01.azure-dns.info`
 
 ![List of name servers](https://docs.microsoft.com/en-us/azure/dns/media/dns-delegate-domain-azure-dns/viewzonens500.png)
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
