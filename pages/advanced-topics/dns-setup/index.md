@@ -19,9 +19,9 @@ Record the nameservers corresponding to this zone.
 
 Go back to where you registered `pluraldemo.com`and add the nameservers from Step 2 as "custom nameservers" under its DNS configuration.
 
-{% hint style="info" %}
+{% callout style="info" %}
 The domain name registrars will typically provide default name servers and also the ability to set up custom name servers. For example, in Google Domains, you can set custom name servers under the DNS tab once you click into a specific domain name.
-{% /hint %}
+{% /callout %}
 
 ![](</assets/Screen Shot 2021-08-18 at 1.00.00 PM.png>)
 {% /tab %}

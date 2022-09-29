@@ -36,7 +36,7 @@ const StyledH = styled.h1.withConfig({ shouldForwardProp: () => true })<{
   }
 
   return {
-    marginTop: theme.spacing.xlarge,
+    marginTop: theme.spacing.xxlarge,
     marginBottom: theme.spacing.small,
     ...style,
   }

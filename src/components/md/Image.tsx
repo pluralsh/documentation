@@ -2,13 +2,13 @@ import styled from 'styled-components'
 
 export const commonCfg = { shouldForwardProp: () => true }
 
-const StyledWrap = styled.span.withConfig(commonCfg)(({ theme }) => ({
+export const MediaWrap = styled.span.withConfig(commonCfg)(({ theme }) => ({
   display: 'block',
   width: '100%',
   paddingLeft: theme.spacing.large,
   paddingRight: theme.spacing.large,
-  marginTop: theme.spacing.medium,
-  marginBottom: theme.spacing.medium,
+  marginTop: theme.spacing.large,
+  marginBottom: theme.spacing.large,
 }))
 
 const StyledImg = styled.img.withConfig(commonCfg)(({ theme }) => ({
@@ -21,9 +21,9 @@ const StyledImg = styled.img.withConfig(commonCfg)(({ theme }) => ({
 
 function Image({ ...props }) {
   return (
-    <StyledWrap>
+    <MediaWrap>
       <StyledImg {...props} />
-    </StyledWrap>
+    </MediaWrap>
   )
 }
 
