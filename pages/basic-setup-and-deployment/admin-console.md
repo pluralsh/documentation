@@ -14,9 +14,9 @@ The plural admin console is a web application that serves as a control panel for
 
 The console is not a strict dependency, but it is highly recommended to install it. It can be installed and deployed like any other application on Plural.
 
-{% hint style="info" %}
+{% callout style="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
-{% /hint %}
+{% /callout %}
 
 ## Installation
 

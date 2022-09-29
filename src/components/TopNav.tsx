@@ -42,8 +42,8 @@ export const TopNav = styled(({ ...props }) => {
   const theme = useTheme()
 
   return (
-    <nav {...props}>
-      <section className="leftSection">
+    <header {...props}>
+      <nav className="leftSection">
         <Link
           href="/"
           className="flex"
@@ -58,7 +58,7 @@ export const TopNav = styled(({ ...props }) => {
           </a>
         </Link>
         <TopNavLinks />
-      </section>
+      </nav>
       <Filler />
       <section className="rightSection">
         <DocSearch
@@ -121,7 +121,7 @@ export const TopNav = styled(({ ...props }) => {
         </div>
 
       </section>
-    </nav>
+    </header>
   )
 })(({ theme }) => ({
   top: 0,

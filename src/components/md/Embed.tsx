@@ -1,7 +1,9 @@
 import ReactEmbed from 'react-embed'
 import * as loom from '@loomhq/loom-embed'
-import { useCallback, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
+import { MediaWrap } from './Image'
 
 const AspectRatio = styled.div<{ $aspectRatio: string }>(({ $aspectRatio }) => ({
   ...($aspectRatio
@@ -36,14 +38,37 @@ const AspectRatio = styled.div<{ $aspectRatio: string }>(({ $aspectRatio }) => (
     : {}),
 }))
 
-function Embed({ url, aspectRatio = '16 / 9', ...props }) {
-  const [loomEmbed, setLoomEmbed] = useState()
-  const loomDone = useCallback(result => {
-    setLoomEmbed(result)
-  }, [])
+function Embed({
+  url,
+  aspectRatio = '16 / 9',
+  ...props
+}: {
+  url: string
+  aspectRatio: string
+}) {
+  console.log('url', url)
+  const [loomEmbed, setLoomEmbed] = useState('')
+  const isLoomUrl = useMemo(() => !!url.match(/^https{0,1}:\/\/(www.){0,1}loom\.com/g),
+    [url])
 
-  if (loomEmbed) {
-    return (
+  useEffect(() => {
+    if (isLoomUrl) {
+      let isSubscribed = true
+
+      loom.textReplace(url).then(result => {
+        if (isSubscribed) setLoomEmbed(result)
+      })
+
+      return () => {
+        isSubscribed = false
+      }
+    }
+  }, [isLoomUrl, url])
+
+  let content
+
+  if (isLoomUrl) {
+    content = (
       <AspectRatio
         $aspectRatio={aspectRatio}
         {...props}
@@ -51,24 +76,22 @@ function Embed({ url, aspectRatio = '16 / 9', ...props }) {
       />
     )
   }
-  if (url.match(/^https{0,1}:\/\/(www.){0,1}loom\.com/g)) {
-    loom.textReplace(url).then(loomDone)
-
-    return null
+  else {
+    content = (
+      <AspectRatio
+        $aspectRatio={aspectRatio}
+        {...props}
+      >
+        <ReactEmbed
+          url={url}
+          {...props}
+          isDark
+        />
+      </AspectRatio>
+    )
   }
 
-  return (
-    <AspectRatio
-      $aspectRatio={aspectRatio}
-      {...props}
-    >
-      <ReactEmbed
-        url={url}
-        {...props}
-        isDark
-      />
-    </AspectRatio>
-  )
+  return <MediaWrap>{content}</MediaWrap>
 }
 
 export default Embed

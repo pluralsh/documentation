@@ -7,6 +7,7 @@ const Blockquote = styled.blockquote(({ theme }) => ({
   background: theme.colors['fill-one'],
   margin: 0,
   marginTop: theme.spacing.xlarge,
+  marginBottom: theme.spacing.xlarge,
   '&::before': {
     content: '""',
     position: 'absolute',
