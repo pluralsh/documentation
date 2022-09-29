@@ -17,7 +17,7 @@ brew install pluralsh/plural/plural
 ```
 
 The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
-{% endtab %}
+{% /tab %}
 
 {% tab title="curl" %}
 You can also download any of our vendored binaries via curl:
@@ -57,7 +57,7 @@ Once these are installed, you'll also need to add the helm push plugin like so
 ```
 helm plugin install https://github.com/pluralsh/helm-push
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="Docker" %}
 We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud.  We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session.  The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:\
@@ -69,7 +69,7 @@ docker run -it --volume $HOME/.aws:/root/aws \
                --volume $HOME/.ssh:/root/.ssh \
     gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="EC2 AMI" %}
 We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs, terraform, helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\
@@ -78,8 +78,8 @@ We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs,
 If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a GitHub issue.
 
 This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/).  You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to choose the one for the appropriate region.
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 
@@ -143,7 +143,7 @@ git push
 If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes.  This is just a matter of finding the relevant pods in the console and clicking the trash icon.  For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
 
 If you'd like help with this process feel free to reach out to us on discord as well!
-{% endhint %}
+{% /hint %}
 
 ### 9. Alice, Bob, and Cory set up cryptographic keys for sharing
 

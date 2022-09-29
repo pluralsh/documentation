@@ -10,7 +10,7 @@ Before you can start installing your Kubernetes cluster and applications with th
 
 {% hint style="info" %}
 If you have already configured and installed your cloud provider CLI and are still seeing errors, make sure that you are on the latest version of the CLI.
-{% endhint %}
+{% /hint %}
 
 ## Installation
 
@@ -37,7 +37,7 @@ access_key     ****************RUG2 shared-credentials-file
 secret_key     ****************hJUU shared-credentials-file    
     region                us-east-2      config-file    ~/.aws/config
 ```
-{% endtab %}
+{% /tab %}
 
 {% tab title="GCP" %}
 * Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud cli.
@@ -73,13 +73,13 @@ gcloud auth application-default login
 ```
 
 to reset the application default credential and re-authorize the browser. Failure to do this could result in `project requested not found` errors further along.
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure" %}
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) to install your Azure cli.
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 ## Permissions
 
@@ -97,16 +97,16 @@ When deploying via GCP, you may run into a Terraform error around permissions. P
 
 
 Follow [these steps](https://cloud.google.com/sdk/docs/authorizing#authorize\_with\_a\_service\_account) to authorize your GCloud CLI with a new or existing Service Account.
-{% endtab %}
+{% /tab %}
 
 {% tab title="AWS" %}
 _No special permissions necessary._
-{% endtab %}
+{% /tab %}
 
 {% tab title="Azure" %}
 _No special permissions necessary._
-{% endtab %}
-{% endtabs %}
+{% /tab %}
+{% /tabs %}
 
 
 
