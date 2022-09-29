@@ -18,4 +18,13 @@ export default styled(Code)(({ theme }) => ({
   '* ~ &': {
     marginLeft: theme.spacing.xxsmall,
   },
+  'a:any-link &': {
+    color: theme.colors['action-link-inline'],
+  },
+  'a:hover &': {
+    color: theme.colors['action-link-inline-hover'],
+  },
+  'a:visited &, a:active &': {
+    color: theme.colors['action-link-inline-visited'],
+  },
 }))
