@@ -1,4 +1,3 @@
-import Head from 'next/head'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import {
@@ -11,6 +10,9 @@ import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 
+import PageHead from 'components/PageHead'
+
+import ExternalScripts from '../src/components/ExternalScripts'
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
 import { TopNav } from '../src/components/TopNav'
@@ -23,7 +25,9 @@ import {
 import GlobalStyles from '../src/components/GlobalStyles'
 import DocSearchStyles from '../src/components/DocSearchStyles'
 import MainContent from '../src/components/MainContent'
-import { DESCRIPTION, TITLE } from '../src/consts'
+import {
+  DESCRIPTION, PAGE_TITLE_PREFIX, PAGE_TITLE_SUFFIX, ROOT_TITLE,
+} from '../src/consts'
 
 import { PagePropsContext } from '../src/components/PagePropsContext'
 import navData from '../src/NavData'
@@ -66,7 +70,7 @@ const Page = styled.div(() => ({}))
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   const { markdoc } = pageProps
 
-  const title = markdoc?.frontmatter?.title ? `Plural | ${markdoc?.frontmatter?.title}` : TITLE
+  const title = markdoc?.frontmatter?.title ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}` : ROOT_TITLE
   const description = markdoc?.frontmatter?.description || DESCRIPTION
 
   const toc = pageProps.markdoc?.content
@@ -82,72 +86,10 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
           <GlobalStyles />
           <DocSearchStyles />
           <PagePropsContext.Provider value={pageProps}>
-            <Head>
-              <title>{title}</title>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1.0"
-              />
-              <meta
-                name="referrer"
-                content="strict-origin"
-              />
-              <meta
-                name="title"
-                content={title}
-              />
-              <meta
-                name="description"
-                content={description}
-              />
-              <link
-                rel="icon"
-                href="/favicon-16.png"
-                sizes="16x16"
-              />
-              <link
-                rel="icon"
-                href="/favicon-32.png"
-                sizes="32x32"
-              />
-              <link
-                rel="icon"
-                href="/favicon-128.png"
-                sizes="128x128"
-              />
-              <link
-                rel="icon"
-                href="/favicon-180.png"
-                sizes="180x180"
-              />{' '}
-              <link
-                rel="icon"
-                href="/favicon-192.png"
-                sizes="192x192"
-              />
-              <link
-                rel="shortcut icon"
-                href="/favicon.ico"
-              />
-              <link
-                rel="icon"
-                href="/favicon.ico"
-              />
-              <link
-                rel="preconnect"
-                href="https://fonts.googleapis.com"
-              />
-              <link
-                rel="preconnect"
-                href="https://fonts.gstatic.com"
-                crossOrigin=""
-              />
-              <link
-                rel="preconnect"
-                href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-                crossOrigin=""
-              />
-            </Head>
+            <PageHead
+              title={title}
+              description={description}
+            />
             <TopNav />
             <Page>
               <PageGrid>
@@ -162,6 +104,8 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 </SideCarContainer>
               </PageGrid>
             </Page>
+            <ExternalScripts />
+
           </PagePropsContext.Provider>
         </StyledThemeProvider>
       </ThemeProvider>
