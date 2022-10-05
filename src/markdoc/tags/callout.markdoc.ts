@@ -5,7 +5,7 @@ export const callout = {
   description: 'Display the enclosed content in a callout box',
   children: ['paragraph', 'tag', 'list'],
   attributes: {
-    style: {
+    severity: {
       type: String,
       description: '"info", "warning", "success", or "danger"',
     },

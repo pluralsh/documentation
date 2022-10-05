@@ -25,6 +25,6 @@ To uninstall your entire Plural installation and Kubernetes cluster, run:
 plural destroy
 ```
 
-{% callout style="danger" %}
+{% callout severity="danger" %}
 Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
 {% /callout %}

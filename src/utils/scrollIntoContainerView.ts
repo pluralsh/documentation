@@ -54,7 +54,6 @@ function getNewScrollPos({
   }
   else if (scrollToPos === 'end') {
     newScrollPos = curScrollPos + overshootEnd + offset
-    console.log('end new ScrollPos', newScrollPos)
   }
   else if (scrollToPos === 'center') {
     newScrollPos = curScrollPos - (overshootStart - overshootEnd) * 0.5

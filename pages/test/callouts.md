@@ -8,7 +8,7 @@ title: Callouts
 This shouldn't be visible
 {% /comment %}
 
-{% callout style="info" title="This is an info callout" %}
+{% callout severity="info" title="This is an info callout" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -17,7 +17,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="warning" title="This is a warning callout" %}
+{% callout severity="warning" title="This is a warning callout" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -25,7 +25,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="danger" title="This is a danger callout" %}
+{% callout severity="danger" title="This is a danger callout" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -33,7 +33,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="success" title="This is a success callout" %}
+{% callout severity="success" title="This is a success callout" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -43,7 +43,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 ## Full size
 
-{% callout style="info" %}
+{% callout severity="info" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -51,7 +51,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -59,7 +59,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="danger" %}
+{% callout severity="danger" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -67,7 +67,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 {% /callout %}
 
-{% callout style="success" %}
+{% callout severity="success" %}
 Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text __styles__ should be ___supported___. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 
 - List item 1
@@ -77,18 +77,18 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 ## Compact size
 
-{% callout style="info" size="compact" %}
+{% callout severity="info" size="compact" %}
 Should support things like [inline links](#).
 {% /callout %}
 
-{% callout style="warning" size="compact" %}
+{% callout severity="warning" size="compact" %}
 Should support things like `code highlights`.
 {% /callout %}
 
-{% callout style="danger" size="compact" %}
+{% callout severity="danger" size="compact" %}
 Should support things like [`linked code highlights`](#).
 {% /callout %}
 
-{% callout style="success" size="compact" %}
+{% callout severity="success" size="compact" %}
 Should support things like _italic text_, __bold text__ or ___bold italic text___.
 {% /callout %}
