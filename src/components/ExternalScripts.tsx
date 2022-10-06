@@ -32,32 +32,19 @@ function HubSpot() {
     if (!router?.events?.on) {
       return
     }
-    // const handleRouteChangeStart = url => {
-    //   console.log('route start', url)
-    // }
     const handleRouteChangeComplete = url => {
-      console.log('route complete', url)
       const { _hsq } = window as any
 
       if (_hsq) {
-        console.log('_hsq', _hsq)
-
-        _hsq.push(['setPath', '/about-us'])
+        _hsq.push(['setPath', url])
         _hsq.push(['trackPageView'])
       }
     }
-    // const handleRouteChangeError = (_err, url) => {
-    //   console.log('route error', url)
-    // }
 
-    // router.events.on('routeChangeStart', handleRouteChangeStart)
     router.events.on('routeChangeComplete', handleRouteChangeComplete)
-    // router.events.on('routeChangeError', handleRouteChangeError)
 
     return () => {
-      // router.events.off('routeChangeStart', handleRouteChangeStart)
       router.events.off('routeChangeComplete', handleRouteChangeComplete)
-      // router.events.off('routeChangeError', handleRouteChangeError)
     }
   }, [router.events])
 
