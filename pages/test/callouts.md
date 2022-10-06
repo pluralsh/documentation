@@ -2,7 +2,7 @@
 title: Callouts
 ---
 
-## Full size with titles
+## Full size kitchen sink
 
 {% comment %}
 This shouldn't be visible
@@ -14,6 +14,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 - List item 1
 - List item 2
 
+{% cta title="Let's go to Google" href="http://google.com" /%}
 
 {% /callout %}
 
@@ -23,6 +24,8 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 - List item 1
 - List item 2
 
+{% cta title="Let's go home" href="/" /%}
+
 {% /callout %}
 
 {% callout severity="danger" title="This is a danger callout" %}
@@ -31,6 +34,8 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 - List item 1
 - List item 2
 
+{% cta title="Let's go to Debugging" href="/advanced-topics/debugging" /%}
+
 {% /callout %}
 
 {% callout severity="success" title="This is a success callout" %}
@@ -38,6 +43,8 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 
 - List item 1
 - List item 2
+
+{% cta title="Let's go to Google" href="http://google.com" /%}
 
 {% /callout %}
 
