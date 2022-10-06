@@ -1,3 +1,5 @@
-export const TITLE = 'Plural Documentation'
+export const ROOT_TITLE = 'Docs | Plural'
+export const PAGE_TITLE_PREFIX = 'Docs | Plural | '
+export const PAGE_TITLE_SUFFIX = ''
 export const DESCRIPTION
-  = 'Plural empowers you to build and maintain production-ready applications on Kubernetes in minutes with no management overhead.'
+  = 'Everything you need to deploy open-source data infrastructure with Plural.'

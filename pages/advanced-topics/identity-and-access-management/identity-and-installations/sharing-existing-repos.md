@@ -137,7 +137,7 @@ git commit -m "Change owner of repo"
 git push
 ```
 
-{% callout style="info" %}
+{% callout severity="info" %}
 If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes.  This is just a matter of finding the relevant pods in the console and clicking the trash icon.  For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
 
 If you'd like help with this process feel free to reach out to us on discord as well!

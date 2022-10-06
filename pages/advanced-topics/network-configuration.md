@@ -42,7 +42,7 @@ subnet_prefixes = ["your.cidr.pref"]
 {% /tab %}
 {% /tabs %}
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 Note that updating these will likely cause the VPC to be replaced, which will recreate your cluster. We recommend that you [destroy your cluster](/basic-setup-and-deployment/uninstall) before applying network config modifications to it.
 {% /callout %}
 
@@ -96,7 +96,7 @@ resource "azurerm_virtual_network_peering" "example-1" {
 {% /tab %}
 {% /tabs %}
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 As mentioned earlier, consult the section on customizing subnets to ensure your vpc subnets don’t overlap when attempting to peer to existing networks.
 {% /callout %}
 
@@ -139,6 +139,6 @@ Sometimes an application will require you to update an attribute called `ingress
 
 We’ll also build out configuration overlays in our console in the “Configuration” tab to edit these, so you don’t have to scavenge for the exact yaml update to do this, although that’s still WIP.
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 We’ve occasionally seen it take some time for the ingress controllers to swap classes. If you want to accelerate that, you can run `kubectl delete ingress <ingress-name> -n <app-name>` then `plural bounce <app-name>` to speed things along. You can usually find the ingresses in the components tab in our console.
 {% /callout %}
