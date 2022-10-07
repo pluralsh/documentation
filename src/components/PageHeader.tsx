@@ -37,7 +37,7 @@ const SocialLink = styled.a(({ theme }) => ({
   },
 }))
 
-export const TopNav = styled(({ ...props }) => {
+export const PageHeader = styled(({ ...props }) => {
   const router = useRouter()
   const theme = useTheme()
 
@@ -57,7 +57,7 @@ export const TopNav = styled(({ ...props }) => {
             />
           </a>
         </Link>
-        <TopNavLinks />
+        <PageHeaderLinks />
       </nav>
       <Filler />
       <section className="rightSection">
@@ -193,7 +193,7 @@ const MainLink = styled.a(({ theme }) => ({
   },
 }))
 
-const TopNavLinks = styled(({ ...props }) => (
+const PageHeaderLinks = styled(({ ...props }) => (
   <div {...props}>
     <MainLink href="https://plural.sh/marketplace">Marketplace</MainLink>
     <MainLink href="https://plural.sh/community">Community</MainLink>

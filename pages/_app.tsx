@@ -10,12 +10,12 @@ import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import PageHead from 'components/PageHead'
+import HtmlHead from 'components/HtmlHead'
 
 import ExternalScripts from '../src/components/ExternalScripts'
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
-import { TopNav } from '../src/components/TopNav'
+import { PageHeader } from '../src/components/PageHeader'
 import {
   ContentContainer,
   PageGrid,
@@ -86,11 +86,11 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
           <GlobalStyles />
           <DocSearchStyles />
           <PagePropsContext.Provider value={pageProps}>
-            <PageHead
+            <HtmlHead
               title={title}
               description={description}
             />
-            <TopNav />
+            <PageHeader />
             <Page>
               <PageGrid>
                 <SideNavContainer>
