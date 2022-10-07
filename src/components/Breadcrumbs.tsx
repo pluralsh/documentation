@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
+import cloneDeep from 'lodash/cloneDeep'
 
 import { removeTrailingSlashes } from 'utils/text'
 
@@ -31,6 +32,9 @@ const NonLink = styled.span(({ theme }) => ({
     textDecoration: 'none',
   },
   color: theme.colors['text-xlight'],
+  '&[aria-current="page"]': {
+    color: theme.colors.text,
+  },
 }))
 
 const Li = styled.li(({ theme }) => ({
@@ -53,14 +57,14 @@ const Li = styled.li(({ theme }) => ({
 function findCrumbs(path, sections: NavItem[] = navData) {
   path = removeTrailingSlashes(path)
 
-  for (const section of sections) {
-    if (removeTrailingSlashes(section.href) === path) {
-      return [section]
+  for (const { title, href, sections: sects } of sections) {
+    if (removeTrailingSlashes(href) === path) {
+      return [{ title, href }]
     }
-    const tailCrumbs = findCrumbs(path, section?.sections || [])
+    const tailCrumbs = findCrumbs(path, sects || [])
 
     if (tailCrumbs.length > 0) {
-      return [section, ...tailCrumbs]
+      return [{ title, href }, ...tailCrumbs]
     }
   }
 
@@ -70,7 +74,10 @@ function findCrumbs(path, sections: NavItem[] = navData) {
 function Breadcrumbs({ className }: { className?: string }) {
   const { pathname } = useRouter()
 
-  const crumbs = [{ title: 'Docs', href: '/' }, ...findCrumbs(pathname)]
+  const crumbs = [{ title: 'Docs' }, ...findCrumbs(pathname)]
+
+  console.log(crumbs[crumbs.length - 1].href)
+  crumbs[crumbs.length - 1].href = undefined
 
   return (
     <nav
@@ -101,7 +108,14 @@ function Breadcrumbs({ className }: { className?: string }) {
             )
           }
           else {
-            inner = <NonLink>{crumb.title}</NonLink>
+            inner = (
+              <NonLink
+                {...(idx === crumbs.length - 1
+                  ? { 'aria-current': 'page' }
+                  : {})}
+              >{crumb.title}
+              </NonLink>
+            )
           }
 
           return (

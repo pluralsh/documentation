@@ -11,6 +11,7 @@ import {
   // RunBookIcon,
 } from 'pluralsh-design-system'
 import { ReactElement } from 'react'
+import deepFreeze from 'deep-freeze'
 
 export type NavItem = {
   title?: string
@@ -261,4 +262,4 @@ const data: NavData = [
   },
 ]
 
-export default data
+export default deepFreeze(data)
