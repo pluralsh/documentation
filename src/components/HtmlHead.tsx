@@ -24,7 +24,7 @@ function Favicons() {
   )
 }
 
-function PageHead({ title, description }) {
+function HtmlHead({ title, description }) {
   return (
     <Head>
       <title>{title}</title>
@@ -63,4 +63,4 @@ function PageHead({ title, description }) {
   )
 }
 
-export default PageHead
+export default HtmlHead
