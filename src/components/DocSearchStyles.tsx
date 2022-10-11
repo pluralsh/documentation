@@ -116,7 +116,8 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   },
   '.DocSearch-Button': {
     borderRadius: theme.borderRadiuses.medium,
-    border: theme.borders.default,
+    border: theme.borders.input,
+    margin: 0,
     width: 40,
     height: 40,
     display: 'flex',
@@ -131,6 +132,7 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     '&:focus, &:focus-visible': {
       outline: 'none',
       boxShadow: 'none',
+      backgroundColor: 'transparent',
     },
     '&:focus-visible': {
       ...theme.partials.focus.default,
