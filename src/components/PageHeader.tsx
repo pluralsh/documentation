@@ -37,7 +37,7 @@ const SocialLink = styled.a(({ theme }) => ({
   },
 }))
 
-export const PageHeader = styled(({ ...props }) => {
+function PageHeaderUnstyled({ ...props }) {
   const router = useRouter()
   const theme = useTheme()
 
@@ -122,7 +122,9 @@ export const PageHeader = styled(({ ...props }) => {
       </section>
     </header>
   )
-})(({ theme }) => ({
+}
+
+const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
   top: 0,
   position: 'sticky',
   height: 'var(--top-nav-height)',
@@ -146,7 +148,10 @@ export const PageHeader = styled(({ ...props }) => {
     },
   },
   '.logo': {
-    width: '164px',
+    width: 162,
+    [mqs.fullHeaderLoose]: {
+      width: 216,
+    },
   },
   '.rightSection, .leftSection': {
     display: 'flex',
@@ -205,3 +210,7 @@ const PageHeaderLinks = styled(({ ...props }) => (
     gap: theme.spacing.xsmall,
   },
 }))
+
+export {
+  PageHeader,
+}
