@@ -149,9 +149,9 @@ const CaretButton = styled(({ isOpen = false, className, ...props }) => {
     : {
       '&:hover': {
         '.icon': {
-          animationName: css`arrowHoverAnim`,
-          // transform: 'rotate(45deg)',
-          // transition: 'transform 0.1s ease',
+          // animationName: css`arrowHoverAnim`,
+          transform: 'rotate(45deg)',
+          transition: 'transform 0.1s ease',
         },
       },
     }),
