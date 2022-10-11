@@ -3,7 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 const mqs = {
   twoColumn: '@media screen and (min-width: 1000px)',
   fullHeader: '@media screen and (min-width: 1000px)',
-  fullHeaderLoose: '@media screen and (min-width: 1080px)',
+  fullHeaderLoose: '@media screen and (min-width: 1180px)',
   threeColumn: '@media screen and (min-width: 1280px)',
   threeColumnLoose: '@media screen and (min-width: 1280px)',
   maxWidth: '@media screen and (min-width: 1588px)',

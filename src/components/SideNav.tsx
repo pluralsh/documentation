@@ -12,7 +12,7 @@ import React, {
   useState,
 } from 'react'
 import Link from 'next/link'
-import styled, { useTheme } from 'styled-components'
+import styled, { css, keyframes, useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
 import { removeTrailingSlashes } from 'utils/text'
 import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
@@ -27,6 +27,13 @@ import { NavData, NavItem } from '../NavData'
 export type SideNavProps = {
   navData: NavData
 }
+
+const arrowHoverAnim = keyframes`
+ 0% { transform: rotate(45deg); }
+ 30% { transform: rotate(-5deg); }
+ 80% { transform: rotate(3deg); }
+ 100% { transform: rotate(0deg); }
+`
 
 const NavContext = createContext<{
   optimisticPathname: null | string
@@ -142,8 +149,9 @@ const CaretButton = styled(({ isOpen = false, className, ...props }) => {
     : {
       '&:hover': {
         '.icon': {
-          transform: 'translateX(10%)',
-          transition: 'transform 0.1s ease',
+          animationName: css`arrowHoverAnim`,
+          // transform: 'rotate(45deg)',
+          // transition: 'transform 0.1s ease',
         },
       },
     }),

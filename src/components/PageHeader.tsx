@@ -3,7 +3,7 @@ import styled, { useTheme } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 
 import {
-  Button, DiscordIcon, TwitterIcon,
+  Button, DiscordIcon, HamburgerMenuIcon, IconFrame,
 } from 'pluralsh-design-system'
 
 import { useRouter } from 'next/router'
@@ -14,6 +14,42 @@ import { mqs } from './GlobalStyles'
 
 const Filler = styled.div(_ => ({
   flexGrow: 1,
+}))
+
+function SearchButton() {
+  const router = useRouter()
+
+  return (
+    <DocSearch
+      appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
+      indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
+      apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
+      placeholder="Search Plural docs"
+      navigator={{
+        navigate: ({ itemUrl }) => {
+          router.push(itemUrl)
+        },
+      }}
+      getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
+    />
+  )
+}
+
+const HamburgerButton = styled(({ className }) => (
+  <div className={className}><IconFrame
+    clickable
+    textValue="Menu"
+    icon={<HamburgerMenuIcon />}
+  />
+  </div>
+))(({ theme }) => ({
+  width: 40,
+  heigh: 40,
+  alignItems: 'center',
+  justifyContent: 'center',
+  [mqs.fullHeader]: {
+    display: 'none',
+  },
 }))
 
 const SocialLink = styled.a(({ theme }) => ({
@@ -38,7 +74,6 @@ const SocialLink = styled.a(({ theme }) => ({
 }))
 
 function PageHeaderUnstyled({ ...props }) {
-  const router = useRouter()
   const theme = useTheme()
 
   return (
@@ -61,20 +96,9 @@ function PageHeaderUnstyled({ ...props }) {
       </nav>
       <Filler />
       <section className="rightSection">
-        <DocSearch
-          appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-          indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-          apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-          placeholder="Search Plural docs"
-          navigator={{
-            navigate: ({ itemUrl }) => {
-              router.push(itemUrl)
-            },
-          }}
-          getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
-        />
         <div className="socialIcons">
           <SocialLink
+            className="discordIcon"
             href="https://discord.gg/pluralsh"
             target="_blank"
             rel="noopener noreferrer"
@@ -82,14 +106,14 @@ function PageHeaderUnstyled({ ...props }) {
           >
             <DiscordIcon size={24} />
           </SocialLink>
-          <SocialLink
+          {/* <SocialLink
             href="https://twitter.com/plural_sh"
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={0}
           >
             <TwitterIcon size={24} />
-          </SocialLink>
+          </SocialLink> */}
         </div>
         <div className="githubButton">
           <GitHubButton
@@ -105,7 +129,7 @@ function PageHeaderUnstyled({ ...props }) {
         <div className="buttons">
           <Button
             as="a"
-            href="https://app.plural.sh"
+            href="https://app.plural.sh/signup"
             primary
             fontFamily={theme.fontFamilies.sans}
           >Get started
@@ -115,10 +139,11 @@ function PageHeaderUnstyled({ ...props }) {
             href="https://app.plural.sh/login"
             secondary
             fontFamily={theme.fontFamilies.sans}
-          >Log in
+          >Sign in
           </Button>
         </div>
-
+        <SearchButton />
+        <HamburgerButton />
       </section>
     </header>
   )
@@ -140,8 +165,16 @@ const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
     paddingLeft: 40,
     paddingRight: 40,
   },
-  '.socialIcons, .githubButton, .buttons': {
+  '.socialIcons, .githubButton': {
     display: 'none',
+    [mqs.fullHeaderLoose]: {
+      display: 'flex',
+      alignItems: 'center',
+    },
+  },
+  '.buttons': {
+    display: 'none',
+    gap: theme.spacing.medium,
     [mqs.fullHeader]: {
       display: 'flex',
       alignItems: 'center',
@@ -149,22 +182,16 @@ const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
   },
   '.logo': {
     width: 162,
-    [mqs.fullHeaderLoose]: {
-      width: 216,
+    [mqs.fullHeader]: {
+      // width: 216,
     },
   },
   '.rightSection, .leftSection': {
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing.medium,
-    [mqs.fullHeaderLoose]: {
-      gap: theme.spacing.large,
-    },
   },
   '.socialIcons': {
-    gap: theme.spacing.medium,
-  },
-  '.buttons': {
     gap: theme.spacing.medium,
   },
   '.githubButton': {
