@@ -1,4 +1,4 @@
-import { Button, GitHubLogoIcon } from 'pluralsh-design-system'
+import { GitHubLogoIcon } from 'pluralsh-design-system'
 import { useContext } from 'react'
 import styled from 'styled-components'
 
