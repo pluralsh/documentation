@@ -3,7 +3,10 @@ import styled, { useTheme } from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 
 import {
-  Button, DiscordIcon, HamburgerMenuIcon, IconFrame,
+  Button,
+  DiscordIcon,
+  HamburgerMenuIcon,
+  IconFrame,
 } from 'pluralsh-design-system'
 
 import { useRouter } from 'next/router'
@@ -36,11 +39,12 @@ function SearchButton() {
 }
 
 const HamburgerButton = styled(({ className }) => (
-  <div className={className}><IconFrame
-    clickable
-    textValue="Menu"
-    icon={<HamburgerMenuIcon />}
-  />
+  <div className={className}>
+    <IconFrame
+      clickable
+      textValue="Menu"
+      icon={<HamburgerMenuIcon />}
+    />
   </div>
 ))(_ => ({
   width: 40,
@@ -132,14 +136,16 @@ function PageHeaderUnstyled({ ...props }) {
             href="https://app.plural.sh/signup"
             primary
             fontFamily={theme.fontFamilies.sans}
-          >Get started
+          >
+            Get started
           </Button>
           <Button
             as="a"
             href="https://app.plural.sh/login"
             secondary
             fontFamily={theme.fontFamilies.sans}
-          >Sign in
+          >
+            Sign in
           </Button>
         </div>
         <SearchButton />
@@ -238,6 +244,4 @@ const PageHeaderLinks = styled(({ ...props }) => (
   },
 }))
 
-export {
-  PageHeader,
-}
+export { PageHeader }
