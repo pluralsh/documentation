@@ -12,6 +12,8 @@ import type { AppProps } from 'next/app'
 
 import HtmlHead from 'components/HtmlHead'
 
+import PageFooter from 'components/PageFooter'
+
 import ExternalScripts from '../src/components/ExternalScripts'
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
@@ -98,6 +100,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
                 </SideNavContainer>
                 <ContentContainer>
                   <MainContent Component={Component} />
+                  <PageFooter />
                 </ContentContainer>
                 <SideCarContainer>
                   <TableOfContents toc={toc} />
@@ -105,7 +108,6 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
               </PageGrid>
             </Page>
             <ExternalScripts />
-
           </PagePropsContext.Provider>
         </StyledThemeProvider>
       </ThemeProvider>
