@@ -42,7 +42,7 @@ const HamburgerButton = styled(({ className }) => (
     icon={<HamburgerMenuIcon />}
   />
   </div>
-))(({ theme }) => ({
+))(_ => ({
   width: 40,
   heigh: 40,
   alignItems: 'center',

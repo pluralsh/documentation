@@ -1,7 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import cloneDeep from 'lodash/cloneDeep'
 
 import { removeTrailingSlashes } from 'utils/text'
 
@@ -76,7 +75,6 @@ function Breadcrumbs({ className }: { className?: string }) {
 
   const crumbs = [{ title: 'Docs' }, ...findCrumbs(pathname)]
 
-  console.log(crumbs[crumbs.length - 1].href)
   crumbs[crumbs.length - 1].href = undefined
 
   return (

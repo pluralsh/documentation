@@ -28,13 +28,6 @@ export type SideNavProps = {
   navData: NavData
 }
 
-const arrowHoverAnim = keyframes`
- 0% { transform: rotate(45deg); }
- 30% { transform: rotate(-5deg); }
- 80% { transform: rotate(3deg); }
- 100% { transform: rotate(0deg); }
-`
-
 const NavContext = createContext<{
   optimisticPathname: null | string
   scrollRef: MutableRefObject<HTMLDivElement | null>
@@ -106,7 +99,7 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
   return content
 })
 
-const CaretButton = styled(({ isOpen = false, className, ...props }) => {
+const CaretButtonInner = styled(({ isOpen = false, className, ...props }) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
 
   return (
@@ -139,23 +132,47 @@ const CaretButton = styled(({ isOpen = false, className, ...props }) => {
     right: theme.spacing.xsmall + theme.spacing.xsmall,
     bottom: theme.spacing.xsmall,
   },
-  ...(isOpen
-    ? {
-      '.icon': {
-        transform: 'rotate(90deg)',
-        transition: 'transform 0.1s ease',
-      },
-    }
-    : {
-      '&:hover': {
-        '.icon': {
-          // animationName: css`arrowHoverAnim`,
-          transform: 'rotate(45deg)',
-          transition: 'transform 0.1s ease',
-        },
-      },
-    }),
+  '.icon': {
+    transform: `rotate(${isOpen ? 90 : 0}deg)`,
+  },
 }))
+
+const arrowOpenHoverKF = keyframes`
+ 0% { transform: rotate(0); }
+ 30% { transform: rotate(35deg); }
+ 60% { transform: rotate(-5deg); }
+ 90% { transform: rotate(3deg); }
+ 100% { transform: rotate(0deg); }
+`
+
+const arrowCloseHoverKF = keyframes`
+ 0% { transform: rotate(90deg); }
+ 30% { transform: rotate(55deg); }
+ 60% { transform: rotate(95deg); }
+ 90% { transform: rotate(87deg); }
+ 100% { transform: rotate(90deg); }
+`
+
+const arrowOpenHoverAnim = css`
+  &:hover .icon {
+    animation-name: ${arrowOpenHoverKF};
+  }
+`
+
+const arrowCloseHoverAnim = css`
+  &:hover .icon {
+    animation-name: ${arrowCloseHoverKF};
+  }
+`
+
+const CaretButton = styled(CaretButtonInner)`
+  &:hover .icon {
+    animation-duration: 0.5s;
+    animation-iteration-count: 1;
+  }
+  ${({ isOpen }) => !isOpen && arrowOpenHoverAnim}
+  ${({ isOpen }) => isOpen && arrowCloseHoverAnim}
+`
 
 const NavLink = styled(({
   className,
