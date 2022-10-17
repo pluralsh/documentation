@@ -14,6 +14,8 @@ import HtmlHead from 'components/HtmlHead'
 
 import PageFooter from 'components/PageFooter'
 
+import { BreakpointProvider } from 'components/Breakpoints'
+
 import ExternalScripts from '../src/components/ExternalScripts'
 import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
@@ -80,41 +82,46 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <SSRProvider>
-      <ThemeProvider theme={honorableTheme}>
-        <StyledThemeProvider theme={styledTheme}>
-          <CssBaseline />
-          <PluralGlobalStyle />
-          <GlobalStyles />
-          <DocSearchStyles />
-          <PagePropsContext.Provider value={pageProps}>
-            <HtmlHead
-              title={title}
-              description={description}
-            />
-            <PageHeader />
-            <Page>
-              <PageGrid>
-                <SideNavContainer>
-                  <SideNav navData={navData} />
-                </SideNavContainer>
-                <ContentContainer>
-                  <MainContent Component={Component} />
-                  <PageFooter />
-                </ContentContainer>
-                <SideCarContainer>
-                  <TableOfContents toc={toc} />
-                </SideCarContainer>
-              </PageGrid>
-            </Page>
-            <ExternalScripts />
-          </PagePropsContext.Provider>
-        </StyledThemeProvider>
-      </ThemeProvider>
-    </SSRProvider>
+    <>
+      <CssBaseline />
+      <PluralGlobalStyle />
+      <GlobalStyles />
+      <DocSearchStyles />
+      <PagePropsContext.Provider value={pageProps}>
+        <HtmlHead
+          title={title}
+          description={description}
+        />
+        <PageHeader />
+        <Page>
+          <PageGrid>
+            <SideNavContainer>
+              <SideNav navData={navData} />
+            </SideNavContainer>
+            <ContentContainer>
+              <MainContent Component={Component} />
+              <PageFooter />
+            </ContentContainer>
+            <SideCarContainer>
+              <TableOfContents toc={toc} />
+            </SideCarContainer>
+          </PageGrid>
+        </Page>
+        <ExternalScripts />
+      </PagePropsContext.Provider>
+    </>
   )
 
-  return app
+  return (
+    <SSRProvider>
+      <BreakpointProvider>
+        <ThemeProvider theme={honorableTheme}>
+          <StyledThemeProvider theme={styledTheme}>{app}
+          </StyledThemeProvider>
+        </ThemeProvider>
+      </BreakpointProvider>
+    </SSRProvider>
+  )
 }
 
 export default MyApp

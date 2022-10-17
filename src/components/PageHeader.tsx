@@ -1,84 +1,24 @@
 import Link from 'next/link'
 import styled, { useTheme } from 'styled-components'
-import { DocSearch } from '@docsearch/react'
 
 import {
   Button,
   DiscordIcon,
-  HamburgerMenuIcon,
-  IconFrame,
 } from 'pluralsh-design-system'
 
-import { useRouter } from 'next/router'
-
-import GitHubButton from 'react-github-btn'
-
-import { mqs } from './GlobalStyles'
+import { mqs, useBreakpoint } from './Breakpoints'
+import GithubStars from './GithubStars'
+import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
 
 const Filler = styled.div(_ => ({
   flexGrow: 1,
 }))
 
-function SearchButton() {
-  const router = useRouter()
-
-  return (
-    <DocSearch
-      appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-      indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-      apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-      placeholder="Search Plural docs"
-      navigator={{
-        navigate: ({ itemUrl }) => {
-          router.push(itemUrl)
-        },
-      }}
-      getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
-    />
-  )
-}
-
-const HamburgerButton = styled(({ className }) => (
-  <div className={className}>
-    <IconFrame
-      clickable
-      textValue="Menu"
-      icon={<HamburgerMenuIcon />}
-    />
-  </div>
-))(_ => ({
-  width: 40,
-  heigh: 40,
-  alignItems: 'center',
-  justifyContent: 'center',
-  [mqs.fullHeader]: {
-    display: 'none',
-  },
-}))
-
-const SocialLink = styled.a(({ theme }) => ({
-  width: 40,
-  height: 40,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: theme.borderRadiuses.medium,
-  color: theme.colors.text,
-  '&:hover': {
-    background: theme.colors['fill-zero-hover'],
-    cursor: 'pointer',
-  },
-  '&:focus, &:focus-visible': {
-    outline: 'none',
-    boxShadow: 'none',
-  },
-  '&:focus-visible': {
-    ...theme.partials.focus.default,
-  },
-}))
-
 function PageHeaderUnstyled({ ...props }) {
   const theme = useTheme()
+  const breakpoint = useBreakpoint()
+
+  console.log('breakpoint', breakpoint)
 
   return (
     <header {...props}>
@@ -108,27 +48,12 @@ function PageHeaderUnstyled({ ...props }) {
             rel="noopener noreferrer"
             tabIndex={0}
           >
-            <DiscordIcon size={24} />
+            <DiscordIcon size={16} />
           </SocialLink>
-          {/* <SocialLink
-            href="https://twitter.com/plural_sh"
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={0}
-          >
-            <TwitterIcon size={24} />
-          </SocialLink> */}
-        </div>
-        <div className="githubButton">
-          <GitHubButton
-            href="https://github.com/pluralsh/plural"
-            data-color-scheme="no-preference: light; light: light; dark: light;"
-            data-size="large"
-            data-show-count="true"
-            aria-label="Star pluralsh/plural on GitHub"
-          >
-            Star
-          </GitHubButton>
+          <GithubStars
+            account="pluralsh"
+            repo="plural"
+          />
         </div>
         <div className="buttons">
           <Button
@@ -149,7 +74,7 @@ function PageHeaderUnstyled({ ...props }) {
           </Button>
         </div>
         <SearchButton />
-        <HamburgerButton />
+        <HamburgerButton onClick={() => {}} />
       </section>
     </header>
   )
@@ -171,11 +96,12 @@ const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
     paddingLeft: 40,
     paddingRight: 40,
   },
-  '.socialIcons, .githubButton': {
+  '.socialIcons': {
     display: 'none',
-    [mqs.fullHeaderLoose]: {
+    [mqs.fullHeader]: {
       display: 'flex',
-      alignItems: 'center',
+      flexDirection: 'row',
+      gap: theme.spacing.medium,
     },
   },
   '.buttons': {
@@ -196,21 +122,6 @@ const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing.medium,
-  },
-  '.socialIcons': {
-    gap: theme.spacing.medium,
-  },
-  '.githubButton': {
-    height: 28,
-    overflow: 'hidden',
-    span: {
-      display: 'block',
-      height: 28,
-      overflow: 'hidden',
-    },
-    '.widget': {
-      display: 'block !important',
-    },
   },
 }))
 
