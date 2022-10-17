@@ -1,7 +1,9 @@
+import { GitHubLogoIcon } from 'pluralsh-design-system'
 import { useContext } from 'react'
 import styled from 'styled-components'
 
 import Breadcrumbs from './Breadcrumbs'
+import { FooterLink } from './PageFooter'
 
 import { PagePropsContext } from './PagePropsContext'
 
@@ -29,6 +31,22 @@ const Description = styled.p(({ theme }) => ({
   marginBottom: theme.spacing.small,
 }))
 
+const EditOnGithub = styled.div(({ theme }) => ({
+  marginBottom: theme.spacing.xxxlarge,
+}))
+
+const EditOnGithubLink = styled(FooterLink)(({ theme }) => ({
+  display: 'flex',
+  flexDirection: 'row',
+  gap: theme.spacing.small,
+}))
+
+const PageDivider = styled.div(({ theme }) => ({
+  marginTop: theme.spacing.xxxlarge,
+  marginBottom: theme.spacing.xxxlarge,
+  borderTop: theme.borders.default,
+}))
+
 export default function MainContent({ Component }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps
@@ -49,6 +67,22 @@ export default function MainContent({ Component }) {
           </PageHeader>
         )}
         <Component {...pageProps} />
+        <PageDivider />
+        {markdoc?.file?.path && (
+          <EditOnGithub>
+            <EditOnGithubLink
+              target="_blank"
+              rel="noopener noreferrer"
+              href={`https://github.com/pluralsh/documentation/blob/${process.env.NEXT_PUBLIC_GITHUB_BRANCH_NAME}/pages${markdoc.file.path}`}
+            >
+              <GitHubLogoIcon
+                size={20}
+                display="block"
+              />
+              <div>Edit on Github</div>
+            </EditOnGithubLink>
+          </EditOnGithub>
+        )}
       </ContentWrapper>
     </>
   )
