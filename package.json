@@ -34,6 +34,7 @@
     "react-dom": "18.2.0",
     "react-embed": "3.6.0",
     "react-github-btn": "1.4.0",
+    "react-scrolllock": "5.0.1",
     "react-spring": "9.5.4",
     "react-use-measure": "2.1.1",
     "rooks": "7.4.0",

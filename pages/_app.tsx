@@ -10,14 +10,11 @@ import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import HtmlHead from 'components/HtmlHead'
-
-import PageFooter from 'components/PageFooter'
-
-import { BreakpointProvider } from 'components/Breakpoints'
-
+import { BreakpointProvider } from '../src/components/Breakpoints'
+import PageFooter from '../src/components/PageFooter'
+import HtmlHead from '../src/components/HtmlHead'
+import { NavPositionWrapper, SideNav } from '../src/components/SideNav'
 import ExternalScripts from '../src/components/ExternalScripts'
-import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
 import { PageHeader } from '../src/components/PageHeader'
 import {
@@ -96,7 +93,15 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         <Page>
           <PageGrid>
             <SideNavContainer>
-              <SideNav navData={navData} />
+              <NavPositionWrapper
+                role="navigation"
+                aria-label="Main"
+              >
+                <SideNav
+                  navData={navData}
+                  desktop
+                />
+              </NavPositionWrapper>
             </SideNavContainer>
             <ContentContainer>
               <MainContent Component={Component} />

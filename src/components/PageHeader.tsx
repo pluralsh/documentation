@@ -4,11 +4,17 @@ import styled, { useTheme } from 'styled-components'
 import {
   Button,
   DiscordIcon,
+  usePrevious,
 } from 'pluralsh-design-system'
 
-import { mqs, useBreakpoint } from './Breakpoints'
+import { useEffect, useState } from 'react'
+
+import { useRouter } from 'next/router'
+
+import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
 import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
+import MobileMenu from './MobileMenu'
 
 const Filler = styled.div(_ => ({
   flexGrow: 1,
@@ -16,9 +22,24 @@ const Filler = styled.div(_ => ({
 
 function PageHeaderUnstyled({ ...props }) {
   const theme = useTheme()
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
+  const { pathname } = useRouter()
+  const prevPathname = usePrevious(pathname)
+
   const breakpoint = useBreakpoint()
 
-  console.log('breakpoint', breakpoint)
+  useEffect(() => {
+    if (BreakpointIsGreaterOrEqual(breakpoint, 'fullHeader')) {
+      console.log('fullHeaderrr')
+      setMenuIsOpen(false)
+    }
+  }, [breakpoint])
+
+  useEffect(() => {
+    if (pathname !== prevPathname) {
+      setMenuIsOpen(false)
+    }
+  }, [pathname, prevPathname])
 
   return (
     <header {...props}>
@@ -74,8 +95,12 @@ function PageHeaderUnstyled({ ...props }) {
           </Button>
         </div>
         <SearchButton />
-        <HamburgerButton onClick={() => {}} />
+        <HamburgerButton onClick={() => {
+          setMenuIsOpen(!menuIsOpen)
+        }}
+        />
       </section>
+      <MobileMenu isOpen={menuIsOpen} />
     </header>
   )
 }

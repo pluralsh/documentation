@@ -26,14 +26,18 @@ import { NavData, NavItem } from '../NavData'
 
 export type SideNavProps = {
   navData: NavData
+  desktop: boolean
+  show: boolean
 }
 
 const NavContext = createContext<{
   optimisticPathname: null | string
   scrollRef: MutableRefObject<HTMLDivElement | null>
+  desktop: boolean
 }>({
   optimisticPathname: null,
   scrollRef: { current: null },
+  desktop: false,
 })
 
 const KeyboardNavContext = createContext<{
@@ -42,7 +46,7 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const LinkA = styled.a(({ theme }) => ({
+const LinkA = styled.a<{desktop: boolean}>(({ desktop, theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   cursor: 'pointer',
@@ -62,6 +66,8 @@ const LinkA = styled.a(({ theme }) => ({
   '&:focus-visible::after': {
     borderStartStartRadius: theme.borderRadiuses.medium,
     borderEndStartRadius: theme.borderRadiuses.medium,
+    borderStartEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
+    borderEndEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
     ...theme.partials.focus.insetAbsolute,
   },
 }))
@@ -74,9 +80,11 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
   className, children, icon, href,
 }, ref) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
+  const { desktop } = useContext(NavContext)
   const content = (
     <LinkA
       className={className}
+      desktop={desktop}
       tabIndex={keyboardNavigable ? 0 : -1}
       ref={ref}
     >
@@ -181,12 +189,14 @@ const NavLink = styled(({
   childIsSelected = false,
   onToggleOpen,
   icon,
+  desktop: _,
   ...props
 }: {
     isSubSection?: boolean
     isOpen?: boolean
     childIsSelected: boolean
     icon?: ReactElement
+    desktop: boolean
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof Link>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
@@ -235,7 +245,7 @@ const NavLink = styled(({
       )}
     </li>
   )
-})(({ theme }) => ({
+})(({ desktop, theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   position: 'relative',
@@ -248,6 +258,8 @@ const NavLink = styled(({
 
   borderStartStartRadius: theme.borderRadiuses.medium,
   borderEndStartRadius: theme.borderRadiuses.medium,
+  borderStartEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
+  borderEndEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
 
   '&:hover': {
     backgroundColor: theme.colors['fill-one-hover'],
@@ -266,8 +278,10 @@ const TopHeading = styled.h1(({ theme }) => ({
   paddingLeft: theme.spacing.medium,
   paddingTop: theme.spacing.xsmall,
   paddingBottom: theme.spacing.xsmall,
-  marginTop: theme.spacing.large,
   ...theme.partials.marketingText.label,
+  '&:not(:first-child)': {
+    marginTop: theme.spacing.large,
+  },
 }))
 
 const TopSection = styled(({ title, children, ...props }) => (
@@ -385,6 +399,7 @@ function SubSection({
   })
 
   const contextValue = useMemo(() => ({ keyboardNavigable: isOpen }), [isOpen])
+  const { desktop } = useContext(NavContext)
 
   return (
     <>
@@ -392,6 +407,7 @@ function SubSection({
         isSubSection={!!sections}
         href={href}
         icon={icon}
+        desktop={desktop}
         isOpen={isOpen}
         childIsSelected={defaultOpen}
         onToggleOpen={toggleOpen}
@@ -420,14 +436,14 @@ function SubSection({
 }
 const navLeftOffset = 1000
 
-const NavPositionWrapper = styled.nav(({ theme: _theme }) => ({
+export const NavPositionWrapper = styled.nav(({ desktop, theme: _theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
   marginLeft: -navLeftOffset,
 }))
 
-const NavScrollContainer = styled.div(({ theme }) => ({
+const NavScrollContainer = styled.div<{desktop: boolean, show: boolean}>(({ desktop, show, theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -435,24 +451,29 @@ const NavScrollContainer = styled.div(({ theme }) => ({
   bottom: 0,
   overflowY: 'auto',
   backgroundColor: theme.colors['fill-one'],
-  borderRight: theme.borders['fill-one'],
+  borderRight: desktop ? theme.borders['fill-one'] : 'none',
   paddingBottom: theme.spacing.xlarge,
+  paddingTop: desktop ? theme.spacing.large : 0,
+  paddingRight: desktop ? 0 : theme.spacing.medium,
+  paddingLeft: desktop ? 0 : theme.spacing.medium,
+  display: show ? 'none' : 'block',
 }))
 
-const Nav = styled.nav(({ theme: _theme }) => ({
-  marginLeft: navLeftOffset,
+const Nav = styled.nav<{desktop: boolean}>(({ desktop, theme: _theme }) => ({
+  marginLeft: desktop ? navLeftOffset : 0,
 }))
 
-export function SideNav({ navData, ...props }: SideNavProps) {
+export function SideNav({ navData, desktop, show }: SideNavProps) {
   const router = useRouter()
   const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contextValue = useMemo(() => ({
     scrollRef,
+    desktop,
     optimisticPathname:
         optimisticPathname === null ? router.pathname : optimisticPathname,
   }),
-  [optimisticPathname, router.pathname])
+  [optimisticPathname, router.pathname, desktop])
 
   useEffect(() => {
     if (!router?.events?.on) {
@@ -481,23 +502,22 @@ export function SideNav({ navData, ...props }: SideNavProps) {
 
   return (
     <NavContext.Provider value={contextValue}>
-      <NavPositionWrapper
-        aria-label="Main"
-        {...props}
+      <NavScrollContainer
+        desktop={desktop}
+        show={show}
+        ref={scrollRef}
       >
-        <NavScrollContainer ref={scrollRef}>
-          <Nav>
-            {navData.map(({ title, sections }) => (
-              <TopSection
-                title={title}
-                key={title}
-              >
-                {sections && <SubSectionsList sections={sections} />}
-              </TopSection>
-            ))}
-          </Nav>
-        </NavScrollContainer>
-      </NavPositionWrapper>
+        <Nav desktop={desktop}>
+          {navData.map(({ title, sections }) => (
+            <TopSection
+              title={title}
+              key={title}
+            >
+              {sections && <SubSectionsList sections={sections} />}
+            </TopSection>
+          ))}
+        </Nav>
+      </NavScrollContainer>
     </NavContext.Provider>
   )
 }
