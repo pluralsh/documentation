@@ -6,7 +6,7 @@ import NavData from 'NavData'
 import { useState } from 'react'
 
 import {
-  ArrowLeftIcon, ArrowRightIcon, Button, DiscordIcon, TwitterIcon,
+  ArrowLeftIcon, ArrowRightIcon, Button, DiscordIcon,
 } from 'pluralsh-design-system'
 
 import { SocialLink } from './PageHeaderButtons'
@@ -48,14 +48,6 @@ function PluralMenuContent({
           tabIndex={0}
         >
           <DiscordIcon size={16} />
-        </SocialLink>
-        <SocialLink
-          href="https://twitter.com/plural_sh"
-          target="_blank"
-          rel="noopener noreferrer"
-          tabIndex={0}
-        >
-          <TwitterIcon size={16} />
         </SocialLink>
         <GithubStars
           account="pluralsh"

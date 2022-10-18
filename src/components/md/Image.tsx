@@ -5,8 +5,7 @@ export const commonCfg = { shouldForwardProp: () => true }
 export const MediaWrap = styled.span.withConfig(commonCfg)(({ theme }) => ({
   display: 'block',
   width: '100%',
-  paddingLeft: theme.spacing.large,
-  paddingRight: theme.spacing.large,
+  padding: theme.spacing.large,
   marginTop: theme.spacing.large,
   marginBottom: theme.spacing.large,
 }))
