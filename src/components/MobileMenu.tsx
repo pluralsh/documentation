@@ -6,7 +6,7 @@ import NavData from 'NavData'
 import { useState } from 'react'
 
 import {
-  ArrowLeftIcon, ArrowRightIcon, Button, DiscordIcon, TwitterIcon,
+  ArrowLeftIcon, ArrowRightIcon, Button, DiscordIcon,
 } from 'pluralsh-design-system'
 
 import { SocialLink } from './PageHeaderButtons'
