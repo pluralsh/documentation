@@ -17,9 +17,12 @@ function PageFooter({ className }: { className?: string }) {
         Terms & Conditions
       </FooterLink>
       <FooterLink
-        href="https://plural.sh"
-        onClick={() => {
-          alert('Add Cookie thing')
+        href=""
+        onClick={e => {
+          e.preventDefault()
+          const _hsp = (window as any)._hsp = (window as any)._hsp || []
+
+          _hsp.push(['showBanner'])
         }}
       >
         Cookie Settings
