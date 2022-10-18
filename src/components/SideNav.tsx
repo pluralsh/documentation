@@ -47,7 +47,7 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const LinkA = styled.a<{desktop: boolean}>(({ desktop, theme }) => ({
+const LinkA = styled.a<{ desktop: boolean }>(({ desktop, theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   cursor: 'pointer',
@@ -444,7 +444,7 @@ export const NavPositionWrapper = styled.nav(({ theme: _theme }) => ({
   marginLeft: -navLeftOffset,
 }))
 
-const NavScrollContainer = styled.div<{desktop: boolean, hide: boolean}>(({ desktop, hide = false, theme }) => ({
+const NavScrollContainer = styled.div<{ desktop: boolean; hide: boolean }>(({ desktop, hide = false, theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -453,14 +453,14 @@ const NavScrollContainer = styled.div<{desktop: boolean, hide: boolean}>(({ desk
   overflowY: 'auto',
   backgroundColor: theme.colors['fill-one'],
   borderRight: desktop ? theme.borders['fill-one'] : 'none',
-  paddingBottom: theme.spacing.xlarge,
+  paddingBottom: `calc(${theme.spacing.xlarge}px + var(--menu-extra-bpad))`,
   paddingTop: desktop ? theme.spacing.large : 0,
   paddingRight: desktop ? 0 : theme.spacing.medium,
   paddingLeft: desktop ? 0 : theme.spacing.medium,
   display: hide ? 'none' : 'block',
 }))
 
-const Nav = styled.nav<{desktop: boolean}>(({ desktop, theme: _theme }) => ({
+const Nav = styled.nav<{ desktop: boolean }>(({ desktop, theme: _theme }) => ({
   marginLeft: desktop ? navLeftOffset : 0,
 }))
 

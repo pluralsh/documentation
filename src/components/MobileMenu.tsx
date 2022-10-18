@@ -62,6 +62,9 @@ const PluralMenu = styled(PluralMenuContent)(({ hide, theme }) => ({
   display: hide ? 'none' : 'block',
   paddingLeft: theme.spacing.xlarge,
   paddingRight: theme.spacing.xlarge,
+  overflow: 'auto',
+  paddingBottom: `calc(${theme.spacing.xlarge}px + var(--menu-extra-bpad))`,
+
   [TopHeading]: {
     paddingLeft: 0,
   },
@@ -93,8 +96,6 @@ const Content = styled.div(({ theme }) => ({
   bottom: 0,
   paddingRight: 0,
   background: theme.colors['fill-one'],
-  overflow: 'auto',
-
   display: 'flex',
   flexDirection: 'column',
 }))
@@ -143,6 +144,7 @@ function MobileMenu({ isOpen, className }: MobileMenuProps) {
 }
 
 export default styled(MobileMenu)(({ isOpen, theme }) => ({
+  '--menu-extra-bpad': '120px',
   position: 'fixed',
   top: 0,
   left: 0,

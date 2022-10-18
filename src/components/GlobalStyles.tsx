@@ -21,6 +21,7 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   },
   ':root': {
     '--top-nav-height': '72px',
+    '--menu-extra-bpad': '0px',
   },
   html: {
     ...fillAvailable('height'),
