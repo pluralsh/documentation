@@ -49,14 +49,6 @@ function PluralMenuContent({
         >
           <DiscordIcon size={16} />
         </SocialLink>
-        <SocialLink
-          href="https://twitter.com/plural_sh"
-          target="_blank"
-          rel="noopener noreferrer"
-          tabIndex={0}
-        >
-          <TwitterIcon size={16} />
-        </SocialLink>
         <GithubStars
           account="pluralsh"
           repo="plural"
