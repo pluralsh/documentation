@@ -27,7 +27,7 @@ import { NavData, NavItem } from '../NavData'
 export type SideNavProps = {
   navData: NavData
   desktop: boolean
-  show: boolean
+  hide?: boolean
 }
 
 const NavContext = createContext<{
@@ -274,7 +274,7 @@ const NavLink = styled(({
   },
 }))
 
-const TopHeading = styled.h1(({ theme }) => ({
+export const TopHeading = styled.h1(({ theme }) => ({
   paddingLeft: theme.spacing.medium,
   paddingTop: theme.spacing.xsmall,
   paddingBottom: theme.spacing.xsmall,
@@ -436,14 +436,14 @@ function SubSection({
 }
 const navLeftOffset = 1000
 
-export const NavPositionWrapper = styled.nav(({ desktop, theme: _theme }) => ({
+export const NavPositionWrapper = styled.nav(({ theme: _theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
   marginLeft: -navLeftOffset,
 }))
 
-const NavScrollContainer = styled.div<{desktop: boolean, show: boolean}>(({ desktop, show, theme }) => ({
+const NavScrollContainer = styled.div<{desktop: boolean, hide: boolean}>(({ desktop, hide = false, theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -456,14 +456,14 @@ const NavScrollContainer = styled.div<{desktop: boolean, show: boolean}>(({ desk
   paddingTop: desktop ? theme.spacing.large : 0,
   paddingRight: desktop ? 0 : theme.spacing.medium,
   paddingLeft: desktop ? 0 : theme.spacing.medium,
-  display: show ? 'none' : 'block',
+  display: hide ? 'none' : 'block',
 }))
 
 const Nav = styled.nav<{desktop: boolean}>(({ desktop, theme: _theme }) => ({
   marginLeft: desktop ? navLeftOffset : 0,
 }))
 
-export function SideNav({ navData, desktop, show }: SideNavProps) {
+export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
   const router = useRouter()
   const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -504,7 +504,7 @@ export function SideNav({ navData, desktop, show }: SideNavProps) {
     <NavContext.Provider value={contextValue}>
       <NavScrollContainer
         desktop={desktop}
-        show={show}
+        hide={hide}
         ref={scrollRef}
       >
         <Nav desktop={desktop}>

@@ -1,15 +1,13 @@
 import Link from 'next/link'
 import styled, { useTheme } from 'styled-components'
-
 import {
   Button,
   DiscordIcon,
   usePrevious,
 } from 'pluralsh-design-system'
-
 import { useEffect, useState } from 'react'
-
 import { useRouter } from 'next/router'
+import { useKey } from 'rooks'
 
 import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
@@ -40,6 +38,10 @@ function PageHeaderUnstyled({ ...props }) {
       setMenuIsOpen(false)
     }
   }, [pathname, prevPathname])
+
+  useKey(['Escape'], () => {
+    setMenuIsOpen(false)
+  })
 
   return (
     <header {...props}>
@@ -150,7 +152,7 @@ const PageHeader = styled(PageHeaderUnstyled)(({ theme }) => ({
   },
 }))
 
-const MainLink = styled.a(({ theme }) => ({
+export const MainLink = styled.a(({ theme }) => ({
   display: 'flex',
   alignItems: 'center',
   '&:any-link': {
