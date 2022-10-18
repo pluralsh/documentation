@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import ScrollLock from 'react-scrolllock'
+import ScrollLock, { TouchScrollable } from 'react-scrolllock'
 
 import NavData from 'NavData'
 
@@ -93,6 +93,7 @@ const Content = styled.div(({ theme }) => ({
   bottom: 0,
   paddingRight: 0,
   background: theme.colors['fill-one'],
+  overflow: 'auto',
 
   display: 'flex',
   flexDirection: 'column',
@@ -105,35 +106,37 @@ function MobileMenu({ isOpen, className }: MobileMenuProps) {
     <>
       {isOpen ? <ScrollLock /> : null}
       <div className={className}>
-        <Content>
-          <NavButtons>
-            {curMenu === 'docs' ? (
-              <Button
-                tertiary
-                endIcon={<ArrowRightIcon />}
-                onClick={() => setCurMenu('plural')}
-              >
-                Plural menu
-              </Button>
-            ) : (
-              <Button
-                tertiary
-                startIcon={<ArrowLeftIcon />}
-                onClick={() => setCurMenu('docs')}
-              >
-                Docs menu
-              </Button>
-            )}
-          </NavButtons>
-          <NavWrap>
-            <SideNav
-              hide={curMenu !== 'docs'}
-              desktop={false}
-              navData={NavData}
-            />
-            <PluralMenu hide={curMenu !== 'plural'} />
-          </NavWrap>
-        </Content>
+        <TouchScrollable>
+          <Content>
+            <NavButtons>
+              {curMenu === 'docs' ? (
+                <Button
+                  tertiary
+                  endIcon={<ArrowRightIcon />}
+                  onClick={() => setCurMenu('plural')}
+                >
+                  Plural menu
+                </Button>
+              ) : (
+                <Button
+                  tertiary
+                  startIcon={<ArrowLeftIcon />}
+                  onClick={() => setCurMenu('docs')}
+                >
+                  Docs menu
+                </Button>
+              )}
+            </NavButtons>
+            <NavWrap>
+              <SideNav
+                hide={curMenu !== 'docs'}
+                desktop={false}
+                navData={NavData}
+              />
+              <PluralMenu hide={curMenu !== 'plural'} />
+            </NavWrap>
+          </Content>
+        </TouchScrollable>
       </div>
     </>
   )
