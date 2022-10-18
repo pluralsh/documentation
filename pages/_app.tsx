@@ -10,12 +10,11 @@ import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
 
-import HtmlHead from 'components/HtmlHead'
-
-import PageFooter from 'components/PageFooter'
-
+import { BreakpointProvider } from '../src/components/Breakpoints'
+import PageFooter from '../src/components/PageFooter'
+import HtmlHead from '../src/components/HtmlHead'
+import { NavPositionWrapper, SideNav } from '../src/components/SideNav'
 import ExternalScripts from '../src/components/ExternalScripts'
-import { SideNav } from '../src/components/SideNav'
 import { TableOfContents } from '../src/components/TableOfContents'
 import { PageHeader } from '../src/components/PageHeader'
 import {
@@ -80,41 +79,54 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     : []
 
   const app = (
-    <SSRProvider>
-      <ThemeProvider theme={honorableTheme}>
-        <StyledThemeProvider theme={styledTheme}>
-          <CssBaseline />
-          <PluralGlobalStyle />
-          <GlobalStyles />
-          <DocSearchStyles />
-          <PagePropsContext.Provider value={pageProps}>
-            <HtmlHead
-              title={title}
-              description={description}
-            />
-            <PageHeader />
-            <Page>
-              <PageGrid>
-                <SideNavContainer>
-                  <SideNav navData={navData} />
-                </SideNavContainer>
-                <ContentContainer>
-                  <MainContent Component={Component} />
-                  <PageFooter />
-                </ContentContainer>
-                <SideCarContainer>
-                  <TableOfContents toc={toc} />
-                </SideCarContainer>
-              </PageGrid>
-            </Page>
-            <ExternalScripts />
-          </PagePropsContext.Provider>
-        </StyledThemeProvider>
-      </ThemeProvider>
-    </SSRProvider>
+    <>
+      <CssBaseline />
+      <PluralGlobalStyle />
+      <GlobalStyles />
+      <DocSearchStyles />
+      <PagePropsContext.Provider value={pageProps}>
+        <HtmlHead
+          title={title}
+          description={description}
+        />
+        <PageHeader />
+        <Page>
+          <PageGrid>
+            <SideNavContainer>
+              <NavPositionWrapper
+                role="navigation"
+                aria-label="Main"
+              >
+                <SideNav
+                  navData={navData}
+                  desktop
+                />
+              </NavPositionWrapper>
+            </SideNavContainer>
+            <ContentContainer>
+              <MainContent Component={Component} />
+              <PageFooter />
+            </ContentContainer>
+            <SideCarContainer>
+              <TableOfContents toc={toc} />
+            </SideCarContainer>
+          </PageGrid>
+        </Page>
+        <ExternalScripts />
+      </PagePropsContext.Provider>
+    </>
   )
 
-  return app
+  return (
+    <SSRProvider>
+      <BreakpointProvider>
+        <ThemeProvider theme={honorableTheme}>
+          <StyledThemeProvider theme={styledTheme}>{app}
+          </StyledThemeProvider>
+        </ThemeProvider>
+      </BreakpointProvider>
+    </SSRProvider>
+  )
 }
 
 export default MyApp

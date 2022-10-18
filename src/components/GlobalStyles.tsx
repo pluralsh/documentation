@@ -1,13 +1,6 @@
 import { createGlobalStyle } from 'styled-components'
 
-const mqs = {
-  twoColumn: '@media screen and (min-width: 1000px)',
-  fullHeader: '@media screen and (min-width: 1000px)',
-  fullHeaderLoose: '@media screen and (min-width: 1180px)',
-  threeColumn: '@media screen and (min-width: 1280px)',
-  threeColumnLoose: '@media screen and (min-width: 1280px)',
-  maxWidth: '@media screen and (min-width: 1588px)',
-}
+import { mqs } from './Breakpoints'
 
 const fillAvailable = prop => ({
   [`${prop} `]: '-webkit-fill-available',
@@ -52,4 +45,4 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
 }))
 
 export default GlobalStyles
-export { mqs, fillAvailable }
+export { fillAvailable }
