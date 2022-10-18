@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-import { mqs } from './GlobalStyles'
+import { mqs } from './Breakpoints'
 
 export const PageGrid = styled.div(_p => ({
   display: 'flex',
@@ -43,7 +43,7 @@ export const ContentContainer = styled.main(({ theme }) => ({
   // Don't remove this min width, or it will paradoxically allow
   // the content to stretch wider than the flex container
   minWidth: '100px',
-  [mqs.threeColumnLoose]: {
+  [mqs.threeColumn]: {
     maxWidth: 896,
     marginRight: theme.spacing.xlarge,
     marginLeft: theme.spacing.xlarge,

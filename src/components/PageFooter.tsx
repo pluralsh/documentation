@@ -57,6 +57,6 @@ export const EditOnGitHubLink = styled(({ ...props }: ComponentPropsWithoutRef<'
 export default styled(PageFooter)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing.medium,
-  // paddingTop: theme.spacing.large,
+  flexWrap: 'wrap',
   marginBottom: theme.spacing.large,
 }))
