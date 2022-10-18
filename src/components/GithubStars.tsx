@@ -18,20 +18,18 @@ function isGithubRepoData(obj: unknown): obj is GithubRepoData {
 }
 
 const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loading }) => ({
-  ...theme.partials.text.buttonSmall,
-  fontWeight: '600',
   height: theme.spacing.xlarge,
   borderRadius: theme.borderRadiuses.medium,
-  color: theme.colors.text,
-  border: theme.borders['fill-two'],
-  background: theme.colors['fill-two'],
   width: 'auto',
   display: 'flex',
   alignItems: 'center',
   flexDirection: 'row',
-  textDecoration: 'none',
   '.left, .right': {
-    height: theme.spacing.xlarge - (theme.borderWidths.default * 2),
+    ...theme.partials.text.buttonSmall,
+    color: theme.colors.text,
+    textDecoration: 'none',
+    fontWeight: '600',
+    height: theme.spacing.xlarge - theme.borderWidths.default * 2,
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
@@ -39,19 +37,22 @@ const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loadi
     paddingRight: theme.spacing.small,
     gap: theme.spacing.small,
   },
-  ...(!$loading ? {
-    '.left': {
-      borderRight: theme.borders['fill-two'],
-    },
-  } : {}),
   '.right': {
     backgroundColor: theme.colors['fill-one'],
+    '&:hover ': {
+      backgroundColor: theme.colors['fill-one-hover'],
+    },
   },
-  '&:hover .right': {
-    backgroundColor: theme.colors['fill-one-hover'],
-  },
-  '&:hover .left': {
-    backgroundColor: theme.colors['fill-two-hover'],
+  '.left': {
+    backgroundColor: theme.colors['fill-two'],
+    '&:hover': {
+      backgroundColor: theme.colors['fill-two-hover'],
+    },
+    ...(!$loading
+      ? {
+        borderRight: theme.borders['fill-two'],
+      }
+      : {}),
   },
 }))
 
@@ -64,17 +65,27 @@ export default function GithubStars({ account, repo }) {
   return (
     <GithubLink
       $loading={loading}
-      target="_blank"
-      rel="noreferrer noopener"
-      href={`https://github.com/${account}/${repo}`}
+      as="div"
     >
-      <div
+      <a
         className="left"
+        target="_blank"
+        rel="noreferrer noopener"
+        href={`https://github.com/${account}/${repo}`}
       >
         <GitHubLogoIcon size={16} />
         <div>Star</div>
-      </div>
-      {!loading && <div className="right">{data?.stargazers_count}</div>}
+      </a>
+      {!loading && (
+        <a
+          className="right"
+          target="_blank"
+          rel="noreferrer noopener"
+          href={`https://github.com/${account}/${repo}/stargazers`}
+        >
+          {data?.stargazers_count}
+        </a>
+      )}
     </GithubLink>
   )
 

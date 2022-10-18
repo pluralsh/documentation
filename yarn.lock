@@ -4749,7 +4749,7 @@ react-player@^1.15.3:
     load-script "^1.0.0"
     prop-types "^15.7.2"
 
-react-scrolllock@^5.0.1:
+react-scrolllock@5.0.1:
   version "5.0.1"
   resolved "https://registry.yarnpkg.com/react-scrolllock/-/react-scrolllock-5.0.1.tgz#da1cfb7b6d55c86ae41dbad5274b778c307752b7"
   integrity sha512-poeEsjnZAlpA6fJlaNo4rZtcip2j6l5mUGU/SJe1FFlicEudS943++u7ZSdA7lk10hoyYK3grOD02/qqt5Lxhw==
