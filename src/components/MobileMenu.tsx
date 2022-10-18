@@ -144,7 +144,7 @@ function MobileMenu({ isOpen, className }: MobileMenuProps) {
 }
 
 export default styled(MobileMenu)(({ isOpen, theme }) => ({
-  '--menu-extra-bpad': '120px',
+  '--menu-extra-bpad': '90px',
   position: 'fixed',
   top: 0,
   left: 0,
