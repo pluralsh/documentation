@@ -28,7 +28,6 @@ function PageHeaderUnstyled({ ...props }) {
 
   useEffect(() => {
     if (BreakpointIsGreaterOrEqual(breakpoint, 'fullHeader')) {
-      console.log('fullHeaderrr')
       setMenuIsOpen(false)
     }
   }, [breakpoint])

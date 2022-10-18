@@ -72,7 +72,7 @@ const data: NavData = [
     title: 'Applications',
     sections: [
       {
-        href: '/repositories/',
+        href: '/repositories',
         title: 'Application Catalog',
         sections: [
           { href: '/repositories/airbyte', title: 'Airbyte' },
@@ -81,7 +81,7 @@ const data: NavData = [
         ],
       },
       {
-        href: '/adding-new-application/',
+        href: '/adding-new-application',
         title: 'Add an Application',
         sections: [
           { href: '/adding-new-application/guide', title: 'Guide' },
@@ -94,7 +94,7 @@ const data: NavData = [
             title: 'Module Library',
           },
           {
-            href: '/adding-new-application/getting-started-with-runbooks/',
+            href: '/adding-new-application/getting-started-with-runbooks',
             title: 'Getting Started With Runbooks',
             // icon: <RunBookIcon />,
             sections: [
@@ -205,7 +205,7 @@ const data: NavData = [
       },
       {
         title: 'Operator Guides',
-        href: '/reference/operator-guides/',
+        href: '/reference/operator-guides',
         icon: <BookIcon />,
         sections: [
           {

@@ -2,6 +2,8 @@ import { GitHubLogoIcon } from 'pluralsh-design-system'
 import { useContext } from 'react'
 import styled from 'styled-components'
 
+import ArticlesInSection from './ArticlesInSection'
+
 import Breadcrumbs from './Breadcrumbs'
 import { FooterLink } from './PageFooter'
 
@@ -64,6 +66,9 @@ export default function MainContent({ Component }) {
           <PageHeader>
             {title && <Title>{title}</Title>}
             {description && <Description>{description}</Description>}
+            <ArticlesInSection
+              hasContent={(markdoc?.content as any)?.children?.length > 0}
+            />
           </PageHeader>
         )}
         <Component {...pageProps} />
