@@ -9,13 +9,13 @@ const Blockquote = styled.blockquote(({ theme }) => ({
   marginTop: theme.spacing.xlarge,
   marginBottom: theme.spacing.xlarge,
   '&::before': {
+    pointerEvents: 'none',
     content: '""',
     position: 'absolute',
     left: 0,
     top: 0,
     bottom: 0,
-    width: 1,
-    background: theme.colors['text-light'],
+    borderLeft: `2px solid ${theme.colors['text-light']}`,
   },
 }))
 
