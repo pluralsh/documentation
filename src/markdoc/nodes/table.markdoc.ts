@@ -1,49 +1,30 @@
-import { Schema } from '@markdoc/markdoc'
+import { Tag } from '@markdoc/markdoc'
+
+import Table from 'components/md/Table'
 
 export const table = {
-  render: 'table',
-}
+  render: Table,
+  description: 'Display horizontal tabs in a box',
+  children: ['tab'],
+  attributes: {},
+  transform(node, config) {
+    const children = node.transformChildren(config)
 
-export const thead: Schema = {
-  render: 'thead',
-  children: ['tr'],
-}
+    const thead = children
+      .find(child => child && child.name.toLowerCase() === 'thead')
+      .children.find(tr => tr && tr.name.toLowerCase() === 'tr')
+      .children.filter(th => th && th.name.toLowerCase() === 'th')
+      .map(th => th.children)
 
-export const tbody: Schema = {
-  render: 'tbody',
-  children: ['tr', 'tag'],
-}
+    const tbody = children
+      .find(child => child && child.name.toLowerCase() === 'tbody')
+      ?.children.filter(tr => tr && tr.name.toLowerCase() === 'tr')
+      ?.map(tr => tr.children
+        .filter(trChild => trChild && trChild.name.toLowerCase() === 'td')
+        .map(td => td.children))
 
-export const tr: Schema = {
-  render: 'tr',
-  children: ['th', 'td'],
-}
-
-export const td: Schema = {
-  render: 'td',
-  children: [
-    'inline',
-    'heading',
-    'paragraph',
-    'image',
-    'table',
-    'tag',
-    'fence',
-    'blockquote',
-    'list',
-    'hr',
-  ],
-  attributes: {
-    colspan: { type: Number },
-    rowspan: { type: Number },
-    align: { type: String },
-  },
-}
-
-export const th: Schema = {
-  render: 'th',
-  attributes: {
-    width: { type: Number },
-    align: { type: String },
+    return new Tag(this.render as any,
+      { thead, tbody, children },
+      node.transformChildren(config))
   },
 }
