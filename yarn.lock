@@ -2202,6 +2202,18 @@
   dependencies:
     tslib "^2.4.0"
 
+"@tanstack/react-table@8.5.13":
+  version "8.5.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/react-table/-/react-table-8.5.13.tgz#a394c4db1cbcd63eb0c5fa2244a963da28f246c4"
+  integrity sha512-k52HsnonKwDZMCIy59HfehTnkJYlqkqyvC+BAV0DyWdN9WmSbVq+Kf+luJVENQnXcnEX47dBHiHAjqZu592ZLQ==
+  dependencies:
+    "@tanstack/table-core" "8.5.13"
+
+"@tanstack/table-core@8.5.13":
+  version "8.5.13"
+  resolved "https://registry.yarnpkg.com/@tanstack/table-core/-/table-core-8.5.13.tgz#7ad94fcc9db72f3eb0ed7dbb9c511a6bd7ff9a06"
+  integrity sha512-kvDRjC7LrLNNNgUMfsBz3nHOwbBLFdosWQ16dfbD9D/OJrvFHRXoUIPzF0MNqqSPghaj7/18fnwXHGypvzoh9Q==
+
 "@types/chroma-js@2.1.4":
   version "2.1.4"
   resolved "https://registry.yarnpkg.com/@types/chroma-js/-/chroma-js-2.1.4.tgz#52e3a8453000cdb9ad76357c2c47dbed702d136f"
@@ -4547,10 +4559,10 @@ picomatch@^2.3.0, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pluralsh-design-system@1.229.0:
-  version "1.229.0"
-  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.229.0.tgz#ebaba2caf7e18fd70f4e97f26366f793a30d92ee"
-  integrity sha512-3xfFsGxAUjRh/0TqKFGhnb0ZmfNmZrFjMBrv8S6KoWryT4uzR2dHpC3N4MDPtCIR/sXPqCqlxAB8uv7XdiSZ9A==
+pluralsh-design-system@1.235.0:
+  version "1.235.0"
+  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.235.0.tgz#03b13db82a81e9fac4d4b80c67c26305d5b0f45d"
+  integrity sha512-iewZLSSaLrquFLgf5oDWCCXxupq/Cj65mVx2y4iqmHWtKZ6yFX2NA03IuRet52n7SU5rbxoHthOR1b3SC93z7g==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.8.1"
     "@react-aria/button" "3.6.1"
@@ -4567,6 +4579,7 @@ pluralsh-design-system@1.229.0:
     "@react-stately/overlays" "3.4.1"
     "@react-stately/tabs" "3.2.1"
     "@react-types/shared" "3.14.1"
+    "@tanstack/react-table" "8.5.13"
     "@types/chroma-js" "2.1.4"
     chroma-js "2.4.2"
     classnames "2.3.2"
