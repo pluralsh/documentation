@@ -26,7 +26,13 @@ function Favicons() {
   )
 }
 
-function OpenGraph({ title, description }) {
+function OpenGraph({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
   const router = useRouter()
 
   return (
@@ -51,7 +57,13 @@ function OpenGraph({ title, description }) {
   )
 }
 
-function HtmlHead({ title, description, pathname }) {
+function HtmlHead({
+  title,
+  description,
+}: {
+  title: string
+  description: string
+}) {
   return (
     <>
       <Head>
