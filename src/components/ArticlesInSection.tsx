@@ -3,7 +3,7 @@ import { useRouter } from 'next/router'
 
 import { removeTrailingSlashes } from 'utils/text'
 
-import { A, Button } from 'honorable'
+import { Button } from 'honorable'
 
 import { DocumentIcon } from 'pluralsh-design-system'
 
@@ -69,10 +69,10 @@ function ArticlesInSection({
           && articles.map(article => (
             <li>
               <Button
-                secondary
+                floating
                 textTransform="none"
                 startIcon={article.icon || <DocumentIcon />}
-                as={A}
+                as="a"
                 href={article.href}
               >
                 {article.title}

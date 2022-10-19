@@ -23,6 +23,10 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     '--top-nav-height': '72px',
     '--menu-extra-bpad': '0px',
   },
+  'a:any-link': {
+    color: 'unset',
+    textDecoration: 'unset',
+  },
   html: {
     ...fillAvailable('height'),
   },

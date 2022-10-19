@@ -44,5 +44,7 @@ function Link({
 }
 
 export default styled(Link)(({ theme }) => ({
-  ...theme.partials.marketingText.inlineLink,
+  '&, a:any-link&': {
+    ...theme.partials.marketingText.inlineLink,
+  },
 }))
