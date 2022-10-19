@@ -9,6 +9,7 @@ import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 
 import { BreakpointProvider } from '../src/components/Breakpoints'
 import PageFooter from '../src/components/PageFooter'
@@ -27,7 +28,10 @@ import GlobalStyles from '../src/components/GlobalStyles'
 import DocSearchStyles from '../src/components/DocSearchStyles'
 import MainContent from '../src/components/MainContent'
 import {
-  DESCRIPTION, PAGE_TITLE_PREFIX, PAGE_TITLE_SUFFIX, ROOT_TITLE,
+  DESCRIPTION,
+  PAGE_TITLE_PREFIX,
+  PAGE_TITLE_SUFFIX,
+  ROOT_TITLE,
 } from '../src/consts'
 
 import { PagePropsContext } from '../src/components/PagePropsContext'
@@ -69,10 +73,17 @@ function collectHeadings(node, sections: any[] = []) {
 const Page = styled.div(() => ({}))
 
 function MyApp({ Component, pageProps }: AppPropsPlusMd) {
+  const router = useRouter()
+
   const { markdoc } = pageProps
 
-  const title = markdoc?.frontmatter?.title ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}` : ROOT_TITLE
-  const description = markdoc?.frontmatter?.description || DESCRIPTION
+  const title = markdoc?.frontmatter?.title
+    ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
+    : ROOT_TITLE
+  const description
+    = router.pathname === '/'
+      ? DESCRIPTION
+      : markdoc?.frontmatter?.description || DESCRIPTION
 
   const toc = pageProps.markdoc?.content
     ? collectHeadings(pageProps.markdoc.content)
@@ -121,8 +132,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     <SSRProvider>
       <BreakpointProvider>
         <ThemeProvider theme={honorableTheme}>
-          <StyledThemeProvider theme={styledTheme}>{app}
-          </StyledThemeProvider>
+          <StyledThemeProvider theme={styledTheme}>{app}</StyledThemeProvider>
         </ThemeProvider>
       </BreakpointProvider>
     </SSRProvider>
