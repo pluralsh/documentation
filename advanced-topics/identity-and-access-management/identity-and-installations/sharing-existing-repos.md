@@ -119,6 +119,10 @@ plural bundle install <repo> <bundle>
 
 To recall which applications she's installed, she should refer to the information she copied in step 4.
 
+{% hint style="info" %}
+Service accounts need to be explicitly granted install permissions in your account before you can successfully run the bundle install command.  Be sure to create a role [here](https://app.plural.sh/account/roles) with install permissions and add the service account to it to grant them access.
+{% endhint %}
+
 ### 8. Alice builds and deploys the Plural installation repo under the new user
 
 Alice should run:
