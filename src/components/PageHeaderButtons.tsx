@@ -1,7 +1,10 @@
 import styled from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 import { useRouter } from 'next/router'
-import { HamburgerMenuIcon } from 'pluralsh-design-system'
+import {
+  HamburgerMenuCollapsedIcon as MenuCloseIcon,
+  HamburgerMenuIcon as MenuOpenIcon,
+} from 'pluralsh-design-system'
 
 import { ComponentPropsWithoutRef } from 'react'
 
@@ -62,10 +65,14 @@ export const HamburgerButtonWrap = styled(ButtonFillTwo)(_ => ({
   },
 }))
 
-export function HamburgerButton(props:ComponentPropsWithoutRef<'a'>) {
+export function HamburgerButton({
+  isOpen,
+  ...props
+}: { isOpen: boolean } & ComponentPropsWithoutRef<'a'>) {
   return (
     <HamburgerButtonWrap {...props}>
-      <HamburgerMenuIcon size={22} />
+      {!isOpen && <MenuOpenIcon size={22} />}
+      {isOpen && <MenuCloseIcon size={22} />}
     </HamburgerButtonWrap>
   )
 }

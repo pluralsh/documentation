@@ -11,7 +11,9 @@ import { useKey } from 'rooks'
 
 import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
-import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
+import {
+  HamburgerButton, SearchButton, SocialLink,
+} from './PageHeaderButtons'
 import MobileMenu from './MobileMenu'
 
 const Filler = styled.div(_ => ({
@@ -96,9 +98,11 @@ function PageHeaderUnstyled({ ...props }) {
           </Button>
         </div>
         <SearchButton />
-        <HamburgerButton onClick={() => {
-          setMenuIsOpen(!menuIsOpen)
-        }}
+        <HamburgerButton
+          isOpen={menuIsOpen}
+          onClick={() => {
+            setMenuIsOpen(!menuIsOpen)
+          }}
         />
       </section>
       <MobileMenu isOpen={menuIsOpen} />
