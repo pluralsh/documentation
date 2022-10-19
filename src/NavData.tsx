@@ -8,7 +8,6 @@ import {
   ToolIcon,
   VideoIcon,
   WorkspaceIcon,
-  // RunBookIcon,
 } from 'pluralsh-design-system'
 import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
@@ -96,7 +95,6 @@ const data: NavData = [
           {
             href: '/adding-new-application/getting-started-with-runbooks',
             title: 'Getting Started With Runbooks',
-            // icon: <RunBookIcon />,
             sections: [
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
@@ -259,6 +257,7 @@ const data: NavData = [
   // {
   //   title: 'Test Pages',
   //   sections: [{ title: 'Callouts', href: '/test/callouts' }],
+  //   sections: [{ title: 'Blockquotes', href: '/test/blockquotes' }],
   // },
 ]
 
