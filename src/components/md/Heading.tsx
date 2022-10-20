@@ -1,6 +1,8 @@
 import * as React from 'react'
 import styled from 'styled-components'
 
+type HTag = 'h1' | 'h2' | 'h3' | 'h5' | 'h6'
+
 const StyledH = styled.h1.withConfig({ shouldForwardProp: () => true })<{
   $level: number
 }>(({ theme, $level }) => {
@@ -45,7 +47,7 @@ const StyledH = styled.h1.withConfig({ shouldForwardProp: () => true })<{
 export function Heading({ level = 1, ...props }) {
   return (
     <StyledH
-      as={`h${level}` as 'h1' | 'h2' | 'h3' | 'h5' | 'h6'}
+      as={`h${level}` as HTag}
       $level={level}
       {...props}
     />

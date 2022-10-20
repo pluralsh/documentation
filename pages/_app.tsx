@@ -2,10 +2,10 @@ import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import {
   GlobalStyle as PluralGlobalStyle,
+  theme as honorableTheme,
   styledTheme,
-  theme,
 } from 'pluralsh-design-system'
-import { CssBaseline, ThemeProvider, mergeTheme } from 'honorable'
+import { CssBaseline, ThemeProvider } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
 import type { AppProps } from 'next/app'
@@ -37,17 +37,17 @@ import {
 import { PagePropsContext } from '../src/components/PagePropsContext'
 import navData from '../src/NavData'
 
-const honorableTheme = mergeTheme(theme, {
-  // global: [
-  //   // This provides the mp spacing props to honorable
-  //   // DEPRECATED in favor of the semantic spacing system
-  //   mpRecipe(),
-  // ],
-})
-
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
 
-function collectHeadings(node, sections: any[] = []) {
+export type MarkdocHeading = {
+  id?: string
+  level?: number
+  title?: string
+}
+
+const docsStyledTheme = { ...styledTheme, ...{ docs: { topNavHeight: 72 } } }
+
+function collectHeadings(node, sections: MarkdocHeading[] = []) {
   if (node) {
     if (node.name === 'Heading') {
       const title = node.children[0]
@@ -67,7 +67,7 @@ function collectHeadings(node, sections: any[] = []) {
     }
   }
 
-  return sections
+  return sections as MarkdocHeading[]
 }
 
 const Page = styled.div(() => ({}))
@@ -132,7 +132,9 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
     <SSRProvider>
       <BreakpointProvider>
         <ThemeProvider theme={honorableTheme}>
-          <StyledThemeProvider theme={styledTheme}>{app}</StyledThemeProvider>
+          <StyledThemeProvider theme={docsStyledTheme}>
+            {app}
+          </StyledThemeProvider>
         </ThemeProvider>
       </BreakpointProvider>
     </SSRProvider>

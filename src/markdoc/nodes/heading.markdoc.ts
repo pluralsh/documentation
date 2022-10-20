@@ -2,16 +2,22 @@ import { Tag } from '@markdoc/markdoc'
 
 import { Heading } from '../../components/md/Heading'
 
-function generateID(children, attributes) {
-  if (attributes.id && typeof attributes.id === 'string') {
+function generateID(children: any[], attributes: { id?: unknown } = {}) {
+  if (attributes?.id && typeof attributes?.id === 'string') {
     return attributes.id
   }
 
   return children
-    .filter(child => typeof child === 'string')
+    .map(child => (typeof child === 'string'
+      ? child
+      : Array.isArray(child?.children)
+        ? generateID(child.children)
+        : ''))
     .join(' ')
-    .replace(/[?]/g, '')
+    .replace(/[~!@#$%^&,.?:;<>()[\]@{}|=#$%]/g, ' ')
+    .trim()
     .replace(/\s+/g, '-')
+    .replace(/[^a-zA-Z0-9_+\-*/]+/g, '')
     .toLowerCase()
 }
 
