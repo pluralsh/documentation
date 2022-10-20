@@ -121,9 +121,9 @@ plural bundle install <repo> <bundle>
 
 To recall which applications she's installed, she should refer to the information she copied in step 4.
 
-{% hint style="info" %}
+{% callout style="info" %}
 Service accounts need to be explicitly granted install permissions in your account before you can successfully run the bundle install command.  Be sure to create a role [here](https://app.plural.sh/account/roles) with install permissions and add the service account to it to grant them access.
-{% endhint %}
+{% /callout %}
 
 ### 8. Alice builds and deploys the Plural installation repo under the new user
 
@@ -141,11 +141,11 @@ git commit -m "Change owner of repo"
 git push
 ```
 
-{% hint style="info" %}
+{% callout style="info" %}
 If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes.  This is just a matter of finding the relevant pods in the console and clicking the trash icon.  For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
 
 If you'd like help with this process feel free to reach out to us on discord as well!
-{% /hint %}
+{% /callout %}
 
 ### 9. Alice, Bob, and Cory set up cryptographic keys for sharing
 

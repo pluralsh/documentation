@@ -12,9 +12,9 @@ Plural comes pre-built with a lot of the core concepts needed for IAM at any org
 
 When you sign up to plural, you'll immediately be allocated an account. You can then invite users by using the form at [https://app.plural.sh/accounts/edit/users](https://app.plural.sh/accounts/edit/users). Users who sign up organically will get their own accounts, and will have to be linked afterwards, so we recommend onboarding additional users via invite.
 
-{% hint style="info" %}
+{% callout style="info" %}
 The only users eligible for sharing repo encryption keys are also those users in your account .
-{% /hint %}
+{% /callout %}
 
 ### RBAC Basics
 

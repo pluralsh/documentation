@@ -1416,10 +1416,10 @@
   resolved "https://registry.yarnpkg.com/@loomhq/loom-embed/-/loom-embed-1.5.0.tgz#1f5a72a3bef30958c05b37a94ec86af78c3626c9"
   integrity sha512-1Rilv+Ta39Rk2mEb8wzfLSpPhl6ax7kfLNnfYTAGK4mCJIxwQ1o/BY46QRbIpQT/SdfsFCvvNWa57hlEEaduGA==
 
-"@markdoc/markdoc@0.1.7":
-  version "0.1.7"
-  resolved "https://registry.yarnpkg.com/@markdoc/markdoc/-/markdoc-0.1.7.tgz#c4a4876ddb4886a45a9d16462277f57fde576f54"
-  integrity sha512-Dz7+VP5I3m/DFpLnzjwvXv64XmneYNzy4adm5uJSkcAJxFlJujIn+hCmMh11k70w+y5Qu18sjngetpuP+3570g==
+"@markdoc/markdoc@0.1.11":
+  version "0.1.11"
+  resolved "https://registry.yarnpkg.com/@markdoc/markdoc/-/markdoc-0.1.11.tgz#63ef70d170468e4031be88f2cae5ff847565afc6"
+  integrity sha512-huGs+EeeWkT1rZ8oyyYoRMz9vNdsDavcsxTHYG4f/Kq3YdUMnuoRJhKq1nNEazVNipBf8+gQY7swsFUbHAGNzw==
 
 "@markdoc/next.js@0.1.6":
   version "0.1.6"

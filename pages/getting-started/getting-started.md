@@ -29,9 +29,9 @@ The brew tap will install Plural, alongside Terraform, Helm and kubectl for you.
 brew install pluralsh/plural/plural
 ```
 
-{% hint style="warning" %}
+{% callout style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-{% /hint %}
+{% /callout %}
 {% /tab %}
 
 {% tab title="curl" %}
@@ -46,9 +46,9 @@ chmod +x plural
 mv plural /usr/local/bin/plural
 ```
 
-{% hint style="info" %}
+{% callout style="info" %}
 Be sure to download the CLI version for your target OS/architecture, the above example is only valid for ARM Mac's
-{% /hint %}
+{% /callout %}
 
 You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here
 
@@ -58,9 +58,9 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 | terraform | [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli) |
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
 
-{% hint style="warning" %}
+{% callout style="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-{% /hint %}
+{% /callout %}
 {% /tab %}
 
 {% tab title="Docker" %}
@@ -98,9 +98,9 @@ The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth 
 \
 _Note, that if you are running in **Azure**, Plural does not automatically create a default resource group for you to place objects into. Make sure to create one beforehand for Plural to use._
 
-{% hint style="info" %}
+{% callout style="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
-{% /hint %}
+{% /callout %}
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
 
@@ -174,8 +174,8 @@ It is common for `plural deploy` to take a fair amount of time, as is the case w
 
 Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
-{% hint style="warning" %}
+{% callout style="warning" %}
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
-{% /hint %}
+{% /callout %}
 
 **And you are done!** You now have a fully-configured Kubernetes cluster and are free to install applications on it to your heart's content. If you want to take down any of your individual applications, run `plural destroy <APP-NAME>`. If you're just testing us out and want to take down the entire thing, run `plural destroy`.

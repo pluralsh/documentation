@@ -50,9 +50,12 @@ const LinkA = styled.a(({ theme }) => ({
   flexGrow: 1,
   margin: 0,
   padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
-  ...theme.partials.marketingText.body2,
+  ...theme.partials.text.body2,
   textDecoration: 'none',
   color: theme.colors['text-light'],
+  '&:hover': {
+    color: theme.colors.text,
+  },
   '&:focus, &:focus-visible': {
     outline: 'none',
     boxShadow: 'none',
