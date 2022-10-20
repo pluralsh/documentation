@@ -1,6 +1,11 @@
-import React, { useId } from 'react'
+import React, {
+  useEffect, useId, useRef, useState,
+} from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
+
+import { MarkdocHeading } from '../../pages/_app'
 
 const Title = styled.h2(({ theme }) => ({
   ...theme.partials.marketingText.label,
@@ -30,7 +35,6 @@ const List = styled.ul(({ theme }) => ({
     top: 0,
     bottom: 0,
     width: '100%',
-    // zIndex: -1,
     borderLeft: theme.borders.default,
   },
 }))
@@ -52,9 +56,11 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
   paddingTop: theme.spacing.xxsmall,
   paddingBottom: theme.spacing.xxsmall,
   paddingRight: theme.spacing.small,
-  ...($active ? {
-    color: theme.colors.text,
-  } : {}),
+  ...($active
+    ? {
+      color: theme.colors.text,
+    }
+    : {}),
   '&:hover': {
     textDecoration: 'underline',
     color: theme.colors.text,
@@ -85,12 +91,78 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
 export const ScrollContainer = styled.div(({ theme: _ }) => ({
   overflowY: 'auto',
   maxHeight: '-webkit-fill-available',
-
 }))
 
-function TableOfContentsBase({ toc, ...props }) {
+const scrollThreshold = 48
+
+const useForceRender = () => {
+  const [toggle, setToggle] = useState(true)
+
+  return () => setToggle(!toggle)
+}
+
+function setUrlHash(hash) {
+  const url = hash || window.location.pathname + window.location.search
+
+  window.history.pushState({}, '', url)
+}
+
+function TableOfContentsBase({ toc, ...props }: { toc: MarkdocHeading[] }) {
   const items = toc.filter(item => item.id && (item.level === 2 || item.level === 3))
   const labelId = `nav-label-${useId()}`
+  const forceRender = useForceRender()
+  const firstRender = useRef(true)
+  const ignoreScrollEvent = useRef(false)
+
+  const router = useRouter()
+
+  const { hash }
+    = (typeof window !== 'undefined' && window?.location)
+    || new URL(`http://plural.sh${router.asPath}`)
+
+  useEffect(() => {
+    const listener = () => {
+      if (ignoreScrollEvent.current) {
+        ignoreScrollEvent.current = false
+
+        return
+      }
+      const topNavHeight = Number(getComputedStyle(document.documentElement)
+        ?.getPropertyValue('--top-nav-height')
+        ?.replace(/[^0-9]/g, '') || 0)
+
+      let scrollToHash
+
+      items.forEach(item => {
+        if (!item.id) return
+        const eltTop
+          = document.getElementById(item.id)?.getBoundingClientRect()?.top
+          || Infinity
+
+        if (eltTop <= scrollThreshold + topNavHeight) {
+          scrollToHash = `#${item.id}`
+        }
+      })
+      if (scrollToHash) {
+        if (scrollToHash !== hash) {
+          setUrlHash(scrollToHash)
+          forceRender()
+        }
+      }
+      else {
+        setUrlHash('')
+        forceRender()
+      }
+    }
+
+    window.addEventListener('scroll', listener)
+    if (firstRender.current) {
+      firstRender.current = false
+      listener()
+    }
+
+    return () => window.removeEventListener('scroll', listener)
+  }, [items, forceRender, hash])
 
   if (items.length <= 1) {
     return null
@@ -104,10 +176,9 @@ function TableOfContentsBase({ toc, ...props }) {
       <Title id={labelId}>On this page</Title>
       <ScrollContainer>
         <List>
-          {items.map(item => {
+          {items.map((item, i) => {
             const href = `#${item.id}`
-            const active
-            = typeof window !== 'undefined' && window.location.hash === href
+            const active = hash === href || (!hash && i === 0)
 
             return (
               <ListItem key={item.title}>
@@ -115,7 +186,14 @@ function TableOfContentsBase({ toc, ...props }) {
                   href={href}
                   passHref
                 >
-                  <LinkA $active={active}>{item.title}</LinkA>
+                  <LinkA
+                    $active={active}
+                    onClick={() => {
+                      ignoreScrollEvent.current = true
+                    }}
+                  >
+                    {item.title}
+                  </LinkA>
                 </Link>
               </ListItem>
             )

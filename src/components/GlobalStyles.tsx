@@ -39,8 +39,8 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     ...fillAvailable('minHeight'),
   },
   '*': {
-    scrollMarginTop: `calc(var(--top-nav-height) + ${theme.spacing.medium}px)`,
-    scrollPaddingTop: `calc(var(--top-nav-height) + ${theme.spacing.xlarge}px)`,
+    scrollPaddingTop: 'var(--top-nav-height)',
+    scrollMarginTop: `${theme.spacing.large}px`,
   },
   [mqs.twoColumn]: {
     ':root': {
