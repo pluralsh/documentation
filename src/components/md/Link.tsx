@@ -4,7 +4,7 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { isRelativeUrl, removeTrailingSlashes } from 'utils/text'
 
-const isExternalUrl = (url: string) => url.substr(0, 4) === 'http' || url.substr(0, 2) === '//'
+import { isExternalUrl } from '../../utils/text'
 
 const stripMdExtension = url => {
   if (!isExternalUrl(url)) {

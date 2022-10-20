@@ -7,5 +7,9 @@ export function removeTrailingSlashes(str) {
 }
 
 export function isRelativeUrl(str) {
-  return !str.match(/^\/.*$|^[^:/]*?:\/\/.*?$/iug)
+  return !str.match(/^\/.*$|^[^:/]*?:\/\/.*?$/giu)
+}
+
+export function isExternalUrl(url: string) {
+  return url.substr(0, 4) === 'http' || url.substr(0, 2) === '//'
 }

@@ -29,7 +29,7 @@ The brew tap will install Plural, alongside Terraform, Helm and kubectl for you.
 brew install pluralsh/plural/plural
 ```
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% /callout %}
 {% /tab %}
@@ -46,7 +46,7 @@ chmod +x plural
 mv plural /usr/local/bin/plural
 ```
 
-{% callout style="info" %}
+{% callout severity="info" %}
 Be sure to download the CLI version for your target OS/architecture, the above example is only valid for ARM Mac's
 {% /callout %}
 
@@ -58,7 +58,7 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 | terraform | [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli) |
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If you aren't sure about how to do that, refer to [this guide](/reference/configuring-cloud-provider). If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
 {% /callout %}
 {% /tab %}
@@ -98,7 +98,7 @@ The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth 
 \
 _Note, that if you are running in **Azure**, Plural does not automatically create a default resource group for you to place objects into. Make sure to create one beforehand for Plural to use._
 
-{% callout style="info" %}
+{% callout severity="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
 {% /callout %}
 
@@ -174,7 +174,7 @@ It is common for `plural deploy` to take a fair amount of time, as is the case w
 
 Once `plural deploy` has completed, you should be ready to log in to your application at `{app-name}.{domain-name}`.
 
-{% callout style="warning" %}
+{% callout severity="warning" %}
 You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
 {% /callout %}
 

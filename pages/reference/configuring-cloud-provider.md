@@ -7,7 +7,7 @@ description: >-
 
 Before you can start installing your Kubernetes cluster and applications with the Plural CLI, you will need to make sure that your cloud provider CLI is set up correctly.
 
-{% callout style="info" %}
+{% callout severity="info" %}
 If you have already configured and installed your cloud provider CLI and are still seeing errors, make sure that you are on the latest version of the CLI.
 {% /callout %}
 

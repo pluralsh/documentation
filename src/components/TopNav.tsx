@@ -68,7 +68,6 @@ export const TopNav = styled(({ ...props }) => {
           placeholder="Search Plural docs"
           navigator={{
             navigate: ({ itemUrl }) => {
-              console.log('search itemUrl', itemUrl)
               router.push(itemUrl)
             },
           }}
