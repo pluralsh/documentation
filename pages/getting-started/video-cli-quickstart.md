@@ -3,7 +3,7 @@ title: "Video: Installing with CLI"
 description: A short video on installing applications on Plural with the CLI
 ---
 
-In under 10 minutes, you will learn to:
+**In under 10 minutes, you will learn how to:**
 
 * Create a repository to store your infrastructure configuration
 * Provision a fully configured Kubernetes cluster with no prior knowledge
