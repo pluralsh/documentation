@@ -36,7 +36,7 @@ Let's go over both options.
 
 To have Plural set up your Git repository, you'll just need to have SSH set up with your version control provider. Then, run:
 
-```bash
+```bash {% showHeader=false}
 plural init
 ```
 

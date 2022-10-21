@@ -61,11 +61,15 @@ Install the Console with the following one-liner:
 
 {% tabs %}
 {% tab title="AWS" %}
-`plural bundle install console console-aws`
+```bash {% showHeader=false %}
+plural bundle install console console-aws
+```
 {% /tab %}
 
 {% tab title="GCP" %}
-`plural bundle install console console-gcp`
+```bash {% showHeader=false %}
+plural bundle install console console-gcp
+```
 {% /tab %}
 {% /tabs %}
 
@@ -77,11 +81,15 @@ Install Airflow with the following one-liner:
 
 {% tabs %}
 {% tab title="AWS" %}
-`plural bundle install airflow aws-airflow`
+```bash {% showHeader=false %}
+plural bundle install airflow aws-airflow
+```
 {% /tab %}
 
 {% tab title="GCP" %}
-`plural bundle install airflow gcp-airflow`
+```bash {% showHeader=false %}
+plural bundle install airflow gcp-airflow
+```
 {% /tab %}
 {% /tabs %}
 
@@ -93,13 +101,16 @@ Both the console and Airflow support [Plural OIDC](/advanced-topics/identity-and
 
 Now it's time for Plural to write all the Helm and Terraform required to bring up your Kubernetes cluster based on the config that you've entered. You can do that by running:
 
-`plural build`
-
-`plural build --only airflow`
+```bash {% showHeader=false %}
+plural build
+plural build --only airflow
+```
 
 Do a quick `ls` to check out the files we've created for you. We're now ready to deploy. Do that by running:
 
-`plural deploy --commit "Deploy Plural console and Airflow"`
+```bash {% showHeader=false %}
+plural deploy --commit "Deploy Plural console and Airflow"
+```
 
 This will do two things:
 
@@ -142,17 +153,23 @@ Now that we've set up a running cluster with Plural, we can add and remove appli
 
 If you want to start using the CLI locally, just [install the Plural CLI](/getting-started/getting-started#install-plural-cli) and run:
 
-`plural shell sync`
+```bash {% showHeader=false %}
+plural shell sync
+```
 
 This will sync your local installation with the Cloud Shell. You can then proceed to purge the shell if you wish to spin it down:
 
-`plural shell purge`
+```bash {% showHeader=false %}
+plural shell purge
+```
 
 ### Uninstalling Applications
 
 To uninstall an application from your cluster, run:
 
-`plural destroy <app-name>`
+```bash {% showHeader=false %}
+plural destroy <app-name>
+```
 
 ### Feedback
 
