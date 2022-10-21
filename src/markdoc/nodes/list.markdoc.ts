@@ -4,7 +4,7 @@ export const list = {
   render: List,
   children: ['item'],
   attributes: {
-    ordered: { type: Boolean, render: false, required: true },
+    ordered: { type: Boolean, render: true, required: true },
   },
 }
 
