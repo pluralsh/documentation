@@ -31,6 +31,21 @@ module.exports = () => {
           destination: '/',
           permanent: false,
         },
+        {
+          source: '/getting-started/getting-started',
+          destination: '/getting-started/quickstart',
+          permanent: false,
+        },
+        {
+          source: '/reference/architecture-1',
+          destination: '/reference/architecture',
+          permanent: false,
+        },
+        {
+          source: '/reference/workspaces/workspace-structure',
+          destination: '/reference/workspaces',
+          permanent: false,
+        },
       ]
     },
     // webpack: (config) => {

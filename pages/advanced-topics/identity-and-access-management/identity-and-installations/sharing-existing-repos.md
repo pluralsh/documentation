@@ -93,13 +93,13 @@ Alice follows the instructions [here](/advanced-topics/identity-and-access-manag
 
 Alice can find which bundles they have installed at [https://app.plural.sh/explore/installed](https://app.plural.sh/explore/installed)
 
-![](</assets/Screen Shot 2022-02-22 at 2.58.10 PM.png>)
+![](</assets/advanced-topics/installed-bundles.png>)
 
 ### 5. Alice changes the owner of the Plural installation repo
 
-Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`.&#x20;
+Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`. In the example below, owner is set to `nick@plural.sh` on line 12.
 
-![](</assets/Screen Shot 2022-02-22 at 2.53.09 PM.png>)
+![](</assets/advanced-topics/code-block.png>)
 
 ### 6. Alice initializes Plural as service account
 

@@ -32,7 +32,7 @@ const data: NavData = [
       },
       {
         title: 'Quickstart',
-        href: '/getting-started/getting-started',
+        href: '/getting-started/quickstart',
         icon: <MagicWandIcon />,
       },
       {
@@ -46,6 +46,10 @@ const data: NavData = [
     title: 'Basic Setup & Deployment',
     sections: [
       {
+        href: '/basic-setup-and-deployment/cloud-shell-quickstart',
+        title: 'Deploying with Cloud Shell',
+      },
+      {
         href: '/basic-setup-and-deployment/setting-up-gitops',
         title: 'Setting up GitOps',
       },
@@ -56,10 +60,6 @@ const data: NavData = [
       {
         href: '/basic-setup-and-deployment/openid-connect',
         title: 'Using Plural OIDC',
-      },
-      {
-        href: '/basic-setup-and-deployment/cloud-shell-quickstart',
-        title: 'Deploying with Cloud Shell',
       },
       {
         href: '/basic-setup-and-deployment/uninstall',
@@ -207,10 +207,6 @@ const data: NavData = [
         icon: <BookIcon />,
         sections: [
           {
-            title: 'Cloud Shell',
-            href: '/reference/operator-guides/cloud-shell',
-          },
-          {
             title: 'Adding Kubecost for Cost Analysis',
             href: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
           },
@@ -218,7 +214,7 @@ const data: NavData = [
       },
       {
         title: 'Architecture',
-        href: '/reference/architecture-1',
+        href: '/reference/architecture',
         icon: <ArchitectureIcon />,
       },
       {
