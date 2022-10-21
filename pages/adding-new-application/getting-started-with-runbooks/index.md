@@ -1,5 +1,6 @@
 ---
 title: Getting Started With Runbooks
+description: What are Plural runbooks? How do I use and create them?
 ---
 
 Plural Runbooks are meant to be installed alongside your open source applications and serve as interactive tutorials for how to perform common maintenance tasks.&#x20;

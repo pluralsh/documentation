@@ -98,11 +98,11 @@ const data: NavData = [
             sections: [
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
-                title: '  Runbook XML',
+                title: '  XML Runbooks',
               },
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
-                title: '  Runbook Yaml',
+                title: '  YAML Runbooks',
               },
             ],
           },
