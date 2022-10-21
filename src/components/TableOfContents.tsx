@@ -1,9 +1,13 @@
 import React, {
-  useEffect, useId, useRef, useState,
+  useEffect, useId, useMemo, useRef, useState,
 } from 'react'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
+
+import classNames from 'classnames'
+
+import { exists } from 'utils/typescript'
 
 import { MarkdocHeading } from '../../pages/_app'
 
@@ -45,7 +49,7 @@ const ListItem = styled.li(() => ({
   listStyle: 'none',
 }))
 
-const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
+const LinkA = styled.a(({ theme }) => ({
   position: 'relative',
   display: 'block',
   ...theme.partials.marketingText.componentLinkSmall,
@@ -56,11 +60,22 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
   paddingTop: theme.spacing.xxsmall,
   paddingBottom: theme.spacing.xxsmall,
   paddingRight: theme.spacing.small,
-  ...($active
-    ? {
-      color: theme.colors.text,
-    }
-    : {}),
+  '&::before': {
+    zIndex: 1,
+    borderLeft: `3px solid ${theme.colors['border-primary']}`,
+    transform: 'scaleX(0)',
+    transformOrigin: 'center left',
+    transition: 'transform 0.15s ease-in',
+  },
+  '&.active': {
+    color: theme.colors.text,
+    '&::before': {
+      zIndex: 1,
+      borderLeft: `3px solid ${theme.colors['border-primary']}`,
+      transform: 'scaleX(1)',
+      transition: 'transform 0.2s ease-out',
+    },
+  },
   '&:hover': {
     textDecoration: 'underline',
     color: theme.colors.text,
@@ -72,12 +87,6 @@ const LinkA = styled.a<{ $active: boolean }>(({ theme, $active = false }) => ({
     top: 0,
     bottom: 0,
     right: 0,
-  },
-  '&::before': {
-    zIndex: 1,
-    borderLeft: $active
-      ? `3px solid ${theme.colors['border-primary']}`
-      : 'none',
   },
   '&:focus, &:focus-visible': {
     boxShadow: 'none',
@@ -107,12 +116,21 @@ function setUrlHash(hash) {
   window.history.pushState({}, '', url)
 }
 
-function TableOfContentsBase({ toc, ...props }: { toc: MarkdocHeading[] }) {
-  const items = toc.filter(item => item.id && (item.level === 2 || item.level === 3))
+function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] }) {
+  const items = useMemo(() => toc.filter(item => item.id && (item.level === 2 || item.level === 3)),
+    [toc])
   const labelId = `nav-label-${useId()}`
   const forceRender = useForceRender()
   const firstRender = useRef(true)
   const ignoreScrollEvent = useRef(false)
+
+  const [headingElements, setHeadingElements] = useState<HTMLElement[]>([])
+
+  useEffect(() => {
+    setHeadingElements(items
+      .map(item => (!item.id ? null : document.getElementById(item.id)))
+      .filter(exists))
+  }, [items])
 
   const router = useRouter()
 
@@ -133,14 +151,11 @@ function TableOfContentsBase({ toc, ...props }: { toc: MarkdocHeading[] }) {
 
       let scrollToHash
 
-      items.forEach(item => {
-        if (!item.id) return
-        const eltTop
-          = document.getElementById(item.id)?.getBoundingClientRect()?.top
-          || Infinity
+      headingElements.forEach(elt => {
+        const eltTop = elt.getBoundingClientRect()?.top || Infinity
 
         if (eltTop <= scrollThreshold + topNavHeight) {
-          scrollToHash = `#${item.id}`
+          scrollToHash = `#${elt.id}`
         }
       })
       if (scrollToHash) {
@@ -162,9 +177,9 @@ function TableOfContentsBase({ toc, ...props }: { toc: MarkdocHeading[] }) {
     }
 
     return () => window.removeEventListener('scroll', listener)
-  }, [items, forceRender, hash])
+  }, [forceRender, hash, headingElements])
 
-  if (items.length <= 1) {
+  if (items.length <= 0) {
     return null
   }
 
@@ -187,7 +202,7 @@ function TableOfContentsBase({ toc, ...props }: { toc: MarkdocHeading[] }) {
                   passHref
                 >
                   <LinkA
-                    $active={active}
+                    className={classNames({ active })}
                     onClick={() => {
                       ignoreScrollEvent.current = true
                     }}
