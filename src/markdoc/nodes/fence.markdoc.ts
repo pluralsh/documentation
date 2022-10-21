@@ -6,8 +6,9 @@ export const fence = {
   render: Fence,
   attributes: {
     content: { type: String, render: false, required: true },
-    language: { type: String, render: 'data-language' },
+    language: { type: String },
     process: { type: Boolean, render: false, default: true },
+    showHeader: { type: Boolean, required: false },
   },
   transform(node, config) {
     const attributes = node.transformAttributes(config)

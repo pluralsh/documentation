@@ -14,7 +14,7 @@ Frequently, VPC peering APIs require all subnets to be non-overlapping, which is
 {% tab title="AWS" %}
 On AWS, update the `aws-bootstrap` modules configuration with:
 
-```bash
+```bash {% showHeader=false %}
 public_subnets = ["your.cidr.pub.1", "your.cidr.pub.2", "your.cidr.pub.3"]
 private_subnets = ["your.cidr.priv.1", "your.cidr.priv.2", "your.cidr.priv.3"]
 worker_private_subnets = ["your.cidr.worker.1", "your.cidr.worker.2", "your.cidr.worker.3"]
@@ -24,7 +24,7 @@ worker_private_subnets = ["your.cidr.worker.1", "your.cidr.worker.2", "your.cidr
 {% tab title="GCP" %}
 On GCP, update the `gcp-bootstrap` modules configuration with:
 
-```bash
+```bash {% showHeader=false %}
 vpc_subnetwork_cidr_range = "your.cidr"
 
 # you might also want to update cluster_secondary_range_cidr 
@@ -35,7 +35,7 @@ vpc_subnetwork_cidr_range = "your.cidr"
 {% tab title="Azure" %}
 With Azure, update the `azure-bootstrap` modules configuration with:
 
-```bash
+```bash {% showHeader=false %}
 address_space = "your.cidr"
 subnet_prefixes = ["your.cidr.pref"]
 ```
@@ -56,7 +56,7 @@ Plural makes it easy to add additional Terraform to the stacks we generate. Effe
 
 {% tabs %}
 {% tab title="AWS" %}
-```bash
+```bash {% showHeader=false %}
 resource "aws_vpc_peering_connection" "foo" {
    peer_owner_id = "my-owner-id" # Use appropriate values here.
    peer_vpc_id   = "peer-vpc-id"
@@ -66,7 +66,7 @@ resource "aws_vpc_peering_connection" "foo" {
 {% /tab %}
 
 {% tab title="GCP" %}
-```bash
+```bash {% showHeader=false %}
 data "google_compute_network" "peer" {
    name = "peer-network"
 }
@@ -80,7 +80,7 @@ resource "google_compute_network_peering" "peering1" {
 {% /tab %}
 
 {% tab title="Azure" %}
-```bash
+```bash {% showHeader=false %}
 data "azure_rm_virtual_network" "peer" {
    resource_group_name = "your-azure-resource-group" # Use appropriate values here.
    name = "peer-network-name"
