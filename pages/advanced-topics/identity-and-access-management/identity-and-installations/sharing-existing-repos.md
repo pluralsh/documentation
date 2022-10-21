@@ -97,7 +97,7 @@ Alice can find which bundles they have installed at [https://app.plural.sh/explo
 
 ### 5. Alice changes the owner of the Plural installation repo
 
-Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`.&#x20;
+Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`. In the example below, owner is set to `nick@plural.sh` on line 12.
 
 ![](</assets/advanced-topics/code-block.png>)
 
