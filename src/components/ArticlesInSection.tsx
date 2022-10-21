@@ -67,7 +67,7 @@ function ArticlesInSection({
       <ArticleList>
         {articles
           && articles.map(article => (
-            <li>
+            <li key={article.href}>
               <Button
                 floating
                 textTransform="none"
