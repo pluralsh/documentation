@@ -41,7 +41,7 @@ plural init
 ```
 
 This will kick off the process of setting up your Plural workspace. Once you've gone through a few setup steps, you'll get the following prompt:\
-**`? you're attempting to setup plural outside a git repository. would you like us to set one up for you here?`**` ``(Y/n)`
+**`? you're attempting to setup plural outside a git repository. would you like us to set one up for you here?`**
 
 Enter `Y`, pick your version control provider of choice, and you will receive an OAuth screen to let Plural create and manage repositories on your behalf. Note, Plural can only manage repositories that it has created.
 
@@ -74,7 +74,7 @@ And you should be good to go!
 2. **Build your configuration**: `plural build`
 3. **Deploy your configuration**: `plural deploy`&#x20;
 
-When Step 2 (`plural build`) is completed, you'll notice all of your new configuration has been created in your local repository. In this state, the files are not yet committed or pushed up to your origin repository.
+When `plural build` is completed, you'll notice all of your new configuration has been created in your local repository. In this state, the files are not yet committed or pushed up to your origin repository.
 
 You can manually commit and push the files yourself, _**but we recommend**_ using the `--commit` CLI argument when running `plural deploy`:&#x20;
 

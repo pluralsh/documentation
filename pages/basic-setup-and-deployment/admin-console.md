@@ -5,14 +5,14 @@ description: Supercharge your day two operations.
 
 ## Introduction
 
-The plural admin console is a web application that serves as a control panel for all your plural applications. It:
+The Plural admin console is a web application that serves as a control panel for all your Plural applications. It:
 
 * manages automated upgrades delivered from the Kubernetes api
 * serves as a thin Grafana to visualize application metrics and logs
-* serves as a built-in k8s dashboard for all plural apps in the cluster, along with providing app-level health checking
+* serves as a built-in K8s dashboard for all plural apps in the cluster, along with providing app-level health checking
 * is the touchpoint at which incidents can be filed with the owner of an application
 
-The console is not a strict dependency, but it is highly recommended to install it. It can be installed and deployed like any other application on Plural.
+The console is not a strict dependency, but we highly recommended installing it. It can be installed and deployed like any other application on Plural.
 
 {% callout severity="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
@@ -20,21 +20,21 @@ The admin console is separate from [app.plural.sh](https://app.plural.sh) which 
 
 ## Installation
 
-#### 1. Check whether your Plural installation repo uses https or ssh for Git authentication
+#### 1. Check your Git authentication method.
 
 ```
 # show repo remote with details
 git remote -v
 ```
 
-If the remote urls start with `git@github.com` then you're using ssh
+If the remote urls start with `git@github.com` then you're using SSH.
 
-If the remote urls start with `https` then you're using https.
+If the remote urls start with `https` then you're using HTTPS.
 
 #### 2. Setup for Git authentication
 
 {% tabs %}
-{% tab title="Https" %}
+{% tab title="HTTPS" %}
 Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to generate a revokable personal access token. The access token needs to have write permissions. Keep track of this access token, you will need it later in the console install process.
 {% /tab %}
 
@@ -45,7 +45,7 @@ Keep track of the path where you've stored your ssh key (most likely in \~/.ssh/
 {% /tab %}
 {% /tabs %}
 
-#### 3. Install Console bundle && build
+#### 3. Install and build the Console
 
 The plural console is installable like any other plural app. To find the available bundles, just run:
 
@@ -67,7 +67,6 @@ Once the bundle has installed, run:
 plural build
 ```
 
-\
 The console takes over the gitops flow of managing plural apps for you. You will be asked for the git authentication credentials you created at Step 1.
 
 #### 4. Deploy Console
