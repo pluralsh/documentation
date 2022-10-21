@@ -32,7 +32,7 @@ const data: NavData = [
       },
       {
         title: 'Quickstart',
-        href: '/getting-started/quickstart',
+        href: '/getting-started/getting-started',
         icon: <MagicWandIcon />,
       },
       {
