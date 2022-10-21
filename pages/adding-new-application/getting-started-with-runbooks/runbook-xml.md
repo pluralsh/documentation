@@ -1,14 +1,15 @@
 ---
-title: Runbook XML
+title: XML Runbooks
+description: Creating a Plural runbook from XML.
 ---
 
 #### XML Tag Definitions
 
 Plural runbooks are written in XML. XML doesn’t have a predefined markup language, like HTML does. Instead, XML allows users to create their own markup symbols to describe content, making an unlimited and self-defining symbol set.
 
-We have defined the following xml attributes in an elixir file that may be used in the creation of your own runbooks and help standardize their layout.&#x20;
+We have defined the following xml attributes in an Elixir file that may be used in the creation of your own runbooks and help standardize their layout.&#x20;
 
-```
+```Elixir
 defmodule Console.Runbooks.Display do
   use Console.Runbooks.Display.Base
   alias Console.Runbooks.Display.{Xml}
@@ -86,18 +87,18 @@ defmodule Console.Runbooks.Display do
 end
 ```
 
-Most of these attributes, like `box` and `input` are basically grommet react components. However, we would like to call out a few custom attributes that interact with other data from the runbook. They each refer to a datasource and then maybe also a way to access a value at that datasource.
+Most of these attributes, like `box` and `input` are basically grommet React components. However, we would like to call out a few custom attributes that interact with other data from the runbook. They each refer to a datasource and then maybe also a way to access a value at that datasource.
 
-* **timeseries**
-  * datasource
-* **valueFrom**
-  * datasource
-  * doc
-  * path
+* **`timeseries`**
+  * `datasource`
+* **`valueFrom`**
+  * `datasource`
+  * `doc`
+  * `path`
 
-Here is an example Runbook xml template composed of these attributes.
+Here is an example Runbook XML template composed of these attributes.
 
-```
+```xml
 <root gap='medium'>
   <box pad='small' gap='medium' direction='row' align='center'>
     <button label='Scale' action='scale' primary='true' headline='true' />
@@ -154,4 +155,4 @@ Here is an example Runbook xml template composed of these attributes.
 </root>
 ```
 
-This xml file is referred to in the `runbooks.yaml` file, where you will also pass along the datasources that will hydrate this template.&#x20;
+This XML file is referred to in the `runbooks.yaml` file, where you will also pass along the datasources that will hydrate this template.&#x20;

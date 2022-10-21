@@ -98,11 +98,11 @@ const data: NavData = [
             sections: [
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
-                title: '  Runbook XML',
+                title: '  XML Runbooks',
               },
               {
                 href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
-                title: '  Runbook Yaml',
+                title: '  YAML Runbooks',
               },
             ],
           },
@@ -225,12 +225,6 @@ const data: NavData = [
         title: 'Workspaces',
         href: '/reference/workspaces',
         icon: <WorkspaceIcon />,
-        sections: [
-          {
-            title: 'Workspace Structure',
-            href: '/reference/workspaces/workspace-structure',
-          },
-        ],
       },
       {
         title: 'Developer Tools / API',

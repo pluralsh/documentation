@@ -10,7 +10,7 @@ The Plural architecture has three main components:
 
 At a high level, the interactions between all three components look something like this:
 
-![](</assets/Flow Chart.jpg>)
+![](</assets/reference/architecture.png>)
 
 ## Plural API
 

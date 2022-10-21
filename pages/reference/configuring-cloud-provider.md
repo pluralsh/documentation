@@ -26,7 +26,7 @@ Follow the provider-specific instructions below.
 aws configure list
 ```
 
-* You should see a set of values that looks like this:
+You should see a set of values that looks like this:
 
 ```
       Name                    Value             Type    Location

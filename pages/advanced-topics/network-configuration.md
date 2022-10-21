@@ -102,7 +102,7 @@ As mentioned earlier, consult the section on customizing subnets to ensure your 
 
 ## Adding an IP Allowlist to the Public Ingress Controller
 
-Plural ships with two ingress controllers, both using the open source [ingress-nginx](https://github.com/kubernetes/ingress-nginx) project. Some users might want to restrict what IPs the public ingress is available on. For example, this is required for locking it down to an office VPN. We can implement this by updating Kubernetes' `loadBalancerSourceRanges` attribute on `LoadBalancer` services. To configure this, head to your Plural repository and modify `ingress-nginx/helm/ingress-nginx/values.yaml` by overlaying:
+Plural ships with two ingress controllers, both using the open-source [ingress-nginx](https://github.com/kubernetes/ingress-nginx) project. Some users might want to restrict what IPs the public ingress is available on. For example, this is required for locking it down to an office VPN. We can implement this by updating Kubernetes' `loadBalancerSourceRanges` attribute on `LoadBalancer` services. To configure this, head to your Plural repository and modify `ingress-nginx/helm/ingress-nginx/values.yaml` by overlaying:
 
 ```yaml
 ingress-nginx:

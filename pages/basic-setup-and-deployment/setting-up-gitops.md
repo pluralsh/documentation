@@ -13,19 +13,19 @@ If you are using the **[Plural Cloud Shell](https://app.plural.sh/shell)**, we h
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
 {% /callout %}
 
-Plural currently supports the following version control providers:
+**Plural currently supports the following version control providers:**
 
 * [GitHub](https://github.com/)
 * [GitLab](https://about.gitlab.com/)
 
-Support for the following providers is on our roadmap:
+**Support for the following providers is on our roadmap:**
 
 * [Bitbucket](https://bitbucket.org/product/)
 * [Mercurial](https://www.mercurial-scm.org/)
 
 ## Setting up a Git Repository for Plural
 
-You have two options when setting up a Git repository for use with a Plural workspace:
+**You have two options when setting up a Git repository for use with a Plural workspace:**
 
 * Use Plural OAuth by running `plural init` anywhere. (_Recommended_)
 * Set up an empty, configured Git repository beforehand.
@@ -41,23 +41,23 @@ plural init
 ```
 
 This will kick off the process of setting up your Plural workspace. Once you've gone through a few setup steps, you'll get the following prompt:\
-**`? you're attempting to setup plural outside a git repository. would you like us to set one up for you here?`**` ``(Y/n)`
+**`? you're attempting to setup plural outside a git repository. would you like us to set one up for you here?`**
 
 Enter `Y`, pick your version control provider of choice, and you will receive an OAuth screen to let Plural create and manage repositories on your behalf. Note, Plural can only manage repositories that it has created.
 
 If everything goes well, it should look like this:
 
-![](</assets/Screen Shot 2022-07-27 at 5.11.01 PM.png>)
+![](</assets/basic-setup-and-deployment/gitops-terminal.png>)
 
 ### Manual Git Setup
 
-To set up a Git repository yourself, you'll need a fresh repository with the following requirements:
+**To set up a Git repository yourself, you'll need a fresh repository with the following requirements:**
 
 * Cloned with SSH
 * Must have an initial commit
 * Must be in sync with the upstream/origin repository
 
-If the requirements aren't fulfilled, you'll hit an error in the `plural init` setup process. To get started, follow these steps:
+**If the requirements aren't fulfilled, you'll hit an error in the `plural init` setup process. To get started, follow these steps:**
 
 1. &#x20;Go to your version control provider and create a fresh repository.&#x20;
 2. Clone the repository to the machine that you'll be running the Plural CLI on.
@@ -68,13 +68,13 @@ And you should be good to go!
 
 ## GitOps Best Practices
 
-Plural has three basic steps to the deploy process:
+**Plural has three basic steps to the deploy process:**
 
 1. **Install a bundle**: `plural bundle install <bundle-name> <bundle-provider>`
 2. **Build your configuration**: `plural build`
 3. **Deploy your configuration**: `plural deploy`&#x20;
 
-When Step 2 (`plural build`) is completed, you'll notice all of your new configuration has been created in your local repository. In this state, the files are not yet committed or pushed up to your origin repository.
+When `plural build` is completed, you'll notice all of your new configuration has been created in your local repository. In this state, the files are not yet committed or pushed up to your origin repository.
 
 You can manually commit and push the files yourself, _**but we recommend**_ using the `--commit` CLI argument when running `plural deploy`:&#x20;
 

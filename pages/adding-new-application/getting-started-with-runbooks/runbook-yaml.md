@@ -1,8 +1,9 @@
 ---
-title: Runbook Yaml
+title: YAML Runbooks
+description: Creating a Plural runbook from YAML.
 ---
 
-```
+```yaml
 apiVersion: platform.plural.sh/v1alpha1
 kind: Runbook
 metadata:
@@ -57,22 +58,26 @@ spec:
 
 Each datasource has a type. At the moment, the only types Plural supports are prometheus, kubernetes, and nodes. Each type has a spec that's specific to the type.&#x20;
 
-*   prometheus
+**prometheus** spec:
+```yaml
+prometheus:
+  format:
+  legend:
+  query:
+```
 
-    spec:&#x20;
+**kubernetes** spec:
+```yaml
+kubernetes:
+  resource:
+  name: # the namespace of the Kubernetes resource
+```
 
-    * format
-    * legend
-    * query
-*   kubernetes
+**nodes** spec:
 
-    spec:
-
-    * resource&#x20;
-    * name -- the namespace of the kubernetes resource
-*   nodes
-
-    This just fetches all the nodes in the Kubernetes cluster
+```yaml
+# No spec needed, this just fetches all the nodes in the Kubernetes cluster.
+```
 
 Additionally, in `runbooks.yaml`, you can define a specific action that the runbook can take based off of context from what the user input has given it.
 

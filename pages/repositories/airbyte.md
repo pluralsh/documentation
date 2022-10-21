@@ -31,7 +31,7 @@ plural bundle install airbyte airbyte-azure
 {% /tab %}
 {% tab title="KinD" %}
 ```shell
-plural bundle install airflow airbyte airbyte-kind
+plural bundle install airbyte airbyte-kind
 ```
 {% /tab %}
 
