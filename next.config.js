@@ -41,6 +41,11 @@ module.exports = () => {
           destination: '/reference/architecture',
           permanent: false,
         },
+        {
+          source: '/reference/workspaces/workspace-structure',
+          destination: '/reference/workspaces',
+          permanent: false,
+        },
       ]
     },
     // webpack: (config) => {
