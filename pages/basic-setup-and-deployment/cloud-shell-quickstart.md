@@ -61,13 +61,13 @@ Install the Console with the following one-liner:
 
 {% tabs %}
 {% tab title="AWS" %}
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural bundle install console console-aws
 ```
 {% /tab %}
 
 {% tab title="GCP" %}
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural bundle install console console-gcp
 ```
 {% /tab %}
@@ -81,13 +81,13 @@ Install Airflow with the following one-liner:
 
 {% tabs %}
 {% tab title="AWS" %}
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural bundle install airflow aws-airflow
 ```
 {% /tab %}
 
 {% tab title="GCP" %}
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural bundle install airflow gcp-airflow
 ```
 {% /tab %}
@@ -101,14 +101,14 @@ Both the console and Airflow support [Plural OIDC](/advanced-topics/identity-and
 
 Now it's time for Plural to write all the Helm and Terraform required to bring up your Kubernetes cluster based on the config that you've entered. You can do that by running:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural build
 plural build --only airflow
 ```
 
 Do a quick `ls` to check out the files we've created for you. We're now ready to deploy. Do that by running:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural deploy --commit "Deploy Plural console and Airflow"
 ```
 
@@ -153,13 +153,13 @@ Now that we've set up a running cluster with Plural, we can add and remove appli
 
 If you want to start using the CLI locally, just [install the Plural CLI](/getting-started/getting-started#install-plural-cli) and run:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural shell sync
 ```
 
 This will sync your local installation with the Cloud Shell. You can then proceed to purge the shell if you wish to spin it down:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural shell purge
 ```
 
@@ -167,7 +167,7 @@ plural shell purge
 
 To uninstall an application from your cluster, run:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural destroy <app-name>
 ```
 

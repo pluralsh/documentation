@@ -15,16 +15,24 @@ We currently support this repository on the following infrastructure providers:
 {% tabs %}
 
 {% tab title="AWS" %}
-```plural bundle install airflow airflow-aws```
+```shell
+plural bundle install airflow airflow-aws
+```
 {% /tab %}
 {% tab title="GCP" %}
-```plural bundle install airflow airflow-gcp```
+```shell
+plural bundle install airflow airflow-gcp
+```
 {% /tab %}
 {% tab title="Azure" %}
-```plural bundle install airflow airflow-azure```
+```shell
+plural bundle install airflow airflow-azure
+```
 {% /tab %}
 {% tab title="KinD" %}
-```plural bundle install airflow airflow-kind```
+```shell
+plural bundle install airflow airflow-kind
+```
 {% /tab %}
 
 {% /tabs %}

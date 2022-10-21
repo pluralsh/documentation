@@ -163,7 +163,7 @@ Ultimately all the values you input at this step will be stored in a file called
 
 With all bundles installed, run:
 
-```bash {% showHeader=false %}
+```shell {% showHeader=false %}
 plural build
 plural deploy --commit "initial deploy"
 ```

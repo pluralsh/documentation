@@ -4,7 +4,7 @@ title: Plural Workspace Layout
 
 Plural ensures the state of all installed applications are stored in a git repository, under a common format.  Broadly, a working workspace should look like
 
-```shell
+```shell {% showHeader=false %}
 app-one/
 -> helm/app-one # helm chart for k8s manifests
 -> terraform/* # terraform modules

@@ -13,13 +13,13 @@ The plural admin console serves a number of different roles
 
 The plural console is installable like any other plural app, to find the available bundles, just run:
 
-```shell
+```shell {% showHeader=false %}
 plural bundle list console
 ```
 
 Then once you've found an eligible bundle to install, do (for the aws bundle as an example):
 
-```shell
+```shell {% showHeader=false %}
 plural bundle install console console-aws
 plural build --only console
 plural deploy
