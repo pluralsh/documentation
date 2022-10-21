@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import {
-  Tab as TabComponent,
   TabList,
   TabListStateProps,
   TabPanel,
@@ -14,7 +13,7 @@ import {
   useState,
 } from 'react'
 
-// components/Tab.js
+import TabComponent from './Tab'
 
 export const TabContext = createContext({})
 
@@ -22,8 +21,8 @@ export const TabPanelStyled = styled(TabPanel)(({ theme }) => ({
   borderBottom: theme.borders.default,
   marginBottom: theme.spacing.xxlarge,
   '> div': {
-    marginTop: theme.spacing.medium,
-    marginBottom: theme.spacing.medium,
+    marginTop: theme.spacing.large,
+    marginBottom: theme.spacing.xlarge,
   },
 }))
 
@@ -49,6 +48,8 @@ export function Tabs({
         stateRef={tabStateRef}
         stateProps={tabListStateProps}
         flexShrink={0}
+        justifyContent="stretch"
+        width="100%"
       >
         {titles.map(title => (
           <TabComponent
