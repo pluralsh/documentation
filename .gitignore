@@ -1,3 +1,10 @@
-# Ignore IDE settings.
-
+# IDE settings.
 .idea
+.vscode
+#
+node_modules/
+.DS_Store
+.next/
+.vercel
+yalc.lock
+.yalc/
