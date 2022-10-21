@@ -14,9 +14,3 @@ We use a tool called [Renovate](https://github.com/renovatebot/renovate) to auto
 
 Once we have tried out the changes and have confirmed that the new version works, we will merge the PR and the change will be available for
 all Plural installations to pull down when they wish to.
-
-## Guides
-
-- [Installing Airbyte](airbyte.md)
-- [Installing Airflow](airflow.md)
-- [Installing Plural Console](console.md)

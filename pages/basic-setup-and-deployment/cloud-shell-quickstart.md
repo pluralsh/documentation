@@ -125,10 +125,6 @@ Now grab a coffee or your favorite hot beverage while we wait for your cloud pro
 
 Head over to `console.YOUR_WORKSPACE.onplural.sh` (or the hostname you picked) to view the console that you have provisioned. If you enabled Plural OIDC, you'll be able to quickly login using your Plural account.
 
-{% callout severity="warning" %}
-You may experience a delayed creation of your SSL certs for your applications. ZeroSSL currently may take up to 24 hours to provide you your certs.
-{% /callout %}
-
 Here, you'll be able to check node health, Pod health, logs, pre-built dashboards tailored for Airflow, and more.
 
 ![](</assets/cloud-shell-quickstart/image-5.png>)

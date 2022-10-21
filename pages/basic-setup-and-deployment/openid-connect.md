@@ -24,9 +24,9 @@ The provider is mapped to a set of users+groups, just like a Plural role, and if
 
 ## Supported Applications
 
-Applications that currently support Plural OIDC are:
+**Applications that currently support Plural OIDC are:**
 
-* Plural console - includes group provisioning as well
+* Plural Console - includes group provisioning as well
 * Airflow
 * Airbyte  
 * Sentry
