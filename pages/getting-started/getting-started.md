@@ -78,11 +78,11 @@ Once you're in the container's zsh, you'll want to clone the repo you'll use for
 {% /tab %}
 
 {% tab title="EC2 AMI" %}
-We have EC2 AMI's with the Plural CLI installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)
+We have EC2 AMI's with the Plural CLI installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed [here](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json).
 
 If there's interest in images for GCP and Azure, feel free to leave feedback in our [Discord](https://discord.gg/pluralsh) or open a [GitHub issue](https://github.com/pluralsh/plural/issues/new/choose).
-
-This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/). You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
+[
+This [doc](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/) gives more details on launching AMIs if you are unfamiliar. You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
 {% /tab %}
 {% /tabs %}
 
