@@ -10,13 +10,13 @@ The provider is mapped to a set of users+groups, just like a Plural role, and if
 
 ### Supported Applications
 
-Applications that currently support Plural OIDC are:
+**Applications that currently support Plural OIDC are:**
 
-* Plural console - includes group provisioning as well
-* Airflow
-* Airbyte  
-* Sentry
-* GitLab
-* Grafana
-* Argo CD
+* [Plural Console](https://www.plural.sh/applications/console) - includes group provisioning as well
+* [Airflow](https://www.plural.sh/applications/airflow)
+* [Airbyte](https://www.plural.sh/applications/airbyte)
+* [Sentry](https://www.plural.sh/applications/sentry)
+* [GitLab](https://www.plural.sh/applications/gitlab)
+* [Grafana](https://www.plural.sh/applications/grafana)
+* [Argo CD](https://www.plural.sh/applications/argo-cd)  
 
