@@ -4,7 +4,7 @@ title: Sharing Existing Plural Installation Repos
 
 Let's say that you have an existing Plural installation repo and you would like to share it with other users. A common scenario might be an individual developer playing around with Plural who would then like to expand Plural adoption across their team or company. Below, we show how to do this.
 
-Let's say that **Alice** is the original user and already has a few applications installed in her own Plural installation repo. She would now like to share the repo with **Bob** and **Cory**, her teammates on the **machine learning infrastructure team**.
+Let's say that **Alice** is the original user and already has a few applications installed in their own Plural installation repo. **Alice** would now like to share the repo with **Bob** and **Cory**, their teammates on the **machine learning infrastructure team**.
 
 ### 1. Bob and Cory Create Plural Accounts at [plural.sh](https://app.plural.sh)
 
@@ -62,7 +62,7 @@ helm plugin install https://github.com/pluralsh/helm-push
 {% /tab %}
 
 {% tab title="Docker" %}
-We offer a docker image with the plural cli installed along with all cli dependencies: terraform, helm, kubectl, and all the major cloud clis: gcr.io/pluralsh/plural-cli:0.1.1-cloud.  We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session.  The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:\
+We offer a docker image with the plural cli installed along with all cli dependencies: Terraform, Helm, kubectl, and all the major cloud CLIs: `gcr.io/pluralsh/plural-cli:0.1.1-cloud`.  We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session.  The best strategy is probably to mount the config dir of the cloud provider you're using, like `\~/.aws`, in the `docker run` command:
 
 
 ```
@@ -74,36 +74,36 @@ docker run -it --volume $HOME/.aws:/root/aws \
 {% /tab %}
 
 {% tab title="EC2 AMI" %}
-We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs, terraform, helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed here: [https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json)\
+We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs, Terraform, Helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed [here](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json):
 
 
 If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a GitHub issue.
 
-This doc gives more details on launching AMIs if you are unfamiliar: [https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/).  You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to choose the one for the appropriate region.
+[This doc](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/) gives more details on launching AMIs if you are unfamiliar.  You'll want to select "Public images" within the AMI search bar and you can use the AMI id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to choose the one for the appropriate region.
 {% /tab %}
 {% /tabs %}
 
-The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+The brew tap will install Plural, alongside Terraform, Helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 
 ### 3. Alice creates a [Plural service account](/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts)
 
 Alice follows the instructions [here](/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts) to create a Plural service account under the `ml-infra@plural.sh` email.
 
-### 4. Alice copies down which bundles she has installed for later reference
+### 4. Alice copies down which bundles they have installed for later reference
 
-She can find which bundles she has installed at [https://app.plural.sh/explore/installed](https://app.plural.sh/explore/installed)
+Alice can find which bundles they have installed at [https://app.plural.sh/explore/installed](https://app.plural.sh/explore/installed)
 
 ![](</assets/Screen Shot 2022-02-22 at 2.58.10 PM.png>)
 
 ### 5. Alice changes the owner of the Plural installation repo
 
-Alice goes to `workspace.yaml` in the root of her installation repo, and changes the owner to `ml-infra@plural.sh`.&#x20;
+Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`.&#x20;
 
 ![](</assets/Screen Shot 2022-02-22 at 2.53.09 PM.png>)
 
 ### 6. Alice initializes Plural as service account
 
-Alice runs the following command from inside her Plural installation repo:
+Alice runs the following command from inside their Plural installation repo:
 
 ```
 plural init --service-account ml-infra@plural.sh
@@ -113,13 +113,13 @@ This switches to the `ml-infra` service account user.
 
 ### 7. Alice registers all the bundles as the service account user
 
-Now that Alice is using a different user, she needs to re-register each installed application with the Plural API under the service account user. For each application, she should run:
+Now that Alice is using a different user, they need to re-register each installed application with the Plural API under the service account user. For each application, Alice should run:
 
 ```
 plural bundle install <repo> <bundle>
 ```
 
-To recall which applications she's installed, she should refer to the information she copied in step 4.
+To recall which applications they have installed, Alice should refer to the information they copied in step 4.
 
 {% callout severity="info" %}
 Service accounts need to be explicitly granted install permissions in your account before you can successfully run the bundle install command.  Be sure to create a role [here](https://app.plural.sh/account/roles) with install permissions and add the service account to it to grant them access.
@@ -134,7 +134,7 @@ plural build
 plural deploy
 ```
 
-Finally, she push up these changes up to the installation repo Github
+Finally, Alice can push up these changes up to the installation repo on Github
 
 ```
 git commit -m "Change owner of repo"
