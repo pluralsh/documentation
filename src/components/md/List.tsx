@@ -12,7 +12,7 @@ const StyledList = styled.div.withConfig(commonCfg)(({ theme }) => ({
   counterReset: `${COUNTER_ID} 0`,
 }))
 
-export const ListItem = styled.li.withConfig(commonCfg)(({ theme, ...props }) => {
+export const ListItem = styled.li.withConfig(commonCfg)(({ theme }) => {
   const offset = theme.spacing.large
   const fillLevel = useFillLevel()
 
