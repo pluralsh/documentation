@@ -32,7 +32,7 @@ mv plural.o /usr/local/bin/plural
 
 
 
-replace \{{plat\}} and \{{arch\}} with any of:
+replace `plat` and `arch` with any of:
 
 | plat    | arch  |
 | ------- | ----- |
@@ -43,9 +43,9 @@ replace \{{plat\}} and \{{arch\}} with any of:
 
 
 
-All binaries can also be viewed in the [artifacts tab ](https://app.plural.sh/repositories/b4ea03b9-d51f-4934-b030-ff864b720df6/artifacts)of the plural repo on app.plural.sh.  You can also find sha256 checksums for each there to guarantee file integrity
+All binaries can also be viewed in the [artifacts tab](https://app.plural.sh/repositories/b4ea03b9-d51f-4934-b030-ff864b720df6/artifacts) of the plural repo on app.plural.sh.  You can also find sha256 checksums for each there to guarantee file integrity
 
-You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here\
+You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here.
 
 
 | Tool      | Installer                                                                                                                  |
@@ -54,7 +54,7 @@ You will still need to ensure helm, terraform and kubectl are properly installed
 | terraform | [https://learn.hashicorp.com/tutorials/terraform/install-cli](https://learn.hashicorp.com/tutorials/terraform/install-cli) |
 | kubectl   | [https://kubernetes.io/docs/tasks/tools/#kubectl](https://kubernetes.io/docs/tasks/tools/#kubectl)                         |
 
-Once these are installed, you'll also need to add the helm push plugin like so
+Once these are installed, you'll also need to add the helm push plugin like so:
 
 ```
 helm plugin install https://github.com/pluralsh/helm-push

@@ -6,11 +6,15 @@ description: >-
   general, just hop into our Discord for help.
 ---
 
-## error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1
+## Invalid apiVersion for K8s
+
+`error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1`
 
 You might see this when attempting to sync crds or run helm commands in a run of `plural deploy`. It's due to legacy versions of the aws cli generating deprecated kubeconfigs, if you upgrade your cli and rerun `plural deploy` it should be able to proceed successfully.
 
-## Error 404: The requested project was not found., notFound
+## Requested project not found
+
+`Error 404: The requested project was not found., notFound`
 
 If you are running `plural build` and encounter a `project requested not found` error it's possible that your application default credential is set to the wrong gcp project. Run:
 
@@ -20,7 +24,9 @@ gcloud auth application-default login
 
 to reset the credential and reauthorize the browser for the correct project.
 
-## Failed deploy model due to Internal error occurred: failed calling webhook "mtargetgroupbinding.elbv2.k8s.aws": Post "https://aws-load-balancer-webhook-service.bootstrap.svc:443/mutate-elbv2-k8s-aws-v1beta1-targetgroupbinding?timeout=10s"
+## Failed deploy model
+
+`Failed deploy model due to Internal error occurred: failed calling webhook "mtargetgroupbinding.elbv2.k8s.aws": Post "https://aws-load-balancer-webhook-service.bootstrap.svc:443/mutate-elbv2-k8s-aws-v1beta1-targetgroupbinding?timeout=10s"`
 
 The aws load balancer controller webhook is not fully reliable, if you see that it's just a matter of recreating the webhook which you can do with:
 
@@ -29,7 +35,7 @@ kubectl delete validatingwebhookconfiguration aws-load-balancer-webhook -n boots
 plural bounce bootstrap
 ```
 
-## Error Acquiring State Lock
+## Error acquiring state lock
 
 If your deploy is interrupted, it's possible terraform state gets confused. To fix this, you'll need to:
 
@@ -55,7 +61,9 @@ helm del bootstrap -n bootstrap
 plural deploy
 ```
 
-## error reading Route Table Association () : Empty result
+## Error reading route table association
+
+`error reading Route Table Association () : Empty result`
 
 This is a possible terraform race condition where the route tables think they're being read before they've been created, but in fact, they have already been created. As a temporary fix, just wait some time and rerun the deploy:
 

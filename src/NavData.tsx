@@ -225,12 +225,6 @@ const data: NavData = [
         title: 'Workspaces',
         href: '/reference/workspaces',
         icon: <WorkspaceIcon />,
-        sections: [
-          {
-            title: 'Workspace Structure',
-            href: '/reference/workspaces/workspace-structure',
-          },
-        ],
       },
       {
         title: 'Developer Tools / API',
