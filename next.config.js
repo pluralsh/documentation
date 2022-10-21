@@ -29,7 +29,7 @@ module.exports = () => {
         {
           source: '/getting-started/readme',
           destination: '/',
-          permanent: false,
+          permanent: true,
         },
         {
           source: '/getting-started/getting-started',
