@@ -17,7 +17,7 @@ To share an encrypted plural repo, there are two steps:
 
 To register a key for your current machine, run:
 
-```shell
+```shell {% showHeader=false %}
 plural crypto setup-keys
 ```
 
@@ -27,7 +27,7 @@ This will generate a new age keypair, and automatically register the public key 
 
 To share a repo, simply run:
 
-```shell
+```shell {% showHeader=false %}
 plural crypto share --email <email1> --email <email2>
 ```
 
@@ -39,7 +39,7 @@ This will do a few things:
 
 If you have the plural console deployed, it's also recommended you run:
 
-```shell
+```shell {% showHeader=false %}
 plural build --only console
 plural deploy
 git add . && git commit -m "set up age"
