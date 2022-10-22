@@ -277,7 +277,7 @@ const NavLink = styled(({
   },
 }))
 
-export const TopHeading = styled.h1(({ theme }) => ({
+export const TopHeading = styled.h6(({ theme }) => ({
   paddingLeft: theme.spacing.medium,
   paddingTop: theme.spacing.xsmall,
   paddingBottom: theme.spacing.xsmall,
