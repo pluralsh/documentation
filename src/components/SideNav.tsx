@@ -74,12 +74,12 @@ const LinkA = styled.a<{ desktop: boolean }>(({ desktop, theme }) => ({
   },
 }))
 
-type LinkBaseProps = Partial<ComponentProps<typeof Link>> & {
+type LinkBaseProps = Partial<ComponentProps<typeof LinkA>> & {
   icon?: ReactElement
 }
 
 const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
-  className, children, icon, href,
+  className, children, icon, href, ...props
 }, ref) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
   const { desktop } = useContext(NavContext)
@@ -89,6 +89,7 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
       desktop={desktop}
       tabIndex={keyboardNavigable ? 0 : -1}
       ref={ref}
+      {...props}
     >
       {icon && icon}
       {children}
@@ -200,7 +201,7 @@ const NavLink = styled(({
     icon?: ReactElement
     desktop: boolean
     onToggleOpen?: () => void
-  } & Partial<ComponentProps<typeof Link>>) => {
+  } & Partial<ComponentProps<typeof LinkA>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
   const { scrollRef, ...navContext } = useContext(NavContext)
   const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
@@ -237,6 +238,7 @@ const NavLink = styled(({
     >
       <LinkBase
         icon={icon}
+        onClick={() => (isSelected && onToggleOpen ? onToggleOpen() : null)}
         {...props}
       />
       {isSubSection && (
@@ -275,7 +277,7 @@ const NavLink = styled(({
   },
 }))
 
-export const TopHeading = styled.h1(({ theme }) => ({
+export const TopHeading = styled.h6(({ theme }) => ({
   paddingLeft: theme.spacing.medium,
   paddingTop: theme.spacing.xsmall,
   paddingBottom: theme.spacing.xsmall,

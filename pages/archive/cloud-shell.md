@@ -15,7 +15,7 @@ We provide a fully managed cloud shell environment with plural cli and all depen
 Note that you **must** to manually push any uncommitted changes as your shell might not be persisted through restarts
 {% /callout %}
 
-![I](</assets/Screen Shot 2022-02-18 at 1.01.22 PM.png>)
+![](</assets/Screen Shot 2022-02-18 at 1.01.22 PM.png>)
 
 If you'd like to sync your shell locally once you've gotten up and running, all you'll need to do is follow the instructions to install the plural cli and run these commands:
 

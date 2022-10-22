@@ -1,14 +1,10 @@
 import styled from 'styled-components'
 
-export const commonCfg = { shouldForwardProp: () => true }
+import { FigCaption } from './Figure'
 
-export const MediaWrap = styled.span.withConfig(commonCfg)(({ theme }) => ({
-  display: 'block',
-  width: '100%',
-  padding: theme.spacing.large,
-  marginTop: theme.spacing.large,
-  marginBottom: theme.spacing.large,
-}))
+import { MediaWrap } from './MediaWrap'
+
+export const commonCfg = { shouldForwardProp: () => true }
 
 const StyledImg = styled.img.withConfig(commonCfg)(({ theme }) => ({
   display: 'block',
@@ -16,12 +12,19 @@ const StyledImg = styled.img.withConfig(commonCfg)(({ theme }) => ({
   border: theme.borders.default,
   borderRadius: theme.borderRadiuses.large,
   overflow: 'hidden',
+  marginLeft: 'auto',
+  marginRight: 'auto',
 }))
 
-function Image({ ...props }) {
+function Image({ title, bareImage, ...props }) {
+  if (bareImage) {
+    return <StyledImg {...props} />
+  }
+
   return (
-    <MediaWrap>
+    <MediaWrap as="figure">
       <StyledImg {...props} />
+      {title && <FigCaption>{title}</FigCaption>}
     </MediaWrap>
   )
 }

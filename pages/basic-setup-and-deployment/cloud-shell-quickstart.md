@@ -42,7 +42,7 @@ We'll now start setting up your Kubernetes cluster configuration. Here's a guide
 
 You should hit the following verification screen afterward. Hit `Create` once you're ready to go!
 
-![Thankfully, Abhi remembered to deactivate the key before publishing this image.](</assets/cloud-shell-quickstart/image-3.png>)
+![](</assets/cloud-shell-quickstart/image-3.png> "Thankfully, Abhi remembered to deactivate the key before publishing this image.")
 
 While your Cloud Shell is provisioning, double check that your repository was initialized by checking your GitHub repos. There should be a repository with an initial commit with the name that you configured.
 
