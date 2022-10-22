@@ -41,6 +41,6 @@ title: Creating a DNS Zone in Console
 4. With the DNS zone created, in the Azure portal **Favorites** pane, select **All resources**. On the **All resources** page, select your DNS zone. If the subscription you've selected already has several resources in it, you can enter your domain name in the **Filter by name** box to easily access the application gateway.
 5. Retrieve the name servers from the DNS zone page. In this example, the zone `contoso.net` has been assigned name servers `ns1-01.azure-dns.com`, `ns2-01.azure-dns.net`, \*`ns3-01.azure-dns.org`, and `ns4-01.azure-dns.info`
 
-![List of name servers](https://docs.microsoft.com/en-us/azure/dns/media/dns-delegate-domain-azure-dns/viewzonens500.png)
+![](https://docs.microsoft.com/en-us/azure/dns/media/dns-delegate-domain-azure-dns/viewzonens500.png "List of name servers")
 {% /tab %}
 {% /tabs %}

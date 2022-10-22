@@ -6,3 +6,4 @@ export {
   comment, head, script, link,
 } from './nextjs.markdoc'
 // export * from '../nodes/link.markdoc'
+export { figure, caption } from './figure.markdoc'
