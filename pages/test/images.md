@@ -16,3 +16,10 @@ A more **complex** caption with `formatted` text and [links](#)
 {% figure %}
 ![alt text for screen readers](/assets/cloud-shell-quickstart/image-1.png)
 {% /figure %}
+
+
+# Let's see what happens with multiple images in a row with some text inbetween
+![alt text for screen readers](/assets/cloud-shell-quickstart/image-1.png 'Basic *caption* (no formatting allowed)')
+Other text
+![alt text for screen readers](/assets/cloud-shell-quickstart/image-1.png 'Basic *caption* (no formatting allowed)')
+![alt text for screen readers](/assets/cloud-shell-quickstart/image-1.png 'Basic *caption* (no formatting allowed)')
