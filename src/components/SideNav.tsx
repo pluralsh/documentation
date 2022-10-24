@@ -19,7 +19,6 @@ import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
-import { TouchScrollable } from 'react-scrolllock'
 
 import scrollIntoContainerView from 'utils/scrollIntoContainerView'
 
@@ -505,24 +504,22 @@ export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
 
   return (
     <NavContext.Provider value={contextValue}>
-      <TouchScrollable>
-        <NavScrollContainer
-          desktop={desktop}
-          hide={hide}
-          ref={scrollRef}
-        >
-          <Nav desktop={desktop}>
-            {navData.map(({ title, sections }) => (
-              <TopSection
-                title={title}
-                key={title}
-              >
-                {sections && <SubSectionsList sections={sections} />}
-              </TopSection>
-            ))}
-          </Nav>
-        </NavScrollContainer>
-      </TouchScrollable>
+      <NavScrollContainer
+        ref={scrollRef}
+        desktop={desktop}
+        hide={hide}
+      >
+        <Nav desktop={desktop}>
+          {navData.map(({ title, sections }) => (
+            <TopSection
+              title={title}
+              key={title}
+            >
+              {sections && <SubSectionsList sections={sections} />}
+            </TopSection>
+          ))}
+        </Nav>
+      </NavScrollContainer>
     </NavContext.Provider>
   )
 }

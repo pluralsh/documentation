@@ -1,10 +1,7 @@
-import styled from 'styled-components'
-import ScrollLock, { TouchScrollable } from 'react-scrolllock'
-
-import NavData from 'NavData'
-
 import { useState } from 'react'
-
+import styled from 'styled-components'
+import { useIsomorphicLayoutEffect } from 'usehooks-ts'
+import NavData from 'NavData'
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
@@ -12,9 +9,9 @@ import {
   DiscordIcon,
 } from 'pluralsh-design-system'
 
+import useScrollLock from './hooks/useScrollLock'
 import { SocialLink } from './PageHeaderButtons'
 import GithubStars from './GithubStars'
-
 import { SideNav, TopHeading } from './SideNav'
 import { MainLink } from './PageHeader'
 
@@ -37,29 +34,27 @@ function PluralMenuContent({
   className?: string
 }) {
   return (
-    <TouchScrollable>
-      <div {...props}>
-        <TopHeading>Plural Menu</TopHeading>
-        <MainLink href="https://plural.sh/marketplace">Marketplace</MainLink>
-        <MainLink href="https://plural.sh/community">Community</MainLink>
-        <MainLink href="https://app.plural.sh/signup">Get started</MainLink>
-        <MainLink href="https://app.plural.sh/login">Sign in</MainLink>
-        <SocialIcons>
-          <SocialLink
-            href="https://discord.gg/pluralsh"
-            target="_blank"
-            rel="noopener noreferrer"
-            tabIndex={0}
-          >
-            <DiscordIcon size={16} />
-          </SocialLink>
-          <GithubStars
-            account="pluralsh"
-            repo="plural"
-          />
-        </SocialIcons>
-      </div>
-    </TouchScrollable>
+    <div {...props}>
+      <TopHeading>Plural Menu</TopHeading>
+      <MainLink href="https://plural.sh/marketplace">Marketplace</MainLink>
+      <MainLink href="https://plural.sh/community">Community</MainLink>
+      <MainLink href="https://app.plural.sh/signup">Get started</MainLink>
+      <MainLink href="https://app.plural.sh/login">Sign in</MainLink>
+      <SocialIcons>
+        <SocialLink
+          href="https://discord.gg/pluralsh"
+          target="_blank"
+          rel="noopener noreferrer"
+          tabIndex={0}
+        >
+          <DiscordIcon size={16} />
+        </SocialLink>
+        <GithubStars
+          account="pluralsh"
+          repo="plural"
+        />
+      </SocialIcons>
+    </div>
   )
 }
 
@@ -107,42 +102,44 @@ const Content = styled.div(({ theme }) => ({
 
 function MobileMenu({ isOpen, className }: MobileMenuProps) {
   const [curMenu, setCurMenu] = useState<'docs' | 'plural'>('docs')
+  const [, setScrollLock] = useScrollLock(false)
+
+  useIsomorphicLayoutEffect(() => {
+    setScrollLock(isOpen)
+  }, [isOpen, setScrollLock])
 
   return (
-    <>
-      {isOpen ? <ScrollLock /> : null}
-      <div className={className}>
-        <Content>
-          <NavButtons>
-            {curMenu === 'docs' ? (
-              <Button
-                tertiary
-                endIcon={<ArrowRightIcon />}
-                onClick={() => setCurMenu('plural')}
-              >
-                Plural menu
-              </Button>
-            ) : (
-              <Button
-                tertiary
-                startIcon={<ArrowLeftIcon />}
-                onClick={() => setCurMenu('docs')}
-              >
-                Docs menu
-              </Button>
-            )}
-          </NavButtons>
-          <NavWrap>
-            <SideNav
-              hide={curMenu !== 'docs'}
-              desktop={false}
-              navData={NavData}
-            />
-            <PluralMenu hide={curMenu !== 'plural'} />
-          </NavWrap>
-        </Content>
-      </div>
-    </>
+    <div className={className}>
+      <Content>
+        <NavButtons>
+          {curMenu === 'docs' ? (
+            <Button
+              tertiary
+              endIcon={<ArrowRightIcon />}
+              onClick={() => setCurMenu('plural')}
+            >
+              Plural menu
+            </Button>
+          ) : (
+            <Button
+              tertiary
+              startIcon={<ArrowLeftIcon />}
+              onClick={() => setCurMenu('docs')}
+            >
+              Docs menu
+            </Button>
+          )}
+        </NavButtons>
+        <NavWrap>
+          <SideNav
+            hide={curMenu !== 'docs'}
+            desktop={false}
+            navData={NavData}
+          />
+          <PluralMenu hide={curMenu !== 'plural'} />
+        </NavWrap>
+      </Content>
+    </div>
   )
 }
 

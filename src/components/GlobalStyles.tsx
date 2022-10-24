@@ -33,7 +33,6 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   body: {
     margin: 0,
     overflowX: 'hidden',
-    overflowY: 'scroll',
     color: theme.colors.text,
     backgroundColor: theme.colors['fill-zero'],
     ...fillAvailable('minHeight'),
