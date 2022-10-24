@@ -24,6 +24,9 @@ export const TabPanelStyled = styled(TabPanel)(({ theme }) => ({
     marginTop: theme.spacing.large,
     marginBottom: theme.spacing.xlarge,
   },
+  'article > &:last-child': {
+    border: 'none',
+  },
 }))
 
 export function Tabs({

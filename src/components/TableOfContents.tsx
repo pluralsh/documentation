@@ -117,7 +117,7 @@ function setUrlHash(hash) {
 }
 
 function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] }) {
-  const items = useMemo(() => toc.filter(item => item.id && (item.level === 2 || item.level === 3)),
+  const items = useMemo(() => toc.filter(item => item.id && (item.level === 1) || (item.level === 2)),
     [toc])
   const labelId = `nav-label-${useId()}`
   const forceRender = useForceRender()
