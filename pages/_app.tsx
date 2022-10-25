@@ -1,6 +1,7 @@
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import {
+  FillLevelProvider,
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
@@ -133,7 +134,9 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
       <BreakpointProvider>
         <ThemeProvider theme={honorableTheme}>
           <StyledThemeProvider theme={docsStyledTheme}>
-            {app}
+            <FillLevelProvider value={0}>
+              {app}
+            </FillLevelProvider>
           </StyledThemeProvider>
         </ThemeProvider>
       </BreakpointProvider>

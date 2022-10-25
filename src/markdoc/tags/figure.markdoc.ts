@@ -1,6 +1,21 @@
 import { Tag } from '@markdoc/markdoc'
+import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
 
 import { FigCaption, Figure } from '../../components/md/Figure'
+
+const makeBareImage = node => {
+  if (node.name !== 'Image') {
+    return node
+  }
+
+  return {
+    ...node,
+    attributes: {
+      ...node.attributes,
+      bareImage: true,
+    },
+  }
+}
 
 export const figure = {
   render: Figure,
@@ -12,16 +27,10 @@ export const figure = {
       .transformChildren(config)
       .map(child => {
         if (child.name === 'Paragraph') {
-          for (const x of (child.children as any[])) {
-            if (x.name === 'Image') {
-              x.attributes = { ...x.attributes, bareImage: true }
-            }
-          }
-
-          return child.children
+          return child.children.map(makeBareImage)
         }
 
-        return child
+        return makeBareImage(child)
       })
       .flat()
 
@@ -39,16 +48,7 @@ export const caption = {
     },
   },
   transform(node, config) {
-    const children = node
-      .transformChildren(config)
-      .map(child => {
-        if (child.name === 'Paragraph') {
-          return child.children
-        }
-
-        return child
-      })
-      .flat()
+    const children = unwrapParagraphs(node.transformChildren(config))
 
     return new Tag(this.render as any, {}, children)
   },

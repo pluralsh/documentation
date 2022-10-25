@@ -12,9 +12,7 @@ export const fence = {
   },
   transform(node, config) {
     const attributes = node.transformAttributes(config)
-    const children = node.children.length
-      ? node.transformChildren(config)
-      : [node.attributes.content]
+    const children = [node.attributes.content]
 
     return new Tag(this.render as any, attributes, children)
   },

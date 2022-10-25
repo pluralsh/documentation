@@ -277,13 +277,11 @@ const NavLink = styled(({
 }))
 
 export const TopHeading = styled.h6(({ theme }) => ({
+  margin: 0,
   paddingLeft: theme.spacing.medium,
   paddingTop: theme.spacing.xsmall,
   paddingBottom: theme.spacing.xsmall,
   ...theme.partials.marketingText.label,
-  '&:not(:first-child)': {
-    marginTop: theme.spacing.large,
-  },
 }))
 
 const TopSection = styled(({ title, children, ...props }) => (
@@ -296,8 +294,8 @@ const TopSection = styled(({ title, children, ...props }) => (
   margin: 0,
   padding: 0,
   listStyle: 'none',
-  h2: {
-    ...theme.partials.text.subtitle2,
+  ':not(:first-child)': {
+    marginTop: theme.spacing.large,
   },
 }))
 

@@ -29,6 +29,7 @@ const Title = styled.h1(({ theme }) => ({
 
 const Description = styled.p(({ theme }) => ({
   ...theme.partials.marketingText.body1,
+  color: theme.colors['text-light'],
   marginTop: 0,
   marginBottom: theme.spacing.small,
 }))
