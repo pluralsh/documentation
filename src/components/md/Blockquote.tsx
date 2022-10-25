@@ -1,8 +1,10 @@
 import styled from 'styled-components'
 
-const Blockquote = styled.blockquote(({ theme }) => ({
+import { FillLevelProvider } from 'pluralsh-design-system'
+import { forwardRef } from 'react'
+
+const StyledBlockquote = styled.blockquote(({ theme }) => ({
   position: 'relative',
-  ...theme.partials.marketingText.body1,
   padding: `${theme.spacing.medium}px ${theme.spacing.xlarge}px`,
   background: theme.colors['fill-one'],
   margin: 0,
@@ -19,4 +21,17 @@ const Blockquote = styled.blockquote(({ theme }) => ({
   },
 }))
 
-export default Blockquote
+function Blockquote({ children, ...props }, ref) {
+  return (
+    <FillLevelProvider value={1}>
+      <StyledBlockquote
+        ref={ref}
+        {...props}
+      >
+        {children}
+      </StyledBlockquote>
+    </FillLevelProvider>
+  )
+}
+
+export default forwardRef(Blockquote)

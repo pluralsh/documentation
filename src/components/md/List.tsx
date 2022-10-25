@@ -1,4 +1,4 @@
-import { useFillLevel } from 'components/contexts'
+import { useFillLevel } from 'pluralsh-design-system'
 import styled from 'styled-components'
 
 export const commonCfg = { shouldForwardProp: () => true }
@@ -19,7 +19,10 @@ export const ListItem = styled.li.withConfig(commonCfg)(({ theme }) => {
   return {
     position: 'relative',
     ...theme.partials.marketingText.body2,
-    ...(fillLevel > 0 ? { color: theme.colors['text-light'] } : {}),
+    color:
+      fillLevel > 0
+        ? theme.colors['text-light']
+        : theme.colors['text-long-form'],
     margin: 0,
     marginLeft: offset,
     listStyle: 'none',

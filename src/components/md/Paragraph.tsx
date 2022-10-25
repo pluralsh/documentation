@@ -1,14 +1,15 @@
-import { useFillLevel } from 'components/contexts'
+import { useFillLevel } from 'pluralsh-design-system'
 import styled from 'styled-components'
 
-export const commonCfg = { shouldForwardProp: () => true }
-
-const Paragraph = styled.p.withConfig(commonCfg)(({ theme }) => {
+const Paragraph = styled.p(({ theme }) => {
   const fillLevel = useFillLevel()
 
-  return ({
+  return {
     ...theme.partials.marketingText.body2,
-    ...(fillLevel > 0 ? { color: theme.colors['text-light'] } : {}),
+    color:
+      fillLevel > 0
+        ? theme.colors['text-light']
+        : theme.colors['text-long-form'],
     marginBottom: theme.spacing.small,
     'b, strong': {
       ...theme.partials.marketingText.bodyBold,
@@ -16,7 +17,7 @@ const Paragraph = styled.p.withConfig(commonCfg)(({ theme }) => {
     'i, em': {
       fontStyle: 'italic',
     },
-  })
+  }
 })
 
 export default Paragraph
