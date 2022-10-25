@@ -9,7 +9,9 @@ This shouldn't be visible
 > Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text **styles** should be **_supported_**. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
 >
 > - List item
-> - Another list item
+> - Another _list_ item
+> - Another **list** item
+> - Another **_list_** item
 
 > Things like [inline links](#), `code highlights`, [`linked code highlights`](#) and _other_ text **styles** should be **_supported_**.
 
