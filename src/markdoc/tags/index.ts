@@ -7,3 +7,4 @@ export {
 } from './nextjs.markdoc'
 // export * from '../nodes/link.markdoc'
 export { figure, caption } from './figure.markdoc'
+export { button, buttonGroup } from './button.markdoc'

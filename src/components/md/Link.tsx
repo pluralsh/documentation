@@ -4,15 +4,7 @@ import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { isRelativeUrl, removeTrailingSlashes } from 'utils/text'
 
-import { isExternalUrl } from '../../utils/text'
-
-const stripMdExtension = url => {
-  if (!isExternalUrl(url)) {
-    return url.replace(/.md$/, '')
-  }
-
-  return url
-}
+import { isExternalUrl, stripMdExtension } from '../../utils/text'
 
 function Link({
   href,

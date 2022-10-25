@@ -13,3 +13,11 @@ export function isRelativeUrl(str) {
 export function isExternalUrl(url: string) {
   return url.substr(0, 4) === 'http' || url.substr(0, 2) === '//'
 }
+
+export const stripMdExtension = url => {
+  if (!isExternalUrl(url)) {
+    return url.replace(/.md$/, '')
+  }
+
+  return url
+}
