@@ -4636,10 +4636,10 @@ picomatch@^2.3.0, picomatch@^2.3.1:
   resolved "https://registry.yarnpkg.com/picomatch/-/picomatch-2.3.1.tgz#3ba3833733646d9d3e4995946c1365a67fb07a42"
   integrity sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==
 
-pluralsh-design-system@1.238.0:
-  version "1.238.0"
-  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.238.0.tgz#8b9a205afddae5a87429d679462f8debac07420f"
-  integrity sha512-hi/qIuaxTBLV6onJIPu27lZDELqH+jygan60NCKxN1lyL3522zeFaCjN2SAYk3UONp5IH3bBlf8/jYUh/69NaQ==
+pluralsh-design-system@1.239.0:
+  version "1.239.0"
+  resolved "https://registry.yarnpkg.com/pluralsh-design-system/-/pluralsh-design-system-1.239.0.tgz#e46233b4f7e9e685373307ff6080dc5323170fc1"
+  integrity sha512-DCzXChLnbbaNa+fdqzmV2yoZqz7gmM5geoE6YFTx5KRpTyajPO2+Dcg0M2AKKG0dDMZ6pTdumYwZQVWHNVrN0Q==
   dependencies:
     "@floating-ui/react-dom-interactions" "0.8.1"
     "@react-aria/button" "3.6.1"
