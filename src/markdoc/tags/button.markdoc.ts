@@ -1,5 +1,6 @@
 import { Tag } from '@markdoc/markdoc'
-import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
+
+import unwrapParagraphs from '../utils/unwrapParagraphs'
 
 import Button, { ButtonGroup } from '../../components/md/Button'
 
