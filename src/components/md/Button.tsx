@@ -8,8 +8,7 @@ import {
   stripMdExtension,
 } from 'utils/text'
 import { Button as PluralButton } from 'pluralsh-design-system'
-
-import { ButtonProps } from 'pluralsh-design-system/dist/components/Button'
+import * as icons from 'pluralsh-design-system/dist/icons'
 
 import { isExternalUrl } from '../../utils/text'
 
@@ -18,12 +17,14 @@ function Button({
   children,
   type = 'floating',
   className,
+  icon,
   ...props
 }: {
   href: string
   children?: ReactNode
   className?: string
   type?: 'floating'
+  icon?: 'string'
 }) {
   const router = useRouter()
 
@@ -31,11 +32,18 @@ function Button({
   if (isRelativeUrl(href)) {
     href = `${removeTrailingSlashes(router.pathname)}/${href}`
   }
-  const buttonProps: ButtonProps = props
+  const buttonProps:any = props
 
   if (type === 'floating') {
     buttonProps.floating = true
   }
+
+  let iconName = icon || ''
+
+  if (iconName && !iconName?.match(/Icon$/gi)) {
+    iconName = `${iconName}Icon`
+  }
+  const Icon = icons[iconName]
 
   return (
     <NextLink href={href}>
@@ -45,26 +53,31 @@ function Button({
           ? { target: '_blank', rel: 'nofollow noopener' }
           : {})}
       >
-        <PluralButton {...buttonProps}>{children}</PluralButton>
+        <PluralButton
+          {...buttonProps}
+          {...(Icon ? { startIcon: <Icon size={16} /> } : {})}
+        >
+          {children}
+        </PluralButton>
       </a>
     </NextLink>
   )
 }
-
-export default styled(Button)(({ theme }) => ({
-  '&, a:any-link&': {
-    display: 'block',
-    textDecoration: 'none',
-    margin: `${theme.spacing.large}px 0`,
-  },
-  [`${ButtonGroup} &`]: {
-    margin: 0,
-  },
-}))
 
 export const ButtonGroup = styled.div(({ theme }) => ({
   margin: `${theme.spacing.large}px 0`,
   display: 'flex',
   flexWrap: 'wrap',
   gap: theme.spacing.small,
+}))
+
+export default styled(Button)(({ theme }) => ({
+  '&, a:any-link&': {
+    display: 'block',
+    textDecoration: 'none',
+    margin: `${theme.spacing.large}px 0`,
+    [`${ButtonGroup} &`]: {
+      margin: 0,
+    },
+  },
 }))

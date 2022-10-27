@@ -113,7 +113,7 @@ const useForceRender = () => {
 function setUrlHash(hash) {
   const url = hash || window.location.pathname + window.location.search
 
-  window.history.pushState({}, '', url)
+  window.history.replaceState({}, '', url)
 }
 
 function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] }) {
@@ -149,7 +149,7 @@ function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] })
         ?.getPropertyValue('--top-nav-height')
         ?.replace(/[^0-9]/g, '') || 0)
 
-      let scrollToHash
+      let scrollToHash = ''
 
       headingElements.forEach(elt => {
         const eltTop = elt.getBoundingClientRect()?.top || Infinity
@@ -158,14 +158,8 @@ function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] })
           scrollToHash = `#${elt.id}`
         }
       })
-      if (scrollToHash) {
-        if (scrollToHash !== hash) {
-          setUrlHash(scrollToHash)
-          forceRender()
-        }
-      }
-      else {
-        setUrlHash('')
+      if (hash !== scrollToHash) {
+        setUrlHash(scrollToHash)
         forceRender()
       }
     }

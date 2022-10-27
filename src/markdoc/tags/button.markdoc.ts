@@ -1,5 +1,6 @@
 import { Tag } from '@markdoc/markdoc'
-import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
+
+import unwrapParagraphs from '../utils/unwrapParagraphs'
 
 import Button, { ButtonGroup } from '../../components/md/Button'
 
@@ -23,8 +24,9 @@ export const button = {
   },
   transform(node, config) {
     const children = unwrapParagraphs(node.transformChildren(config))
+    const attributes = node.transformAttributes(config)
 
-    return new Tag(this.render as any, node.attributes, children)
+    return new Tag(this.render as any, attributes, children)
   },
 }
 
@@ -35,7 +37,8 @@ export const buttonGroup = {
   attributes: {},
   transform(node, config) {
     const children = unwrapParagraphs(node.transformChildren(config)).filter(child => child.name === 'Button')
+    const attributes = node.transformAttributes(config)
 
-    return new Tag(this.render as any, node.attributes, children)
+    return new Tag(this.render as any, attributes, children)
   },
 }
