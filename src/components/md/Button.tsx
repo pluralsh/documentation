@@ -46,20 +46,19 @@ function Button({
   const Icon = icons[iconName]
 
   return (
-    <NextLink href={href}>
-      <a
-        className={className}
-        {...(isExternalUrl(href)
-          ? { target: '_blank', rel: 'nofollow noopener' }
-          : {})}
+    <NextLink
+      href={href}
+      className={className}
+      {...(isExternalUrl(href)
+        ? { target: '_blank', rel: 'nofollow noopener' }
+        : {})}
+    >
+      <PluralButton
+        {...buttonProps}
+        {...(Icon ? { startIcon: <Icon size={16} /> } : {})}
       >
-        <PluralButton
-          {...buttonProps}
-          {...(Icon ? { startIcon: <Icon size={16} /> } : {})}
-        >
-          {children}
-        </PluralButton>
-      </a>
+        {children}
+      </PluralButton>
     </NextLink>
   )
 }

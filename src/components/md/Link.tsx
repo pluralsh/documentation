@@ -22,15 +22,14 @@ function Link({
   }
 
   return (
-    <NextLink href={href}>
-      <a
-        {...props}
-        {...(isExternalUrl(href)
-          ? { target: '_blank', rel: 'nofollow noopener' }
-          : {})}
-      >
-        {children}
-      </a>
+    <NextLink
+      href={href}
+      {...props}
+      {...(isExternalUrl(href)
+        ? { target: '_blank', rel: 'nofollow noopener' }
+        : {})}
+    >
+      {children}
     </NextLink>
   )
 }
