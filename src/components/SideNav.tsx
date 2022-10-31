@@ -11,7 +11,7 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import styled, { css, keyframes, useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
 import { removeTrailingSlashes } from 'utils/text'
@@ -46,7 +46,7 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const LinkA = styled.a<{ desktop: boolean }>(({ desktop, theme }) => ({
+const StyledLink = styled(NextLink)<{ desktop: boolean }>(({ desktop, theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   cursor: 'pointer',
@@ -73,7 +73,7 @@ const LinkA = styled.a<{ desktop: boolean }>(({ desktop, theme }) => ({
   },
 }))
 
-type LinkBaseProps = Partial<ComponentProps<typeof LinkA>> & {
+type LinkBaseProps = Partial<ComponentProps<typeof StyledLink>> & {
   icon?: ReactElement
 }
 
@@ -83,7 +83,8 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
   const { keyboardNavigable } = useContext(KeyboardNavContext)
   const { desktop } = useContext(NavContext)
   const content = (
-    <LinkA
+    <StyledLink
+      href={href}
       className={className}
       desktop={desktop}
       tabIndex={keyboardNavigable ? 0 : -1}
@@ -92,19 +93,8 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
     >
       {icon && icon}
       {children}
-    </LinkA>
+    </StyledLink>
   )
-
-  if (href) {
-    return (
-      <Link
-        href={href}
-        passHref
-      >
-        {content}
-      </Link>
-    )
-  }
 
   return content
 })
@@ -200,7 +190,7 @@ const NavLink = styled(({
     icon?: ReactElement
     desktop: boolean
     onToggleOpen?: () => void
-  } & Partial<ComponentProps<typeof LinkA>>) => {
+  } & Partial<ComponentProps<typeof StyledLink>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
   const { scrollRef, ...navContext } = useContext(NavContext)
   const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
@@ -488,10 +478,18 @@ export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
     const handleRouteChangeError = (_err, _url) => {
       setOptimisticPathname(null)
     }
+    const handleHashChangeStart = _url => {
+      console.log('hashChangeStart', _url)
+    }
+    const handleHashChangeComplete = _url => {
+      console.log('handleHashChangeComplete', _url)
+    }
 
     router.events.on('routeChangeStart', handleRouteChangeStart)
     router.events.on('routeChangeComplete', handleRouteChangeComplete)
     router.events.on('routeChangeError', handleRouteChangeError)
+    router.events.on('hashChangeStart', handleHashChangeStart)
+    router.events.on('hashChangeComplete', handleHashChangeComplete)
 
     return () => {
       router.events.off('routeChangeStart', handleRouteChangeStart)

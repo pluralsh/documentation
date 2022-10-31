@@ -1,4 +1,4 @@
-import Link from 'next/link'
+import NextLink from 'next/link'
 import styled, { useTheme } from 'styled-components'
 import {
   Button,
@@ -47,19 +47,17 @@ function PageHeaderUnstyled({ ...props }) {
   return (
     <header {...props}>
       <nav className="leftSection">
-        <Link
+        <NextLink
           href="/"
           className="flex"
           passHref
         >
-          <a>
-            <img
-              className="logo"
-              alt="Plural docs"
-              src="/images/plural-docs-logo.svg"
-            />
-          </a>
-        </Link>
+          <img
+            className="logo"
+            alt="Plural docs"
+            src="/images/plural-docs-logo.svg"
+          />
+        </NextLink>
         <PageHeaderLinks />
       </nav>
       <Filler />

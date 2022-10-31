@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 import { removeTrailingSlashes } from 'utils/text'
@@ -8,7 +8,7 @@ import { ReactNode } from 'react'
 
 import navData, { NavItem } from '../NavData'
 
-const LinkA = styled.a(({ theme }) => ({
+const StyledLink = styled(NextLink)(({ theme }) => ({
   ...theme.partials.marketingText.componentLinkSmall,
   display: 'inline',
   textDecoration: 'none',
@@ -91,18 +91,14 @@ function Breadcrumbs({ className }: { className?: string }) {
 
           if (crumb.href) {
             inner = (
-              <Link
+              <StyledLink
                 href={crumb.href}
-                passHref
+                {...(idx === crumbs.length - 1
+                  ? { 'aria-current': 'page' }
+                  : {})}
               >
-                <LinkA
-                  {...(idx === crumbs.length - 1
-                    ? { 'aria-current': 'page' }
-                    : {})}
-                >
-                  {crumb.title}
-                </LinkA>
-              </Link>
+                {crumb.title}
+              </StyledLink>
             )
           }
           else {
@@ -111,7 +107,8 @@ function Breadcrumbs({ className }: { className?: string }) {
                 {...(idx === crumbs.length - 1
                   ? { 'aria-current': 'page' }
                   : {})}
-              >{crumb.title}
+              >
+                {crumb.title}
               </NonLink>
             )
           }

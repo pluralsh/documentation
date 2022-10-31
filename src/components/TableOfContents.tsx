@@ -1,7 +1,7 @@
 import React, {
   useEffect, useId, useMemo, useRef, useState,
 } from 'react'
-import Link from 'next/link'
+import NextLink from 'next/link'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
@@ -49,7 +49,7 @@ const ListItem = styled.li(() => ({
   listStyle: 'none',
 }))
 
-const LinkA = styled.a(({ theme }) => ({
+const StyledLink = styled(NextLink)(({ theme }) => ({
   position: 'relative',
   display: 'block',
   ...theme.partials.marketingText.componentLinkSmall,
@@ -116,8 +116,13 @@ function setUrlHash(hash) {
   window.history.replaceState({}, '', url)
 }
 
-function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] }) {
-  const items = useMemo(() => toc.filter(item => item.id && (item.level === 1) || (item.level === 2)),
+function TableOfContentsBase({
+  toc = [],
+  ...props
+}: {
+  toc?: MarkdocHeading[]
+}) {
+  const items = useMemo(() => toc.filter(item => (item.id && item.level === 1) || item.level === 2),
     [toc])
   const labelId = `nav-label-${useId()}`
   const forceRender = useForceRender()
@@ -191,19 +196,16 @@ function TableOfContentsBase({ toc = [], ...props }: { toc?: MarkdocHeading[] })
 
             return (
               <ListItem key={item.title}>
-                <Link
+                <StyledLink
                   href={href}
-                  passHref
+                  className={classNames({ active })}
+                  onClick={() => {
+                    ignoreScrollEvent.current = true
+                  }}
+                  scroll={false}
                 >
-                  <LinkA
-                    className={classNames({ active })}
-                    onClick={() => {
-                      ignoreScrollEvent.current = true
-                    }}
-                  >
-                    {item.title}
-                  </LinkA>
-                </Link>
+                  {item.title}
+                </StyledLink>
               </ListItem>
             )
           })}
