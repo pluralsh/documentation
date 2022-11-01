@@ -46,20 +46,27 @@ function Button({
   const Icon = icons[iconName]
 
   return (
-    <NextLink
-      href={href}
-      className={className}
-      {...(isExternalUrl(href)
-        ? { target: '_blank', rel: 'nofollow noopener' }
-        : {})}
-    >
-      <PluralButton
-        {...buttonProps}
-        {...(Icon ? { startIcon: <Icon size={16} /> } : {})}
+    /* Needs to be <span> to prevent "<div> cannot appear as a descendant of <p>."
+       hydration error */
+    <span className={className}>
+      <NextLink
+        legacyBehavior
+        passHref
+        href={href}
+        // className={className}
+        {...(isExternalUrl(href)
+          ? { target: '_blank', rel: 'nofollow noopener' }
+          : {})}
       >
-        {children}
-      </PluralButton>
-    </NextLink>
+        <PluralButton
+          {...buttonProps}
+          {...(Icon ? { startIcon: <Icon size={16} /> } : {})}
+          as="a"
+        >
+          {children}
+        </PluralButton>
+      </NextLink>
+    </span>
   )
 }
 
@@ -71,12 +78,10 @@ export const ButtonGroup = styled.div(({ theme }) => ({
 }))
 
 export default styled(Button)(({ theme }) => ({
-  '&, a:any-link&': {
-    display: 'block',
-    textDecoration: 'none',
-    margin: `${theme.spacing.large}px 0`,
-    [`${ButtonGroup} &`]: {
-      margin: 0,
-    },
+  display: 'flex',
+  flexDirection: 'row',
+  margin: `${theme.spacing.large}px 0`,
+  [`${ButtonGroup} &`]: {
+    margin: 0,
   },
 }))
