@@ -1,4 +1,10 @@
 import { Code } from 'pluralsh-design-system'
+import styled from 'styled-components'
+
+const CodeStyled = styled(Code)(({ theme }) => ({
+  marginTop: theme.spacing.large,
+  marginBottom: theme.spacing.large,
+}))
 
 export default function Fence({
   children, language, showHeader, ...props
@@ -11,12 +17,12 @@ export default function Fence({
   }
 
   return (
-    <Code
+    <CodeStyled
       showHeader={showHeader}
       language={language}
       {...props}
     >
       {children}
-    </Code>
+    </CodeStyled>
   )
 }
