@@ -47,5 +47,3 @@ Eu qui laborum fugiat ipsum labore proident consequat id dolor exercitation irur
 {% /tab %}
 
 {% /tabs %}
-
-## Linked
