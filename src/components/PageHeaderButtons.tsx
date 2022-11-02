@@ -1,10 +1,7 @@
 import styled from 'styled-components'
 import { DocSearch } from '@docsearch/react'
 import { useRouter } from 'next/router'
-import {
-  HamburgerMenuCollapsedIcon as MenuCloseIcon,
-  HamburgerMenuIcon as MenuOpenIcon,
-} from 'pluralsh-design-system'
+import { HamburgerMenuCollapsedIcon as MenuCloseIcon, HamburgerMenuIcon as MenuOpenIcon } from 'pluralsh-design-system'
 
 import { ComponentPropsWithoutRef } from 'react'
 

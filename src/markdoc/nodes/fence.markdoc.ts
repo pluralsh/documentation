@@ -1,19 +1,12 @@
-import { Tag } from '@markdoc/markdoc'
-
 import Fence from '../../components/md/Fence'
 
 export const fence = {
   render: Fence,
   attributes: {
-    content: { type: String, render: false, required: true },
+    content: { type: String, render: true, required: true },
     language: { type: String },
-    process: { type: Boolean, render: false, default: true },
+    process: { type: Boolean, render: true, default: false },
     showHeader: { type: Boolean, required: false },
-  },
-  transform(node, config) {
-    const attributes = node.transformAttributes(config)
-    const children = [node.attributes.content]
-
-    return new Tag(this.render as any, attributes, children)
+    title: { type: String, required: false },
   },
 }

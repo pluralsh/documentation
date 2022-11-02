@@ -1,14 +1,9 @@
 import styled from 'styled-components'
-import {
-  TabList,
-  TabListStateProps,
-  TabPanel,
-} from 'pluralsh-design-system'
+import { TabList, TabListStateProps, TabPanel } from 'pluralsh-design-system'
 import {
   Key,
   ReactNode,
   createContext,
-  useContext,
   useRef,
   useState,
 } from 'react'
@@ -29,15 +24,22 @@ export const TabPanelStyled = styled(TabPanel)(({ theme }) => ({
   },
 }))
 
-export function Tabs({
-  titles,
-  children,
-}: {
-  titles: string[]
+const TabListStyled = styled(TabList)(({ theme }) => ({
+  flexShrink: 0,
+  justifyContent: 'stretch',
+  width: '100%',
+  marginTop: theme.spacing.large,
+  marginBottom: theme.spacing.large,
+}))
+
+type TabProps = {
+  title: string
   children: ReactNode
-}) {
+}
+
+export function Tabs({ tabs }: { tabs: TabProps[] }) {
   const tabStateRef = useRef<any>()
-  const [selectedKey, setSelectedKey] = useState<Key>(titles[0] || '')
+  const [selectedKey, setSelectedKey] = useState<Key>(tabs[0].title || '')
   const tabListStateProps: TabListStateProps = {
     keyboardActivation: 'manual',
     orientation: 'horizontal',
@@ -47,14 +49,11 @@ export function Tabs({
 
   return (
     <TabContext.Provider value={selectedKey}>
-      <TabList
+      <TabListStyled
         stateRef={tabStateRef}
         stateProps={tabListStateProps}
-        flexShrink={0}
-        justifyContent="stretch"
-        width="100%"
       >
-        {titles.map(title => (
+        {tabs.map(({ title }) => (
           <TabComponent
             key={title}
             textValue={title}
@@ -62,23 +61,21 @@ export function Tabs({
             {title}
           </TabComponent>
         ))}
-      </TabList>
-      <TabPanelStyled
-        stateRef={tabStateRef}
-        as={TabPanelStyled}
-      >
-        <div>{children}</div>
-      </TabPanelStyled>
+      </TabListStyled>
+      {tabs.map(({ children, title }) => (
+        <TabPanel
+          key={title}
+          tabKey={title}
+          mode="multipanel"
+          stateRef={tabStateRef}
+        >
+          {children}
+        </TabPanel>
+      ))}
     </TabContext.Provider>
   )
 }
 
-export function Tab({ title, children }) {
-  const currentTab = useContext(TabContext)
-
-  if (title !== currentTab) {
-    return null
-  }
-
+export function Tab({ children }) {
   return children
 }

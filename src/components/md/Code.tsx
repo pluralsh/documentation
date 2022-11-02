@@ -5,4 +5,3 @@ function Code({ ...props }) {
 }
 
 export default Code
-

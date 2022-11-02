@@ -4,7 +4,7 @@ import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
 import { FigCaption, Figure } from '../../components/md/Figure'
 
 const makeBareImage = node => {
-  if (node.name !== 'Image') {
+  if (node?.name !== 'Image') {
     return node
   }
 
@@ -26,7 +26,7 @@ export const figure = {
     const children = node
       .transformChildren(config)
       .map(child => {
-        if (child.name === 'Paragraph') {
+        if (child?.name === 'Paragraph') {
           return child.children.map(makeBareImage)
         }
 
