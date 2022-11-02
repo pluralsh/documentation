@@ -69,8 +69,8 @@ prometheus:
 **kubernetes** spec:
 ```yaml
 kubernetes:
-  resource:
-  name: # the namespace of the Kubernetes resource
+  resource: # the kind of Kubernetes resource, i.e. statefulset
+  name: # the name of the Kubernetes resource, i.e. ghost
 ```
 
 **nodes** spec:
