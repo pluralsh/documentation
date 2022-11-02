@@ -34,17 +34,22 @@ module.exports = () => {
         {
           source: '/getting-started/getting-started',
           destination: '/getting-started/quickstart',
-          permanent: false,
+          permanent: true,
         },
         {
           source: '/reference/architecture-1',
           destination: '/reference/architecture',
-          permanent: false,
+          permanent: true,
         },
         {
           source: '/reference/workspaces/workspace-structure',
           destination: '/reference/workspaces',
-          permanent: false,
+          permanent: true,
+        },
+        {
+          source: '/getting-started/getting-started-with-runbooks/runbook-yaml',
+          destination: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
+          permanent: true,
         },
       ]
     },
