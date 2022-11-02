@@ -8,14 +8,19 @@ export const tabs = {
   children: ['tab'],
   attributes: {},
   transform(node, config) {
-    const titles = node
+    const tabs = node
       .transformChildren(config)
       .filter(child => child && child.name === 'Tab')
-      .map(tab => (typeof tab === 'object' ? tab.attributes.title : null))
+      .map(tab => {
+        console.log('tab', tab)
 
-    return new Tag(this.render as any,
-      { titles },
-      node.transformChildren(config))
+        return (typeof tab === 'object' ? {
+          title: tab.attributes.title,
+          children: tab.children,
+        } : {})
+      })
+
+    return new Tag(this.render as any, { tabs }, node.transformChildren(config))
   },
 }
 
