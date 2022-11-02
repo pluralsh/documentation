@@ -26,6 +26,10 @@ const data: NavData = [
     title: 'Getting Started',
     sections: [
       {
+        title: 'Welcome',
+        href: '/',
+      },
+      {
         title: 'Introduction',
         href: '/',
         icon: <DocumentIcon />,
