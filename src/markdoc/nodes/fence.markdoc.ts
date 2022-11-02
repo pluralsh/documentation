@@ -1,5 +1,3 @@
-import { Tag } from '@markdoc/markdoc'
-
 import Fence from '../../components/md/Fence'
 
 export const fence = {

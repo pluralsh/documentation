@@ -1,4 +1,3 @@
-import { Code } from 'pluralsh-design-system'
 import { useMemo } from 'react'
 
 import { CodeStyled, toCodeString } from './Fence'

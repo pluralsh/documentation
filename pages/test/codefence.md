@@ -2,10 +2,6 @@
 title: Code Fence
 ---
 
-{% $markdoc.title %}
-
-{% partial variables={testVar: "Worked"} file="code-partial.md" /%}
-
 ## Basic
 
 `````markdown {% title="One line, no props specified" %}

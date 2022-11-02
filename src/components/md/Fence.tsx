@@ -1,5 +1,5 @@
 import { Code } from 'pluralsh-design-system'
-import { useMemo } from 'react'
+import { ReactNode, useMemo } from 'react'
 import styled from 'styled-components'
 
 export function toCodeString({
