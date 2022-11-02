@@ -4,7 +4,7 @@ import Paragraph from '../../components/md/Paragraph'
 
 function containsImage(children: { name: string }[]) {
   for (const c of children) {
-    if (c.name === 'Image') return true
+    if (c?.name === 'Image') return true
   }
 
   return false
@@ -23,7 +23,7 @@ export const paragraph = {
       let childAcc:any[] = []
 
       for (const c of children) {
-        if (c.name === 'Image' || c.name === 'Paragraph') {
+        if (c?.name === 'Image' || c?.name === 'Paragraph') {
           if (childAcc.length > 0) {
             newChildren.push(new Tag('Paragraph', {}, childAcc))
             childAcc = []

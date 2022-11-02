@@ -46,7 +46,7 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const StyledLink = styled(NextLink)<{ desktop: boolean }>(({ desktop, theme }) => ({
+const StyledLink = styled(NextLink)<{ $desktop: boolean }>(({ $desktop, theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   cursor: 'pointer',
@@ -67,8 +67,8 @@ const StyledLink = styled(NextLink)<{ desktop: boolean }>(({ desktop, theme }) =
   '&:focus-visible::after': {
     borderStartStartRadius: theme.borderRadiuses.medium,
     borderEndStartRadius: theme.borderRadiuses.medium,
-    borderStartEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
-    borderEndEndRadius: desktop ? 0 : theme.borderRadiuses.medium,
+    borderStartEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
+    borderEndEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
     ...theme.partials.focus.insetAbsolute,
   },
 }))
@@ -86,7 +86,7 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
     <StyledLink
       href={href}
       className={className}
-      desktop={desktop}
+      $desktop={desktop}
       tabIndex={keyboardNavigable ? 0 : -1}
       ref={ref}
       {...props}
@@ -479,10 +479,10 @@ export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
       setOptimisticPathname(null)
     }
     const handleHashChangeStart = _url => {
-      console.log('hashChangeStart', _url)
+      console.debug('hashChangeStart', _url)
     }
     const handleHashChangeComplete = _url => {
-      console.log('handleHashChangeComplete', _url)
+      console.debug('handleHashChangeComplete', _url)
     }
 
     router.events.on('routeChangeStart', handleRouteChangeStart)

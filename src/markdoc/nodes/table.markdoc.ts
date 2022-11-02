@@ -11,16 +11,16 @@ export const table = {
     const children = node.transformChildren(config)
 
     const thead = children
-      .find(child => child && child.name.toLowerCase() === 'thead')
-      .children.find(tr => tr && tr.name.toLowerCase() === 'tr')
-      .children.filter(th => th && th.name.toLowerCase() === 'th')
+      .find(child => child?.name.toLowerCase() === 'thead')
+      .children.find(tr => tr?.name.toLowerCase() === 'tr')
+      .children.filter(th => th?.name.toLowerCase() === 'th')
       .map(th => th.children)
 
     const tbody = children
-      .find(child => child && child.name.toLowerCase() === 'tbody')
-      ?.children.filter(tr => tr && tr.name.toLowerCase() === 'tr')
+      .find(child => child?.name.toLowerCase() === 'tbody')
+      ?.children.filter(tr => tr?.name.toLowerCase() === 'tr')
       ?.map(tr => tr.children
-        .filter(trChild => trChild && trChild.name.toLowerCase() === 'td')
+        .filter(trChild => trChild?.name.toLowerCase() === 'td')
         .map(td => td.children))
 
     return new Tag(this.render as any,
