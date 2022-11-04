@@ -35,15 +35,24 @@ If the remote urls start with `https` then you're using HTTPS.
 
 {% tabs %}
 {% tab title="HTTPS" %}
-Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to generate a revokable personal access token. The access token needs to have write permissions. Keep track of this access token, you will need it later in the console install process.
+Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/keeping-your-account-and-data-secure/creating-a-personal-access-token) to generate a revokable personal access token (PAT). The access token needs to have write permissions. Keep track of this access token, you will need it later in the console install process.  The PAT should have both push and pull permissions to the repository.
+
+If you need to update your PAT you can go to the `context.yaml` file at the root of your repo and modify the `access_token` variable within the console block.
 {% /tab %}
 
 {% tab title="SSH" %}
-Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using Github to generate a ssh key and add it to your ssh-agent and Github account.
+Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using GitHub to generate an SSH key and add it to your ssh-agent and GitHub account.  The `bundle install` command below will then ask you to provide an SSH key and a valid path to the key you created.
 
-Keep track of the path where you've stored your ssh key (most likely in \~/.ssh/id\_rsa); you will need this later.
+If you need to update your SSH key for any reason (e.g. creating a new scoped deploy key) then update the `private_key` key in the console block of the `context.yaml` file at the root of your repo. 
 {% /tab %}
 {% /tabs %}
+
+If you modified `context.yaml` to reconfigure your git auth, be sure to run:
+
+```
+plural build --only console ## wires the creds into the console helm chart from context.yaml
+plural deploy
+```
 
 #### 3. Install and build the Console
 
