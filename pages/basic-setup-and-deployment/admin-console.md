@@ -43,7 +43,7 @@ If you need to update your PAT you can go to the `context.yaml` file at the root
 {% tab title="SSH" %}
 Follow the instructions [here](https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent) if you are using GitHub to generate an SSH key and add it to your ssh-agent and GitHub account.  The `bundle install` command below will then ask you to provide an SSH key and a valid path to the key you created.
 
-If you need to update your ssh key for any reason, eg you want to use a new scoped deploy key, then simply update the `private_key` key in the console block of the `context.yaml` file at the root of your repo. 
+If you need to update your SSH key for any reason (e.g. creating a new scoped deploy key) then update the `private_key` key in the console block of the `context.yaml` file at the root of your repo. 
 {% /tab %}
 {% /tabs %}
 
