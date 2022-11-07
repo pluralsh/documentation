@@ -1,75 +1,40 @@
----
-title: Plural Console
-description: A Plural admin console for monitoring and ops.
----
+
+# Console
 
 ## Description
-
-Plural will install Console in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one
-CLI command.
+Plural will install Console in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
-
-We currently support this repository on the following infrastructure providers: 
+We currently support Console for the following providers:
 
 {% tabs %}
-
-{% tab title="AWS" %}
-```shell
-plural bundle install console console-aws
-```
-{% /tab %}
-{% tab title="GCP" %}
-```shell
-plural bundle install console console-gcp
-```
-{% /tab %}
-{% tab title="Azure" %}
-```shell
-plural bundle install console console-azure
-```
-{% /tab %}
-{% tab title="Equinix" %}
-```shell
-plural bundle install console console-equinix
-```
-{% /tab %}
-{% tab title="KinD" %}
-```shell
-plural bundle install console console-kind
-```
-{% /tab %}
-
-{% /tabs %}
+{% tab title="AWS" %} plural bundle install console console-aws {% endtab %} {% tab title="AZURE" %} plural bundle install console console-azure {% endtab %} {% tab title="EQUINIX" %} plural bundle install console console-equinix {% endtab %} {% tab title="GCP" %} plural bundle install console console-gcp {% endtab %} {% tab title="KIND" %} plural bundle install console console-kind {% endtab %}
+{% endtabs %}
 
 ## Setup Configuration
+`vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
-`vpc_name`: We need an isolated VPC to launch your resources in, so we create one for you. Stick with `plural` for
-most cases. This is a cluster-level setting that we only ask for once. Once you've set this up, you won't need to do it again.
 
-`wal_bucket`: Plural uses Postgres as the backing database for cluster information. We need to store the WAL logs
-somewhere to backup and restore from. This is a cluster-level setting that we only ask for once. Once you've set this up, you won't need to do it again unless you destroy
-all existing applications.
 
-`console_dns`: This will be where your console is hosted. Generally, use `console.$YOUR_ORG_NAME.onplural.sh`.
 
-`Enable plural OIDC`: Enabling Plural OIDC means that you won't need to worry about authenticating into this app if you're logged into Plural. We highly recommend this
-as long as you don't have any specific security requirements.
 
-## Auth Configuration
+`wal_bucket`: Arbitary name for s3 bucket to store wal archives in, eg plural-wal-archives
 
-`git_user`: Plural will perform Git operations on your behalf to manage your config repository. Just use your GitHub
-username here, unless you have a dedicated user for Ops.
+`console_dns`: Fully Qualified Domain Name for the console dashboard, eg console.topleveldomain.com if topleveldomain.com is the hostname you inputed above.
 
-`git_email`: Use the email tied to the account associated with `git_user`
+`git_user`: git username for console to use in git operations, eg your github username
 
-`admin_name`: Use your naming preference for admin accounts. No need to reinvent the wheel, `admin` is fine too.
+`git_email`: email for git operations by console
 
-`private_key`: This makes sure that your admin account has Read/Write access to the config repo. We recommend you stick with the default, unless you have 
-compliance reasons for this file not existing here.
+`admin_name`: name for the initial admin user
 
-`public_key`: Similar to `private_key`, this makes sure that your admin account has Read/Write access to the DAG repo. We recommend you stick with the default, unless you have
-compliance reasons for this file not existing here.
+`repo_url`: the url to the remote git repo
 
-`passphrase`: If you have encrypted your SSH key with a passphrase for extra security, you'll need to enter it here in order
-for Plural to use it for Git operations.
+`access_token`: github/gitlab access token to use for http git authentication
+
+`private_key`: path to the private key to use for git authentication
+
+`public_key`: path to the public key to use for git authentication
+
+`passphrase`: passphrase to use for encrypted private keys (leave empty if not applicable)
+    
