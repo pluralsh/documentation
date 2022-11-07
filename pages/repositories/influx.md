@@ -2,16 +2,29 @@
 # Influx
 
 ## Description
+
 Plural will install Influx in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Influx for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install influx influx-aws {% endtab %} {% tab title="AZURE" %} plural bundle install influx influx-azure {% endtab %} {% tab title="GCP" %} plural bundle install influx influx-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install influx influx-aws
+{% /tab %}
+{% tab title="AZURE" %}
+plural bundle install influx influx-azure
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install influx influx-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -27,4 +40,5 @@ We currently support Influx for the following providers:
 `databaseName`: name for the initial bootstrapped database
 
 `influxdbHostname`: external dns name for your influxdb instance (leave empty if you don't want ingress)
-    
+
+

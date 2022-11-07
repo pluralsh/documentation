@@ -2,16 +2,29 @@
 # Argo-cd
 
 ## Description
+
 Plural will install Argo-cd in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Argo-cd for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install argo-cd argo-cd-aws {% endtab %} {% tab title="AZURE" %} plural bundle install argo-cd argo-cd-azure {% endtab %} {% tab title="GCP" %} plural bundle install argo-cd argo-cd-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install argo-cd argo-cd-aws
+{% /tab %}
+{% tab title="AZURE" %}
+plural bundle install argo-cd argo-cd-azure
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install argo-cd argo-cd-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -35,4 +48,5 @@ We currently support Argo-cd for the following providers:
 `privateRepoURL`: URL of the private repository
 
 `enableImageUpdater`: Enable the Argo CD Image Updater
-    
+
+

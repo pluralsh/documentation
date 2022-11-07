@@ -2,16 +2,26 @@
 # Plural
 
 ## Description
+
 Plural will install Plural in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Plural for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install plural plural-aws {% endtab %} {% tab title="GCP" %} plural bundle install plural plural-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install plural plural-aws
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install plural plural-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -51,4 +61,5 @@ We currently support Plural for the following providers:
 `publisher_description`: description for initial publisher
 
 `hydra_host`: the fqdn to use for hydra, for managing plural oauth
-    
+
+

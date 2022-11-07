@@ -2,16 +2,29 @@
 # Kserve
 
 ## Description
+
 Plural will install Kserve in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Kserve for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install kserve kserve-aws {% endtab %} {% tab title="AZURE" %} plural bundle install kserve kserve-azure {% endtab %} {% tab title="GCP" %} plural bundle install kserve kserve-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install kserve kserve-aws
+{% /tab %}
+{% tab title="AZURE" %}
+plural bundle install kserve kserve-azure
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install kserve kserve-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -29,4 +42,5 @@ We currently support Kserve for the following providers:
 
 
 
-    
+
+

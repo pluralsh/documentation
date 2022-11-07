@@ -2,16 +2,29 @@
 # Airflow
 
 ## Description
+
 Plural will install Airflow in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Airflow for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install airflow airflow-aws {% endtab %} {% tab title="AZURE" %} plural bundle install airflow airflow-azure {% endtab %} {% tab title="GCP" %} plural bundle install airflow airflow-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install airflow airflow-aws
+{% /tab %}
+{% tab title="AZURE" %}
+plural bundle install airflow airflow-azure
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install airflow airflow-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -37,4 +50,5 @@ We currently support Airflow for the following providers:
 `private_key`: path to the private key to use for git authentication
 
 `public_key`: path to the public key to use for git authentication
-    
+
+

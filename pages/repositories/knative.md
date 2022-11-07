@@ -2,16 +2,29 @@
 # Knative
 
 ## Description
+
 Plural will install Knative in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Knative for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install knative knative-aws {% endtab %} {% tab title="GCP" %} plural bundle install knative knative-gcp {% endtab %} {% tab title="AWS" %} plural bundle install knative knative-operator-aws {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install knative knative-aws
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install knative knative-gcp
+{% /tab %}
+{% tab title="AWS" %}
+plural bundle install knative knative-operator-aws
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -27,4 +40,5 @@ We currently support Knative for the following providers:
 `kialiHostname`: FQDN to use for the Kiali installation
 
 
-    
+
+

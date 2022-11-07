@@ -2,16 +2,26 @@
 # Kubeflow
 
 ## Description
+
 Plural will install Kubeflow in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Kubeflow for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install kubeflow kubeflow-aws {% endtab %} {% tab title="GCP" %} plural bundle install kubeflow kubeflow-gcp {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install kubeflow kubeflow-aws
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install kubeflow kubeflow-gcp
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -39,4 +49,5 @@ We currently support Kubeflow for the following providers:
 `pipelines_bucket`: bucket to store the pipeline artifacts and logs in
 
 `hostname`: FQDN to use for your Kubeflow installation
-    
+
+

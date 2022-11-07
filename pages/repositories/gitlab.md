@@ -2,16 +2,26 @@
 # Gitlab
 
 ## Description
+
 Plural will install Gitlab in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one CLI command.
 
 ## Installation
+
 We currently support Gitlab for the following providers:
 
 {% tabs %}
-{% tab title="AWS" %} plural bundle install gitlab aws-gitlab {% endtab %} {% tab title="GCP" %} plural bundle install gitlab gcp-gitlab {% endtab %}
-{% endtabs %}
+
+{% tab title="AWS" %}
+plural bundle install gitlab aws-gitlab
+{% /tab %}
+{% tab title="GCP" %}
+plural bundle install gitlab gcp-gitlab
+{% /tab %}
+
+{% /tabs %}
 
 ## Setup Configuration
+
 `vpc_name`: Arbitary name for the virtual private cloud to place your cluster in, eg "plural"
 
 
@@ -35,4 +45,5 @@ We currently support Gitlab for the following providers:
 `runnerCacheBucket`: bucket name for gitlab runner cache
 
 `terraformBucket`: bucket name for gitlab managed terraform state
-    
+
+
