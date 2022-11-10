@@ -1,3 +1,5 @@
+import { useMemo } from 'react'
+import { useRouter } from 'next/router'
 import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import {
@@ -9,12 +11,17 @@ import {
 import { CssBaseline, ThemeProvider } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
-import { useRouter } from 'next/router'
 
+import { NavDataProvider } from '../src/contexts/NavDataContext'
+import { getNavData } from '../src/NavData'
+import { FragmentType, useFragment } from '../src/gql/fragment-masking'
+
+import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
+import { ReposProvider } from '../src/contexts/ReposContext'
+import client from '../src/apollo-client'
 import { BreakpointProvider } from '../src/components/Breakpoints'
 import PageFooter from '../src/components/PageFooter'
 import HtmlHead from '../src/components/HtmlHead'
-import { NavPositionWrapper, SideNav } from '../src/components/SideNav'
 import ExternalScripts from '../src/components/ExternalScripts'
 import { TableOfContents } from '../src/components/TableOfContents'
 import { PageHeader } from '../src/components/PageHeader'
@@ -34,11 +41,15 @@ import {
   ROOT_TITLE,
 } from '../src/consts'
 import { PagePropsContext } from '../src/components/PagePropsContext'
-import navData from '../src/NavData'
 
+import { FullNav } from '../src/components/FullNav'
 import type { AppProps } from 'next/app'
 
-type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
+type MyAppProps = AppProps & {
+  pageProps?: MarkdocNextJsPageProps
+  apolloError?: any
+  repos: FragmentType<typeof RepoFragment>[]
+}
 
 export type MarkdocHeading = {
   id?: string
@@ -73,10 +84,15 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 
 const Page = styled.div(() => ({}))
 
-function MyApp({ Component, pageProps }: AppPropsPlusMd) {
+function App({
+  Component,
+  repos = [],
+  pageProps = {},
+  apolloError: _,
+}: MyAppProps) {
   const router = useRouter()
-
-  const { markdoc } = pageProps
+  const markdoc = pageProps?.markdoc
+  const navData = useMemo(() => getNavData({ repos }), [repos])
 
   const title = markdoc?.frontmatter?.title
     ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
@@ -86,8 +102,8 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
       ? DESCRIPTION
       : markdoc?.frontmatter?.description || DESCRIPTION
 
-  const toc = pageProps.markdoc?.content
-    ? collectHeadings(pageProps.markdoc.content)
+  const toc = pageProps?.markdoc?.content
+    ? collectHeadings(pageProps?.markdoc.content)
     : []
 
   const app = (
@@ -105,15 +121,7 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
         <Page>
           <PageGrid>
             <SideNavContainer>
-              <NavPositionWrapper
-                role="navigation"
-                aria-label="Main"
-              >
-                <SideNav
-                  navData={navData}
-                  desktop
-                />
-              </NavPositionWrapper>
+              <FullNav desktop />
             </SideNavContainer>
             <ContentContainer>
               <MainContent Component={Component} />
@@ -130,18 +138,45 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   )
 
   return (
-    <SSRProvider>
-      <BreakpointProvider>
-        <ThemeProvider theme={honorableTheme}>
-          <StyledThemeProvider theme={docsStyledTheme}>
-            <FillLevelProvider value={0}>
-              {app}
-            </FillLevelProvider>
-          </StyledThemeProvider>
-        </ThemeProvider>
-      </BreakpointProvider>
-    </SSRProvider>
+    <ReposProvider value={repos}>
+      <NavDataProvider value={navData}>
+        <SSRProvider>
+          <BreakpointProvider>
+            <ThemeProvider theme={honorableTheme}>
+              <StyledThemeProvider theme={docsStyledTheme}>
+                <FillLevelProvider value={0}>{app}</FillLevelProvider>
+              </StyledThemeProvider>
+            </ThemeProvider>
+          </BreakpointProvider>
+        </SSRProvider>
+      </NavDataProvider>
+    </ReposProvider>
   )
 }
 
-export default MyApp
+App.getInitialProps = async () => {
+  try {
+    const { data, error } = await client.query({ query: REPOS_QUERY })
+
+    console.error(error)
+    const repos = data?.repositories?.edges
+      ?.map(edge => edge?.node)
+      .filter(node => {
+        const repo = useFragment(RepoFragment, node)
+
+        return !repo?.private
+      })
+
+    return {
+      repos,
+    }
+  }
+  catch (e) {
+    return {
+      repos: [],
+      apolloError: e,
+    }
+  }
+}
+
+export default App

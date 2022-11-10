@@ -9,17 +9,41 @@ import {
 } from '@pluralsh/design-system'
 import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
+import { FragmentType, useFragment } from './gql/fragment-masking'
+import { RepoFragment } from './queries/recipesQueries'
+
+export type NavMenuId = 'docs' | 'appCatalog'
+export type MenuId = NavMenuId | 'plural'
+export type NavData = Record<NavMenuId, NavMenu>
 
 export type NavItem = {
   title?: string
   href?: string
+  toMenu?: MenuId
   icon?: ReactElement
   sections?: NavItem[]
 }
 
-export type NavData = NavItem[]
+export type NavMenu = NavItem[]
 
-const data: NavData = [
+export function findNavItem(test: (arg: NavItem) => boolean,
+  section: NavMenu): NavItem | null {
+  for (const item of section) {
+    if (test(item)) {
+      return item
+    }
+
+    const search = findNavItem(test, item.sections || [])
+
+    if (search) {
+      return search
+    }
+  }
+
+  return null
+}
+
+const rootNavData: NavMenu = deepFreeze([
   {
     title: 'Getting Started',
     sections: [
@@ -70,12 +94,8 @@ const data: NavData = [
     sections: [
       {
         href: '/applications',
+        toMenu: 'appCatalog',
         title: 'Application Catalog',
-        sections: [
-          { href: '/applications/airbyte', title: 'Airbyte' },
-          { href: '/applications/airflow', title: 'Airflow' },
-          { href: '/applications/console', title: 'Console' },
-        ],
       },
       {
         href: '/adding-new-application',
@@ -240,6 +260,28 @@ const data: NavData = [
   //   sections: [{ title: 'Callouts', href: '/test/callouts' }],
   //   sections: [{ title: 'Blockquotes', href: '/test/blockquotes' }],
   // },
-]
+])
 
-export default deepFreeze(data)
+export const getNavData = ({
+  repos,
+}: {
+  repos: FragmentType<typeof RepoFragment>[]
+}): NavData => ({
+  docs: rootNavData,
+  appCatalog: [
+    {
+      title: 'Application Catalog',
+      sections: [
+        { title: 'Repository Documentation', href: '/repositories' },
+        ...repos.map(r => {
+          const repo = useFragment(RepoFragment, r)
+
+          return {
+            title: repo.name,
+            href: `/repositories/${repo.name}`,
+          }
+        }),
+      ],
+    },
+  ],
+})

@@ -31,7 +31,7 @@ function Button({
   if (isRelativeUrl(href)) {
     href = `${removeTrailingSlashes(router.pathname)}/${href}`
   }
-  const buttonProps:any = props
+  const buttonProps: any = props
 
   if (type === 'floating') {
     buttonProps.floating = true

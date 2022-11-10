@@ -1,7 +1,10 @@
 import React, {
   ComponentProps,
+  Dispatch,
+  Key,
   MutableRefObject,
   ReactElement,
+  SetStateAction,
   createContext,
   forwardRef,
   useCallback,
@@ -19,24 +22,29 @@ import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import scrollIntoContainerView from '../utils/scrollIntoContainerView'
-import { removeTrailingSlashes } from '../utils/text'
+import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
-import { NavData, NavItem } from '../NavData'
+import { MenuId, NavItem, NavMenu } from '../NavData'
 
 export type SideNavProps = {
-  navData: NavData
+  navData: NavMenu
   desktop: boolean
+  padTop?: boolean
   hide?: boolean
+  menuId?: Key
+  setMenuId?: Dispatch<SetStateAction<MenuId>>
 }
 
 const NavContext = createContext<{
   optimisticPathname: null | string
   scrollRef: MutableRefObject<HTMLDivElement | null>
   desktop: boolean
+  setMenuId?: Dispatch<SetStateAction<MenuId>>
 }>({
   optimisticPathname: null,
   scrollRef: { current: null },
   desktop: false,
+  setMenuId: () => {},
 })
 
 const KeyboardNavContext = createContext<{
@@ -181,6 +189,7 @@ const NavLink = styled(({
   onToggleOpen,
   icon,
   desktop: _,
+  toMenu,
   ...props
 }: {
     isSubSection?: boolean
@@ -188,19 +197,21 @@ const NavLink = styled(({
     childIsSelected: boolean
     icon?: ReactElement
     desktop: boolean
+    toMenu: MenuId
+
     onToggleOpen?: () => void
   } & Partial<ComponentProps<typeof StyledLink>>) => {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
-  const { scrollRef, ...navContext } = useContext(NavContext)
+  const { scrollRef, setMenuId, ...navContext } = useContext(NavContext)
   const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
   const isSelectedOptimistic = useMemo(() => optimisticPathname === href,
     [optimisticPathname, href])
   const liRef = useRef<HTMLLIElement>(null)
   const theme = useTheme()
 
-  // Scroll into view gets interrupted by page transitions, so we only start
-  // scrolling when the actual pathname changes instead of using optimisticPathname
-  // like everything else
+    // Scroll into view gets interrupted by page transitions, so we only start
+    // scrolling when the actual pathname changes instead of using optimisticPathname
+    // like everything else
   const pathname = removeTrailingSlashes(useRouter().pathname)
   const isSelected = useMemo(() => pathname === href, [pathname, href])
   const wasSelected = usePrevious(isSelected)
@@ -226,7 +237,14 @@ const NavLink = styled(({
     >
       <LinkBase
         icon={icon}
-        onClick={() => (isSelected && onToggleOpen ? onToggleOpen() : null)}
+        onClick={() => {
+          if (isSelected && onToggleOpen) {
+            onToggleOpen()
+          }
+          if (toMenu && setMenuId) {
+            setMenuId(toMenu)
+          }
+        }}
         {...props}
       />
       {isSubSection && (
@@ -348,6 +366,7 @@ function SubSection({
   icon,
   indentLevel = 1,
   defaultOpen = false,
+  toMenu,
 }: NavItem & { indentLevel?: number; defaultOpen: boolean }) {
   const [isOpen, setIsOpen] = useState(defaultOpen)
   const toggleOpen = useCallback(() => {
@@ -400,6 +419,7 @@ function SubSection({
         isOpen={isOpen}
         childIsSelected={defaultOpen}
         onToggleOpen={toggleOpen}
+        toMenu={toMenu}
       >
         {title}
       </NavLink>
@@ -429,10 +449,17 @@ export const NavPositionWrapper = styled.nav(({ theme: _theme }) => ({
   position: 'sticky',
   height: 'calc(100vh - var(--top-nav-height))',
   top: 'var(--top-nav-height)',
-  marginLeft: -navLeftOffset,
+  display: 'flex',
+  flexDirection: 'column',
 }))
 
-const NavScrollContainer = styled.div<{ desktop: boolean; hide: boolean }>(({ desktop, hide = false, theme }) => ({
+const NavScrollContainer = styled.div<{
+  $desktop: boolean
+  $padTop: boolean
+  $hide: boolean
+}>(({
+  $desktop: desktop, $padTop: padTop, $hide: hide = false, theme,
+}) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -442,27 +469,38 @@ const NavScrollContainer = styled.div<{ desktop: boolean; hide: boolean }>(({ de
   backgroundColor: theme.colors['fill-one'],
   borderRight: desktop ? theme.borders['fill-one'] : 'none',
   paddingBottom: `calc(${theme.spacing.xlarge}px + var(--menu-extra-bpad))`,
-  paddingTop: desktop ? theme.spacing.large : 0,
+  paddingTop: padTop ? theme.spacing.large : 0,
   paddingRight: desktop ? 0 : theme.spacing.medium,
   paddingLeft: desktop ? 0 : theme.spacing.medium,
+  marginLeft: desktop ? -navLeftOffset : 0,
   display: hide ? 'none' : 'block',
 }))
 
-const Nav = styled.nav<{ desktop: boolean }>(({ desktop, theme: _theme }) => ({
+const Nav = styled.nav<{ $desktop: boolean }>(({ $desktop: desktop, theme: _theme }) => ({
   marginLeft: desktop ? navLeftOffset : 0,
 }))
 
-export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
+export function SideNav({
+  navData,
+  desktop,
+  padTop = true,
+  hide = false,
+  menuId = '',
+  setMenuId,
+}: SideNavProps) {
   const router = useRouter()
   const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
   const scrollRef = useRef<HTMLDivElement>(null)
   const contextValue = useMemo(() => ({
     scrollRef,
     desktop,
+    setMenuId,
     optimisticPathname:
-        optimisticPathname === null ? router.pathname : optimisticPathname,
+        optimisticPathname === null
+          ? getBarePathFromPath(router.asPath)
+          : optimisticPathname,
   }),
-  [optimisticPathname, router.pathname, desktop])
+  [desktop, setMenuId, optimisticPathname, router.asPath])
 
   useEffect(() => {
     if (!router?.events?.on) {
@@ -500,12 +538,14 @@ export function SideNav({ navData, desktop, hide = false }: SideNavProps) {
   return (
     <NavContext.Provider value={contextValue}>
       <NavScrollContainer
+        key={menuId}
         ref={scrollRef}
-        desktop={desktop}
-        hide={hide}
+        $desktop={desktop}
+        $padTop={padTop}
+        $hide={hide}
       >
-        <Nav desktop={desktop}>
-          {navData.map(({ title, sections }) => (
+        <Nav $desktop={desktop}>
+          {(navData || []).map(({ title, sections }) => (
             <TopSection
               title={title}
               key={title}

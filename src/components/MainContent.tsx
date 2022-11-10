@@ -17,10 +17,6 @@ const BreadcrumbsWrapper = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xlarge,
 }))
 
-const PageHeader = styled.div(({ theme }) => ({
-  marginBottom: theme.spacing.xxlarge,
-}))
-
 const Title = styled.h1(({ theme }) => ({
   ...theme.partials.marketingText.hero2,
   margin: 0,
@@ -50,6 +46,30 @@ const PageDivider = styled.div(({ theme }) => ({
   borderTop: theme.borders.default,
 }))
 
+function ContentHeaderUnstyled({
+  title,
+  description,
+  className,
+  pageHasContent = true,
+}: {
+  title?: string
+  description?: string
+  className?: string
+  pageHasContent?: boolean
+}) {
+  return (
+    <div className={className}>
+      {title && <Title>{title}</Title>}
+      {description && <Description>{description}</Description>}
+      <ArticlesInSection hasContent={pageHasContent} />
+    </div>
+  )
+}
+
+export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
+  marginBottom: theme.spacing.xxlarge,
+}))
+
 export default function MainContent({ Component }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps
@@ -63,14 +83,12 @@ export default function MainContent({ Component }) {
         <Breadcrumbs />
       </BreadcrumbsWrapper>
       <ContentWrapper>
-        {(markdoc?.frontmatter?.title || markdoc?.frontmatter?.description) && (
-          <PageHeader>
-            {title && <Title>{title}</Title>}
-            {description && <Description>{description}</Description>}
-            <ArticlesInSection
-              hasContent={(markdoc?.content as any)?.children?.length > 0}
-            />
-          </PageHeader>
+        {(title || description) && (
+          <ContentHeader
+            title={title}
+            description={description}
+            pageHasContent={(markdoc?.content as any)?.children?.length > 0}
+          />
         )}
         <Component {...pageProps} />
         <PageDivider />

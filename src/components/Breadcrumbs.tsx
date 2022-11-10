@@ -2,10 +2,12 @@ import styled from 'styled-components'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
-import { ReactNode } from 'react'
-import { removeTrailingSlashes } from '../utils/text'
+import { ReactNode, useMemo } from 'react'
 
-import navData, { NavItem } from '../NavData'
+import { useNavMenu } from '../contexts/NavDataContext'
+import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
+
+import { NavItem } from '../NavData'
 
 const StyledLink = styled(NextLink)(({ theme }) => ({
   ...theme.partials.marketingText.componentLinkSmall,
@@ -52,7 +54,7 @@ const Li = styled.li(({ theme }) => ({
   },
 }))
 
-function findCrumbs(path, sections: NavItem[] = navData) {
+function findCrumbs(path, sections: NavItem[]) {
   path = removeTrailingSlashes(path)
 
   for (const { title, href, sections: sects } of sections) {
@@ -70,9 +72,13 @@ function findCrumbs(path, sections: NavItem[] = navData) {
 }
 
 function Breadcrumbs({ className }: { className?: string }) {
-  const { pathname } = useRouter()
+  const { asPath } = useRouter()
 
-  const crumbs = [{ title: 'Docs' }, ...findCrumbs(pathname)]
+  const path = getBarePathFromPath(asPath)
+  const navData = useNavMenu()
+
+  const crumbs = useMemo(() => [{ title: 'Docs' }, ...findCrumbs(path, navData)],
+    [navData, path])
 
   crumbs[crumbs.length - 1].href = undefined
 

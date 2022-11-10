@@ -6,7 +6,9 @@ import { Button } from 'honorable'
 import { DocumentIcon } from '@pluralsh/design-system'
 import { removeTrailingSlashes } from '../utils/text'
 
-import navData, { NavItem } from '../NavData'
+import { useNavMenu } from '../contexts/NavDataContext'
+
+import { NavItem } from '../NavData'
 
 function findArticlesIn(routerPathname,
   sections: NavItem[] | undefined,
@@ -50,6 +52,7 @@ function ArticlesInSection({
   hasContent: boolean
 }) {
   const { pathname } = useRouter()
+  const navData = useNavMenu()
 
   const articles = findArticlesIn(pathname, navData)
 
