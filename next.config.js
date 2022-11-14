@@ -73,7 +73,7 @@ module.exports = () => {
         },
         {
           source: '/basic-setup-and-deployment/uninstall',
-          destination: '/getting-started/quickstart',
+          destination: '/operations/uninstall',
           permanent: true,
         },
         {
@@ -139,6 +139,66 @@ module.exports = () => {
         {
           source: '/advanced-topics/security/secret-management',
           destination: '/operations/security/secret-management',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/debugging',
+          destination: '/debugging',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/debugging/health-checks',
+          destination: '/debugging/health-checks',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/debugging/logs',
+          destination: '/debugging/logs',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/debugging/proxies',
+          destination: '/debugging/proxies',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management',
+          destination: '/operations/auth-access-control',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/introduction',
+          destination: '/operations/auth-access-control',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/openid-connect',
+          destination: '/operations/auth-access-control/openid-connect',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/api-tokens',
+          destination: '/operations/auth-access-control/api-tokens',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/identity-and-installations',
+          destination: '/operations/auth-access-control/identity-and-installations',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/identity-and-installations/audit-logging',
+          destination: '/operations/auth-access-control/identity-and-installations/audit-logging',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts',
+          destination: '/operations/auth-access-control/identity-and-installations/service-accounts',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
+          destination: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
           permanent: true,
         },
       ]

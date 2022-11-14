@@ -4,7 +4,10 @@ import {
   BookIcon,
   CloudIcon,
   DocumentIcon,
+  GitHubIcon,
+  GraphIcon,
   MagicWandIcon,
+  PadlockIcon,
   ToolIcon,
   VideoIcon,
   WorkspaceIcon,
@@ -43,18 +46,22 @@ const data: NavData = [
       {
         href: '/getting-started/cloud-shell-quickstart',
         title: 'Deploying with Cloud Shell',
+        icon: <CloudIcon />,
       },
       {
         href: '/getting-started/setting-up-gitops',
         title: 'Setting up GitOps',
+        icon: <GitHubIcon />,
       },
       {
         href: '/getting-started/admin-console',
         title: 'Installing Plural Console',
+        icon: <GraphIcon />,
       },
       {
         href: '/getting-started/openid-connect',
         title: 'Using Plural OIDC',
+        icon: <PadlockIcon />,
       },
     ],
   },
@@ -109,6 +116,10 @@ const data: NavData = [
         title: 'Network Configuration',
       },
       {
+        href: '/operations/uninstall',
+        title: 'Destroying the Cluster Safely',
+      },
+      {
         href: '/operations/dns-setup',
         title: 'Setting up Third Party DNS',
         sections: [
@@ -129,69 +140,69 @@ const data: NavData = [
         ],
       },
       {
-        href: '/advanced-topics/identity-and-access-management',
+        href: '/operations/auth-access-control',
         title: 'Auth & Access Control',
         sections: [
           {
-            href: '/advanced-topics/identity-and-access-management/introduction',
-            title: 'Introduction',
-          },
-          {
-            href: '/advanced-topics/identity-and-access-management/openid-connect',
+            href: '/operations/auth-access-control/openid-connect',
             title: 'OpenID Connect',
           },
           {
-            href: '/advanced-topics/identity-and-access-management/api-tokens',
+            href: '/operations/auth-access-control/api-tokens',
             title: 'API Tokens',
           },
           {
-            href: '/advanced-topics/identity-and-access-management/identity-and-installations',
+            href: '/operations/auth-access-control/identity-and-installations',
             title: 'Identity and Installations',
             sections: [
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/audit-logging',
+                href: '/operations/auth-access-control/identity-and-installations/audit-logging',
                 title: 'Audit Logging',
               },
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts',
+                href: '/operations/auth-access-control/identity-and-installations/service-accounts',
                 title: 'Service Accounts',
               },
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
+                href: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
                 title: 'Sharing Existing Repos',
               },
             ],
           },
         ],
       },
+    ],
+  },
+  {
+    title: 'Debugging',
+    sections: [
       {
-        href: '/advanced-topics/debugging',
+        href: '/debugging',
         title: 'Debugging',
         sections: [
           {
-            href: '/advanced-topics/debugging/health-checks',
+            href: '/debugging/health-checks',
             title: '  Health Checks',
           },
           {
-            href: '/advanced-topics/debugging/proxies',
+            href: '/debugging/proxies',
             title: 'Proxies',
           },
           {
-            href: '/advanced-topics/debugging/logs',
+            href: '/debugging/logs',
             title: 'Logs',
           },
         ],
+      },
+      {
+        title: 'Troubleshooting',
+        href: '/reference/troubleshooting',
       },
     ],
   },
   {
     title: 'Reference',
     sections: [
-      {
-        title: 'Troubleshooting',
-        href: '/reference/troubleshooting',
-        icon: <ToolIcon />,
-      },
       {
         title: 'Workspaces',
         href: '/reference/workspaces',

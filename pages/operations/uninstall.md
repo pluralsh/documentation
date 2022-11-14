@@ -1,5 +1,5 @@
 ---
-title: Uninstalling Plural
+title: Destroying the Cluster Safely
 description: How do I bring things down safely?
 ---
 
