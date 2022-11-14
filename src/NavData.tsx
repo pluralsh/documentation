@@ -40,30 +40,21 @@ const data: NavData = [
         title: 'Video: CLI Quickstart',
         icon: <VideoIcon />,
       },
-    ],
-  },
-  {
-    title: 'Basic Setup & Deployment',
-    sections: [
       {
-        href: '/basic-setup-and-deployment/cloud-shell-quickstart',
+        href: '/getting-started/cloud-shell-quickstart',
         title: 'Deploying with Cloud Shell',
       },
       {
-        href: '/basic-setup-and-deployment/setting-up-gitops',
+        href: '/getting-started/setting-up-gitops',
         title: 'Setting up GitOps',
       },
       {
-        href: '/basic-setup-and-deployment/admin-console',
+        href: '/getting-started/admin-console',
         title: 'Installing Plural Console',
       },
       {
-        href: '/basic-setup-and-deployment/openid-connect',
+        href: '/getting-started/openid-connect',
         title: 'Using Plural OIDC',
-      },
-      {
-        href: '/basic-setup-and-deployment/uninstall',
-        title: 'Destroying the Cluster Safely',
       },
     ],
   },
@@ -71,12 +62,12 @@ const data: NavData = [
     title: 'Applications',
     sections: [
       {
-        href: '/repositories',
+        href: '/applications',
         title: 'Application Catalog',
         sections: [
-          { href: '/repositories/airbyte', title: 'Airbyte' },
-          { href: '/repositories/airflow', title: 'Airflow' },
-          { href: '/repositories/console', title: 'Console' },
+          { href: '/applications/airbyte', title: 'Airbyte' },
+          { href: '/applications/airflow', title: 'Airflow' },
+          { href: '/applications/console', title: 'Console' },
         ],
       },
       {
@@ -111,28 +102,28 @@ const data: NavData = [
     ],
   },
   {
-    title: 'Advanced Topics',
+    title: 'Operations',
     sections: [
       {
-        href: '/advanced-topics/network-configuration',
+        href: '/operations/network-configuration',
         title: 'Network Configuration',
       },
       {
-        href: '/advanced-topics/dns-setup',
+        href: '/operations/dns-setup',
         title: 'Setting up Third Party DNS',
         sections: [
           {
-            href: '/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+            href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
             title: '  Creating a DNS Zone in Console',
           },
         ],
       },
       {
-        href: '/advanced-topics/security',
-        title: 'Security Concepts',
+        href: '/operations/security',
+        title: 'Security',
         sections: [
           {
-            href: '/advanced-topics/security/secret-management',
+            href: '/operations/security/secret-management',
             title: '  Secret Management',
           },
         ],
@@ -202,28 +193,12 @@ const data: NavData = [
         icon: <ToolIcon />,
       },
       {
-        title: 'Operator Guides',
-        href: '/reference/operator-guides',
-        icon: <BookIcon />,
-        sections: [
-          {
-            title: 'Adding Kubecost for Cost Analysis',
-            href: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
-          },
-        ],
-      },
-      {
-        title: 'Architecture',
-        href: '/reference/architecture',
-        icon: <ArchitectureIcon />,
-      },
-      {
         title: 'Workspaces',
         href: '/reference/workspaces',
         icon: <WorkspaceIcon />,
       },
       {
-        title: 'Developer Tools / API',
+        title: 'API / Developer Tools',
         href: '/reference/api',
         icon: <ApiIcon />,
         sections: [

@@ -51,6 +51,96 @@ module.exports = () => {
           destination: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
           permanent: true,
         },
+        {
+          source: '/basic-setup-and-deployment/setting-up-gitops',
+          destination: '/getting-started/setting-up-gitops',
+          permanent: true,
+        },
+        {
+          source: '/basic-setup-and-deployment/openid-connect',
+          destination: '/getting-started/openid-connect',
+          permanent: true,
+        },
+        {
+          source: '/basic-setup-and-deployment/admin-console',
+          destination: '/getting-started/admin-console',
+          permanent: true,
+        },
+        {
+          source: '/basic-setup-and-deployment/cloud-shell-quickstart',
+          destination: '/getting-started/cloud-shell-quickstart',
+          permanent: true,
+        },
+        {
+          source: '/basic-setup-and-deployment/uninstall',
+          destination: '/getting-started/quickstart',
+          permanent: true,
+        },
+        {
+          source: '/reference/operator-guides',
+          destination: '/repositories',
+          permanent: true,
+        },
+        {
+          source: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
+          destination: '/repositories/kubecost',
+          permanent: true,
+        },
+        {
+          source: '/reference/architecture',
+          destination: '/',
+          permanent: true,
+        },
+        {
+          source: '/repositories',
+          destination: '/applications',
+          permanent: true,
+        },
+        {
+          source: '/repositories/airbyte',
+          destination: '/applications/airbyte',
+          permanent: true,
+        },
+        {
+          source: '/repositories/airflow',
+          destination: '/applications/airflow',
+          permanent: true,
+        },
+        {
+          source: '/repositories/console',
+          destination: '/applications/console',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics',
+          destination: '/operations',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/network-configuration',
+          destination: '/operations/network-configuration',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/dns-setup',
+          destination: '/operations/dns-setup',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+          destination: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/security',
+          destination: '/operations/security',
+          permanent: true,
+        },
+        {
+          source: '/advanced-topics/security/secret-management',
+          destination: '/operations/security/secret-management',
+          permanent: true,
+        },
       ]
     },
     // webpack: (config) => {
