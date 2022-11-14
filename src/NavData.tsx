@@ -1,6 +1,5 @@
 import {
   ApiIcon,
-  ArchitectureIcon,
   BookIcon,
   CloudIcon,
   DocumentIcon,
@@ -179,6 +178,7 @@ const data: NavData = [
       {
         href: '/debugging',
         title: 'Debugging',
+        icon: <BookIcon />,
         sections: [
           {
             href: '/debugging/health-checks',
@@ -197,6 +197,7 @@ const data: NavData = [
       {
         title: 'Troubleshooting',
         href: '/reference/troubleshooting',
+        icon: <ToolIcon />,
       },
     ],
   },
