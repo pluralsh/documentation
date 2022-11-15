@@ -1,6 +1,6 @@
-import { useMemo } from 'react'
-
 import { CodeStyled, toCodeString } from './Fence'
+
+import { useMemo } from 'react'
 
 function CodeTabs({ tabs, ...props }) {
   const codeTabs = useMemo(() => tabs.map(tab => {

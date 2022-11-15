@@ -1,13 +1,13 @@
+import { removeTrailingSlashes } from 'utils/text'
+
+import navData, { NavItem } from '../NavData'
+
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-
-import { removeTrailingSlashes } from 'utils/text'
 
 import { Button } from 'honorable'
 
 import { DocumentIcon } from 'pluralsh-design-system'
-
-import navData, { NavItem } from '../NavData'
 
 function findArticlesIn(routerPathname,
   sections: NavItem[] | undefined,

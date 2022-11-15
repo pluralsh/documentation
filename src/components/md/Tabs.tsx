@@ -1,3 +1,5 @@
+import TabComponent from './Tab'
+
 import styled from 'styled-components'
 import { TabList, TabListStateProps, TabPanel } from 'pluralsh-design-system'
 import {
@@ -7,8 +9,6 @@ import {
   useRef,
   useState,
 } from 'react'
-
-import TabComponent from './Tab'
 
 export const TabContext = createContext({})
 

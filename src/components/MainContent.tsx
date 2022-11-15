@@ -1,13 +1,13 @@
-import { GitHubLogoIcon } from 'pluralsh-design-system'
-import { useContext } from 'react'
-import styled from 'styled-components'
-
 import ArticlesInSection from './ArticlesInSection'
 
 import Breadcrumbs from './Breadcrumbs'
 import { FooterLink } from './PageFooter'
 
 import { PagePropsContext } from './PagePropsContext'
+
+import styled from 'styled-components'
+import { useContext } from 'react'
+import { GitHubLogoIcon } from 'pluralsh-design-system'
 
 const ContentWrapper = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xlarge,

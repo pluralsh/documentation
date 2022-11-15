@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components'
-
 import { mqs } from './Breakpoints'
+
+import { createGlobalStyle } from 'styled-components'
 
 const fillAvailable = prop => ({
   [`${prop} `]: '-webkit-fill-available',

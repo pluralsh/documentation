@@ -1,6 +1,6 @@
-import { Tag } from '@markdoc/markdoc'
-
 import Paragraph from '../../components/md/Paragraph'
+
+import { Tag } from '@markdoc/markdoc'
 
 function containsImage(children: { name: string }[]) {
   for (const c of children) {

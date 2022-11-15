@@ -1,6 +1,6 @@
-import styled from 'styled-components'
-
 import { mqs } from './Breakpoints'
+
+import styled from 'styled-components'
 
 export const PageGrid = styled.div(_p => ({
   display: 'flex',

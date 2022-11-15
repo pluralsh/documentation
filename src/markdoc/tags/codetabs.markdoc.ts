@@ -1,6 +1,6 @@
-import { Tag } from '@markdoc/markdoc'
-
 import { CodeTabs } from '../../components/md/CodeTabs'
+
+import { Tag } from '@markdoc/markdoc'
 
 export const codetabs = {
   render: CodeTabs,

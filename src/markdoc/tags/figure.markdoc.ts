@@ -1,7 +1,8 @@
-import { Tag } from '@markdoc/markdoc'
 import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
 
 import { FigCaption, Figure } from '../../components/md/Figure'
+
+import { Tag } from '@markdoc/markdoc'
 
 const makeBareImage = node => {
   if (node?.name !== 'Image') {
