@@ -2,9 +2,8 @@ import styled from 'styled-components'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
-import { removeTrailingSlashes } from 'utils/text'
-
 import { ReactNode } from 'react'
+import { removeTrailingSlashes } from '../utils/text'
 
 import navData, { NavItem } from '../NavData'
 

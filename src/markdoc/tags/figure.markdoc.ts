@@ -1,5 +1,5 @@
-import { Tag } from '@markdoc/markdoc'
 import unwrapParagraphs from 'markdoc/utils/unwrapParagraphs'
+import { Tag } from '@markdoc/markdoc'
 
 import { FigCaption, Figure } from '../../components/md/Figure'
 
