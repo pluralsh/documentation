@@ -198,7 +198,7 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
-          destination: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
+          destination: '/getting-started/managing-git-repository/sharing-git-repository',
           permanent: true,
         },
         {
