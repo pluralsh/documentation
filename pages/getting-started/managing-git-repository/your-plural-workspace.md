@@ -1,5 +1,5 @@
 ---
-title: Workspaces
+title: Your Plural Workspace
 description: Learn about your Plural Git workspaces and how to manage them.
 ---
 
