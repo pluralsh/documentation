@@ -1,10 +1,12 @@
 import {
   ApiIcon,
-  ArchitectureIcon,
   BookIcon,
   CloudIcon,
   DocumentIcon,
+  GitHubIcon,
+  GraphIcon,
   MagicWandIcon,
+  PadlockIcon,
   ToolIcon,
   VideoIcon,
   WorkspaceIcon,
@@ -40,30 +42,25 @@ const data: NavData = [
         title: 'Video: CLI Quickstart',
         icon: <VideoIcon />,
       },
-    ],
-  },
-  {
-    title: 'Basic Setup & Deployment',
-    sections: [
       {
-        href: '/basic-setup-and-deployment/cloud-shell-quickstart',
+        href: '/getting-started/cloud-shell-quickstart',
         title: 'Deploying with Cloud Shell',
+        icon: <CloudIcon />,
       },
       {
-        href: '/basic-setup-and-deployment/setting-up-gitops',
+        href: '/getting-started/setting-up-gitops',
         title: 'Setting up GitOps',
+        icon: <GitHubIcon />,
       },
       {
-        href: '/basic-setup-and-deployment/admin-console',
+        href: '/getting-started/admin-console',
         title: 'Installing Plural Console',
+        icon: <GraphIcon />,
       },
       {
-        href: '/basic-setup-and-deployment/openid-connect',
+        href: '/getting-started/openid-connect',
         title: 'Using Plural OIDC',
-      },
-      {
-        href: '/basic-setup-and-deployment/uninstall',
-        title: 'Destroying the Cluster Safely',
+        icon: <PadlockIcon />,
       },
     ],
   },
@@ -71,12 +68,12 @@ const data: NavData = [
     title: 'Applications',
     sections: [
       {
-        href: '/repositories',
+        href: '/applications',
         title: 'Application Catalog',
         sections: [
-          { href: '/repositories/airbyte', title: 'Airbyte' },
-          { href: '/repositories/airflow', title: 'Airflow' },
-          { href: '/repositories/console', title: 'Console' },
+          { href: '/applications/airbyte', title: 'Airbyte' },
+          { href: '/applications/airflow', title: 'Airflow' },
+          { href: '/applications/console', title: 'Console' },
         ],
       },
       {
@@ -111,85 +108,96 @@ const data: NavData = [
     ],
   },
   {
-    title: 'Advanced Topics',
+    title: 'Operations',
     sections: [
       {
-        href: '/advanced-topics/network-configuration',
+        href: '/operations/network-configuration',
         title: 'Network Configuration',
       },
       {
-        href: '/advanced-topics/dns-setup',
+        href: '/operations/uninstall',
+        title: 'Destroying the Cluster Safely',
+      },
+      {
+        href: '/operations/dns-setup',
         title: 'Setting up Third Party DNS',
         sections: [
           {
-            href: '/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+            href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
             title: '  Creating a DNS Zone in Console',
           },
         ],
       },
       {
-        href: '/advanced-topics/security',
-        title: 'Security Concepts',
+        href: '/operations/security',
+        title: 'Security',
         sections: [
           {
-            href: '/advanced-topics/security/secret-management',
+            href: '/operations/security/secret-management',
             title: '  Secret Management',
           },
         ],
       },
       {
-        href: '/advanced-topics/identity-and-access-management',
+        href: '/operations/auth-access-control',
         title: 'Auth & Access Control',
         sections: [
           {
-            href: '/advanced-topics/identity-and-access-management/introduction',
-            title: 'Introduction',
-          },
-          {
-            href: '/advanced-topics/identity-and-access-management/openid-connect',
+            href: '/operations/auth-access-control/openid-connect',
             title: 'OpenID Connect',
           },
           {
-            href: '/advanced-topics/identity-and-access-management/api-tokens',
+            href: '/operations/auth-access-control/api-tokens',
             title: 'API Tokens',
           },
           {
-            href: '/advanced-topics/identity-and-access-management/identity-and-installations',
+            href: '/operations/auth-access-control/identity-and-installations',
             title: 'Identity and Installations',
             sections: [
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/audit-logging',
+                href: '/operations/auth-access-control/identity-and-installations/audit-logging',
                 title: 'Audit Logging',
               },
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts',
+                href: '/operations/auth-access-control/identity-and-installations/service-accounts',
                 title: 'Service Accounts',
               },
               {
-                href: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
+                href: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
                 title: 'Sharing Existing Repos',
               },
             ],
           },
         ],
       },
+    ],
+  },
+  {
+    title: 'Debugging',
+    sections: [
       {
-        href: '/advanced-topics/debugging',
+        href: '/debugging',
         title: 'Debugging',
+        icon: <BookIcon />,
         sections: [
           {
-            href: '/advanced-topics/debugging/health-checks',
+            href: '/debugging/health-checks',
             title: '  Health Checks',
           },
           {
-            href: '/advanced-topics/debugging/proxies',
+            href: '/debugging/proxies',
             title: 'Proxies',
           },
           {
-            href: '/advanced-topics/debugging/logs',
+            href: '/debugging/logs',
             title: 'Logs',
           },
         ],
+      },
+      {
+        title: 'Troubleshooting',
+        href: '/reference/troubleshooting',
+        icon: <ToolIcon />,
       },
     ],
   },
@@ -197,33 +205,12 @@ const data: NavData = [
     title: 'Reference',
     sections: [
       {
-        title: 'Troubleshooting',
-        href: '/reference/troubleshooting',
-        icon: <ToolIcon />,
-      },
-      {
-        title: 'Operator Guides',
-        href: '/reference/operator-guides',
-        icon: <BookIcon />,
-        sections: [
-          {
-            title: 'Adding Kubecost for Cost Analysis',
-            href: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
-          },
-        ],
-      },
-      {
-        title: 'Architecture',
-        href: '/reference/architecture',
-        icon: <ArchitectureIcon />,
-      },
-      {
         title: 'Workspaces',
         href: '/reference/workspaces',
         icon: <WorkspaceIcon />,
       },
       {
-        title: 'Developer Tools / API',
+        title: 'API / Developer Tools',
         href: '/reference/api',
         icon: <ApiIcon />,
         sections: [

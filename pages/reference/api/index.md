@@ -1,5 +1,5 @@
 ---
-title: Developer Tools / API
+title: API / Developer Tools
 ---
 
 Plural has two main components, each with their own graphql API:
