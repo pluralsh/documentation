@@ -1,6 +1,5 @@
 # IDE settings.
 .idea
-.vscode
 #
 .DS_Store
 .next/
