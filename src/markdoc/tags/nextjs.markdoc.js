@@ -3,7 +3,6 @@
 // Current plugin doesn't seem to support these from the package using Typescript
 
 import Link from 'components/md/Link'
-
 import Head from 'next/head'
 import Script from 'next/script'
 

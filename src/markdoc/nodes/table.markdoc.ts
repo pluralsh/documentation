@@ -1,6 +1,6 @@
-import Table from 'components/md/Table'
-
 import { Tag } from '@markdoc/markdoc'
+
+import Table from 'components/md/Table'
 
 export const table = {
   render: Table,

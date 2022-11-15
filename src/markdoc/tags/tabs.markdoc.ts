@@ -1,6 +1,6 @@
-import { Tab, Tabs } from '../../components/md/Tabs'
-
 import { Tag } from '@markdoc/markdoc'
+
+import { Tab, Tabs } from '../../components/md/Tabs'
 
 export const tabs = {
   render: Tabs,

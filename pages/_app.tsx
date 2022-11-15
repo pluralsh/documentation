@@ -1,4 +1,16 @@
+import { MarkdocNextJsPageProps } from '@markdoc/next.js'
+import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import {
+  FillLevelProvider,
+  GlobalStyle as PluralGlobalStyle,
+  theme as honorableTheme,
+  styledTheme,
+} from 'pluralsh-design-system'
+import { CssBaseline, ThemeProvider } from 'honorable'
+import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
 
 import { BreakpointProvider } from '../src/components/Breakpoints'
 import PageFooter from '../src/components/PageFooter'
@@ -25,20 +37,6 @@ import {
 
 import { PagePropsContext } from '../src/components/PagePropsContext'
 import navData from '../src/NavData'
-
-import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
-import { MarkdocNextJsPageProps } from '@markdoc/next.js'
-
-import { useRouter } from 'next/router'
-import type { AppProps } from 'next/app'
-import {
-  FillLevelProvider,
-  GlobalStyle as PluralGlobalStyle,
-  theme as honorableTheme,
-  styledTheme,
-} from 'pluralsh-design-system'
-import { SSRProvider } from '@react-aria/ssr'
-import { CssBaseline, ThemeProvider } from 'honorable'
 
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
 

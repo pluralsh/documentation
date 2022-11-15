@@ -1,13 +1,12 @@
-import { isExternalUrl } from '../../utils/text'
-
-import Paragraph from './Paragraph'
-
-import { ListItem } from './List'
-
 import styled from 'styled-components'
 import { Callout, CalloutProps } from 'pluralsh-design-system'
 
 import { useRouter } from 'next/router'
+
+import { isExternalUrl } from '../../utils/text'
+
+import Paragraph from './Paragraph'
+import { ListItem } from './List'
 
 function MarkdocCallout({
   ctas,

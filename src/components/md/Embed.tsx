@@ -1,9 +1,9 @@
-import { MediaWrap } from './MediaWrap'
-
 import ReactEmbed from 'react-embed'
 import * as loom from '@loomhq/loom-embed'
 import { useEffect, useMemo, useState } from 'react'
 import styled from 'styled-components'
+
+import { MediaWrap } from './MediaWrap'
 
 const AspectRatio = styled.div<{ $aspectRatio: string }>(({ $aspectRatio }) => ({
   ...($aspectRatio

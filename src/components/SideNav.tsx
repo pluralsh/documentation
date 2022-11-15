@@ -1,9 +1,3 @@
-import { removeTrailingSlashes } from 'utils/text'
-
-import scrollIntoContainerView from 'utils/scrollIntoContainerView'
-
-import { NavData, NavItem } from '../NavData'
-
 import React, {
   ComponentProps,
   MutableRefObject,
@@ -20,10 +14,15 @@ import React, {
 import NextLink from 'next/link'
 import styled, { css, keyframes, useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
+import { removeTrailingSlashes } from 'utils/text'
 import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
+
+import scrollIntoContainerView from 'utils/scrollIntoContainerView'
+
+import { NavData, NavItem } from '../NavData'
 
 export type SideNavProps = {
   navData: NavData

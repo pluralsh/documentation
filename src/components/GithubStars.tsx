@@ -1,8 +1,8 @@
-import { ButtonFillTwo } from './PageHeaderButtons'
-
 import styled from 'styled-components'
 import { GitHubLogoIcon } from 'pluralsh-design-system'
 import useSWR from 'swr'
+
+import { ButtonFillTwo } from './PageHeaderButtons'
 
 async function fetcher<JSON = any>(input: RequestInfo,
   init?: RequestInit): Promise<JSON> {

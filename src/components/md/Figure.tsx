@@ -1,6 +1,6 @@
-import { MediaWrap } from './MediaWrap'
-
 import styled from 'styled-components'
+
+import { MediaWrap } from './MediaWrap'
 
 export function Figure(props) {
   return (

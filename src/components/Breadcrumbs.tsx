@@ -1,12 +1,12 @@
-import { removeTrailingSlashes } from 'utils/text'
-
-import navData, { NavItem } from '../NavData'
-
 import styled from 'styled-components'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
+import { removeTrailingSlashes } from 'utils/text'
+
 import { ReactNode } from 'react'
+
+import navData, { NavItem } from '../NavData'
 
 const StyledLink = styled(NextLink)(({ theme }) => ({
   ...theme.partials.marketingText.componentLinkSmall,

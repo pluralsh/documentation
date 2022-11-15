@@ -1,20 +1,19 @@
+import { useState } from 'react'
+import styled from 'styled-components'
+import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 import NavData from 'NavData'
-
-import useScrollLock from './hooks/useScrollLock'
-import { SocialLink } from './PageHeaderButtons'
-import GithubStars from './GithubStars'
-import { SideNav, TopHeading } from './SideNav'
-import { MainLink } from './PageHeader'
-
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   Button,
   DiscordIcon,
 } from 'pluralsh-design-system'
-import { useIsomorphicLayoutEffect } from 'usehooks-ts'
-import styled from 'styled-components'
-import { useState } from 'react'
+
+import useScrollLock from './hooks/useScrollLock'
+import { SocialLink } from './PageHeaderButtons'
+import GithubStars from './GithubStars'
+import { SideNav, TopHeading } from './SideNav'
+import { MainLink } from './PageHeader'
 
 type MobileMenuProps = {
   isOpen: boolean

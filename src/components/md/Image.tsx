@@ -1,8 +1,8 @@
+import styled from 'styled-components'
+
 import { FigCaption } from './Figure'
 
 import { MediaWrap } from './MediaWrap'
-
-import styled from 'styled-components'
 
 export const commonCfg = { shouldForwardProp: () => true }
 

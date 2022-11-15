@@ -1,6 +1,6 @@
-import Callout from '../../components/md/Callout'
-
 import { Tag } from '@markdoc/markdoc'
+
+import Callout from '../../components/md/Callout'
 
 export const callout = {
   render: Callout,

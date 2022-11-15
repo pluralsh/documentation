@@ -1,7 +1,7 @@
-import { bodyText } from './Paragraph'
-
 import { useFillLevel } from 'pluralsh-design-system'
 import styled from 'styled-components'
+
+import { bodyText } from './Paragraph'
 
 export const commonCfg = { shouldForwardProp: () => true }
 
