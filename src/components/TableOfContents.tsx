@@ -10,8 +10,7 @@ import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
 import classNames from 'classnames'
-
-import { exists } from 'utils/typescript'
+import { exists } from '../utils/typescript'
 
 import { MarkdocHeading } from '../../pages/_app'
 

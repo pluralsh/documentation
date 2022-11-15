@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from 'usehooks-ts'
-import NavData from 'NavData'
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   Button,
   DiscordIcon,
-} from 'pluralsh-design-system'
+} from '@pluralsh/design-system'
 
+import NavData from '../NavData'
 import useScrollLock from './hooks/useScrollLock'
 import { SocialLink } from './PageHeaderButtons'
 import GithubStars from './GithubStars'

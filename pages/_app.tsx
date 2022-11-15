@@ -5,11 +5,10 @@ import {
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
-} from 'pluralsh-design-system'
+} from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
-import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import { BreakpointProvider } from '../src/components/Breakpoints'
@@ -34,9 +33,10 @@ import {
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
 } from '../src/consts'
-
 import { PagePropsContext } from '../src/components/PagePropsContext'
 import navData from '../src/NavData'
+
+import type { AppProps } from 'next/app'
 
 type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
 

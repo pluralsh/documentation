@@ -1,6 +1,6 @@
 import NextLink from 'next/link'
 import styled, { useTheme } from 'styled-components'
-import { Button, DiscordIcon, usePrevious } from 'pluralsh-design-system'
+import { Button, DiscordIcon, usePrevious } from '@pluralsh/design-system'
 import { useEffect, useState } from 'react'
 import { useRouter } from 'next/router'
 import { useKey } from 'rooks'

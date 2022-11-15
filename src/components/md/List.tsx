@@ -1,4 +1,4 @@
-import { useFillLevel } from 'pluralsh-design-system'
+import { useFillLevel } from '@pluralsh/design-system'
 import styled from 'styled-components'
 
 import { bodyText } from './Paragraph'

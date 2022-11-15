@@ -2,11 +2,14 @@ import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 import { ReactNode } from 'react'
 import styled from 'styled-components'
-import { isRelativeUrl, removeTrailingSlashes, stripMdExtension } from 'utils/text'
-import { Button as PluralButton } from 'pluralsh-design-system'
-import * as icons from 'pluralsh-design-system/dist/icons'
-
-import { isExternalUrl } from '../../utils/text'
+import { Button as PluralButton } from '@pluralsh/design-system'
+import * as icons from '@pluralsh/design-system/dist/icons'
+import {
+  isExternalUrl,
+  isRelativeUrl,
+  removeTrailingSlashes,
+  stripMdExtension,
+} from '../../utils/text'
 
 function Button({
   href,

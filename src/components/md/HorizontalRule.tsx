@@ -1,4 +1,4 @@
-import { Divider } from 'pluralsh-design-system'
+import { Divider } from '@pluralsh/design-system'
 import styled from 'styled-components'
 
 export default styled(props => <div {...props}><Divider /></div>)(({ theme }) => ({

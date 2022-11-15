@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Callout, CalloutProps } from 'pluralsh-design-system'
+import { Callout, CalloutProps } from '@pluralsh/design-system'
 
 import { useRouter } from 'next/router'
 
