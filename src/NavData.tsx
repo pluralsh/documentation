@@ -48,9 +48,14 @@ const data: NavData = [
         icon: <CloudIcon />,
       },
       {
-        href: '/getting-started/setting-up-gitops',
-        title: 'Setting up GitOps',
+        href: '/getting-started/managing-git-repository',
+        title: 'Managing Your Git Repository',
         icon: <GitHubIcon />,
+        sections: [
+          { href: '/getting-started/managing-git-repository/setting-up-gitops', title: 'Setting Up GitOps' },
+          { href: '/getting-started/managing-git-repository/your-plural-workspace', title: 'Your Plural Workspace' },
+          { href: '/applications/console', title: 'Console' },
+        ]
       },
       {
         href: '/getting-started/admin-console',
