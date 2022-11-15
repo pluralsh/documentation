@@ -1,6 +1,6 @@
 ---
 title: Security Concepts
-description: Addressing security concerns and learn about what Plural has access to.
+description: Learn about what Plural has access to at various steps of deployment.
 ---
 
 ## Cloud Access

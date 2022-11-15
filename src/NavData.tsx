@@ -44,27 +44,27 @@ const data: NavData = [
       },
       {
         href: '/getting-started/cloud-shell-quickstart',
-        title: 'Deploying with Cloud Shell',
+        title: 'Deploy with Cloud Shell',
         icon: <CloudIcon />,
       },
       {
-        href: '/getting-started/managing-git-repository',
-        title: 'Managing Your Git Repository',
+        href: '/getting-started/manage-git-repositories',
+        title: 'Manage Git Repositories',
         icon: <GitHubIcon />,
         sections: [
-          { href: '/getting-started/managing-git-repository/setting-up-gitops', title: 'Setting Up GitOps' },
-          { href: '/getting-started/managing-git-repository/your-plural-workspace', title: 'Your Plural Workspace' },
-          { href: '/getting-started/managing-git-repository/sharing-git-repository', title: 'Sharing Your Git Repositories' },
+          { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
+          { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
+          { href: '/getting-started/manage-git-repositories/sharing-git-repository', title: 'Sharing Your Git Repositories' },
         ],
       },
       {
         href: '/getting-started/admin-console',
-        title: 'Installing Plural Console',
+        title: 'Install Plural Console',
         icon: <GraphIcon />,
       },
       {
         href: '/getting-started/openid-connect',
-        title: 'Using Plural OIDC',
+        title: 'Plural OIDC',
         icon: <PadlockIcon />,
       },
     ],
@@ -136,12 +136,6 @@ const data: NavData = [
       {
         href: '/operations/security',
         title: 'Security',
-        sections: [
-          {
-            href: '/operations/security/secret-management',
-            title: '  Secret Management',
-          },
-        ],
       },
       {
         href: '/operations/auth-access-control',

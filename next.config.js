@@ -138,7 +138,7 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/security/secret-management',
-          destination: '/operations/security/secret-management',
+          destination: '/getting-started/manage-git-repositories/sharing-git-repository',
           permanent: true,
         },
         {
@@ -198,12 +198,12 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
-          destination: '/getting-started/managing-git-repository/sharing-git-repository',
+          destination: '/getting-started/manage-git-repositories/sharing-git-repository',
           permanent: true,
         },
         {
           source: '/reference/workspaces',
-          destination: '/getting-started/managing-git-repository/your-plural-workspace',
+          destination: '/getting-started/manage-git-repositories/your-plural-workspace',
           permanent: true,
         },
       ]

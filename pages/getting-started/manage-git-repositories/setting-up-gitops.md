@@ -17,24 +17,22 @@ Currently we're limited to a one cluster to one repo mapping, but eventually tha
 
 * [GitHub](https://github.com/)
 * [GitLab](https://about.gitlab.com/)
+* [Bitbucket](https://bitbucket.org/product/) (*Follow Manual Git Setup below to use Bitbucket*)
 
 **Support for the following providers is on our roadmap:**
 
-* [Bitbucket](https://bitbucket.org/product/)
 * [Mercurial](https://www.mercurial-scm.org/)
 
-## Setting up a Git Repository for Plural
+You have two options when setting up a Git repository for use with a Plural workspace:
 
-**You have two options when setting up a Git repository for use with a Plural workspace:**
+* **Using Plural OAuth** by running `plural init` anywhere. (_Recommended_)
+* **Manual Git Setup** with an empty, configured Git repository beforehand.
 
-* Use Plural OAuth by running `plural init` anywhere. (_Recommended_)
-* Set up an empty, configured Git repository beforehand.
+## Using Plural OAuth
 
-Let's go over both options.
+*Supported for: (GitHub, GitLab)*
 
-### Using Plural OAuth
-
-To have Plural set up your Git repository, you'll just need to have SSH set up with your version control provider. Then, run:
+To have Plural set up your Git repository, you'll need to have SSH set up with your version control provider. Then, run:
 
 ```shell {% showHeader=false}
 plural init
@@ -49,7 +47,9 @@ If everything goes well, it should look like this:
 
 ![](</assets/basic-setup-and-deployment/gitops-terminal.png>)
 
-### Manual Git Setup
+## Manual Git Setup
+
+*Supported for: (GitHub, GitLab, Bitbucket)*
 
 **To set up a Git repository yourself, you'll need a fresh repository with the following requirements:**
 
@@ -59,7 +59,7 @@ If everything goes well, it should look like this:
 
 **If the requirements aren't fulfilled, you'll hit an error in the `plural init` setup process. To get started, follow these steps:**
 
-1. &#x20;Go to your version control provider and create a fresh repository.&#x20;
+1. Go to your version control provider and create a fresh repository.
 2. Clone the repository to the machine that you'll be running the Plural CLI on.
 3. Make sure that the repository has an initial commit (a README works). GitHub and GitLab provide the option to add an initial commit on creation, so choose that.
 4. Run `plural init` from the root of the repository.
@@ -68,18 +68,18 @@ And you should be good to go!
 
 ## GitOps Best Practices
 
-**Plural has three basic steps to the deploy process:**
+Plural has three basic steps to the deploy process:
 
-1. **Install a bundle**: `plural bundle install <bundle-name> <bundle-provider>`
-2. **Build your configuration**: `plural build`
-3. **Deploy your configuration**: `plural deploy`&#x20;
+1. **Install** a bundle: `plural bundle install <app-name> <bundle-provider>`
+2. **Build** your configuration: `plural build`
+3. **Deploy** your configuration: `plural deploy`
 
 When `plural build` is completed, you'll notice all of your new configuration has been created in your local repository. In this state, the files are not yet committed or pushed up to your origin repository.
 
-You can manually commit and push the files yourself, _**but we recommend**_ using the `--commit` CLI argument when running `plural deploy`:&#x20;
+You can manually commit and push the files yourself, _**but we recommend**_ using the `--commit` CLI argument when running `plural deploy`
 
 ```
 plural deploy --commit "deploying console and dagster"
 ```
 
-This will commit and push up your configuration changes for you to your origin repository, using the commit message you've specified.&#x20;
+This will commit and push up your configuration changes for you to your origin repository, using the commit message you've specified.
