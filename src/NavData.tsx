@@ -167,10 +167,6 @@ const data: NavData = [
                 href: '/operations/auth-access-control/identity-and-installations/service-accounts',
                 title: 'Service Accounts',
               },
-              {
-                href: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
-                title: 'Sharing Existing Repos',
-              },
             ],
           },
         ],
