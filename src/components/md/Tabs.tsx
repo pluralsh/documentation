@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { TabList, TabListStateProps, TabPanel } from 'pluralsh-design-system'
+import { TabList, TabListStateProps, TabPanel } from '@pluralsh/design-system'
 import {
   Key,
   ReactNode,

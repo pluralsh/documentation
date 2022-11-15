@@ -14,7 +14,7 @@ import React, {
 import NextLink from 'next/link'
 import styled, { css, keyframes, useTheme } from 'styled-components'
 import { useRouter } from 'next/router'
-import { CaretRightIcon, usePrevious } from 'pluralsh-design-system'
+import { CaretRightIcon, usePrevious } from '@pluralsh/design-system'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'

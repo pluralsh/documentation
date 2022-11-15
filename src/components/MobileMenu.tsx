@@ -6,7 +6,7 @@ import {
   ArrowRightIcon,
   Button,
   DiscordIcon,
-} from 'pluralsh-design-system'
+} from '@pluralsh/design-system'
 
 import NavData from '../NavData'
 import useScrollLock from './hooks/useScrollLock'

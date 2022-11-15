@@ -1,5 +1,5 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import { Table as PluralTable } from 'pluralsh-design-system'
+import { Table as PluralTable } from '@pluralsh/design-system'
 
 type TableProps = {
   thead: any[]

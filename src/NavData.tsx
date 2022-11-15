@@ -8,7 +8,7 @@ import {
   ToolIcon,
   VideoIcon,
   WorkspaceIcon,
-} from 'pluralsh-design-system'
+} from '@pluralsh/design-system'
 import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
 

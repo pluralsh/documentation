@@ -1,4 +1,4 @@
-import { Code } from 'pluralsh-design-system'
+import { Code } from '@pluralsh/design-system'
 import { ReactNode, useMemo } from 'react'
 import styled from 'styled-components'
 

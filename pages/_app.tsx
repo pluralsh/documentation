@@ -5,7 +5,7 @@ import {
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
-} from 'pluralsh-design-system'
+} from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
 import '../src/styles/globals.css'
