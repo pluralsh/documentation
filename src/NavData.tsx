@@ -194,10 +194,6 @@ const data: NavData = [
     title: 'Reference',
     sections: [
       {
-        title: 'Workspaces',
-        href: '/reference/workspaces',
-      },
-      {
         title: 'API / Developer Tools',
         href: '/reference/api',
         sections: [
