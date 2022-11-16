@@ -11,7 +11,7 @@ This domain name, eg `pluraldemo.com` can be registered with any registrar, for 
 
 #### 2. Create a DNS Zone in Your Cloud Provider Console Corresponding to the registered Domain Name
 
-Follow [the instructions](/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console) for creating a DNS Zone named `pluraldemo.com` within the DNS service of your cloud provider.
+Follow [the instructions](/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console) for creating a DNS Zone named `pluraldemo.com` within the DNS service of your cloud provider.
 
 Record the nameservers corresponding to this zone.
 
@@ -31,7 +31,7 @@ The more likely scenario is that you will have an existing company domain, i.e. 
 
 #### 1. Create DNS Zone in Your Cloud Provider Console
 
-Follow [the instructions](/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console) for creating a DNS Zone named `plural.pinterest.com` within the DNS service of your cloud provider.
+Follow [the instructions](/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console) for creating a DNS Zone named `plural.pinterest.com` within the DNS service of your cloud provider.
 
 Record the nameservers corresponding to this zone.
 

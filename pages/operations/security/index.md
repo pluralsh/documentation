@@ -13,7 +13,7 @@ Plural **does not** have access to any cloud environments when deployed through 
 
 Plural **does** have access to your cloud credentials when deployed through the Cloud Shell. In order to streamline the Cloud Shell experience, we securely store cloud credentials to create resources on your behalf. You can eject from the Cloud Shell to the CLI at any time to save your configuration and revoke our access. This is done with the following steps:
 
-1. [Install the Plural CLI](/getting-started/getting-started).
+1. [Install the Plural CLI](/getting-started/quickstart).
 2. Run `plural shell sync` on your local machine.
 3. Run `plural shell purge` in the Cloud Shell to destroy it.
 

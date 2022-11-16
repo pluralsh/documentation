@@ -34,7 +34,7 @@ Things like [inline links](#), `code highlights`, [`linked code highlights`](#) 
 - List item 1
 - List item 2
 
-{% cta title="Let's go to Debugging" href="/advanced-topics/debugging" /%}
+{% cta title="Let's go to Debugging" href="/debugging" /%}
 
 {% /callout %}
 
