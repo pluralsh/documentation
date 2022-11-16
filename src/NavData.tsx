@@ -173,7 +173,6 @@ const data: NavData = [
       {
         href: '/debugging',
         title: 'Debugging',
-        icon: <BookIcon />,
         sections: [
           {
             href: '/debugging/health-checks',
@@ -192,7 +191,6 @@ const data: NavData = [
       {
         title: 'Troubleshooting',
         href: '/reference/troubleshooting',
-        icon: <ToolIcon />,
       },
     ],
   },
@@ -202,12 +200,10 @@ const data: NavData = [
       {
         title: 'Workspaces',
         href: '/reference/workspaces',
-        icon: <WorkspaceIcon />,
       },
       {
         title: 'API / Developer Tools',
         href: '/reference/api',
-        icon: <ApiIcon />,
         sections: [
           {
             href: '/reference/api/plural-api',
@@ -222,7 +218,6 @@ const data: NavData = [
       {
         title: 'Cloud Provider CLI Setup',
         href: '/reference/configuring-cloud-provider',
-        icon: <CloudIcon />,
       },
     ],
   },
