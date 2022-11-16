@@ -138,7 +138,7 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/security/secret-management',
-          destination: '/getting-started/manage-git-repositories/sharing-git-repository',
+          destination: '/getting-started/manage-git-repositories/sharing-git-repositories',
           permanent: true,
         },
         {

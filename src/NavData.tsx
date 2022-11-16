@@ -54,7 +54,7 @@ const data: NavData = [
         sections: [
           { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
           { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
-          { href: '/getting-started/manage-git-repositories/sharing-git-repository', title: 'Sharing Your Git Repositories' },
+          { href: '/getting-started/manage-git-repositories/sharing-git-repositories', title: 'Sharing Your Git Repositories' },
         ],
       },
       {
