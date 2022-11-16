@@ -28,7 +28,7 @@ You can create a runbook just for your own use in your Plural installation, or y
 {% /tab %}
 {% /tabs %}
 
-You can access the runbooks through the Plural admin console; i.e. you must first [install the Plural admin console](/basic-setup-and-deployment/admin-console) in order to use the runbooks.
+You can access the runbooks through the Plural admin console; i.e. you must first [install the Plural admin console](/getting-started/admin-console) in order to use the runbooks.
 
 
 

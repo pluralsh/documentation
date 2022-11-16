@@ -73,7 +73,7 @@ plural bundle install console console-gcp
 {% /tab %}
 {% /tabs %}
 
-You'll now be guided through a setup wizard for the console. For help with configuration, refer to [this guide](/repositories/console) for explanations on each step.
+You'll now be guided through a setup wizard for the console. For help with configuration, refer to [this guide](/applications/console) for explanations on each step.
 
 ### Install Airflow
 
@@ -93,9 +93,9 @@ plural bundle install airflow gcp-airflow
 {% /tab %}
 {% /tabs %}
 
-Similarly to the console, you'll be guided through a setup wizard for Airflow. For help with configuration, refer to [this guide](/repositories/airflow).
+Similarly to the console, you'll be guided through a setup wizard for Airflow. For help with configuration, refer to [this guide](/applications/airflow).
 
-Both the console and Airflow support [Plural OIDC](/advanced-topics/identity-and-access-management/openid-connect), so as long as you're logged in to `app.plural.sh`, you can directly access both applications.
+Both the console and Airflow support [Plural OIDC](/operations/auth-access-control/openid-connect), so as long as you're logged in to `app.plural.sh`, you can directly access both applications.
 
 ## Provision the Kubernetes Cluster and Install Applications
 
@@ -147,7 +147,7 @@ Now that we've set up a running cluster with Plural, we can add and remove appli
 
 ### Leaving the Shell Experience
 
-If you want to start using the CLI locally, just [install the Plural CLI](/getting-started/getting-started#install-plural-cli) and run:
+If you want to start using the CLI locally, just [install the Plural CLI](/getting-started/quickstart#install-plural-cli) and run:
 
 ```shell {% showHeader=false %}
 plural shell sync
