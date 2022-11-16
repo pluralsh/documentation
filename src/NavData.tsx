@@ -1,15 +1,11 @@
 import {
-  ApiIcon,
-  BookIcon,
   CloudIcon,
   DocumentIcon,
   GitHubIcon,
   GraphIcon,
   MagicWandIcon,
   PadlockIcon,
-  ToolIcon,
   VideoIcon,
-  WorkspaceIcon,
 } from '@pluralsh/design-system'
 import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
