@@ -6,6 +6,7 @@
 .vercel
 yalc.lock
 .yalc/
+node_modules/
 
 # dependencies
 .yarn/*
