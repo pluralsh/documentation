@@ -127,6 +127,10 @@ const data: NavData = [
             href: '/operations/managing-applications/bounce-application',
             title: 'Bounce an Application',
           },
+          {
+            href: '/operations/managing-applications/connect-application-db',
+            title: 'Connect to Application DB',
+          },
         ],
       },
       {
