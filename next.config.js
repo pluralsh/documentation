@@ -53,7 +53,7 @@ module.exports = () => {
         },
         {
           source: '/basic-setup-and-deployment/setting-up-gitops',
-          destination: '/getting-started/setting-up-gitops',
+          destination: '/getting-started/managing-git-repository/setting-up-gitops',
           permanent: true,
         },
         {
@@ -138,7 +138,7 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/security/secret-management',
-          destination: '/operations/security/secret-management',
+          destination: '/getting-started/manage-git-repositories/sharing-git-repositories',
           permanent: true,
         },
         {
@@ -198,7 +198,12 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
-          destination: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
+          destination: '/getting-started/manage-git-repositories/sharing-git-repository',
+          permanent: true,
+        },
+        {
+          source: '/reference/workspaces',
+          destination: '/getting-started/manage-git-repositories/your-plural-workspace',
           permanent: true,
         },
       ]

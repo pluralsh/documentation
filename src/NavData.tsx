@@ -1,15 +1,11 @@
 import {
-  ApiIcon,
-  BookIcon,
   CloudIcon,
   DocumentIcon,
   GitHubIcon,
   GraphIcon,
   MagicWandIcon,
   PadlockIcon,
-  ToolIcon,
   VideoIcon,
-  WorkspaceIcon,
 } from '@pluralsh/design-system'
 import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
@@ -44,22 +40,27 @@ const data: NavData = [
       },
       {
         href: '/getting-started/cloud-shell-quickstart',
-        title: 'Deploying with Cloud Shell',
+        title: 'Deploy with Cloud Shell',
         icon: <CloudIcon />,
       },
       {
-        href: '/getting-started/setting-up-gitops',
-        title: 'Setting up GitOps',
+        href: '/getting-started/manage-git-repositories',
+        title: 'Manage Git Repositories',
         icon: <GitHubIcon />,
+        sections: [
+          { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
+          { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
+          { href: '/getting-started/manage-git-repositories/sharing-git-repositories', title: 'Sharing Your Git Repositories' },
+        ],
       },
       {
         href: '/getting-started/admin-console',
-        title: 'Installing Plural Console',
+        title: 'Install Plural Console',
         icon: <GraphIcon />,
       },
       {
         href: '/getting-started/openid-connect',
-        title: 'Using Plural OIDC',
+        title: 'Plural OIDC',
         icon: <PadlockIcon />,
       },
     ],
@@ -131,12 +132,6 @@ const data: NavData = [
       {
         href: '/operations/security',
         title: 'Security',
-        sections: [
-          {
-            href: '/operations/security/secret-management',
-            title: '  Secret Management',
-          },
-        ],
       },
       {
         href: '/operations/auth-access-control',
@@ -162,10 +157,6 @@ const data: NavData = [
                 href: '/operations/auth-access-control/identity-and-installations/service-accounts',
                 title: 'Service Accounts',
               },
-              {
-                href: '/operations/auth-access-control/identity-and-installations/sharing-existing-repos',
-                title: 'Sharing Existing Repos',
-              },
             ],
           },
         ],
@@ -178,7 +169,6 @@ const data: NavData = [
       {
         href: '/debugging',
         title: 'Debugging',
-        icon: <BookIcon />,
         sections: [
           {
             href: '/debugging/health-checks',
@@ -197,7 +187,6 @@ const data: NavData = [
       {
         title: 'Troubleshooting',
         href: '/reference/troubleshooting',
-        icon: <ToolIcon />,
       },
     ],
   },
@@ -207,12 +196,10 @@ const data: NavData = [
       {
         title: 'Workspaces',
         href: '/reference/workspaces',
-        icon: <WorkspaceIcon />,
       },
       {
         title: 'API / Developer Tools',
         href: '/reference/api',
-        icon: <ApiIcon />,
         sections: [
           {
             href: '/reference/api/plural-api',
@@ -227,7 +214,6 @@ const data: NavData = [
       {
         title: 'Cloud Provider CLI Setup',
         href: '/reference/configuring-cloud-provider',
-        icon: <CloudIcon />,
       },
     ],
   },
