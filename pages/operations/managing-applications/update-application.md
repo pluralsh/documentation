@@ -3,9 +3,9 @@ title: Update an Application
 description: How to update an application's version.
 ---
 
-## How to update your applications
+Updates to Plural applications are applied **automatically** based on a per-application setting.
 
-You can set your installed applications up to receive updates by clicking the gear in the top-right corner of the application's detail page in the Plural app. You can find your installed applications at https://app.plural.sh/installed.
+You can change this setting by clicking the gear in the top-right corner of the application's detail page in the Plural app. You can find your installed applications at [https://app.plural.sh/installed](https://app.plural.sh/installed).
 
 ![](</assets/operations/update-application.png>)
 
