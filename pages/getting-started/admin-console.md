@@ -68,7 +68,7 @@ Then once you've found an eligible bundle to install, do:
 plural bundle install console <bundle-name>
 ```
 
-You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](/repositories/console).
+You will now be guided through a configuration wizard. If you have any questions about a specific parameter, refer to [this document](/applications/console).
 
 Once the bundle has installed, run:
 

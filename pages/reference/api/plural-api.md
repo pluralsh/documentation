@@ -10,5 +10,5 @@ You'll need to do two things to allow the graphiql interface to be functional:
 * Add your access token as an authorization header with `Bearer <access token>` as the format.
 
 {% callout severity="info" %}
-You can use the docs [here](/advanced-topics/identity-and-access-management/api-tokens) to learn how to create API tokens
+You can use the docs [here](/operations/auth-access-control/api-tokens) to learn how to create API tokens
 {% /callout %}
