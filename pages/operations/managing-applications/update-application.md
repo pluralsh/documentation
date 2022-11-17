@@ -1,6 +1,6 @@
 ---
 title: Update an Application
-description: How to update an application's version.
+description: How to change an application's version.
 ---
 
 Updates to Plural applications are applied **automatically** based on a per-application setting. This setting supports telling Plural to only upgrade for Stable or Warm releases, as well as disabling automatic upgrades altogether.
@@ -9,7 +9,7 @@ You can change this setting by clicking the gear in the top-right corner of the 
 
 ![](</assets/operations/update-application.png>)
 
-## How to rollback to a previous version
+## Rollback to a previous version
 
 This requires having the [Plural Console installed](../../getting-started/admin-console.md). We'll need this to create an upgrade
 policy that tells Plural to not deploy an upgrade to your application, which is normally performed automatically unless disabled using the setting in our app. You could just disable upgrades altogether in
