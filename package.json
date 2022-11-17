@@ -15,7 +15,7 @@
     "@emotion/react": "11.10.4",
     "@emotion/styled": "11.10.4",
     "@loomhq/loom-embed": "1.5.0",
-    "@markdoc/markdoc": "0.1.13",
+    "@markdoc/markdoc": "0.2.1",
     "@markdoc/next.js": "0.1.10",
     "@pluralsh/design-system": "1.291.0",
     "@react-aria/ssr": "3.3.0",
