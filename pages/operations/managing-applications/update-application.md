@@ -29,7 +29,7 @@ to pick Helm charts and Terraform modules that correspond to previously deployed
 Once you click on the Helm chart, the associated application version for the Helm chart is displayed in the `CHART.YAML` section on the right. On the left will be a drop-down menu showing which version you are currently on. Scroll through the
 chart versions to find the application version that you want to rollback to. Then click `Install` in the top right.
 
-*We are aware that this process isn't ideal and are working on a simple rollback command in our CLI.*
+*We'll be honest. This process isn't ideal, so we're working on a simple rollback command in our CLI.*
 
 ## How Plural updates app versions
 
