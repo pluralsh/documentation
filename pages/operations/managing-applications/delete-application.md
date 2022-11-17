@@ -19,3 +19,6 @@ This will **not**:
 
 - Remove application builds from your local Plural Git repository
 - Remove application configuration values from `context.yaml`
+
+We don't remove certain information as it contains required configuration for spinning up
+the same instance again. If we removed that information, you would be unable to restore an application after destroying it.

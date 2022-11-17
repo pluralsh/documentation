@@ -3,11 +3,33 @@ title: Update an Application
 description: How to update an application's version.
 ---
 
-Updates to Plural applications are applied **automatically** based on a per-application setting.
+Updates to Plural applications are applied **automatically** based on a per-application setting. This setting supports telling Plural to only upgrade for Stable or Warm releases, as well as disabling automatic upgrades altogether.
 
 You can change this setting by clicking the gear in the top-right corner of the application's detail page in the Plural app. You can find your installed applications at [https://app.plural.sh/installed](https://app.plural.sh/installed).
 
 ![](</assets/operations/update-application.png>)
+
+## How to rollback to a previous version
+
+This requires having the [Plural Console installed](../../getting-started/admin-console.md). We'll need this to create an upgrade
+policy that tells Plural to not deploy an upgrade to your application, which is normally performed automatically unless disabled using the setting in our app. You could just disable upgrades altogether in
+the application as stated above, but then you'd lose out on easy upgrade delivery later.
+
+First, navigate to the Plural Console and select the app you want to rollback in the top right corner.
+
+Click on the gear icon to the left of `Bounce`, `Approval`, and `Deploy` to enter the Upgrade Policy section and then click `Create More`.
+
+Here is an example for a policy that will require approval before runninng `plural deploy` for Airflow.
+
+![](</assets/operations/upgrade-policy.png>)
+
+Then head back to our [app](https://app.plural.sh), go to the repository page for your installed application, and click the `Packages` section in the sidebar. This will allow you
+to pick Helm charts and Terraform modules that correspond to previously deployed versions of your application. 
+
+Once you click on the Helm chart, the associated application version for the Helm chart is displayed in the `CHART.YAML` section on the right. On the left will be a drop-down menu showing which version you are currently on. Scroll through the
+chart versions to find the application version that you want to rollback to. Then click `Install` in the top right.
+
+*We are aware that this process isn't ideal and are working on a simple rollback command in our CLI.*
 
 ## How Plural updates app versions
 
