@@ -1,6 +1,6 @@
 ---
 title: Bounce an Application
-description: How to redeploy an application for new configuration or troubleshooting.
+description: How to restart an application to pull in new changes or troubleshoot.
 ---
 
 To bounce an application, you can either:
@@ -10,10 +10,11 @@ To bounce an application, you can either:
 
 ## When to bounce an application
 
-Bouncing an application redeploys the application in your cloud provider. You may need to redeploy an installed application for reasons including:
+Bouncing an application restarts the appropriate running software in your cloud provider. You may need to bounce an installed application for reasons including:
 
+- Applying changes to an application that require a redeploy
 - Resolving transient errors in deployment
 - Resolving transient errors with your cloud provider
 - Refreshing the Plural Console to get an updated view of your repository
-- Applying changes to an application that require a redeploy
 
+Especially perceptive users may notice that behind the scenes, `plural bounce` runs `helm upgrade` with some special arguments.

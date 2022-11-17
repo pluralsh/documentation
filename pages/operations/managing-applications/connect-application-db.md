@@ -3,6 +3,8 @@ title: Connect to an Application DB
 description: How to connect to the underlying database for a deployed application.
 ---
 
+For various reasons, you may want to connect to the underlying database for an application. This could be for routine operations, verifying state, or for surgical procedures.
+
 ## Connecting with the Plural CLI
 
 You can list all possible proxies for an application by running:
