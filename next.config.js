@@ -37,6 +37,11 @@ module.exports = () => {
           permanent: true,
         },
         {
+          source: '/getting-started',
+          destination: '/getting-started/quickstart',
+          permanent: true,
+        },
+        {
           source: '/reference/architecture-1',
           destination: '/reference/architecture',
           permanent: true,
