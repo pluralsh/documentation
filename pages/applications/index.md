@@ -1,5 +1,5 @@
 ---
-title: Repository Documentation
+title: Applications Catalog
 description: Applications you can install with Plural.
 ---
 
