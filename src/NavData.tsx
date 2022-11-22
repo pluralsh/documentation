@@ -112,6 +112,28 @@ const data: NavData = [
     title: 'Operations',
     sections: [
       {
+        href: '/operations/managing-applications',
+        title: 'Managing Applications',
+        sections: [
+          {
+            href: '/operations/managing-applications/update-application',
+            title: 'Update an Application',
+          },
+          {
+            href: '/operations/managing-applications/delete-application',
+            title: 'Delete an Application',
+          },
+          {
+            href: '/operations/managing-applications/bounce-application',
+            title: 'Bounce an Application',
+          },
+          {
+            href: '/operations/managing-applications/connect-application-db',
+            title: 'Connect to Application DB',
+          },
+        ],
+      },
+      {
         href: '/operations/network-configuration',
         title: 'Network Configuration',
       },
@@ -125,7 +147,7 @@ const data: NavData = [
         sections: [
           {
             href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
-            title: '  Creating a DNS Zone in Console',
+            title: 'Creating a DNS Zone in Console',
           },
         ],
       },
