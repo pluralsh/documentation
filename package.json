@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint {src,pages} --ext ts,tsx,js,jsx",
-    "fix": "eslint --fix {src,pages} --ext ts,tsx,js,jsx"
+    "fix": "eslint --fix {src,pages} --ext ts,tsx,js,jsx",
+    "generate": "graphql-codegen --config codegen.ts"
   },
   "dependencies": {
     "@apollo/client": "3.7.1",
