@@ -1,5 +1,6 @@
 import { Router } from 'next/router'
 import { APP_CATALOG_BASE_URL } from '../consts/routes'
+import type { Provider } from '../gql/graphql'
 
 export function removeTrailingSlashes(str) {
   if (typeof str !== 'string') {
@@ -37,10 +38,12 @@ export function isAppCatalogRoute(route: string) {
   return isSubrouteOf(route, APP_CATALOG_BASE_URL)
 }
 
-export const providerToProviderName = {
+export const providerToProviderName:Record<Provider, string> = {
   GCP: 'GCP',
   AWS: 'AWS',
   AZURE: 'Azure',
   EQUINIX: 'Equinix',
   KIND: 'kind',
+  CUSTOM: 'Custom',
+  KUBERNETES: 'Kubernetes',
 }
