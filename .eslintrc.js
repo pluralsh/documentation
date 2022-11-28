@@ -2,6 +2,7 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
+  plugins: ['import-newlines'],
   extends: ['@pluralsh/eslint-config-typescript'],
   globals: {
     JSX: true,
@@ -9,6 +10,7 @@ module.exports = {
   rules: {
     '@typescript-eslint/consistent-type-exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
+    "import-newlines/enforce": "error",
     'import/order': [
       'error',
       {
