@@ -1,4 +1,3 @@
-import { Router } from 'next/router'
 import { APP_CATALOG_BASE_URL } from '../consts/routes'
 import type { Provider } from '../gql/graphql'
 

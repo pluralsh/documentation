@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
-import { isAppCatalogRoute, isSubrouteOf } from '../utils/text'
+import { isAppCatalogRoute } from '../utils/text'
 import { NavPositionWrapper, SideNav } from './SideNav'
 import { PluralMenu } from './MobileMenu'
 
