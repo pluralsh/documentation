@@ -54,14 +54,6 @@ export const RECIPES_QUERY = graphql(`
   }
 `)
 
-export const RECIPE_QUERY = graphql(`
-  query Recipe($id: ID!) {
-    recipe(id: $id) {
-      ...RecipeFragment
-    }
-  }
-`)
-
 export const REPOS_QUERY = graphql(`
   query Repos {
     repositories(first: 5000) {
