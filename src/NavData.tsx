@@ -11,6 +11,7 @@ import deepFreeze from 'deep-freeze'
 import { useFragment } from './gql/fragment-masking'
 import { RepoFragment } from './queries/recipesQueries'
 
+import { APP_CATALOG_BASE_URL } from './consts/routes'
 import type { FragmentType } from './gql/fragment-masking'
 import type { ReactElement } from 'react'
 
@@ -95,7 +96,7 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Applications',
     sections: [
       {
-        href: '/applications',
+        href: APP_CATALOG_BASE_URL,
         toMenu: 'appCatalog',
         title: 'Application Catalog',
       },
@@ -274,13 +275,13 @@ export const getNavData = ({
     {
       title: 'Application Catalog',
       sections: [
-        { title: 'Repository Documentation', href: '/applications' },
+        { title: 'Repository Documentation', href: APP_CATALOG_BASE_URL },
         ...repos.map(r => {
           const repo = useFragment(RepoFragment, r)
 
           return {
             title: repo.name,
-            href: `/applications/${repo.name}`,
+            href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
           }
         }),
       ],

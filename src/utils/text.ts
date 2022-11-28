@@ -1,3 +1,6 @@
+import { Router } from 'next/router'
+import { APP_CATALOG_BASE_URL } from '../consts/routes'
+
 export function removeTrailingSlashes(str) {
   if (typeof str !== 'string') {
     return str
@@ -28,6 +31,10 @@ export function getBarePathFromPath(url: string) {
 
 export function isSubrouteOf(route: string, compareRoute:string) {
   return route.startsWith(compareRoute)
+}
+
+export function isAppCatalogRoute(route: string) {
+  return isSubrouteOf(route, APP_CATALOG_BASE_URL)
 }
 
 export const providerToProviderName = {

@@ -9,7 +9,7 @@ import {
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
-import { isSubrouteOf } from '../utils/text'
+import { isAppCatalogRoute, isSubrouteOf } from '../utils/text'
 import { NavPositionWrapper, SideNav } from './SideNav'
 import { PluralMenu } from './MobileMenu'
 
@@ -70,16 +70,16 @@ export function FullNav({ desktop = true }: { desktop: boolean }) {
   const navData = useNavData()
   const router = useRouter()
 
-  const isAppCatalogRoute = isSubrouteOf(router.asPath, '/repositories')
-  const wasAppCatalogRoute = usePrevious(isAppCatalogRoute)
+  const routeIsAppCatalog = isAppCatalogRoute(router.asPath)
+  const routeWasAppCatalog = usePrevious(routeIsAppCatalog)
 
   useEffect(() => {
-    if (isAppCatalogRoute && !wasAppCatalogRoute) {
+    if (routeIsAppCatalog && !routeWasAppCatalog) {
       setMenuId('appCatalog')
     }
-  }, [isAppCatalogRoute, wasAppCatalogRoute])
+  }, [routeIsAppCatalog, routeWasAppCatalog])
 
-  const showNavButton = isAppCatalogRoute || !desktop
+  const showNavButton = routeIsAppCatalog || !desktop
   let rightNavButton
   let leftNavButton
 
@@ -105,7 +105,7 @@ export function FullNav({ desktop = true }: { desktop: boolean }) {
       )
     }
   }
-  if (isAppCatalogRoute) {
+  if (routeIsAppCatalog) {
     if (menuId === 'docs') {
       rightNavButton = (
         <NavButton
