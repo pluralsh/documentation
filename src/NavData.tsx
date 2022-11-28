@@ -274,13 +274,13 @@ export const getNavData = ({
     {
       title: 'Application Catalog',
       sections: [
-        { title: 'Repository Documentation', href: '/repositories' },
+        { title: 'Repository Documentation', href: '/applications' },
         ...repos.map(r => {
           const repo = useFragment(RepoFragment, r)
 
           return {
             title: repo.name,
-            href: `/repositories/${repo.name}`,
+            href: `/applications/${repo.name}`,
           }
         }),
       ],
