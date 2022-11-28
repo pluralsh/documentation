@@ -6,18 +6,15 @@ import {
   Button,
   usePrevious,
 } from '@pluralsh/design-system'
-import { ButtonProps } from 'honorable'
-
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
-
 import { isSubrouteOf } from '../utils/text'
-
-import { MenuId } from '../NavData'
-
 import { NavPositionWrapper, SideNav } from './SideNav'
 import { PluralMenu } from './MobileMenu'
+
+import type { MenuId } from '../NavData'
+import type { ButtonProps } from 'honorable'
 
 function NavButtonsUnstyled({ desktop: _desktop, children, ...props }) {
   return (

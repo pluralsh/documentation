@@ -3,9 +3,9 @@ import { DocSearch } from '@docsearch/react'
 import { useRouter } from 'next/router'
 import { HamburgerMenuCollapsedIcon as MenuCloseIcon, HamburgerMenuIcon as MenuOpenIcon } from '@pluralsh/design-system'
 
-import { ComponentPropsWithoutRef } from 'react'
-
 import { mqs } from './Breakpoints'
+
+import type { ComponentPropsWithoutRef } from 'react'
 
 export function SearchButton() {
   const router = useRouter()

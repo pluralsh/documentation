@@ -12,7 +12,7 @@ import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { exists } from '../utils/typescript'
 
-import { MarkdocHeading } from '../../pages/_app'
+import type { MarkdocHeading } from '../../pages/_app'
 
 const Title = styled.h2(({ theme }) => ({
   ...theme.partials.marketingText.label,

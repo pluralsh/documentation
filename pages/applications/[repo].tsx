@@ -1,18 +1,19 @@
-import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { useRouter } from 'next/router'
 import { InlineCode } from '@pluralsh/design-system'
+
 import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/queries/recipesQueries'
 import { CodeStyled } from '../../src/components/md/Fence'
 import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
 import { useRepos } from '../../src/contexts/ReposContext'
-
 import { ContentHeader } from '../../src/components/MainContent'
-
-import { FragmentType, useFragment } from '../../src/gql/fragment-masking'
+import { useFragment } from '../../src/gql/fragment-masking'
 import client from '../../src/apollo-client'
 import { providerToProviderName } from '../../src/utils/text'
+
+import type { FragmentType } from '../../src/gql/fragment-masking'
+import type { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 
 type PageProps = {
   recipes: FragmentType<typeof RecipeFragment>[]

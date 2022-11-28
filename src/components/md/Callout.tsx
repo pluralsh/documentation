@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Callout, CalloutProps } from '@pluralsh/design-system'
+import { Callout } from '@pluralsh/design-system'
 
 import { useRouter } from 'next/router'
 
@@ -7,6 +7,8 @@ import { isExternalUrl } from '../../utils/text'
 
 import Paragraph from './Paragraph'
 import { ListItem } from './List'
+
+import type { CalloutProps } from '@pluralsh/design-system'
 
 function MarkdocCallout({
   ctas,

@@ -1,14 +1,11 @@
 import styled from 'styled-components'
-import { TabList, TabListStateProps, TabPanel } from '@pluralsh/design-system'
-import {
-  Key,
-  ReactNode,
-  createContext,
-  useRef,
-  useState,
-} from 'react'
+import { TabList, TabPanel } from '@pluralsh/design-system'
+import { createContext, useRef, useState } from 'react'
 
 import TabComponent from './Tab'
+
+import type { Key, ReactNode } from 'react'
+import type { TabListStateProps } from '@pluralsh/design-system'
 
 export const TabContext = createContext({})
 

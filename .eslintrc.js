@@ -1,11 +1,14 @@
 module.exports = {
-  extends: [
-    '@pluralsh/eslint-config-typescript',
-  ],
+  parserOptions: {
+    project: './tsconfig.json',
+  },
+  extends: ['@pluralsh/eslint-config-typescript'],
   globals: {
     JSX: true,
   },
   rules: {
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
     'import/order': [
       'error',
       {
@@ -23,5 +26,13 @@ module.exports = {
       },
     ],
   },
+  overrides: [
+    {
+      files: ['.eslintrc.js'],
+      parserOptions: {
+        project: null,
+      },
+    },
+  ],
   ignorePatterns: ['src/gql/**/*'],
 }

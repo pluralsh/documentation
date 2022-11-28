@@ -1,11 +1,12 @@
 import {
-  PropsWithChildren,
   createContext,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from 'react'
+
+import type { PropsWithChildren } from 'react'
 
 type Breakpoint =
   | ''

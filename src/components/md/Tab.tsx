@@ -1,7 +1,9 @@
-import { ComponentProps, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import { useTheme } from 'styled-components'
 
 import { Tab as TabBase } from '@pluralsh/design-system'
+
+import type { ComponentProps } from 'react'
 
 function TabRef({ ...props }: ComponentProps<typeof TabBase>, ref) {
   const theme = useTheme()

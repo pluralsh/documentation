@@ -1,6 +1,5 @@
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 import styled from 'styled-components'
 import {
   isExternalUrl,
@@ -8,6 +7,8 @@ import {
   removeTrailingSlashes,
   stripMdExtension,
 } from '../../utils/text'
+
+import type { ReactNode } from 'react'
 
 function Link({
   href,

@@ -1,6 +1,7 @@
 import { GitHubLogoIcon } from '@pluralsh/design-system'
-import { ComponentPropsWithoutRef } from 'react'
 import styled from 'styled-components'
+
+import type { ComponentPropsWithoutRef } from 'react'
 
 function PageFooter({ className }: { className?: string }) {
   return (

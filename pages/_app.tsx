@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
 import { useRouter } from 'next/router'
-import { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import {
   FillLevelProvider,
@@ -10,12 +9,12 @@ import {
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
 import { SSRProvider } from '@react-aria/ssr'
+
 import '../src/styles/globals.css'
 
 import { NavDataProvider } from '../src/contexts/NavDataContext'
 import { getNavData } from '../src/NavData'
-import { FragmentType, useFragment } from '../src/gql/fragment-masking'
-
+import { useFragment } from '../src/gql/fragment-masking'
 import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
 import { ReposProvider } from '../src/contexts/ReposContext'
 import client from '../src/apollo-client'
@@ -41,8 +40,10 @@ import {
   ROOT_TITLE,
 } from '../src/consts'
 import { PagePropsContext } from '../src/components/PagePropsContext'
-
 import { FullNav } from '../src/components/FullNav'
+
+import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
+import type { FragmentType } from '../src/gql/fragment-masking'
 import type { AppProps } from 'next/app'
 
 type MyAppProps = AppProps & {

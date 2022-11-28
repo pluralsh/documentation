@@ -1,10 +1,4 @@
 import React, {
-  ComponentProps,
-  Dispatch,
-  Key,
-  MutableRefObject,
-  ReactElement,
-  SetStateAction,
   createContext,
   forwardRef,
   useCallback,
@@ -23,8 +17,16 @@ import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import scrollIntoContainerView from '../utils/scrollIntoContainerView'
 import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
+import type {
+  ComponentProps,
+  Dispatch,
+  Key,
+  MutableRefObject,
+  ReactElement,
+  SetStateAction,
+} from 'react'
 
-import { MenuId, NavItem, NavMenu } from '../NavData'
+import type { MenuId, NavItem, NavMenu } from '../NavData'
 
 export type SideNavProps = {
   navData: NavMenu

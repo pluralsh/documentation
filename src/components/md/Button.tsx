@@ -1,6 +1,5 @@
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
 import styled from 'styled-components'
 import { Button as PluralButton } from '@pluralsh/design-system'
 import * as icons from '@pluralsh/design-system/dist/icons'
@@ -10,6 +9,8 @@ import {
   removeTrailingSlashes,
   stripMdExtension,
 } from '../../utils/text'
+
+import type { ReactNode } from 'react'
 
 function Button({
   href,

@@ -1,7 +1,8 @@
 import { createContext, useContext } from 'react'
 import { useRouter } from 'next/router'
-import { NavData } from '../NavData'
 import { isSubrouteOf } from '../utils/text'
+
+import type { NavData } from '../NavData'
 
 export const NavDataContext = createContext<NavData>({
   docs: [],

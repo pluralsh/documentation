@@ -1,13 +1,13 @@
 import styled from 'styled-components'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-
-import { ReactNode, useMemo } from 'react'
+import { useMemo } from 'react'
 
 import { useNavMenu } from '../contexts/NavDataContext'
 import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
-import { NavItem } from '../NavData'
+import type { ReactNode } from 'react'
+import type { NavItem } from '../NavData'
 
 const StyledLink = styled(NextLink)(({ theme }) => ({
   ...theme.partials.marketingText.componentLinkSmall,

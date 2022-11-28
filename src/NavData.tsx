@@ -7,10 +7,12 @@ import {
   PadlockIcon,
   VideoIcon,
 } from '@pluralsh/design-system'
-import { ReactElement } from 'react'
 import deepFreeze from 'deep-freeze'
-import { FragmentType, useFragment } from './gql/fragment-masking'
+import { useFragment } from './gql/fragment-masking'
 import { RepoFragment } from './queries/recipesQueries'
+
+import type { FragmentType } from './gql/fragment-masking'
+import type { ReactElement } from 'react'
 
 export type NavMenuId = 'docs' | 'appCatalog'
 export type MenuId = NavMenuId | 'plural'
