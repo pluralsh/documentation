@@ -78,8 +78,8 @@ export default function Repo({
         <>
           <Heading level={2}>Setup configuration</Heading>
           <List ordered={false}>
-            {recipeSections.map((section, i) => section?.configuration?.map(x => (
-              <ListItem key={i}>
+            {recipeSections.map(section => section?.configuration?.map((x, configIdx) => (
+              <ListItem key={configIdx}>
                 <InlineCode>{x?.name}</InlineCode>:{' '}
                 {x?.longform || x?.documentation}
               </ListItem>
