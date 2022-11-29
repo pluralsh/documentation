@@ -11,12 +11,10 @@ import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
 import { SSRProvider } from '@react-aria/ssr'
-import memoizeOne from 'memoize-one'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 import '../src/styles/globals.css'
 
-import client from '../src/apollo-client'
 import { BreakpointProvider } from '../src/components/Breakpoints'
 import DocSearchStyles from '../src/components/DocSearchStyles'
 import ExternalScripts from '../src/components/ExternalScripts'
@@ -42,12 +40,11 @@ import {
 } from '../src/consts'
 import { NavDataProvider } from '../src/contexts/NavDataContext'
 import { ReposProvider } from '../src/contexts/ReposContext'
-import { useFragment as asFragment } from '../src/gql/fragment-masking'
+import { getRepos, reposCache } from '../src/data/getRepos'
 import { getNavData } from '../src/NavData'
-import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
 
+import type { RepoFragment } from '../src/data/queries/recipesQueries'
 import type { FragmentType } from '../src/gql/fragment-masking'
-import type { RepoFragmentFragment, ReposQuery } from '../src/gql/graphql'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 type MyAppProps = AppProps & {
@@ -157,34 +154,6 @@ function App({
       </NavDataProvider>
     </ReposProvider>
   )
-}
-
-const reposCache: {
-  filtered: RepoFragmentFragment[]
-} = {
-  filtered: [],
-}
-
-const filterRepos = memoizeOne((data: ReposQuery) => data?.repositories?.edges
-  ?.map(edge => edge?.node)
-  .map(node => asFragment(RepoFragment, node))
-  .filter((repo: RepoFragmentFragment | undefined | null): repo is RepoFragmentFragment => !!repo && !repo.private))
-
-export async function getRepos() {
-  const { data, error } = await client.query({ query: REPOS_QUERY })
-
-  if (error) {
-    throw new Error(`${error.name}: ${error.message}`)
-  }
-  const filteredRepos = filterRepos(data)
-
-  if (filteredRepos && filteredRepos.length > 0) {
-    reposCache.filtered = filteredRepos
-
-    return filteredRepos || []
-  }
-
-  throw new Error('No repos found')
 }
 
 App.getInitialProps = async () => {

@@ -9,10 +9,10 @@ import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
 import { useRepos } from '../../src/contexts/ReposContext'
+import { getRepos } from '../../src/data/getRepos'
+import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/data/queries/recipesQueries'
 import { useFragment as asFragment } from '../../src/gql/fragment-masking'
-import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/queries/recipesQueries'
 import { providerToProviderName } from '../../src/utils/text'
-import { getRepos } from '../_app'
 
 import type { FragmentType } from '../../src/gql/fragment-masking'
 

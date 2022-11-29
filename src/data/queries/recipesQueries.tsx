@@ -4,7 +4,7 @@ https://www.the-guild.dev/blog/unleash-the-power-of-fragments-with-graphql-codeg
 https://the-guild.dev/graphql/codegen/docs/guides/react-vue#writing-graphql-fragments
 */
 
-import { graphql } from '../gql'
+import { graphql } from '../../gql'
 
 export const RepoFragment = graphql(`
   fragment RepoFragment on Repository {

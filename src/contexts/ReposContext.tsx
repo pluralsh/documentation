@@ -1,7 +1,7 @@
 import { createContext, useContext } from 'react'
 
 import type { FragmentType } from '../gql/fragment-masking'
-import type { RepoFragment } from '../queries/recipesQueries'
+import type { RepoFragment } from '../data/queries/recipesQueries'
 
 export type ReposContextT = any
 export const ReposContext = createContext<FragmentType<typeof RepoFragment>[]>([])

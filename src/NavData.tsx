@@ -13,8 +13,8 @@ import {
 import deepFreeze from 'deep-freeze'
 
 import { APP_CATALOG_BASE_URL } from './consts/routes'
+import { RepoFragment } from './data/queries/recipesQueries'
 import { useFragment as asFragment } from './gql/fragment-masking'
-import { RepoFragment } from './queries/recipesQueries'
 
 import type { FragmentType } from './gql/fragment-masking'
 
