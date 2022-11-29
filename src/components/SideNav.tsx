@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   forwardRef,
   useCallback,
@@ -8,15 +8,6 @@ import React, {
   useRef,
   useState,
 } from 'react'
-import NextLink from 'next/link'
-import styled, { css, keyframes, useTheme } from 'styled-components'
-import { useRouter } from 'next/router'
-import { CaretRightIcon, usePrevious } from '@pluralsh/design-system'
-import classNames from 'classnames'
-import { animated, useSpring } from 'react-spring'
-import useMeasure from 'react-use-measure'
-import scrollIntoContainerView from '../utils/scrollIntoContainerView'
-import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 import type {
   ComponentProps,
   Dispatch,
@@ -25,6 +16,18 @@ import type {
   ReactElement,
   SetStateAction,
 } from 'react'
+
+import { CaretRightIcon, usePrevious } from '@pluralsh/design-system'
+import NextLink from 'next/link'
+import { useRouter } from 'next/router'
+
+import classNames from 'classnames'
+import { animated, useSpring } from 'react-spring'
+import useMeasure from 'react-use-measure'
+import styled, { css, keyframes, useTheme } from 'styled-components'
+
+import scrollIntoContainerView from '../utils/scrollIntoContainerView'
+import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
 import type { MenuId, NavItem, NavMenu } from '../NavData'
 

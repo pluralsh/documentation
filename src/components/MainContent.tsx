@@ -1,12 +1,12 @@
-import { GitHubLogoIcon } from '@pluralsh/design-system'
 import { useContext } from 'react'
+
+import { GitHubLogoIcon } from '@pluralsh/design-system'
+
 import styled from 'styled-components'
 
 import ArticlesInSection from './ArticlesInSection'
-
 import Breadcrumbs from './Breadcrumbs'
 import { FooterLink } from './PageFooter'
-
 import { PagePropsContext } from './PagePropsContext'
 
 const ContentWrapper = styled.div(({ theme }) => ({

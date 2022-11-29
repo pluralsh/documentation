@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import { GitHubLogoIcon } from '@pluralsh/design-system'
+
+import styled from 'styled-components'
 import useSWR from 'swr'
 
 import { ButtonFillTwo } from './PageHeaderButtons'

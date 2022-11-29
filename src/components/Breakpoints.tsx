@@ -5,7 +5,6 @@ import {
   useMemo,
   useState,
 } from 'react'
-
 import type { PropsWithChildren } from 'react'
 
 type Breakpoint =

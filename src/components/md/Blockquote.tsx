@@ -1,7 +1,8 @@
-import styled from 'styled-components'
+import { forwardRef } from 'react'
 
 import { FillLevelProvider } from '@pluralsh/design-system'
-import { forwardRef } from 'react'
+
+import styled from 'styled-components'
 
 const StyledBlockquote = styled.blockquote(({ theme }) => ({
   position: 'relative',

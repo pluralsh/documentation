@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react'
-import { useRouter } from 'next/router'
+
 import {
   ArrowLeftIcon,
   ArrowRightIcon,
   Button,
   usePrevious,
 } from '@pluralsh/design-system'
+import type { ButtonProps } from 'honorable'
+import { useRouter } from 'next/router'
+
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
 import { isAppCatalogRoute } from '../utils/text'
-import { NavPositionWrapper, SideNav } from './SideNav'
+
 import { PluralMenu } from './MobileMenu'
+import { NavPositionWrapper, SideNav } from './SideNav'
 
 import type { MenuId } from '../NavData'
-import type { ButtonProps } from 'honorable'
 
 function NavButtonsUnstyled({ desktop: _desktop, children, ...props }) {
   return (

@@ -1,10 +1,11 @@
-import styled from 'styled-components'
-import { useRouter } from 'next/router'
-import { Button } from 'honorable'
 import { DocumentIcon } from '@pluralsh/design-system'
+import { Button } from 'honorable'
+import { useRouter } from 'next/router'
 
-import { removeTrailingSlashes } from '../utils/text'
+import styled from 'styled-components'
+
 import { useNavMenu } from '../contexts/NavDataContext'
+import { removeTrailingSlashes } from '../utils/text'
 
 import type { NavItem } from '../NavData'
 

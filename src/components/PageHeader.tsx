@@ -1,14 +1,16 @@
-import NextLink from 'next/link'
-import styled, { useTheme } from 'styled-components'
-import { Button, DiscordIcon, usePrevious } from '@pluralsh/design-system'
 import { useEffect, useState } from 'react'
+
+import { Button, DiscordIcon, usePrevious } from '@pluralsh/design-system'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
+
 import { useKey } from 'rooks'
+import styled, { useTheme } from 'styled-components'
 
 import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
-import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
 import MobileMenu from './MobileMenu'
+import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
 
 const Filler = styled.div(_ => ({
   flexGrow: 1,

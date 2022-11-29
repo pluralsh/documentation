@@ -1,4 +1,5 @@
 import { useFillLevel } from '@pluralsh/design-system'
+
 import styled from 'styled-components'
 
 export function bodyText({ theme, fillLevel }) {

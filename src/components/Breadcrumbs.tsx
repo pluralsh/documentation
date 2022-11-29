@@ -1,12 +1,14 @@
-import styled from 'styled-components'
+import { useMemo } from 'react'
+import type { ReactNode } from 'react'
+
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { useMemo } from 'react'
+
+import styled from 'styled-components'
 
 import { useNavMenu } from '../contexts/NavDataContext'
 import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
-import type { ReactNode } from 'react'
 import type { NavItem } from '../NavData'
 
 const StyledLink = styled(NextLink)(({ theme }) => ({

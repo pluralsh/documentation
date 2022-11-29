@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+
 import {
   CloudIcon,
   DocumentIcon,
@@ -7,13 +9,14 @@ import {
   PadlockIcon,
   VideoIcon,
 } from '@pluralsh/design-system'
+
 import deepFreeze from 'deep-freeze'
+
+import { APP_CATALOG_BASE_URL } from './consts/routes'
 import { useFragment } from './gql/fragment-masking'
 import { RepoFragment } from './queries/recipesQueries'
 
-import { APP_CATALOG_BASE_URL } from './consts/routes'
 import type { FragmentType } from './gql/fragment-masking'
-import type { ReactElement } from 'react'
 
 export type NavMenuId = 'docs' | 'appCatalog'
 export type MenuId = NavMenuId | 'plural'

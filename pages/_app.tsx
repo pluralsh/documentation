@@ -1,6 +1,5 @@
 import { useMemo } from 'react'
-import { useRouter } from 'next/router'
-import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
+
 import {
   FillLevelProvider,
   GlobalStyle as PluralGlobalStyle,
@@ -8,43 +7,46 @@ import {
   styledTheme,
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
+import type { AppProps } from 'next/app'
+import { useRouter } from 'next/router'
+
 import { SSRProvider } from '@react-aria/ssr'
+import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 
 import '../src/styles/globals.css'
 
-import { NavDataProvider } from '../src/contexts/NavDataContext'
-import { getNavData } from '../src/NavData'
-import { useFragment } from '../src/gql/fragment-masking'
-import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
-import { ReposProvider } from '../src/contexts/ReposContext'
 import client from '../src/apollo-client'
 import { BreakpointProvider } from '../src/components/Breakpoints'
-import PageFooter from '../src/components/PageFooter'
-import HtmlHead from '../src/components/HtmlHead'
+import DocSearchStyles from '../src/components/DocSearchStyles'
 import ExternalScripts from '../src/components/ExternalScripts'
-import { TableOfContents } from '../src/components/TableOfContents'
-import { PageHeader } from '../src/components/PageHeader'
+import { FullNav } from '../src/components/FullNav'
+import GlobalStyles from '../src/components/GlobalStyles'
+import HtmlHead from '../src/components/HtmlHead'
+import MainContent from '../src/components/MainContent'
+import PageFooter from '../src/components/PageFooter'
 import {
   ContentContainer,
   PageGrid,
   SideCarContainer,
   SideNavContainer,
 } from '../src/components/PageGrid'
-import GlobalStyles from '../src/components/GlobalStyles'
-import DocSearchStyles from '../src/components/DocSearchStyles'
-import MainContent from '../src/components/MainContent'
+import { PageHeader } from '../src/components/PageHeader'
+import { PagePropsContext } from '../src/components/PagePropsContext'
+import { TableOfContents } from '../src/components/TableOfContents'
 import {
   DESCRIPTION,
   PAGE_TITLE_PREFIX,
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
 } from '../src/consts'
-import { PagePropsContext } from '../src/components/PagePropsContext'
-import { FullNav } from '../src/components/FullNav'
+import { NavDataProvider } from '../src/contexts/NavDataContext'
+import { ReposProvider } from '../src/contexts/ReposContext'
+import { useFragment } from '../src/gql/fragment-masking'
+import { getNavData } from '../src/NavData'
+import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
 
-import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 import type { FragmentType } from '../src/gql/fragment-masking'
-import type { AppProps } from 'next/app'
+import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 type MyAppProps = AppProps & {
   pageProps?: MarkdocNextJsPageProps
@@ -98,8 +100,8 @@ function App({
   const title = markdoc?.frontmatter?.title
     ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
     : ROOT_TITLE
-  const description =
-    router.pathname === '/'
+  const description
+    = router.pathname === '/'
       ? DESCRIPTION
       : markdoc?.frontmatter?.description || DESCRIPTION
 
@@ -114,7 +116,10 @@ function App({
       <GlobalStyles />
       <DocSearchStyles />
       <PagePropsContext.Provider value={pageProps}>
-        <HtmlHead title={title} description={description} />
+        <HtmlHead
+          title={title}
+          description={description}
+        />
         <PageHeader />
         <Page>
           <PageGrid>
@@ -161,12 +166,8 @@ export async function getRepos() {
 
   const repos = data?.repositories?.edges
     ?.map(edge => edge?.node)
-    .map(node => {
-      return useFragment(RepoFragment, node)
-    })
-    .filter(repo => {
-      return !repo?.private
-    })
+    .map(node => useFragment(RepoFragment, node))
+    .filter(repo => !repo?.private)
 
   if ((repos || []).length <= 0) {
     throw new Error('No repos found')
@@ -178,10 +179,12 @@ export async function getRepos() {
 App.getInitialProps = async () => {
   try {
     const repos = await getRepos()
+
     return {
-      repos: repos,
+      repos,
     }
-  } catch (e) {
+  }
+  catch (e) {
     return {
       repos: [],
       apolloError: e,

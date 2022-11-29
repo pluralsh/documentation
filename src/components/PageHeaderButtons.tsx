@@ -1,11 +1,12 @@
-import styled from 'styled-components'
-import { DocSearch } from '@docsearch/react'
-import { useRouter } from 'next/router'
+import type { ComponentPropsWithoutRef } from 'react'
+
 import { HamburgerMenuCollapsedIcon as MenuCloseIcon, HamburgerMenuIcon as MenuOpenIcon } from '@pluralsh/design-system'
+import { useRouter } from 'next/router'
+
+import { DocSearch } from '@docsearch/react'
+import styled from 'styled-components'
 
 import { mqs } from './Breakpoints'
-
-import type { ComponentPropsWithoutRef } from 'react'
 
 export function SearchButton() {
   const router = useRouter()

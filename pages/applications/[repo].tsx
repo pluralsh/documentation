@@ -1,29 +1,20 @@
-import { useRouter } from 'next/router'
 import { InlineCode } from '@pluralsh/design-system'
+import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import { useRouter } from 'next/router'
 
-import {
-  RECIPES_QUERY,
-  RecipeFragment,
-  RepoFragment,
-} from '../../src/queries/recipesQueries'
+import client from '../../src/apollo-client'
+import { ContentHeader } from '../../src/components/MainContent'
 import { CodeStyled } from '../../src/components/md/Fence'
 import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
 import { useRepos } from '../../src/contexts/ReposContext'
-import { ContentHeader } from '../../src/components/MainContent'
 import { useFragment } from '../../src/gql/fragment-masking'
-import client from '../../src/apollo-client'
+import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/queries/recipesQueries'
 import { providerToProviderName } from '../../src/utils/text'
+import { getRepos } from '../_app'
 
 import type { FragmentType } from '../../src/gql/fragment-masking'
-import type {
-  GetStaticPaths,
-  GetStaticProps,
-  InferGetServerSidePropsType,
-  InferGetStaticPropsType,
-} from 'next'
-import { getRepos } from '../_app'
 
 type PageProps = {
   recipes: FragmentType<typeof RecipeFragment>[]
@@ -35,11 +26,9 @@ export default function Repo({
   const router = useRouter()
   const { repo: repoName } = router.query
   const repos = useRepos()
-  const thisRepo = useFragment(
-    RepoFragment,
+  const thisRepo = useFragment(RepoFragment,
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    repos.find(r => useFragment(RepoFragment, r).name === repoName)
-  )
+    repos.find(r => useFragment(RepoFragment, r).name === repoName))
 
   const tabs = recipes.map(r => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
@@ -48,8 +37,8 @@ export default function Repo({
     return {
       key: recipe.name,
       label:
-        providerToProviderName[recipe?.provider?.toUpperCase() || ''] ||
-        recipe.provider,
+        providerToProviderName[recipe?.provider?.toUpperCase() || '']
+        || recipe.provider,
       language: 'shell',
       content: `plural bundle install ${thisRepo?.name} ${recipe.name}`,
     }
@@ -90,14 +79,12 @@ export default function Repo({
         <>
           <Heading level={2}>Setup configuration</Heading>
           <List ordered={false}>
-            {recipeSections.map(section =>
-              section?.configuration?.map((x, configIdx) => (
-                <ListItem key={configIdx}>
-                  <InlineCode>{x?.name}</InlineCode>:{' '}
-                  {x?.longform || x?.documentation}
-                </ListItem>
-              ))
-            )}
+            {recipeSections.map(section => section?.configuration?.map((x, configIdx) => (
+              <ListItem key={configIdx}>
+                <InlineCode>{x?.name}</InlineCode>:{' '}
+                {x?.longform || x?.documentation}
+              </ListItem>
+            )))}
           </List>
         </>
       )}
@@ -105,7 +92,7 @@ export default function Repo({
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async context => {
+export const getStaticPaths: GetStaticPaths = async () => {
   if (process.env.NODE_ENV === 'development') {
     return {
       paths: [],
@@ -114,10 +101,9 @@ export const getStaticPaths: GetStaticPaths = async context => {
   }
 
   const repos = (await getRepos()) || []
+
   return {
-    paths: repos.map(repo => {
-      return { params: { repo: repo?.name } }
-    }),
+    paths: repos.map(repo => ({ params: { repo: repo?.name } })),
     fallback: true,
   }
 }
@@ -132,8 +118,8 @@ export const getStaticProps: GetStaticProps<PageProps> = async context => {
     throw new Error(`${recipesError.name}: ${recipesError.message}`)
   }
 
-  const recipes: FragmentType<typeof RecipeFragment>[] =
-    (
+  const recipes: FragmentType<typeof RecipeFragment>[]
+    = (
       recipesData?.recipes?.edges?.map(edge => edge?.node) as FragmentType<
         typeof RecipeFragment
       >[]

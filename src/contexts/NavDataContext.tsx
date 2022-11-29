@@ -1,5 +1,7 @@
 import { createContext, useContext } from 'react'
+
 import { useRouter } from 'next/router'
+
 import { isAppCatalogRoute } from '../utils/text'
 
 import type { NavData } from '../NavData'
