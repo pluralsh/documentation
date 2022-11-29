@@ -98,8 +98,8 @@ function App({
   const title = markdoc?.frontmatter?.title
     ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
     : ROOT_TITLE
-  const description
-    = router.pathname === '/'
+  const description =
+    router.pathname === '/'
       ? DESCRIPTION
       : markdoc?.frontmatter?.description || DESCRIPTION
 
@@ -114,10 +114,7 @@ function App({
       <GlobalStyles />
       <DocSearchStyles />
       <PagePropsContext.Provider value={pageProps}>
-        <HtmlHead
-          title={title}
-          description={description}
-        />
+        <HtmlHead title={title} description={description} />
         <PageHeader />
         <Page>
           <PageGrid>
@@ -155,24 +152,36 @@ function App({
   )
 }
 
+export async function getRepos() {
+  const { data, error } = await client.query({ query: REPOS_QUERY })
+
+  if (error) {
+    throw new Error(`${error.name}: ${error.message}`)
+  }
+
+  const repos = data?.repositories?.edges
+    ?.map(edge => edge?.node)
+    .map(node => {
+      return useFragment(RepoFragment, node)
+    })
+    .filter(repo => {
+      return !repo?.private
+    })
+
+  if ((repos || []).length <= 0) {
+    throw new Error('No repos found')
+  }
+
+  return repos || []
+}
+
 App.getInitialProps = async () => {
   try {
-    const { data, error } = await client.query({ query: REPOS_QUERY })
-
-    console.error(error)
-    const repos = data?.repositories?.edges
-      ?.map(edge => edge?.node)
-      .filter(node => {
-        const repo = useFragment(RepoFragment, node)
-
-        return !repo?.private
-      })
-
+    const repos = await getRepos()
     return {
-      repos,
+      repos: repos,
     }
-  }
-  catch (e) {
+  } catch (e) {
     return {
       repos: [],
       apolloError: e,
