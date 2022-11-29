@@ -7,7 +7,8 @@ import {
   styledTheme,
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
-import type { AppProps } from 'next/app'
+import type { AppContext, AppProps } from 'next/app'
+import type { Router } from 'next/router'
 import { useRouter } from 'next/router'
 
 import { SSRProvider } from '@react-aria/ssr'
@@ -38,20 +39,22 @@ import {
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
 } from '../src/consts'
+import { APP_CATALOG_BASE_URL } from '../src/consts/routes'
 import { NavDataProvider } from '../src/contexts/NavDataContext'
 import { ReposProvider } from '../src/contexts/ReposContext'
-import { getRepos, reposCache } from '../src/data/getRepos'
+import { getRepo, getRepos, reposCache } from '../src/data/repos'
 import { getNavData } from '../src/NavData'
+import { getBarePathFromPath, isAppCatalogRoute } from '../src/utils/text'
 
-import type { RepoFragment } from '../src/data/queries/recipesQueries'
-import type { FragmentType } from '../src/gql/fragment-masking'
+import type { RepoFragmentFragment } from '../src/gql/graphql'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
-type MyAppProps = AppProps & {
-  pageProps?: MarkdocNextJsPageProps
-  apolloError?: any
-  repos: FragmentType<typeof RepoFragment>[]
+type DocsInitialProps = {
+  repos: RepoFragmentFragment[]
+  repo?: any
 }
+
+type DocsAppProps = AppProps<MarkdocNextJsPageProps> & DocsInitialProps
 
 export type MarkdocHeading = {
   id?: string
@@ -86,12 +89,9 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 
 const Page = styled.div(() => ({}))
 
-function App({
-  Component,
-  repos = [],
-  pageProps = {},
-  apolloError: _,
-}: MyAppProps) {
+function DocsApp({
+  Component, pageProps, repos, repo,
+}: DocsAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc
   const navData = useMemo(() => getNavData({ repos }), [repos])
@@ -126,7 +126,10 @@ function App({
               <FullNav desktop />
             </SideNavContainer>
             <ContentContainer>
-              <MainContent Component={Component} />
+              <MainContent
+                Component={Component}
+                repo={repo}
+              />
               <PageFooter />
             </ContentContainer>
             <SideCarContainer>
@@ -156,18 +159,42 @@ function App({
   )
 }
 
-App.getInitialProps = async () => {
+function getAppName(router: Router) {
+  const pathname = getBarePathFromPath(router.asPath)
+
+  const appName = isAppCatalogRoute(pathname)
+    ? pathname.replace(RegExp(`^${APP_CATALOG_BASE_URL}/`), '').split('/')[0]
+    : null
+
+  return appName
+}
+
+DocsApp.getInitialProps = async (context: AppContext) => {
+  let repos: RepoFragmentFragment[] | undefined
+  let repo: Awaited<ReturnType<typeof getRepo>> | undefined
+  let apolloError: any | undefined
+
   try {
-    return {
-      repos: await getRepos(),
-    }
+    repos = await getRepos()
   }
   catch (e) {
-    return {
-      repos: reposCache.filtered,
-      apolloError: e,
-    }
+    apolloError = e
+    repos = reposCache.filtered
+  }
+  try {
+    const repoName = getAppName(context.router)
+
+    repo = repoName ? await getRepo(repoName, repos) : undefined
+  }
+  catch (e) {
+    apolloError = e
+  }
+
+  return {
+    repos,
+    repo,
+    apolloError,
   }
 }
 
-export default App
+export default DocsApp

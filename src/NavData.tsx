@@ -13,10 +13,8 @@ import {
 import deepFreeze from 'deep-freeze'
 
 import { APP_CATALOG_BASE_URL } from './consts/routes'
-import { RepoFragment } from './data/queries/recipesQueries'
-import { useFragment as asFragment } from './gql/fragment-masking'
 
-import type { FragmentType } from './gql/fragment-masking'
+import type { RepoFragmentFragment } from './gql/graphql'
 
 export type NavMenuId = 'docs' | 'appCatalog'
 export type MenuId = NavMenuId | 'plural'
@@ -78,9 +76,18 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Manage Git Repositories',
         icon: <GitHubIcon />,
         sections: [
-          { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
-          { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
-          { href: '/getting-started/manage-git-repositories/sharing-git-repositories', title: 'Sharing Your Git Repositories' },
+          {
+            href: '/getting-started/manage-git-repositories/setting-up-gitops',
+            title: 'Setting Up GitOps',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/your-plural-workspace',
+            title: 'Your Plural Workspace',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
+            title: 'Sharing Your Git Repositories',
+          },
         ],
       },
       {
@@ -271,7 +278,7 @@ const rootNavData: NavMenu = deepFreeze([
 export const getNavData = ({
   repos,
 }: {
-  repos: FragmentType<typeof RepoFragment>[]
+  repos: RepoFragmentFragment[]
 }): NavData => ({
   docs: rootNavData,
   appCatalog: [
@@ -279,14 +286,10 @@ export const getNavData = ({
       title: 'Application Catalog',
       sections: [
         { title: 'Repository Documentation', href: APP_CATALOG_BASE_URL },
-        ...repos.map(r => {
-          const repo = asFragment(RepoFragment, r)
-
-          return {
-            title: repo.name,
-            href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
-          }
-        }),
+        ...repos.map(repo => ({
+          title: repo.name,
+          href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
+        })),
       ],
     },
   ],

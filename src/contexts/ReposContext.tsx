@@ -1,9 +1,8 @@
 import { createContext, useContext } from 'react'
 
-import type { FragmentType } from '../gql/fragment-masking'
-import type { RepoFragment } from '../data/queries/recipesQueries'
+import type { RepoFragmentFragment } from '../gql/graphql'
 
 export type ReposContextT = any
-export const ReposContext = createContext<FragmentType<typeof RepoFragment>[]>([])
+export const ReposContext = createContext<RepoFragmentFragment[]>([])
 export const useRepos = () => useContext(ReposContext)
 export const ReposProvider = ReposContext.Provider

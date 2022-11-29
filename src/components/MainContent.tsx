@@ -8,6 +8,7 @@ import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
 import { FooterLink } from './PageFooter'
 import { PagePropsContext } from './PagePropsContext'
+import Repo from './Repo'
 
 const ContentWrapper = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xlarge,
@@ -70,8 +71,8 @@ export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
   marginBottom: theme.spacing.xxlarge,
 }))
 
-export default function MainContent({ Component }) {
-  const pageProps = useContext(PagePropsContext)
+export default function MainContent({ Component, repo }) {
+  const pageProps = useContext(PagePropsContext) || {}
   const { markdoc } = pageProps
 
   const title = markdoc?.frontmatter?.title
@@ -83,14 +84,23 @@ export default function MainContent({ Component }) {
         <Breadcrumbs />
       </BreadcrumbsWrapper>
       <ContentWrapper>
-        {(title || description) && (
-          <ContentHeader
-            title={title}
-            description={description}
-            pageHasContent={(markdoc?.content as any)?.children?.length > 0}
+        {repo ? (
+          <Repo
+            repo={repo}
+            Component={Component}
           />
+        ) : (
+          <>
+            {(title || description) && (
+              <ContentHeader
+                title={title}
+                description={description}
+                pageHasContent={(markdoc?.content as any)?.children?.length > 0}
+              />
+            )}
+            <Component {...pageProps} />
+          </>
         )}
-        <Component {...pageProps} />
         <PageDivider />
         {markdoc?.file?.path && (
           <EditOnGithub>
