@@ -20,7 +20,7 @@
     "@markdoc/markdoc": "0.1.13",
     "@markdoc/next.js": "0.1.10",
     "@pluralsh/design-system": "1.292.4",
-    "@react-aria/ssr": "3.3.0",
+    "@react-aria/ssr": "3.4.0",
     "@react-stately/list": "3.5.4",
     "@react-stately/select": "3.3.2",
     "@tanstack/react-table": "8.5.28",

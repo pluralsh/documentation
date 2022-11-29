@@ -3535,18 +3535,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-aria/ssr@npm:3.3.0":
-  version: 3.3.0
-  resolution: "@react-aria/ssr@npm:3.3.0"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 0b7677ef521c65452460601dce3c264b67baa75ef7c99e9755ea55913765054156b6157c9c42e3d56aba86d1704b8b2aeb7672e4084f2f375fe1ec481e33c8c6
-  languageName: node
-  linkType: hard
-
-"@react-aria/ssr@npm:^3.4.0":
+"@react-aria/ssr@npm:3.4.0, @react-aria/ssr@npm:^3.4.0":
   version: 3.4.0
   resolution: "@react-aria/ssr@npm:3.4.0"
   dependencies:
@@ -10373,7 +10362,7 @@ __metadata:
     "@markdoc/next.js": 0.1.10
     "@pluralsh/design-system": 1.292.4
     "@pluralsh/eslint-config-typescript": 2.5.8
-    "@react-aria/ssr": 3.3.0
+    "@react-aria/ssr": 3.4.0
     "@react-stately/list": 3.5.4
     "@react-stately/select": 3.3.2
     "@tanstack/react-table": 8.5.28
