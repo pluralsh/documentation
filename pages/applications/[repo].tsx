@@ -17,7 +17,7 @@ import { getRepos } from '../_app'
 import type { FragmentType } from '../../src/gql/fragment-masking'
 
 type PageProps = {
-  recipes: FragmentType<typeof RecipeFragment>[]
+  recipes?: FragmentType<typeof RecipeFragment>[]
 }
 
 export default function Repo({
@@ -30,7 +30,7 @@ export default function Repo({
     // eslint-disable-next-line react-hooks/rules-of-hooks
     repos.find(r => useFragment(RepoFragment, r).name === repoName))
 
-  const tabs = recipes.map(r => {
+  const tabs = recipes?.map(r => {
     // eslint-disable-next-line react-hooks/rules-of-hooks
     const recipe = useFragment(RecipeFragment, r)
 
@@ -44,7 +44,9 @@ export default function Repo({
     }
   })
 
-  const recipeSections = useFragment(RecipeFragment, recipes[0])?.recipeSections
+  const recipeSections
+    = Array.isArray(recipes)
+    && useFragment(RecipeFragment, recipes[0])?.recipeSections
 
   let hasConfig = false
 
@@ -73,7 +75,7 @@ export default function Repo({
       <Paragraph>
         We currently support {thisRepo?.name} for the following providers:
       </Paragraph>
-      {tabs.length > 0 && <CodeStyled tabs={tabs} />}
+      {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
 
       {recipeSections && hasConfig && (
         <>

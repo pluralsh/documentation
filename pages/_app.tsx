@@ -46,6 +46,7 @@ import { getNavData } from '../src/NavData'
 import { REPOS_QUERY, RepoFragment } from '../src/queries/recipesQueries'
 
 import type { FragmentType } from '../src/gql/fragment-masking'
+import type { RepoFragmentFragment, ReposQuery } from '../src/gql/graphql'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 type MyAppProps = AppProps & {
@@ -157,36 +158,49 @@ function App({
   )
 }
 
+const reposCache: {
+  filtered: RepoFragmentFragment[]
+  queryData: ReposQuery | null
+} = {
+  filtered: [],
+  queryData: null,
+}
+
 export async function getRepos() {
   const { data, error } = await client.query({ query: REPOS_QUERY })
 
   if (error) {
     throw new Error(`${error.name}: ${error.message}`)
   }
+  if (data === reposCache.queryData) {
+    return reposCache.filtered
+  }
 
-  const repos = data?.repositories?.edges
+  const filteredRepos = data?.repositories?.edges
     ?.map(edge => edge?.node)
     .map(node => useFragment(RepoFragment, node))
-    .filter(repo => !repo?.private)
+    .filter((repo: RepoFragmentFragment | undefined | null): repo is RepoFragmentFragment => !repo?.private)
 
-  if ((repos || []).length <= 0) {
+  if (filteredRepos && filteredRepos?.length > 0) {
+    reposCache.queryData = data
+    reposCache.filtered = filteredRepos
+  }
+  else {
     throw new Error('No repos found')
   }
 
-  return repos || []
+  return filteredRepos || []
 }
 
 App.getInitialProps = async () => {
   try {
-    const repos = await getRepos()
-
     return {
-      repos,
+      repos: await getRepos(),
     }
   }
   catch (e) {
     return {
-      repos: [],
+      repos: reposCache.filtered,
       apolloError: e,
     }
   }
