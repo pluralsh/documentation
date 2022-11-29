@@ -9,7 +9,7 @@ import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
 import { useRepos } from '../../src/contexts/ReposContext'
-import { useFragment } from '../../src/gql/fragment-masking'
+import { useFragment as asFragment } from '../../src/gql/fragment-masking'
 import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/queries/recipesQueries'
 import { providerToProviderName } from '../../src/utils/text'
 import { getRepos } from '../_app'
@@ -26,13 +26,11 @@ export default function Repo({
   const router = useRouter()
   const { repo: repoName } = router.query
   const repos = useRepos()
-  const thisRepo = useFragment(RepoFragment,
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    repos.find(r => useFragment(RepoFragment, r).name === repoName))
+  const thisRepo = asFragment(RepoFragment,
+    repos.find(r => asFragment(RepoFragment, r).name === repoName))
 
   const tabs = recipes?.map(r => {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const recipe = useFragment(RecipeFragment, r)
+    const recipe = asFragment(RecipeFragment, r)
 
     return {
       key: recipe.name,
@@ -46,7 +44,7 @@ export default function Repo({
 
   const recipeSections
     = Array.isArray(recipes)
-    && useFragment(RecipeFragment, recipes[0])?.recipeSections
+    && asFragment(RecipeFragment, recipes[0])?.recipeSections
 
   let hasConfig = false
 
@@ -125,7 +123,7 @@ export const getStaticProps: GetStaticProps<PageProps> = async context => {
       recipesData?.recipes?.edges?.map(edge => edge?.node) as FragmentType<
         typeof RecipeFragment
       >[]
-    ).filter(r => r && !useFragment(RecipeFragment, r)?.private) || []
+    ).filter(r => r && !asFragment(RecipeFragment, r)?.private) || []
 
   return {
     props: {

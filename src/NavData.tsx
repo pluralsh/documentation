@@ -13,7 +13,7 @@ import {
 import deepFreeze from 'deep-freeze'
 
 import { APP_CATALOG_BASE_URL } from './consts/routes'
-import { useFragment } from './gql/fragment-masking'
+import { useFragment as asFragment } from './gql/fragment-masking'
 import { RepoFragment } from './queries/recipesQueries'
 
 import type { FragmentType } from './gql/fragment-masking'
@@ -280,7 +280,7 @@ export const getNavData = ({
       sections: [
         { title: 'Repository Documentation', href: APP_CATALOG_BASE_URL },
         ...repos.map(r => {
-          const repo = useFragment(RepoFragment, r)
+          const repo = asFragment(RepoFragment, r)
 
           return {
             title: repo.name,
