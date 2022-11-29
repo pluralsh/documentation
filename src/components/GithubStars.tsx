@@ -15,7 +15,7 @@ async function fetcher<JSON = any>(input: RequestInfo,
 type GithubRepoData = { stargazers_count: number }
 
 function isGithubRepoData(obj: unknown): obj is GithubRepoData {
-  return !!(obj && 'stargazers_count' in obj)
+  return !!(obj && typeof obj === 'object' && 'stargazers_count' in obj)
 }
 
 const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loading }) => ({
