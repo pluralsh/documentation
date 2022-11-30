@@ -23,7 +23,7 @@ module.exports = () => {
       locales: ['en-US'],
       defaultLocale: 'en-US',
     },
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdoc'],
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', '(?<!\.partial)\.md', '(?<!\.partial)\.mdoc'],
     async redirects() {
       return [
         {
@@ -213,12 +213,5 @@ module.exports = () => {
         },
       ]
     },
-    // webpack: (config) => {
-    //   config.module.rules.push({
-    //     test: /\.md$/,
-    //     use: 'raw-loader',
-    //   });
-    //   return config;
-    // },
   })
 }

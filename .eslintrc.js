@@ -50,7 +50,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js'],
+      files: ['.eslintrc.js', 'next.config.js'],
       parserOptions: {
         project: null,
       },

@@ -34,6 +34,7 @@ export type Account = {
   insertedAt?: Maybe<Scalars['DateTime']>;
   name?: Maybe<Scalars['String']>;
   rootUser?: Maybe<User>;
+  subscription?: Maybe<PlatformSubscription>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   workosConnectionId?: Maybe<Scalars['String']>;
 };
@@ -1300,6 +1301,10 @@ export type LineItemAttributes = {
   type?: InputMaybe<PlanType>;
 };
 
+export enum LineItemDimension {
+  User = 'USER'
+}
+
 export type LockAttributes = {
   lock: Scalars['String'];
 };
@@ -1630,6 +1635,11 @@ export type PageInfo = {
   startCursor?: Maybe<Scalars['String']>;
 };
 
+export enum PaymentPeriod {
+  Monthly = 'MONTHLY',
+  Yearly = 'YEARLY'
+}
+
 export enum Permission {
   Billing = 'BILLING',
   Install = 'INSTALL',
@@ -1731,6 +1741,11 @@ export type PlanFeatureAttributes = {
   name: Scalars['String'];
 };
 
+export type PlanFeatures = {
+  __typename?: 'PlanFeatures';
+  vpn?: Maybe<Scalars['Boolean']>;
+};
+
 export type PlanLineItemAttributes = {
   included?: InputMaybe<Array<InputMaybe<LimitAttributes>>>;
   items?: InputMaybe<Array<InputMaybe<LineItemAttributes>>>;
@@ -1764,6 +1779,52 @@ export type PlatformMetrics = {
   publishers?: Maybe<Scalars['Int']>;
   repositories?: Maybe<Scalars['Int']>;
   rollouts?: Maybe<Scalars['Int']>;
+};
+
+export type PlatformPlan = {
+  __typename?: 'PlatformPlan';
+  cost: Scalars['Int'];
+  features?: Maybe<PlanFeatures>;
+  id: Scalars['ID'];
+  insertedAt?: Maybe<Scalars['DateTime']>;
+  lineItems?: Maybe<Array<Maybe<PlatformPlanItem>>>;
+  name: Scalars['String'];
+  period: PaymentPeriod;
+  updatedAt?: Maybe<Scalars['DateTime']>;
+  visible: Scalars['Boolean'];
+};
+
+export type PlatformPlanItem = {
+  __typename?: 'PlatformPlanItem';
+  cost: Scalars['Int'];
+  dimension: LineItemDimension;
+  externalId?: Maybe<Scalars['String']>;
+  name: Scalars['String'];
+  period: PaymentPeriod;
+};
+
+export type PlatformPlanLineItemAttributes = {
+  dimension: LineItemDimension;
+  quantity: Scalars['Int'];
+};
+
+export type PlatformSubscription = {
+  __typename?: 'PlatformSubscription';
+  externalId?: Maybe<Scalars['String']>;
+  id: Scalars['ID'];
+  lineItems?: Maybe<Array<Maybe<PlatformSubscriptionLineItems>>>;
+  plan?: Maybe<PlatformPlan>;
+};
+
+export type PlatformSubscriptionAttributes = {
+  lineItems?: InputMaybe<Array<InputMaybe<PlatformPlanLineItemAttributes>>>;
+};
+
+export type PlatformSubscriptionLineItems = {
+  __typename?: 'PlatformSubscriptionLineItems';
+  dimension: LineItemDimension;
+  externalId?: Maybe<Scalars['String']>;
+  quantity: Scalars['Int'];
 };
 
 export type PluralConfiguration = {
@@ -2262,6 +2323,7 @@ export type RootMutationType = {
   acceptIncident?: Maybe<Incident>;
   acceptLogin?: Maybe<OauthResponse>;
   acquireLock?: Maybe<ApplyLock>;
+  cancelPlatformSubscription?: Maybe<PlatformSubscription>;
   completeIncident?: Maybe<Incident>;
   createArtifact?: Maybe<Artifact>;
   createCard?: Maybe<Account>;
@@ -2281,6 +2343,7 @@ export type RootMutationType = {
   createOauthIntegration?: Maybe<OauthIntegration>;
   createOidcProvider?: Maybe<OidcProvider>;
   createPlan?: Maybe<Plan>;
+  createPlatformSubscription?: Maybe<PlatformSubscription>;
   createPublicKey?: Maybe<PublicKey>;
   createPublisher?: Maybe<Publisher>;
   createQueue?: Maybe<UpgradeQueue>;
@@ -2311,6 +2374,7 @@ export type RootMutationType = {
   deleteInstallation?: Maybe<Installation>;
   deleteIntegrationWebhook?: Maybe<IntegrationWebhook>;
   deleteInvite?: Maybe<Invite>;
+  deleteKeyBackup?: Maybe<KeyBackup>;
   deleteMessage?: Maybe<IncidentMessage>;
   deletePublicKey?: Maybe<PublicKey>;
   deleteReaction?: Maybe<IncidentMessage>;
@@ -2348,6 +2412,7 @@ export type RootMutationType = {
   releaseLock?: Maybe<ApplyLock>;
   resetInstallations?: Maybe<Scalars['Int']>;
   restartShell?: Maybe<Scalars['Boolean']>;
+  setupShell?: Maybe<CloudShell>;
   signup?: Maybe<User>;
   ssoCallback?: Maybe<User>;
   stopShell?: Maybe<Scalars['Boolean']>;
@@ -2369,6 +2434,7 @@ export type RootMutationType = {
   updateOidcProvider?: Maybe<OidcProvider>;
   updatePlan?: Maybe<RepositorySubscription>;
   updatePlanAttributes?: Maybe<Plan>;
+  updatePlatformPlan?: Maybe<PlatformSubscription>;
   updatePublisher?: Maybe<Publisher>;
   updateRepository?: Maybe<Repository>;
   updateRole?: Maybe<Role>;
@@ -2501,6 +2567,12 @@ export type RootMutationTypeCreateOidcProviderArgs = {
 export type RootMutationTypeCreatePlanArgs = {
   attributes: PlanAttributes;
   repositoryId: Scalars['ID'];
+};
+
+
+export type RootMutationTypeCreatePlatformSubscriptionArgs = {
+  attributes: PlatformSubscriptionAttributes;
+  planId: Scalars['ID'];
 };
 
 
@@ -2655,6 +2727,11 @@ export type RootMutationTypeDeleteIntegrationWebhookArgs = {
 export type RootMutationTypeDeleteInviteArgs = {
   id?: InputMaybe<Scalars['ID']>;
   secureId?: InputMaybe<Scalars['String']>;
+};
+
+
+export type RootMutationTypeDeleteKeyBackupArgs = {
+  name: Scalars['String'];
 };
 
 
@@ -2954,6 +3031,11 @@ export type RootMutationTypeUpdatePlanAttributesArgs = {
 };
 
 
+export type RootMutationTypeUpdatePlatformPlanArgs = {
+  planId: Scalars['ID'];
+};
+
+
 export type RootMutationTypeUpdatePublisherArgs = {
   attributes: PublisherAttributes;
 };
@@ -3066,6 +3148,7 @@ export type RootQueryType = {
   integrations?: Maybe<IntegrationConnection>;
   invite?: Maybe<Invite>;
   invites?: Maybe<InviteConnection>;
+  invoices?: Maybe<InvoiceConnection>;
   keyBackup?: Maybe<KeyBackup>;
   keyBackups?: Maybe<KeyBackupConnection>;
   loginMethod?: Maybe<LoginMethodResponse>;
@@ -3080,6 +3163,8 @@ export type RootQueryType = {
   oidcLogin?: Maybe<OidcStepResponse>;
   oidcLogins?: Maybe<OidcLoginConnection>;
   platformMetrics?: Maybe<PlatformMetrics>;
+  platformPlans?: Maybe<Array<Maybe<PlatformPlan>>>;
+  platformSubscription?: Maybe<PlatformSubscription>;
   publicKeys?: Maybe<PublicKeyConnection>;
   publisher?: Maybe<Publisher>;
   publishers?: Maybe<PublisherConnection>;
@@ -3188,6 +3273,7 @@ export type RootQueryTypeDnsDomainsArgs = {
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
   last?: InputMaybe<Scalars['Int']>;
+  q?: InputMaybe<Scalars['String']>;
 };
 
 
@@ -3319,6 +3405,14 @@ export type RootQueryTypeInviteArgs = {
 
 
 export type RootQueryTypeInvitesArgs = {
+  after?: InputMaybe<Scalars['String']>;
+  before?: InputMaybe<Scalars['String']>;
+  first?: InputMaybe<Scalars['Int']>;
+  last?: InputMaybe<Scalars['Int']>;
+};
+
+
+export type RootQueryTypeInvoicesArgs = {
   after?: InputMaybe<Scalars['String']>;
   before?: InputMaybe<Scalars['String']>;
   first?: InputMaybe<Scalars['Int']>;
@@ -3976,6 +4070,7 @@ export type Test = {
   sourceTag: Scalars['String'];
   status: TestStatus;
   steps?: Maybe<Array<Maybe<TestStep>>>;
+  tags?: Maybe<Array<Scalars['String']>>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
@@ -3997,6 +4092,7 @@ export type TestAttributes = {
   promoteTag?: InputMaybe<Scalars['String']>;
   status?: InputMaybe<TestStatus>;
   steps?: InputMaybe<Array<InputMaybe<TestStepAttributes>>>;
+  tags?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
 export type TestConnection = {

@@ -1,46 +1,43 @@
+import path from 'path'
+
 import { InlineCode } from '@pluralsh/design-system'
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
 import { useRouter } from 'next/router'
 
 import client from '../../src/apollo-client'
 import { ContentHeader } from '../../src/components/MainContent'
+import MarkdocComponent from '../../src/components/MarkdocContent'
 import { CodeStyled } from '../../src/components/md/Fence'
 import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
+import { APP_CATALOG_BASE_URL } from '../../src/consts/routes'
 import { useRepos } from '../../src/contexts/ReposContext'
 import { getRepos } from '../../src/data/getRepos'
 import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/data/queries/recipesQueries'
 import { useFragment as asFragment } from '../../src/gql/fragment-masking'
+import { readMdFileCached } from '../../src/markdoc/mdParser'
 import { providerToProviderName } from '../../src/utils/text'
 
 import type { FragmentType } from '../../src/gql/fragment-masking'
-
-type PageProps = {
-  recipes?: FragmentType<typeof RecipeFragment>[]
-}
+import type { RecipeFragmentFragment } from '../../src/gql/graphql'
+import type { MarkdocPage } from '../../src/markdoc/mdSchema'
+import type { MyPageProps } from '../_app'
 
 export default function Repo({
-  recipes,
+  repo,
+  markdoc,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
-  const router = useRouter()
-  const { repo: repoName } = router.query
-  const repos = useRepos()
-  const thisRepo = asFragment(RepoFragment,
-    repos.find(r => asFragment(RepoFragment, r).name === repoName))
+  const { recipes } = repo || {}
 
-  const tabs = recipes?.map(r => {
-    const recipe = asFragment(RecipeFragment, r)
-
-    return {
-      key: recipe.name,
-      label:
+  const tabs = recipes?.map(recipe => ({
+    key: recipe.name,
+    label:
         providerToProviderName[recipe?.provider?.toUpperCase() || '']
         || recipe.provider,
-      language: 'shell',
-      content: `plural bundle install ${thisRepo?.name} ${recipe.name}`,
-    }
-  })
+    language: 'shell',
+    content: `plural bundle install ${repo?.name} ${recipe.name}`,
+  }))
 
   const recipeSections
     = Array.isArray(recipes)
@@ -59,23 +56,18 @@ export default function Repo({
 
   return (
     <div>
-      <ContentHeader
-        title={thisRepo?.name}
-        description={thisRepo?.description || undefined}
-        pageHasContent
-      />
       <Heading level={2}>Description</Heading>
       <Paragraph>
-        Plural will install {thisRepo?.name} in a dependency-aware manner onto a
+        Plural will install {repo?.name} in a dependency-aware manner onto a
         Plural-managed Kubernetes cluster with one CLI command.
       </Paragraph>
       <Heading level={2}>Installation</Heading>
       <Paragraph>
-        We currently support {thisRepo?.name} for the following providers:
+        We currently support {repo?.name} for the following providers:
       </Paragraph>
       {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
-
-      {recipeSections && hasConfig && (
+      {/* {markdoc && <MarkdocComponent markdoc={markdoc} />} */}
+      {!markdoc && recipeSections && hasConfig && (
         <>
           <Heading level={2}>Setup configuration</Heading>
           <List ordered={false}>
@@ -108,27 +100,51 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 }
 
-export const getStaticProps: GetStaticProps<PageProps> = async context => {
+export const getStaticProps: GetStaticProps<
+  Partial<MyPageProps>
+> = async context => {
+  const repoName = context?.params?.repo
+
+  const repos = getRepos()
+  const thisRepo = (await repos).find(r => r.name === repoName)
+
+  if (!repoName || typeof repoName !== 'string') {
+    return { notFound: true }
+  }
+  const mdFilePath = path.join('/pages',
+    APP_CATALOG_BASE_URL,
+    `${repoName}.partial.md`)
+
+  const markdoc = await readMdFileCached(mdFilePath)
+
   const { data: recipesData, error: recipesError } = await client.query({
     query: RECIPES_QUERY,
-    variables: { repoName: (context?.params?.repo || '') as string },
+    variables: { repoName },
   })
 
   if (recipesError) {
     throw new Error(`${recipesError.name}: ${recipesError.message}`)
   }
 
-  const recipes: FragmentType<typeof RecipeFragment>[]
+  const recipes: RecipeFragmentFragment[]
     = (
       recipesData?.recipes?.edges?.map(edge => edge?.node) as FragmentType<
         typeof RecipeFragment
       >[]
-    ).filter(r => r && !asFragment(RecipeFragment, r)?.private) || []
+    )
+      .map(r => asFragment(RecipeFragment, r))
+      .filter(r => r && !r?.private) || []
 
   return {
     props: {
-      recipes: recipes || [],
+      markdoc,
+      title: markdoc?.frontmatter?.title || repoName,
+      description: markdoc?.frontmatter?.description || thisRepo?.description,
+      repo: {
+        ...thisRepo,
+        recipes: recipes || [],
+      },
     },
-    revalidate: 60,
+    revalidate: 600,
   }
 }

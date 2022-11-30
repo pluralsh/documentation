@@ -70,12 +70,9 @@ export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
   marginBottom: theme.spacing.xxlarge,
 }))
 
-export default function MainContent({ Component }) {
+export default function MainContent({ Component, title, description }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps
-
-  const title = markdoc?.frontmatter?.title
-  const description = markdoc?.frontmatter?.description
 
   return (
     <>

@@ -45,10 +45,18 @@ import { getNavData } from '../src/NavData'
 
 import type { RepoFragment } from '../src/data/queries/recipesQueries'
 import type { FragmentType } from '../src/gql/fragment-masking'
+import type { RecipeFragmentFragment, RepoFragmentFragment } from '../src/gql/graphql'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
-type MyAppProps = AppProps & {
-  pageProps?: MarkdocNextJsPageProps
+export type MyPageProps = MarkdocNextJsPageProps & {
+  title?: string
+  description?: string
+  repo: RepoFragmentFragment & {
+    recipes?: RecipeFragmentFragment[]
+  }
+}
+
+type MyAppProps = AppProps<MyPageProps> & {
   apolloError?: any
   repos: FragmentType<typeof RepoFragment>[]
 }
@@ -96,13 +104,22 @@ function App({
   const markdoc = pageProps?.markdoc
   const navData = useMemo(() => getNavData({ repos }), [repos])
 
-  const title = markdoc?.frontmatter?.title
-    ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
-    : ROOT_TITLE
+  console.log('pageProps', pageProps)
+  console.log('Component', Component)
+
+  const title = pageProps?.title || markdoc?.frontmatter?.title
   const description
-    = router.pathname === '/'
-      ? DESCRIPTION
-      : markdoc?.frontmatter?.description || DESCRIPTION
+    = pageProps?.description || markdoc?.frontmatter?.description
+
+  const headProps = {
+    title: title
+      ? `${PAGE_TITLE_PREFIX}${title}${PAGE_TITLE_SUFFIX}`
+      : ROOT_TITLE,
+    description:
+      router.pathname === '/'
+        ? DESCRIPTION
+        : markdoc?.frontmatter?.description || DESCRIPTION,
+  }
 
   const toc = pageProps?.markdoc?.content
     ? collectHeadings(pageProps?.markdoc.content)
@@ -115,10 +132,7 @@ function App({
       <GlobalStyles />
       <DocSearchStyles />
       <PagePropsContext.Provider value={pageProps}>
-        <HtmlHead
-          title={title}
-          description={description}
-        />
+        <HtmlHead {...headProps} />
         <PageHeader />
         <Page>
           <PageGrid>
@@ -126,7 +140,11 @@ function App({
               <FullNav desktop />
             </SideNavContainer>
             <ContentContainer>
-              <MainContent Component={Component} />
+              <MainContent
+                Component={Component}
+                title={title}
+                description={description}
+              />
               <PageFooter />
             </ContentContainer>
             <SideCarContainer>
