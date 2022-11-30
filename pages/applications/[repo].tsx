@@ -18,13 +18,44 @@ import { providerToProviderName } from '../../src/utils/text'
 
 import type { FragmentType } from '../../src/gql/fragment-masking'
 import type { RecipeFragmentFragment } from '../../src/gql/graphql'
-import type { MyPageProps } from '../_app'
+import type { MarkdocHeading, MyPageProps } from '../_app'
+import type { RenderableTreeNode, RenderableTreeNodes } from '@markdoc/markdoc'
+
+function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
+  console.log('node', node)
+  if (node) {
+    if (node?.name === 'Heading') {
+      const title = node.children[0]
+
+      if (typeof title === 'string') {
+        sections.push({
+          ...node.attributes,
+          title,
+        })
+      }
+    }
+
+    if (node?.children) {
+      for (const child of node.children) {
+        collectHeadings(child, sections)
+      }
+    }
+  }
+
+  return sections as MarkdocHeading[]
+}
 
 export default function Repo({
   repo,
   markdoc,
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const { recipes } = repo || {}
+
+  const headings = collectHeadings(markdoc?.content)
+
+  const mdHasConfig = !!headings.find(heading => heading?.title?.match(/configuration/gi))
+
+  console.log('hasConfig', mdHasConfig)
 
   const tabs = recipes?.map(recipe => ({
     key: recipe.name,
@@ -37,12 +68,12 @@ export default function Repo({
 
   const recipeSections = Array.isArray(recipes) && recipes[0]?.recipeSections
 
-  let hasConfig = false
+  let recipeHasConfig = false
 
   if (recipeSections) {
     for (const section of recipeSections) {
       if (section?.configuration?.length || 0 > 0) {
-        hasConfig = true
+        recipeHasConfig = true
         break
       }
     }
@@ -60,7 +91,7 @@ export default function Repo({
         We currently support {repo?.name} for the following providers:
       </Paragraph>
       {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
-      {!markdoc && recipeSections && hasConfig && (
+      {!mdHasConfig && recipeSections && recipeHasConfig && (
         <>
           <Heading level={2}>Setup configuration</Heading>
           <List ordered={false}>
@@ -131,7 +162,7 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      markdoc: markdoc || undefined,
+      ...(markdoc ? { markdoc } : {}),
       title: markdoc?.frontmatter?.title || repoName,
       description: markdoc?.frontmatter?.description || thisRepo?.description,
       repo: thisRepo
