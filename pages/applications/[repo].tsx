@@ -19,10 +19,8 @@ import { providerToProviderName } from '../../src/utils/text'
 import type { FragmentType } from '../../src/gql/fragment-masking'
 import type { RecipeFragmentFragment } from '../../src/gql/graphql'
 import type { MarkdocHeading, MyPageProps } from '../_app'
-import type { RenderableTreeNode, RenderableTreeNodes } from '@markdoc/markdoc'
 
 function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
-  console.log('node', node)
   if (node) {
     if (node?.name === 'Heading') {
       const title = node.children[0]
@@ -54,8 +52,6 @@ export default function Repo({
   const headings = collectHeadings(markdoc?.content)
 
   const mdHasConfig = !!headings.find(heading => heading?.title?.match(/configuration/gi))
-
-  console.log('hasConfig', mdHasConfig)
 
   const tabs = recipes?.map(recipe => ({
     key: recipe.name,
@@ -138,7 +134,7 @@ export const getStaticProps: GetStaticProps<
   }
   const mdFilePath = path.join('/pages',
     APP_CATALOG_BASE_URL,
-    `${repoName}.partial.md`)
+    `${repoName}.mdpart`)
 
   const markdoc = await readMdFileCached(mdFilePath)
 

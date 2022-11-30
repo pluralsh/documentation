@@ -99,9 +99,6 @@ function App({
   const markdoc = pageProps?.markdoc
   const navData = useMemo(() => getNavData({ repos }), [repos])
 
-  console.log('pageProps', pageProps)
-  console.log('Component', Component)
-
   const title = pageProps?.title || markdoc?.frontmatter?.title
   const description
     = pageProps?.description || markdoc?.frontmatter?.description

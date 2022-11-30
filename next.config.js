@@ -23,7 +23,7 @@ module.exports = () => {
       locales: ['en-US'],
       defaultLocale: 'en-US',
     },
-    pageExtensions: ['js', 'jsx', 'ts', 'tsx', '(?<!\.partial)\.md', '(?<!\.partial)\.mdoc'],
+    pageExtensions: ['js', 'jsx', 'ts', 'tsx', 'md', 'mdoc'],
     async redirects() {
       return [
         {

@@ -72,7 +72,7 @@ export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
 
 export default function MainContent({ Component, title, description }) {
   const pageProps = useContext(PagePropsContext)
-  const { markdoc } = pageProps
+  const { markdoc } = pageProps || {}
 
   return (
     <>
