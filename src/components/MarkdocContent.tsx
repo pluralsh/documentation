@@ -13,6 +13,10 @@ export default function MarkdocComponent({
   markdoc: MarkdocPage
   components?: any
 }) {
+  if (!markdoc) {
+    return null
+  }
+
   const node = renderers.react(markdoc.content, React, {
     components: {
       ...components,
