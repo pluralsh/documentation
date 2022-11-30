@@ -3,40 +3,6 @@ title: Airflow
 description: A DAG-based, dependency-aware job scheduler.
 ---
 
-## Description
-
-Plural will install Airflow in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one
-CLI command.
-
-## Installation
-
-We currently support this repository on the following infrastructure providers:
-
-{% tabs %}
-
-{% tab title="AWS" %}
-```shell
-plural bundle install airflow airflow-aws
-```
-{% /tab %}
-{% tab title="GCP" %}
-```shell
-plural bundle install airflow airflow-gcp
-```
-{% /tab %}
-{% tab title="Azure" %}
-```shell
-plural bundle install airflow airflow-azure
-```
-{% /tab %}
-{% tab title="KinD" %}
-```shell
-plural bundle install airflow airflow-kind
-```
-{% /tab %}
-
-{% /tabs %}
-
 ## Setup Configuration
 
 `vpc_name`: We need an isolated VPC to launch your resources in, so we create one for you. Stick with `plural` for

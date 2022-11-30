@@ -3,45 +3,6 @@ title: Plural Console
 description: A Plural admin console for monitoring and ops.
 ---
 
-## Description
-
-Plural will install Console in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one
-CLI command.
-
-## Installation
-
-We currently support this repository on the following infrastructure providers: 
-
-{% tabs %}
-
-{% tab title="AWS" %}
-```shell
-plural bundle install console console-aws
-```
-{% /tab %}
-{% tab title="GCP" %}
-```shell
-plural bundle install console console-gcp
-```
-{% /tab %}
-{% tab title="Azure" %}
-```shell
-plural bundle install console console-azure
-```
-{% /tab %}
-{% tab title="Equinix" %}
-```shell
-plural bundle install console console-equinix
-```
-{% /tab %}
-{% tab title="KinD" %}
-```shell
-plural bundle install console console-kind
-```
-{% /tab %}
-
-{% /tabs %}
-
 ## Setup Configuration
 
 `vpc_name`: We need an isolated VPC to launch your resources in, so we create one for you. Stick with `plural` for

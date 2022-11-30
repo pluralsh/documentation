@@ -51,9 +51,7 @@ import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 export type MyPageProps = MarkdocNextJsPageProps & {
   title?: string
   description?: string
-  repo: RepoFragmentFragment & {
-    recipes?: RecipeFragmentFragment[]
-  }
+  repo?: RepoFragmentFragment & { recipes?: RecipeFragmentFragment[] }
 }
 
 type MyAppProps = AppProps<MyPageProps> & {
@@ -95,10 +93,7 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 const Page = styled.div(() => ({}))
 
 function App({
-  Component,
-  repos = [],
-  pageProps = {},
-  apolloError: _,
+  Component, repos = [], pageProps, apolloError: _,
 }: MyAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc

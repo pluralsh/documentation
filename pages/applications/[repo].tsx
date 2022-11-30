@@ -2,26 +2,22 @@ import path from 'path'
 
 import { InlineCode } from '@pluralsh/design-system'
 import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
-import { useRouter } from 'next/router'
 
 import client from '../../src/apollo-client'
-import { ContentHeader } from '../../src/components/MainContent'
 import MarkdocComponent from '../../src/components/MarkdocContent'
 import { CodeStyled } from '../../src/components/md/Fence'
 import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
 import { APP_CATALOG_BASE_URL } from '../../src/consts/routes'
-import { useRepos } from '../../src/contexts/ReposContext'
 import { getRepos } from '../../src/data/getRepos'
-import { RECIPES_QUERY, RecipeFragment, RepoFragment } from '../../src/data/queries/recipesQueries'
+import { RECIPES_QUERY, RecipeFragment } from '../../src/data/queries/recipesQueries'
 import { useFragment as asFragment } from '../../src/gql/fragment-masking'
 import { readMdFileCached } from '../../src/markdoc/mdParser'
 import { providerToProviderName } from '../../src/utils/text'
 
 import type { FragmentType } from '../../src/gql/fragment-masking'
 import type { RecipeFragmentFragment } from '../../src/gql/graphql'
-import type { MarkdocPage } from '../../src/markdoc/mdSchema'
 import type { MyPageProps } from '../_app'
 
 export default function Repo({
@@ -33,15 +29,13 @@ export default function Repo({
   const tabs = recipes?.map(recipe => ({
     key: recipe.name,
     label:
-        providerToProviderName[recipe?.provider?.toUpperCase() || '']
-        || recipe.provider,
+      providerToProviderName[recipe?.provider?.toUpperCase() || '']
+      || recipe.provider,
     language: 'shell',
     content: `plural bundle install ${repo?.name} ${recipe.name}`,
   }))
 
-  const recipeSections
-    = Array.isArray(recipes)
-    && asFragment(RecipeFragment, recipes[0])?.recipeSections
+  const recipeSections = Array.isArray(recipes) && recipes[0]?.recipeSections
 
   let hasConfig = false
 
@@ -66,7 +60,6 @@ export default function Repo({
         We currently support {repo?.name} for the following providers:
       </Paragraph>
       {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
-      {/* {markdoc && <MarkdocComponent markdoc={markdoc} />} */}
       {!markdoc && recipeSections && hasConfig && (
         <>
           <Heading level={2}>Setup configuration</Heading>
@@ -80,6 +73,7 @@ export default function Repo({
           </List>
         </>
       )}
+      {markdoc && <MarkdocComponent markdoc={markdoc} />}
     </div>
   )
 }
@@ -105,10 +99,10 @@ export const getStaticProps: GetStaticProps<
 > = async context => {
   const repoName = context?.params?.repo
 
-  const repos = getRepos()
-  const thisRepo = (await repos).find(r => r.name === repoName)
+  const repos = await getRepos()
+  const thisRepo = repos.find(r => r.name === repoName)
 
-  if (!repoName || typeof repoName !== 'string') {
+  if (!thisRepo || !repoName || typeof repoName !== 'string') {
     return { notFound: true }
   }
   const mdFilePath = path.join('/pages',
@@ -137,13 +131,15 @@ export const getStaticProps: GetStaticProps<
 
   return {
     props: {
-      markdoc,
+      markdoc: markdoc || undefined,
       title: markdoc?.frontmatter?.title || repoName,
       description: markdoc?.frontmatter?.description || thisRepo?.description,
-      repo: {
-        ...thisRepo,
-        recipes: recipes || [],
-      },
+      repo: thisRepo
+        ? {
+          ...thisRepo,
+          recipes: recipes || [],
+        }
+        : undefined,
     },
     revalidate: 600,
   }

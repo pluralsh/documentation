@@ -3,35 +3,6 @@ title: Kubecost
 description: Get visibility into your Kubernetes spend and resource allocation.
 ---
 
-## Description
-
-Plural will install Kubecost in a dependency-aware manner onto a Plural-managed Kubernetes cluster with one
-CLI command.
-
-## Installation
-
-We currently support this repository on the following infrastructure providers:
-
-{% tabs %}
-
-{% tab title="AWS" %}
-```shell
-plural bundle install kubecost kubecost-aws
-```
-{% /tab %}
-{% tab title="GCP" %}
-```shell
-plural bundle install kubecost kubecost-gcp
-```
-{% /tab %}
-{% tab title="Azure" %}
-```shell
-plural bundle install kubecost kubecost-azure
-```
-{% /tab %}
-
-{% /tabs %}
-
 ## Examples
 
 Plural integrates directly with kubecost to provide cost analysis for any application deployed on your plural kubernetes clusters. Kubecost can be installed just like any other application, although perhaps the easiest is to just go to your console and click the install button in the top right:

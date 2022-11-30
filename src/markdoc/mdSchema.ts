@@ -4,7 +4,7 @@ import { getSchema } from './mdSchemaTransforms'
 import * as nodes from './nodes'
 import * as tags from './tags'
 
-import type { RenderableTreeNode } from '@markdoc/markdoc'
+import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 const baseSchema = {
   nodes,
@@ -19,10 +19,4 @@ const { components, ...schemaConfig } = getSchema(baseSchema)
 
 export { components, schemaConfig as config }
 
-export type MarkdocPage = {
-  content: RenderableTreeNode
-  frontmatter: Record<string, any>
-  file: {
-    path: string
-  }
-}
+export type MarkdocPage = MarkdocNextJsPageProps['markdoc']
