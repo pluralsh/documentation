@@ -278,7 +278,7 @@ export const getNavData = ({
     {
       title: 'Application Catalog',
       sections: [
-        { title: 'Repository Documentation', href: APP_CATALOG_BASE_URL },
+        { title: 'Catalog Overview', href: APP_CATALOG_BASE_URL },
         ...repos.map(r => {
           const repo = asFragment(RepoFragment, r)
 
