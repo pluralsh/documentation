@@ -5,7 +5,8 @@ import { useRouter } from 'next/router'
 
 import styled from 'styled-components'
 
-import { isAppCatalogRoute } from '../utils/text'
+import { APP_CATALOG_BASE_URL } from '../consts/routes'
+import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
 
 import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
@@ -60,7 +61,7 @@ function ContentHeaderUnstyled({
   description?: string
   className?: string
   pageHasContent?: boolean
-  }) {
+}) {
   const router = useRouter()
 
   const isAppCatalog = isAppCatalogRoute(router.asPath)
@@ -88,7 +89,9 @@ export default function MainContent({ Component, title, description }) {
   const { markdoc } = pageProps || {}
   const router = useRouter()
 
-  const isAppCatalog = isAppCatalogRoute(router.asPath)
+  const isAppCatalogIndex
+    = isAppCatalogRoute(router.asPath)
+    && getBarePathFromPath(router.asPath).endsWith(APP_CATALOG_BASE_URL)
 
   return (
     <>
@@ -104,13 +107,12 @@ export default function MainContent({ Component, title, description }) {
           />
         )}
         <Component {...pageProps} />
-        <Heading level={2}>Our Catalog</Heading>
-        {isAppCatalog && (
-          <ArticlesInSection
-            hasContent={false}
-          />
+        {isAppCatalogIndex && (
+          <>
+            <Heading level={2}>Our Catalog</Heading>
+            <ArticlesInSection hasContent={false} />
+          </>
         )}
-
         <PageDivider />
         {markdoc?.file?.path && (
           <EditOnGithub>
