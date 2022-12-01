@@ -1,4 +1,10 @@
-import { useEffect, useState } from 'react'
+import type { Dispatch, SetStateAction } from 'react'
+import {
+  createContext,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import {
   ArrowLeftIcon,
@@ -12,12 +18,24 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
-import { isAppCatalogRoute } from '../utils/text'
+import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
 
 import { PluralMenu } from './MobileMenu'
 import { NavPositionWrapper, SideNav } from './SideNav'
 
 import type { MenuId } from '../NavData'
+import type { PartialBy } from '../utils/typescript'
+
+const setIsOpenStub: Dispatch<SetStateAction<boolean>> = () => {}
+
+export type NavContextValue = {
+  setIsOpen: Dispatch<SetStateAction<boolean>>
+  isOpen: boolean
+}
+export const NavContext = createContext<NavContextValue>({
+  setIsOpen: setIsOpenStub,
+  isOpen: false,
+})
 
 function NavButtonsUnstyled({ desktop: _desktop, children, ...props }) {
   return (
@@ -39,7 +57,6 @@ export const NavButtons = styled(NavButtonsUnstyled)<{ desktop: boolean }>(({ de
     : {}),
 
   '> div': {
-    width: '100%',
     marginLeft: desktop ? 1000 : 0,
     display: 'flex',
     flexDirection: 'row',
@@ -68,21 +85,36 @@ function NavButton({
     />
   )
 }
-export function FullNav({ desktop = true }: { desktop: boolean }) {
+export function FullNav({
+  desktop = true,
+  isOpen,
+  setIsOpen,
+}: PartialBy<NavContextValue, 'setIsOpen' | 'isOpen'> & {
+  desktop: boolean
+}) {
   const [menuId, setMenuId] = useState<MenuId>('docs')
   const navData = useNavData()
   const router = useRouter()
+  const thisPath = getBarePathFromPath(router.asPath)
+  const previousPath = usePrevious(thisPath)
 
   const routeIsAppCatalog = isAppCatalogRoute(router.asPath)
-  const routeWasAppCatalog = usePrevious(routeIsAppCatalog)
 
   useEffect(() => {
-    if (routeIsAppCatalog && !routeWasAppCatalog) {
-      setMenuId('appCatalog')
+    if (thisPath !== previousPath) {
+      if (setIsOpen) {
+        setIsOpen(false)
+      }
+      if (routeIsAppCatalog) {
+        setMenuId('appCatalog')
+      }
+      else {
+        setMenuId('docs')
+      }
     }
-  }, [routeIsAppCatalog, routeWasAppCatalog])
+  }, [thisPath, previousPath, setIsOpen, routeIsAppCatalog])
 
-  const showNavButton = routeIsAppCatalog || !desktop
+  const showNavButton = menuId === 'appCatalog' || routeIsAppCatalog || !desktop
   let rightNavButton
   let leftNavButton
 
@@ -108,6 +140,16 @@ export function FullNav({ desktop = true }: { desktop: boolean }) {
       )
     }
   }
+  if (menuId === 'appCatalog') {
+    leftNavButton = (
+      <NavButton
+        navDirection="back"
+        onClick={() => setMenuId('docs')}
+      >
+        All docs
+      </NavButton>
+    )
+  }
   if (routeIsAppCatalog) {
     if (menuId === 'docs') {
       rightNavButton = (
@@ -119,20 +161,13 @@ export function FullNav({ desktop = true }: { desktop: boolean }) {
         </NavButton>
       )
     }
-    else if (menuId === 'appCatalog') {
-      leftNavButton = (
-        <NavButton
-          navDirection="back"
-          onClick={() => setMenuId('docs')}
-        >
-          All docs
-        </NavButton>
-      )
-    }
   }
 
+  const navContextValue = useMemo(() => ({ setIsOpen: setIsOpen || setIsOpenStub, isOpen: !!isOpen }),
+    [setIsOpen, isOpen])
+
   const content = (
-    <>
+    <NavContext.Provider value={navContextValue}>
       {showNavButton && (
         <NavButtons desktop={desktop}>
           {leftNavButton}
@@ -152,7 +187,7 @@ export function FullNav({ desktop = true }: { desktop: boolean }) {
           />
         )}
       </NavWrap>
-    </>
+    </NavContext.Provider>
   )
 
   if (desktop) {

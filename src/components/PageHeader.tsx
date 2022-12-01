@@ -99,7 +99,10 @@ function PageHeaderUnstyled({ ...props }) {
           }}
         />
       </section>
-      <MobileMenu isOpen={menuIsOpen} />
+      <MobileMenu
+        isOpen={menuIsOpen}
+        setIsOpen={setMenuIsOpen}
+      />
     </header>
   )
 }

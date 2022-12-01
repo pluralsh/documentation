@@ -1,5 +1,5 @@
 ---
-title: Applications Catalog
+title: Catalog Overview
 description: Applications you can install with Plural.
 ---
 

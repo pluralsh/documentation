@@ -17,7 +17,7 @@ import type {
   SetStateAction,
 } from 'react'
 
-import { CaretRightIcon, usePrevious } from '@pluralsh/design-system'
+import { ArrowRightIcon, CaretRightIcon, usePrevious } from '@pluralsh/design-system'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -37,14 +37,14 @@ export type SideNavProps = {
   padTop?: boolean
   hide?: boolean
   menuId?: Key
-  setMenuId?: Dispatch<SetStateAction<MenuId>>
+  setMenuId: Dispatch<SetStateAction<MenuId>>
 }
 
 const NavContext = createContext<{
   optimisticPathname: null | string
   scrollRef: MutableRefObject<HTMLDivElement | null>
   desktop: boolean
-  setMenuId?: Dispatch<SetStateAction<MenuId>>
+  setMenuId: Dispatch<SetStateAction<MenuId>>
 }>({
   optimisticPathname: null,
   scrollRef: { current: null },
@@ -69,6 +69,11 @@ const StyledLink = styled(NextLink)<{ $desktop: boolean }>(({ $desktop, theme })
   ...theme.partials.text.body2,
   textDecoration: 'none',
   color: theme.colors['text-light'],
+  '.iconRight': {
+    display: 'flex',
+    justifyContent: 'right',
+    flexGrow: 1,
+  },
   '&:hover': {
     color: theme.colors.text,
   },
@@ -86,11 +91,12 @@ const StyledLink = styled(NextLink)<{ $desktop: boolean }>(({ $desktop, theme })
 }))
 
 type LinkBaseProps = Partial<ComponentProps<typeof StyledLink>> & {
-  icon?: ReactElement
+  iconLeft?: ReactElement
+  iconRight?: ReactElement
 }
 
 const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
-  className, children, icon, href, ...props
+  className, children, iconLeft, iconRight, href, ...props
 }, ref) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
   const { desktop } = useContext(NavContext)
@@ -103,29 +109,49 @@ const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
       ref={ref}
       {...props}
     >
-      {icon && icon}
+      {iconLeft && iconLeft}
       {children}
+      <div className="iconRight">{iconRight && iconRight}</div>
     </StyledLink>
   )
 
   return content
 })
 
-const CaretButtonInner = styled(({ isOpen = false, className, ...props }) => {
+const CaretButton = styled(({
+  isOpen = false, mode: _mode, className, ...props
+}) => {
   const { keyboardNavigable } = useContext(KeyboardNavContext)
+  const [showHoverState, setShowHoverState] = useState(false)
+  const [isHovered, setIsHovered] = useState(false)
+  const wasOpen = usePrevious(isOpen)
+
+  useEffect(() => {
+    if (wasOpen !== isOpen) {
+      if (isHovered) setShowHoverState(false)
+    }
+  }, [wasOpen, isOpen, isHovered])
 
   return (
     <button
       tabIndex={keyboardNavigable ? 0 : -1}
       type="button"
-      className={className}
+      className={classNames(className, { showHoverState })}
       aria-label={isOpen ? 'Collapse' : 'Expand'}
+      onMouseEnter={() => {
+        setShowHoverState(true)
+        setIsHovered(true)
+      }}
+      onMouseLeave={() => {
+        setShowHoverState(true)
+        setIsHovered(false)
+      }}
       {...props}
     >
-      <CaretRightIcon className="icon" />
+      {_mode === 'menu' ? <ArrowRightIcon className="icon" /> : <CaretRightIcon className="icon" />}
     </button>
   )
-})(({ theme, isOpen }) => ({
+})(({ theme, isOpen, mode = 'subsection' }) => ({
   ...theme.partials.reset.button,
   display: 'flex',
   alignItems: 'center',
@@ -144,49 +170,32 @@ const CaretButtonInner = styled(({ isOpen = false, className, ...props }) => {
     right: theme.spacing.xsmall + theme.spacing.xsmall,
     bottom: theme.spacing.xsmall,
   },
-  '.icon': {
-    transform: `rotate(${isOpen ? 90 : 0}deg)`,
-  },
+  ...(mode === 'subsection'
+    ? {
+      '.icon': {
+        transform: `rotate(${isOpen ? 90 : 0}deg)`,
+        transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
+      },
+      '&.showHoverState:hover .icon': {
+        transform: isOpen ? 'rotate(-45deg)' : 'rotate(45deg)',
+        transitionDuration: '0.2s',
+      },
+    }
+    : {}),
+  ...(mode === 'menu'
+    ? {
+      '.icon': {
+        transform: `translateX(${isOpen ? 20 : 0}%)`,
+        transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
+      },
+      '&.showHoverState:hover .icon': {
+        transform: 'translateX(30%)',
+      },
+    }
+    : {}),
 }))
 
-const arrowOpenHoverKF = keyframes`
- 0% { transform: rotate(0); }
- 30% { transform: rotate(35deg); }
- 60% { transform: rotate(-5deg); }
- 90% { transform: rotate(3deg); }
- 100% { transform: rotate(0deg); }
-`
-
-const arrowCloseHoverKF = keyframes`
- 0% { transform: rotate(90deg); }
- 30% { transform: rotate(55deg); }
- 60% { transform: rotate(95deg); }
- 90% { transform: rotate(87deg); }
- 100% { transform: rotate(90deg); }
-`
-
-const arrowOpenHoverAnim = css`
-  &:hover .icon {
-    animation-name: ${arrowOpenHoverKF};
-  }
-`
-
-const arrowCloseHoverAnim = css`
-  &:hover .icon {
-    animation-name: ${arrowCloseHoverKF};
-  }
-`
-
-const CaretButton = styled(CaretButtonInner)`
-  &:hover .icon {
-    animation-duration: 0.5s;
-    animation-iteration-count: 1;
-  }
-  ${({ isOpen }) => !isOpen && arrowOpenHoverAnim}
-  ${({ isOpen }) => isOpen && arrowCloseHoverAnim}
-`
-
-const NavLink = styled(({
+function NavLinkUnstyled({
   className,
   isSubSection = false,
   isOpen = false,
@@ -197,15 +206,14 @@ const NavLink = styled(({
   toMenu,
   ...props
 }: {
-    isSubSection?: boolean
-    isOpen?: boolean
-    childIsSelected: boolean
-    icon?: ReactElement
-    desktop: boolean
-    toMenu: MenuId
-
-    onToggleOpen?: () => void
-  } & Partial<ComponentProps<typeof StyledLink>>) => {
+  isSubSection?: boolean
+  isOpen?: boolean
+  childIsSelected: boolean
+  icon?: ReactElement
+  desktop: boolean
+  toMenu: MenuId
+  onToggleOpen?: () => void
+} & Partial<ComponentProps<typeof StyledLink>>) {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
   const { scrollRef, setMenuId, ...navContext } = useContext(NavContext)
   const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
@@ -214,9 +222,9 @@ const NavLink = styled(({
   const liRef = useRef<HTMLLIElement>(null)
   const theme = useTheme()
 
-    // Scroll into view gets interrupted by page transitions, so we only start
-    // scrolling when the actual pathname changes instead of using optimisticPathname
-    // like everything else
+  // Scroll into view gets interrupted by page transitions, so we only start
+  // scrolling when the actual pathname changes instead of using optimisticPathname
+  // like everything else
   const pathname = removeTrailingSlashes(useRouter().pathname)
   const isSelected = useMemo(() => pathname === href, [pathname, href])
   const wasSelected = usePrevious(isSelected)
@@ -232,6 +240,8 @@ const NavLink = styled(({
     }
   }, [isSelected, wasSelected, scrollRef, liRef, theme.spacing.xlarge])
 
+  const toMenuOnClick = () => setMenuId(toMenu)
+
   return (
     <li
       ref={liRef}
@@ -241,26 +251,29 @@ const NavLink = styled(({
       })}
     >
       <LinkBase
-        icon={icon}
+        iconLeft={icon}
         onClick={() => {
           if (isSelected && onToggleOpen) {
             onToggleOpen()
           }
-          if (toMenu && setMenuId) {
-            setMenuId(toMenu)
+          if (toMenu) {
+            toMenuOnClick()
           }
         }}
         {...props}
       />
-      {isSubSection && (
+      {(isSubSection || toMenu) && (
         <CaretButton
-          isOpen={isOpen}
-          onClick={onToggleOpen}
+          isOpen={isOpen && !toMenu}
+          mode={toMenu ? 'menu' : 'subsection'}
+          onClick={toMenu ? toMenuOnClick : onToggleOpen}
         />
       )}
     </li>
   )
-})(({ desktop, theme }) => ({
+}
+
+const NavLink = styled(NavLinkUnstyled)(({ desktop, theme }) => ({
   display: 'flex',
   flexDirection: 'row',
   position: 'relative',

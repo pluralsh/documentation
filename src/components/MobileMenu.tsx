@@ -10,8 +10,9 @@ import { MainLink } from './PageHeader'
 import { SocialLink } from './PageHeaderButtons'
 import { TopHeading } from './SideNav'
 
-type MobileMenuProps = {
-  isOpen: boolean
+import type { NavContextValue } from './FullNav'
+
+type MobileMenuProps = NavContextValue & {
   className?: string
 }
 
@@ -86,7 +87,7 @@ const Content = styled.div(({ theme }) => ({
   flexDirection: 'column',
 }))
 
-function MobileMenu({ isOpen, className }: MobileMenuProps) {
+function MobileMenu({ isOpen, setIsOpen, className }: MobileMenuProps) {
   const [, setScrollLock] = useScrollLock(false)
 
   useIsomorphicLayoutEffect(() => {
@@ -96,7 +97,11 @@ function MobileMenu({ isOpen, className }: MobileMenuProps) {
   return (
     <div className={className}>
       <Content>
-        <FullNav desktop={false} />
+        <FullNav
+          desktop={false}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </Content>
     </div>
   )

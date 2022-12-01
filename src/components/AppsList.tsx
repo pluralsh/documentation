@@ -1,5 +1,3 @@
-import { useMemo } from 'react'
-
 import { DocumentIcon } from '@pluralsh/design-system'
 import { Button } from 'honorable'
 import { useRouter } from 'next/router'
@@ -8,6 +6,8 @@ import styled from 'styled-components'
 
 import { useNavMenu } from '../contexts/NavDataContext'
 import { removeTrailingSlashes } from '../utils/text'
+
+import { ArticleList, Title } from './ArticlesInSection'
 
 import type { NavItem } from '../NavData'
 
@@ -29,22 +29,7 @@ function findArticlesIn(routerPathname,
   return undefined
 }
 
-export const ArticleList = styled.ul(({ theme }) => ({
-  margin: 0,
-  padding: 0,
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: theme.spacing.small,
-  ...theme.partials.marketingText.label,
-  marginBottom: theme.spacing.medium,
-}))
-
-export const Title = styled.h2(({ theme }) => ({
-  ...theme.partials.marketingText.label,
-  marginBottom: theme.spacing.medium,
-}))
-
-function ArticlesInSection({
+function AppsList({
   className,
   hasContent: _,
   ...props
@@ -55,7 +40,7 @@ function ArticlesInSection({
   const { pathname } = useRouter()
   const navData = useNavMenu()
 
-  const articles = useMemo(() => findArticlesIn(pathname, navData), [navData, pathname])
+  const articles = findArticlesIn(pathname, navData)
 
   if (!articles || articles.length <= 0) {
     return null
@@ -87,7 +72,7 @@ function ArticlesInSection({
   )
 }
 
-export default styled(ArticlesInSection)(({ theme, hasContent }) => ({
+export default styled(AppsList)(({ theme, hasContent }) => ({
   marginTop: theme.spacing.large,
   paddingBottom: hasContent ? theme.spacing.xlarge : 0,
   borderBottom: hasContent ? theme.borders.default : 'none',
