@@ -79,12 +79,12 @@ export default function Repo({
     <div>
       <Heading level={2}>Description</Heading>
       <Paragraph>
-        Plural will install {repo?.name} in a dependency-aware manner onto a
+        Plural will install {repo?.displayName} in a dependency-aware manner onto a
         Plural-managed Kubernetes cluster with one CLI command.
       </Paragraph>
       <Heading level={2}>Installation</Heading>
       <Paragraph>
-        We currently support {repo?.name} for the following providers:
+        We currently support {repo?.displayName} for the following providers:
       </Paragraph>
       {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
       {!mdHasConfig && recipeSections && recipeHasConfig && (
@@ -159,7 +159,7 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       ...(markdoc ? { markdoc } : {}),
-      title: markdoc?.frontmatter?.title || repoName,
+      title: markdoc?.frontmatter?.title || `Installing ${thisRepo?.displayName}`,
       description: markdoc?.frontmatter?.description || thisRepo?.description,
       repo: thisRepo
         ? {

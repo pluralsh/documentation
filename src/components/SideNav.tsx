@@ -24,7 +24,7 @@ import { useRouter } from 'next/router'
 import classNames from 'classnames'
 import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
-import styled, { css, keyframes, useTheme } from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 import scrollIntoContainerView from '../utils/scrollIntoContainerView'
 import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'

@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useMemo } from 'react'
 
 import { DocumentIcon } from '@pluralsh/design-system'
@@ -7,7 +8,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { useNavMenu } from '../contexts/NavDataContext'
-import { removeTrailingSlashes } from '../utils/text'
+import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
 import type { NavItem } from '../NavData'
 
@@ -46,16 +47,19 @@ export const Title = styled.h2(({ theme }) => ({
 
 function ArticlesInSection({
   className,
-  hasContent: _,
+  hasContent: _hasContent,
+  title,
   ...props
 }: {
   className?: string
   hasContent: boolean
+  title?: ReactNode
 }) {
-  const { pathname } = useRouter()
+  const pathname = getBarePathFromPath(useRouter().asPath)
   const navData = useNavMenu()
 
-  const articles = useMemo(() => findArticlesIn(pathname, navData), [navData, pathname])
+  const articles = useMemo(() => findArticlesIn(pathname, navData)?.filter(article => article.href !== pathname),
+    [navData, pathname])
 
   if (!articles || articles.length <= 0) {
     return null
@@ -66,7 +70,7 @@ function ArticlesInSection({
       className={className}
       {...props}
     >
-      <Title>Articles in this section:</Title>
+      {title && <Title>{title}:</Title>}
       <ArticleList>
         {articles
           && articles.map(article => (

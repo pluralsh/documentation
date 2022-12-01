@@ -1,11 +1,15 @@
 import { useContext } from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
+import { useRouter } from 'next/router'
 
 import styled from 'styled-components'
 
+import { isAppCatalogRoute } from '../utils/text'
+
 import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
+import { Heading } from './md/Heading'
 import { FooterLink } from './PageFooter'
 import { PagePropsContext } from './PagePropsContext'
 
@@ -56,12 +60,21 @@ function ContentHeaderUnstyled({
   description?: string
   className?: string
   pageHasContent?: boolean
-}) {
+  }) {
+  const router = useRouter()
+
+  const isAppCatalog = isAppCatalogRoute(router.asPath)
+
   return (
     <div className={className}>
       {title && <Title>{title}</Title>}
       {description && <Description>{description}</Description>}
-      <ArticlesInSection hasContent={pageHasContent} />
+      {!isAppCatalog && (
+        <ArticlesInSection
+          title="Articles in this section"
+          hasContent={pageHasContent}
+        />
+      )}
     </div>
   )
 }
@@ -73,6 +86,9 @@ export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
 export default function MainContent({ Component, title, description }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps || {}
+  const router = useRouter()
+
+  const isAppCatalog = isAppCatalogRoute(router.asPath)
 
   return (
     <>
@@ -88,6 +104,13 @@ export default function MainContent({ Component, title, description }) {
           />
         )}
         <Component {...pageProps} />
+        <Heading level={2}>Our Catalog</Heading>
+        {isAppCatalog && (
+          <ArticlesInSection
+            hasContent={false}
+          />
+        )}
+
         <PageDivider />
         {markdoc?.file?.path && (
           <EditOnGithub>

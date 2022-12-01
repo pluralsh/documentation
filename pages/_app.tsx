@@ -43,20 +43,18 @@ import { ReposProvider } from '../src/contexts/ReposContext'
 import { getRepos, reposCache } from '../src/data/getRepos'
 import { getNavData } from '../src/NavData'
 
-import type { RepoFragment } from '../src/data/queries/recipesQueries'
-import type { FragmentType } from '../src/gql/fragment-masking'
-import type { RecipeFragmentFragment, RepoFragmentFragment } from '../src/gql/graphql'
+import type { Repo } from '../src/data/getRepos'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   title?: string
   description?: string
-  repo?: RepoFragmentFragment & { recipes?: RecipeFragmentFragment[] }
+  repo?: Repo
 }
 
 type MyAppProps = AppProps<MyPageProps> & {
   apolloError?: any
-  repos: FragmentType<typeof RepoFragment>[]
+  repos: Repo[]
 }
 
 export type MarkdocHeading = {

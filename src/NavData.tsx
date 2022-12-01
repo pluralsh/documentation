@@ -13,10 +13,8 @@ import {
 import deepFreeze from 'deep-freeze'
 
 import { APP_CATALOG_BASE_URL } from './consts/routes'
-import { RepoFragment } from './data/queries/recipesQueries'
-import { useFragment as asFragment } from './gql/fragment-masking'
 
-import type { FragmentType } from './gql/fragment-masking'
+import type { Repo } from './data/getRepos'
 
 export type NavMenuId = 'docs' | 'appCatalog'
 export type MenuId = NavMenuId | 'plural'
@@ -271,7 +269,7 @@ const rootNavData: NavMenu = deepFreeze([
 export const getNavData = ({
   repos,
 }: {
-  repos: FragmentType<typeof RepoFragment>[]
+  repos: Repo[]
 }): NavData => ({
   docs: rootNavData,
   appCatalog: [
@@ -280,14 +278,10 @@ export const getNavData = ({
       href: APP_CATALOG_BASE_URL,
       sections: [
         { title: 'Catalog Overview', href: APP_CATALOG_BASE_URL },
-        ...repos.map(r => {
-          const repo = asFragment(RepoFragment, r)
-
-          return {
-            title: repo.name,
-            href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
-          }
-        }),
+        ...repos.map(repo => ({
+          title: repo.displayName,
+          href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
+        })),
       ],
     },
   ],

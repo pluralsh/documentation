@@ -91,7 +91,6 @@ function Breadcrumbs({ className }: { className?: string }) {
     >
       <ol>
         {crumbs.map((crumb, idx) => {
-          console.log('crumb', crumb)
           if (!crumb.title) {
             return undefined
           }
