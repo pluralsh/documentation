@@ -421,7 +421,7 @@ function SubSection({
         href={href}
         icon={icon}
         desktop={desktop}
-        isOpen={isOpen}
+        isOpen={isOpen && Array.isArray(sections) && sections?.length > 0}
         childIsSelected={defaultOpen}
         onToggleOpen={toggleOpen}
         toMenu={toMenu}

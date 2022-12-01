@@ -102,6 +102,8 @@ const rootNavData: NavMenu = deepFreeze([
         href: APP_CATALOG_BASE_URL,
         toMenu: 'appCatalog',
         title: 'Application Catalog',
+        // Empty array below makes sure arrow shows up for nav link
+        sections: [],
       },
       {
         href: '/adding-new-application',
