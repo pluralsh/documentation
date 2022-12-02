@@ -33,7 +33,7 @@ import { PageHeader } from '../src/components/PageHeader'
 import { PagePropsContext } from '../src/components/PagePropsContext'
 import { TableOfContents } from '../src/components/TableOfContents'
 import {
-  DESCRIPTION,
+  META_DESCRIPTION,
   PAGE_TITLE_PREFIX,
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
@@ -47,8 +47,10 @@ import type { Repo } from '../src/data/getRepos'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
 export type MyPageProps = MarkdocNextJsPageProps & {
-  title?: string
-  description?: string
+  displayTitle?: string
+  metaTitle?: string
+  displayDescription?: string
+  metaDescription?: string
   repo?: Repo
 }
 
@@ -96,19 +98,22 @@ function App({
   const router = useRouter()
   const markdoc = pageProps?.markdoc
   const navData = useMemo(() => getNavData({ repos }), [repos])
+  const { metaTitle, metaDescription } = pageProps
 
-  const title = pageProps?.title || markdoc?.frontmatter?.title
-  const description
-    = pageProps?.description || markdoc?.frontmatter?.description
+  const displayTitle = pageProps?.displayTitle || markdoc?.frontmatter?.title
+  const displayDescription
+    = pageProps?.displayDescription || markdoc?.frontmatter?.description
 
   const headProps = {
-    title: title
-      ? `${PAGE_TITLE_PREFIX}${title}${PAGE_TITLE_SUFFIX}`
-      : ROOT_TITLE,
+    title:
+      metaTitle || displayTitle
+        ? `${PAGE_TITLE_PREFIX}${displayTitle}${PAGE_TITLE_SUFFIX}`
+        : ROOT_TITLE,
     description:
-      router.pathname === '/'
-        ? DESCRIPTION
-        : markdoc?.frontmatter?.description || DESCRIPTION,
+      metaDescription
+      || (router.pathname === '/'
+        ? META_DESCRIPTION
+        : markdoc?.frontmatter?.description || META_DESCRIPTION),
   }
 
   const toc = pageProps?.markdoc?.content
@@ -132,8 +137,8 @@ function App({
             <ContentContainer>
               <MainContent
                 Component={Component}
-                title={title}
-                description={description}
+                title={displayTitle}
+                description={displayDescription}
               />
               <PageFooter />
             </ContentContainer>

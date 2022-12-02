@@ -9,6 +9,7 @@ import { CodeStyled } from '../../src/components/md/Fence'
 import { Heading } from '../../src/components/md/Heading'
 import { List, ListItem } from '../../src/components/md/List'
 import Paragraph from '../../src/components/md/Paragraph'
+import { getAppMetaDescription } from '../../src/consts'
 import { APP_CATALOG_BASE_URL } from '../../src/consts/routes'
 import { getRepos } from '../../src/data/getRepos'
 import { RECIPES_QUERY, RecipeFragment } from '../../src/data/queries/recipesQueries'
@@ -159,8 +160,9 @@ export const getStaticProps: GetStaticProps<
   return {
     props: {
       ...(markdoc ? { markdoc } : {}),
-      title: markdoc?.frontmatter?.title || `Installing ${thisRepo?.displayName}`,
-      description: markdoc?.frontmatter?.description || thisRepo?.description,
+      displayTitle: markdoc?.frontmatter?.title || `Installing ${thisRepo?.displayName}`,
+      displayDescription: markdoc?.frontmatter?.description || thisRepo?.description,
+      metaDescription: getAppMetaDescription(thisRepo.displayName),
       repo: thisRepo
         ? {
           ...thisRepo,
