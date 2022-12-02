@@ -5,6 +5,7 @@ import Document, {
   Main,
   NextScript,
 } from 'next/document'
+
 import { ServerStyleSheet } from 'styled-components'
 
 class MyDocument extends Document {

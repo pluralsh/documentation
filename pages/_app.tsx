@@ -1,5 +1,5 @@
-import { MarkdocNextJsPageProps } from '@markdoc/next.js'
-import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
+import { useMemo } from 'react'
+
 import {
   FillLevelProvider,
   GlobalStyle as PluralGlobalStyle,
@@ -7,38 +7,57 @@ import {
   styledTheme,
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
-import { SSRProvider } from '@react-aria/ssr'
-import '../src/styles/globals.css'
+import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
+import { SSRProvider } from '@react-aria/ssr'
+import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
+
+import '../src/styles/globals.css'
+
 import { BreakpointProvider } from '../src/components/Breakpoints'
-import PageFooter from '../src/components/PageFooter'
-import HtmlHead from '../src/components/HtmlHead'
-import { NavPositionWrapper, SideNav } from '../src/components/SideNav'
+import DocSearchStyles from '../src/components/DocSearchStyles'
 import ExternalScripts from '../src/components/ExternalScripts'
-import { TableOfContents } from '../src/components/TableOfContents'
-import { PageHeader } from '../src/components/PageHeader'
+import { FullNav } from '../src/components/FullNav'
+import GlobalStyles from '../src/components/GlobalStyles'
+import HtmlHead from '../src/components/HtmlHead'
+import MainContent from '../src/components/MainContent'
+import PageFooter from '../src/components/PageFooter'
 import {
   ContentContainer,
   PageGrid,
   SideCarContainer,
   SideNavContainer,
 } from '../src/components/PageGrid'
-import GlobalStyles from '../src/components/GlobalStyles'
-import DocSearchStyles from '../src/components/DocSearchStyles'
-import MainContent from '../src/components/MainContent'
+import { PageHeader } from '../src/components/PageHeader'
+import { PagePropsContext } from '../src/components/PagePropsContext'
+import { TableOfContents } from '../src/components/TableOfContents'
 import {
-  DESCRIPTION,
+  META_DESCRIPTION,
   PAGE_TITLE_PREFIX,
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
 } from '../src/consts'
-import { PagePropsContext } from '../src/components/PagePropsContext'
-import navData from '../src/NavData'
+import { NavDataProvider } from '../src/contexts/NavDataContext'
+import { ReposProvider } from '../src/contexts/ReposContext'
+import { getRepos, reposCache } from '../src/data/getRepos'
+import { getNavData } from '../src/NavData'
 
-import type { AppProps } from 'next/app'
+import type { Repo } from '../src/data/getRepos'
+import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
-type AppPropsPlusMd = AppProps & { pageProps: MarkdocNextJsPageProps }
+export type MyPageProps = MarkdocNextJsPageProps & {
+  displayTitle?: string
+  metaTitle?: string
+  displayDescription?: string
+  metaDescription?: string
+  repo?: Repo
+}
+
+type MyAppProps = AppProps<MyPageProps | undefined> & {
+  apolloError?: any
+  repos: Repo[]
+}
 
 export type MarkdocHeading = {
   id?: string
@@ -73,21 +92,32 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 
 const Page = styled.div(() => ({}))
 
-function MyApp({ Component, pageProps }: AppPropsPlusMd) {
+function App({
+  Component, repos = [], pageProps = {}, apolloError: _,
+}: MyAppProps) {
   const router = useRouter()
+  const markdoc = pageProps?.markdoc
+  const navData = useMemo(() => getNavData({ repos }), [repos])
+  const { metaTitle, metaDescription } = pageProps
 
-  const { markdoc } = pageProps
+  const displayTitle = pageProps?.displayTitle || markdoc?.frontmatter?.title
+  const displayDescription
+    = pageProps?.displayDescription || markdoc?.frontmatter?.description
 
-  const title = markdoc?.frontmatter?.title
-    ? `${PAGE_TITLE_PREFIX}${markdoc?.frontmatter?.title}${PAGE_TITLE_SUFFIX}`
-    : ROOT_TITLE
-  const description
-    = router.pathname === '/'
-      ? DESCRIPTION
-      : markdoc?.frontmatter?.description || DESCRIPTION
+  const headProps = {
+    title:
+      metaTitle || displayTitle
+        ? `${PAGE_TITLE_PREFIX}${displayTitle}${PAGE_TITLE_SUFFIX}`
+        : ROOT_TITLE,
+    description:
+      metaDescription
+      || (router.pathname === '/'
+        ? META_DESCRIPTION
+        : markdoc?.frontmatter?.description || META_DESCRIPTION),
+  }
 
-  const toc = pageProps.markdoc?.content
-    ? collectHeadings(pageProps.markdoc.content)
+  const toc = pageProps?.markdoc?.content
+    ? collectHeadings(pageProps?.markdoc.content)
     : []
 
   const app = (
@@ -97,26 +127,19 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
       <GlobalStyles />
       <DocSearchStyles />
       <PagePropsContext.Provider value={pageProps}>
-        <HtmlHead
-          title={title}
-          description={description}
-        />
+        <HtmlHead {...headProps} />
         <PageHeader />
         <Page>
           <PageGrid>
             <SideNavContainer>
-              <NavPositionWrapper
-                role="navigation"
-                aria-label="Main"
-              >
-                <SideNav
-                  navData={navData}
-                  desktop
-                />
-              </NavPositionWrapper>
+              <FullNav desktop />
             </SideNavContainer>
             <ContentContainer>
-              <MainContent Component={Component} />
+              <MainContent
+                Component={Component}
+                title={displayTitle}
+                description={displayDescription}
+              />
               <PageFooter />
             </ContentContainer>
             <SideCarContainer>
@@ -130,18 +153,34 @@ function MyApp({ Component, pageProps }: AppPropsPlusMd) {
   )
 
   return (
-    <SSRProvider>
-      <BreakpointProvider>
-        <ThemeProvider theme={honorableTheme}>
-          <StyledThemeProvider theme={docsStyledTheme}>
-            <FillLevelProvider value={0}>
-              {app}
-            </FillLevelProvider>
-          </StyledThemeProvider>
-        </ThemeProvider>
-      </BreakpointProvider>
-    </SSRProvider>
+    <ReposProvider value={repos}>
+      <NavDataProvider value={navData}>
+        <SSRProvider>
+          <BreakpointProvider>
+            <ThemeProvider theme={honorableTheme}>
+              <StyledThemeProvider theme={docsStyledTheme}>
+                <FillLevelProvider value={0}>{app}</FillLevelProvider>
+              </StyledThemeProvider>
+            </ThemeProvider>
+          </BreakpointProvider>
+        </SSRProvider>
+      </NavDataProvider>
+    </ReposProvider>
   )
 }
 
-export default MyApp
+App.getInitialProps = async () => {
+  try {
+    return {
+      repos: await getRepos(),
+    }
+  }
+  catch (e) {
+    return {
+      repos: reposCache.filtered,
+      apolloError: e,
+    }
+  }
+}
+
+export default App

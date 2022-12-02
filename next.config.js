@@ -13,7 +13,7 @@ module.exports = () => {
   const plugins = [withMarkdoc, withTM]
 
   return plugins.reduce((acc, next) => next(acc), {
-    reactStrictMode: true,
+    reactStrictMode: false,
     compiler: {
       // https://nextjs.org/docs/advanced-features/compiler#styled-components
       styledComponents: true,
@@ -213,12 +213,5 @@ module.exports = () => {
         },
       ]
     },
-    // webpack: (config) => {
-    //   config.module.rules.push({
-    //     test: /\.md$/,
-    //     use: 'raw-loader',
-    //   });
-    //   return config;
-    // },
   })
 }

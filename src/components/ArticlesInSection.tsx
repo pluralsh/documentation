@@ -1,12 +1,16 @@
-import styled from 'styled-components'
-import { useRouter } from 'next/router'
-
-import { Button } from 'honorable'
+import type { ReactNode } from 'react'
+import { useMemo } from 'react'
 
 import { DocumentIcon } from '@pluralsh/design-system'
-import { removeTrailingSlashes } from '../utils/text'
+import { Button } from 'honorable'
+import { useRouter } from 'next/router'
 
-import navData, { NavItem } from '../NavData'
+import styled from 'styled-components'
+
+import { useNavMenu } from '../contexts/NavDataContext'
+import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
+
+import type { NavItem } from '../NavData'
 
 function findArticlesIn(routerPathname,
   sections: NavItem[] | undefined,
@@ -26,7 +30,7 @@ function findArticlesIn(routerPathname,
   return undefined
 }
 
-const ArticleList = styled.ul(({ theme }) => ({
+export const ArticleList = styled.ul(({ theme }) => ({
   margin: 0,
   padding: 0,
   display: 'flex',
@@ -36,22 +40,26 @@ const ArticleList = styled.ul(({ theme }) => ({
   marginBottom: theme.spacing.medium,
 }))
 
-const Title = styled.h2(({ theme }) => ({
+export const Title = styled.h2(({ theme }) => ({
   ...theme.partials.marketingText.label,
   marginBottom: theme.spacing.medium,
 }))
 
 function ArticlesInSection({
   className,
-  hasContent: _,
+  hasContent: _hasContent,
+  title,
   ...props
 }: {
   className?: string
   hasContent: boolean
+  title?: ReactNode
 }) {
-  const { pathname } = useRouter()
+  const pathname = getBarePathFromPath(useRouter().asPath)
+  const navData = useNavMenu()
 
-  const articles = findArticlesIn(pathname, navData)
+  const articles = useMemo(() => findArticlesIn(pathname, navData)?.filter(article => article.href !== pathname),
+    [navData, pathname])
 
   if (!articles || articles.length <= 0) {
     return null
@@ -62,7 +70,7 @@ function ArticlesInSection({
       className={className}
       {...props}
     >
-      <Title>Articles in this section:</Title>
+      {title && <Title>{title}:</Title>}
       <ArticleList>
         {articles
           && articles.map(article => (

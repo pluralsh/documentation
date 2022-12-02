@@ -5,14 +5,16 @@ import React, {
   useRef,
   useState,
 } from 'react'
+
 import NextLink from 'next/link'
-import styled from 'styled-components'
 import { useRouter } from 'next/router'
 
 import classNames from 'classnames'
+import styled from 'styled-components'
+
 import { exists } from '../utils/typescript'
 
-import { MarkdocHeading } from '../../pages/_app'
+import type { MarkdocHeading } from '../../pages/_app'
 
 const Title = styled.h2(({ theme }) => ({
   ...theme.partials.marketingText.label,

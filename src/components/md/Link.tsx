@@ -1,7 +1,10 @@
+import type { ReactNode } from 'react'
+
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
-import { ReactNode } from 'react'
+
 import styled from 'styled-components'
+
 import {
   isExternalUrl,
   isRelativeUrl,

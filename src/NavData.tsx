@@ -1,3 +1,5 @@
+import type { ReactElement } from 'react'
+
 import {
   CloudIcon,
   DocumentIcon,
@@ -7,19 +9,45 @@ import {
   PadlockIcon,
   VideoIcon,
 } from '@pluralsh/design-system'
-import { ReactElement } from 'react'
+
 import deepFreeze from 'deep-freeze'
+
+import { APP_CATALOG_BASE_URL } from './consts/routes'
+
+import type { Repo } from './data/getRepos'
+
+export type NavMenuId = 'docs' | 'appCatalog'
+export type MenuId = NavMenuId | 'plural'
+export type NavData = Record<NavMenuId, NavMenu>
 
 export type NavItem = {
   title?: string
   href?: string
+  toMenu?: MenuId
   icon?: ReactElement
   sections?: NavItem[]
 }
 
-export type NavData = NavItem[]
+export type NavMenu = NavItem[]
 
-const data: NavData = [
+export function findNavItem(test: (arg: NavItem) => boolean,
+  section: NavMenu): NavItem | null {
+  for (const item of section) {
+    if (test(item)) {
+      return item
+    }
+
+    const search = findNavItem(test, item.sections || [])
+
+    if (search) {
+      return search
+    }
+  }
+
+  return null
+}
+
+const rootNavData: NavMenu = deepFreeze([
   {
     title: 'Getting Started',
     sections: [
@@ -69,13 +97,9 @@ const data: NavData = [
     title: 'Applications',
     sections: [
       {
-        href: '/applications',
+        href: APP_CATALOG_BASE_URL,
+        toMenu: 'appCatalog',
         title: 'Application Catalog',
-        sections: [
-          { href: '/applications/airbyte', title: 'Airbyte' },
-          { href: '/applications/airflow', title: 'Airflow' },
-          { href: '/applications/console', title: 'Console' },
-        ],
       },
       {
         href: '/adding-new-application',
@@ -240,6 +264,25 @@ const data: NavData = [
   //   sections: [{ title: 'Callouts', href: '/test/callouts' }],
   //   sections: [{ title: 'Blockquotes', href: '/test/blockquotes' }],
   // },
-]
+])
 
-export default deepFreeze(data)
+export const getNavData = ({
+  repos,
+}: {
+  repos: Repo[]
+}): NavData => ({
+  docs: rootNavData,
+  appCatalog: [
+    {
+      title: 'Application Catalog',
+      href: APP_CATALOG_BASE_URL,
+      sections: [
+        { title: 'Catalog Overview', href: APP_CATALOG_BASE_URL },
+        ...repos.map(repo => ({
+          title: repo.displayName,
+          href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
+        })),
+      ],
+    },
+  ],
+})

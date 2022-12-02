@@ -1,5 +1,6 @@
-import styled from 'styled-components'
 import { GitHubLogoIcon } from '@pluralsh/design-system'
+
+import styled from 'styled-components'
 import useSWR from 'swr'
 
 import { ButtonFillTwo } from './PageHeaderButtons'
@@ -14,7 +15,7 @@ async function fetcher<JSON = any>(input: RequestInfo,
 type GithubRepoData = { stargazers_count: number }
 
 function isGithubRepoData(obj: unknown): obj is GithubRepoData {
-  return !!(obj && 'stargazers_count' in obj)
+  return !!(obj && typeof obj === 'object' && 'stargazers_count' in obj)
 }
 
 const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loading }) => ({

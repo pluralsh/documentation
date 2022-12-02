@@ -1,6 +1,7 @@
-import ReactEmbed from 'react-embed'
-import * as loom from '@loomhq/loom-embed'
 import { useEffect, useMemo, useState } from 'react'
+
+import * as loom from '@loomhq/loom-embed'
+import ReactEmbed from 'react-embed'
 import styled from 'styled-components'
 
 import { MediaWrap } from './MediaWrap'

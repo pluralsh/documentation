@@ -1,12 +1,18 @@
-import { GitHubLogoIcon } from '@pluralsh/design-system'
+import type { ReactNode } from 'react'
 import { useContext } from 'react'
+
+import { GitHubLogoIcon } from '@pluralsh/design-system'
+import { useRouter } from 'next/router'
+
 import styled from 'styled-components'
 
+import { APP_CATALOG_BASE_URL } from '../consts/routes'
+import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
+
 import ArticlesInSection from './ArticlesInSection'
-
 import Breadcrumbs from './Breadcrumbs'
+import { Heading } from './md/Heading'
 import { FooterLink } from './PageFooter'
-
 import { PagePropsContext } from './PagePropsContext'
 
 const ContentWrapper = styled.div(({ theme }) => ({
@@ -15,10 +21,6 @@ const ContentWrapper = styled.div(({ theme }) => ({
 
 const BreadcrumbsWrapper = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xlarge,
-}))
-
-const PageHeader = styled.div(({ theme }) => ({
-  marginBottom: theme.spacing.xxlarge,
 }))
 
 const Title = styled.h1(({ theme }) => ({
@@ -50,12 +52,47 @@ const PageDivider = styled.div(({ theme }) => ({
   borderTop: theme.borders.default,
 }))
 
-export default function MainContent({ Component }) {
-  const pageProps = useContext(PagePropsContext)
-  const { markdoc } = pageProps
+function ContentHeaderUnstyled({
+  title,
+  description,
+  className,
+  pageHasContent = true,
+}: {
+  title?: ReactNode
+  description?: ReactNode
+  className?: string
+  pageHasContent?: boolean
+}) {
+  const router = useRouter()
 
-  const title = markdoc?.frontmatter?.title
-  const description = markdoc?.frontmatter?.description
+  const isAppCatalog = isAppCatalogRoute(router.asPath)
+
+  return (
+    <div className={className}>
+      {title && <Title>{title}</Title>}
+      {description && <Description>{description}</Description>}
+      {!isAppCatalog && (
+        <ArticlesInSection
+          title="Articles in this section"
+          hasContent={pageHasContent}
+        />
+      )}
+    </div>
+  )
+}
+
+export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
+  marginBottom: theme.spacing.xxlarge,
+}))
+
+export default function MainContent({ Component, title, description }) {
+  const pageProps = useContext(PagePropsContext)
+  const { markdoc } = pageProps || {}
+  const router = useRouter()
+
+  const isAppCatalogIndex
+    = isAppCatalogRoute(router.asPath)
+    && getBarePathFromPath(router.asPath).endsWith(APP_CATALOG_BASE_URL)
 
   return (
     <>
@@ -63,16 +100,20 @@ export default function MainContent({ Component }) {
         <Breadcrumbs />
       </BreadcrumbsWrapper>
       <ContentWrapper>
-        {(markdoc?.frontmatter?.title || markdoc?.frontmatter?.description) && (
-          <PageHeader>
-            {title && <Title>{title}</Title>}
-            {description && <Description>{description}</Description>}
-            <ArticlesInSection
-              hasContent={(markdoc?.content as any)?.children?.length > 0}
-            />
-          </PageHeader>
+        {(title || description) && (
+          <ContentHeader
+            title={title}
+            description={description}
+            pageHasContent={(markdoc?.content as any)?.children?.length > 0}
+          />
         )}
         <Component {...pageProps} />
+        {isAppCatalogIndex && (
+          <>
+            <Heading level={2}>Our Catalog</Heading>
+            <ArticlesInSection hasContent={false} />
+          </>
+        )}
         <PageDivider />
         {markdoc?.file?.path && (
           <EditOnGithub>

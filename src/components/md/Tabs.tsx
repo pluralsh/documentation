@@ -1,12 +1,10 @@
+import { createContext, useRef, useState } from 'react'
+import type { Key, ReactNode } from 'react'
+
+import type { TabListStateProps } from '@pluralsh/design-system'
+import { TabList, TabPanel } from '@pluralsh/design-system'
+
 import styled from 'styled-components'
-import { TabList, TabListStateProps, TabPanel } from '@pluralsh/design-system'
-import {
-  Key,
-  ReactNode,
-  createContext,
-  useRef,
-  useState,
-} from 'react'
 
 import TabComponent from './Tab'
 

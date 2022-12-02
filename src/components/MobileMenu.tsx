@@ -1,22 +1,18 @@
-import { useState } from 'react'
+import { DiscordIcon } from '@pluralsh/design-system'
+
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from 'usehooks-ts'
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  Button,
-  DiscordIcon,
-} from '@pluralsh/design-system'
 
-import NavData from '../NavData'
-import useScrollLock from './hooks/useScrollLock'
-import { SocialLink } from './PageHeaderButtons'
+import { FullNav } from './FullNav'
 import GithubStars from './GithubStars'
-import { SideNav, TopHeading } from './SideNav'
+import useScrollLock from './hooks/useScrollLock'
 import { MainLink } from './PageHeader'
+import { SocialLink } from './PageHeaderButtons'
+import { TopHeading } from './SideNav'
 
-type MobileMenuProps = {
-  isOpen: boolean
+import type { NavContextValue } from './FullNav'
+
+type MobileMenuProps = NavContextValue & {
   className?: string
 }
 
@@ -30,7 +26,7 @@ function PluralMenuContent({
   hide: _,
   ...props
 }: {
-  hide: boolean
+  hide?: boolean
   className?: string
 }) {
   return (
@@ -58,7 +54,7 @@ function PluralMenuContent({
   )
 }
 
-const PluralMenu = styled(PluralMenuContent)(({ hide, theme }) => ({
+export const PluralMenu = styled(PluralMenuContent)(({ hide = false, theme }) => ({
   display: hide ? 'none' : 'block',
   paddingLeft: theme.spacing.xlarge,
   paddingRight: theme.spacing.xlarge,
@@ -78,15 +74,6 @@ const PluralMenu = styled(PluralMenuContent)(({ hide, theme }) => ({
   },
 }))
 
-const NavButtons = styled.div(({ theme }) => ({
-  padding: theme.spacing.medium,
-}))
-
-const NavWrap = styled.div(_ => ({
-  position: 'relative',
-  flexGrow: 1,
-}))
-
 const Content = styled.div(({ theme }) => ({
   pointerEvents: 'all',
   position: 'absolute',
@@ -100,8 +87,7 @@ const Content = styled.div(({ theme }) => ({
   flexDirection: 'column',
 }))
 
-function MobileMenu({ isOpen, className }: MobileMenuProps) {
-  const [curMenu, setCurMenu] = useState<'docs' | 'plural'>('docs')
+function MobileMenu({ isOpen, setIsOpen, className }: MobileMenuProps) {
   const [, setScrollLock] = useScrollLock(false)
 
   useIsomorphicLayoutEffect(() => {
@@ -111,33 +97,11 @@ function MobileMenu({ isOpen, className }: MobileMenuProps) {
   return (
     <div className={className}>
       <Content>
-        <NavButtons>
-          {curMenu === 'docs' ? (
-            <Button
-              tertiary
-              endIcon={<ArrowRightIcon />}
-              onClick={() => setCurMenu('plural')}
-            >
-              Plural menu
-            </Button>
-          ) : (
-            <Button
-              tertiary
-              startIcon={<ArrowLeftIcon />}
-              onClick={() => setCurMenu('docs')}
-            >
-              Docs menu
-            </Button>
-          )}
-        </NavButtons>
-        <NavWrap>
-          <SideNav
-            hide={curMenu !== 'docs'}
-            desktop={false}
-            navData={NavData}
-          />
-          <PluralMenu hide={curMenu !== 'plural'} />
-        </NavWrap>
+        <FullNav
+          desktop={false}
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+        />
       </Content>
     </div>
   )

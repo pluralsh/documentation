@@ -1,8 +1,7 @@
 import { Tag } from '@markdoc/markdoc'
 
-import unwrapParagraphs from '../utils/unwrapParagraphs'
-
 import Button, { ButtonGroup } from '../../components/md/Button'
+import unwrapParagraphs from '../utils/unwrapParagraphs'
 
 export const button = {
   render: Button,

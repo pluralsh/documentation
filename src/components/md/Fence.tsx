@@ -1,5 +1,8 @@
+import { useMemo } from 'react'
+import type { ReactNode } from 'react'
+
 import { Code } from '@pluralsh/design-system'
-import { ReactNode, useMemo } from 'react'
+
 import styled from 'styled-components'
 
 export function toCodeString({
