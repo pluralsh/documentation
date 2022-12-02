@@ -25,17 +25,18 @@ const replacements = {
   nvidia: 'NVIDIA',
   oauth: 'OAuth',
   sql: 'SQL',
-  db: 'DB',
 }
 
 const nameMap = {
   console: 'Plural Console',
   'renovate-on-prem': 'Renovate on Prem',
   nocodb: 'NocoDB',
+  mongodb: 'MongoDB',
   rabbitmq: 'RabbitMQ',
   n8n: 'n8n',
   mlflow: 'MLflow',
   postgres: 'PostgreSQL',
+  'argo-cd': 'Argo CD',
 }
 
 function fakeDisplayName(name = '') {
