@@ -3968,25 +3968,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-stately/select@npm:3.3.2":
-  version: 3.3.2
-  resolution: "@react-stately/select@npm:3.3.2"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-stately/collections": ^3.4.4
-    "@react-stately/list": ^3.5.4
-    "@react-stately/menu": ^3.4.2
-    "@react-stately/selection": ^3.11.0
-    "@react-stately/utils": ^3.5.1
-    "@react-types/select": ^3.6.4
-    "@react-types/shared": ^3.15.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 814389f4098cfd63d0fe583d58ad238a524b76e1c5376738c55dd7bc87315a98d100eafd8276b5b7e8b8c7ccafb81370cda17ea156a01eac6ff1e839233e4f77
-  languageName: node
-  linkType: hard
-
-"@react-stately/select@npm:^3.3.2, @react-stately/select@npm:^3.3.3":
+"@react-stately/select@npm:3.3.3, @react-stately/select@npm:^3.3.2, @react-stately/select@npm:^3.3.3":
   version: 3.3.3
   resolution: "@react-stately/select@npm:3.3.3"
   dependencies:
@@ -4196,17 +4178,6 @@ __metadata:
   peerDependencies:
     react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
   checksum: d3d53145e44e695477f16dac9efda91cf547ca2489d01fe80813065fae2b231d6ad6faea83cf525d2e08de4b0bdbdeca358ad0670bb0f6f8c284945166147913
-  languageName: node
-  linkType: hard
-
-"@react-types/select@npm:^3.6.4":
-  version: 3.6.4
-  resolution: "@react-types/select@npm:3.6.4"
-  dependencies:
-    "@react-types/shared": ^3.15.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 7e29eb57d19147c2a393e2e19b118e74fd95b236cc422b862500f7f34415a22aea14e12ae51594294340185f1bc06561f2adf82250cc836b763095950060d2f8
   languageName: node
   linkType: hard
 
@@ -10459,7 +10430,7 @@ __metadata:
     "@pluralsh/eslint-config-typescript": 2.5.9
     "@react-aria/ssr": 3.4.0
     "@react-stately/list": 3.5.4
-    "@react-stately/select": 3.3.2
+    "@react-stately/select": 3.3.3
     "@tanstack/react-table": 8.5.28
     "@types/node": 18.11.10
     "@types/react": 18.0.26
