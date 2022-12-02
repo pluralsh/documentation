@@ -1,3 +1,4 @@
+import type { ReactNode } from 'react'
 import { useContext } from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
@@ -57,8 +58,8 @@ function ContentHeaderUnstyled({
   className,
   pageHasContent = true,
 }: {
-  title?: string
-  description?: string
+  title?: ReactNode
+  description?: ReactNode
   className?: string
   pageHasContent?: boolean
 }) {

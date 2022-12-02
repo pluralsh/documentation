@@ -82,6 +82,9 @@ function Breadcrumbs({ className }: { className?: string }) {
   const crumbs = useMemo(() => [{ title: 'Docs' }, ...findCrumbs(path, navData)],
     [navData, path])
 
+  if (crumbs.length <= 1) {
+    return null
+  }
   crumbs[crumbs.length - 1].href = undefined
 
   return (

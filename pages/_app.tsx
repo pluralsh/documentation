@@ -54,7 +54,7 @@ export type MyPageProps = MarkdocNextJsPageProps & {
   repo?: Repo
 }
 
-type MyAppProps = AppProps<MyPageProps> & {
+type MyAppProps = AppProps<MyPageProps | undefined> & {
   apolloError?: any
   repos: Repo[]
 }
@@ -93,7 +93,7 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 const Page = styled.div(() => ({}))
 
 function App({
-  Component, repos = [], pageProps, apolloError: _,
+  Component, repos = [], pageProps = {}, apolloError: _,
 }: MyAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc
