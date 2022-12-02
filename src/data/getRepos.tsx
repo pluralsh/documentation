@@ -10,10 +10,10 @@ import type { RecipeFragmentFragment, RepoFragmentFragment, ReposQuery } from '.
 
 const REMOVE_LIST = ['bootstrap', 'test-harness', 'gcp-config-connector']
 
-export type Repo = {
+export type Repo = Exclude<RepoFragmentFragment, null | undefined> & {
   displayName?: string
   recipes?: RecipeFragmentFragment[]
-} & RepoFragmentFragment
+}
 
 export const reposCache: {
   filtered: Repo[]
@@ -57,28 +57,18 @@ function inRemoveList(repoName: string) {
   return !!REMOVE_LIST.find(name => name === repoName)
 }
 
-function repoFilter(repo: Repo | undefined | null): repo is Repo {
-  return !!(repo && !repo.private && !inRemoveList(repo.name))
-}
+const normalizeRepos = memoizeOne((data: ReposQuery) => data?.repositories?.edges?.flatMap(edge => {
+  const repo = asFragment(RepoFragment, edge?.node)
 
-function filterRepos(data: ReposQuery): Repo[] {
-  return data?.repositories?.edges
-    ?.map(edge => edge?.node)
-    .map(node => {
-      const repo = asFragment(RepoFragment, node)
-
-      if (!repo) return null
-
-      return {
-        ...repo,
-        displayName:
-          ((repo as any).displayName as string) || fakeDisplayName(repo?.name),
-      }
-    })
-    .filter(repoFilter) as Repo[]
-}
-
-const filterReposMemoized = memoizeOne(filterRepos)
+  return repo && !inRemoveList(repo.name)
+    ? {
+      ...repo,
+      displayName:
+            ((repo as any).displayName as string)
+            || fakeDisplayName(repo?.name),
+    }
+    : []
+}))
 
 export async function getRepos() {
   const { data, error } = await client.query({ query: REPOS_QUERY })
@@ -86,7 +76,7 @@ export async function getRepos() {
   if (error) {
     throw new Error(`${error.name}: ${error.message}`)
   }
-  const filteredRepos = filterReposMemoized(data)
+  const filteredRepos = normalizeRepos(data)
 
   if (filteredRepos && filteredRepos.length > 0) {
     reposCache.filtered = filteredRepos
