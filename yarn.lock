@@ -3896,22 +3896,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@react-stately/list@npm:3.5.4":
-  version: 3.5.4
-  resolution: "@react-stately/list@npm:3.5.4"
-  dependencies:
-    "@babel/runtime": ^7.6.2
-    "@react-stately/collections": ^3.4.4
-    "@react-stately/selection": ^3.11.0
-    "@react-stately/utils": ^3.5.1
-    "@react-types/shared": ^3.15.0
-  peerDependencies:
-    react: ^16.8.0 || ^17.0.0-rc.1 || ^18.0.0
-  checksum: 9e46c6e257b37e9b7419a20ed135944d65918c35a4d2c9a7a058cbcf9be31e0609504ebe45da939fa5242211736a7fb9d964f493389e39459c167a25b972b2a4
-  languageName: node
-  linkType: hard
-
-"@react-stately/list@npm:^3.5.4, @react-stately/list@npm:^3.6.0":
+"@react-stately/list@npm:3.6.0, @react-stately/list@npm:^3.5.4, @react-stately/list@npm:^3.6.0":
   version: 3.6.0
   resolution: "@react-stately/list@npm:3.6.0"
   dependencies:
@@ -10458,7 +10443,7 @@ __metadata:
     "@pluralsh/design-system": 1.293.5
     "@pluralsh/eslint-config-typescript": 2.5.9
     "@react-aria/ssr": 3.4.0
-    "@react-stately/list": 3.5.4
+    "@react-stately/list": 3.6.0
     "@react-stately/select": 3.3.2
     "@tanstack/react-table": 8.5.28
     "@types/node": 18.11.10
