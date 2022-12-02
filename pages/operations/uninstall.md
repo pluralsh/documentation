@@ -40,7 +40,7 @@ plural destroy
 Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
 {% /callout %}
 
-By default, previously installed applications will still appear in app.plural.sh. To remove all installation history, run `plural repos reset` as documented below.
+By default, previously installed applications will still appear in app.plural.sh after running `plural destroy`. To remove all installation history, run `plural repos reset` as documented below.
 
 ## Terraform Destroy
 
