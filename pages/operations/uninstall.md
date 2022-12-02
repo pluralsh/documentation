@@ -1,15 +1,26 @@
 ---
-title: Destroying the Cluster Safely
+title: Destroying the Cluster and Installations
 description: How do I bring things down safely?
 ---
 
 ## Overview
 
-Uninstalling any Plural application or an entire Plural installation is a one-liner in your terminal. If you want to delete your Plural installation, make sure to run `plural destroy` before deleting your Git repository. If you delete your Git repository first, you will have to manually clean up all the resources that Plural has provisioned for you.&#x20;
+Plural provides options to uninstall specific applications, tear down your clusters, and wipe any references to installations to start from zero. Uninstalling any Plural application or an entire Plural installation is a one-liner in your terminal or Cloud Shell. If you want to delete your Plural installation, make sure to run `plural destroy` before deleting your Git repository. If you delete your Git repository first, you will have to manually clean up all the resources that Plural has provisioned for you.&#x20;
+
+## Purging the Cloud Shell
+
+If you'd like to move your Cloud Shell instance locally, you can sync your shell and delete the Cloud Shell instance from our servers. To sync your shell and delete your current Cloud Shell instance, use:
+ 
+ ```
+ plural shell sync
+ plural shell purge
+ ```
+ 
+  This command will destroy your current Cloud Shell instance, but preserve your existing cluster and installations. Your account will still be pinned to the same cloud provider chosen at the beginning of your onboarding.
 
 ## Uninstalling Individual Applications
 
-To uninstall applications, use:
+To uninstall specific applications, use:
 
 ```
 plural destroy <app-name>
@@ -28,3 +39,24 @@ plural destroy
 {% callout severity="danger" %}
 Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
 {% /callout %}
+
+## Terraform Destroy
+
+To tear down the current cluster but leave installation references as pointers to the helm/terraform, cd into `bootstrap/terraform` and run:
+
+```
+terraform destroy
+```
+
+
+## Start from Zero
+
+To remove all installation references in our API, run:
+
+```
+plural repos reset
+```
+
+This command does not interact with any infrastructure, but removes references to all installations. This will also reset any association with a specific cloud provider.
+
+To tear down a cluster and fully start over, run `plural destroy` and then `plural repos reset`.
