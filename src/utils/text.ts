@@ -30,7 +30,7 @@ export function getBarePathFromPath(url: string) {
   return url.split(/[?#]/)[0]
 }
 
-export function isSubrouteOf(route: string, compareRoute:string) {
+export function isSubrouteOf(route: string, compareRoute: string) {
   return route.startsWith(compareRoute)
 }
 
@@ -38,7 +38,7 @@ export function isAppCatalogRoute(route: string) {
   return isSubrouteOf(route, APP_CATALOG_BASE_URL)
 }
 
-export const providerToProviderName:Record<Provider, string> = {
+export const providerToProviderName: Record<Provider, string> = {
   GCP: 'GCP',
   AWS: 'AWS',
   AZURE: 'Azure',
