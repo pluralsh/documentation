@@ -16,7 +16,7 @@ If you'd like to move your Cloud Shell instance locally, you can sync your shell
  plural shell purge
  ```
  
-  This command will destroy your current Cloud Shell instance, but preserve your existing cluster and installations. Your account will still be pinned to the same cloud provider chosen at the beginning of your onboarding.
+  The purge command will destroy your current Cloud Shell instance, but preserve your existing cluster and installations. Your account will still be pinned to the same cloud provider chosen at the beginning of your onboarding.
 
 ## Uninstalling Individual Applications
 
