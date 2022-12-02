@@ -40,6 +40,8 @@ plural destroy
 Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
 {% /callout %}
 
+By default, previously installed applications will still appear in app.plural.sh. To remove all installation history, run `plural repos reset` as documented below.
+
 ## Terraform Destroy
 
 To tear down the current cluster but leave installation references as pointers to the helm/terraform, cd into `bootstrap/terraform` and run:
