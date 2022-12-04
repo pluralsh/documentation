@@ -3227,36 +3227,36 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pluralsh/eslint-config-pluralsh@npm:1.4.3":
-  version: 1.4.3
-  resolution: "@pluralsh/eslint-config-pluralsh@npm:1.4.3"
+"@pluralsh/eslint-config-pluralsh@npm:1.4.4":
+  version: 1.4.4
+  resolution: "@pluralsh/eslint-config-pluralsh@npm:1.4.4"
   dependencies:
-    eslint: 8.28.0
+    eslint: 8.29.0
     eslint-config-airbnb: 19.0.4
     eslint-plugin-import: 2.26.0
     eslint-plugin-import-newlines: ^1.2.3
     eslint-plugin-jsx-a11y: 6.6.1
     eslint-plugin-react: 7.31.11
     eslint-plugin-react-hooks: 4.6.0
-  checksum: 365b0d885f6166b076c277cae58df69a5bb4ee4e7ee9eb986484fdddabcbcbae8c1f005faeead75ff5c9b8c9d6444b4de6d72582761adc35ff1cd9ba1d938b77
+  checksum: 57f5a8ea25e1e3bcbd2fe1cfb5733e659f061a2ab264b9ce5b8f0a1812b02a3e244114d4512590c08f68a1053cec915f6e5dfbbb9aba519a4e16fc16df16abb7
   languageName: node
   linkType: hard
 
-"@pluralsh/eslint-config-typescript@npm:2.5.9":
-  version: 2.5.9
-  resolution: "@pluralsh/eslint-config-typescript@npm:2.5.9"
+"@pluralsh/eslint-config-typescript@npm:2.5.11":
+  version: 2.5.11
+  resolution: "@pluralsh/eslint-config-typescript@npm:2.5.11"
   dependencies:
     "@babel/core": 7.20.5
     "@babel/eslint-parser": 7.19.1
     "@babel/preset-env": 7.20.2
     "@babel/preset-react": 7.18.6
-    "@pluralsh/eslint-config-pluralsh": 1.4.3
+    "@pluralsh/eslint-config-pluralsh": 1.4.4
     "@types/node": 18.11.10
     "@typescript-eslint/eslint-plugin": 5.45.0
     "@typescript-eslint/parser": 5.45.0
-    eslint: 8.28.0
+    eslint: 8.29.0
     typescript: 4.9.3
-  checksum: 3986e4919864ffc6c01ad426035d30e7827f095c460e9b0933f8a2e55a775d86e9429407ef3c8fe553488744dcdb986228943a95fb81494875f6a4064851da2e
+  checksum: 7e4ae9fb54af686883380954544c87d24b2f7c5d681da33327b4b44ec855a2ab19c7194423dbfffd438e4cf054b96dc14c05125eb7c37ce9261a391124a947fc
   languageName: node
   linkType: hard
 
@@ -6699,6 +6699,55 @@ __metadata:
   bin:
     eslint: bin/eslint.js
   checksum: 1b793486b2ec80f0602d75fff7116f7c39a3286f523608a999eead9bec4154a06841785d2b4fb87f8292a94cf85778c1dbfaec727772a09c4d604fdb9ff0809a
+  languageName: node
+  linkType: hard
+
+"eslint@npm:8.29.0":
+  version: 8.29.0
+  resolution: "eslint@npm:8.29.0"
+  dependencies:
+    "@eslint/eslintrc": ^1.3.3
+    "@humanwhocodes/config-array": ^0.11.6
+    "@humanwhocodes/module-importer": ^1.0.1
+    "@nodelib/fs.walk": ^1.2.8
+    ajv: ^6.10.0
+    chalk: ^4.0.0
+    cross-spawn: ^7.0.2
+    debug: ^4.3.2
+    doctrine: ^3.0.0
+    escape-string-regexp: ^4.0.0
+    eslint-scope: ^7.1.1
+    eslint-utils: ^3.0.0
+    eslint-visitor-keys: ^3.3.0
+    espree: ^9.4.0
+    esquery: ^1.4.0
+    esutils: ^2.0.2
+    fast-deep-equal: ^3.1.3
+    file-entry-cache: ^6.0.1
+    find-up: ^5.0.0
+    glob-parent: ^6.0.2
+    globals: ^13.15.0
+    grapheme-splitter: ^1.0.4
+    ignore: ^5.2.0
+    import-fresh: ^3.0.0
+    imurmurhash: ^0.1.4
+    is-glob: ^4.0.0
+    is-path-inside: ^3.0.3
+    js-sdsl: ^4.1.4
+    js-yaml: ^4.1.0
+    json-stable-stringify-without-jsonify: ^1.0.1
+    levn: ^0.4.1
+    lodash.merge: ^4.6.2
+    minimatch: ^3.1.2
+    natural-compare: ^1.4.0
+    optionator: ^0.9.1
+    regexpp: ^3.2.0
+    strip-ansi: ^6.0.1
+    strip-json-comments: ^3.1.0
+    text-table: ^0.2.0
+  bin:
+    eslint: bin/eslint.js
+  checksum: e05204b05907b82d910983995cb946e0ba62ca514eb2b6791c43f623333b143564a2eee0139909d31c10935c21877d815b1f76dd674a59cb91c471064325c4ab
   languageName: node
   linkType: hard
 
@@ -10456,7 +10505,7 @@ __metadata:
     "@markdoc/markdoc": 0.2.1
     "@markdoc/next.js": 0.2.1
     "@pluralsh/design-system": 1.293.5
-    "@pluralsh/eslint-config-typescript": 2.5.9
+    "@pluralsh/eslint-config-typescript": 2.5.11
     "@react-aria/ssr": 3.4.0
     "@react-stately/list": 3.5.4
     "@react-stately/select": 3.3.2
