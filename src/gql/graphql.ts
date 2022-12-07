@@ -3989,6 +3989,12 @@ export enum TagGroup {
   Repositories = 'REPOSITORIES'
 }
 
+/** Template engines that can be used at build time. */
+export enum TemplateType {
+  Gotemplate = 'GOTEMPLATE',
+  Lua = 'LUA'
+}
+
 export type Terraform = {
   __typename?: 'Terraform';
   dependencies?: Maybe<Dependencies>;
@@ -4288,6 +4294,7 @@ export enum ValidationType {
   Regex = 'REGEX'
 }
 
+/** The version of a package. */
 export type Version = {
   __typename?: 'Version';
   chart?: Maybe<Chart>;
@@ -4301,6 +4308,8 @@ export type Version = {
   readme?: Maybe<Scalars['String']>;
   scan?: Maybe<PackageScan>;
   tags?: Maybe<Array<Maybe<VersionTag>>>;
+  /** The template engine used to render the valuesTemplate. */
+  templateType?: Maybe<TemplateType>;
   terraform?: Maybe<Terraform>;
   updatedAt?: Maybe<Scalars['DateTime']>;
   valuesTemplate?: Maybe<Scalars['String']>;
