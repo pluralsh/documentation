@@ -51,6 +51,8 @@ export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | 
     return cacheAndReturn(ret)
   }
   catch (e) {
+    console.error(e)
+
     return cacheAndReturn(null)
   }
 }
