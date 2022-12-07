@@ -1,15 +1,5 @@
 import type { ReactElement } from 'react'
 
-import {
-  CloudIcon,
-  DocumentIcon,
-  GitHubIcon,
-  GraphIcon,
-  MagicWandIcon,
-  PadlockIcon,
-  VideoIcon,
-} from '@pluralsh/design-system'
-
 import deepFreeze from 'deep-freeze'
 
 import { APP_CATALOG_BASE_URL } from './consts/routes'
