@@ -15,6 +15,9 @@ export const RepoFragment = graphql(`
     icon
     darkIcon
     private
+    tags {
+      tag
+    }
   }
 `)
 

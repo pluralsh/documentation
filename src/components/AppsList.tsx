@@ -1,48 +1,30 @@
-import { DocumentIcon } from '@pluralsh/design-system'
-import { Button } from 'honorable'
-import { useRouter } from 'next/router'
+import { useMemo, useState } from 'react'
 
+import { Input, MagnifyingGlassIcon, RepositoryChip } from '@pluralsh/design-system'
+import Link from 'next/link'
+
+import chroma from 'chroma-js'
+import Fuse from 'fuse.js'
 import styled from 'styled-components'
 
-import { useNavMenu } from '../contexts/NavDataContext'
-import { removeTrailingSlashes } from '../utils/text'
+import { APP_CATALOG_BASE_URL } from '../consts/routes'
+import { useRepos } from '../contexts/ReposContext'
 
-import { ArticleList, Title } from './ArticlesInSection'
+function AppsList({ className, ...props }: { className?: string }) {
+  const applications = useRepos()
+  const [search, setSearch] = useState('')
 
-import type { NavItem } from '../NavData'
+  const fuse = useMemo(() => new Fuse(applications, {
+    threshold: 0.3,
+    keys: ['name', 'displayName', 'tags.tag'],
+  }),
+  [applications])
 
-function findArticlesIn(routerPathname,
-  sections: NavItem[] | undefined,
-  depth = 0): NavItem[] | undefined {
-  routerPathname = removeTrailingSlashes(routerPathname)
-  for (const section of sections || []) {
-    if (routerPathname === removeTrailingSlashes(section.href)) {
-      return section.sections
-    }
-    const res = findArticlesIn(routerPathname, section.sections, depth + 1)
+  const filteredApplications = search
+    ? fuse.search(search).map(x => x.item)
+    : applications
 
-    if (res) {
-      return res
-    }
-  }
-
-  return undefined
-}
-
-function AppsList({
-  className,
-  hasContent: _,
-  ...props
-}: {
-  className?: string
-  hasContent: boolean
-}) {
-  const { pathname } = useRouter()
-  const navData = useNavMenu()
-
-  const articles = findArticlesIn(pathname, navData)
-
-  if (!articles || articles.length <= 0) {
+  if (!applications || applications.length <= 0) {
     return null
   }
 
@@ -51,34 +33,71 @@ function AppsList({
       className={className}
       {...props}
     >
-      <Title>Articles in this section:</Title>
-      <ArticleList>
-        {articles
-          && articles.map(article => (
-            <li key={article.href}>
-              <Button
-                floating
-                textTransform="none"
-                startIcon={article.icon || <DocumentIcon />}
-                as="a"
-                href={article.href}
-              >
-                {article.title}
-              </Button>
-            </li>
+      <div className="inputWrap">
+        <Input
+          className="searchInput"
+          autoFocus
+          value={search}
+          onChange={event => setSearch(event.target.value)}
+          placeholder="Search an application"
+          startIcon={<MagnifyingGlassIcon />}
+          width="100%"
+        />
+      </div>
+      <div className="appList">
+        {filteredApplications
+          && filteredApplications.map(application => (
+            <RepositoryChip
+              key={application.id}
+              imageUrl={application.darkIcon || application.icon || undefined}
+              label={`${application.displayName}`}
+              checked={false}
+              as={Link}
+              href={`${APP_CATALOG_BASE_URL}/${application.name}`}
+              cursor="pointer"
+              textDecoration="none"
+              color="inherit"
+            />
           ))}
-      </ArticleList>
+      </div>
     </nav>
   )
 }
 
-export default styled(AppsList)(({ theme, hasContent }) => ({
-  marginTop: theme.spacing.large,
-  paddingBottom: hasContent ? theme.spacing.xlarge : 0,
-  borderBottom: hasContent ? theme.borders.default : 'none',
-  'ol, li': {
+export default styled(AppsList)(({ theme }) => ({
+  'ul, li': {
     margin: 0,
     padding: 0,
     listStyle: 'none',
   },
+  '.appList': {
+    flexGrow: 1,
+    overflowY: 'auto',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
+    gridTemplateRows: 'repeat(auto-fill, 42px)',
+    gridColumnGap: theme.spacing.medium,
+    gridRowGap: '16px',
+    paddingRight: 'xsmall',
+    paddingBottom: 'medium',
+    minHeight: 'calc(100vh - var(--top-nav-height) - 420px)',
+  },
+  '.inputWrap': {
+    position: 'sticky',
+    top: 'var(--top-nav-height)',
+    marginBottom: theme.spacing.large,
+    backgroundColor: theme.colors['fill-zero'],
+
+    '&::after': {
+      content: '""',
+      display: 'block',
+      position: 'absolute',
+      top: '100%',
+      left: 0,
+      width: '100%',
+      height: theme.spacing.large,
+      background: `linear-gradient(0deg, ${chroma(theme.colors['fill-zero']).alpha(0.0)} 0%, ${chroma(theme.colors['fill-zero']).alpha(1.0)} 100%)`,
+    },
+  },
+  '.searchInput': {},
 }))
