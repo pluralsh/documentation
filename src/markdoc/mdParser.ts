@@ -30,6 +30,8 @@ export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | 
   try {
     const file = await fs.readFile(fullPath, 'utf8')
 
+    console.log('file', file)
+
     if (!file) {
       return cacheAndReturn(null)
     }
@@ -51,6 +53,9 @@ export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | 
     return cacheAndReturn(ret)
   }
   catch (e) {
+    console.error('Reading file error:')
+    console.error(e)
+
     return cacheAndReturn(null)
   }
 }
