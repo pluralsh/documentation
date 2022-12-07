@@ -28,6 +28,9 @@ export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | 
   const fullPath = path.join(process.cwd(), filePath)
 
   try {
+    const dir = await fs.readdir(process.cwd())
+
+    console.log('dir', dir)
     const file = await fs.readFile(fullPath, 'utf8')
 
     console.log('file', file)
