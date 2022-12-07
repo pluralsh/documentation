@@ -54,27 +54,22 @@ const rootNavData: NavMenu = deepFreeze([
       {
         title: 'Introduction',
         href: '/',
-        icon: <DocumentIcon />,
       },
       {
         title: 'Quickstart',
         href: '/getting-started/quickstart',
-        icon: <MagicWandIcon />,
       },
       {
         href: '/getting-started/video-cli-quickstart',
         title: 'Video: CLI Quickstart',
-        icon: <VideoIcon />,
       },
       {
         href: '/getting-started/cloud-shell-quickstart',
         title: 'Deploy with Cloud Shell',
-        icon: <CloudIcon />,
       },
       {
         href: '/getting-started/manage-git-repositories',
         title: 'Manage Git Repositories',
-        icon: <GitHubIcon />,
         sections: [
           { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
           { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
@@ -84,12 +79,10 @@ const rootNavData: NavMenu = deepFreeze([
       {
         href: '/getting-started/admin-console',
         title: 'Install Plural Console',
-        icon: <GraphIcon />,
       },
       {
         href: '/getting-started/openid-connect',
         title: 'Plural OIDC',
-        icon: <PadlockIcon />,
       },
     ],
   },
