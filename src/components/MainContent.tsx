@@ -9,6 +9,7 @@ import styled from 'styled-components'
 import { APP_CATALOG_BASE_URL } from '../consts/routes'
 import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
 
+import AppsList from './AppsList'
 import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
 import { Heading } from './md/Heading'
@@ -111,7 +112,7 @@ export default function MainContent({ Component, title, description }) {
         {isAppCatalogIndex && (
           <>
             <Heading level={2}>Our Catalog</Heading>
-            <ArticlesInSection hasContent={false} />
+            <AppsList />
           </>
         )}
         <PageDivider />
