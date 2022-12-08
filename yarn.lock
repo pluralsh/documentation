@@ -5687,7 +5687,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"chroma-js@npm:2.4.2, chroma-js@npm:^2.4.2":
+"chroma-js@npm:2.4.2":
   version: 2.4.2
   resolution: "chroma-js@npm:2.4.2"
   checksum: cf9884c02d406286e4370599bcd1afbf089384407df46b3a69edfedcba7bb99e8f959a5cfdbfec750b305c441c06ca40cd1f70ba3a6c2ce739ac09a92520ddae
@@ -7131,7 +7131,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"fuse.js@npm:^6.6.2":
+"fuse.js@npm:6.6.2":
   version: 6.6.2
   resolution: "fuse.js@npm:6.6.2"
   checksum: 17ae758ce205276ebd88bd9c9f088a100be0b4896abac9f6b09847151269d1690f41d7f98ff5813d4a58973162dbd99d0072ce807020fee6f9de60170f6b08eb
@@ -10559,7 +10559,7 @@ __metadata:
     "@types/styled-components": 5.1.26
     "@typescript-eslint/eslint-plugin": 5.45.1
     algoliasearch: 4.14.2
-    chroma-js: ^2.4.2
+    chroma-js: 2.4.2
     classnames: 2.3.2
     concurrently: 7.6.0
     deep-freeze: 0.0.1
@@ -10570,7 +10570,7 @@ __metadata:
     eslint-plugin-jsx-a11y: 6.6.1
     eslint-plugin-react: 7.31.11
     eslint-plugin-react-hooks: 4.6.0
-    fuse.js: ^6.6.2
+    fuse.js: 6.6.2
     graphql: 16.6.0
     honorable: 0.194.0
     honorable-theme-default: 0.77.0
