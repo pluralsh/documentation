@@ -112,12 +112,6 @@ export const ScrollContainer = styled.div(({ theme: _ }) => ({
 
 const scrollThreshold = 48
 
-const useForceRender = () => {
-  const [toggle, setToggle] = useState(true)
-
-  return () => setToggle(!toggle)
-}
-
 function TableOfContentsBase({
   toc = [],
   ...props
@@ -127,7 +121,6 @@ function TableOfContentsBase({
   const items = useMemo(() => toc.filter(item => (item.id && item.level === 1) || item.level === 2),
     [toc])
   const labelId = `nav-label-${useId()}`
-  const forceRender = useForceRender()
   const firstRender = useRef(true)
   const hashIsInToC = useCallback((hash: string) => !!items.find(item => `#${item.id}` === hash) || hash === '',
     [items])
@@ -140,7 +133,7 @@ function TableOfContentsBase({
     || new URL(`http://plural.sh${router.asPath}`)
   const previousHash = usePrevious(hash)
 
-  const ignoreNextScrollEvent = useRef(false)
+  const ignoreNextScrollEvent = useRef(!!hash)
 
   const [highlightedHash, _setHighlightedHash] = useState(hashIsInToC(hash) ? hash : '')
   const setHighlightedHash = useCallback(hash => {
@@ -151,7 +144,7 @@ function TableOfContentsBase({
   [hashIsInToC, _setHighlightedHash])
 
   useEffect(() => {
-    setHighlightedHash(hash)
+    firstRender.current = false
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
@@ -187,17 +180,11 @@ function TableOfContentsBase({
     })
     if (highlightedHash !== scrollToHash) {
       setHighlightedHash(scrollToHash)
-      forceRender()
     }
-  }, [forceRender, headingElements, highlightedHash, setHighlightedHash])
+  }, [headingElements, highlightedHash, setHighlightedHash])
 
   useEffect(() => {
-    if (firstRender.current) {
-      firstRender.current = false
-    }
-    else {
-      window.addEventListener('scroll', scrollListener)
-    }
+    window.addEventListener('scroll', scrollListener)
 
     return () => window.removeEventListener('scroll', scrollListener)
   }, [scrollListener])
