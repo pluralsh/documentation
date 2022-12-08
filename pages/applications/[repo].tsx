@@ -90,7 +90,7 @@ export default function Repo({
       {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
       {!mdHasConfig && recipeSections && recipeHasConfig && (
         <>
-          <Heading level={2}>Setup configuration</Heading>
+          <Heading level={2}>Setup Configuration</Heading>
           <List ordered={false}>
             {recipeSections.map(section => section?.configuration?.map((x, configIdx) => (
               <ListItem key={configIdx}>
