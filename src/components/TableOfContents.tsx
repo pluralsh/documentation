@@ -1,4 +1,5 @@
 import React, {
+  useCallback,
   useEffect,
   useId,
   useMemo,
@@ -6,6 +7,7 @@ import React, {
   useState,
 } from 'react'
 
+import { usePrevious } from '@pluralsh/design-system'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -54,7 +56,7 @@ const ListItem = styled.li(() => ({
   listStyle: 'none',
 }))
 
-const StyledLink = styled(NextLink)(({ theme }) => ({
+const StyledLink = styled(NextLink)<{ $active: boolean }>(({ theme, $active }) => ({
   position: 'relative',
   display: 'block',
   ...theme.partials.marketingText.componentLinkSmall,
@@ -72,15 +74,17 @@ const StyledLink = styled(NextLink)(({ theme }) => ({
     transformOrigin: 'center left',
     transition: 'transform 0.15s ease-in',
   },
-  '&.active': {
-    color: theme.colors.text,
-    '&::before': {
-      zIndex: 1,
-      borderLeft: `3px solid ${theme.colors['border-primary']}`,
-      transform: 'scaleX(1)',
-      transition: 'transform 0.2s ease-out',
-    },
-  },
+  ...($active
+    ? {
+      color: theme.colors.text,
+      '&::before ': {
+        zIndex: 1,
+        borderLeft: `3px solid ${theme.colors['border-primary']}`,
+        transform: 'scaleX(1)',
+        transition: 'transform 0.2s ease-out',
+      },
+    }
+    : {}),
   '&:hover': {
     textDecoration: 'underline',
     color: theme.colors.text,
@@ -115,12 +119,6 @@ const useForceRender = () => {
   return () => setToggle(!toggle)
 }
 
-function setUrlHash(hash) {
-  const url = hash || window.location.pathname + window.location.search
-
-  window.history.replaceState({}, '', url)
-}
-
 function TableOfContentsBase({
   toc = [],
   ...props
@@ -132,9 +130,30 @@ function TableOfContentsBase({
   const labelId = `nav-label-${useId()}`
   const forceRender = useForceRender()
   const firstRender = useRef(true)
-  const ignoreScrollEvent = useRef(false)
+  const hashInToC = useCallback((hash: string) => items.find(item => `#${item.id}` === hash),
+    [items])
 
   const [headingElements, setHeadingElements] = useState<HTMLElement[]>([])
+  const router = useRouter()
+
+  const { hash }
+    = (typeof window !== 'undefined' && window?.location)
+    || new URL(`http://plural.sh${router.asPath}`)
+  const previousHash = usePrevious(hash)
+
+  const ignoreScrollEvent = useRef(false)
+
+  const [highlightedHash, setHighlightedHash] = useState('')
+
+  useEffect(() => {
+    setHighlightedHash(hash)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
+  useEffect(() => {
+    if (hash !== previousHash && hashInToC(hash)) {
+      setHighlightedHash(hash)
+    }
+  }, [hash, hashInToC, previousHash])
 
   useEffect(() => {
     setHeadingElements(items
@@ -142,19 +161,16 @@ function TableOfContentsBase({
       .filter(exists))
   }, [items])
 
-  const router = useRouter()
-
-  const { hash }
-    = (typeof window !== 'undefined' && window?.location)
-    || new URL(`http://plural.sh${router.asPath}`)
-
   useEffect(() => {
     const listener = () => {
       if (ignoreScrollEvent.current) {
+        console.log('changeignorescrollevent', false)
+
         ignoreScrollEvent.current = false
 
         return
       }
+      console.log('scroll event')
       const topNavHeight = Number(getComputedStyle(document.documentElement)
         ?.getPropertyValue('--top-nav-height')
         ?.replace(/[^0-9]/g, '') || 0)
@@ -168,16 +184,20 @@ function TableOfContentsBase({
           scrollToHash = `#${elt.id}`
         }
       })
-      if (hash !== scrollToHash) {
-        setUrlHash(scrollToHash)
+      if (highlightedHash !== scrollToHash) {
+        console.log('highlightedHash !== scrollToHash. setting to',
+          scrollToHash)
+        setHighlightedHash(scrollToHash)
         forceRender()
       }
     }
 
-    window.addEventListener('scroll', listener)
     if (firstRender.current) {
       firstRender.current = false
-      listener()
+      // listener()
+    }
+    else {
+      window.addEventListener('scroll', listener)
     }
 
     return () => window.removeEventListener('scroll', listener)
@@ -197,15 +217,24 @@ function TableOfContentsBase({
         <List>
           {items.map((item, i) => {
             const href = `#${item.id}`
-            const active = hash === href || (!hash && i === 0)
+
+            const active
+              = !firstRender.current
+              && (highlightedHash === href || (!highlightedHash && i === 0))
+
+            const className = classNames({ active })
+
+            console.log({ href, highlightedHash, className })
 
             return (
               <ListItem key={item.title}>
                 <StyledLink
                   href={href}
-                  className={classNames({ active })}
+                  $active={active}
                   onClick={() => {
+                    console.log('click changeignorescrollevent', true)
                     ignoreScrollEvent.current = true
+                    setHighlightedHash(href)
                   }}
                   scroll={false}
                 >

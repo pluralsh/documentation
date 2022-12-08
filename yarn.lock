@@ -7448,6 +7448,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"gsap@npm:3.11.3":
+  version: 3.11.3
+  resolution: "gsap@npm:3.11.3"
+  checksum: b97d33ca1fa28dc3b4ce957fa49226f6dcdea39eddd4ffaf4af2b9fe681ff974731bdb8717e50110842267187064659e2f7874c6d1936de4162f8c7721c09676
+  languageName: node
+  linkType: hard
+
 "has-bigints@npm:^1.0.1, has-bigints@npm:^1.0.2":
   version: 1.0.2
   resolution: "has-bigints@npm:1.0.2"
@@ -10572,6 +10579,7 @@ __metadata:
     eslint-plugin-react-hooks: 4.6.0
     fuse.js: 6.6.2
     graphql: 16.6.0
+    gsap: 3.11.3
     honorable: 0.194.0
     honorable-theme-default: 0.77.0
     immer: 9.0.16

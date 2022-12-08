@@ -9,6 +9,7 @@ import {
 import { CssBaseline, ThemeProvider } from 'honorable'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
+import Script from 'next/script'
 
 import { SSRProvider } from '@react-aria/ssr'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
@@ -93,7 +94,10 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 const Page = styled.div(() => ({}))
 
 function App({
-  Component, repos = [], pageProps = {}, apolloError: _,
+  Component,
+  repos = [],
+  pageProps = {},
+  apolloError: _,
 }: MyAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc
@@ -122,6 +126,8 @@ function App({
 
   const app = (
     <>
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/gsap.min.js" />
+      <Script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.3/ScrollToPlugin.min.js" />
       <CssBaseline />
       <PluralGlobalStyle />
       <GlobalStyles />
