@@ -11,7 +11,6 @@ import { usePrevious } from '@pluralsh/design-system'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
-import classNames from 'classnames'
 import styled from 'styled-components'
 
 import { exists } from '../utils/typescript'
@@ -141,7 +140,7 @@ function TableOfContentsBase({
     || new URL(`http://plural.sh${router.asPath}`)
   const previousHash = usePrevious(hash)
 
-  const ignoreScrollEvent = useRef(false)
+  const ignoreNextScrollEvent = useRef(false)
 
   const [highlightedHash, _setHighlightedHash] = useState(hashIsInToC(hash) ? hash : '')
   const setHighlightedHash = useCallback(hash => {
@@ -167,47 +166,41 @@ function TableOfContentsBase({
       .filter(exists))
   }, [items])
 
-  useEffect(() => {
-    const listener = () => {
-      if (ignoreScrollEvent.current) {
-        console.log('changeignorescrollevent', false)
+  const scrollListener = useCallback(() => {
+    if (ignoreNextScrollEvent.current) {
+      ignoreNextScrollEvent.current = false
 
-        ignoreScrollEvent.current = false
-
-        return
-      }
-      console.log('scroll event')
-      const topNavHeight = Number(getComputedStyle(document.documentElement)
-        ?.getPropertyValue('--top-nav-height')
-        ?.replace(/[^0-9]/g, '') || 0)
-
-      let scrollToHash = ''
-
-      headingElements.forEach(elt => {
-        const eltTop = elt.getBoundingClientRect()?.top || Infinity
-
-        if (eltTop <= scrollThreshold + topNavHeight) {
-          scrollToHash = `#${elt.id}`
-        }
-      })
-      if (highlightedHash !== scrollToHash) {
-        console.log('highlightedHash !== scrollToHash. setting to',
-          scrollToHash)
-        setHighlightedHash(scrollToHash)
-        forceRender()
-      }
+      return
     }
+    const topNavHeight = Number(getComputedStyle(document.documentElement)
+      ?.getPropertyValue('--top-nav-height')
+      ?.replace(/[^0-9]/g, '') || 0)
 
+    let scrollToHash = ''
+
+    headingElements.forEach(elt => {
+      const eltTop = elt.getBoundingClientRect()?.top || Infinity
+
+      if (eltTop <= scrollThreshold + topNavHeight) {
+        scrollToHash = `#${elt.id}`
+      }
+    })
+    if (highlightedHash !== scrollToHash) {
+      setHighlightedHash(scrollToHash)
+      forceRender()
+    }
+  }, [forceRender, headingElements, highlightedHash, setHighlightedHash])
+
+  useEffect(() => {
     if (firstRender.current) {
       firstRender.current = false
-      // listener()
     }
     else {
-      window.addEventListener('scroll', listener)
+      window.addEventListener('scroll', scrollListener)
     }
 
-    return () => window.removeEventListener('scroll', listener)
-  }, [forceRender, hash, headingElements])
+    return () => window.removeEventListener('scroll', scrollListener)
+  }, [scrollListener])
 
   if (items.length <= 0) {
     return null
@@ -228,18 +221,13 @@ function TableOfContentsBase({
               = !firstRender.current
               && (highlightedHash === href || (!highlightedHash && i === 0))
 
-            const className = classNames({ active })
-
-            console.log({ href, highlightedHash, className })
-
             return (
               <ListItem key={item.title}>
                 <StyledLink
                   href={href}
                   $active={active}
                   onClick={() => {
-                    console.log('click changeignorescrollevent', true)
-                    ignoreScrollEvent.current = true
+                    ignoreNextScrollEvent.current = true
                     setHighlightedHash(href)
                   }}
                   scroll={false}
