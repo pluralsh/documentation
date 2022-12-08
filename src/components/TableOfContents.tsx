@@ -130,7 +130,7 @@ function TableOfContentsBase({
   const labelId = `nav-label-${useId()}`
   const forceRender = useForceRender()
   const firstRender = useRef(true)
-  const hashInToC = useCallback((hash: string) => items.find(item => `#${item.id}` === hash),
+  const hashIsInToC = useCallback((hash: string) => !!items.find(item => `#${item.id}` === hash) || hash === '',
     [items])
 
   const [headingElements, setHeadingElements] = useState<HTMLElement[]>([])
@@ -143,17 +143,23 @@ function TableOfContentsBase({
 
   const ignoreScrollEvent = useRef(false)
 
-  const [highlightedHash, setHighlightedHash] = useState('')
+  const [highlightedHash, _setHighlightedHash] = useState(hashIsInToC(hash) ? hash : '')
+  const setHighlightedHash = useCallback(hash => {
+    if (hashIsInToC(hash)) {
+      _setHighlightedHash(hash)
+    }
+  },
+  [hashIsInToC, _setHighlightedHash])
 
   useEffect(() => {
     setHighlightedHash(hash)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
   useEffect(() => {
-    if (hash !== previousHash && hashInToC(hash)) {
+    if (hash !== previousHash && hashIsInToC(hash)) {
       setHighlightedHash(hash)
     }
-  }, [hash, hashInToC, previousHash])
+  }, [hash, hashIsInToC, previousHash, setHighlightedHash])
 
   useEffect(() => {
     setHeadingElements(items
