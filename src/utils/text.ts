@@ -47,3 +47,10 @@ export const providerToProviderName: Record<Provider, string> = {
   CUSTOM: 'Custom',
   KUBERNETES: 'Kubernetes',
 }
+
+export function toHtmlId(str) {
+  const id = str.replace(/\W+/g, ' ').trim().replace(/\s/g, '-').toLowerCase()
+
+  // make sure the id starts with a letter or underscore
+  return id.match(/^[A-Za-z]/) ? id : `_${id}`
+}

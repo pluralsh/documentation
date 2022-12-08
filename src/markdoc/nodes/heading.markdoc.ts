@@ -1,24 +1,20 @@
 import { Tag } from '@markdoc/markdoc'
 
 import { Heading } from '../../components/md/Heading'
+import { toHtmlId } from '../../utils/text'
 
 function generateID(children: any[], attributes: { id?: unknown } = {}) {
   if (attributes?.id && typeof attributes?.id === 'string') {
     return attributes.id
   }
 
-  return children
+  return toHtmlId(children
     .map(child => (typeof child === 'string'
       ? child
       : Array.isArray(child?.children)
         ? generateID(child.children)
         : ''))
-    .join(' ')
-    .replace(/[~!@#$%^&,.?:;<>()[\]@{}|=#$%]/g, ' ')
-    .trim()
-    .replace(/\s+/g, '-')
-    .replace(/[^a-zA-Z0-9_+\-*/]+/g, '')
-    .toLowerCase()
+    .join(' '))
 }
 
 export const heading = {

@@ -1,6 +1,7 @@
-import * as React from 'react'
+import { LinksIcon } from '@pluralsh/design-system'
+import Link from 'next/link'
 
-import styled from 'styled-components'
+import styled, { useTheme } from 'styled-components'
 
 type HTag = 'h1' | 'h2' | 'h3' | 'h5' | 'h6'
 
@@ -42,15 +43,40 @@ const StyledH = styled.h1.withConfig({ shouldForwardProp: () => true })<{
     marginTop: theme.spacing.xxlarge,
     marginBottom: theme.spacing.small,
     ...style,
+    '.link': {
+      marginLeft: theme.spacing.xsmall,
+      opacity: 0.35,
+      '&:hover': {
+        opacity: 1,
+      },
+    },
   }
 })
 
-export function Heading({ level = 1, ...props }) {
+export function Heading({ level = 1, children, ...props }) {
+  const theme = useTheme()
+
   return (
     <StyledH
       as={`h${level}` as HTag}
       $level={level}
       {...props}
-    />
+    >
+      {children}
+      {props.id && (
+        <Link
+          className="link"
+          href={`#${props.id}`}
+        >
+          <LinksIcon
+            size={'100%' as any}
+            width="0.65em"
+            position="relative"
+            bottom="-0.03em"
+            color={theme.colors['icon-xlight']}
+          />
+        </Link>
+      )}
+    </StyledH>
   )
 }

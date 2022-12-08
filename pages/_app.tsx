@@ -93,7 +93,10 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 const Page = styled.div(() => ({}))
 
 function App({
-  Component, repos = [], pageProps = {}, apolloError: _,
+  Component,
+  repos = [],
+  pageProps = {},
+  apolloError: _,
 }: MyAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc
