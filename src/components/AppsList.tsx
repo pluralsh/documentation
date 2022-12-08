@@ -72,7 +72,6 @@ export default styled(AppsList)(({ theme }) => ({
   },
   '.appList': {
     flexGrow: 1,
-    overflowY: 'auto',
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))',
     gridTemplateRows: 'repeat(auto-fill, 42px)',
