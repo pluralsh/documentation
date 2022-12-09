@@ -217,6 +217,10 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Troubleshooting',
         href: '/reference/troubleshooting',
       },
+      {
+        title: 'Application Issues',
+        href: '/reference/application-issues',
+      },
     ],
   },
   {
