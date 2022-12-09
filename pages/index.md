@@ -56,8 +56,6 @@ The primary responsibility of the Plural API is to store the packages needed for
 
 It also can serve as an identity provider for any Plural application, delegating authentication via OIDC and also maintaining user group info and communicating it down to applications.
 
-Finally it handles billing and licensing, supporting all the common constructs seen in modern SaaS billing.
-
 ### Plural CLI
 
 The Plural CLI effectively uses the Plural API as a package manager, and works as a higher level build tool on top of the DevOps packages it supports. It will handle things like running installations in dependency order, detecting changes between runs, and templating out a workspace from scratch.
