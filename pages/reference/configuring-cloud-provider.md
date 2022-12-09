@@ -97,11 +97,11 @@ Follow [these steps](https://cloud.google.com/sdk/docs/authorizing#authorize\_wi
 {% /tab %}
 
 {% tab title="AWS" %}
-_No special permissions necessary._
+No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements.
 {% /tab %}
 
 {% tab title="Azure" %}
-_No special permissions necessary._
+No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements.
 {% /tab %}
 {% /tabs %}
 
