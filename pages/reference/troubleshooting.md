@@ -14,16 +14,19 @@ This error either means you cannot push information to Git, or you do not have a
 
 ### Out of date
 `Your local workspace is not in sync with remote, either 'git pull' recent changes or 'git push' any missed changes.`
+
 This error can happen if you're ahead of or behind your remote by a few commits, so try `git push` if `git pull` does not resolve the issue.
 
 
 # Cloud Errors
 ### Google Credentials
 `You don't have necessary services enabled. Please run: 'gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com container.googleapis.com' with an owner of the project to enable or enable them in the GCP console.`
+
 Ensure that you've run the gcloud command in the correct project, and make sure you have owner rights.
 
 ### AWS Credentials
 `Failed to get aws account (is your aws cli configured?)`
+
 Ensure your AWS CLI is set up, that you have the correct profile chosen, and that you're authenticated in to AWS. If necessary, run `export AWS_PROFILE=<profile-name>` in the terminal you are running Plural in and auth in with `aws sso login`.
 
 
