@@ -101,7 +101,7 @@ No special permissions necessary, but as mentioned above, providing Plural `Admi
 {% /tab %}
 
 {% tab title="Azure" %}
-No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements.
+No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements. Make sure you're specifically providing `Administrator` access for the resource group you're deploying Plural into.
 {% /tab %}
 {% /tabs %}
 
