@@ -6,7 +6,7 @@ description: >-
   general, just hop into our Discord for help.
 ---
 
-# Git Misconfigurations
+## Git Errors
 ### Could not compare workspace to origin
 `Failed to get git information: Could not compare current workspace to origin, do you have an 'origin' remote configured, or does your repo not have an inital commit?`
 
@@ -18,7 +18,7 @@ This error either means you cannot push information to Git, or you do not have a
 This error can happen if you're ahead of or behind your remote by a few commits, so try `git push` if `git pull` does not resolve the issue.
 
 
-# Cloud Errors
+## Cloud Errors
 ### Google Credentials
 `You don't have necessary services enabled. Please run: 'gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com container.googleapis.com' with an owner of the project to enable or enable them in the GCP console.`
 
@@ -46,15 +46,16 @@ gcloud auth application-default login
 
 to reset the credential and reauthorize the browser for the correct project.
 
-# Initialization Errors
+## Initialization Errors
 ### Workspace Initialization
 `Your workspace hasn't been configured, try running 'plural init'`
 `Could not find workspace.yaml file, you might need to run 'plural init'`
 
+Base cloud provider setup for a Plural repository is stored in your workspace.yaml file. This should be created when running `plural init`.
 
 
-# Deployment Errors
 
+## Deployment Errors
 ### Invalid apiVersion for K8s
 
 `error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1`
@@ -66,7 +67,7 @@ You might see this when attempting to sync crds or run helm commands in a run of
 
 `Failed deploy model due to Internal error occurred: failed calling webhook "mtargetgroupbinding.elbv2.k8s.aws": Post "https://aws-load-balancer-webhook-service.bootstrap.svc:443/mutate-elbv2-k8s-aws-v1beta1-targetgroupbinding?timeout=10s"`
 
-The aws load balancer controller webhook is not fully reliable, if you see that it's just a matter of recreating the webhook which you can do with:
+The aws load balancer controller webhook is not fully reliable; if you see this error it's just a matter of recreating the webhook which you can do with:
 
 ```
 kubectl delete validatingwebhookconfiguration aws-load-balancer-webhook -n bootstrap
