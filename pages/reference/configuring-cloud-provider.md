@@ -79,8 +79,10 @@ to reset the application default credential and re-authorize the browser. Failur
 * Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
 {% /tab %}
 {% /tabs %}
-
+  
 ## Permissions
+
+Since Plural is responsible for creating over 50 different applications, what permissions are required will vary based on what you're deploying. In most cases, `Admin` access is the simplest to use. For example, when provisioning Airbyte, we'll need to create an IAM role and IRSA binding to the EKS control plane, which is an `Admin` only action.
 
 {% tabs %}
 {% tab title="GCP" %}
@@ -95,11 +97,11 @@ Follow [these steps](https://cloud.google.com/sdk/docs/authorizing#authorize\_wi
 {% /tab %}
 
 {% tab title="AWS" %}
-_No special permissions necessary._
+No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements.
 {% /tab %}
 
 {% tab title="Azure" %}
-_No special permissions necessary._
+No special permissions necessary, but as mentioned above, providing Plural `Administrator` access will prevent issues around application specific requirements. Make sure you're specifically providing `Administrator` access for the resource group you're deploying Plural into.
 {% /tab %}
 {% /tabs %}
 
