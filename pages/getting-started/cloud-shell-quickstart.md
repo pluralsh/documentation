@@ -1,6 +1,6 @@
 ---
-title: Deploying with Cloud Shell
-description: Setting up your first cluster in browser.
+title: In-Browser Quickstart
+description: Setting up your first cluster in browser using the Plural Cloud Shell.
 ---
 
 ## Overview
