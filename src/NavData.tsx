@@ -46,16 +46,16 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/',
       },
       {
-        title: 'Quickstart',
+        title: 'Quickstart: CLI',
         href: '/getting-started/quickstart',
+      },
+      {
+        href: '/getting-started/cloud-shell-quickstart',
+        title: 'Quickstart: In-Browser',
       },
       {
         href: '/getting-started/video-cli-quickstart',
         title: 'Video: CLI Quickstart',
-      },
-      {
-        href: '/getting-started/cloud-shell-quickstart',
-        title: 'Deploy with Cloud Shell',
       },
       {
         href: '/getting-started/manage-git-repositories',
