@@ -94,9 +94,7 @@ Plural stores all configuration artifacts within a Git repository that we will c
 plural init
 ```
 
-The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf. \
-\
-_Note, that if you are running in **Azure**, Plural does not automatically create a default resource group for you to place objects into. Make sure to create one beforehand for Plural to use._
+The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf.
 
 {% callout severity="info" %}
 Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
