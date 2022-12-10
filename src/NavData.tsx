@@ -244,6 +244,10 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Cloud Provider CLI Setup',
         href: '/reference/configuring-cloud-provider',
       },
+      {
+        title: 'CLI Command Reference',
+        href: '/reference/cli-reference',
+      },
     ],
   },
   // {
