@@ -68,10 +68,7 @@ function PageHeaderUnstyled({ ...props }) {
           >
             <DiscordIcon size={16} />
           </SocialLink>
-          <GithubStars
-            account="pluralsh"
-            repo="plural"
-          />
+          <GithubStars />
         </div>
         <div className="buttons">
           <Button

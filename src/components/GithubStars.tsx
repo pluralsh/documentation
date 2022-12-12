@@ -5,6 +5,42 @@ import useSWR from 'swr'
 
 import { ButtonFillTwo } from './PageHeaderButtons'
 
+type GithubRepoData = {
+  stargazers_count: number
+}
+
+const CACHE_MAX_AGE_MINUTES = 1
+
+export const GITHUB_DATA_URL = 'https://api.github.com/repos/pluralsh/plural'
+
+const githubDataCache: { data?: GithubRepoData; minutes?: number } = {}
+
+export const getGithubDataServer = async () => {
+  const minutes = new Date().getUTCMinutes()
+
+  if (
+    githubDataCache.minutes
+    && minutes < githubDataCache.minutes + CACHE_MAX_AGE_MINUTES
+    && githubDataCache.data
+  ) {
+    return githubDataCache.data
+  }
+
+  const githubUrl = GITHUB_DATA_URL
+
+  const githubResp = await fetch(githubUrl)
+  const githubData = await githubResp?.json()
+
+  if (isGithubRepoData(githubData)) {
+    githubDataCache.data = githubData
+    githubDataCache.minutes = minutes
+
+    return githubData
+  }
+
+  return githubDataCache.data || undefined
+}
+
 async function fetcher<JSON = any>(input: RequestInfo,
   init?: RequestInit): Promise<JSON> {
   const res = await fetch(input, init)
@@ -12,9 +48,7 @@ async function fetcher<JSON = any>(input: RequestInfo,
   return res.json()
 }
 
-type GithubRepoData = { stargazers_count: number }
-
-function isGithubRepoData(obj: unknown): obj is GithubRepoData {
+export function isGithubRepoData(obj: unknown): obj is GithubRepoData {
   return !!(obj && typeof obj === 'object' && 'stargazers_count' in obj)
 }
 
@@ -57,7 +91,7 @@ const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loadi
   },
 }))
 
-export default function GithubStars({ account, repo }) {
+export default function GithubStars({ account = 'pluralsh', repo = 'plural' }) {
   const { data, error } = useSWR(`https://api.github.com/repos/${account}/${repo}`,
     fetcher)
 

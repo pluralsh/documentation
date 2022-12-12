@@ -1,3 +1,4 @@
+import type { ComponentProps } from 'react'
 import { useMemo } from 'react'
 
 import {
@@ -10,15 +11,17 @@ import { CssBaseline, ThemeProvider } from 'honorable'
 import type { AppProps } from 'next/app'
 import { useRouter } from 'next/router'
 
+import { until } from '@open-draft/until'
 import { SSRProvider } from '@react-aria/ssr'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
-
+import { SWRConfig } from 'swr'
 import '../src/styles/globals.css'
 
 import { BreakpointProvider } from '../src/components/Breakpoints'
 import DocSearchStyles from '../src/components/DocSearchStyles'
 import ExternalScripts from '../src/components/ExternalScripts'
 import { FullNav } from '../src/components/FullNav'
+import { GITHUB_DATA_URL, getGithubDataServer, isGithubRepoData } from '../src/components/GithubStars'
 import GlobalStyles from '../src/components/GlobalStyles'
 import HtmlHead from '../src/components/HtmlHead'
 import MainContent from '../src/components/MainContent'
@@ -55,8 +58,9 @@ export type MyPageProps = MarkdocNextJsPageProps & {
 }
 
 type MyAppProps = AppProps<MyPageProps | undefined> & {
-  apolloError?: any
+  errors: Error[]
   repos: Repo[]
+  swrConfig: ComponentProps<typeof SWRConfig>['value']
 }
 
 export type MarkdocHeading = {
@@ -93,10 +97,7 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 const Page = styled.div(() => ({}))
 
 function App({
-  Component,
-  repos = [],
-  pageProps = {},
-  apolloError: _,
+  Component, repos = [], pageProps = {}, swrConfig,
 }: MyAppProps) {
   const router = useRouter()
   const markdoc = pageProps?.markdoc
@@ -156,33 +157,42 @@ function App({
   )
 
   return (
-    <ReposProvider value={repos}>
-      <NavDataProvider value={navData}>
-        <SSRProvider>
-          <BreakpointProvider>
-            <ThemeProvider theme={honorableTheme}>
-              <StyledThemeProvider theme={docsStyledTheme}>
-                <FillLevelProvider value={0}>{app}</FillLevelProvider>
-              </StyledThemeProvider>
-            </ThemeProvider>
-          </BreakpointProvider>
-        </SSRProvider>
-      </NavDataProvider>
-    </ReposProvider>
+    <SWRConfig value={swrConfig}>
+      <ReposProvider value={repos}>
+        <NavDataProvider value={navData}>
+          <SSRProvider>
+            <BreakpointProvider>
+              <ThemeProvider theme={honorableTheme}>
+                <StyledThemeProvider theme={docsStyledTheme}>
+                  <FillLevelProvider value={0}>{app}</FillLevelProvider>
+                </StyledThemeProvider>
+              </ThemeProvider>
+            </BreakpointProvider>
+          </SSRProvider>
+        </NavDataProvider>
+      </ReposProvider>
+    </SWRConfig>
   )
 }
 
 App.getInitialProps = async () => {
-  try {
-    return {
-      repos: await getRepos(),
-    }
+  const { data: repos, error: reposError } = await until(() => getRepos())
+  const { data: githubData, error: githubError } = await until(() => getGithubDataServer())
+  const swrFallback = {}
+
+  if (isGithubRepoData(githubData)) {
+    swrFallback[GITHUB_DATA_URL] = githubData
   }
-  catch (e) {
-    return {
-      repos: reposCache.filtered,
-      apolloError: e,
-    }
+
+  return {
+    repos: repos || reposCache.filtered,
+    swrConfig: {
+      fallback: swrFallback,
+    },
+    errors: [
+      ...(reposError ? [reposError] : []),
+      ...(githubError ? [githubError] : []),
+    ],
   }
 }
 

@@ -45,10 +45,7 @@ function PluralMenuContent({
         >
           <DiscordIcon size={16} />
         </SocialLink>
-        <GithubStars
-          account="pluralsh"
-          repo="plural"
-        />
+        <GithubStars />
       </SocialIcons>
     </div>
   )
