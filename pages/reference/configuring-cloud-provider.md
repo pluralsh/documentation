@@ -36,6 +36,9 @@ access_key     ****************RUG2 shared-credentials-file
 secret_key     ****************hJUU shared-credentials-file    
     region                us-east-2      config-file    ~/.aws/config
 ```
+
+If you need to update your AWS CLI for any reason, make sure to run `plural wkspace kube-init` to regenerate your kubeconfig to be compatible with the changes. This will be required if you're on a new machine, were using a different Kubernetes cluster, or if the kubeconfig has stale credentials.
+
 {% /tab %}
 
 {% tab title="GCP" %}
