@@ -119,6 +119,10 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Operations',
     sections: [
       {
+        href: '/operations/cost-management',
+        title: 'Cost Management',
+      },
+      {
         href: '/operations/managing-applications',
         title: 'Managing Applications',
         sections: [
