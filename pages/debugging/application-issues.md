@@ -19,13 +19,20 @@ If you see failed Pods, you can get the logs for the Pods by running:
 kubectl logs -n <application-name> <name-of-pod>
 ```
 
+We also curate a list of helpful logging shortcuts for each application, which you can use the `plural logs` subcommand for, eg with
+
+```
+plural logs list <application> # shows all log tails available
+plural logs tail <application> <name> # tails that specific log
+```
+
 To delete problematic Pods, run:
 
 ```
 kubectl delete pod <pod-name>
 ```
 
-Then, run `plural bounce` to regenerate your deleted Pods.
+In most cases, kubernetes will restart the pod for you.  You can always also run `plural bounce` to regenerate your deleted Pods.
 
 ## With Plural Console 
 
