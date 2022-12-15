@@ -36,6 +36,14 @@ access_key     ****************RUG2 shared-credentials-file
 secret_key     ****************hJUU shared-credentials-file    
     region                us-east-2      config-file    ~/.aws/config
 ```
+
+If you are deploying to an AWS account with SSO enabled, you'll need to pass that specific AWS profile to the Plural CLI, or it won't be able to create resources on your behalf. You can do this with the following two steps:
+
+1. Run `export AWS_PROFILE=profile_name` to set this variable for your terminal session.
+2. Run `aws sso login` to open your relevant SSO auth page and log in.
+
+If you need to update your AWS CLI for any reason, make sure to run `plural wkspace kube-init` to regenerate your kubeconfig to be compatible with the changes. This will be required if you're on a new machine, were using a different Kubernetes cluster, or if the kubeconfig has stale credentials.
+
 {% /tab %}
 
 {% tab title="GCP" %}
