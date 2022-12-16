@@ -83,8 +83,14 @@ to reset the application default credential and re-authorize the browser. Failur
 {% /tab %}
 
 {% tab title="Azure" %}
-* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) to install your Azure cli.
-* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure cli.
+* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/install-azure-cli) to install your Azure CLI.
+* Follow the instructions [here](https://docs.microsoft.com/en-us/cli/azure/get-started-with-azure-cli) to sign into your Azure CLI.
+
+{% callout severity="warning" %}
+Keep in mind that your Azure subscription type can limit the availability of your VMs, so make sure to tailor your subscription
+to the availability requirements of your infrastructure.
+{% /callout %}
+
 {% /tab %}
 {% /tabs %}
   
