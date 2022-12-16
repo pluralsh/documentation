@@ -30,11 +30,12 @@ As with any operations that involve taking down resources, you will likely encou
 
 ### Node Sizing at Scale
 
-If you start deploying a lot of applications and resources, you may start seeing cost go up faster than expected due to the fixed cost of installing Kubernetes and its services on every node.
+If you deploy a lot of applications and resources, you may start seeing cost go up faster than expected due to the fixed cost of installing Kubernetes and its services on every node.
 
 To control this, it is recommended that you increase your node sizes to accommodate more resources and applications per node, reducing the amount of times you're paying the fixed cost for running Kubernetes.
+Learn how to modify your node types [here](./cluster-configuration.md).
 
 ## Kubecost
 
-To monitor your cost and keep an eye out for spend, you can install [Kubecost](https://docs.plural.sh/applications/kubecost) on Plural just how you would install any other application.
+To monitor your cost and keep an eye out for spend, you can install [Kubecost](https://docs.plural.sh/applications/kubecost) on Plural just how you would install any other application. Check out their documentation [here](https://docs.kubecost.com/).
 
