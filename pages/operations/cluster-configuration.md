@@ -1,26 +1,24 @@
 ---
 title: Cluster Configuration
-description: DevOps workflows that involve editing your cluster Terraform.
+description: DevOps workflows that involve editing your cluster's Terraform files.
 ---
 
 Plural offers a set of sane defaults to spin up a one-size-fits-all Kubernetes cluster, but there will be cases
 where you'll want to edit the default cluster configuration to better fit your organization's needs. This will
 involve editing the Terraform that we generate for you, which carries risks if administered incorrectly.
 
-In general, all core cluster configuration is set up in a terraform stack in the `bootstrap` app.  You can find the terraform
-code under `bootstrap/terraform` if you'd want to dive in yourself, but we can help guide you here as well.
+In general, all core cluster configuration is set up in a Terraform stack in the `bootstrap` app directory.  You can find the Terraform
+code under `bootstrap/terraform` if you want to dive in yourself, but we can help guide you here as well.
 
 ## Operations on node groups
 
 ### Modifying node types
 
-Modifying node types allows you to optimize the infrastructure backing your applications for cost and/or performance. 
-
-To do this, [TODO: Michael write here]
+Modifying node types allows you to optimize the infrastructure backing your applications for cost and/or performance reasons. 
 
 {% tabs %}
 {% tab title="AWS" %}
-On AWS EKS has some interesting limitations around node groups.  Since EBS doesn't support multi-az disks, to make node autoscaling work properly for stateful workloads, you need to split node groups across all azs deployed in a region.  Some non-stateful workloads don't need this complexity, so we also have a set of multi-az groups as well.  To modify either, simply update the `aws-bootstrap` module's `single_az_node_groups` or `multi_az_node_groups` configuration (in `bootstrap/terraform/main.tf`) with:
+On AWS, EKS has some interesting limitations around node groups.  Since EBS doesn't support multi-AZ disks, to make node autoscaling work properly for stateful workloads, you need to split node groups across all availability zones deployed in a region.  Some non-stateful workloads don't need this complexity, so we also have a set of multi-AZ groups as well.  To modify either, simply update the `aws-bootstrap` module's `single_az_node_groups` or `multi_az_node_groups` configuration (in `bootstrap/terraform/main.tf`) with:
 
 ```shell {% showHeader=false %}
 single_az_node_groups = {
@@ -37,7 +35,7 @@ single_az_node_groups = {
       } # kubernetes labels are good for targeting workloads
 }
 ```
-for multi az groups you can simply do
+for multi-AZ groups you can do the following:
 
 ```shell {% showHeader=false %}
 multi_az_node_groups = {
@@ -104,7 +102,7 @@ node_pool_taints = {
 {% /tab %}
 
 {% tab title="Azure" %}
-Currently azure has an annoying chicken-egg issue with the requirement at least one node pool is created.  Terraform manages this poorly by forcing cluster recreation if the default node pool changes.  To ensure no instability, we strongly recommend you confirm any node topology changes do not interfere with the default node pool on the AKS cluster.
+Currently Azure has an annoying chicken-egg issue with the requirement that at least one node pool must be created. Terraform manages this poorly by forcing cluster recreation if the default node pool changes. To ensure no instability, we strongly recommend you confirm any node topology changes do not interfere with the default node pool on the AKS cluster.
 
 With Azure, update the `azure-bootstrap` modules configuration in `bootstrap/terraform/main.tf` with:
 
