@@ -11,22 +11,42 @@ encryption backups.
 
 ## Your encryption key
 
-When you initialize your Plural repository, Plural creates a directory in your home director called `.plural`. Within this directory
+When you initialize your Plural repository, Plural creates a directory in your home directory called `.plural`. Within this directory
 is a file called `key`, which is your local encryption key. This key is required to decrypt any sensitive configuration within your
 Plural workspace.
+
+To import a preexisting key, you can run the following command:
+
+```shell {% showHeader=false %}
+cat /path/to/key | plural crypto import
+```
 
 ## Encryption backup operations
 
 ### Create workspace backup
 
-To create a backup for your local `key`, run `plural crypto backups create`. In the case that you lose your local encryption key,
-this will allow you to decrypt your repo. 
+To create a backup for your local `key`, run: 
+
+
+```shell {% showHeader=false %}
+plural crypto backups create
+```
+
+In the case that you lose your local encryption key, this will allow you to decrypt your repo. 
 
 ### List backups
 
-To list your workspace backups that you have created, run `plural crypto backups list`.
+To list your workspace backups that you have created, run:
+
+```shell {% showHeader=false %}
+plural crypto backups list
+```
 
 ### Restore from backup
 
 In the event that you lose your `key` file or are on a new machine, you can restore from a backup that you have created
-with the command `plural crypto backups restore`.
+with this command:
+
+```shell {% showHeader=false %}
+plural crypto backups restore
+```
