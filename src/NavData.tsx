@@ -119,6 +119,10 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Operations',
     sections: [
       {
+        href: '/operations/cluster-configuration',
+        title: 'Cluster Configuration',
+      },
+      {
         href: '/operations/cost-management',
         title: 'Cost Management',
       },
