@@ -140,6 +140,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Delete an Application',
           },
           {
+            href: '/operations/managing-applications/add-users-to-application',
+            title: 'Add Users to an Application',
+          },
+          {
             href: '/operations/managing-applications/bounce-application',
             title: 'Bounce an Application',
           },
