@@ -53,7 +53,16 @@ to reset the credential and reauthorize the browser for the correct project.
 
 Base cloud provider setup for a Plural repository is stored in your workspace.yaml file. This should be created when running `plural init`.
 
+### Kubconfig missing
+`2022/12/19 16:56:24 stat /home/plural/.kube/config: no such file or directory`
 
+This will happen because for whatever reason your kubeconfig is not available locally.  This will occasionally happen if your cloud shell pod was recently recreated, if you're using a new laptop, or if the file was deleted/expired accidentally.  To fix, run:
+
+```
+plural wkspace kube-init
+```
+
+in your repo and we'll generate a new one for you.
 
 ## Deployment Errors
 ### Invalid apiVersion for K8s
