@@ -11,10 +11,6 @@ Admin users who have installed an application have the ability to add users to t
 
 ![](</assets/operations/marketplace-add-users.png>)
 
-{% callout severity="info" %}
-When binding groups to an OIDC provider, this will not be reflected in the Console until a login from that group occurs.
-{% /callout %}
-
 ## Through Plural Console
 
 Any Plural Console user with permissions to manage users and groups can add users to any installed application. Navigate to the Plural Console and select your application in the top right. Click the info circle to the left of the application name, and select "OpenID Connect". This allows you to search for additional user or group bindings to add for access. Add any new users or groups and click "Update" in the bottom right.
