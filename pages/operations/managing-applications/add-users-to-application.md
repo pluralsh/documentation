@@ -18,4 +18,4 @@ Any Plural Console user with permissions to manage users and groups can add user
 ![](</assets/operations/console-add-users.png>)
 
 
-For applications not using OIDC, permissions are managed through the individual app's 
+For applications not using OIDC, permissions are managed through the individual applications.
