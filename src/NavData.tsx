@@ -209,30 +209,16 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Debugging',
     sections: [
       {
-        href: '/debugging',
-        title: 'Debugging',
-        sections: [
-          {
-            href: '/debugging/health-checks',
-            title: '  Health Checks',
-          },
-          {
-            href: '/debugging/proxies',
-            title: 'Proxies',
-          },
-          {
-            href: '/debugging/logs',
-            title: 'Logs',
-          },
-        ],
+        title: 'Debugging Applications',
+        href: '/debugging/debugging-applications',
       },
       {
-        title: 'Troubleshooting',
-        href: '/reference/troubleshooting',
+        href: '/debugging/debugging-tools',
+        title: 'Tools for Debugging',
       },
       {
-        title: 'Application Issues',
-        href: '/debugging/application-issues',
+        title: 'Common Errors',
+        href: '/debugging/common-errors',
       },
     ],
   },
