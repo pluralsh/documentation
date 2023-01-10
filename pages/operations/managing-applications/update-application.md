@@ -17,7 +17,7 @@ You can change this setting by clicking the gear in the top-right corner of the 
 
 ## Rollback to a previous version
 
-This requires having the [Plural Console installed](../../getting-started/admin-console.md). We'll need this to create an upgrade
+This requires having the [Plural Console installed](/getting-started/admin-console). We'll need this to create an upgrade
 policy that tells Plural to not deploy an upgrade to your application, which is normally performed automatically unless disabled using the setting in our app. You could just disable upgrades altogether in
 the application as stated above, but then you'd lose out on easy upgrade delivery later.
 

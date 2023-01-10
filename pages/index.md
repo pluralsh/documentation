@@ -7,7 +7,7 @@ description: >-
 
 ## What is Plural?
 
-Plural is an open-source, unified, application deployment platform that stands up a Kubernetes cluster and selected applications in the cloud provider of your choice. Plural stores your infrastructure code and configuration in a fresh Git repository of your choosing, which we refer to as a Plural [workspace](./getting-started/manage-git-repositories/your-plural-workspace.md). 
+Plural is an open-source, unified, application deployment platform that stands up a Kubernetes cluster and selected applications in the cloud provider of your choice. Plural stores your infrastructure code and configuration in a fresh Git repository of your choosing, which we refer to as a Plural [workspace](/getting-started/manage-git-repositories/your-plural-workspace). 
 
 Plural writes all the Helm, Terraform, and YAML needed for your desired infrastructure with `plural build`, and deploys it all into production with `plural deploy`. All configuration within your Plural Git repository is fully ejectable from the platform and ecosystem.
 
