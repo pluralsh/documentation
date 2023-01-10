@@ -64,7 +64,7 @@ const rootNavData: NavMenu = deepFreeze([
           { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
           { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
           { href: '/getting-started/manage-git-repositories/sharing-git-repositories', title: 'Sharing Your Git Repositories' },
-          { href: '/getting-started/manage-git-repositories/workspace-backups', title: 'Workspace Encryption Guide' },
+          { href: '/getting-started/manage-git-repositories/workspace-encryption', title: 'Workspace Encryption Guide' },
         ],
       },
       {
