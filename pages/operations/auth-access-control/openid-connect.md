@@ -4,7 +4,7 @@ title: OpenID Connect
 
 All Plural applications have the capability to create a custom OIDC provider for a user's installation.  This allows Plural to become a unified identity management solution for your entire open source portfolio. We have even automated upgrades for OIDC configuration changes, so the setup process is entirely turnkey.&#x20;
 
-For more information about adding users to applications using OpenID Connect, see the page on [Adding Users to Applications](../../managing-applications/add-users-to-application.md)
+For more information about adding users to applications using OpenID Connect, see the page on [Adding Users to Applications](/operations/managing-applications/add-users-to-application)
 
 ### Login Policies
 
