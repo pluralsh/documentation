@@ -37,10 +37,10 @@ Before you proceed, make sure that your cloud provider CLI is properly configure
 {% tab title="curl" %}
 You can download the binaries attached to our GitHub releases [here](https://github.com/pluralsh/plural-cli/releases). There will be binaries for linux, windows, and mac and all compatible platforms.
 
-For example, you can download v0.2.57 for Darwin arm64 via:
+For example, you can download v0.6.2 for Darwin arm64 via:
 
 ```
-curl -L -o plural.tgz 'https://github.com/pluralsh/plural-cli/releases/download/v0.2.57/plural-cli_0.2.57_Darwin_arm64.tar.gz'
+curl -L -o plural.tgz 'https://github.com/pluralsh/plural-cli/releases/download/v0.6.2/plural-cli_0.6.2_Darwin_arm64.tar.gz'
 tar -xvf plural.tgz
 chmod +x plural
 mv plural /usr/local/bin/plural
