@@ -46,6 +46,7 @@ export const providerToProviderName: Record<Provider, string> = {
   KIND: 'kind',
   CUSTOM: 'Custom',
   KUBERNETES: 'Kubernetes',
+  GENERIC: 'Generic',
 }
 
 export function toHtmlId(str) {
