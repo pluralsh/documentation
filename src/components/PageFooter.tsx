@@ -22,9 +22,7 @@ function PageFooter({ className }: { className?: string }) {
         href=""
         onClick={e => {
           e.preventDefault()
-          const _hsp = (window as any)._hsp = (window as any)._hsp || []
-
-          _hsp.push(['showBanner'])
+          ;(window as any)?.Cookiebot?.show()
         }}
       >
         Cookie Settings

@@ -42,6 +42,14 @@ class MyDocument extends Document {
             rel="stylesheet"
             href="https://cdn.jsdelivr.net/npm/@docsearch/css@3"
           />
+          <script
+            id="Cookiebot"
+            src="https://consent.cookiebot.com/uc.js"
+            data-cbid="c6718f17-016b-4d02-9bc2-9f1467f610fb"
+            data-blockingmode="auto"
+            type="text/javascript"
+            data-widget-position="bottom-right"
+          />
         </Head>
         <body>
           <Main />
