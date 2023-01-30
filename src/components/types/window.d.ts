@@ -4,6 +4,7 @@ interface Window {
       statistics: boolean
       marketing: boolean
     }
+    show: () => void
   }
   _hsq?: any[]
 }
