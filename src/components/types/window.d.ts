@@ -5,4 +5,5 @@ interface Window {
       marketing: boolean
     }
   }
+  _hsq?: any[]
 }
