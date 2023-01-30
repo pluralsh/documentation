@@ -49,9 +49,9 @@ function HubSpot() {
 
   return (
     <Script
+      type="text/plain"
       data-cookieconsent="statistics"
       strategy="afterInteractive"
-      type="text/javascript"
       id="hs-script-loader"
       async
       defer
