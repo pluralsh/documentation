@@ -28,6 +28,7 @@ function HubSpot() {
 
   return (
     <Script
+      data-cookieconsent="marketing"
       strategy="afterInteractive"
       type="text/javascript"
       id="hs-script-loader"
@@ -48,6 +49,7 @@ function Posthog() {
     <>
       {/* <!-- Posthog Tracking Code for https://docs.plural.sh/ --> */}
       <Script
+        data-cookieconsent="statistics"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{ __html: posthogScript }}
       />
