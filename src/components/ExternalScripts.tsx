@@ -27,12 +27,15 @@ function HubSpot() {
     }
   }, [router.events])
 
-    // Turn tracking on and off when cookie prefs change
+  // Turn tracking on and off when cookie prefs change
   useEffect(() => {
     const onCookiePrefChange = () => {
       const _hsq = (window._hsq = window._hsq || [])
 
-      _hsq.push(['doNotTrack', { track: window.Cookiebot?.consent?.statistics }])
+      _hsq.push([
+        'doNotTrack',
+        { track: window.Cookiebot?.consent?.statistics },
+      ])
     }
 
     window.addEventListener('CookiebotOnAccept', onCookiePrefChange)
@@ -46,7 +49,7 @@ function HubSpot() {
 
   return (
     <Script
-      data-cookieconsent="marketing"
+      data-cookieconsent="statistics"
       strategy="afterInteractive"
       type="text/javascript"
       id="hs-script-loader"
@@ -58,7 +61,5 @@ function HubSpot() {
 }
 
 export default function ExternalScripts() {
-  return (
-    <HubSpot />
-  )
+  return <HubSpot />
 }
