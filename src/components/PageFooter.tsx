@@ -21,9 +21,7 @@ function PageFooter({ className }: { className?: string }) {
       <FooterLink
         href="#"
         onClick={e => {
-          console.log('e', e)
           e.preventDefault()
-          console.log('e', window.Cookiebot)
           window.Cookiebot?.show()
         }}
       >
