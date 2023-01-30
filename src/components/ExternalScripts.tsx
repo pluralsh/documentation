@@ -27,6 +27,23 @@ function HubSpot() {
     }
   }, [router.events])
 
+    // Turn tracking on and off when cookie prefs change
+  useEffect(() => {
+    const onCookiePrefChange = () => {
+      const _hsq = (window._hsq = window._hsq || [])
+
+      _hsq.push(['doNotTrack', { track: window.Cookiebot?.consent?.statistics }])
+    }
+
+    window.addEventListener('CookiebotOnAccept', onCookiePrefChange)
+    window.addEventListener('CookiebotOnDecline', onCookiePrefChange)
+
+    return () => {
+      window.removeEventListener('CookiebotOnAccept', onCookiePrefChange)
+      window.removeEventListener('CookiebotOnDecline', onCookiePrefChange)
+    }
+  }, [])
+
   return (
     <Script
       data-cookieconsent="marketing"
