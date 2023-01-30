@@ -1,5 +1,4 @@
 ;(function () {
-  console.log('_hsq', window._hsq)
   let isInit = false
   function startPosthog() {
     /* prettier-ignore */
@@ -7,38 +6,28 @@
     /* prettier-ignore */
     function initPosthog() { window.posthog.init('phc_r0v4jbKz8Rr27mfqgO15AN5BMuuvnU8hCFedd6zpSDy', { api_host: 'https://posthog.plural.sh' }) }
     if (!window.posthog) {
-      console.log('consent accepted, load')
       loadPosthog()
     }
     if (!isInit) {
-      console.log('consent accepted, init')
       initPosthog()
       isInit = true
     }
-    console.log('consent accepted, opt_in')
     posthog.opt_in_capturing()
   }
   function stopPosthog() {
     if (window.posthog) {
-      console.log('consent rejected')
-      console.log('consent rejected, opt_out')
       posthog.opt_out_capturing()
     }
   }
   function startHubspot() {
-    console.log('startHubspot')
     const _hsq = (window._hsq = window._hsq || [])
     _hsq.push(['doNotTrack', { track: true }])
   }
   function stopHubspot() {
-    console.log('stopHubspot')
     const _hsq = (window._hsq = window._hsq || [])
     _hsq.push(['doNotTrack'])
   }
-
   function onPrefChange(e) {
-    console.log('onPrefChange', e)
-    console.log('Cookiebot.consent.statistics', Cookiebot.consent.statistics)
     if (Cookiebot.consent.statistics) {
       startPosthog()
       startHubspot()
