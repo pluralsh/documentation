@@ -5,7 +5,8 @@ description: General-use OLTP database for stateful use cases.
 ## Introduction
 
 You may have noticed that Plural sometimes deploys with the Postgres application pre-installed. This is because
-it is a dependency for the Plural Console, which requires a Postgres database to store state about your Plural installation.
+it is a
+ dependency for the Plural Console, which requires a Postgres database to store state about your Plural installation.
 
 Some applications may also have a Postgres database as a dependency, in which case a separate database would be deployed for that
 application. These databases can be accessed directly using the plural proxy CLI command which you can learn about [here](/operations/managing-applications/connect-application-db).
@@ -18,7 +19,7 @@ us to create Postgres databases on-demand when required by an application.
 While we use the operator automatically to create databases for applications, you can invoke the operator yourself to manually spin up a database
 for your own use cases.
 
-To do this, place the following YAML into any application directory (we recommend ``/postgres/helm/postgres/templates`):
+To do this, place the following YAML into any application directory (we recommend `/postgres/helm/postgres/templates`):
 
 ```YAML
 apiVersion: acid.zalan.do/v1
@@ -42,14 +43,6 @@ spec:
     cluster: plural-clone
   databases:
     plural: plural
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: plural.sh/scalingGroup
-          operator: In
-          values:
-          - plural-small
   numberOfInstances: 2
   postgresql:
     parameters:
@@ -130,7 +123,7 @@ kubectl get secrets -n postgres
 The relevant secret should follow the naming convention `dbuser.dbname.acid.zalando`. To decrypt the secret, run the following command:
 
 ```
-kubectl get secrets/{SECRET_NAME} --template={{.data.password}} | base64 -D
+kubectl get secrets/{SECRET_NAME} --template={{.data.password}} | base64 -d
 ```
 
 Now with the username in the name of this secret and the decrypted password, you can now access your database.
