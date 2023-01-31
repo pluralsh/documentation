@@ -5,8 +5,7 @@ description: General-use OLTP database for stateful use cases.
 ## Introduction
 
 You may have noticed that Plural sometimes deploys with the Postgres application pre-installed. This is because
-it is a
- dependency for the Plural Console, which requires a Postgres database to store state about your Plural installation.
+it is a dependency for the Plural Console, which requires a Postgres database to store state about your Plural installation.
 
 Some applications may also have a Postgres database as a dependency, in which case a separate database would be deployed for that
 application. These databases can be accessed directly using the plural proxy CLI command which you can learn about [here](/operations/managing-applications/connect-application-db).
