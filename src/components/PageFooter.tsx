@@ -19,10 +19,10 @@ function PageFooter({ className }: { className?: string }) {
         Terms & Conditions
       </FooterLink>
       <FooterLink
-        href=""
+        href="#"
         onClick={e => {
           e.preventDefault()
-          ;(window as any)?.Cookiebot?.show()
+          window.Cookiebot?.show()
         }}
       >
         Cookie Settings

@@ -23,6 +23,7 @@ import ExternalScripts from '../src/components/ExternalScripts'
 import { FullNav } from '../src/components/FullNav'
 import { GITHUB_DATA_URL, getGithubDataServer, isGithubRepoData } from '../src/components/GithubStars'
 import GlobalStyles from '../src/components/GlobalStyles'
+import { usePosthog } from '../src/components/hooks/usePosthog'
 import HtmlHead from '../src/components/HtmlHead'
 import MainContent from '../src/components/MainContent'
 import PageFooter from '../src/components/PageFooter'
@@ -99,6 +100,7 @@ const Page = styled.div(() => ({}))
 function App({
   Component, repos = [], pageProps = {}, swrConfig,
 }: MyAppProps) {
+  usePosthog()
   const router = useRouter()
   const markdoc = pageProps?.markdoc
   const navData = useMemo(() => getNavData({ repos }), [repos])

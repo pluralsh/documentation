@@ -21,6 +21,20 @@ const documents = {
 
 /**
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
+ *
+ *
+ * @example
+ * ```ts
+ * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
+ * ```
+ *
+ * The query argument is unknown!
+ * Please regenerate the types.
+ */
+export function graphql(source: string): unknown;
+
+/**
+ * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  fragment RepoFragment on Repository {\n    id\n    name\n    description\n    documentation\n    icon\n    darkIcon\n    private\n    tags {\n      tag\n    }\n  }\n"): (typeof documents)["\n  fragment RepoFragment on Repository {\n    id\n    name\n    description\n    documentation\n    icon\n    darkIcon\n    private\n    tags {\n      tag\n    }\n  }\n"];
 /**
@@ -35,20 +49,6 @@ export function graphql(source: "\n  query Recipes($repoName: String!) {\n    re
  * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
  */
 export function graphql(source: "\n  query Repos {\n    repositories(first: 5000) {\n      edges {\n        node {\n          ...RepoFragment\n        }\n      }\n    }\n  }\n"): (typeof documents)["\n  query Repos {\n    repositories(first: 5000) {\n      edges {\n        node {\n          ...RepoFragment\n        }\n      }\n    }\n  }\n"];
-
-/**
- * The graphql function is used to parse GraphQL queries into a document that can be used by GraphQL clients.
- *
- *
- * @example
- * ```ts
- * const query = gql(`query GetUser($id: ID!) { user(id: $id) { name } }`);
- * ```
- *
- * The query argument is unknown!
- * Please regenerate the types.
-**/
-export function graphql(source: string): unknown;
 
 export function graphql(source: string) {
   return (documents as any)[source] ?? {};
