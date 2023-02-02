@@ -1,5 +1,5 @@
 ---
-title: Application Issues
+title: Debugging Applications
 description: Figuring out what is going wrong with your deployed applications.
 ---
 
