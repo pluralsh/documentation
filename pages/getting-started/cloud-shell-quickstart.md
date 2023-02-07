@@ -34,9 +34,9 @@ You can provide your credentials in the following screen.
 
 We'll now start setting up your Kubernetes cluster configuration. Here's a guide to the config:
 
-**cluster**: The name of your Kubernetes cluster. Name this based on what you're planning to run. Feel free to use the provided default.
+**cluster**: The name of your Kubernetes cluster. Name this based on what you're planning to run.
 
-**bucket prefix**: We provision S3 buckets for storing logs and state. Enter any string to help us uniquely name your buckets, or use the provided default.
+**bucket prefix**: We provision S3 buckets for storing logs and state. Enter any string to help us uniquely name your buckets.
 
 **subdomain**: We'll provision a subdomain for you to host your cluster and applications under. For example, if you choose `nintendo` as your subdomain and spin up an instance of Airflow, it will be available at `airflow.nintendo.onplural.sh`.
 
