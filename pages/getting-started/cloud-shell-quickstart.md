@@ -24,11 +24,11 @@ Directly navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to acces
 
 ### Set up a Cloud Provider
 
-You now have two options. If you're just trying out Plural, you can have a free demo cluster on the house that will last for 6 hours. Just keep in mind that this option will be only available once.
+Choose the option to set up your Cloud Provider in the browser. Plural can be set up on AWS, GCP, or Azure.
 
 ![](</assets/cloud-shell-quickstart/image-2.png>)
 
-To set up with your own cloud provider, provide your credentials in the following screen.
+You can provide your credentials in the following screen.
 
 ### Set up a Workspace
 

@@ -13,9 +13,9 @@ Admin users who have installed an application have the ability to add users to t
 
 ## Through Plural Console
 
-Any Plural Console user with permissions to manage users and groups can add users to any installed application. Navigate to the Plural Console and select your application in the top right. Click the info circle to the left of the application name, and select "OpenID Connect". This allows you to search for additional user or group bindings to add for access. Add any new users or groups and click "Update" in the bottom right.
+Any Plural Console user with permissions to manage users and groups can add users to any installed application. Navigate to the Plural Console and select your application from the Application Overview tab. Click the "User management" option from the menu on the left. This allows you to search for additional user or group bindings to add for access. Add any new users or groups and click "Update" in the bottom right.
 
-![](</assets/operations/console-add-users.png>)
+![](</assets/operations/add-users-console.png>)
 
 
 For applications not using OIDC, permissions are managed through the individual applications.

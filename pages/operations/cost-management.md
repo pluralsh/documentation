@@ -9,7 +9,7 @@ Out of the box, Plural performs a lot of optimizations behind the scenes with ou
 
 The Plural Console offers scaling recommendations for certain apps, some of which can be immediately applied from the Console.
 
-To do this, select your desired application in the top right of the Console and then click on the `Components` tab in the sidebar on the left. Then click on the specific component you want to get recommendations for and you will see a `Scaling` button in the top right. 
+To do this, select your desired application from the Application Overview tab and then click on the `Components` tab in the sidebar on the left. Then click on the specific component you want to get recommendations for and you will see a `Scaling` button in the top right. 
 
 When you click on the `Scaling` button, if you see `Apply` in the bottom right, you can immediately enforce the recommendations given by Plural.
 

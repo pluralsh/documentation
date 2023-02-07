@@ -5,14 +5,14 @@ description: Supercharge your day two operations.
 
 ## Introduction
 
-The Plural admin console is a web application that serves as a control panel for all your Plural applications. It:
+The Plural Admin Console is a web application that serves as a control panel for all your Plural applications. It:
 
 * manages automated upgrades delivered from the Kubernetes api
 * serves as a thin Grafana to visualize application metrics and logs
 * serves as a built-in K8s dashboard for all plural apps in the cluster, along with providing app-level health checking
 * is the touchpoint at which incidents can be filed with the owner of an application
 
-The console is not a strict dependency, but we highly recommended installing it. It can be installed and deployed like any other application on Plural.
+We highly recommended installing Plural Console. It can be installed and deployed like any other application on Plural.
 
 {% callout severity="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.
@@ -98,14 +98,23 @@ If you didn't select (y) to OIDC, your login credentials for this console are di
 
 ## Console Highlights
 
-The console is the command center for your Plural applications, and it comes with built-in goodies. Some highlights include:
+The Console is the command center for your Plural applications, and it comes with built-in goodies. Some highlights include:
 
-#### Runbooks
+#### Application Overview
 
-* The Plural console comes with interactive runbooks that serve as guided tutorials for advanced operations on Plural applications.
+The first place you'll land in the Plural Console is the Application Overview. Here you can see all installed applications, along with their version and status. Clicking into an application shows all available dashboards, runbooks, an overview of components related to that application, cost analysis, user management, and configuration options. 
 
-For example, the Airflow scaling runbook det
+The features in this section can be used to manage applications. As an example, select applications have interactive runbooks that serve as guided tutorials for advanced operations on Plural applications.
 
-ails how to look the Airflow CPU and memory usage graphs and compute your reservation appropriately. It then allows you to make that reservation directly from the runbook.
+![](</assets/basic-setup-and-deployment/application-runbook.png>)
 
-{% embed url="https://www.loom.com/share/61ae5014daec4b1fabec8c689eec7b18" /%}
+#### Builds Overview
+The Builds Overview shows all scheduled, running, and completed builds. Completed builds will display the status of that build, and clicking into an individual build shows the build output and available actions to take.
+
+#### Nodes Overview
+The Nodes Overview gives you an overview of your Kubernetes cluster, including total memory and CPU reservation, as well as the detail on each individual node. 
+
+Clicking on a node shows the pods assigned to that node, along with metadata and events associated with that node.
+
+#### Pods Overview
+The Pods Overview gives a filterable list of pods, their status, and running containers. Pod details give more information on containers, conditions, available metadata, and access to logs.
