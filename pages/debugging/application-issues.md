@@ -38,8 +38,8 @@ In most cases, kubernetes will restart the pod for you.  You can always also run
 
 If you have the Plural Console installed, you can debug your Kubernetes Pods with the following steps:
 
-1. Navigate to the `Components` tab and click on the failing component
+1. Navigate to the Application Overview tab, select the relevant application and click on the `Components` option in the menu on the left. Click on the failing component. 
    
-2. Scroll to the `Pods` section at the bottom of the screen and hit the red trash can button located on the right of the screen to delete the failing Pod.
+2. The `Pods` section at the top of the screen should have the failing pod; hit the red trash can button located on the right of the screen to delete it.
 
-3. Head back to the `Builds` tab in the sidebar and click the `Bounce` button in the top right to redeploy your deleted Pods.
+3. Head back to the `Builds` tab in the sidebar and create a `Bounce` build to redeploy your deleted Pods.
