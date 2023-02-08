@@ -12,7 +12,7 @@ The Plural Admin Console is a web application that serves as a control panel for
 * serves as a built-in K8s dashboard for all plural apps in the cluster, along with providing app-level health checking
 * is the touchpoint at which incidents can be filed with the owner of an application
 
-We highly recommended installing Plural Console. It can be installed and deployed like any other application on Plural.
+Plural Console is installed by default in the Cloud Shell, and we also highly recommend installing it if using the Plural CLI. It can be deployed and managed like any other application on Plural.
 
 {% callout severity="info" %}
 The admin console is separate from [app.plural.sh](https://app.plural.sh) which is primarily a package registry.

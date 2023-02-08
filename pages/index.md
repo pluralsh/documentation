@@ -32,7 +32,7 @@ This is the current standard deployment method. Click below for a quickstart to 
 
 ### Plural Cloud Shell
 
-We have created a Cloud Shell with all of the tools and dependencies needed to run Plural. This is available [here](https://app.plural.sh/shell) to try out. If you want to **try out Plural without entering cloud credentials**, we offer a Kubernetes deployment and Cloud Shell deployment on the house that lasts for 6 hours.
+We have created a Cloud Shell with all of the tools and dependencies needed to run Plural. This is available [here](https://app.plural.sh/shell) to try out. If you want to **try out Plural without entering cloud credentials**, we offer a demo environment of our Plural Console that you can access [here](https://www.plural.sh/demo-login).
 
 * [Using our in-browser Cloud Shell](/getting-started/cloud-shell-quickstart)
 
@@ -44,7 +44,7 @@ The Plural architecture has three main components:
 
 * Plural API and Catalog site (available at [https://app.plural.sh](https://app.plural.sh))
 * Plural CLI and Git SCM to maintain the state of a user's applications
-* Plural console for management of all plural applications on your infrastructure
+* Plural Console for management of all plural applications on your infrastructure
 
 At a high level, the interactions between all three components look something like this:
 
