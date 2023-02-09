@@ -36,7 +36,7 @@ Each cloud provider requires a slightly different set of credentials. Follow the
 
 {% tabs %}
 {% tab title="AWS" %}
-For AWS, you'll need to create or use a user with AdministratorAccess and create an Access Key for Plural to use.
+For AWS, you'll need to create or use a user with AdministratorAccess and create an access key for Plural to use.
 
 To create a new user, navigate to the IAM section of your AWS Console.
 
@@ -61,6 +61,27 @@ Choose "Command Line Interface", optionally add a tag, and create your access ke
 {% /tab %}
 
 {% tab title="GCP" %}
+For GCP, you'll want to create a service account with the Owner role and generate an access key for Plural to use.
+
+To create a new service account, navigate to the Service Accounts section of your GCP Console.
+
+![](</assets/cloud-shell-quickstart/service-accounts-gcp.png>)
+
+Select the `Create Service Account` from the top banner. You should see the following input fields:
+
+![](</assets/cloud-shell-quickstart/gcp-service-account-fields.png>)
+
+Fill in the details for your user. On the second step, add the `Owner` role for your service account.
+
+![](</assets/cloud-shell-quickstart/gcp-owner-service-account.png>)
+
+Finish creating your service account, and you should see your new service account in the Service Accounts home page. Click the three dots at the end of the row and select `Manage keys` like in the screenshot below:
+
+![](</assets/cloud-shell-quickstart/create-keys-gcp.png>)
+
+Select `Add Key` and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
+
+![](</assets/cloud-shell-quickstart/gcp-plural-credentials.png>)
 ```
 plural bundle install console console-gcp
 ```
