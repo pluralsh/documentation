@@ -24,11 +24,55 @@ Navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to access the Clo
 
 ### Set up a Cloud Provider
 
-Choose the option to set up your Cloud Provider in the browser. Plural can be set up on AWS, GCP, or Azure.
+Choose the option to continue your setup in the browser. If you'd prefer to use the CLI, choose "Local terminal" and switch to the CLI quickstart.
 
 ![](</assets/cloud-shell-quickstart/setup-options.png>)
 
-You can provide your credentials in the following screen.
+Plural can be set up on AWS, GCP, or Azure. You can provide your credentials in the following screen:
+
+![](</assets/cloud-shell-quickstart/cloud-provider-info.png>)
+
+Each cloud provider requires a slightly different set of credentials. Follow the steps below to generate the credentials for your provider.
+
+{% tabs %}
+{% tab title="AWS" %}
+For AWS, you'll need to create or use a user with AdministratorAccess and create an Access Key for Plural to use.
+
+To create a new user, navigate to the IAM section of your AWS Console.
+
+![](</assets/cloud-shell-quickstart/iam-aws.png>)
+
+Select the `Users` tab and `Add users`. You should see the following screen:
+
+![](</assets/cloud-shell-quickstart/create-user.png>)
+
+Fill in the details for your user. On the `Set permissions` screen, you can either choose to add your user to a group with AdministratorAccess, or attach the AdministratorAccess policy directly.
+
+![](</assets/cloud-shell-quickstart/administrator-access-aws.png>)
+
+Review your user and hit the `Create user` button. Navigate to your newly created user and click the `Security credentials` tab. Find the section for Access keys and click `Create access key`. You should see the following:
+
+![](</assets/cloud-shell-quickstart/access-keys-aws.png>)
+
+Choose "Command Line Interface", optionally add a tag, and create your access key. Make sure to download and save your new credentials; you can then enter the Access Key ID and Secret Access Key in your Plural onboarding.
+
+![](</assets/cloud-shell-quickstart/aws-plural-config.png>)
+
+{% /tab %}
+
+{% tab title="GCP" %}
+```
+plural bundle install console console-gcp
+```
+{% /tab %}
+
+{% tab title="Azure" %}
+```
+plural bundle install console console-azure
+```
+{% /tab %}
+{% /tabs %}
+
 
 ### Set up a Workspace
 
