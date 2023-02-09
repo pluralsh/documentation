@@ -46,11 +46,11 @@ Select the `Users` tab and `Add users`. You should see the following screen:
 
 ![](</assets/cloud-shell-quickstart/create-user.png>)
 
-Fill in the details for your user. On the `Set permissions` screen, you can either choose to add your user to a group with AdministratorAccess, or attach the AdministratorAccess policy directly.
+Fill in the details for your user. On the "Set permissions" screen, you can either choose to add your user to a group with AdministratorAccess, or attach the AdministratorAccess policy directly.
 
 ![](</assets/cloud-shell-quickstart/administrator-access-aws.png>)
 
-Review your user and hit the `Create user` button. Navigate to your newly created user and click the `Security credentials` tab. Find the section for Access keys and click `Create access key`. You should see the following:
+Review your user and hit the "Create user" button. Navigate to your newly created user and click the "Security credentials" tab. Find the section for Access keys and click "Create access key". You should see the following:
 
 ![](</assets/cloud-shell-quickstart/access-keys-aws.png>)
 
@@ -63,11 +63,11 @@ Choose "Command Line Interface", optionally add a tag, and create your access ke
 {% tab title="GCP" %}
 For GCP, you'll want to create a service account with the Owner role and generate an access key for Plural to use.
 
-To create a new service account, navigate to the Service Accounts section of your GCP Console.
+To create a new service account, navigate to the "Service Accounts" section of your GCP Console.
 
 ![](</assets/cloud-shell-quickstart/service-accounts-gcp.png>)
 
-Select the `Create Service Account` from the top banner. You should see the following input fields:
+Select the "Create Service Account" from the top banner. You should see the following input fields:
 
 ![](</assets/cloud-shell-quickstart/gcp-service-account-fields.png>)
 
@@ -75,22 +75,45 @@ Fill in the details for your user. On the second step, add the `Owner` role for 
 
 ![](</assets/cloud-shell-quickstart/gcp-owner-service-account.png>)
 
-Finish creating your service account, and you should see your new service account in the Service Accounts home page. Click the three dots at the end of the row and select `Manage keys` like in the screenshot below:
+Finish creating your service account, and you should see your new service account in the Service Accounts home page. Click the three dots at the end of the row and select "Manage keys" like in the screenshot below:
 
 ![](</assets/cloud-shell-quickstart/create-keys-gcp.png>)
 
-Select `Add Key` and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
+Select "Add Key" and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
 
 ![](</assets/cloud-shell-quickstart/gcp-plural-credentials.png>)
-```
-plural bundle install console console-gcp
-```
+
 {% /tab %}
 
 {% tab title="Azure" %}
-```
-plural bundle install console console-azure
-```
+
+For Azure, you'll need various fields including your Client ID, Client Secret, Subscription ID, Tenant ID, Resource Group, and Storage Account.
+
+To find your Subscription ID, navigate to the home page of your Azure console and search for "Subscriptions". You should see a page like the following:
+
+![](</assets/cloud-shell-quickstart/subscriptions-azure.png>)
+
+Your `Subscription ID` should be visible next to the Subscription name.
+
+Next, navigate to the Azure Active Directory section. Your `Tenant ID` should be displayed under "Basic information".
+
+Finally, navigate to the App registrations tab within your Directory. You should see an option to add a new registration: 
+
+![](</assets/cloud-shell-quickstart/app-registrations-azure.png>)
+
+Click to add a new registration. Fill in the details for your registration as indicated below and click the "Register" button.
+
+![](</assets/cloud-shell-quickstart/registration-details-azure.png>)
+
+Your new App Registration should then be displayed. The displayed "Application (client) ID" will be the `Client ID` in your Plural configuration. Click on the option "Add a certificate or secret" of Client credentials. Select "New client secret" from the screen:
+
+![](</assets/cloud-shell-quickstart/new-client-secret-azure.png>)
+
+Set your preferred timeframe and generate your new secret. The "Value" field will be the `Client Secret` in your Plural configuration. 
+
+You can optionally navigate to the Resource groups section of your Azure console to retrieve a `Resource Group` and `Storage Account`, or you can enter new values in the Plural configuration which can create them for you.
+
+![](</assets/cloud-shell-quickstart/plural-azure-config.png>)
 {% /tab %}
 {% /tabs %}
 
