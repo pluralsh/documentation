@@ -42,7 +42,7 @@ To create a new user, navigate to the IAM section of your AWS Console.
 
 ![](</assets/cloud-shell-quickstart/iam-aws.png>)
 
-Select the `Users` tab and `Add users`. You should see the following screen:
+Select the `Users` tab and click `Add users`. You should see the following screen:
 
 ![](</assets/cloud-shell-quickstart/create-user.png>)
 
