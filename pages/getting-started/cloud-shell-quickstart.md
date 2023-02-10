@@ -109,9 +109,19 @@ Your new App Registration should then be displayed. The displayed "Application (
 
 ![](</assets/cloud-shell-quickstart/new-client-secret-azure.png>)
 
-Set your preferred timeframe and generate your new secret. The "Value" field will be the `Client Secret` in your Plural configuration. 
+Set your preferred timeframe and generate your new secret. The "Value" field will be the `Client Secret` in your Plural configuration.
 
 You can optionally navigate to the Resource groups section of your Azure console to retrieve a `Resource Group` and `Storage Account`, or you can enter new values in the Plural configuration which can create them for you.
+
+From here, you have two options. You either need to give your app a role on either your overall Subscription or scoped to a Resource Group. As an example, navigate to the Access Control (IAM) tab of your Subscription. Click the "Role Assignments" tab and Select "Add" at the top.
+
+![](</assets/cloud-shell-quickstart/ra-azure.png>)
+
+Select the Owner role, and click on "Select members" to search for your app name. Select the app and continue until your new Role assignment is complete. You should now see your app listed as an owner for the Subscription. The process is the same if choosing to scope to a Resource Group.
+
+![](</assets/cloud-shell-quickstart/completed-role-assignments-azure.png>)
+
+Return to your Plural onboarding. Enter the values noted above into your Cloud Credential configuration, and proceed to the next step.
 
 ![](</assets/cloud-shell-quickstart/plural-azure-config.png>)
 {% /tab %}
