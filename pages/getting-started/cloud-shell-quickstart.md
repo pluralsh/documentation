@@ -87,6 +87,10 @@ Select "Add Key" and save the generated file. This will be used to configure you
 
 {% tab title="Azure" %}
 
+You can either follow along with the text instructions here or use the following video to set up your Azure installation on Plural.
+
+{% embed url="https://www.youtube.com/watch?v=LgwnBjYOCbg&t=10s&ab_channel=Plural" aspectRatio="16 / 9" /%}
+
 For Azure, you'll need various fields including your Client ID, Client Secret, Subscription ID, Tenant ID, Resource Group, and Storage Account.
 
 To find your Subscription ID, navigate to the home page of your Azure console and search for "Subscriptions". You should see a page like the following:
@@ -97,7 +101,7 @@ Your `Subscription ID` should be visible next to the Subscription name.
 
 Next, navigate to the Azure Active Directory section. Your `Tenant ID` should be displayed under "Basic information".
 
-Finally, navigate to the App registrations tab within your Directory. You should see an option to add a new registration: 
+Finally, navigate to the App registrations tab within your Directory. You should see an option to add a new registration:
 
 ![](</assets/cloud-shell-quickstart/app-registrations-azure.png>)
 
@@ -146,7 +150,7 @@ While your Cloud Shell is provisioning, double check that your repository was in
 
 ## Install Wizard and Cloud Shell
 
-You'll be redirected into your Cloud Shell environment after confirmation. Your Cloud Shell is where you can install applications, inspect your workspace, and run terminal commands. 
+You'll be redirected into your Cloud Shell environment after confirmation. Your Cloud Shell is where you can install applications, inspect your workspace, and run terminal commands.
 
 The left-hand side of the screen is the Install Wizard, where you can configure applications for installation. Applications can be configured and installed in a fully point-and-click manner by following the available prompts. When Plural is installing your applications, you can follow progress on the right-hand side of the screen in the terminal window.
 
