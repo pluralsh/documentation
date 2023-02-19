@@ -40,7 +40,8 @@ You can download the binaries attached to our GitHub releases [here](https://git
 For example, you can download v0.6.2 for Darwin arm64 via:
 
 ```
-curl -L -o plural.tgz 'https://github.com/pluralsh/plural-cli/releases/download/v0.6.2/plural-cli_0.6.2_Darwin_arm64.tar.gz'
+VSN=$(curl --silent -qI https://github.com/pluralsh/plural-cli/releases/latest | awk -F '/' '/^location/ {print  substr($NF, 1, length($NF)-1)}')
+curl -L -o plural.tgz 'https://github.com/pluralsh/plural-cli/releases/download/${VSN}/plural-cli_${VSN#v}_Darwin_arm64.tar.gz'
 tar -xvf plural.tgz
 chmod +x plural
 mv plural /usr/local/bin/plural
