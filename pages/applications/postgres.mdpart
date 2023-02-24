@@ -18,7 +18,7 @@ us to create Postgres databases on-demand when required by an application.
 While we use the operator automatically to create databases for applications, you can invoke the operator yourself to manually spin up a database
 for your own use cases.
 
-To do this, place the following YAML into any application directory (we recommend ``/postgres/helm/postgres/templates`):
+To do this, place the following YAML into any application directory (we recommend `/postgres/helm/postgres/templates`):
 
 ```YAML
 apiVersion: acid.zalan.do/v1
@@ -42,14 +42,6 @@ spec:
     cluster: plural-clone
   databases:
     plural: plural
-  nodeAffinity:
-    requiredDuringSchedulingIgnoredDuringExecution:
-      nodeSelectorTerms:
-      - matchExpressions:
-        - key: plural.sh/scalingGroup
-          operator: In
-          values:
-          - plural-small
   numberOfInstances: 2
   postgresql:
     parameters:
@@ -130,7 +122,7 @@ kubectl get secrets -n postgres
 The relevant secret should follow the naming convention `dbuser.dbname.acid.zalando`. To decrypt the secret, run the following command:
 
 ```
-kubectl get secrets/{SECRET_NAME} --template={{.data.password}} | base64 -D
+kubectl get secrets/{SECRET_NAME} --template={{.data.password}} | base64 -d
 ```
 
 Now with the username in the name of this secret and the decrypted password, you can now access your database.
