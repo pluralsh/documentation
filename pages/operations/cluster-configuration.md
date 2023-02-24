@@ -81,7 +81,7 @@ node_pools = [
     }
 ]
 # if you'd like to add lables
-node_pool_labels = {
+node_pools_labels = {
     "small-burst-on-demand" = {
       "plural.sh/capacityType" = "ON_DEMAND"
       "plural.sh/performanceType" = "BURST"
@@ -89,7 +89,7 @@ node_pool_labels = {
     }
 }
 # if you'd also like to add taints
-node_pool_taints = {
+node_pools_taints = {
     small-burst-spot = [
       {
         key    = "plural.sh/capacityType"
