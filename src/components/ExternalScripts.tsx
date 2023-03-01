@@ -64,19 +64,20 @@ function Gtag() {
   const gtag = useCallback<(...args: any[]) => void>((...args) => {
     const dataLayer = (window.dataLayer = window.dataLayer || [])
 
-    console.log('ga push', args)
     dataLayer.push(...args)
   }, [])
 
-  window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = true
+  useEffect(() => {
+    window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = true
 
-  gtag('set', { allow_google_signals: false })
-  gtag('set', { allow_ad_personalization_signals: false })
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    analytics_storage: 'denied',
-  })
-  gtag('config', process.env.NEXT_PUBLIC_GA_ID)
+    gtag('set', { allow_google_signals: false })
+    gtag('set', { allow_ad_personalization_signals: false })
+    gtag('consent', 'default', {
+      ad_storage: 'denied',
+      analytics_storage: 'denied',
+    })
+    gtag('config', process.env.NEXT_PUBLIC_GA_ID)
+  }, [gtag])
 
   // Turn tracking on and off when cookie prefs change
   useEffect(() => {

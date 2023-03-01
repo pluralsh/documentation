@@ -4772,13 +4772,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@sentry/types@npm:7.22.0":
-  version: 7.22.0
-  resolution: "@sentry/types@npm:7.22.0"
-  checksum: eec788104d3a8ed8b8bf57d95e6c1ec8ec48212a94914e4e1d8bc110fe6b88825ce2a299439d10bd2f0c69778afedabcc6cbf38c4850345e6954d8bc3be0060b
-  languageName: node
-  linkType: hard
-
 "@swc/helpers@npm:0.4.14":
   version: 0.4.14
   resolution: "@swc/helpers@npm:0.4.14"
@@ -10678,14 +10671,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"posthog-js@npm:1.42.2":
-  version: 1.42.2
-  resolution: "posthog-js@npm:1.42.2"
+"posthog-js@npm:1.50.1":
+  version: 1.50.1
+  resolution: "posthog-js@npm:1.50.1"
   dependencies:
-    "@sentry/types": 7.22.0
     fflate: ^0.4.1
     rrweb-snapshot: ^1.1.14
-  checksum: 6be66339a027060ee1fbf65c07ea0c640bb2bd83669106e33af5d30f4cd135b8cf6d18835abce3b5422bf30681e58f433a835f5d63febcae21d4b7796adb1e86
+  checksum: 2dfc3f7aee61657f75cc4b96c0a728184190694942b7f756fecc09858f2a2704ba50fca8d3e2ab2dc6a0fa3dd71b7710234f0147213db651e693d48f5937e533
   languageName: node
   linkType: hard
 
@@ -11468,7 +11460,7 @@ __metadata:
     next: 13.1.6
     next-compose-plugins: 2.2.1
     next-transpile-modules: 10.0.0
-    posthog-js: 1.42.2
+    posthog-js: 1.50.1
     qs: 6.11.0
     raw-loader: 4.0.2
     react: 18.2.0
