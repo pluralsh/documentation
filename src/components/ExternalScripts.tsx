@@ -90,7 +90,7 @@ function Gtag() {
         ad_storage: allowMarketing ? 'granted' : 'denied',
         analytics_storage: allowStats ? 'granted' : 'denied',
       })
-      window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = allowStats
+      window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = !allowStats
     }
 
     window.addEventListener('CookiebotOnAccept', onCookiePrefChange)
