@@ -6,5 +6,8 @@ interface Window {
     }
     show: () => void
   }
+  // Hubspot
   _hsq?: any[]
+  // Gtag
+  dataLayer?: any[]
 }
