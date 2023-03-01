@@ -76,6 +76,7 @@ function Gtag() {
       ad_storage: 'denied',
       analytics_storage: 'denied',
     })
+    gtag('js', new Date())
     gtag('config', process.env.NEXT_PUBLIC_GA_ID)
   }, [gtag])
 
