@@ -61,7 +61,6 @@ function HubSpot() {
 }
 
 function gtag(..._: any) {
-  console.log('gtag', _)
   const dataLayer = (window.dataLayer = window.dataLayer || [])
 
   // Trying not to rewrite what google provides
