@@ -30,6 +30,7 @@ class MyDocument extends Document {
     }
   }
 
+  // Using gtag with Cookiebot: https://support.cookiebot.com/hc/en-us/articles/360003979074-Using-Google-Gtag-with-Cookiebot
   render() {
     return (
       <Html data-theme="dark">
@@ -50,6 +51,21 @@ class MyDocument extends Document {
             type="text/javascript"
             data-widget-position="bottom-right"
           />
+          <script
+            async
+            src="https://www.googletagmanager.com/gtag/js?id=G-ND8K98HK0J"
+          />
+          <script>
+            {`
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('consent', 'default', {ad_storage:'denied', analytics_storage:'denied'});
+  gtag('set', 'ads_data_redaction', true);
+  gtag('set', 'url_passthrough', true);
+  gtag('config', 'G-ND8K98HK0J');
+  `}
+          </script>
         </Head>
         <body>
           <Main />
