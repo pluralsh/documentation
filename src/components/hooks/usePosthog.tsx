@@ -5,7 +5,10 @@ import { useRouter } from 'next/router'
 import { posthog } from 'posthog-js'
 
 function setAllowTracking(on?: boolean) {
-  if (window) {
+  // Checking for POSTHOG_API_KEY prevents posthog error when calling
+  // opt_in_capturing() or opt_out_capturing() without having run
+  // posthog.init() first. This generally only occurs when running locally.
+  if (window && process.env.NEXT_PUBLIC_POSTHOG_API_KEY) {
     if (on) {
       posthog.opt_in_capturing()
     }

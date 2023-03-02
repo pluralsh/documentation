@@ -26,12 +26,14 @@ export type Scalars = {
 
 export type Account = {
   __typename?: 'Account';
+  availableFeatures?: Maybe<PlanFeatures>;
   backgroundColor?: Maybe<Scalars['String']>;
+  billingAddress?: Maybe<Address>;
   billingCustomerId?: Maybe<Scalars['String']>;
   clusterCount?: Maybe<Scalars['String']>;
   delinquentAt?: Maybe<Scalars['DateTime']>;
   domainMappings?: Maybe<Array<Maybe<DomainMapping>>>;
-  grandfatheredUnitl?: Maybe<Scalars['DateTime']>;
+  grandfatheredUntil?: Maybe<Scalars['DateTime']>;
   icon?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   insertedAt?: Maybe<Scalars['DateTime']>;
@@ -44,6 +46,7 @@ export type Account = {
 };
 
 export type AccountAttributes = {
+  billingAddress?: InputMaybe<AddressAttributes>;
   domainMappings?: InputMaybe<Array<InputMaybe<DomainMappingInput>>>;
   icon?: InputMaybe<Scalars['UploadOrUrl']>;
   name?: InputMaybe<Scalars['String']>;
@@ -72,6 +75,7 @@ export type Address = {
   country?: Maybe<Scalars['String']>;
   line1?: Maybe<Scalars['String']>;
   line2?: Maybe<Scalars['String']>;
+  name?: Maybe<Scalars['String']>;
   state?: Maybe<Scalars['String']>;
   zip?: Maybe<Scalars['String']>;
 };
@@ -81,6 +85,7 @@ export type AddressAttributes = {
   country: Scalars['String'];
   line1: Scalars['String'];
   line2: Scalars['String'];
+  name?: InputMaybe<Scalars['String']>;
   state: Scalars['String'];
   zip: Scalars['String'];
 };
@@ -215,6 +220,7 @@ export type CardEdge = {
   node?: Maybe<Card>;
 };
 
+/** Application categories. */
 export enum Category {
   Data = 'DATA',
   Database = 'DATABASE',
@@ -325,6 +331,7 @@ export type CloudShell = {
   gitUrl: Scalars['String'];
   id: Scalars['ID'];
   insertedAt?: Maybe<Scalars['DateTime']>;
+  missing?: Maybe<Array<Maybe<Scalars['String']>>>;
   provider: Provider;
   region: Scalars['String'];
   status?: Maybe<ShellStatus>;
@@ -340,29 +347,48 @@ export type CloudShellAttributes = {
   workspace: WorkspaceAttributes;
 };
 
+/** A Kubernetes cluster that can be used to deploy applications on with Plural. */
 export type Cluster = {
   __typename?: 'Cluster';
+  /** The account that the cluster belongs to. */
   account?: Maybe<Account>;
+  /** The URL of the console running on the cluster. */
   consoleUrl?: Maybe<Scalars['String']>;
+  /** The domain name used for applications deployed on the cluster. */
   domain?: Maybe<Scalars['String']>;
+  /** The git repository URL for the cluster. */
   gitUrl?: Maybe<Scalars['String']>;
+  /** The ID of the cluster. */
   id: Scalars['ID'];
   insertedAt?: Maybe<Scalars['DateTime']>;
+  /** The name of the cluster. */
   name: Scalars['String'];
+  /** The user that owns the cluster. */
   owner?: Maybe<User>;
+  /** The last time the cluster was pinged. */
   pingedAt?: Maybe<Scalars['DateTime']>;
+  /** The cluster's cloud provider. */
   provider: Provider;
+  /** The upgrade queue for applications running on the cluster. */
   queue?: Maybe<UpgradeQueue>;
+  /** The source of the cluster. */
   source?: Maybe<Source>;
   updatedAt?: Maybe<Scalars['DateTime']>;
 };
 
+/** Input for creating or updating a cluster. */
 export type ClusterAttributes = {
+  /** The URL of the console running on the cluster. */
   consoleUrl?: InputMaybe<Scalars['String']>;
+  /** The domain name used for applications deployed on the cluster. */
   domain?: InputMaybe<Scalars['String']>;
+  /** The git repository URL for the cluster. */
   gitUrl?: InputMaybe<Scalars['String']>;
+  /** The name of the cluster. */
   name: Scalars['String'];
+  /** The cluster's cloud provider. */
   provider: Provider;
+  /** The source of the cluster. */
   source?: InputMaybe<Source>;
 };
 
@@ -404,12 +430,19 @@ export type Community = {
   videos?: Maybe<Array<Maybe<Scalars['String']>>>;
 };
 
+/** Input for creating or updating the community links of an application. */
 export type CommunityAttributes = {
+  /** The application's Discord server. */
   discord?: InputMaybe<Scalars['String']>;
+  /** The application's git URL. */
   gitUrl?: InputMaybe<Scalars['String']>;
+  /** The application's homepage. */
   homepage?: InputMaybe<Scalars['String']>;
+  /** The application's Slack channel. */
   slack?: InputMaybe<Scalars['String']>;
+  /** The application's Twitter account. */
   twitter?: InputMaybe<Scalars['String']>;
+  /** The videos of the application. */
   videos?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
@@ -1114,27 +1147,41 @@ export enum IncidentStatus {
   Resolved = 'RESOLVED'
 }
 
+/** An installation of an application. */
 export type Installation = {
   __typename?: 'Installation';
   acmeKeyId?: Maybe<Scalars['String']>;
   acmeSecret?: Maybe<Scalars['String']>;
+  /** Whether the application should auto upgrade. */
   autoUpgrade?: Maybe<Scalars['Boolean']>;
+  /** A YAML object of context. */
   context?: Maybe<Scalars['Map']>;
+  /** The installation's ID. */
   id: Scalars['ID'];
   insertedAt?: Maybe<Scalars['DateTime']>;
   license?: Maybe<Scalars['String']>;
+  /** The license key for the application. */
   licenseKey?: Maybe<Scalars['String']>;
+  /** The OIDC provider for the application. */
   oidcProvider?: Maybe<OidcProvider>;
+  /** The application that was installed. */
   repository?: Maybe<Repository>;
+  /** The subscription for the application. */
   subscription?: Maybe<RepositorySubscription>;
+  /** The tag to track for auto upgrades. */
   trackTag: Scalars['String'];
   updatedAt?: Maybe<Scalars['DateTime']>;
+  /** The user that installed the application. */
   user?: Maybe<User>;
 };
 
+/** Input for creating or updating the tag attributes of an application installation. */
 export type InstallationAttributes = {
+  /** Whether the application should auto upgrade. */
   autoUpgrade?: InputMaybe<Scalars['Boolean']>;
+  /** A YAML object of context. */
   context?: InputMaybe<Scalars['Yaml']>;
+  /** The tag to track for auto upgrades. */
   trackTag?: InputMaybe<Scalars['String']>;
 };
 
@@ -1524,17 +1571,25 @@ export type OauthSettings = {
   uriFormat: Scalars['String'];
 };
 
+/** Input for the application's OAuth settings. */
 export type OauthSettingsAttributes = {
+  /** The authentication method for the OAuth provider. */
   authMethod: OidcAuthMethod;
+  /** The URI format for the OAuth provider. */
   uriFormat: Scalars['String'];
 };
 
+/** Input for creating or updating the OIDC attributes of an application installation. */
 export type OidcAttributes = {
+  /** The authentication method for the OIDC provider. */
   authMethod: OidcAuthMethod;
+  /** The users or groups that can login through the OIDC provider. */
   bindings?: InputMaybe<Array<InputMaybe<BindingAttributes>>>;
+  /** The redirect URIs for the OIDC provider. */
   redirectUris?: InputMaybe<Array<InputMaybe<Scalars['String']>>>;
 };
 
+/** Supported OIDC authentication methods. */
 export enum OidcAuthMethod {
   Basic = 'BASIC',
   Post = 'POST'
@@ -1794,6 +1849,8 @@ export type PlanFeatureAttributes = {
 
 export type PlanFeatures = {
   __typename?: 'PlanFeatures';
+  audit?: Maybe<Scalars['Boolean']>;
+  userManagement?: Maybe<Scalars['Boolean']>;
   vpn?: Maybe<Scalars['Boolean']>;
 };
 
@@ -1855,21 +1912,12 @@ export type PlatformPlanItem = {
   period: PaymentPeriod;
 };
 
-export type PlatformPlanLineItemAttributes = {
-  dimension: LineItemDimension;
-  quantity: Scalars['Int'];
-};
-
 export type PlatformSubscription = {
   __typename?: 'PlatformSubscription';
   externalId?: Maybe<Scalars['String']>;
   id: Scalars['ID'];
   lineItems?: Maybe<Array<Maybe<PlatformSubscriptionLineItems>>>;
   plan?: Maybe<PlatformPlan>;
-};
-
-export type PlatformSubscriptionAttributes = {
-  lineItems?: InputMaybe<Array<InputMaybe<PlatformPlanLineItemAttributes>>>;
 };
 
 export type PlatformSubscriptionLineItems = {
@@ -2153,61 +2201,110 @@ export type RecipeValidationAttributes = {
   type: ValidationType;
 };
 
+/** Attributes of an application. */
 export type Repository = {
   __typename?: 'Repository';
+  /** The artifacts of the application. */
   artifacts?: Maybe<Array<Maybe<Artifact>>>;
+  /** The category of the application. */
   category?: Maybe<Category>;
+  /** The community links of the application. */
   community?: Maybe<Community>;
   darkIcon?: Maybe<Scalars['String']>;
+  /** The default tag to deploy. */
   defaultTag?: Maybe<Scalars['String']>;
+  /** The description of the application. */
   description?: Maybe<Scalars['String']>;
+  /** The documentation of the application. */
   docs?: Maybe<Array<Maybe<FileContent>>>;
+  /** The documentation of the application. */
   documentation?: Maybe<Scalars['String']>;
+  /** If the application can be edited by the current user. */
   editable?: Maybe<Scalars['Boolean']>;
+  /** The git URL of the application. */
   gitUrl?: Maybe<Scalars['String']>;
+  /** The homepage of the application. */
   homepage?: Maybe<Scalars['String']>;
   icon?: Maybe<Scalars['String']>;
+  /** The application's ID. */
   id: Scalars['ID'];
   insertedAt?: Maybe<Scalars['DateTime']>;
+  /** The installation of the application by a user. */
   installation?: Maybe<Installation>;
+  /** The license of the application. */
   license?: Maybe<License>;
+  /** The main branch of the application. */
   mainBranch?: Maybe<Scalars['String']>;
+  /** The name of the application. */
   name: Scalars['String'];
+  /** Notes about the application rendered after deploying and displayed to the user. */
   notes?: Maybe<Scalars['String']>;
+  /** The OAuth settings for the application. */
   oauthSettings?: Maybe<OauthSettings>;
+  /** The available plans for the application. */
   plans?: Maybe<Array<Maybe<Plan>>>;
+  /** Whether the application is private. */
   private?: Maybe<Scalars['Boolean']>;
+  /** The application's public key. */
   publicKey?: Maybe<Scalars['String']>;
+  /** The application publisher. */
   publisher?: Maybe<Publisher>;
+  /** The README of the application. */
   readme?: Maybe<Scalars['String']>;
+  /** The recipes used to install the application. */
   recipes?: Maybe<Array<Maybe<Recipe>>>;
+  /** A map of secrets of the application. */
   secrets?: Maybe<Scalars['Map']>;
+  /** The tags of the application. */
   tags?: Maybe<Array<Maybe<Tag>>>;
+  /** Whether the application is trending. */
   trending?: Maybe<Scalars['Boolean']>;
   updatedAt?: Maybe<Scalars['DateTime']>;
+  /** Whether the application is verified. */
   verified?: Maybe<Scalars['Boolean']>;
 };
 
+/** Input for creating or updating an application's attributes. */
 export type RepositoryAttributes = {
+  /** The category of the application. */
   category?: InputMaybe<Category>;
+  /** The application's community links. */
   community?: InputMaybe<CommunityAttributes>;
+  /** The application's dark icon. */
   darkIcon?: InputMaybe<Scalars['UploadOrUrl']>;
+  /** The default tag to use when deploying the application. */
   defaultTag?: InputMaybe<Scalars['String']>;
+  /** A short description of the application. */
   description?: InputMaybe<Scalars['String']>;
+  /** The application's documentation. */
   docs?: InputMaybe<Scalars['UploadOrUrl']>;
+  /** A link to the application's documentation. */
   documentation?: InputMaybe<Scalars['String']>;
+  /** The application's git URL. */
   gitUrl?: InputMaybe<Scalars['String']>;
+  /** The application's homepage. */
   homepage?: InputMaybe<Scalars['String']>;
+  /** The application's icon. */
   icon?: InputMaybe<Scalars['UploadOrUrl']>;
+  /** The application's integration resource definition. */
   integrationResourceDefinition?: InputMaybe<ResourceDefinitionAttributes>;
+  /** The name of the application. */
   name?: InputMaybe<Scalars['String']>;
+  /** Notes about the application rendered after deploying and displayed to the user. */
   notes?: InputMaybe<Scalars['String']>;
+  /** The application's OAuth settings. */
   oauthSettings?: InputMaybe<OauthSettingsAttributes>;
+  /** Whether the application is private. */
   private?: InputMaybe<Scalars['Boolean']>;
+  /** The application's README. */
   readme?: InputMaybe<Scalars['String']>;
+  /** A YAML object of secrets. */
   secrets?: InputMaybe<Scalars['Yaml']>;
+  /** The application's tags. */
   tags?: InputMaybe<Array<InputMaybe<TagAttributes>>>;
+  /** Whether the application is trending. */
   trending?: InputMaybe<Scalars['Boolean']>;
+  /** Whether the application is verified. */
   verified?: InputMaybe<Scalars['Boolean']>;
 };
 
@@ -2381,6 +2478,7 @@ export type RootMutationType = {
   completeIncident?: Maybe<Incident>;
   createArtifact?: Maybe<Artifact>;
   createCard?: Maybe<Account>;
+  /** Create a new cluster. */
   createCluster?: Maybe<Cluster>;
   createCrd?: Maybe<Crd>;
   createDemoProject?: Maybe<DemoProject>;
@@ -2419,6 +2517,7 @@ export type RootMutationType = {
   createZoom?: Maybe<ZoomMeeting>;
   deleteCard?: Maybe<Account>;
   deleteChartInstallation?: Maybe<ChartInstallation>;
+  /** Delete a cluster. */
   deleteCluster?: Maybe<Cluster>;
   deleteDemoProject?: Maybe<DemoProject>;
   deleteDnsRecord?: Maybe<DnsRecord>;
@@ -2540,6 +2639,7 @@ export type RootMutationTypeCreateArtifactArgs = {
 
 
 export type RootMutationTypeCreateCardArgs = {
+  address?: InputMaybe<AddressAttributes>;
   source: Scalars['String'];
 };
 
@@ -2636,7 +2736,6 @@ export type RootMutationTypeCreatePlanArgs = {
 
 
 export type RootMutationTypeCreatePlatformSubscriptionArgs = {
-  attributes: PlatformSubscriptionAttributes;
   planId: Scalars['ID'];
 };
 
@@ -3206,6 +3305,7 @@ export type RootMutationTypeUpsertRepositoryArgs = {
 
 export type RootQueryType = {
   __typename?: 'RootQueryType';
+  account?: Maybe<Account>;
   auditMetrics?: Maybe<Array<Maybe<GeoMetric>>>;
   audits?: Maybe<AuditConnection>;
   categories?: Maybe<Array<Maybe<CategoryInfo>>>;
@@ -3214,7 +3314,9 @@ export type RootQueryType = {
   chartInstallations?: Maybe<ChartInstallationConnection>;
   charts?: Maybe<ChartConnection>;
   closure?: Maybe<Array<Maybe<ClosureItem>>>;
+  /** Get a cluster by its ID. */
   cluster?: Maybe<Cluster>;
+  /** Get a list of clusters owned by the current account. */
   clusters?: Maybe<ClusterConnection>;
   configuration?: Maybe<PluralConfiguration>;
   deferredUpdates?: Maybe<DeferredUpdateConnection>;
@@ -3262,6 +3364,7 @@ export type RootQueryType = {
   recipe?: Maybe<Recipe>;
   recipes?: Maybe<RecipeConnection>;
   repositories?: Maybe<RepositoryConnection>;
+  /** Get an application by its ID or name. */
   repository?: Maybe<Repository>;
   repositorySubscription?: Maybe<RepositorySubscription>;
   resetToken?: Maybe<ResetToken>;
@@ -3920,15 +4023,20 @@ export type ScanViolation = {
 };
 
 export type ScmAttributes = {
-  name: Scalars['String'];
+  gitUrl?: InputMaybe<Scalars['String']>;
+  name?: InputMaybe<Scalars['String']>;
   org?: InputMaybe<Scalars['String']>;
+  privateKey?: InputMaybe<Scalars['String']>;
   provider?: InputMaybe<ScmProvider>;
-  token: Scalars['String'];
+  publicKey?: InputMaybe<Scalars['String']>;
+  token?: InputMaybe<Scalars['String']>;
 };
 
 export enum ScmProvider {
+  Demo = 'DEMO',
   Github = 'GITHUB',
-  Gitlab = 'GITLAB'
+  Gitlab = 'GITLAB',
+  Manual = 'MANUAL'
 }
 
 export type ServiceAccountAttributes = {
@@ -3988,6 +4096,7 @@ export type SlimSubscription = {
   plan?: Maybe<Plan>;
 };
 
+/** Possible cluster sources. */
 export enum Source {
   Default = 'DEFAULT',
   Demo = 'DEMO',
@@ -4337,13 +4446,14 @@ export enum UpgradeType {
 
 export type User = {
   __typename?: 'User';
-  account?: Maybe<Account>;
+  account: Account;
   address?: Maybe<Address>;
   avatar?: Maybe<Scalars['String']>;
   backgroundColor?: Maybe<Scalars['String']>;
   boundRoles?: Maybe<Array<Maybe<Role>>>;
   cards?: Maybe<CardConnection>;
   defaultQueueId?: Maybe<Scalars['ID']>;
+  demoing?: Maybe<Scalars['Boolean']>;
   email: Scalars['String'];
   emailConfirmBy?: Maybe<Scalars['DateTime']>;
   emailConfirmed?: Maybe<Scalars['Boolean']>;
