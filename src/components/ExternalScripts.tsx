@@ -68,47 +68,27 @@ function gtag(..._: any) {
   dataLayer.push(arguments)
 }
 
-function getGtagStorageConsent() {
-  const consent = window.Cookiebot?.consent
-
-  return {
-    ad_storage: consent?.marketing ? 'granted' : 'denied',
-    analytics_storage: consent?.statistics ? 'granted' : 'denied',
-    personalization_storage: consent?.preferences ? 'granted' : 'denied',
-  }
-}
-
 function Gtag() {
-  useEffect(() => {
-    gtag('consent', 'default', {
-      ...getGtagStorageConsent(),
-      wait_for_update: 1000,
-    })
-    gtag('js', new Date())
-    gtag('config', process.env.NEXT_PUBLIC_GA_ID)
-  }, [])
-
-  // Turn tracking on and off when cookie prefs change
-  useEffect(() => {
-    const onCookiePrefChange = () => {
-      gtag('consent', 'update', {
-        ...getGtagStorageConsent(),
-      })
-    }
-
-    window.addEventListener('CookiebotOnAccept', onCookiePrefChange)
-    window.addEventListener('CookiebotOnDecline', onCookiePrefChange)
-
-    return () => {
-      window.removeEventListener('CookiebotOnAccept', onCookiePrefChange)
-      window.removeEventListener('CookiebotOnDecline', onCookiePrefChange)
-    }
-  }, [])
+  // Cookiebot will automatically turn on/off gtag tracking when prefs change
+  // https://support.cookiebot.com/hc/en-us/articles/360003979074-Using-Google-Gtag-with-Cookiebot
 
   return (
     <Script
       strategy="afterInteractive"
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
+      onLoad={() => {
+        const consent = window.Cookiebot?.consent
+
+        gtag('consent', 'default', {
+          ad_storage: consent?.marketing ? 'granted' : 'denied',
+          analytics_storage: consent?.statistics ? 'granted' : 'denied',
+          personalization_storage: consent?.preferences ? 'granted' : 'denied',
+        })
+        gtag('set', 'ads_data_redaction', !consent?.marketing)
+        gtag('set', 'url_passthrough', true)
+        gtag('js', new Date())
+        gtag('config', process.env.NEXT_PUBLIC_GA_ID)
+      }}
     />
   )
 }
