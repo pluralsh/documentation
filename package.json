@@ -23,7 +23,7 @@
     "@pluralsh/design-system": "1.307.0",
     "@react-aria/ssr": "3.4.0",
     "@react-stately/list": "3.5.4",
-    "@react-stately/select": "3.3.2",
+    "@react-stately/select": "3.3.4",
     "@tanstack/react-table": "8.5.28",
     "algoliasearch": "4.14.3",
     "chroma-js": "2.4.2",
