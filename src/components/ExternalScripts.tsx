@@ -68,15 +68,21 @@ function gtag(..._: any) {
   dataLayer.push(arguments)
 }
 
+function getGtagStorageConsent() {
+  const consent = window.Cookiebot?.consent
+
+  return {
+    ad_storage: consent?.marketing ? 'granted' : 'denied',
+    analytics_storage: consent?.statistics ? 'granted' : 'denied',
+    personalization_storage: consent?.preferences ? 'granted' : 'denied',
+  }
+}
+
 function Gtag() {
   useEffect(() => {
-    window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = true
-
-    gtag('set', { allow_google_signals: false })
-    gtag('set', { allow_ad_personalization_signals: false })
     gtag('consent', 'default', {
-      ad_storage: 'denied',
-      analytics_storage: 'denied',
+      ...getGtagStorageConsent(),
+      wait_for_update: 1000,
     })
     gtag('js', new Date())
     gtag('config', process.env.NEXT_PUBLIC_GA_ID)
@@ -85,15 +91,9 @@ function Gtag() {
   // Turn tracking on and off when cookie prefs change
   useEffect(() => {
     const onCookiePrefChange = () => {
-      const allowStats = window.Cookiebot?.consent?.statistics
-      const allowMarketing = window.Cookiebot?.consent?.marketing
-
-      gtag('set', { allow_google_signals: allowMarketing })
       gtag('consent', 'update', {
-        ad_storage: allowMarketing ? 'granted' : 'denied',
-        analytics_storage: allowStats ? 'granted' : 'denied',
+        ...getGtagStorageConsent(),
       })
-      window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = !allowStats
     }
 
     window.addEventListener('CookiebotOnAccept', onCookiePrefChange)
