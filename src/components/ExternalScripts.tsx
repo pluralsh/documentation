@@ -60,13 +60,16 @@ function HubSpot() {
   )
 }
 
+function gtag(..._: any) {
+  console.log('gtag', _)
+  const dataLayer = (window.dataLayer = window.dataLayer || [])
+
+  // Trying not to rewrite what google provides
+  // eslint-disable-next-line prefer-rest-params
+  dataLayer.push(arguments)
+}
+
 function Gtag() {
-  const gtag = useCallback<(...args: any[]) => void>((...args) => {
-    const dataLayer = (window.dataLayer = window.dataLayer || [])
-
-    dataLayer.push(...args)
-  }, [])
-
   useEffect(() => {
     window[`ga-disable-${process.env.NEXT_PUBLIC_GA_ID}`] = true
 
@@ -78,7 +81,7 @@ function Gtag() {
     })
     gtag('js', new Date())
     gtag('config', process.env.NEXT_PUBLIC_GA_ID)
-  }, [gtag])
+  }, [])
 
   // Turn tracking on and off when cookie prefs change
   useEffect(() => {
@@ -101,7 +104,7 @@ function Gtag() {
       window.removeEventListener('CookiebotOnAccept', onCookiePrefChange)
       window.removeEventListener('CookiebotOnDecline', onCookiePrefChange)
     }
-  }, [gtag])
+  }, [])
 
   return (
     <Script
