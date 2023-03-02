@@ -72,23 +72,24 @@ function Gtag() {
   // Cookiebot will automatically turn on/off gtag tracking when prefs change
   // https://support.cookiebot.com/hc/en-us/articles/360003979074-Using-Google-Gtag-with-Cookiebot
 
+  useEffect(() => {
+    const consent = window.Cookiebot?.consent
+
+    gtag('consent', 'default', {
+      ad_storage: consent?.marketing ? 'granted' : 'denied',
+      analytics_storage: consent?.statistics ? 'granted' : 'denied',
+      personalization_storage: consent?.preferences ? 'granted' : 'denied',
+    })
+    gtag('set', 'ads_data_redaction', !consent?.marketing)
+    gtag('set', 'url_passthrough', true)
+    gtag('js', new Date())
+    gtag('config', process.env.NEXT_PUBLIC_GA_ID)
+  }, [])
+
   return (
     <Script
       strategy="afterInteractive"
       src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
-      onLoad={() => {
-        const consent = window.Cookiebot?.consent
-
-        gtag('consent', 'default', {
-          ad_storage: consent?.marketing ? 'granted' : 'denied',
-          analytics_storage: consent?.statistics ? 'granted' : 'denied',
-          personalization_storage: consent?.preferences ? 'granted' : 'denied',
-        })
-        gtag('set', 'ads_data_redaction', !consent?.marketing)
-        gtag('set', 'url_passthrough', true)
-        gtag('js', new Date())
-        gtag('config', process.env.NEXT_PUBLIC_GA_ID)
-      }}
     />
   )
 }
