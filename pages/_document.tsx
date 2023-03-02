@@ -53,19 +53,18 @@ class MyDocument extends Document {
           />
           <script
             async
-            src="https://www.googletagmanager.com/gtag/js?id=G-ND8K98HK0J"
+            src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           />
-          <script>
-            {`
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-  gtag('consent', 'default', {ad_storage:'denied', analytics_storage:'denied'});
-  gtag('set', 'ads_data_redaction', true);
-  gtag('set', 'url_passthrough', true);
-  gtag('config', 'G-ND8K98HK0J');
-  `}
-          </script>
+          <script dangerouslySetInnerHTML={{
+            __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('consent', 'default', {ad_storage:'denied', analytics_storage:'denied'});
+gtag('set', 'ads_data_redaction', true);
+gtag('set', 'url_passthrough', true);
+gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');`,
+          }}
+          />
         </Head>
         <body>
           <Main />
