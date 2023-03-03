@@ -72,19 +72,12 @@ docker run -it --volume $HOME/.aws:/home/plural/aws \
                --volume $HOME/.plural:/home/plural/.plural \
                --volume $HOME/.ssh:/home/plural/.ssh \
                --volume $HOME/PATH_TO_INSTALLATION_REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
-    gcr.io/pluralsh/plural-cli-cloud:0.5.20 zsh
+    gcr.io/pluralsh/plural-cli-cloud:0.6.8 zsh
 ```
 
 Once you're in the container's zsh, you'll want to clone the repo you'll use for your installations state there, or alternatively you can clone it outside your container and mount another volume pointing to it.
 {% /tab %}
 
-{% tab title="EC2 AMI" %}
-We have EC2 AMI's with the Plural CLI installed, along with all cloud provider clis, terraform, helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed [here](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json).
-
-If there's interest in images for GCP and Azure, feel free to leave feedback in our [Discord](https://discord.gg/pluralsh) or open a [GitHub issue](https://github.com/pluralsh/plural/issues/new/choose).
-[
-This [doc](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/) gives more details on launching AMIs if you are unfamiliar. You'll want to select "Public images" within the ami search bar and you can use the ami id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to chose the one for the appropriate region.
-{% /tab %}
 {% /tabs %}
 
 ## Create your Plural Repo
