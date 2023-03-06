@@ -9,13 +9,19 @@
     "start": "next start",
     "lint": "eslint {src,pages} --ext ts,tsx,js,jsx",
     "fix": "eslint --fix {src,pages} --ext ts,tsx,js,jsx",
-    "generate": "graphql-codegen --config codegen.ts"
+    "graphql:codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
     "@apollo/client": "3.7.5",
     "@docsearch/react": "3.3.2",
     "@emotion/react": "11.10.5",
     "@emotion/styled": "11.10.5",
+    "@graphql-codegen/add": "3.2.3",
+    "@graphql-codegen/cli": "2.16.5",
+    "@graphql-codegen/introspection": "2.2.3",
+    "@graphql-codegen/typescript": "2.8.8",
+    "@graphql-codegen/typescript-operations": "2.5.13",
+    "@graphql-codegen/typescript-react-apollo": "3.3.7",
     "@loomhq/loom-embed": "1.5.0",
     "@markdoc/markdoc": "0.2.1",
     "@markdoc/next.js": "0.2.1",
