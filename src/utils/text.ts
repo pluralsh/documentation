@@ -1,6 +1,8 @@
 import { APP_CATALOG_BASE_URL } from '../consts/routes'
 
-import type { Provider } from '../gql/graphql'
+import type { Provider } from '../generated/graphql'
+
+export * from '@pluralsh/design-system'
 
 export function removeTrailingSlashes(str) {
   if (typeof str !== 'string') {
