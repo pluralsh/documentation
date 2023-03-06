@@ -3661,7 +3661,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@open-draft/until@npm:^2.0.0":
+"@open-draft/until@npm:2.0.0":
   version: 2.0.0
   resolution: "@open-draft/until@npm:2.0.0"
   checksum: 08ad8fec2a061034184ee9bb238fde2b4b62040b213198b53e686a06b626bd9331f5638eff3329c71ec38ae35e86298903573da10af92625d6e368802f1ebe3e
@@ -11539,7 +11539,7 @@ __metadata:
     "@loomhq/loom-embed": 1.5.0
     "@markdoc/markdoc": 0.2.1
     "@markdoc/next.js": 0.2.1
-    "@open-draft/until": ^2.0.0
+    "@open-draft/until": 2.0.0
     "@pluralsh/design-system": 1.307.0
     "@pluralsh/eslint-config-typescript": 2.5.40
     "@react-aria/ssr": 3.4.0
