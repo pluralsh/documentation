@@ -12,13 +12,11 @@ import Paragraph from '../../src/components/md/Paragraph'
 import { getAppMetaDescription } from '../../src/consts'
 import { APP_CATALOG_BASE_URL } from '../../src/consts/routes'
 import { getRepos } from '../../src/data/getRepos'
-import { RECIPES_QUERY, RecipeFragment } from '../../src/data/queries/recipesQueries'
-import { useFragment as asFragment } from '../../src/gql/fragment-masking'
+import { RecipesDocument } from '../../src/generated/graphql'
 import { readMdFileCached } from '../../src/markdoc/mdParser'
 import { providerToProviderName } from '../../src/utils/text'
 
-import type { FragmentType } from '../../src/gql/fragment-masking'
-import type { RecipeFragmentFragment } from '../../src/gql/graphql'
+import type { RecipeFragment, RecipesQuery, RecipesQueryVariables } from '../../src/generated/graphql'
 import type { MarkdocHeading, MyPageProps } from '../_app'
 
 function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
@@ -44,6 +42,10 @@ function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
   return sections as MarkdocHeading[]
 }
 
+function isRecipe(recipe: RecipeFragment | null | undefined): recipe is RecipeFragment {
+  return !!recipe
+}
+
 export default function Repo({
   repo,
   markdoc,
@@ -54,7 +56,7 @@ export default function Repo({
 
   const mdHasConfig = !!headings.find(heading => heading?.title?.match(/configuration/gi))
 
-  const tabs = recipes?.map(recipe => ({
+  const tabs = recipes?.filter(isRecipe).map(recipe => ({
     key: recipe.name,
     label:
       providerToProviderName[recipe?.provider?.toUpperCase() || '']
@@ -80,8 +82,8 @@ export default function Repo({
     <div>
       <Heading level={2}>Description</Heading>
       <Paragraph>
-        Plural will install {repo?.displayName} in a dependency-aware manner onto a
-        Plural-managed Kubernetes cluster with one CLI command.
+        Plural will install {repo?.displayName} in a dependency-aware manner
+        onto a Plural-managed Kubernetes cluster with one CLI command.
       </Paragraph>
       <Heading level={2}>Installation</Heading>
       <Paragraph>
@@ -139,8 +141,11 @@ export const getStaticProps: GetStaticProps<
 
   const markdoc = await readMdFileCached(mdFilePath)
 
-  const { data: recipesData, error: recipesError } = await client.query({
-    query: RECIPES_QUERY,
+  const { data: recipesData, error: recipesError } = await client.query<
+    RecipesQuery,
+    RecipesQueryVariables
+  >({
+    query: RecipesDocument,
     variables: { repoName },
   })
 
@@ -148,20 +153,18 @@ export const getStaticProps: GetStaticProps<
     throw new Error(`${recipesError.name}: ${recipesError.message}`)
   }
 
-  const recipes: RecipeFragmentFragment[]
-    = (
-      recipesData?.recipes?.edges?.map(edge => edge?.node) as FragmentType<
-        typeof RecipeFragment
-      >[]
-    )
-      .map(r => asFragment(RecipeFragment, r))
+  const recipes
+    = recipesData?.recipes?.edges
+      ?.map(edge => edge?.node)
       .filter(r => r && !r?.private) || []
 
   return {
     props: {
       ...(markdoc ? { markdoc } : {}),
-      displayTitle: markdoc?.frontmatter?.title || `Installing ${thisRepo?.displayName}`,
-      displayDescription: markdoc?.frontmatter?.description || thisRepo?.description,
+      displayTitle:
+        markdoc?.frontmatter?.title || `Installing ${thisRepo?.displayName}`,
+      displayDescription:
+        markdoc?.frontmatter?.description || thisRepo?.description,
       metaDescription: getAppMetaDescription(thisRepo.displayName),
       repo: thisRepo
         ? {

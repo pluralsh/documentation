@@ -2,17 +2,20 @@ import capitalize from 'lodash/capitalize'
 import memoizeOne from 'memoize-one'
 
 import client from '../apollo-client'
-import { useFragment as asFragment } from '../gql/fragment-masking'
+import { ReposDocument } from '../generated/graphql'
 
-import { REPOS_QUERY, RepoFragment } from './queries/recipesQueries'
-
-import type { RecipeFragmentFragment, RepoFragmentFragment, ReposQuery } from '../gql/graphql'
+import type {
+  RecipeFragment,
+  RepoFragment,
+  ReposQuery,
+  ReposQueryVariables,
+} from '../generated/graphql'
 
 const REMOVE_LIST = ['bootstrap', 'test-harness', 'gcp-config-connector']
 
-export type Repo = Exclude<RepoFragmentFragment, null | undefined> & {
+export type Repo = Exclude<RepoFragment, null | undefined> & {
   displayName?: string
-  recipes?: RecipeFragmentFragment[]
+  recipes?: (RecipeFragment | undefined | null)[]
 }
 
 export const reposCache: {
@@ -59,20 +62,22 @@ function inRemoveList(repoName: string) {
 }
 
 const normalizeRepos = memoizeOne((data: ReposQuery) => data?.repositories?.edges?.flatMap(edge => {
-  const repo = asFragment(RepoFragment, edge?.node)
+  const repo = edge?.node
 
   return repo && !inRemoveList(repo.name)
     ? {
       ...repo,
       displayName:
-            ((repo as any).displayName as string)
-            || fakeDisplayName(repo?.name),
+              ((repo as any).displayName as string)
+              || fakeDisplayName(repo?.name),
     }
     : []
-}))
+}) || [])
 
-export async function getRepos() {
-  const { data, error } = await client.query({ query: REPOS_QUERY })
+export async function getRepos(): Promise<Repo[]> {
+  const { data, error } = await client.query<ReposQuery, ReposQueryVariables>({
+    query: ReposDocument,
+  })
 
   if (error) {
     throw new Error(`${error.name}: ${error.message}`)
