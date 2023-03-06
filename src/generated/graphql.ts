@@ -4741,8 +4741,6 @@ export type ZoomMeeting = {
   password?: Maybe<Scalars['String']>;
 };
 
-export type RepoFragment = { __typename?: 'Repository', id: string, name: string, description?: string | null, documentation?: string | null, icon?: string | null, darkIcon?: string | null, private?: boolean | null, tags?: Array<{ __typename?: 'Tag', tag: string } | null> | null };
-
 export type RecipeFragment = { __typename?: 'Recipe', name: string, description?: string | null, provider?: Provider | null, private?: boolean | null, repository?: { __typename?: 'Repository', description?: string | null } | null, recipeSections?: Array<{ __typename?: 'RecipeSection', repository?: { __typename?: 'Repository', name: string } | null, configuration?: Array<{ __typename?: 'RecipeConfiguration', name?: string | null, type?: Datatype | null, optional?: boolean | null, documentation?: string | null, longform?: string | null } | null> | null } | null> | null };
 
 export type RecipesQueryVariables = Exact<{
@@ -4752,25 +4750,13 @@ export type RecipesQueryVariables = Exact<{
 
 export type RecipesQuery = { __typename?: 'RootQueryType', recipes?: { __typename?: 'RecipeConnection', edges?: Array<{ __typename?: 'RecipeEdge', node?: { __typename?: 'Recipe', name: string, description?: string | null, provider?: Provider | null, private?: boolean | null, repository?: { __typename?: 'Repository', description?: string | null } | null, recipeSections?: Array<{ __typename?: 'RecipeSection', repository?: { __typename?: 'Repository', name: string } | null, configuration?: Array<{ __typename?: 'RecipeConfiguration', name?: string | null, type?: Datatype | null, optional?: boolean | null, documentation?: string | null, longform?: string | null } | null> | null } | null> | null } | null } | null> | null } | null };
 
+export type RepoFragment = { __typename?: 'Repository', id: string, name: string, description?: string | null, documentation?: string | null, icon?: string | null, darkIcon?: string | null, private?: boolean | null, tags?: Array<{ __typename?: 'Tag', tag: string } | null> | null };
+
 export type ReposQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type ReposQuery = { __typename?: 'RootQueryType', repositories?: { __typename?: 'RepositoryConnection', edges?: Array<{ __typename?: 'RepositoryEdge', node?: { __typename?: 'Repository', id: string, name: string, description?: string | null, documentation?: string | null, icon?: string | null, darkIcon?: string | null, private?: boolean | null, tags?: Array<{ __typename?: 'Tag', tag: string } | null> | null } | null } | null> | null } | null };
 
-export const RepoFragmentDoc = gql`
-    fragment Repo on Repository {
-  id
-  name
-  description
-  documentation
-  icon
-  darkIcon
-  private
-  tags {
-    tag
-  }
-}
-    `;
 export const RecipeFragmentDoc = gql`
     fragment Recipe on Recipe {
   name
@@ -4791,6 +4777,20 @@ export const RecipeFragmentDoc = gql`
       documentation
       longform
     }
+  }
+}
+    `;
+export const RepoFragmentDoc = gql`
+    fragment Repo on Repository {
+  id
+  name
+  description
+  documentation
+  icon
+  darkIcon
+  private
+  tags {
+    tag
   }
 }
     `;
