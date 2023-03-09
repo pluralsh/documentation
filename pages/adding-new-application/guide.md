@@ -10,7 +10,7 @@ description: >-
 Clone the [plural-artifacts](https://github.com/pluralsh/plural-artifacts) repository
 
 ```
-git clone github.com/pluralsh/plural-artifacts
+git clone https://github.com/pluralsh/plural-artifacts.git
 ```
 
 For this getting started guide, let's pretend that we are onboarding Hasura. We have a useful make target to scaffold some of the necessary stubs for integrating with Plural.
@@ -87,8 +87,8 @@ The Plural platform includes a number of custom resources that you might find us
 
 * [dashboard.yaml](/adding-new-application/plural-custom-resources#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
 * [runbook.yaml](/adding-new-application/getting-started-with-runbooks/runbook-yaml) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](/adding-new-application/getting-started-with-runbooks).
-* [proxies.yaml](/adding-new-application/plural-custom-resources#proxies.yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
-* [configurationOverlay.yaml](/adding-new-application/plural-custom-resources#configurationoverlay.yaml) -- creates form fields to modify helm configuration within the console
+* [proxies.yaml](/adding-new-application/plural-custom-resources#proxies-yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
+* [configurationOverlay.yaml](/adding-new-application/plural-custom-resources#configurationoverlay-yaml) -- creates form fields to modify helm configuration within the console
 
 ![](</assets/image (2).png>)
 
@@ -137,7 +137,7 @@ spec:
 
 ## 3. Add your cloud config
 
-From the root of the `plural-artifacts/` directory, navigate to the `terraform/` directory. Terraform is a tool for creating, updating, and destroying cloud infrastructure via configuration rather than a graphical user interface. If you are not familiar with it, we suggest reading through the [Terraform docs](https://www.terraform.io/language). The files that are located inside this directory are responsible for creating various cloud objects -- i.e. Kubernetes namespaces, AWS IAM roles, and service accounts.
+From the root of the `hasura/` directory (not the one on `helm/` directory but its parent directory), navigate to the `terraform/` directory. Terraform is a tool for creating, updating, and destroying cloud infrastructure via configuration rather than a graphical user interface. If you are not familiar with it, we suggest reading through the [Terraform docs](https://www.terraform.io/language). The files that are located inside this directory are responsible for creating various cloud objects -- i.e. Kubernetes namespaces, AWS IAM roles, and service accounts.
 
 ```
 cd terraform
@@ -201,7 +201,7 @@ resource "kubernetes_service_account" "postgres" {
 
 Finally, let's look at how to set up the config that will go to Plural.
 
-From the root of `plural-artifacts/`, navigate to `plural/recipes.`
+From the root of `hasura/`, navigate to `plural/recipes.`
 
 ```
 plural/recipes
