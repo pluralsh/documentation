@@ -13,10 +13,9 @@ For alternate installation methods such as curl and Docker, [click here](https:/
 brew install pluralsh/plural/plural
 ```
 
-<Warning>
-    Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version.
-    If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
-</Warning>
+{% callout severity="warning" %}
+Before you proceed, make sure that your cloud provider CLI is properly configured and updated to the latest version. If it is not configured correctly, Plural will fail and won't be able to create resources on your behalf.
+{% /callout %}
 
 Plural uses a GitOps workflow to manage configuration files and deployment state, so you'll need a Git repository to store your Plural configuration. Plural supports GitHub, GitLab, and Bitbucket currently. If you're planning on using Bitbucket, follow [this guide](https://docs.plural.sh/getting-started/manage-git-repositories/setting-up-gitops#manual-git-setup). This repository will contain the Helm charts, Terraform config, and Kubernetes manifests that Plural will autogenerate for you.
 
@@ -76,14 +75,12 @@ To bring down your entire Plural deployment, run:
 plural destroy
 ```
 
-<Warning>
-    Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
-</Warning>
+{% callout severity="warning" %}
+Only do this if you're absolutely sure you want to bring down all associated resources with this repository.
+{% /callout %}
 
 ## Troubleshooting
 
 If you run into any issues with installing Dagster on Plural, feel free to join our [Discord Community](https://discord.gg/pluralsh) so that we can help you out.
 
 If you'd like to request any updates or new features for our Dagster installation, feel free to open an issue [here](https://github.com/pluralsh/plural-artifacts).
-
-
