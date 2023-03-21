@@ -3728,9 +3728,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pluralsh/design-system@npm:1.324.2":
-  version: 1.324.2
-  resolution: "@pluralsh/design-system@npm:1.324.2"
+"@pluralsh/design-system@npm:1.324.3":
+  version: 1.324.3
+  resolution: "@pluralsh/design-system@npm:1.324.3"
   dependencies:
     "@floating-ui/react-dom-interactions": 0.13.3
     "@monaco-editor/react": 4.4.6
@@ -3787,7 +3787,7 @@ __metadata:
     react-dom: ">=16.0.0"
     react-transition-group: ">=4.4.2"
     styled-components: ">=5.3.5"
-  checksum: e05d151286a36a0b33f26fc780286f5769bfc58b8952a9d8ff34cb7086c00a06cfdffcb05df845ee51c95cc8c0dc669c6bf6963321308a47512a93c2ba5b5d90
+  checksum: 01a20676b346e728995aac67f4a782348578beb00c800a2d4d754d23c2aa1be8e76557ace2c18fbf45fdf064d84f61138f9990217cfd6f556996199b8f3903f2
   languageName: node
   linkType: hard
 
@@ -11700,7 +11700,7 @@ __metadata:
     "@markdoc/markdoc": 0.2.1
     "@markdoc/next.js": 0.2.1
     "@open-draft/until": ^2.0.0
-    "@pluralsh/design-system": 1.324.2
+    "@pluralsh/design-system": 1.324.3
     "@pluralsh/eslint-config-typescript": 2.5.40
     "@react-aria/ssr": 3.4.0
     "@react-stately/list": 3.5.4
