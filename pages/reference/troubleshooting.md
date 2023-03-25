@@ -6,6 +6,20 @@ description: >-
   general, just hop into our Discord for help.
 ---
 
+## Helm Errors
+
+Helm can be tempermental at times, here are some errors that will ocassionally pop up
+
+### another operation (install/upgrade/rollback) is in progress
+`helm upgrade --install --skip-crds --namespace APP APP /path/to/chart 2023/03/23 02:02:15 another operation (install/upgrade/rollback) is in progress`
+
+In this case you need to roll back your helm release to the last successful version.  You can do this by running:
+
+`helm history APP --namespace APP` to find the latest safe version, then run:
+`helm rollback APP VSN --namespace APP` to get helm back in a safe state.
+
+You should then be able to run either `plural deploy ` or `plural bounce` without issue.
+
 ## Git Errors
 ### Could not compare workspace to origin
 `Failed to get git information: Could not compare current workspace to origin, do you have an 'origin' remote configured, or does your repo not have an inital commit?`
