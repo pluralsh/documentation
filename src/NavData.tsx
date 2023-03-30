@@ -46,6 +46,10 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/',
       },
       {
+        title: 'Concepts',
+        href: '/getting-started/concepts',
+      },
+      {
         title: 'Quickstart: CLI',
         href: '/getting-started/quickstart',
       },
