@@ -8,11 +8,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "run-p lint:format lint:js lint:css",
-    "lint:format": "prettier --check ./src",
+    "lint:format": "prettier --check --no-error-on-unmatched-pattern ./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}",
     "lint:js": "eslint {src,pages} --ext ts,tsx,js,jsx",
     "lint:css": "stylelint src/**/*.css",
     "fix": "run-s fix:format fix:js fix:css",
-    "fix:format": "prettier --write ./{src,pages}",
+    "fix:format": "prettier --write --no-error-on-unmatched-pattern ./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}",
     "fix:js": "eslint --fix {src,pages} --ext ts,tsx,js,jsx",
     "fix:css": "stylelint src/**/*.css --fix",
     "graphql:codegen": "graphql-codegen --config codegen.yml"
@@ -99,6 +99,6 @@
   },
   "packageManager": "yarn@3.3.0",
   "lint-staged": {
-    "./src/**/*.{js,jsx,ts,tsx,graphql,md}": "prettier --write"
+    "./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}": "prettier --write"
   }
 }
