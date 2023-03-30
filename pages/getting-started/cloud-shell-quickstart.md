@@ -7,10 +7,10 @@ description: Setting up your first cluster in your browser using the Plural Clou
 
 This guide goes over how to get started with Plural using our in-browser Cloud Shell. At the end of this tutorial, you will have:
 
-* Provisioned a virtual shell loaded with the dependencies to run Plural.
-* Created a Plural GitHub repository to store your configuration in.
-* Provisioned a fully-configured Kubernetes cluster.
-* Installed an application and all its dependencies on your Kubernetes cluster.
+- Provisioned a virtual shell loaded with the dependencies to run Plural.
+- Created a Plural GitHub repository to store your configuration in.
+- Provisioned a fully-configured Kubernetes cluster.
+- Installed an application and all its dependencies on your Kubernetes cluster.
 
 in under 30 minutes, all within your browser.
 
@@ -20,17 +20,17 @@ Head over to [app.plural.sh](https://app.plural.sh) and set up an account.
 
 Navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to access the Cloud Shell (if this is your first time using app.plural.sh, you should be automatically redirected to the onboarding flow). You'll be prompted to OAuth with either GitHub or GitLab. We're just getting your permission to create a repository for Plural configuration on your behalf. Give your repository a name, being sure to select the right organization or individual account in the first box. Your repository name must be unique within your account, which will be checked before you can advance to the next step.
 
-![](</assets/cloud-shell-quickstart/github-config.png>)
+![](/assets/cloud-shell-quickstart/github-config.png)
 
 ### Set up a Cloud Provider
 
 Choose the option to continue your setup in the browser. If you'd prefer to use the CLI, choose "Local terminal" and switch to the CLI quickstart.
 
-![](</assets/cloud-shell-quickstart/setup-options.png>)
+![](/assets/cloud-shell-quickstart/setup-options.png)
 
 Plural can be set up on AWS, GCP, or Azure. You can provide your credentials in the following screen:
 
-![](</assets/cloud-shell-quickstart/cloud-provider-info.png>)
+![](/assets/cloud-shell-quickstart/cloud-provider-info.png)
 
 Each cloud provider requires a slightly different set of credentials. Follow the steps below to generate the credentials for your provider.
 
@@ -40,23 +40,23 @@ For AWS, you'll need to create or use a user with AdministratorAccess and create
 
 To create a new user, navigate to the IAM section of your AWS Console.
 
-![](</assets/cloud-shell-quickstart/iam-aws.png>)
+![](/assets/cloud-shell-quickstart/iam-aws.png)
 
 Select the `Users` tab and click `Add users`. You should see the following screen:
 
-![](</assets/cloud-shell-quickstart/create-user.png>)
+![](/assets/cloud-shell-quickstart/create-user.png)
 
 Fill in the details for your user. On the "Set permissions" screen, you can either choose to add your user to a group with AdministratorAccess, or attach the AdministratorAccess policy directly.
 
-![](</assets/cloud-shell-quickstart/administrator-access-aws.png>)
+![](/assets/cloud-shell-quickstart/administrator-access-aws.png)
 
 Review your user and hit the "Create user" button. Navigate to your newly created user and click the "Security credentials" tab. Find the section for Access keys and click "Create access key". You should see the following:
 
-![](</assets/cloud-shell-quickstart/access-keys-aws.png>)
+![](/assets/cloud-shell-quickstart/access-keys-aws.png)
 
 Choose "Command Line Interface", optionally add a tag, and create your access key. Make sure to download and save your new credentials; you can then enter the Access Key ID and Secret Access Key in your Plural onboarding.
 
-![](</assets/cloud-shell-quickstart/aws-plural-config.png>)
+![](/assets/cloud-shell-quickstart/aws-plural-config.png)
 
 {% /tab %}
 
@@ -65,23 +65,23 @@ For GCP, you'll want to create a service account with the Owner role and generat
 
 To create a new service account, navigate to the "Service Accounts" section of your GCP Console.
 
-![](</assets/cloud-shell-quickstart/service-accounts-gcp.png>)
+![](/assets/cloud-shell-quickstart/service-accounts-gcp.png)
 
 Select the "Create Service Account" from the top banner. You should see the following input fields:
 
-![](</assets/cloud-shell-quickstart/gcp-service-account-fields.png>)
+![](/assets/cloud-shell-quickstart/gcp-service-account-fields.png)
 
 Fill in the details for your user. On the second step, add the `Owner` role for your service account.
 
-![](</assets/cloud-shell-quickstart/gcp-owner-service-account.png>)
+![](/assets/cloud-shell-quickstart/gcp-owner-service-account.png)
 
 Finish creating your service account, and you should see your new service account in the Service Accounts home page. Click the three dots at the end of the row and select "Manage keys" like in the screenshot below:
 
-![](</assets/cloud-shell-quickstart/create-keys-gcp.png>)
+![](/assets/cloud-shell-quickstart/create-keys-gcp.png)
 
 Select "Add Key" and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
 
-![](</assets/cloud-shell-quickstart/gcp-plural-credentials.png>)
+![](/assets/cloud-shell-quickstart/gcp-plural-credentials.png)
 
 {% /tab %}
 
@@ -95,7 +95,7 @@ For Azure, you'll need various fields including your Client ID, Client Secret, S
 
 To find your Subscription ID, navigate to the home page of your Azure console and search for "Subscriptions". You should see a page like the following:
 
-![](</assets/cloud-shell-quickstart/subscriptions-azure.png>)
+![](/assets/cloud-shell-quickstart/subscriptions-azure.png)
 
 Your `Subscription ID` should be visible next to the Subscription name.
 
@@ -103,15 +103,15 @@ Next, navigate to the Azure Active Directory section. Your `Tenant ID` should be
 
 Finally, navigate to the App registrations tab within your Directory. You should see an option to add a new registration:
 
-![](</assets/cloud-shell-quickstart/app-registrations-azure.png>)
+![](/assets/cloud-shell-quickstart/app-registrations-azure.png)
 
 Click to add a new registration. Fill in the details for your registration as indicated below and click the "Register" button.
 
-![](</assets/cloud-shell-quickstart/registration-details-azure.png>)
+![](/assets/cloud-shell-quickstart/registration-details-azure.png)
 
 Your new App Registration should then be displayed. The displayed "Application (client) ID" will be the `Client ID` in your Plural configuration. Click on the option "Add a certificate or secret" of Client credentials. Select "New client secret" from the screen:
 
-![](</assets/cloud-shell-quickstart/new-client-secret-azure.png>)
+![](/assets/cloud-shell-quickstart/new-client-secret-azure.png)
 
 Set your preferred timeframe and generate your new secret. The "Value" field will be the `Client Secret` in your Plural configuration.
 
@@ -119,18 +119,17 @@ You can optionally navigate to the Resource groups section of your Azure console
 
 From here, you have two options. You either need to give your app a role on either your overall Subscription or scoped to a Resource Group. As an example, navigate to the Access Control (IAM) tab of your Subscription. Click the "Role Assignments" tab and Select "Add" at the top.
 
-![](</assets/cloud-shell-quickstart/ra-azure.png>)
+![](/assets/cloud-shell-quickstart/ra-azure.png)
 
 Select the Owner role, and click on "Select members" to search for your app name. Select the app and continue until your new Role assignment is complete. You should now see your app listed as an owner for the Subscription. The process is the same if choosing to scope to a Resource Group.
 
-![](</assets/cloud-shell-quickstart/completed-role-assignments-azure.png>)
+![](/assets/cloud-shell-quickstart/completed-role-assignments-azure.png)
 
 Return to your Plural onboarding. Enter the values noted above into your Cloud Credential configuration, and proceed to the next step.
 
-![](</assets/cloud-shell-quickstart/plural-azure-config.png>)
+![](/assets/cloud-shell-quickstart/plural-azure-config.png)
 {% /tab %}
 {% /tabs %}
-
 
 ### Set up a Workspace
 
@@ -144,7 +143,7 @@ We'll now start setting up your Kubernetes cluster configuration. Here's a guide
 
 You should hit the following verification screen afterward. Hit `Create` once you're ready to go!
 
-![](</assets/cloud-shell-quickstart/cloud-shell-config.png>)
+![](/assets/cloud-shell-quickstart/cloud-shell-config.png)
 
 While your Cloud Shell is provisioning, double check that your repository was initialized by checking your GitHub repos. There should be a repository with an initial commit with the name that you configured.
 
@@ -156,7 +155,7 @@ The left-hand side of the screen is the Install Wizard, where you can configure 
 
 The terminal window is an interactive shell where you can follow along with installation progress and optionally run any additional commands you need to set up your Plural instance.
 
-![](</assets/cloud-shell-quickstart/cloud-shell-applications.png>)
+![](/assets/cloud-shell-quickstart/cloud-shell-applications.png)
 
 ### Select Applications
 
@@ -164,27 +163,27 @@ Once you have successfully booted into your Cloud Shell, you can configure and i
 
 In the Install Wizard on the left-hand side of the screen, choose the applications you want to install on your cluster. This will add these applications and their dependencies to the configuration flow, shown at the top of the Install Wizard.
 
-![](</assets/cloud-shell-quickstart/cloud-shell-applications.png>)
+![](/assets/cloud-shell-quickstart/cloud-shell-applications.png)
 
 You'll now be guided through a setup wizard for the applications you chose. For help with Plural Console configuration, refer to [this guide](/applications/console) for explanations on each step. For help with configuring Airflow, refer to [this guide](/applications/airflow). Required fields are indicated with a star and will appear in red until they've been populated. Many fields have default values populated; you can use those defaults or provide your own inputs. Any steps without required configuration will be auto-skipped.
 
-![](</assets/cloud-shell-quickstart/airflow-configuration.png>)
+![](/assets/cloud-shell-quickstart/airflow-configuration.png)
 
 After configuration, you'll be provided with an overview screen of exactly which applications will be installed. When you're happy with the configuration, click `Install` to proceed.
 
-![](</assets/cloud-shell-quickstart/applications-install-confirm.png>)
+![](/assets/cloud-shell-quickstart/applications-install-confirm.png)
 
 ## Provision the Kubernetes Cluster and Install Applications
 
 Now it's time for Plural to write all the Helm and Terraform required to bring up your Kubernetes cluster based on the config that you've entered. When you click install, Plural will be running the commands to `build` and `deploy` your cluster. Your terminal window will display the output from these ongoing operations.
 
-![](</assets/cloud-shell-quickstart/terminal-output.png>)
+![](/assets/cloud-shell-quickstart/terminal-output.png)
 
 Now grab a coffee or your favorite hot beverage while we wait for your cloud provider to provision your infrastructure.
 
 When your applications are finished installing, you'll be able to see the domains for each application in the terminal window.
 
-![](</assets/cloud-shell-quickstart/application-domains.png>)
+![](/assets/cloud-shell-quickstart/application-domains.png)
 
 ### Troubleshooting
 
@@ -200,13 +199,13 @@ Once your cluster has completed deployment, click the `Launch Console` button to
 
 Here, you'll be able to check node health, Pod health, logs, pre-built dashboards tailored for Airflow, and more.
 
-![](</assets/cloud-shell-quickstart/console-example.png>)
+![](/assets/cloud-shell-quickstart/console-example.png)
 
 ### Airflow / Other Applications
 
 To access your Airflow installation, access it similarly to the console at `airflow.YOUR_WORKSPACE.onplural.sh`
 
-![](</assets/cloud-shell-quickstart/image-7.png>)
+![](/assets/cloud-shell-quickstart/image-7.png)
 
 You can now access your DAGs from the GitHub repo that you set up earlier. Just add any DAGs you want to use the repo and a sync will run every 5 minutes or so to pull them in.
 

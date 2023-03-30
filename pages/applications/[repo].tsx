@@ -1,7 +1,11 @@
 import path from 'path'
 
 import { InlineCode } from '@pluralsh/design-system'
-import type { GetStaticPaths, GetStaticProps, InferGetStaticPropsType } from 'next'
+import type {
+  GetStaticPaths,
+  GetStaticProps,
+  InferGetStaticPropsType,
+} from 'next'
 
 import client from '../../src/apollo-client'
 import MarkdocComponent from '../../src/components/MarkdocContent'
@@ -16,7 +20,11 @@ import { RecipesDocument } from '../../src/generated/graphql'
 import { readMdFileCached } from '../../src/markdoc/mdParser'
 import { providerToProviderName } from '../../src/utils/text'
 
-import type { RecipeFragment, RecipesQuery, RecipesQueryVariables } from '../../src/generated/graphql'
+import type {
+  RecipeFragment,
+  RecipesQuery,
+  RecipesQueryVariables,
+} from '../../src/generated/graphql'
 import type { MarkdocHeading, MyPageProps } from '../_app'
 
 function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
@@ -42,7 +50,9 @@ function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
   return sections as MarkdocHeading[]
 }
 
-function isRecipe(recipe: RecipeFragment | null | undefined): recipe is RecipeFragment {
+function isRecipe(
+  recipe: RecipeFragment | null | undefined
+): recipe is RecipeFragment {
   return !!recipe
 }
 
@@ -54,13 +64,15 @@ export default function Repo({
 
   const headings = collectHeadings(markdoc?.content)
 
-  const mdHasConfig = !!headings.find(heading => heading?.title?.match(/configuration/gi))
+  const mdHasConfig = !!headings.find((heading) =>
+    heading?.title?.match(/configuration/gi)
+  )
 
-  const tabs = recipes?.filter(isRecipe).map(recipe => ({
+  const tabs = recipes?.filter(isRecipe).map((recipe) => ({
     key: recipe.name,
     label:
-      providerToProviderName[recipe?.provider?.toUpperCase() || '']
-      || recipe.provider,
+      providerToProviderName[recipe?.provider?.toUpperCase() || ''] ||
+      recipe.provider,
     language: 'shell',
     content: `plural bundle install ${repo?.name} ${recipe.name}`,
   }))
@@ -94,12 +106,14 @@ export default function Repo({
         <>
           <Heading level={2}>Setup Configuration</Heading>
           <List ordered={false}>
-            {recipeSections.map(section => section?.configuration?.map((x, configIdx) => (
-              <ListItem key={configIdx}>
-                <InlineCode>{x?.name}</InlineCode>:{' '}
-                {x?.longform || x?.documentation}
-              </ListItem>
-            )))}
+            {recipeSections.map((section) =>
+              section?.configuration?.map((x, configIdx) => (
+                <ListItem key={configIdx}>
+                  <InlineCode>{x?.name}</InlineCode>:{' '}
+                  {x?.longform || x?.documentation}
+                </ListItem>
+              ))
+            )}
           </List>
         </>
       )}
@@ -119,25 +133,27 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const repos = (await getRepos()) || []
 
   return {
-    paths: repos.map(repo => ({ params: { repo: repo?.name } })),
+    paths: repos.map((repo) => ({ params: { repo: repo?.name } })),
     fallback: true,
   }
 }
 
-export const getStaticProps: GetStaticProps<
-  Partial<MyPageProps>
-> = async context => {
+export const getStaticProps: GetStaticProps<Partial<MyPageProps>> = async (
+  context
+) => {
   const repoName = context?.params?.repo
 
   const repos = await getRepos()
-  const thisRepo = repos.find(r => r.name === repoName)
+  const thisRepo = repos.find((r) => r.name === repoName)
 
   if (!thisRepo || !repoName || typeof repoName !== 'string') {
     return { notFound: true }
   }
-  const mdFilePath = path.join('/pages',
+  const mdFilePath = path.join(
+    '/pages',
     APP_CATALOG_BASE_URL,
-    `${repoName}.mdpart`)
+    `${repoName}.mdpart`
+  )
 
   const markdoc = await readMdFileCached(mdFilePath)
 
@@ -153,10 +169,10 @@ export const getStaticProps: GetStaticProps<
     throw new Error(`${recipesError.name}: ${recipesError.message}`)
   }
 
-  const recipes
-    = recipesData?.recipes?.edges
-      ?.map(edge => edge?.node)
-      .filter(r => r && !r?.private) || []
+  const recipes =
+    recipesData?.recipes?.edges
+      ?.map((edge) => edge?.node)
+      .filter((r) => r && !r?.private) || []
 
   return {
     props: {
@@ -168,9 +184,9 @@ export const getStaticProps: GetStaticProps<
       metaDescription: getAppMetaDescription(thisRepo.displayName),
       repo: thisRepo
         ? {
-          ...thisRepo,
-          recipes: recipes || [],
-        }
+            ...thisRepo,
+            recipes: recipes || [],
+          }
         : undefined,
     },
     revalidate: 600,

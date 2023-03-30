@@ -42,7 +42,7 @@ spec:
     redirectTo: '/'
     configuration:
       updates:
-      - path: 
+      - path:
         - ghost
         - resources
         - requests
@@ -59,6 +59,7 @@ spec:
 Each datasource has a type. At the moment, the only types Plural supports are prometheus, kubernetes, and nodes. Each type has a spec that's specific to the type.&#x20;
 
 **prometheus** spec:
+
 ```yaml
 prometheus:
   format:
@@ -67,6 +68,7 @@ prometheus:
 ```
 
 **kubernetes** spec:
+
 ```yaml
 kubernetes:
   resource: # the kind of Kubernetes resource, i.e. statefulset

@@ -1,10 +1,5 @@
 // pages/_document.js
-import Document, {
-  Head,
-  Html,
-  Main,
-  NextScript,
-} from 'next/document'
+import Document, { Head, Html, Main, NextScript } from 'next/document'
 
 import { ServerStyleSheet } from 'styled-components'
 
@@ -14,9 +9,11 @@ class MyDocument extends Document {
     const originalRenderPage = ctx.renderPage
 
     try {
-      ctx.renderPage = () => originalRenderPage({
-        enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
-      })
+      ctx.renderPage = () =>
+        originalRenderPage({
+          enhanceApp: (App) => (props) =>
+            sheet.collectStyles(<App {...props} />),
+        })
 
       const initialProps = await Document.getInitialProps(ctx)
 
@@ -24,8 +21,7 @@ class MyDocument extends Document {
         ...initialProps,
         styles: [initialProps.styles, sheet.getStyleElement()],
       }
-    }
-    finally {
+    } finally {
       sheet.seal()
     }
   }
@@ -55,15 +51,16 @@ class MyDocument extends Document {
             async
             src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID}`}
           />
-          <script dangerouslySetInnerHTML={{
-            __html: `window.dataLayer = window.dataLayer || [];
+          <script
+            dangerouslySetInnerHTML={{
+              __html: `window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('consent', 'default', {ad_storage:'denied', analytics_storage:'denied'});
 gtag('set', 'ads_data_redaction', true);
 gtag('set', 'url_passthrough', true);
 gtag('js', new Date());
 gtag('config', '${process.env.NEXT_PUBLIC_GA_ID}');`,
-          }}
+            }}
           />
         </Head>
         <body>

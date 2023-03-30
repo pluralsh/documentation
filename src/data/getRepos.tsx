@@ -43,11 +43,11 @@ const nameMap = {
 }
 
 function fakeDisplayName(name = '') {
-  let displayName: string
-    = nameMap[name]
-    || name
+  let displayName: string =
+    nameMap[name] ||
+    name
       .split('-')
-      .map(word => capitalize(word))
+      .map((word) => capitalize(word))
       .join(' ')
 
   Object.entries(replacements).forEach(([s, r]) => {
@@ -58,21 +58,24 @@ function fakeDisplayName(name = '') {
 }
 
 function inRemoveList(repoName: string) {
-  return !!REMOVE_LIST.find(name => name === repoName)
+  return !!REMOVE_LIST.find((name) => name === repoName)
 }
 
-const normalizeRepos = memoizeOne((data: ReposQuery) => data?.repositories?.edges?.flatMap(edge => {
-  const repo = edge?.node
+const normalizeRepos = memoizeOne(
+  (data: ReposQuery) =>
+    data?.repositories?.edges?.flatMap((edge) => {
+      const repo = edge?.node
 
-  return repo && !inRemoveList(repo.name)
-    ? {
-      ...repo,
-      displayName:
-              ((repo as any).displayName as string)
-              || fakeDisplayName(repo?.name),
-    }
-    : []
-}) || [])
+      return repo && !inRemoveList(repo.name)
+        ? {
+            ...repo,
+            displayName:
+              ((repo as any).displayName as string) ||
+              fakeDisplayName(repo?.name),
+          }
+        : []
+    }) || []
+)
 
 export async function getRepos(): Promise<Repo[]> {
   const { data, error } = await client.query<ReposQuery, ReposQueryVariables>({

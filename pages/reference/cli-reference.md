@@ -9,6 +9,7 @@ To install the Plural CLI, use:
 ```
 brew install pluralsh/plural/plural
 ```
+
 Refer to the CLI quickstart for more information.
 
 {% callout severity="info" %}
@@ -16,6 +17,7 @@ Make sure to update your CLI to the latest version to pick up any new features.
 {% /callout %}
 
 ## Synopsis
+
 ```
 plural [options] <command> [parameters]
 ```
@@ -34,112 +36,106 @@ Use `plural command help` for information on a specific command. The synopsis fo
 
 **General**
 
-`version, v, vsn`  Gets cli version info
+`version, v, vsn` Gets cli version info
 
-`build, b`         Builds your workspace
+`build, b` Builds your workspace
 
-`deploy, d`        Deploys the current workspace. This command will first sniff out git diffs in workspaces, topsort them, then apply all changes.
+`deploy, d` Deploys the current workspace. This command will first sniff out git diffs in workspaces, topsort them, then apply all changes.
 
-`diff, df`         Diffs the state of the current workspace with the deployed version and dumps results to diffs/
-   
-`bounce`           Redeploys the charts in a workspace
+`diff, df` Diffs the state of the current workspace with the deployed version and dumps results to diffs/
 
-`destroy`          Iterates through all installations in reverse topological order, deleting helm installations and terraform
+`bounce` Redeploys the charts in a workspace
 
-`init`             Initializes plural within a git repo
+`destroy` Iterates through all installations in reverse topological order, deleting helm installations and terraform
 
-`preflights`       Runs provider preflight checks
+`init` Initializes plural within a git repo
 
-`bundle`           Commands for installing and discovering installation bundles
+`preflights` Runs provider preflight checks
 
-`stack`            Commands for installing and discovering plural stacks
+`bundle` Commands for installing and discovering installation bundles
 
-`packages`         Commands for managing your installed packages
+`stack` Commands for installing and discovering plural stacks
 
-`link`             links a local package into an installation repo
+`packages` Commands for managing your installed packages
 
-`unlink`           Unlinks a linked package
+`link` links a local package into an installation repo
 
-`help, h`          Shows a list of commands or help for one command
+`unlink` Unlinks a linked package
 
+`help, h` Shows a list of commands or help for one command
 
 **API**
 
-`repos`            View and manage plural repositories
+`repos` View and manage plural repositories
 
-`api`              Inspect the plural api
-
+`api` Inspect the plural api
 
 **Debugging**
 
-`watch`            Watches applications until they become ready
+`watch` Watches applications until they become ready
 
-`wait`             Waits on applications until they become ready
+`wait` Waits on applications until they become ready
 
-`info`             Generates a console dashboard for the namespace of this repo
+`info` Generates a console dashboard for the namespace of this repo
 
-`proxy`            Proxies into running processes in your cluster
+`proxy` Proxies into running processes in your cluster
 
-`logs`             Commands for tailing logs for specific apps
+`logs` Commands for tailing logs for specific apps
 
-`ops`              Commands for simplifying cluster operations
+`ops` Commands for simplifying cluster operations
 
-`ai`               Utilize openai to get help with your setup
-
+`ai` Utilize openai to get help with your setup
 
 **Miscellaneous**
 
-`utils`            Useful plural utilities
+`utils` Useful plural utilities
 
-`vpn`              Interacting with the plural vpn
-
+`vpn` Interacting with the plural vpn
 
 **Publishing**
-     
-`apply`            Applies the current pluralfile
 
-`test`             Validate a values templace
+`apply` Applies the current pluralfile
 
-`push`             Utilities for pushing tf or helm packages
+`test` Validate a values templace
 
-`template, tpl`    Templates a helm chart to be uploaded to plural
+`push` Utilities for pushing tf or helm packages
 
-`from-grafana`     Imports a grafana dashboard to a plural crd
+`template, tpl` Templates a helm chart to be uploaded to plural
 
+`from-grafana` Imports a grafana dashboard to a plural crd
 
 **User Profile**
 
-`login`            Logs into plural and saves credentials to the current config profile
+`login` Logs into plural and saves credentials to the current config profile
 
-`import`           Imports plural config from another file
+`import` Imports plural config from another file
 
-`crypto`           Plural encryption utilities
+`crypto` Plural encryption utilities
 
-`config, conf`     Reads/modifies cli configuration
+`config, conf` Reads/modifies cli configuration
 
-`profile`          Commands for managing config profiles for plural
-
+`profile` Commands for managing config profiles for plural
 
 **Workspace**
 
-`create`           Scaffolds the resources needed to create a new plural repository
+`create` Scaffolds the resources needed to create a new plural repository
 
-`repair`           Commits any new encrypted changes in your local workspace automatically
+`repair` Commits any new encrypted changes in your local workspace automatically
 
-`validate, v`      Validates your workspace
+`validate, v` Validates your workspace
 
-`topsort`          Renders a dependency-inferred topological sort of the installations in a workspace
+`topsort` Renders a dependency-inferred topological sort of the installations in a workspace
 
 `dependencies, deps` Prints ordered dependencies for a repo in your workspace
 
-`serve`            Launch the server
+`serve` Launch the server
 
-`shell`            Manages your cloud shell
+`shell` Manages your cloud shell
 
-`workspace, wkspace`  Commands for managing installations in your workspace
+`workspace, wkspace` Commands for managing installations in your workspace
 
-`output`           Commands for generating outputs from supported tools
+`output` Commands for generating outputs from supported tools
 
-`build-context`    Creates a fresh context.yaml for legacy repos
+`build-context` Creates a fresh context.yaml for legacy repos
 
-`changed`          Shows repos with pending changes
+`changed` Shows repos with pending changes

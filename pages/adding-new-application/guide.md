@@ -34,7 +34,7 @@ In the steps below we will go through and fill out the stubs.
 
 ## 2. Add your Helm chart
 
-This section assumes familiarity with helm, the Kubernetes package manager. If you have not worked with helm before, it's strongly recommended that you read through the helm docs to understand core helm concepts, particularly [helm templates](https://helm.sh/docs/chart\_template\_guide/getting\_started/) and helm template values.
+This section assumes familiarity with helm, the Kubernetes package manager. If you have not worked with helm before, it's strongly recommended that you read through the helm docs to understand core helm concepts, particularly [helm templates](https://helm.sh/docs/chart_template_guide/getting_started/) and helm template values.
 
 ### Getting Started with Helm
 
@@ -85,14 +85,14 @@ Next, let's fill out the `templates` directory. Recall that the `templates` dire
 
 The Plural platform includes a number of custom resources that you might find useful to fully productionize your application and can copy and paste over for your own use:
 
-* [dashboard.yaml](/adding-new-application/plural-custom-resources#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
-* [runbook.yaml](/adding-new-application/getting-started-with-runbooks/runbook-yaml) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](/adding-new-application/getting-started-with-runbooks).
-* [proxies.yaml](/adding-new-application/plural-custom-resources#proxies-yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
-* [configurationOverlay.yaml](/adding-new-application/plural-custom-resources#configurationoverlay-yaml) -- creates form fields to modify helm configuration within the console
+- [dashboard.yaml](/adding-new-application/plural-custom-resources#dashboards.yaml) -- creates dashboards in the console that reference Prometheus metrics
+- [runbook.yaml](/adding-new-application/getting-started-with-runbooks/runbook-yaml) -- creates interactive tutorials in the console that show how to perform common maintenance tasks. For more documentation on runbooks refer [here](/adding-new-application/getting-started-with-runbooks).
+- [proxies.yaml](/adding-new-application/plural-custom-resources#proxies-yaml) -- wrappers around kubectl port-forward and kubectl proxy which allow you to get shells into running pods, databases or access private web uis
+- [configurationOverlay.yaml](/adding-new-application/plural-custom-resources#configurationoverlay-yaml) -- creates form fields to modify helm configuration within the console
 
 ![](</assets/image (2).png>)
 
-* logfilter.yaml
+- logfilter.yaml
 
 ### Fill out deps.yaml
 
@@ -109,29 +109,29 @@ spec:
     - type: helm
       name: bootstrap
       repo: bootstrap
-      version: ">= 0.5.1"
+      version: '>= 0.5.1'
     - type: helm
       name: ingress-nginx
       repo: ingress-nginx
-      version: ">= 0.1.2"
+      version: '>= 0.1.2'
     - type: helm
       name: postgres
       repo: postgres
-      version: ">= 0.1.6"
+      version: '>= 0.1.6'
     - type: terraform
       name: aws
       repo: hasura
-      version: ">= 0.1.0"
+      version: '>= 0.1.0'
       optional: true
     - type: terraform
       name: azure
       repo: hasura
-      version: ">= 0.1.0"
+      version: '>= 0.1.0'
       optional: true
     - type: terraform
       name: gcp
       repo: hasura
-      version: ">= 0.1.0"
+      version: '>= 0.1.0'
       optional: true
 ```
 

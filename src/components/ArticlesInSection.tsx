@@ -12,9 +12,11 @@ import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
 import type { NavItem } from '../NavData'
 
-function findArticlesIn(routerPathname,
+function findArticlesIn(
+  routerPathname,
   sections: NavItem[] | undefined,
-  depth = 0): NavItem[] | undefined {
+  depth = 0
+): NavItem[] | undefined {
   routerPathname = removeTrailingSlashes(routerPathname)
   for (const section of sections || []) {
     if (routerPathname === removeTrailingSlashes(section.href)) {
@@ -58,8 +60,13 @@ function ArticlesInSection({
   const pathname = getBarePathFromPath(useRouter().asPath)
   const navData = useNavMenu()
 
-  const articles = useMemo(() => findArticlesIn(pathname, navData)?.filter(article => article.href !== pathname),
-    [navData, pathname])
+  const articles = useMemo(
+    () =>
+      findArticlesIn(pathname, navData)?.filter(
+        (article) => article.href !== pathname
+      ),
+    [navData, pathname]
+  )
 
   if (!articles || articles.length <= 0) {
     return null
@@ -72,8 +79,8 @@ function ArticlesInSection({
     >
       {title && <Title>{title}:</Title>}
       <ArticleList>
-        {articles
-          && articles.map(article => (
+        {articles &&
+          articles.map((article) => (
             <li key={article.href}>
               <Button
                 floating

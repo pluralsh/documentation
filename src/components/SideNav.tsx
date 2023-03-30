@@ -17,7 +17,11 @@ import type {
   SetStateAction,
 } from 'react'
 
-import { ArrowRightIcon, CaretRightIcon, usePrevious } from '@pluralsh/design-system'
+import {
+  ArrowRightIcon,
+  CaretRightIcon,
+  usePrevious,
+} from '@pluralsh/design-system'
 import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
@@ -58,100 +62,106 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const StyledLink = styled(NextLink)<{ $desktop: boolean }>(({ $desktop, theme }) => ({
-  display: 'flex',
-  gap: theme.spacing.small,
-  cursor: 'pointer',
-  flexGrow: 1,
-  flexShrink: 1,
-  margin: 0,
-  padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
-  ...theme.partials.text.body2,
-  textDecoration: 'none',
-  color: theme.colors['text-light'],
-  '.iconRight': {
+const StyledLink = styled(NextLink)<{ $desktop: boolean }>(
+  ({ $desktop, theme }) => ({
     display: 'flex',
-    justifyContent: 'right',
+    gap: theme.spacing.small,
+    cursor: 'pointer',
     flexGrow: 1,
-  },
-  '&:hover': {
-    color: theme.colors.text,
-  },
-  '&:focus, &:focus-visible': {
-    outline: 'none',
-    boxShadow: 'none',
-  },
-  '&:focus-visible::after': {
-    borderStartStartRadius: theme.borderRadiuses.medium,
-    borderEndStartRadius: theme.borderRadiuses.medium,
-    borderStartEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
-    borderEndEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
-    ...theme.partials.focus.insetAbsolute,
-  },
-}))
+    flexShrink: 1,
+    margin: 0,
+    padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
+    ...theme.partials.text.body2,
+    textDecoration: 'none',
+    color: theme.colors['text-light'],
+    '.iconRight': {
+      display: 'flex',
+      justifyContent: 'right',
+      flexGrow: 1,
+    },
+    '&:hover': {
+      color: theme.colors.text,
+    },
+    '&:focus, &:focus-visible': {
+      outline: 'none',
+      boxShadow: 'none',
+    },
+    '&:focus-visible::after': {
+      borderStartStartRadius: theme.borderRadiuses.medium,
+      borderEndStartRadius: theme.borderRadiuses.medium,
+      borderStartEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
+      borderEndEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
+      ...theme.partials.focus.insetAbsolute,
+    },
+  })
+)
 
 type LinkBaseProps = Partial<ComponentProps<typeof StyledLink>> & {
   iconLeft?: ReactElement
   iconRight?: ReactElement
 }
 
-const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(({
-  className, children, iconLeft, iconRight, href, ...props
-}, ref) => {
-  const { keyboardNavigable } = useContext(KeyboardNavContext)
-  const { desktop } = useContext(NavContext)
-  const content = (
-    <StyledLink
-      href={href}
-      className={className}
-      $desktop={desktop}
-      tabIndex={keyboardNavigable ? 0 : -1}
-      ref={ref}
-      {...props}
-    >
-      {iconLeft && iconLeft}
-      {children}
-      <div className="iconRight">{iconRight && iconRight}</div>
-    </StyledLink>
-  )
+const LinkBase = forwardRef<HTMLAnchorElement, LinkBaseProps>(
+  ({ className, children, iconLeft, iconRight, href, ...props }, ref) => {
+    const { keyboardNavigable } = useContext(KeyboardNavContext)
+    const { desktop } = useContext(NavContext)
+    const content = (
+      <StyledLink
+        href={href}
+        className={className}
+        $desktop={desktop}
+        tabIndex={keyboardNavigable ? 0 : -1}
+        ref={ref}
+        {...props}
+      >
+        {iconLeft && iconLeft}
+        {children}
+        <div className="iconRight">{iconRight && iconRight}</div>
+      </StyledLink>
+    )
 
-  return content
-})
+    return content
+  }
+)
 
-const CaretButton = styled(({
-  isOpen = false, mode: _mode, className, ...props
-}) => {
-  const { keyboardNavigable } = useContext(KeyboardNavContext)
-  const [showHoverState, setShowHoverState] = useState(false)
-  const [isHovered, setIsHovered] = useState(false)
-  const wasOpen = usePrevious(isOpen)
+const CaretButton = styled(
+  ({ isOpen = false, mode: _mode, className, ...props }) => {
+    const { keyboardNavigable } = useContext(KeyboardNavContext)
+    const [showHoverState, setShowHoverState] = useState(false)
+    const [isHovered, setIsHovered] = useState(false)
+    const wasOpen = usePrevious(isOpen)
 
-  useEffect(() => {
-    if (wasOpen !== isOpen) {
-      if (isHovered) setShowHoverState(false)
-    }
-  }, [wasOpen, isOpen, isHovered])
+    useEffect(() => {
+      if (wasOpen !== isOpen) {
+        if (isHovered) setShowHoverState(false)
+      }
+    }, [wasOpen, isOpen, isHovered])
 
-  return (
-    <button
-      tabIndex={keyboardNavigable ? 0 : -1}
-      type="button"
-      className={classNames(className, { showHoverState })}
-      aria-label={isOpen ? 'Collapse' : 'Expand'}
-      onMouseEnter={() => {
-        setShowHoverState(true)
-        setIsHovered(true)
-      }}
-      onMouseLeave={() => {
-        setShowHoverState(true)
-        setIsHovered(false)
-      }}
-      {...props}
-    >
-      {_mode === 'menu' ? <ArrowRightIcon className="icon" /> : <CaretRightIcon className="icon" />}
-    </button>
-  )
-})(({ theme, isOpen, mode = 'subsection' }) => ({
+    return (
+      <button
+        tabIndex={keyboardNavigable ? 0 : -1}
+        type="button"
+        className={classNames(className, { showHoverState })}
+        aria-label={isOpen ? 'Collapse' : 'Expand'}
+        onMouseEnter={() => {
+          setShowHoverState(true)
+          setIsHovered(true)
+        }}
+        onMouseLeave={() => {
+          setShowHoverState(true)
+          setIsHovered(false)
+        }}
+        {...props}
+      >
+        {_mode === 'menu' ? (
+          <ArrowRightIcon className="icon" />
+        ) : (
+          <CaretRightIcon className="icon" />
+        )}
+      </button>
+    )
+  }
+)(({ theme, isOpen, mode = 'subsection' }) => ({
   ...theme.partials.reset.button,
   display: 'flex',
   alignItems: 'center',
@@ -172,26 +182,26 @@ const CaretButton = styled(({
   },
   ...(mode === 'subsection'
     ? {
-      '.icon': {
-        transform: `rotate(${isOpen ? 90 : 0}deg)`,
-        transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
-      },
-      '&.showHoverState:hover .icon': {
-        transform: isOpen ? 'rotate(-45deg)' : 'rotate(45deg)',
-        transitionDuration: '0.2s',
-      },
-    }
+        '.icon': {
+          transform: `rotate(${isOpen ? 90 : 0}deg)`,
+          transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
+        },
+        '&.showHoverState:hover .icon': {
+          transform: isOpen ? 'rotate(-45deg)' : 'rotate(45deg)',
+          transitionDuration: '0.2s',
+        },
+      }
     : {}),
   ...(mode === 'menu'
     ? {
-      '.icon': {
-        transform: `translateX(${isOpen ? 20 : 0}%)`,
-        transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
-      },
-      '&.showHoverState:hover .icon': {
-        transform: 'translateX(30%)',
-      },
-    }
+        '.icon': {
+          transform: `translateX(${isOpen ? 20 : 0}%)`,
+          transition: 'all 0.175s cubic-bezier(.31,1.49,.64,1)',
+        },
+        '&.showHoverState:hover .icon': {
+          transform: 'translateX(30%)',
+        },
+      }
     : {}),
 }))
 
@@ -216,9 +226,13 @@ function NavLinkUnstyled({
 } & Partial<ComponentProps<typeof StyledLink>>) {
   const href = useMemo(() => removeTrailingSlashes(props.href), [props.href])
   const { scrollRef, setMenuId, ...navContext } = useContext(NavContext)
-  const optimisticPathname = removeTrailingSlashes(navContext.optimisticPathname)
-  const isSelectedOptimistic = useMemo(() => optimisticPathname === href,
-    [optimisticPathname, href])
+  const optimisticPathname = removeTrailingSlashes(
+    navContext.optimisticPathname
+  )
+  const isSelectedOptimistic = useMemo(
+    () => optimisticPathname === href,
+    [optimisticPathname, href]
+  )
   const liRef = useRef<HTMLLIElement>(null)
   const theme = useTheme()
 
@@ -324,9 +338,11 @@ const TopSection = styled(({ title, children, ...props }) => (
   },
 }))
 
-function isPathnameInSections(routerPathname,
+function isPathnameInSections(
+  routerPathname,
   sections: NavItem[] | undefined,
-  depth = 0) {
+  depth = 0
+) {
   routerPathname = removeTrailingSlashes(routerPathname)
   for (const section of sections || []) {
     if (routerPathname === removeTrailingSlashes(section.href)) {
@@ -340,7 +356,8 @@ function isPathnameInSections(routerPathname,
   return false
 }
 
-const SubSectionsList = styled(forwardRef<
+const SubSectionsList = styled(
+  forwardRef<
     HTMLUListElement,
     { sections: NavItem[]; indentLevel?: number; className?: string }
   >(({ className, sections, indentLevel = 0 }, ref) => {
@@ -351,7 +368,7 @@ const SubSectionsList = styled(forwardRef<
         ref={ref}
         className={className}
       >
-        {sections.map(subSection => {
+        {sections.map((subSection) => {
           const defaultOpen = isPathnameInSections(pathname, [subSection])
 
           return (
@@ -365,15 +382,16 @@ const SubSectionsList = styled(forwardRef<
         })}
       </ul>
     )
-  }))(({ theme, indentLevel }) => ({
+  })
+)(({ theme, indentLevel }) => ({
   margin: 0,
   padding: 0,
   listStyle: 'none',
   ...(indentLevel
     ? {
-      paddingLeft:
+        paddingLeft:
           indentLevel >= 2 ? theme.spacing.xsmall : theme.spacing.medium,
-    }
+      }
     : {}),
 }))
 
@@ -393,15 +411,19 @@ function SubSection({
   const [measureRef, { height }] = useMeasure()
   const prevHeight = usePrevious(height)
 
-  const pathname = removeTrailingSlashes(useContext(NavContext).optimisticPathname)
+  const pathname = removeTrailingSlashes(
+    useContext(NavContext).optimisticPathname
+  )
   const prevPathname = usePrevious(pathname)
-  const isSelected = useMemo(() => pathname === removeTrailingSlashes(href),
-    [pathname, href])
+  const isSelected = useMemo(
+    () => pathname === removeTrailingSlashes(href),
+    [pathname, href]
+  )
 
   useEffect(() => {
     if (
-      prevPathname !== pathname
-      && isPathnameInSections(pathname, [{ href, sections }])
+      prevPathname !== pathname &&
+      isPathnameInSections(pathname, [{ href, sections }])
     ) {
       setIsOpen(true)
     }
@@ -412,16 +434,16 @@ function SubSection({
     immediate: !prevHeight,
     config: isOpen
       ? {
-        mass: 0.6,
-        tension: 280,
-        velocity: 0.02,
-      }
+          mass: 0.6,
+          tension: 280,
+          velocity: 0.02,
+        }
       : {
-        mass: 0.6,
-        tension: 400,
-        velocity: 0.02,
-        restVelocity: 0.1,
-      },
+          mass: 0.6,
+          tension: 400,
+          velocity: 0.02,
+          restVelocity: 0.1,
+        },
   })
 
   const contextValue = useMemo(() => ({ keyboardNavigable: isOpen }), [isOpen])
@@ -475,9 +497,7 @@ const NavScrollContainer = styled.div<{
   $desktop: boolean
   $padTop: boolean
   $hide: boolean
-}>(({
-  $desktop: desktop, $padTop: padTop, $hide: hide = false, theme,
-}) => ({
+}>(({ $desktop: desktop, $padTop: padTop, $hide: hide = false, theme }) => ({
   position: 'absolute',
   top: 0,
   left: 0,
@@ -494,9 +514,11 @@ const NavScrollContainer = styled.div<{
   display: hide ? 'none' : 'block',
 }))
 
-const Nav = styled.nav<{ $desktop: boolean }>(({ $desktop: desktop, theme: _theme }) => ({
-  marginLeft: desktop ? navLeftOffset : 0,
-}))
+const Nav = styled.nav<{ $desktop: boolean }>(
+  ({ $desktop: desktop, theme: _theme }) => ({
+    marginLeft: desktop ? navLeftOffset : 0,
+  })
+)
 
 export function SideNav({
   navData,
@@ -507,36 +529,40 @@ export function SideNav({
   setMenuId,
 }: SideNavProps) {
   const router = useRouter()
-  const [optimisticPathname, setOptimisticPathname] = useState<string | null>(null)
+  const [optimisticPathname, setOptimisticPathname] = useState<string | null>(
+    null
+  )
   const scrollRef = useRef<HTMLDivElement>(null)
-  const contextValue = useMemo(() => ({
-    scrollRef,
-    desktop,
-    setMenuId,
-    optimisticPathname:
+  const contextValue = useMemo(
+    () => ({
+      scrollRef,
+      desktop,
+      setMenuId,
+      optimisticPathname:
         optimisticPathname === null
           ? getBarePathFromPath(router.asPath)
           : optimisticPathname,
-  }),
-  [desktop, setMenuId, optimisticPathname, router.asPath])
+    }),
+    [desktop, setMenuId, optimisticPathname, router.asPath]
+  )
 
   useEffect(() => {
     if (!router?.events?.on) {
       return
     }
-    const handleRouteChangeStart = url => {
+    const handleRouteChangeStart = (url) => {
       setOptimisticPathname(url)
     }
-    const handleRouteChangeComplete = _url => {
+    const handleRouteChangeComplete = (_url) => {
       setOptimisticPathname(null)
     }
     const handleRouteChangeError = (_err, _url) => {
       setOptimisticPathname(null)
     }
-    const handleHashChangeStart = _url => {
+    const handleHashChangeStart = (_url) => {
       console.debug('hashChangeStart', _url)
     }
-    const handleHashChangeComplete = _url => {
+    const handleHashChangeComplete = (_url) => {
       console.debug('handleHashChangeComplete', _url)
     }
 

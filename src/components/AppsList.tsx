@@ -1,6 +1,10 @@
 import { useMemo, useState } from 'react'
 
-import { Input, MagnifyingGlassIcon, RepositoryChip } from '@pluralsh/design-system'
+import {
+  Input,
+  MagnifyingGlassIcon,
+  RepositoryChip,
+} from '@pluralsh/design-system'
 import Link from 'next/link'
 
 import chroma from 'chroma-js'
@@ -14,14 +18,17 @@ function AppsList({ className, ...props }: { className?: string }) {
   const applications = useRepos()
   const [search, setSearch] = useState('')
 
-  const fuse = useMemo(() => new Fuse(applications, {
-    threshold: 0.3,
-    keys: ['name', 'displayName', 'tags.tag'],
-  }),
-  [applications])
+  const fuse = useMemo(
+    () =>
+      new Fuse(applications, {
+        threshold: 0.3,
+        keys: ['name', 'displayName', 'tags.tag'],
+      }),
+    [applications]
+  )
 
   const filteredApplications = search
-    ? fuse.search(search).map(x => x.item)
+    ? fuse.search(search).map((x) => x.item)
     : applications
 
   if (!applications || applications.length <= 0) {
@@ -38,15 +45,15 @@ function AppsList({ className, ...props }: { className?: string }) {
           className="searchInput"
           autoFocus
           value={search}
-          onChange={event => setSearch(event.target.value)}
+          onChange={(event) => setSearch(event.target.value)}
           placeholder="Search an application"
           startIcon={<MagnifyingGlassIcon />}
           width="100%"
         />
       </div>
       <div className="appList">
-        {filteredApplications
-          && filteredApplications.map(application => (
+        {filteredApplications &&
+          filteredApplications.map((application) => (
             <RepositoryChip
               key={application.id}
               imageUrl={application.darkIcon || application.icon || undefined}
@@ -95,7 +102,9 @@ export default styled(AppsList)(({ theme }) => ({
       left: 0,
       width: '100%',
       height: theme.spacing.large,
-      background: `linear-gradient(0deg, ${chroma(theme.colors['fill-zero']).alpha(0.0)} 0%, ${chroma(theme.colors['fill-zero']).alpha(1.0)} 100%)`,
+      background: `linear-gradient(0deg, ${chroma(
+        theme.colors['fill-zero']
+      ).alpha(0.0)} 0%, ${chroma(theme.colors['fill-zero']).alpha(1.0)} 100%)`,
     },
   },
   '.searchInput': {},

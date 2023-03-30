@@ -5,6 +5,7 @@ description: Registering and setting up a domain
 
 {% tabs %}
 {% tab title="New Domain" %}
+
 #### 1. Register a Domain Name
 
 This domain name, eg `pluraldemo.com` can be registered with any registrar, for example Google Domains, GoDaddy, or Namecheap.
@@ -60,6 +61,7 @@ resource "aws_route53_record" "test-ns" {
   records = aws_route53_zone.test.name_servers
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -67,16 +69,16 @@ resource "aws_route53_record" "test-ns" {
 
 There are two ways this can be done:
 
-* for a new cluster
-* for an existing cluster using plural's dns service you want to switch over
+- for a new cluster
+- for an existing cluster using plural's dns service you want to switch over
 
 ## Fresh Cluster
 
-For a fresh cluster, you'll be prompted in `plural init` whether you want to enable plural dns.  Simply answer no, provide the subdomain you created above, and we'll configure externaldns correctly for you from the start.
+For a fresh cluster, you'll be prompted in `plural init` whether you want to enable plural dns. Simply answer no, provide the subdomain you created above, and we'll configure externaldns correctly for you from the start.
 
 ## Existing Plural Cluster
 
-For existing clusters, there's a bit of cleanup you'll need to do to reconfigure from plural dns.  You'll want to edit the `workspace.yaml` file at the root of your repo to set `false` to the `pluralDns` entry.  You'll also want to rewire the subdomain to point to your new subdomain so domain validation works in the future.
+For existing clusters, there's a bit of cleanup you'll need to do to reconfigure from plural dns. You'll want to edit the `workspace.yaml` file at the root of your repo to set `false` to the `pluralDns` entry. You'll also want to rewire the subdomain to point to your new subdomain so domain validation works in the future.
 
 Additionally, in the `context.yaml` file, there will likely be a number of dns entries in the configuration for your apps, you'll want to move those to the new subdomain as well (the old plural dns records will still work during this transition).
 

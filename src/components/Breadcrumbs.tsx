@@ -79,8 +79,10 @@ function Breadcrumbs({ className }: { className?: string }) {
   const path = getBarePathFromPath(asPath)
   const navData = useNavMenu()
 
-  const crumbs = useMemo(() => [{ title: 'Docs' }, ...findCrumbs(path, navData)],
-    [navData, path])
+  const crumbs = useMemo(
+    () => [{ title: 'Docs' }, ...findCrumbs(path, navData)],
+    [navData, path]
+  )
 
   if (crumbs.length <= 1) {
     return null
@@ -110,8 +112,7 @@ function Breadcrumbs({ className }: { className?: string }) {
                 {crumb.title}
               </StyledLink>
             )
-          }
-          else {
+          } else {
             inner = (
               <NonLink
                 {...(idx === crumbs.length - 1

@@ -33,9 +33,9 @@ plural crypto share --email <email1> --email <email2>
 
 This will do a few things:
 
-* create a base identity to encrypt the repo's current AES key and store it in a git-ignored place under `${REPO_ROOT}/.plural-crypt`.
-* register all the users who have access in a yaml file under `${REPO_ROOT}/.plural-crypt`
-* encrypt the file using all this information and store it under `${REPO_ROOT}/.plural-crypt`
+- create a base identity to encrypt the repo's current AES key and store it in a git-ignored place under `${REPO_ROOT}/.plural-crypt`.
+- register all the users who have access in a yaml file under `${REPO_ROOT}/.plural-crypt`
+- encrypt the file using all this information and store it under `${REPO_ROOT}/.plural-crypt`
 
 If you have the Plural Console deployed, run:
 

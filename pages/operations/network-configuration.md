@@ -19,6 +19,7 @@ public_subnets = ["your.cidr.pub.1", "your.cidr.pub.2", "your.cidr.pub.3"]
 private_subnets = ["your.cidr.priv.1", "your.cidr.priv.2", "your.cidr.priv.3"]
 worker_private_subnets = ["your.cidr.worker.1", "your.cidr.worker.2", "your.cidr.worker.3"]
 ```
+
 {% /tab %}
 
 {% tab title="GCP" %}
@@ -27,9 +28,10 @@ On GCP, update the `gcp-bootstrap` modules configuration with:
 ```shell {% showHeader=false %}
 vpc_subnetwork_cidr_range = "your.cidr"
 
-# you might also want to update cluster_secondary_range_cidr 
+# you might also want to update cluster_secondary_range_cidr
 # and services_secondary_range_cidr
 ```
+
 {% /tab %}
 
 {% tab title="Azure" %}
@@ -39,6 +41,7 @@ With Azure, update the `azure-bootstrap` modules configuration with:
 address_space = "your.cidr"
 subnet_prefixes = ["your.cidr.pref"]
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -56,6 +59,7 @@ Plural makes it easy to add additional Terraform to the stacks we generate. Effe
 
 {% tabs %}
 {% tab title="AWS" %}
+
 ```shell {% showHeader=false %}
 resource "aws_vpc_peering_connection" "foo" {
    peer_owner_id = "my-owner-id" # Use appropriate values here.
@@ -63,23 +67,27 @@ resource "aws_vpc_peering_connection" "foo" {
    vpc_id        = module.aws-bootstrap.vpc.id
 }
 ```
+
 {% /tab %}
 
 {% tab title="GCP" %}
+
 ```shell {% showHeader=false %}
 data "google_compute_network" "peer" {
    name = "peer-network"
 }
 
 resource "google_compute_network_peering" "peering1" {
-   name         = "plrl-peer" 
+   name         = "plrl-peer"
    network      = module.gcp-bootstrap.vpc_network.self_link
    peer_network = data.google_compute_network.peer.self_link
 }
 ```
+
 {% /tab %}
 
 {% tab title="Azure" %}
+
 ```shell {% showHeader=false %}
 data "azure_rm_virtual_network" "peer" {
    resource_group_name = "your-azure-resource-group" # Use appropriate values here.
@@ -88,11 +96,12 @@ data "azure_rm_virtual_network" "peer" {
 
 resource "azurerm_virtual_network_peering" "example-1" {
    name                      = "plrl-peer"
-   resource_group_name       = "your-azure-resource-group"  
+   resource_group_name       = "your-azure-resource-group"
    virtual_network_name      = module.azure-bootstrap.network.name
    remote_virtual_network_id = data.azurerm_virtual_network.peer.id
 }
 ```
+
 {% /tab %}
 {% /tabs %}
 
@@ -107,14 +116,14 @@ Plural ships with two ingress controllers, both using the open-source [ingress-n
 ```yaml
 ingress-nginx:
   ingress-nginx:
-     controller:
-       service:
-         loadBalancerSourceRanges:
-         - cidr.1
-         - cidr.2
-         annotations:
-           # this is only needed for aws
-           service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
+    controller:
+      service:
+        loadBalancerSourceRanges:
+          - cidr.1
+          - cidr.2
+        annotations:
+          # this is only needed for aws
+          service.beta.kubernetes.io/aws-load-balancer-target-group-attributes: preserve_client_ip.enabled=true
 ```
 
 Once that’s updated, run `plural deploy --commit "adding ip allowlist"` and it will update the service for you and push the changes upstream to your git repository.
@@ -132,7 +141,7 @@ dagster:
   dagster:
     ingress:
       annotations:
-        kubernetes.io/ingress.class: "internal-nginx"
+        kubernetes.io/ingress.class: 'internal-nginx'
 ```
 
 Sometimes an application will require you to update an attribute called `ingressClass`. This will depend on whether the Helm chart is still using the legacy annotation-based ingress class flag or if it has migrated to the new first-class spec field.

@@ -10,7 +10,9 @@ import type { MarkdocPage } from './mdSchema'
 
 const fileCache = new Map<string, MarkdocPage | null>()
 
-export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | null> => {
+export const readMdFileCached = async (
+  filePath: string
+): Promise<MarkdocPage | null> => {
   if (!filePath.startsWith('/pages')) {
     return null
   }
@@ -40,17 +42,18 @@ export const readMdFileCached = async (filePath: string): Promise<MarkdocPage | 
       : {}
     const content = Markdoc.transform(ast, schemaConfig)
 
-    const ret: MarkdocPage = JSON.parse(JSON.stringify({
-      content,
-      frontmatter,
-      file: {
-        path: filePath.replace(/^\/pages/g, ''),
-      },
-    }))
+    const ret: MarkdocPage = JSON.parse(
+      JSON.stringify({
+        content,
+        frontmatter,
+        file: {
+          path: filePath.replace(/^\/pages/g, ''),
+        },
+      })
+    )
 
     return cacheAndReturn(ret)
-  }
-  catch (e) {
+  } catch (e) {
     console.error(e)
 
     return cacheAndReturn(null)

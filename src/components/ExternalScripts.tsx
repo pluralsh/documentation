@@ -10,7 +10,7 @@ function HubSpot() {
     if (!router?.events?.on) {
       return
     }
-    const handleRouteChangeComplete = url => {
+    const handleRouteChangeComplete = (url) => {
       if (!(window as any)?.Cookiebot?.consent?.statistics) {
         return
       }

@@ -6,8 +6,12 @@ import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 type UseLockedBodyOutput = [boolean, (locked: boolean) => void]
 
 export function getPadding() {
-  const paddingRight = parseInt(window.getComputedStyle(document.body).paddingRight, 10)
-  const scrollbarWidth = window.innerWidth - document.documentElement.clientWidth
+  const paddingRight = parseInt(
+    window.getComputedStyle(document.body).paddingRight,
+    10
+  )
+  const scrollbarWidth =
+    window.innerWidth - document.documentElement.clientWidth
 
   return paddingRight + scrollbarWidth
 }

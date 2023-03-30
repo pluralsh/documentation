@@ -12,7 +12,7 @@ import GithubStars from './GithubStars'
 import MobileMenu from './MobileMenu'
 import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
 
-const Filler = styled.div(_ => ({
+const Filler = styled.div((_) => ({
   flexGrow: 1,
 }))
 

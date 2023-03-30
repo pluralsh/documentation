@@ -43,28 +43,27 @@ function getNewScrollPos({
   if (scrollToPos === 'nearest') {
     if (overshootStart > overshootEnd) {
       scrollToPos = 'start'
-    }
-    else {
+    } else {
       scrollToPos = 'end'
     }
   }
 
   if (scrollToPos === 'start') {
     newScrollPos = curScrollPos - overshootStart - offset
-  }
-  else if (scrollToPos === 'end') {
+  } else if (scrollToPos === 'end') {
     newScrollPos = curScrollPos + overshootEnd + offset
-  }
-  else if (scrollToPos === 'center') {
+  } else if (scrollToPos === 'center') {
     newScrollPos = curScrollPos - (overshootStart - overshootEnd) * 0.5
   }
 
   return newScrollPos
 }
 
-function scrollIntoContainerView(child: Element,
+function scrollIntoContainerView(
+  child: Element,
   parent: Element,
-  config: Config) {
+  config: Config
+) {
   config = {
     ...{
       blockOffset: 0,
@@ -73,7 +72,12 @@ function scrollIntoContainerView(child: Element,
     ...config,
   }
   const {
-    block, inline, behavior, blockOffset, inlineOffset, preventIfVisible,
+    block,
+    inline,
+    behavior,
+    blockOffset,
+    inlineOffset,
+    preventIfVisible,
   } = config
   const overshoot = getRelativeOvershoots(parent, child)
 
@@ -87,8 +91,8 @@ function scrollIntoContainerView(child: Element,
     scrollToOptions.behavior = behavior
   }
   if (
-    block
-    && !(preventIfVisible && overshoot.top <= 0 && overshoot.bottom <= 0)
+    block &&
+    !(preventIfVisible && overshoot.top <= 0 && overshoot.bottom <= 0)
   ) {
     scrollToOptions.top = getNewScrollPos({
       overshootStart: overshoot.top,
@@ -99,8 +103,8 @@ function scrollIntoContainerView(child: Element,
     })
   }
   if (
-    inline
-    && !(preventIfVisible && overshoot.left <= 0 && overshoot.right <= 0)
+    inline &&
+    !(preventIfVisible && overshoot.left <= 0 && overshoot.right <= 0)
   ) {
     scrollToOptions.left = getNewScrollPos({
       overshootStart: overshoot.left,

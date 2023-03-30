@@ -10,12 +10,12 @@ Plural provides options to uninstall specific applications, tear down your clust
 ## Purging the Cloud Shell
 
 If you created a Plural installation in our Cloud Shell and want to move it to your local dev environment, you can sync your shell and delete the Cloud Shell instance from our servers. To sync your shell and delete your current Cloud Shell instance, use:
- 
- ```
- plural shell sync
- plural shell purge
- ```
- 
+
+```
+plural shell sync
+plural shell purge
+```
+
 The purge command will destroy your current Cloud Shell instance, but preserve your existing cluster and installations. Your account will still be pinned to the same cloud provider chosen at the beginning of your onboarding.
 
 ## Uninstalling Individual Applications

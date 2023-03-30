@@ -13,9 +13,9 @@ This is a guide on how to get Plural running using our CLI. If you prefer an in-
 
 **You will need the following things to successfully get up and running with Plural:**
 
-* **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
-* **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
-* **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
+- **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
+- **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
+- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
 
 ## Install Plural CLI
 
@@ -129,21 +129,27 @@ We can try this out by installing the Plural Console:
 
 {% tabs %}
 {% tab title="AWS" %}
+
 ```
 plural bundle install console console-aws
 ```
+
 {% /tab %}
 
 {% tab title="GCP" %}
+
 ```
 plural bundle install console console-gcp
 ```
+
 {% /tab %}
 
 {% tab title="Azure" %}
+
 ```
 plural bundle install console console-azure
 ```
+
 {% /tab %}
 {% /tabs %}
 

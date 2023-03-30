@@ -5,9 +5,9 @@ description: Learn about configuring access control within Plural.
 
 Plural comes pre-built with a lot of the core concepts needed for IAM at any organizational scale. These include:
 
-* Users and Groups - maintain a full directory to manage identity within Plural
-* Roles - which can be bound to any set of users or groups of users to allocate permissions
-* Service Accounts - dedicated identities with a fixed policy as far as what other entities can impersonate them and act on their behalf.
+- Users and Groups - maintain a full directory to manage identity within Plural
+- Roles - which can be bound to any set of users or groups of users to allocate permissions
+- Service Accounts - dedicated identities with a fixed policy as far as what other entities can impersonate them and act on their behalf.
 
 ### Account Basics
 

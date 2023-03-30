@@ -20,7 +20,7 @@ function PageFooter({ className }: { className?: string }) {
       </FooterLink>
       <FooterLink
         href="#"
-        onClick={e => {
+        onClick={(e) => {
           e.preventDefault()
           window.Cookiebot?.show()
         }}
@@ -43,15 +43,17 @@ export const FooterLink = styled.a(({ theme }) => ({
   },
 }))
 
-export const EditOnGitHubLink = styled(({ ...props }: ComponentPropsWithoutRef<'a'>) => (
-  <a
-    href=""
-    {...props}
-  >
-    <GitHubLogoIcon size={20} />
-    Edit on Github
-  </a>
-))(({ theme }) => ({
+export const EditOnGitHubLink = styled(
+  ({ ...props }: ComponentPropsWithoutRef<'a'>) => (
+    <a
+      href=""
+      {...props}
+    >
+      <GitHubLogoIcon size={20} />
+      Edit on Github
+    </a>
+  )
+)(({ theme }) => ({
   display: 'flex',
   gap: theme.spacing.small,
   marginTop: theme.spacing.xxlarge,

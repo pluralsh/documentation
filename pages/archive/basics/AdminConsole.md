@@ -4,10 +4,10 @@ title: Plural Admin Console
 
 The plural admin console serves a number of different roles
 
-* managing automated upgrades delivered from the kubernetes api
-* serving as a thin grafana to visualize application metrics and logs
-* serving as a built-in k8s dashboard for all plural apps in the cluster, along with providing app-level health checking
-* being the touchpoint at which incidents can be filed with the owner of an application
+- managing automated upgrades delivered from the kubernetes api
+- serving as a thin grafana to visualize application metrics and logs
+- serving as a built-in k8s dashboard for all plural apps in the cluster, along with providing app-level health checking
+- being the touchpoint at which incidents can be filed with the owner of an application
 
 # Installation
 
@@ -27,8 +27,8 @@ plural deploy
 
 # Dependencies
 
-The console takes over the gitops flow for managing plural apps for you, but that also means it needs your git repo set up appropriately.  Currently we require these details (although we'll support other git operating modes in the future):
+The console takes over the gitops flow for managing plural apps for you, but that also means it needs your git repo set up appropriately. Currently we require these details (although we'll support other git operating modes in the future):
 
-* the remote url should be ssh not https
-* you have a passphraseless ssh key with access to that repo you can offer to the console
-* the ssh key should have write perms to the repo
+- the remote url should be ssh not https
+- you have a passphraseless ssh key with access to that repo you can offer to the console
+- the ssh key should have write perms to the repo

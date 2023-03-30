@@ -55,55 +55,57 @@ const ListItem = styled.li(() => ({
   listStyle: 'none',
 }))
 
-const StyledLink = styled(NextLink)<{ $active: boolean }>(({ theme, $active }) => ({
-  position: 'relative',
-  display: 'block',
-  ...theme.partials.marketingText.componentLinkSmall,
-  color: theme.colors['text-xlight'],
-  textDecoration: 'none',
-  margin: 0,
-  paddingLeft: theme.spacing.medium,
-  paddingTop: theme.spacing.xxsmall,
-  paddingBottom: theme.spacing.xxsmall,
-  paddingRight: theme.spacing.small,
-  '&::before': {
-    zIndex: 1,
-    borderLeft: `3px solid ${theme.colors['border-primary']}`,
-    transform: 'scaleX(0)',
-    transformOrigin: 'center left',
-    transition: 'transform 0.15s ease-in',
-  },
-  ...($active
-    ? {
+const StyledLink = styled(NextLink)<{ $active: boolean }>(
+  ({ theme, $active }) => ({
+    position: 'relative',
+    display: 'block',
+    ...theme.partials.marketingText.componentLinkSmall,
+    color: theme.colors['text-xlight'],
+    textDecoration: 'none',
+    margin: 0,
+    paddingLeft: theme.spacing.medium,
+    paddingTop: theme.spacing.xxsmall,
+    paddingBottom: theme.spacing.xxsmall,
+    paddingRight: theme.spacing.small,
+    '&::before': {
+      zIndex: 1,
+      borderLeft: `3px solid ${theme.colors['border-primary']}`,
+      transform: 'scaleX(0)',
+      transformOrigin: 'center left',
+      transition: 'transform 0.15s ease-in',
+    },
+    ...($active
+      ? {
+          color: theme.colors.text,
+          '&::before ': {
+            zIndex: 1,
+            borderLeft: `3px solid ${theme.colors['border-primary']}`,
+            transform: 'scaleX(1)',
+            transition: 'transform 0.2s ease-out',
+          },
+        }
+      : {}),
+    '&:hover': {
+      textDecoration: 'underline',
       color: theme.colors.text,
-      '&::before ': {
-        zIndex: 1,
-        borderLeft: `3px solid ${theme.colors['border-primary']}`,
-        transform: 'scaleX(1)',
-        transition: 'transform 0.2s ease-out',
-      },
-    }
-    : {}),
-  '&:hover': {
-    textDecoration: 'underline',
-    color: theme.colors.text,
-  },
-  '&::before, &::after': {
-    content: '""',
-    position: 'absolute',
-    left: 0,
-    top: 0,
-    bottom: 0,
-    right: 0,
-  },
-  '&:focus, &:focus-visible': {
-    boxShadow: 'none',
-  },
-  '&:focus-visible::after': {
-    ...theme.partials.focus.insetAbsolute,
-    zIndex: 1,
-  },
-}))
+    },
+    '&::before, &::after': {
+      content: '""',
+      position: 'absolute',
+      left: 0,
+      top: 0,
+      bottom: 0,
+      right: 0,
+    },
+    '&:focus, &:focus-visible': {
+      boxShadow: 'none',
+    },
+    '&:focus-visible::after': {
+      ...theme.partials.focus.insetAbsolute,
+      zIndex: 1,
+    },
+  })
+)
 
 export const ScrollContainer = styled.div(({ theme: _ }) => ({
   overflowY: 'auto',
@@ -118,30 +120,40 @@ function TableOfContentsBase({
 }: {
   toc?: MarkdocHeading[]
 }) {
-  const items = useMemo(() => toc.filter(item => (item.id && item.level === 1) || item.level === 2),
-    [toc])
+  const items = useMemo(
+    () =>
+      toc.filter((item) => (item.id && item.level === 1) || item.level === 2),
+    [toc]
+  )
   const labelId = `nav-label-${useId()}`
   const firstRender = useRef(true)
-  const hashIsInToC = useCallback((hash: string) => !!items.find(item => `#${item.id}` === hash) || hash === '',
-    [items])
+  const hashIsInToC = useCallback(
+    (hash: string) =>
+      !!items.find((item) => `#${item.id}` === hash) || hash === '',
+    [items]
+  )
 
   const [headingElements, setHeadingElements] = useState<HTMLElement[]>([])
   const router = useRouter()
 
-  const { hash }
-    = (typeof window !== 'undefined' && window?.location)
-    || new URL(`http://plural.sh${router.asPath}`)
+  const { hash } =
+    (typeof window !== 'undefined' && window?.location) ||
+    new URL(`http://plural.sh${router.asPath}`)
   const previousHash = usePrevious(hash)
 
   const ignoreNextScrollEvent = useRef(!!hash)
 
-  const [highlightedHash, _setHighlightedHash] = useState(hashIsInToC(hash) ? hash : '')
-  const setHighlightedHash = useCallback(hash => {
-    if (hashIsInToC(hash)) {
-      _setHighlightedHash(hash)
-    }
-  },
-  [hashIsInToC, _setHighlightedHash])
+  const [highlightedHash, _setHighlightedHash] = useState(
+    hashIsInToC(hash) ? hash : ''
+  )
+  const setHighlightedHash = useCallback(
+    (hash) => {
+      if (hashIsInToC(hash)) {
+        _setHighlightedHash(hash)
+      }
+    },
+    [hashIsInToC, _setHighlightedHash]
+  )
 
   useEffect(() => {
     firstRender.current = false
@@ -154,9 +166,11 @@ function TableOfContentsBase({
   }, [hash, hashIsInToC, previousHash, setHighlightedHash])
 
   useEffect(() => {
-    setHeadingElements(items
-      .map(item => (!item.id ? null : document.getElementById(item.id)))
-      .filter(exists))
+    setHeadingElements(
+      items
+        .map((item) => (!item.id ? null : document.getElementById(item.id)))
+        .filter(exists)
+    )
   }, [items])
 
   const scrollListener = useCallback(() => {
@@ -165,13 +179,15 @@ function TableOfContentsBase({
 
       return
     }
-    const topNavHeight = Number(getComputedStyle(document.documentElement)
-      ?.getPropertyValue('--top-nav-height')
-      ?.replace(/[^0-9]/g, '') || 0)
+    const topNavHeight = Number(
+      getComputedStyle(document.documentElement)
+        ?.getPropertyValue('--top-nav-height')
+        ?.replace(/[^0-9]/g, '') || 0
+    )
 
     let scrollToHash = ''
 
-    headingElements.forEach(elt => {
+    headingElements.forEach((elt) => {
       const eltTop = elt.getBoundingClientRect()?.top || Infinity
 
       if (eltTop <= scrollThreshold + topNavHeight) {
@@ -204,9 +220,9 @@ function TableOfContentsBase({
           {items.map((item, i) => {
             const href = `#${item.id}`
 
-            const active
-              = !firstRender.current
-              && (highlightedHash === href || (!highlightedHash && i === 0))
+            const active =
+              !firstRender.current &&
+              (highlightedHash === href || (!highlightedHash && i === 0))
 
             return (
               <ListItem key={item.title}>

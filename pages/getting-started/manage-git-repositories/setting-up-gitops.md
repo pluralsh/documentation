@@ -15,22 +15,22 @@ Currently we're limited to a one cluster to one repo mapping, but eventually tha
 
 **Plural currently supports the following version control providers:**
 
-* [GitHub](https://github.com/)
-* [GitLab](https://about.gitlab.com/)
-* [Bitbucket](https://bitbucket.org/product/) (*Follow Manual Git Setup below to use Bitbucket*)
+- [GitHub](https://github.com/)
+- [GitLab](https://about.gitlab.com/)
+- [Bitbucket](https://bitbucket.org/product/) (_Follow Manual Git Setup below to use Bitbucket_)
 
 **Support for the following providers is on our roadmap:**
 
-* [Mercurial](https://www.mercurial-scm.org/)
+- [Mercurial](https://www.mercurial-scm.org/)
 
 You have two options when setting up a Git repository for use with a Plural workspace:
 
-* **Using Plural OAuth** by running `plural init` anywhere. (_Recommended_)
-* **Manual Git Setup** with an empty, configured Git repository beforehand.
+- **Using Plural OAuth** by running `plural init` anywhere. (_Recommended_)
+- **Manual Git Setup** with an empty, configured Git repository beforehand.
 
 ## Using Plural OAuth
 
-*Supported for: (GitHub, GitLab)*
+_Supported for: (GitHub, GitLab)_
 
 To have Plural set up your Git repository, you'll need to have SSH set up with your version control provider. Then, run:
 
@@ -45,17 +45,17 @@ Enter `Y`, pick your version control provider of choice, and you will receive an
 
 If everything goes well, it should look like this:
 
-![](</assets/basic-setup-and-deployment/gitops-terminal.png>)
+![](/assets/basic-setup-and-deployment/gitops-terminal.png)
 
 ## Manual Git Setup
 
-*Supported for: (GitHub, GitLab, Bitbucket)*
+_Supported for: (GitHub, GitLab, Bitbucket)_
 
 **To set up a Git repository yourself, you'll need a fresh repository with the following requirements:**
 
-* Cloned with SSH
-* Must have an initial commit
-* Must be in sync with the upstream/origin repository
+- Cloned with SSH
+- Must have an initial commit
+- Must be in sync with the upstream/origin repository
 
 **If the requirements aren't fulfilled, you'll hit an error in the `plural init` setup process. To get started, follow these steps:**
 

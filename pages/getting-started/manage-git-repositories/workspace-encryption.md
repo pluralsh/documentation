@@ -25,14 +25,13 @@ cat /path/to/key | plural crypto import
 
 ### Create workspace backup
 
-To create a backup for your local `key`, run: 
-
+To create a backup for your local `key`, run:
 
 ```shell {% showHeader=false %}
 plural crypto backups create
 ```
 
-In the case that you lose your local encryption key, this will allow you to decrypt your repo. 
+In the case that you lose your local encryption key, this will allow you to decrypt your repo.
 
 ### List backups
 
