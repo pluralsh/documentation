@@ -25,7 +25,7 @@ Our console has elevated permissions when running in your Plural Kubernetes clus
 
 When using the CLI or Cloud Shell, Plural will receive the following permissions:
 
-* Create GitHub repositories on your behalf
-* Commit changes to repositories that Plural has created
+- Create GitHub repositories on your behalf
+- Commit changes to repositories that Plural has created
 
 Plural **does not** have access to repositories that have not been created by Plural.&#x20;

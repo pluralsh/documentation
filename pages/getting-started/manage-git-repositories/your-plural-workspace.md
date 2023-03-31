@@ -13,7 +13,7 @@ Plural ensures the state of all installed applications are stored in a git repos
 ┗ 📜workspace.yaml
 ```
 
-***
+---
 
 ## Top level files
 
@@ -29,7 +29,7 @@ Base cloud provider setup for this repository is stored here. On each app instal
 
 This file specifies the filters that drive secret encryption. In general, **do not** manually edit this file.
 
-***
+---
 
 ## Application folders
 
@@ -62,8 +62,8 @@ Our build and deploy files are written in HCL, HashiCorp's proprietary configura
 
 The build/deploy/diff files manage two things:
 
-* the steps needed to build or apply a specific application in Plural
-* change detection between runs
+- the steps needed to build or apply a specific application in Plural
+- change detection between runs
 
 We automatically detect if changes have been made to your Terraform files, which enables us to ignore unneeded Terraform commands that take a long time to execute.
 
@@ -72,7 +72,7 @@ We automatically detect if changes have been made to your Terraform files, which
 `.pluralignore`
 
 This file tells the Plural CLI to ignore certain paths during change detection, is similar to a `.gitignore` file for Git.
- 
+
 `manifest.yaml`
 
 Metadata about the plural application.

@@ -19,9 +19,9 @@ export const getGithubDataServer = async () => {
   const minutes = new Date().getUTCMinutes()
 
   if (
-    githubDataCache.minutes
-    && minutes < githubDataCache.minutes + CACHE_MAX_AGE_MINUTES
-    && githubDataCache.data
+    githubDataCache.minutes &&
+    minutes < githubDataCache.minutes + CACHE_MAX_AGE_MINUTES &&
+    githubDataCache.data
   ) {
     return githubDataCache.data
   }
@@ -41,8 +41,10 @@ export const getGithubDataServer = async () => {
   return githubDataCache.data || undefined
 }
 
-async function fetcher<JSON = any>(input: RequestInfo,
-  init?: RequestInit): Promise<JSON> {
+async function fetcher<JSON = any>(
+  input: RequestInfo,
+  init?: RequestInit
+): Promise<JSON> {
   const res = await fetch(input, init)
 
   return res.json()
@@ -52,48 +54,52 @@ export function isGithubRepoData(obj: unknown): obj is GithubRepoData {
   return !!(obj && typeof obj === 'object' && 'stargazers_count' in obj)
 }
 
-const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(({ theme, $loading }) => ({
-  height: theme.spacing.xlarge,
-  borderRadius: theme.borderRadiuses.medium,
-  width: 'auto',
-  display: 'flex',
-  alignItems: 'center',
-  flexDirection: 'row',
-  '.left, .right': {
-    ...theme.partials.text.buttonSmall,
-    color: theme.colors.text,
-    textDecoration: 'none',
-    fontWeight: '600',
-    height: theme.spacing.xlarge - theme.borderWidths.default * 2,
+const GithubLink = styled(ButtonFillTwo)<{ $loading: boolean }>(
+  ({ theme, $loading }) => ({
+    height: theme.spacing.xlarge,
+    borderRadius: theme.borderRadiuses.medium,
+    width: 'auto',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'row',
-    paddingLeft: theme.spacing.small,
-    paddingRight: theme.spacing.small,
-    gap: theme.spacing.small,
-  },
-  '.right': {
-    backgroundColor: theme.colors['fill-one'],
-    '&:hover ': {
-      backgroundColor: theme.colors['fill-one-hover'],
+    '.left, .right': {
+      ...theme.partials.text.buttonSmall,
+      color: theme.colors.text,
+      textDecoration: 'none',
+      fontWeight: '600',
+      height: theme.spacing.xlarge - theme.borderWidths.default * 2,
+      display: 'flex',
+      alignItems: 'center',
+      flexDirection: 'row',
+      paddingLeft: theme.spacing.small,
+      paddingRight: theme.spacing.small,
+      gap: theme.spacing.small,
     },
-  },
-  '.left': {
-    backgroundColor: theme.colors['fill-two'],
-    '&:hover': {
-      backgroundColor: theme.colors['fill-two-hover'],
+    '.right': {
+      backgroundColor: theme.colors['fill-one'],
+      '&:hover ': {
+        backgroundColor: theme.colors['fill-one-hover'],
+      },
     },
-    ...(!$loading
-      ? {
-        borderRight: theme.borders['fill-two'],
-      }
-      : {}),
-  },
-}))
+    '.left': {
+      backgroundColor: theme.colors['fill-two'],
+      '&:hover': {
+        backgroundColor: theme.colors['fill-two-hover'],
+      },
+      ...(!$loading
+        ? {
+            borderRight: theme.borders['fill-two'],
+          }
+        : {}),
+    },
+  })
+)
 
 export default function GithubStars({ account = 'pluralsh', repo = 'plural' }) {
-  const { data, error } = useSWR(`https://api.github.com/repos/${account}/${repo}`,
-    fetcher)
+  const { data, error } = useSWR(
+    `https://api.github.com/repos/${account}/${repo}`,
+    fetcher
+  )
 
   const loading = error || !isGithubRepoData(data)
 

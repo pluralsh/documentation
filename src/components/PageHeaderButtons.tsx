@@ -1,6 +1,9 @@
 import type { ComponentPropsWithoutRef } from 'react'
 
-import { HamburgerMenuCollapsedIcon as MenuCloseIcon, HamburgerMenuIcon as MenuOpenIcon } from '@pluralsh/design-system'
+import {
+  HamburgerMenuCollapsedIcon as MenuCloseIcon,
+  HamburgerMenuIcon as MenuOpenIcon,
+} from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
 
 import { DocSearch } from '@docsearch/react'
@@ -22,7 +25,9 @@ export function SearchButton() {
           router.push(itemUrl)
         },
       }}
-      getMissingResultsUrl={({ query }) => `https://github.com/pluralsh/documentation/issues/new?title=${query}`}
+      getMissingResultsUrl={({ query }) =>
+        `https://github.com/pluralsh/documentation/issues/new?title=${query}`
+      }
     />
   )
 }
@@ -53,7 +58,7 @@ export const SocialLink = styled(ButtonFillTwo)(({ theme }) => ({
   height: theme.spacing.xlarge,
 }))
 
-export const HamburgerButtonWrap = styled(ButtonFillTwo)(_ => ({
+export const HamburgerButtonWrap = styled(ButtonFillTwo)((_) => ({
   width: 40,
   height: 40,
   alignItems: 'center',

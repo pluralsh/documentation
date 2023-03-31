@@ -10,11 +10,11 @@ This guide goes over the basics to getting started with running Prefect flows on
 
 The Prefect CLI needs API access to Prefect on the Plural cluster. A simple solution is to create a basic auth user in Plural.
 
-1) In the Plural repo open context.yaml
-2) Add a users object to the prefect bundle:
+1. In the Plural repo open context.yaml
+2. Add a users object to the prefect bundle:
 
 prefect:
-   users: { <username>: <password> }
+users: { <username>: <password> }
 
 Plural has a utility to create a password. `plural crypto random will create a random string that can be used as a password.
 
@@ -30,7 +30,7 @@ pip install prefect
 
 Once the installation is complete, you can verify that the CLI is installed by running the following command:
 
-```shell
+````shell
 prefect --version
 ``
 
@@ -60,8 +60,8 @@ if name == "__main__":
 
 
 3) Run the file locally python test_flow.py
-```
+````
 
 If everything is functioning, you should see a flow run on the Plural hosted Prefect Orion UI.
 
-*Guide contributed by @reeves from the Plural Discord.*
+_Guide contributed by @reeves from the Plural Discord._

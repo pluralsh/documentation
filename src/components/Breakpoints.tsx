@@ -1,18 +1,7 @@
-import {
-  createContext,
-  useContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { PropsWithChildren } from 'react'
 
-type Breakpoint =
-  | ''
-  | 'twoColumn'
-  | 'fullHeader'
-  | 'threeColumn'
-  | 'maxWidth'
+type Breakpoint = '' | 'twoColumn' | 'fullHeader' | 'threeColumn' | 'maxWidth'
 
 export const breakpoints: Record<Breakpoint, number> = {
   '': 0,
@@ -22,17 +11,19 @@ export const breakpoints: Record<Breakpoint, number> = {
   maxWidth: 1588,
 }
 
-export const mqs = Object.fromEntries(Object.entries(breakpoints).map(([key, val]) => [
-  key,
-  `@media screen and (min-width: ${val}px)`,
-])) as Record<Breakpoint, string>
+export const mqs = Object.fromEntries(
+  Object.entries(breakpoints).map(([key, val]) => [
+    key,
+    `@media screen and (min-width: ${val}px)`,
+  ])
+) as Record<Breakpoint, string>
 
 export const BreakpointContext = createContext<Breakpoint>('')
 
 export function BreakpointProvider({ children }: PropsWithChildren) {
   const [windowWidth, setWindowWidth] = useState(0)
   const val = useMemo(() => {
-    let curBreakpoint:Breakpoint = ''
+    let curBreakpoint: Breakpoint = ''
 
     for (const [name, width] of Object.entries(breakpoints)) {
       if (windowWidth > width) {
@@ -53,7 +44,11 @@ export function BreakpointProvider({ children }: PropsWithChildren) {
     })
   })
 
-  return <BreakpointContext.Provider value={val}>{children}</BreakpointContext.Provider>
+  return (
+    <BreakpointContext.Provider value={val}>
+      {children}
+    </BreakpointContext.Provider>
+  )
 }
 
 export function BreakpointIsGreaterOrEqual(a: Breakpoint, b: Breakpoint) {

@@ -2,7 +2,7 @@ import { createGlobalStyle } from 'styled-components'
 
 import { mqs } from './Breakpoints'
 
-const fillAvailable = prop => ({
+const fillAvailable = (prop) => ({
   [`${prop} `]: '-webkit-fill-available',
   [`${prop}  `]: '-moz-available',
   [`${prop}   `]: '-fill-available',

@@ -11,9 +11,10 @@ description: >-
 Helm can be tempermental at times, here are some errors that will ocassionally pop up
 
 ### another operation (install/upgrade/rollback) is in progress
+
 `helm upgrade --install --skip-crds --namespace APP APP /path/to/chart 2023/03/23 02:02:15 another operation (install/upgrade/rollback) is in progress`
 
-In this case you need to roll back your helm release to the last successful version.  You can do this by running:
+In this case you need to roll back your helm release to the last successful version. You can do this by running:
 
 `helm history APP --namespace APP` to find the latest safe version, then run:
 `helm rollback APP VSN --namespace APP` to get helm back in a safe state.
@@ -21,28 +22,32 @@ In this case you need to roll back your helm release to the last successful vers
 You should then be able to run either `plural deploy ` or `plural bounce` without issue.
 
 ## Git Errors
+
 ### Could not compare workspace to origin
+
 `Failed to get git information: Could not compare current workspace to origin, do you have an 'origin' remote configured, or does your repo not have an inital commit?`
 
 This error either means you cannot push information to Git, or you do not have a remote branch set up to track your local one. Make sure you've added your SSH keys to Github and verify that your origin is set by running `git remote -v`.
 
 ### Out of date
+
 `Your local workspace is not in sync with remote, either 'git pull' recent changes or 'git push' any missed changes.`
 
 This error can happen if you're ahead of or behind your remote by a few commits, so try `git push` if `git pull` does not resolve the issue.
 
-
 ## Cloud Errors
+
 ### Google Credentials
+
 `You don't have necessary services enabled. Please run: 'gcloud services enable serviceusage.googleapis.com cloudresourcemanager.googleapis.com container.googleapis.com' with an owner of the project to enable or enable them in the GCP console.`
 
 Ensure that you've run the gcloud command in the correct project, and make sure you have owner rights.
 
 ### AWS Credentials
+
 `Failed to get aws account (is your aws cli configured?)`
 
 Ensure your AWS CLI is set up, that you have the correct profile chosen, and that you're authenticated in to AWS. If necessary, run `export AWS_PROFILE=<profile-name>` in the terminal you are running Plural in and auth in with `aws sso login`.
-
 
 ### IAM policy update 403 permission denied
 
@@ -61,16 +66,19 @@ gcloud auth application-default login
 to reset the credential and reauthorize the browser for the correct project.
 
 ## Initialization Errors
+
 ### Workspace Initialization
+
 `Your workspace hasn't been configured, try running 'plural init'`
 `Could not find workspace.yaml file, you might need to run 'plural init'`
 
 Base cloud provider setup for a Plural repository is stored in your workspace.yaml file. This should be created when running `plural init`.
 
 ### Kubconfig missing
+
 `2022/12/19 16:56:24 stat /home/plural/.kube/config: no such file or directory`
 
-This will happen because for whatever reason your kubeconfig is not available locally.  This will occasionally happen if your cloud shell pod was recently recreated, if you're using a new laptop, or if the file was deleted/expired accidentally.  To fix, run:
+This will happen because for whatever reason your kubeconfig is not available locally. This will occasionally happen if your cloud shell pod was recently recreated, if you're using a new laptop, or if the file was deleted/expired accidentally. To fix, run:
 
 ```
 plural wkspace kube-init
@@ -79,12 +87,12 @@ plural wkspace kube-init
 in your repo and we'll generate a new one for you.
 
 ## Deployment Errors
+
 ### Invalid apiVersion for K8s
 
 `error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" error: exec plugin: invalid apiVersion "client.authentication.k8s.io/v1alpha1" exit status 1`
 
 You might see this when attempting to sync crds or run helm commands in a run of `plural deploy`. It's due to legacy versions of the aws cli generating deprecated kubeconfigs, if you upgrade your cli and rerun `plural deploy` it should be able to proceed successfully.
-
 
 ### Failed deploy model
 
@@ -98,6 +106,7 @@ plural bounce bootstrap
 ```
 
 ### Error acquiring state lock
+
 `Terraform acquires a state lock to protect the state from being written by multiple users at the same time. Please resolve the issue above and try again.`
 
 If your deploy is interrupted, it's possible terraform state gets confused. To fix this, you'll need to:
@@ -144,5 +153,3 @@ terraform import path_to_terraform_resource resource_id
 ```
 
 If you devise a better way to recover crashed terraform state, please give us a shout in our [Discord](https://discord.gg/pluralsh). We'd love to automate this better.
-
-

@@ -4,7 +4,7 @@ title: Plural Custom Resources
 
 ## dashboards.yaml
 
-Dashboards are the source of truth for the **Dashboards** section in plural.  They're very similar in structure to grafana dashboards, and you can actually scaffold them from existing grafana dashboards using the `plural from-grafana` command.
+Dashboards are the source of truth for the **Dashboards** section in plural. They're very similar in structure to grafana dashboards, and you can actually scaffold them from existing grafana dashboards using the `plural from-grafana` command.
 
 ```
 apiVersion: platform.plural.sh/v1alpha1
@@ -65,11 +65,9 @@ spec:
     name: Cache hit rate
 ```
 
-
-
 ## runbook.yaml
 
-Runbooks are dynamically generated web interfaces to provide guided experiences for operational interactions within Plural.  A common one that's needed is managing the database for an application, shown here, but they're meant to be adaptable to a wide array of operational use-cases.  The api is also naturally extensible if other datasources are needed.
+Runbooks are dynamically generated web interfaces to provide guided experiences for operational interactions within Plural. A common one that's needed is managing the database for an application, shown here, but they're meant to be adaptable to a wide array of operational use-cases. The api is also naturally extensible if other datasources are needed.
 
 ```
 apiVersion: platform.plural.sh/v1alpha1
@@ -110,7 +108,7 @@ spec:
       format: none
       legend: $persistentvolumeclaim
       query: (kubelet_volume_stats_capacity_bytes{namespace="{{ .Release.Namespace }}", persistentvolumeclaim=~"pgdata-plural-hasura-.*"} - kubelet_volume_stats_available_bytes{namespace="{{ .Release.Namespace }}", persistentvolumeclaim=~"pgdata-plural-hasura-.*"}) / kubelet_volume_stats_capacity_bytes{namespace="{{ .Release.Namespace }}", persistentvolumeclaim=~"pgdata-plural-hasura-.*"}
-  - name: nodes 
+  - name: nodes
     type: nodes # nodes api call
   actions: # actions to perform on form submits
   - name: scale
@@ -118,7 +116,7 @@ spec:
     redirectTo: '/'
     configuration:
       updates: # path update into helm values
-      - path: 
+      - path:
         - hasura
         - postgres
         - resources
@@ -145,8 +143,6 @@ spec:
         valueFrom: volume
 ```
 
-
-
 ## proxies.yaml
 
 These drive the `plural proxy connect` command, and can be used to establish local connections to databases or private web interfaces running in your cluster.
@@ -169,11 +165,9 @@ spec:
     port: 5432
 ```
 
-
-
 ## configurationOverlay.yaml
 
-These drive form fields which can customize applications in the console's **Configuration** section.  At the moment they resolve to a helm values update according to a yaml path.
+These drive form fields which can customize applications in the console's **Configuration** section. At the moment they resolve to a helm values update according to a yaml path.
 
 ```
 {{- define "nocodb.config-overlay" -}}
@@ -187,4 +181,3 @@ spec:
   updates: # a helm path update fo
   - path: ['airflow', 'airflow', 'airflow', 'image', 'repository']
 ```
-

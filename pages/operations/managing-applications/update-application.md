@@ -5,15 +5,14 @@ description: How to change an application's version.
 
 Updates to Plural applications are applied **automatically** based on a per-application setting. This setting supports telling Plural to only upgrade for Stable or Warm releases, as well as disabling automatic upgrades altogether. Here's what each of the settings mean:
 
-* **Latest**: Everytime the Plural team tests and publishes a new release, you receive it.
-* **Warm**: You only receive versions that have passed a set of Plural determined tests.
-* **Stable**: You only receive versions once the Plural team has determined them to be stable, through active production usage.
-* **None**: You never receive automatic updates and have to manually update your application versions or change this setting.
-
+- **Latest**: Everytime the Plural team tests and publishes a new release, you receive it.
+- **Warm**: You only receive versions that have passed a set of Plural determined tests.
+- **Stable**: You only receive versions once the Plural team has determined them to be stable, through active production usage.
+- **None**: You never receive automatic updates and have to manually update your application versions or change this setting.
 
 You can change this setting by clicking the gear in the top-right corner of the application's detail page in the Plural app. You can find your installed applications at [https://app.plural.sh/installed](https://app.plural.sh/installed).
 
-![](</assets/operations/update-application.png>)
+![](/assets/operations/update-application.png)
 
 ## Rollback to a previous version
 
@@ -27,15 +26,15 @@ Click on the gear icon in the top right to enter the Upgrade Policy section and 
 
 Here is an example for a policy that will require approval before runninng `plural deploy` for Airflow.
 
-![](</assets/operations/airflow-approval-policy.png>)
+![](/assets/operations/airflow-approval-policy.png)
 
 Then head back to our [app](https://app.plural.sh), go to the repository page for your installed application, and click the `Packages` section in the sidebar. This will allow you
-to pick Helm charts and Terraform modules that correspond to previously deployed versions of your application. 
+to pick Helm charts and Terraform modules that correspond to previously deployed versions of your application.
 
 Once you click on the Helm chart, the associated application version for the Helm chart is displayed in the `CHART.YAML` section on the right. On the left will be a drop-down menu showing which version you are currently on. Scroll through the
 chart versions to find the application version that you want to rollback to. Then click `Install` in the top right.
 
-*We'll be honest. This process isn't ideal, so we're working on a simple rollback command in our CLI.*
+_We'll be honest. This process isn't ideal, so we're working on a simple rollback command in our CLI._
 
 ## How Plural updates app versions
 

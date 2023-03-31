@@ -91,9 +91,9 @@ export default function MainContent({ Component, title, description }) {
   const { markdoc } = pageProps || {}
   const router = useRouter()
 
-  const isAppCatalogIndex
-    = isAppCatalogRoute(router.asPath)
-    && getBarePathFromPath(router.asPath).endsWith(APP_CATALOG_BASE_URL)
+  const isAppCatalogIndex =
+    isAppCatalogRoute(router.asPath) &&
+    getBarePathFromPath(router.asPath).endsWith(APP_CATALOG_BASE_URL)
 
   return (
     <>

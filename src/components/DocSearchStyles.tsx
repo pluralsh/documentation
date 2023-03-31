@@ -112,7 +112,6 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   '.DocSearch-Input': {
     ...theme.partials.marketingText.body1,
     paddingLeft: theme.spacing.small,
-
   },
   '.DocSearch-Button': {
     borderRadius: theme.borderRadiuses.medium,

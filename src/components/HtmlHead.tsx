@@ -6,7 +6,7 @@ const FAVICON_SIZES = [16, 32, 128, 180, 192]
 function Favicons() {
   return (
     <Head>
-      {FAVICON_SIZES.map(size => (
+      {FAVICON_SIZES.map((size) => (
         <link
           key={size}
           rel="icon"

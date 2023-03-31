@@ -2,14 +2,14 @@ module.exports = {
   parserOptions: {
     project: './tsconfig.json',
   },
-  extends: ['@pluralsh/eslint-config-typescript'],
+  extends: ['@pluralsh/eslint-config-typescript', 'prettier'],
   globals: {
     JSX: true,
   },
   rules: {
     '@typescript-eslint/consistent-type-exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
-    'import-newlines/enforce': 'error',
+    'import-newlines/enforce': 'off',
     'import/order': [
       'error',
       {

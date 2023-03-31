@@ -2,7 +2,7 @@ import styled from 'styled-components'
 
 import { mqs } from './Breakpoints'
 
-export const PageGrid = styled.div(_p => ({
+export const PageGrid = styled.div((_p) => ({
   display: 'flex',
   flexDirection: 'row',
   width: '100%',

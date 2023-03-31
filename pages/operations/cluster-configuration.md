@@ -7,23 +7,23 @@ Plural offers a set of sane defaults to spin up a one-size-fits-all Kubernetes c
 where you'll want to edit the default cluster configuration to better fit your organization's needs. This will
 involve editing the Terraform that we generate for you, which carries risks if administered incorrectly.
 
-In general, all core cluster configuration is set up in a Terraform stack in the `bootstrap` app directory.  You can find the Terraform
+In general, all core cluster configuration is set up in a Terraform stack in the `bootstrap` app directory. You can find the Terraform
 code under `bootstrap/terraform` if you want to dive in yourself, but we can help guide you here as well.
 
 ## Operations on node groups
 
 ### Modifying node types
 
-Modifying node types allows you to optimize the infrastructure backing your applications for cost and/or performance reasons. 
+Modifying node types allows you to optimize the infrastructure backing your applications for cost and/or performance reasons.
 
 {% tabs %}
 {% tab title="AWS" %}
-On AWS, EKS has some interesting limitations around node groups.  Since EBS doesn't support multi-AZ disks, to make node autoscaling work properly for stateful workloads, you need to split node groups across all availability zones deployed in a region.  Some non-stateful workloads don't need this complexity, so we also have a set of multi-AZ groups as well.  To modify either, simply update the `aws-bootstrap` module's `single_az_node_groups` or `multi_az_node_groups` configuration (in `bootstrap/terraform/main.tf`) with:
+On AWS, EKS has some interesting limitations around node groups. Since EBS doesn't support multi-AZ disks, to make node autoscaling work properly for stateful workloads, you need to split node groups across all availability zones deployed in a region. Some non-stateful workloads don't need this complexity, so we also have a set of multi-AZ groups as well. To modify either, simply update the `aws-bootstrap` module's `single_az_node_groups` or `multi_az_node_groups` configuration (in `bootstrap/terraform/main.tf`) with:
 
 ```shell {% showHeader=false %}
 single_az_node_groups = {
     my_node_group = {
-      name = "my-node-group" 
+      name = "my-node-group"
       capacity_type = "ON_DEMAND" # or SPOT
       min_capacity = 3
       desired_capacity = 3
@@ -35,6 +35,7 @@ single_az_node_groups = {
       } # kubernetes labels are good for targeting workloads
 }
 ```
+
 for multi-AZ groups you can do the following:
 
 ```shell {% showHeader=false %}
@@ -56,8 +57,8 @@ multi_az_node_groups = {
     }
 }
 ```
-{% /tab %}
 
+{% /tab %}
 
 {% tab title="GCP" %}
 On GCP, update the `gcp-bootstrap` modules configuration (in `bootstrap/terraform/main.tf`) with:
@@ -99,6 +100,7 @@ node_pools_taints = {
     ],
 }
 ```
+
 {% /tab %}
 
 {% tab title="Azure" %}
@@ -107,7 +109,7 @@ Currently Azure has an annoying chicken-egg issue with the requirement that at l
 With Azure, update the `azure-bootstrap` modules configuration in `bootstrap/terraform/main.tf` with:
 
 ```shell {% showHeader=false %}
-node_groups =  [  
+node_groups =  [
     {
       name                = "ssod1"
       priority            = "Regular"
@@ -130,7 +132,7 @@ node_groups =  [
         "plural.sh/scalingGroup" = "small-sustained-on-demand"
       } # or whatever labels you'd prefer
       node_taints = [
-        # "someTaintName" 
+        # "someTaintName"
       ]
       tags = {
         "ScalingGroup": "small-sustained-on-demand"
@@ -138,14 +140,14 @@ node_groups =  [
     }
 ]
 ```
+
 {% /tab %}
 {% /tabs %}
 
 ## Adding users/roles [AWS]
 
 Because of the limitations set by AWS' IAM authenticator, you'll need to follow this process to add new users or roles to a cluster
-running in AWS. 
-
+running in AWS.
 
 Add these input to `aws-bootstrap` in `bootstrap/terraform/main.tf`
 

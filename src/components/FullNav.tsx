@@ -1,10 +1,5 @@
 import type { Dispatch, SetStateAction } from 'react'
-import {
-  createContext,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react'
+import { createContext, useEffect, useMemo, useState } from 'react'
 
 import {
   ArrowLeftIcon,
@@ -45,28 +40,30 @@ function NavButtonsUnstyled({ desktop: _desktop, children, ...props }) {
   )
 }
 
-export const NavButtons = styled(NavButtonsUnstyled)<{ desktop: boolean }>(({ desktop, theme }) => ({
-  padding: theme.spacing.medium,
-  backgroundColor: theme.colors['fill-one'],
+export const NavButtons = styled(NavButtonsUnstyled)<{ desktop: boolean }>(
+  ({ desktop, theme }) => ({
+    padding: theme.spacing.medium,
+    backgroundColor: theme.colors['fill-one'],
 
-  ...(desktop
-    ? {
-      paddingLeft: 0,
-      marginLeft: -1000,
-    }
-    : {}),
+    ...(desktop
+      ? {
+          paddingLeft: 0,
+          marginLeft: -1000,
+        }
+      : {}),
 
-  '> div': {
-    marginLeft: desktop ? 1000 : 0,
-    display: 'flex',
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    gap: theme.spacing.medium,
-    justifyContent: 'space-between',
-  },
-}))
+    '> div': {
+      marginLeft: desktop ? 1000 : 0,
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      gap: theme.spacing.medium,
+      justifyContent: 'space-between',
+    },
+  })
+)
 
-export const NavWrap = styled.div(_ => ({
+export const NavWrap = styled.div((_) => ({
   position: 'relative',
   flexGrow: 1,
 }))
@@ -107,8 +104,7 @@ export function FullNav({
       }
       if (routeIsAppCatalog) {
         setMenuId('appCatalog')
-      }
-      else {
+      } else {
         setMenuId('docs')
       }
     }
@@ -128,8 +124,7 @@ export function FullNav({
           Docs menu
         </NavButton>
       )
-    }
-    else if (menuId === 'docs') {
+    } else if (menuId === 'docs') {
       leftNavButton = (
         <NavButton
           navDirection="back"
@@ -163,8 +158,10 @@ export function FullNav({
     }
   }
 
-  const navContextValue = useMemo(() => ({ setIsOpen: setIsOpen || setIsOpenStub, isOpen: !!isOpen }),
-    [setIsOpen, isOpen])
+  const navContextValue = useMemo(
+    () => ({ setIsOpen: setIsOpen || setIsOpenStub, isOpen: !!isOpen }),
+    [setIsOpen, isOpen]
+  )
 
   const content = (
     <NavContext.Provider value={navContextValue}>

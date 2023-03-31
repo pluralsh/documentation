@@ -20,8 +20,10 @@ export type NavItem = {
 
 export type NavMenu = NavItem[]
 
-export function findNavItem(test: (arg: NavItem) => boolean,
-  section: NavMenu): NavItem | null {
+export function findNavItem(
+  test: (arg: NavItem) => boolean,
+  section: NavMenu
+): NavItem | null {
   for (const item of section) {
     if (test(item)) {
       return item
@@ -65,10 +67,22 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/manage-git-repositories',
         title: 'Manage Git Repositories',
         sections: [
-          { href: '/getting-started/manage-git-repositories/setting-up-gitops', title: 'Setting Up GitOps' },
-          { href: '/getting-started/manage-git-repositories/your-plural-workspace', title: 'Your Plural Workspace' },
-          { href: '/getting-started/manage-git-repositories/sharing-git-repositories', title: 'Sharing Your Git Repositories' },
-          { href: '/getting-started/manage-git-repositories/workspace-encryption', title: 'Workspace Encryption Guide' },
+          {
+            href: '/getting-started/manage-git-repositories/setting-up-gitops',
+            title: 'Setting Up GitOps',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/your-plural-workspace',
+            title: 'Your Plural Workspace',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
+            title: 'Sharing Your Git Repositories',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/workspace-encryption',
+            title: 'Workspace Encryption Guide',
+          },
         ],
       },
       {
@@ -280,11 +294,7 @@ const rootNavData: NavMenu = deepFreeze([
   // },
 ])
 
-export const getNavData = ({
-  repos,
-}: {
-  repos: Repo[]
-}): NavData => ({
+export const getNavData = ({ repos }: { repos: Repo[] }): NavData => ({
   docs: rootNavData,
   appCatalog: [
     {
@@ -292,7 +302,7 @@ export const getNavData = ({
       href: APP_CATALOG_BASE_URL,
       sections: [
         { title: 'Catalog Overview', href: APP_CATALOG_BASE_URL },
-        ...repos.map(repo => ({
+        ...repos.map((repo) => ({
           title: repo.displayName,
           href: `${APP_CATALOG_BASE_URL}/${repo.name}`,
         })),

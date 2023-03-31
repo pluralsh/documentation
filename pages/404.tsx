@@ -5,12 +5,12 @@ export default function Docs404() {
   return (
     <ContentHeader
       title="Page not found"
-      description={(
+      description={
         <>
           Sorry, this page doesn't appear to exist. Would you like to vist the{' '}
           <Link href="/">home page</Link>?{' '}
         </>
-      )}
+      }
     />
   )
 }

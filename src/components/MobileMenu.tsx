@@ -51,25 +51,27 @@ function PluralMenuContent({
   )
 }
 
-export const PluralMenu = styled(PluralMenuContent)(({ hide = false, theme }) => ({
-  display: hide ? 'none' : 'block',
-  paddingLeft: theme.spacing.xlarge,
-  paddingRight: theme.spacing.xlarge,
-  overflow: 'auto',
-  paddingBottom: `calc(${theme.spacing.xlarge}px + var(--menu-extra-bpad))`,
+export const PluralMenu = styled(PluralMenuContent)(
+  ({ hide = false, theme }) => ({
+    display: hide ? 'none' : 'block',
+    paddingLeft: theme.spacing.xlarge,
+    paddingRight: theme.spacing.xlarge,
+    overflow: 'auto',
+    paddingBottom: `calc(${theme.spacing.xlarge}px + var(--menu-extra-bpad))`,
 
-  [TopHeading]: {
-    paddingLeft: 0,
-  },
-  [MainLink]: {
-    paddingLeft: 0,
-    paddingRight: 0,
-    paddingTop: theme.spacing.xsmall,
-    paddingBottom: theme.spacing.xsmall,
-    marginBottom: theme.spacing.xsmall,
-    width: '100%',
-  },
-}))
+    [TopHeading]: {
+      paddingLeft: 0,
+    },
+    [MainLink]: {
+      paddingLeft: 0,
+      paddingRight: 0,
+      paddingTop: theme.spacing.xsmall,
+      paddingBottom: theme.spacing.xsmall,
+      marginBottom: theme.spacing.xsmall,
+      width: '100%',
+    },
+  })
+)
 
 const Content = styled.div(({ theme }) => ({
   pointerEvents: 'all',

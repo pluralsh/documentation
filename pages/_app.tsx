@@ -21,7 +21,11 @@ import { BreakpointProvider } from '../src/components/Breakpoints'
 import DocSearchStyles from '../src/components/DocSearchStyles'
 import ExternalScripts from '../src/components/ExternalScripts'
 import { FullNav } from '../src/components/FullNav'
-import { GITHUB_DATA_URL, getGithubDataServer, isGithubRepoData } from '../src/components/GithubStars'
+import {
+  GITHUB_DATA_URL,
+  getGithubDataServer,
+  isGithubRepoData,
+} from '../src/components/GithubStars'
 import GlobalStyles from '../src/components/GlobalStyles'
 import { usePosthog } from '../src/components/hooks/usePosthog'
 import HtmlHead from '../src/components/HtmlHead'
@@ -97,9 +101,7 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 
 const Page = styled.div(() => ({}))
 
-function App({
-  Component, repos = [], pageProps = {}, swrConfig,
-}: MyAppProps) {
+function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
   const router = useRouter()
   const markdoc = pageProps?.markdoc
@@ -107,8 +109,8 @@ function App({
   const { metaTitle, metaDescription } = pageProps
 
   const displayTitle = pageProps?.displayTitle || markdoc?.frontmatter?.title
-  const displayDescription
-    = pageProps?.displayDescription || markdoc?.frontmatter?.description
+  const displayDescription =
+    pageProps?.displayDescription || markdoc?.frontmatter?.description
 
   const headProps = {
     title:
@@ -116,8 +118,8 @@ function App({
         ? `${PAGE_TITLE_PREFIX}${displayTitle}${PAGE_TITLE_SUFFIX}`
         : ROOT_TITLE,
     description:
-      metaDescription
-      || (router.pathname === '/'
+      metaDescription ||
+      (router.pathname === '/'
         ? META_DESCRIPTION
         : markdoc?.frontmatter?.description || META_DESCRIPTION),
   }
@@ -179,7 +181,9 @@ function App({
 
 App.getInitialProps = async () => {
   const { data: repos, error: reposError } = await until(() => getRepos())
-  const { data: githubData, error: githubError } = await until(() => getGithubDataServer())
+  const { data: githubData, error: githubError } = await until(() =>
+    getGithubDataServer()
+  )
   const swrFallback = {}
 
   if (isGithubRepoData(githubData)) {

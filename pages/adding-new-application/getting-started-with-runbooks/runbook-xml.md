@@ -89,12 +89,12 @@ end
 
 Most of these attributes, like `box` and `input` are basically grommet React components. However, we would like to call out a few custom attributes that interact with other data from the runbook. They each refer to a datasource and then maybe also a way to access a value at that datasource.
 
-* **`timeseries`**
-  * `datasource`
-* **`valueFrom`**
-  * `datasource`
-  * `doc`
-  * `path`
+- **`timeseries`**
+  - `datasource`
+- **`valueFrom`**
+  - `datasource`
+  - `doc`
+  - `path`
 
 Here is an example Runbook XML template composed of these attributes.
 
@@ -105,27 +105,27 @@ Here is an example Runbook XML template composed of these attributes.
     <box direction='row' align='center' gap='small'>
       <box gap='small' align='center'>
         <timeseries datasource="cpu" label="CPU Usage" />
-        <text size='small'>You should set a reservation to 
+        <text size='small'>You should set a reservation to
           roughly correspond to 30% utilization</text>
       </box>
       <box gap='small' align='center'>
         <timeseries datasource="memory" label="Memory Usage" />
-        <text size='small'>You should set a reservation to 
+        <text size='small'>You should set a reservation to
           roughly correspond to 60% utilization</text>
       </box>
     </box>
     <box gap='small'>
       <box gap='xsmall'>
         <input placeholder="250m" label='CPU Request' name='cpu'>
-          <valueFrom 
-            datasource="statefulset" 
-            doc="kubernetes.raw" 
+          <valueFrom
+            datasource="statefulset"
+            doc="kubernetes.raw"
             path="spec.template.spec.containers[0].resources.requests.cpu" />
         </input>
         <input placeholder="1Gi" label='Memory Request' name='memory'>
-          <valueFrom 
-            datasource="statefulset" 
-            doc="kubernetes.raw" 
+          <valueFrom
+            datasource="statefulset"
+            doc="kubernetes.raw"
             path="spec.template.spec.containers[0].resources.requests.memory" />
         </input>
       </box>
@@ -137,9 +137,9 @@ Here is an example Runbook XML template composed of these attributes.
     </box>
     <box direction='row' gap='small' width='30%' align='center'>
       <input datatype='int' placeholder="1" label='Replicas' name='replicas'>
-        <valueFrom 
-          datasource="statefulset" 
-          doc="kubernetes.raw" 
+        <valueFrom
+          datasource="statefulset"
+          doc="kubernetes.raw"
           path="spec.replicas" />
       </input>
     </box>

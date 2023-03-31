@@ -6,15 +6,15 @@ description: >-
 
 ## Components
 
-Plural deploys open-source third party `applications` into a net new `cluster` in your cloud environment. You can browse a list of all available applications in the Plural [Marketplace](https://www.plural.sh/marketplace). Plural uses [Terraform](https://www.terraform.io/) to create and manage the cluster, and uses an application’s [Helm charts](https://helm.sh/docs/topics/charts/) to deploy and update that application. 
+Plural deploys open-source third party `applications` into a net new `cluster` in your cloud environment. You can browse a list of all available applications in the Plural [Marketplace](https://www.plural.sh/marketplace). Plural uses [Terraform](https://www.terraform.io/) to create and manage the cluster, and uses an application’s [Helm charts](https://helm.sh/docs/topics/charts/) to deploy and update that application.
 
 All the necessary configuration for an individual cluster and its applications is stored in an `installation repository` in your Github or Gitlab account that’s created at the time of deployment.
 
-Each application has a set of `packages` that encompasses the application’s Helm charts, Terraform, and Docker images necessary to install and manage that application. These packages are stored in a `repository`, and a user can install that repository and the set of packages within. 
+Each application has a set of `packages` that encompasses the application’s Helm charts, Terraform, and Docker images necessary to install and manage that application. These packages are stored in a `repository`, and a user can install that repository and the set of packages within.
 
-A `bundle` is a collection of packages that we automate the installation and configuration of that’s specific to a cloud provider. `Stacks` are collections of bundles (i.e., a one-shot installation of a set of applications with a guided configuration experience). 
+A `bundle` is a collection of packages that we automate the installation and configuration of that’s specific to a cloud provider. `Stacks` are collections of bundles (i.e., a one-shot installation of a set of applications with a guided configuration experience).
 
-An `installation` is a specific deployment of an application onto a cluster. As an example, an organization can have multiple installations of the same application on different clusters. 
+An `installation` is a specific deployment of an application onto a cluster. As an example, an organization can have multiple installations of the same application on different clusters.
 
 Plural `OIDC` (OpenID Connect) is a form of [SSO](https://www.onelogin.com/learn/how-single-sign-on-works) that enables Plural users to add an authentication layer on top of any apps they deploy with Plural. Instead of using the application's normal login screen, you are instead prompted to login with Plural. This login is connected to your login at [app.plural.sh](https://app.plural.sh/?__hstc=156969850.241daab91cb4e8e8e57fdd6f2b1266f5.1675451782881.1680120796944.1680203822803.30&__hssc=156969850.1.1680203822803&__hsfp=646352474).
 

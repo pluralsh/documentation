@@ -11,8 +11,7 @@ function setAllowTracking(on?: boolean) {
   if (window && process.env.NEXT_PUBLIC_POSTHOG_API_KEY) {
     if (on) {
       posthog.opt_in_capturing()
-    }
-    else {
+    } else {
       posthog.opt_out_capturing()
     }
   }
@@ -25,8 +24,8 @@ export function usePosthog() {
     if (process.env.NEXT_PUBLIC_POSTHOG_API_KEY) {
       posthog.init(process.env.NEXT_PUBLIC_POSTHOG_API_KEY, {
         api_host:
-          process.env.NEXT_PUBLIC_POSTHOG_API_HOST
-          || 'https://posthog.plural.sh',
+          process.env.NEXT_PUBLIC_POSTHOG_API_HOST ||
+          'https://posthog.plural.sh',
         opt_out_capturing_by_default:
           window.Cookiebot?.consent?.statistics ?? false,
         loaded: () => {

@@ -14,11 +14,12 @@ The Plural CLI and dependencies are available using a package manager for your s
 
 {% tabs %}
 {% tab title="Mac" %}
+
 ```
 brew install pluralsh/plural/plural
 ```
 
-The brew tap will install plural, alongside terraform, helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+The brew tap will install plural, alongside terraform, helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 {% /tab %}
 
 {% tab title="curl" %}
@@ -30,8 +31,6 @@ chmod +x plural.o
 mv plural.o /usr/local/bin/plural
 ```
 
-
-
 replace `plat` and `arch` with any of:
 
 | plat    | arch  |
@@ -41,12 +40,9 @@ replace `plat` and `arch` with any of:
 | windows | amd64 |
 | linux   | amd64 |
 
-
-
-All binaries can also be viewed in the [artifacts tab](https://app.plural.sh/repositories/b4ea03b9-d51f-4934-b030-ff864b720df6/artifacts) of the plural repo on app.plural.sh.  You can also find sha256 checksums for each there to guarantee file integrity
+All binaries can also be viewed in the [artifacts tab](https://app.plural.sh/repositories/b4ea03b9-d51f-4934-b030-ff864b720df6/artifacts) of the plural repo on app.plural.sh. You can also find sha256 checksums for each there to guarantee file integrity
 
 You will still need to ensure helm, terraform and kubectl are properly installed, you can find installers for each here.
-
 
 | Tool      | Installer                                                                                                                  |
 | --------- | -------------------------------------------------------------------------------------------------------------------------- |
@@ -59,11 +55,11 @@ Once these are installed, you'll also need to add the helm push plugin like so:
 ```
 helm plugin install https://github.com/pluralsh/helm-push
 ```
+
 {% /tab %}
 
 {% tab title="Docker" %}
-We offer a docker image with the plural cli installed along with all cli dependencies: Terraform, Helm, kubectl, and all the major cloud CLIs: `gcr.io/pluralsh/plural-cli:0.1.1-cloud`.  We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session.  The best strategy is probably to mount the config dir of the cloud provider you're using, like `\~/.aws`, in the `docker run` command:
-
+We offer a docker image with the plural cli installed along with all cli dependencies: Terraform, Helm, kubectl, and all the major cloud CLIs: `gcr.io/pluralsh/plural-cli:0.1.1-cloud`. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like `\~/.aws`, in the `docker run` command:
 
 ```
 docker run -it --volume $HOME/.aws:/root/aws \
@@ -71,19 +67,19 @@ docker run -it --volume $HOME/.aws:/root/aws \
                --volume $HOME/.ssh:/root/.ssh \
     gcr.io/pluralsh/plural-cli:0.1.1-cloud zsh
 ```
+
 {% /tab %}
 
 {% tab title="EC2 AMI" %}
-We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs, Terraform, Helm and kubectl for those interested in creating a remote environment.  A registry of the AMIs can be viewed [here](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json):
-
+We have EC2 AMI's with Plural CLI installed, along with all cloud provider CLIs, Terraform, Helm and kubectl for those interested in creating a remote environment. A registry of the AMIs can be viewed [here](https://github.com/pluralsh/plural-cli/blob/master/packer/manifest.json):
 
 If there's interest in images for GCP and Azure, please to give us a shout in our discord or feel free to open a GitHub issue.
 
-[This doc](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/) gives more details on launching AMIs if you are unfamiliar.  You'll want to select "Public images" within the AMI search bar and you can use the AMI id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`.  Be sure to choose the one for the appropriate region.
+[This doc](https://aws.amazon.com/premiumsupport/knowledge-center/launch-instance-custom-ami/) gives more details on launching AMIs if you are unfamiliar. You'll want to select "Public images" within the AMI search bar and you can use the AMI id embedded in the `artifact_id` in our manifests, eg `ami-0249247d5fc865089`. Be sure to choose the one for the appropriate region.
 {% /tab %}
 {% /tabs %}
 
-The brew tap will install Plural, alongside Terraform, Helm and kubectl for you.  If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
+The brew tap will install Plural, alongside Terraform, Helm and kubectl for you. If you've already installed any of those dependencies, you can add `--without-helm`, `--without-terraform`, or `--without-kubectl`
 
 ### 3. Alice creates a [Plural service account](/operations/auth-access-control/identity-and-installations/service-accounts)
 
@@ -93,13 +89,13 @@ Alice follows the instructions [here](/operations/auth-access-control/identity-a
 
 Alice can find which bundles they have installed at [https://app.plural.sh/explore/installed](https://app.plural.sh/explore/installed)
 
-![](</assets/advanced-topics/installed-bundles.png>)
+![](/assets/advanced-topics/installed-bundles.png)
 
 ### 5. Alice changes the owner of the Plural installation repo
 
 Alice goes to `workspace.yaml` in the root of their installation repo, and changes the owner to `ml-infra@plural.sh`. In the example below, owner is set to `nick@plural.sh` on line 12.
 
-![](</assets/advanced-topics/code-block.png>)
+![](/assets/advanced-topics/code-block.png)
 
 ### 6. Alice initializes Plural as service account
 
@@ -122,7 +118,7 @@ plural bundle install <repo> <bundle>
 To recall which applications they have installed, Alice should refer to the information they copied in step 4.
 
 {% callout severity="info" %}
-Service accounts need to be explicitly granted install permissions in your account before you can successfully run the bundle install command.  Be sure to create a role [here](https://app.plural.sh/account/roles) with install permissions and add the service account to it to grant them access.
+Service accounts need to be explicitly granted install permissions in your account before you can successfully run the bundle install command. Be sure to create a role [here](https://app.plural.sh/account/roles) with install permissions and add the service account to it to grant them access.
 {% /callout %}
 
 ### 8. Alice builds and deploys the Plural installation repo under the new user
@@ -142,14 +138,14 @@ git push
 ```
 
 {% callout severity="info" %}
-If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes.  This is just a matter of finding the relevant pods in the console and clicking the trash icon.  For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
+If a user has oidc configured for an app, occasionally you'll need to manually delete the pods associated with their webservers as our oidc proxy does not respect config changes. This is just a matter of finding the relevant pods in the console and clicking the trash icon. For airbyte as an example, you'd want to delete all the pods in deployment/airbyte-webapp.
 
 If you'd like help with this process feel free to reach out to us on discord as well!
 {% /callout %}
 
 ### 9. Alice, Bob, and Cory set up cryptographic keys for sharing
 
-The next step is sharing the repository's cryptography layer with any users you expect to need to use the repo locally.  If you want to learn more about how Plural encrypts your repository's state, we'd definitely recommend you read our docs [here](/operations/security/secret-management)
+The next step is sharing the repository's cryptography layer with any users you expect to need to use the repo locally. If you want to learn more about how Plural encrypts your repository's state, we'd definitely recommend you read our docs [here](/operations/security/secret-management)
 
 Alice, Bob, and Cory should each run:
 

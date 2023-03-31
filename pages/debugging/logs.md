@@ -2,7 +2,7 @@
 title: Logs
 ---
 
-Application aware log tails can be baked into any Plural application to prevent a user from having to dig through the Kubernetes API to find the specific Pod they should tail.  They can be discovered and watched using:
+Application aware log tails can be baked into any Plural application to prevent a user from having to dig through the Kubernetes API to find the specific Pod they should tail. They can be discovered and watched using:
 
 ```shell {% showHeader=false %}
 plural logs list <app>
