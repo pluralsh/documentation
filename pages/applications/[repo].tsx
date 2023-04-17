@@ -7,25 +7,25 @@ import type {
   InferGetStaticPropsType,
 } from 'next'
 
-import client from '../../src/apollo-client'
-import MarkdocComponent from '../../src/components/MarkdocContent'
-import { CodeStyled } from '../../src/components/md/Fence'
-import { Heading } from '../../src/components/md/Heading'
-import { List, ListItem } from '../../src/components/md/List'
-import Paragraph from '../../src/components/md/Paragraph'
-import { getAppMetaDescription } from '../../src/consts'
-import { APP_CATALOG_BASE_URL } from '../../src/consts/routes'
-import { getRepos } from '../../src/data/getRepos'
-import { RecipesDocument } from '../../src/generated/graphql'
-import { readMdFileCached } from '../../src/markdoc/mdParser'
-import { providerToProviderName } from '../../src/utils/text'
+import client from '@src/apollo-client'
+import MarkdocComponent from '@src/components/MarkdocContent'
+import { CodeStyled } from '@src/components/md/Fence'
+import { Heading } from '@src/components/md/Heading'
+import { List, ListItem } from '@src/components/md/List'
+import Paragraph from '@src/components/md/Paragraph'
+import { getAppMetaDescription } from '@src/consts'
+import { APP_CATALOG_BASE_URL } from '@src/consts/routes'
+import { getRepos } from '@src/data/getRepos'
+import { RecipesDocument } from '@src/generated/graphql'
+import { readMdFileCached } from '@src/markdoc/mdParser'
+import { providerToProviderName } from '@src/utils/text'
 
+import type { MarkdocHeading, MyPageProps } from '../_app'
 import type {
   RecipeFragment,
   RecipesQuery,
   RecipesQueryVariables,
-} from '../../src/generated/graphql'
-import type { MarkdocHeading, MyPageProps } from '../_app'
+} from '@src/generated/graphql'
 
 function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
   if (node) {

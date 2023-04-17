@@ -1,5 +1,5 @@
-import { ContentHeader } from '../src/components/MainContent'
-import Link from '../src/components/md/Link'
+import { ContentHeader } from '@src/components/MainContent'
+import Link from '@src/components/md/Link'
 
 export default function Docs404() {
   return (
