@@ -49,6 +49,10 @@ Ensure that you've run the gcloud command in the correct project, and make sure 
 
 Ensure your AWS CLI is set up, that you have the correct profile chosen, and that you're authenticated in to AWS. If necessary, run `export AWS_PROFILE=<profile-name>` in the terminal you are running Plural in and auth in with `aws sso login`.
 
+`api error AuthorizationHeaderMalformed: The authorization header is malformed; a non-empty Access Key (AKID) must be provided in the credential.`
+
+Make sure you're authenticated in to AWS with `aws sso login`.
+
 ### IAM policy update 403 permission denied
 
 You will see permission errors if your Cloud account does not have permissions to create the IAM roles needed by Plural. Apply the correct permissions to the user account that Plural is deploying as.

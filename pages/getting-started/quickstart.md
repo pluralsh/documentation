@@ -104,7 +104,16 @@ This process will generate a `workspace.yaml` file at the root of your repo that
 
 To view the applications you can install on Plural, head to [this link](https://app.plural.sh/explore/public).
 
-Alternatively, you can run `plural repos list` on the CLI or Cloud Shell.
+Once you've selected your applications, you can install Plural bundles using our interactive GUI. To start the GUI, run:
+
+```plural install```
+
+You should see a window pop up like the below:
+![](/assets/cli-quickstart/local-installer.png)
+
+You can then follow a guided flow to select and configure your applications.
+
+Alternatively, you can run `plural repos list` on the CLI or Cloud Shell and find the bundle name specific to your cloud provider.
 
 Run `plural bundle list <app-name>` to find installation commands and information about each application available for install. For example, to list the bundle information for the Plural console, a powerful Kubernetes control plane:
 
@@ -152,6 +161,12 @@ plural bundle install console console-azure
 
 {% /tab %}
 {% /tabs %}
+
+As of CLI version 0.6.19, the bundle name can be inferred from primary bundles, optionally shortening the command to:
+
+```
+plural bundle install console
+```
 
 After running the install command, you will be asked a few questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to access Plural-deployed applications. This will add an extra layer of security for applications without built-in authentication.
 
