@@ -3511,6 +3511,26 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@markdoc/markdoc@npm:0.2.2":
+  version: 0.2.2
+  resolution: "@markdoc/markdoc@npm:0.2.2"
+  dependencies:
+    "@types/markdown-it": 12.2.3
+  peerDependencies:
+    "@types/react": "*"
+    react: "*"
+  dependenciesMeta:
+    "@types/markdown-it":
+      optional: true
+  peerDependenciesMeta:
+    "@types/react":
+      optional: true
+    react:
+      optional: true
+  checksum: 03d5585567b5f82882580c130a90a0210c032ce8b02beb0368576782442414a22eeeb3a98edde32c2981be470d5d733929344e1357762b3c2c44a245700cb180
+  languageName: node
+  linkType: hard
+
 "@markdoc/next.js@npm:0.2.1":
   version: 0.2.1
   resolution: "@markdoc/next.js@npm:0.2.1"
@@ -3684,7 +3704,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@open-draft/until@npm:^2.0.0":
+"@open-draft/until@npm:2.0.0":
   version: 2.0.0
   resolution: "@open-draft/until@npm:2.0.0"
   checksum: 08ad8fec2a061034184ee9bb238fde2b4b62040b213198b53e686a06b626bd9331f5638eff3329c71ec38ae35e86298903573da10af92625d6e368802f1ebe3e
@@ -3751,11 +3771,13 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@pluralsh/design-system@npm:1.324.3":
-  version: 1.324.3
-  resolution: "@pluralsh/design-system@npm:1.324.3"
+"@pluralsh/design-system@file:.yalc/@pluralsh/design-system::locator=root-workspace-0b6124%40workspace%3A.":
+  version: 0.1.0
+  resolution: "@pluralsh/design-system@file:.yalc/@pluralsh/design-system#.yalc/@pluralsh/design-system::hash=73cf6d&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@floating-ui/react-dom-interactions": 0.13.3
+    "@loomhq/loom-embed": 1.5.0
+    "@markdoc/markdoc": 0.2.2
     "@monaco-editor/react": 4.4.6
     "@react-aria/button": 3.7.0
     "@react-aria/checkbox": 3.8.0
@@ -3792,6 +3814,7 @@ __metadata:
     moment: 2.29.4
     prop-types: 15.8.1
     react-animate-height: 3.1.0
+    react-embed: 3.6.0
     react-markdown: 8.0.5
     react-merge-refs: 2.0.1
     react-spring: 9.6.1
@@ -3810,7 +3833,7 @@ __metadata:
     react-dom: ">=16.0.0"
     react-transition-group: ">=4.4.2"
     styled-components: ">=5.3.5"
-  checksum: 01a20676b346e728995aac67f4a782348578beb00c800a2d4d754d23c2aa1be8e76557ace2c18fbf45fdf064d84f61138f9990217cfd6f556996199b8f3903f2
+  checksum: d90ad985b8d91a2e4c4e118a18b30dd92bd9a78521828c43466b1acb8658bc6b3b5c183e3ec4918009625f338393f3773f3fe216d21233965b594ccee42068e1
   languageName: node
   linkType: hard
 
@@ -12196,15 +12219,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"qs@npm:6.11.1":
-  version: 6.11.1
-  resolution: "qs@npm:6.11.1"
-  dependencies:
-    side-channel: ^1.0.4
-  checksum: 82ee78ef12a16f3372fae5b64f76f8aedecb000feea882bbff1af146c147f6eb66b08f9c3f34d7e076f28563586956318b9b2ca41141846cdd6d5ad6f241d52f
-  languageName: node
-  linkType: hard
-
 "query-string@npm:^5.1.1":
   version: 5.1.1
   resolution: "query-string@npm:5.1.1"
@@ -12968,8 +12982,8 @@ __metadata:
     "@loomhq/loom-embed": 1.5.0
     "@markdoc/markdoc": 0.2.1
     "@markdoc/next.js": 0.2.1
-    "@open-draft/until": ^2.0.0
-    "@pluralsh/design-system": 1.324.3
+    "@open-draft/until": 2.0.0
+    "@pluralsh/design-system": "file:.yalc/@pluralsh/design-system"
     "@pluralsh/eslint-config-typescript": 2.5.40
     "@pluralsh/stylelint-config": 1.1.3
     "@react-aria/ssr": 3.6.0
@@ -13011,7 +13025,6 @@ __metadata:
     npm-run-all: 4.1.5
     posthog-js: 1.53.3
     prettier: 2.8.7
-    qs: 6.11.1
     raw-loader: 4.0.2
     react: 18.2.0
     react-dom: 18.2.0

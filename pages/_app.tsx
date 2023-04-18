@@ -3,15 +3,19 @@ import { useMemo } from 'react'
 
 import {
   FillLevelProvider,
+  type NavigationContextLinkProps,
+  NavigationContextProvider,
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
 import type { AppProps } from 'next/app'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 import { until } from '@open-draft/until'
+import { MarkdocContextProvider } from '@pluralsh/design-system/dist/markdoc'
 import { SSRProvider } from '@react-aria/ssr'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
@@ -101,6 +105,29 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 
 const Page = styled.div(() => ({}))
 
+const useNavigate = () => {
+  const router = useRouter()
+
+  return (url) => {
+    router.push(url)
+  }
+}
+
+const usePathname = () => {
+  const router = useRouter()
+
+  return router.asPath || router.pathname
+}
+
+function Link({ href, ...props }: NavigationContextLinkProps) {
+  return (
+    <NextLink
+      href={href ?? ''}
+      {...props}
+    />
+  )
+}
+
 function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
   const router = useRouter()
@@ -160,22 +187,28 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
     </>
   )
 
+  const navContextVal = useMemo(() => ({ useNavigate, usePathname, Link }), [])
+
   return (
-    <SWRConfig value={swrConfig}>
-      <ReposProvider value={repos}>
-        <NavDataProvider value={navData}>
-          <SSRProvider>
-            <BreakpointProvider>
-              <ThemeProvider theme={honorableTheme}>
-                <StyledThemeProvider theme={docsStyledTheme}>
-                  <FillLevelProvider value={0}>{app}</FillLevelProvider>
-                </StyledThemeProvider>
-              </ThemeProvider>
-            </BreakpointProvider>
-          </SSRProvider>
-        </NavDataProvider>
-      </ReposProvider>
-    </SWRConfig>
+    <MarkdocContextProvider value={{ variant: 'docs' }}>
+      <NavigationContextProvider value={navContextVal}>
+        <SWRConfig value={swrConfig}>
+          <ReposProvider value={repos}>
+            <NavDataProvider value={navData}>
+              <SSRProvider>
+                <BreakpointProvider>
+                  <ThemeProvider theme={honorableTheme}>
+                    <StyledThemeProvider theme={docsStyledTheme}>
+                      <FillLevelProvider value={0}>{app}</FillLevelProvider>
+                    </StyledThemeProvider>
+                  </ThemeProvider>
+                </BreakpointProvider>
+              </SSRProvider>
+            </NavDataProvider>
+          </ReposProvider>
+        </SWRConfig>
+      </NavigationContextProvider>
+    </MarkdocContextProvider>
   )
 }
 

@@ -13,7 +13,12 @@ module.exports = {
   },
   rules: {
     '@typescript-eslint/consistent-type-exports': 'error',
-    '@typescript-eslint/consistent-type-imports': 'error',
+    '@typescript-eslint/consistent-type-imports': [
+      'error',
+      { fixStyle: 'inline-type-imports' },
+    ],
+    'no-duplicate-imports': 'off',
+    'import/no-duplicates': ['error', { 'prefer-inline': true }],
     'import-newlines/enforce': 'off',
     'import/order': [
       'error',
