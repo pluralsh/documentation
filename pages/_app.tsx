@@ -1,10 +1,10 @@
-import type { ComponentProps } from 'react'
-import { useMemo } from 'react'
+import { type ComponentProps, forwardRef, useMemo } from 'react'
 
 import {
   FillLevelProvider,
   type NavigationContextLinkProps,
   NavigationContextProvider,
+  type NavigationContextValue,
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
@@ -116,17 +116,18 @@ const useNavigate = () => {
 const usePathname = () => {
   const router = useRouter()
 
-  return router.asPath || router.pathname
+  return router.basePath + (router.asPath.split('?')[0] || router.pathname)
 }
 
-function Link({ href, ...props }: NavigationContextLinkProps) {
-  return (
+const Link = forwardRef(
+  ({ href, ...props }: NavigationContextLinkProps, ref) => (
     <NextLink
+      ref={ref}
       href={href ?? ''}
       {...props}
     />
   )
-}
+)
 
 function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
@@ -187,7 +188,10 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
     </>
   )
 
-  const navContextVal = useMemo(() => ({ useNavigate, usePathname, Link }), [])
+  const navContextVal = useMemo<NavigationContextValue>(
+    () => ({ useNavigate, usePathname, Link }),
+    []
+  )
 
   return (
     <MarkdocContextProvider value={{ variant: 'docs' }}>
