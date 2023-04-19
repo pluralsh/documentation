@@ -63,7 +63,7 @@ export type MyPageProps = MarkdocNextJsPageProps & {
   metaTitle?: string
   displayDescription?: string
   metaDescription?: string
-  repo?: Repo
+  repo?: Repo | null
 }
 
 type MyAppProps = AppProps<MyPageProps | undefined> & {
@@ -194,12 +194,12 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   )
 
   return (
-    <MarkdocContextProvider value={{ variant: 'docs' }}>
-      <NavigationContextProvider value={navContextVal}>
-        <SWRConfig value={swrConfig}>
-          <ReposProvider value={repos}>
-            <NavDataProvider value={navData}>
-              <SSRProvider>
+    <SSRProvider>
+      <MarkdocContextProvider value={{ variant: 'docs' }}>
+        <NavigationContextProvider value={navContextVal}>
+          <SWRConfig value={swrConfig}>
+            <ReposProvider value={repos}>
+              <NavDataProvider value={navData}>
                 <BreakpointProvider>
                   <ThemeProvider theme={honorableTheme}>
                     <StyledThemeProvider theme={docsStyledTheme}>
@@ -207,12 +207,12 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
                     </StyledThemeProvider>
                   </ThemeProvider>
                 </BreakpointProvider>
-              </SSRProvider>
-            </NavDataProvider>
-          </ReposProvider>
-        </SWRConfig>
-      </NavigationContextProvider>
-    </MarkdocContextProvider>
+              </NavDataProvider>
+            </ReposProvider>
+          </SWRConfig>
+        </NavigationContextProvider>
+      </MarkdocContextProvider>
+    </SSRProvider>
   )
 }
 

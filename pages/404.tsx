@@ -1,5 +1,6 @@
+import Link from '@pluralsh/design-system/dist/markdoc/components/Link'
+
 import { ContentHeader } from '@src/components/MainContent'
-import Link from '@src/components/md/Link'
 
 export default function Docs404() {
   return (

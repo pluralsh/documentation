@@ -7,12 +7,16 @@ import type {
   InferGetStaticPropsType,
 } from 'next'
 
+import {
+  FenceInner,
+  Heading,
+  List,
+  ListItem,
+  Paragraph,
+} from '@pluralsh/design-system/dist/markdoc/components'
+
 import client from '@src/apollo-client'
 import MarkdocComponent from '@src/components/MarkdocContent'
-import { CodeStyled } from '@src/components/md/Fence'
-import { Heading } from '@src/components/md/Heading'
-import { List, ListItem } from '@src/components/md/List'
-import Paragraph from '@src/components/md/Paragraph'
 import { getAppMetaDescription } from '@src/consts'
 import { APP_CATALOG_BASE_URL } from '@src/consts/routes'
 import { getRepos } from '@src/data/getRepos'
@@ -101,7 +105,7 @@ export default function Repo({
       <Paragraph>
         We currently support {repo?.displayName} for the following providers:
       </Paragraph>
-      {tabs && tabs.length > 0 && <CodeStyled tabs={tabs} />}
+      {tabs && tabs.length > 0 && <FenceInner tabs={tabs} />}
       {!mdHasConfig && recipeSections && recipeHasConfig && (
         <>
           <Heading level={2}>Setup Configuration</Heading>
@@ -187,7 +191,7 @@ export const getStaticProps: GetStaticProps<Partial<MyPageProps>> = async (
             ...thisRepo,
             recipes: recipes || [],
           }
-        : undefined,
+        : null,
     },
     revalidate: 600,
   }

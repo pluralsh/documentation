@@ -3796,7 +3796,7 @@ __metadata:
 
 "@pluralsh/design-system@file:.yalc/@pluralsh/design-system::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.1.0
-  resolution: "@pluralsh/design-system@file:.yalc/@pluralsh/design-system#.yalc/@pluralsh/design-system::hash=2f3274&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@pluralsh/design-system@file:.yalc/@pluralsh/design-system#.yalc/@pluralsh/design-system::hash=898799&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@floating-ui/react-dom-interactions": 0.13.3
     "@loomhq/loom-embed": 1.5.0
@@ -3856,7 +3856,7 @@ __metadata:
     react-dom: ">=16.0.0"
     react-transition-group: ">=4.4.2"
     styled-components: ">=5.3.5"
-  checksum: 2d02d8da3d3211a81552e4eb4ea0ae74a5310b45dbb6893f92673ba7c586c16e94eb7a1e7e8599ee97d9c4acaef6ae3d7cacbd703dd65fd0f68520579e63165e
+  checksum: 274b2717eff156be72ab92a179efdf5af396c31cf82bcdb86281939e52b69c8c998d9c814f0b36beb05be7275e498b9665d82b74dcd15bfd81a0e3595bbd48b9
   languageName: node
   linkType: hard
 
