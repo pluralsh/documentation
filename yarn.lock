@@ -3796,7 +3796,7 @@ __metadata:
 
 "@pluralsh/design-system@file:.yalc/@pluralsh/design-system::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.1.0
-  resolution: "@pluralsh/design-system@file:.yalc/@pluralsh/design-system#.yalc/@pluralsh/design-system::hash=898799&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@pluralsh/design-system@file:.yalc/@pluralsh/design-system#.yalc/@pluralsh/design-system::hash=a81d51&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@floating-ui/react-dom-interactions": 0.13.3
     "@loomhq/loom-embed": 1.5.0
@@ -3833,7 +3833,7 @@ __metadata:
     grommet-icons: 4.9.0
     highlight.js: 11.7.0
     honorable-recipe-mapper: 0.2.0
-    immer: 10.0.1
+    immer: 9.0.21
     moment: 2.29.4
     prop-types: 15.8.1
     react-animate-height: 3.1.0
@@ -3856,7 +3856,7 @@ __metadata:
     react-dom: ">=16.0.0"
     react-transition-group: ">=4.4.2"
     styled-components: ">=5.3.5"
-  checksum: 274b2717eff156be72ab92a179efdf5af396c31cf82bcdb86281939e52b69c8c998d9c814f0b36beb05be7275e498b9665d82b74dcd15bfd81a0e3595bbd48b9
+  checksum: b747715c44b3854ce59fa4151523e93a91fee95c2083687ca27b9f96469a7487ff844b983437e1ce8523d57203030e97e5443be6fb099755b80a333cad6f7928
   languageName: node
   linkType: hard
 
@@ -9377,13 +9377,6 @@ __metadata:
   version: 5.2.4
   resolution: "ignore@npm:5.2.4"
   checksum: 3d4c309c6006e2621659311783eaea7ebcd41fe4ca1d78c91c473157ad6666a57a2df790fe0d07a12300d9aac2888204d7be8d59f9aaf665b1c7fcdb432517ef
-  languageName: node
-  linkType: hard
-
-"immer@npm:10.0.1":
-  version: 10.0.1
-  resolution: "immer@npm:10.0.1"
-  checksum: 24ab640e9d928385047f6f31bc77966117087236faf1a1f52b6b9a0159f78d543f648fecbf04d5e8c782a6f6cddd6eeb9e09c3b616a104632e701c7a22735654
   languageName: node
   linkType: hard
 
