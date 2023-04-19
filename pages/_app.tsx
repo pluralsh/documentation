@@ -116,7 +116,7 @@ const useNavigate = () => {
 const usePathname = () => {
   const router = useRouter()
 
-  return router.basePath + (router.asPath.split('?')[0] || router.pathname)
+  return router.basePath + (router.asPath.split(/[?#]/)[0] || router.pathname)
 }
 
 const Link = forwardRef(
