@@ -24,6 +24,6 @@
       "@pages/*": ["pages/*"]
     }
   },
-  "include": ["next-env.d.ts", "pages/**/*", "src/**/*"],
+  "include": ["next-env.d.ts", "pages/**/*", "src/**/*", "tailwind.config.js"],
   "exclude": ["node_modules"]
 }

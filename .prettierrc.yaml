@@ -8,3 +8,5 @@ overrides:
   - files: '*.mdpart'
     options:
       parser: 'markdown'
+plugins:
+  - 'prettier-plugin-tailwindcss'
