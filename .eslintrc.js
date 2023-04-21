@@ -60,7 +60,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'next.config.js'],
+      files: ['.eslintrc.js', 'next.config.js', 'tailwind.config.ts'],
       parserOptions: {
         project: null,
       },
