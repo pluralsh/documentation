@@ -64,20 +64,6 @@ Before you proceed, make sure that your cloud provider CLI is properly configure
 {% /callout %}
 {% /tab %}
 
-{% tab title="Docker" %}
-We offer a docker image with the plural CLI installed along with all CLI dependencies: terraform, helm, kubectl, and all the major cloud CLI's: `gcr.io/pluralsh/plural-cli-cloud:0.5.20`. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
-
-```
-docker run -it --volume $HOME/.aws:/home/plural/aws \
-               --volume $HOME/.plural:/home/plural/.plural \
-               --volume $HOME/.ssh:/home/plural/.ssh \
-               --volume $HOME/PATH_TO_INSTALLATION_REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
-    gcr.io/pluralsh/plural-cli-cloud:0.6.8 zsh
-```
-
-Once you're in the container's zsh, you'll want to clone the repo you'll use for your installations state there, or alternatively you can clone it outside your container and mount another volume pointing to it.
-{% /tab %}
-
 {% /tabs %}
 
 ## Create your Plural Repo
