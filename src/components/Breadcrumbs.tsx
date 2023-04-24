@@ -39,7 +39,6 @@ export default function Breadcrumbs() {
   if (crumbs.length <= 1) {
     return null
   }
-  console.log('crumbs', crumbs)
 
   return <BreadcrumbsComponent breadcrumbs={crumbs ?? []} />
 }
