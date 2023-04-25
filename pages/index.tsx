@@ -19,6 +19,7 @@ import {
 } from '@pluralsh/design-system'
 import Link, { type LinkProps } from 'next/link'
 
+import { Heading as MarkdocHeading } from '@pluralsh/design-system/dist/markdoc/components'
 import styled, { useTheme } from 'styled-components'
 
 import { mqs } from '@src/components/Breakpoints'
@@ -31,7 +32,7 @@ const Hero = styled.div(({ theme }) => ({
   div: {},
   h1: {
     margin: 0,
-    ...theme.partials.marketingText.title2,
+    marginBottom: theme.spacing.xsmall,
   },
   '.contentWrap': {
     width: '100%',
@@ -41,16 +42,15 @@ const Hero = styled.div(({ theme }) => ({
   },
   '.content': {
     padding: `${theme.spacing.xlarge}px ${theme.spacing.large}px `,
-    gap: theme.spacing.xsmall,
     p: {
       ...theme.partials.marketingText.body1,
       color: theme.colors['text-light'],
       margin: 0,
     },
   },
-
-  '.bgImgLg': { display: 'none' },
-
+  '.bgImgLg': {
+    display: 'none',
+  },
   [mqs.md]: {
     display: 'flex',
     '& > *': { flexShrink: 0 },
@@ -107,8 +107,11 @@ const CardLink = styled(CardLinkUnstyled)(({ theme }) => ({
   columnGap: theme.spacing.large,
   padding: theme.spacing.large,
   alignItems: 'flex-start',
-  backgroundColor: theme.colors['fill-two'],
+  backgroundColor: theme.colors['fill-one'],
   borderRadius: theme.borderRadiuses.large,
+  '&:hover': {
+    backgroundColor: theme.colors['fill-one-hover'],
+  },
   '.icon': {
     flexShrink: 0,
   },
@@ -135,20 +138,15 @@ const CardLinkGrid = styled.div(({ theme }) => ({
   marginTop: theme.spacing.large,
 }))
 
-const H2 = styled.h2(({ theme }) => ({
-  margin: 0,
-  ...theme.partials.marketingText.title1,
+const Heading = styled(MarkdocHeading).attrs(() => ({
+  level: 2,
+}))((_) => ({
+  marginBottom: 0,
 }))
 
 const Body2 = styled.p(({ theme }) => ({
   ...theme.partials.marketingText.body2,
   margin: 0,
-}))
-
-const Sections = styled.div(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing.xxlarge,
 }))
 
 const Section = styled.section((_) => ({
@@ -164,11 +162,13 @@ const SectionHeading = styled.div(({ theme }) => ({
 
 function Index() {
   return (
-    <Sections>
+    <>
       <Hero id={tableOfContents[0].id}>
         <div className="contentWrap">
           <div className="content">
-            <h1>{tableOfContents[0].title}</h1>
+            <MarkdocHeading level={1}>
+              {tableOfContents[0].title}
+            </MarkdocHeading>
             <p>
               Get started, master your operations, and troubleshoot your
               problems.
@@ -183,7 +183,9 @@ function Index() {
       </Hero>
       <Section>
         <SectionHeading>
-          <H2 id={tableOfContents[1].id}>{tableOfContents[1].title}</H2>
+          <Heading id={tableOfContents[1].id}>
+            {tableOfContents[1].title}
+          </Heading>
           <Body2>Find what’s most relevant to you</Body2>
         </SectionHeading>
         <CardLinkGrid>
@@ -233,7 +235,9 @@ function Index() {
       </Section>
       <Section>
         <SectionHeading>
-          <H2 id={tableOfContents[2].id}>{tableOfContents[2].title}</H2>
+          <Heading id={tableOfContents[2].id}>
+            {tableOfContents[2].title}
+          </Heading>
           <Body2>
             Join the group of Plural users and contributors that are helping
             shape the future of DevOps.
@@ -260,7 +264,7 @@ function Index() {
           </CardLink>
         </CardLinkGrid>
       </Section>
-    </Sections>
+    </>
   )
 }
 
