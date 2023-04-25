@@ -9,3 +9,4 @@ title: Component usage
 - [Tabs](tabs)
 - [Code Fence](codefence)
 - [Code Tabs](codetabs)
+- [Global Variables](global-variables)

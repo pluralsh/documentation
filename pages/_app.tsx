@@ -1,65 +1,69 @@
-import type { ComponentProps } from 'react'
-import { useMemo } from 'react'
+import { type ComponentProps, forwardRef, useMemo } from 'react'
 
 import {
   FillLevelProvider,
+  type NavigationContextLinkProps,
+  NavigationContextProvider,
+  type NavigationContextValue,
   GlobalStyle as PluralGlobalStyle,
   theme as honorableTheme,
   styledTheme,
 } from '@pluralsh/design-system'
 import { CssBaseline, ThemeProvider } from 'honorable'
 import type { AppProps } from 'next/app'
+import NextLink from 'next/link'
 import { useRouter } from 'next/router'
 
 import { until } from '@open-draft/until'
+import { MarkdocContextProvider } from '@pluralsh/design-system/dist/markdoc'
 import { SSRProvider } from '@react-aria/ssr'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
-import '../src/styles/globals.css'
+import '@src/styles/globals.css'
 
-import { BreakpointProvider } from '../src/components/Breakpoints'
-import DocSearchStyles from '../src/components/DocSearchStyles'
-import ExternalScripts from '../src/components/ExternalScripts'
-import { FullNav } from '../src/components/FullNav'
+import { BreakpointProvider } from '@src/components/Breakpoints'
+import DocSearchStyles from '@src/components/DocSearchStyles'
+import ExternalScripts from '@src/components/ExternalScripts'
+import { FullNav } from '@src/components/FullNav'
 import {
   GITHUB_DATA_URL,
   getGithubDataServer,
   isGithubRepoData,
-} from '../src/components/GithubStars'
-import GlobalStyles from '../src/components/GlobalStyles'
-import { usePosthog } from '../src/components/hooks/usePosthog'
-import HtmlHead from '../src/components/HtmlHead'
-import MainContent from '../src/components/MainContent'
-import PageFooter from '../src/components/PageFooter'
+} from '@src/components/GithubStars'
+import GlobalStyles from '@src/components/GlobalStyles'
+import { usePosthog } from '@src/components/hooks/usePosthog'
+import HtmlHead from '@src/components/HtmlHead'
+import MainContent from '@src/components/MainContent'
+import PageFooter from '@src/components/PageFooter'
 import {
   ContentContainer,
   PageGrid,
   SideCarContainer,
   SideNavContainer,
-} from '../src/components/PageGrid'
-import { PageHeader } from '../src/components/PageHeader'
-import { PagePropsContext } from '../src/components/PagePropsContext'
-import { TableOfContents } from '../src/components/TableOfContents'
+} from '@src/components/PageGrid'
+import { PageHeader } from '@src/components/PageHeader'
+import { PagePropsContext } from '@src/components/PagePropsContext'
+import { TableOfContents } from '@src/components/TableOfContents'
 import {
   META_DESCRIPTION,
   PAGE_TITLE_PREFIX,
   PAGE_TITLE_SUFFIX,
   ROOT_TITLE,
-} from '../src/consts'
-import { NavDataProvider } from '../src/contexts/NavDataContext'
-import { ReposProvider } from '../src/contexts/ReposContext'
-import { getRepos, reposCache } from '../src/data/getRepos'
-import { getNavData } from '../src/NavData'
+} from '@src/consts'
+import { NavDataProvider } from '@src/contexts/NavDataContext'
+import { ReposProvider } from '@src/contexts/ReposContext'
+import { getRepos, reposCache } from '@src/data/getRepos'
+import { getNavData } from '@src/NavData'
 
-import type { Repo } from '../src/data/getRepos'
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
+import type { Repo } from '@src/data/getRepos'
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   displayTitle?: string
   metaTitle?: string
   displayDescription?: string
   metaDescription?: string
-  repo?: Repo
+  repo?: Repo | null
 }
 
 type MyAppProps = AppProps<MyPageProps | undefined> & {
@@ -100,6 +104,30 @@ function collectHeadings(node, sections: MarkdocHeading[] = []) {
 }
 
 const Page = styled.div(() => ({}))
+
+const useNavigate = () => {
+  const router = useRouter()
+
+  return (url) => {
+    router.push(url)
+  }
+}
+
+const usePathname = () => {
+  const router = useRouter()
+
+  return router.basePath + (router.asPath.split(/[?#]/)[0] || router.pathname)
+}
+
+const Link = forwardRef(
+  ({ href, ...props }: NavigationContextLinkProps, ref) => (
+    <NextLink
+      ref={ref}
+      href={href ?? ''}
+      {...props}
+    />
+  )
+)
 
 function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
@@ -160,22 +188,31 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
     </>
   )
 
+  const navContextVal = useMemo<NavigationContextValue>(
+    () => ({ useNavigate, usePathname, Link }),
+    []
+  )
+
   return (
-    <SWRConfig value={swrConfig}>
-      <ReposProvider value={repos}>
-        <NavDataProvider value={navData}>
-          <SSRProvider>
-            <BreakpointProvider>
-              <ThemeProvider theme={honorableTheme}>
-                <StyledThemeProvider theme={docsStyledTheme}>
-                  <FillLevelProvider value={0}>{app}</FillLevelProvider>
-                </StyledThemeProvider>
-              </ThemeProvider>
-            </BreakpointProvider>
-          </SSRProvider>
-        </NavDataProvider>
-      </ReposProvider>
-    </SWRConfig>
+    <SSRProvider>
+      <MarkdocContextProvider value={{ variant: 'docs' }}>
+        <NavigationContextProvider value={navContextVal}>
+          <SWRConfig value={swrConfig}>
+            <ReposProvider value={repos}>
+              <NavDataProvider value={navData}>
+                <BreakpointProvider>
+                  <ThemeProvider theme={honorableTheme}>
+                    <StyledThemeProvider theme={docsStyledTheme}>
+                      <FillLevelProvider value={0}>{app}</FillLevelProvider>
+                    </StyledThemeProvider>
+                  </ThemeProvider>
+                </BreakpointProvider>
+              </NavDataProvider>
+            </ReposProvider>
+          </SWRConfig>
+        </NavigationContextProvider>
+      </MarkdocContextProvider>
+    </SSRProvider>
   )
 }
 

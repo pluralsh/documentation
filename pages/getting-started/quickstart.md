@@ -92,7 +92,9 @@ To view the applications you can install on Plural, head to [this link](https://
 
 Once you've selected your applications, you can install Plural bundles using our interactive GUI. To start the GUI, run:
 
-```plural install```
+```
+plural install
+```
 
 You should see a window pop up like the below:
 ![](/assets/cli-quickstart/local-installer.png)

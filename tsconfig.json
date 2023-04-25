@@ -17,12 +17,13 @@
     "jsx": "preserve",
     "noImplicitAny": false,
     "incremental": true,
-    "jsxImportSource": "@emotion/react"
+    "jsxImportSource": "@emotion/react",
+    "baseUrl": ".",
+    "paths": {
+      "@src/*": ["src/*"],
+      "@pages/*": ["pages/*"]
+    }
   },
-  "include": [
-    "next-env.d.ts",
-    "pages/**/*",
-    "src/**/*",
-  ],
+  "include": ["next-env.d.ts", "pages/**/*", "src/**/*"],
   "exclude": ["node_modules"]
 }

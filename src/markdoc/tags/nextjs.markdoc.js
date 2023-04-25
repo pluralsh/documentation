@@ -5,7 +5,7 @@
 import Head from 'next/head'
 import Script from 'next/script'
 
-import Link from '../../components/md/Link'
+import { Link } from '@pluralsh/design-system/dist/markdoc/components'
 
 export const comment = {
   description: 'Use to comment the content itself',
