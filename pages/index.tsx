@@ -1,4 +1,5 @@
 import {
+  type ComponentProps,
   type PropsWithChildren,
   type ReactElement,
   type ReactNode,
@@ -8,11 +9,11 @@ import {
 import {
   AppsIcon,
   DiscordIcon,
-  GitPull,
+  GitPullIcon,
   IconFrame,
   MagicWandIcon,
   PadlockLockedIcon,
-  SourcererIcon,
+  SourcererHatIcon,
   TerminalIcon,
   ToolsIcon,
 } from '@pluralsh/design-system'
@@ -70,12 +71,18 @@ const Hero = styled.div(({ theme }) => ({
   },
 }))
 
-function HomeCardUnstyled({
+function CardLinkUnstyled({
   heading,
   children,
   icon,
   ...props
-}: PropsWithChildren<LinkProps & { icon: ReactElement; heading: ReactNode }>) {
+}: PropsWithChildren<
+  LinkProps &
+    Omit<ComponentProps<'a'>, 'ref'> & {
+      icon: ReactElement
+      heading: ReactNode
+    }
+>) {
   const theme = useTheme()
   const colorIcon = cloneElement(icon, { color: theme.colors['icon-info'] })
 
@@ -85,6 +92,7 @@ function HomeCardUnstyled({
         type="floating"
         size="xlarge"
         icon={colorIcon}
+        className="icon"
       />
       <div className="content">
         <h3 className="heading">{heading}</h3>
@@ -94,13 +102,19 @@ function HomeCardUnstyled({
   )
 }
 
-const HomeCard = styled(HomeCardUnstyled)(({ theme }) => ({
+const CardLink = styled(CardLinkUnstyled)(({ theme }) => ({
   display: 'flex',
   columnGap: theme.spacing.large,
   padding: theme.spacing.large,
-  alignItems: 'center',
+  alignItems: 'flex-start',
   backgroundColor: theme.colors['fill-two'],
   borderRadius: theme.borderRadiuses.large,
+  '.icon': {
+    flexShrink: 0,
+  },
+  '.content': {
+    alignSelf: 'center',
+  },
   '.heading': {
     margin: 0,
     ...theme.partials.marketingText.body2Bold,
@@ -114,7 +128,7 @@ const HomeCard = styled(HomeCardUnstyled)(({ theme }) => ({
   },
 }))
 
-const HomeCardGrid = styled.div(({ theme }) => ({
+const CardLinkGrid = styled.div(({ theme }) => ({
   display: 'grid',
   gridTemplateColumns: 'repeat(auto-fill, minmax(290px, 1fr))',
   gap: theme.spacing.large,
@@ -134,7 +148,7 @@ const Body2 = styled.p(({ theme }) => ({
 const Sections = styled.div(({ theme }) => ({
   display: 'flex',
   flexDirection: 'column',
-  gap: theme.spacing.xlarge,
+  gap: theme.spacing.xxlarge,
 }))
 
 const Section = styled.section((_) => ({
@@ -148,13 +162,13 @@ const SectionHeading = styled.div(({ theme }) => ({
   marginBottom: theme.spacing.large,
 }))
 
-export default function Index() {
+function Index() {
   return (
     <Sections>
-      <Hero>
+      <Hero id={tableOfContents[0].id}>
         <div className="contentWrap">
           <div className="content">
-            <h1>Documentation</h1>
+            <h1>{tableOfContents[0].title}</h1>
             <p>
               Get started, master your operations, and troubleshoot your
               problems.
@@ -169,79 +183,109 @@ export default function Index() {
       </Hero>
       <Section>
         <SectionHeading>
-          <H2>Explore topics</H2>
+          <H2 id={tableOfContents[1].id}>{tableOfContents[1].title}</H2>
           <Body2>Find what’s most relevant to you</Body2>
         </SectionHeading>
-        <HomeCardGrid>
-          <HomeCard
+        <CardLinkGrid>
+          <CardLink
             heading="Quickstart"
             icon={<MagicWandIcon />}
-            href="/getting-started/quickstart "
+            href="/getting-started/quickstart"
           >
             A guide to getting up and running.
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="Security"
             icon={<PadlockLockedIcon />}
-            href="/getting-started/quickstart "
+            href="/operations/security"
           >
             What does Plural have access to?
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="Cloud Shell"
             icon={<TerminalIcon />}
             href="/getting-started/cloud-shell-quickstart"
           >
             Setting up your first cluster in browser.
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="Application catalog"
             icon={<AppsIcon />}
-            href="xxx"
+            href="/applications"
           >
             Applications you can install with Plural.
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="Troubleshooting"
             icon={<ToolsIcon />}
-            href="sss"
+            href="/reference/troubleshooting"
           >
             Common issues or errors.
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="GitOps"
-            icon={<GitPull />}
-            href="xxx"
+            icon={<GitPullIcon />}
+            href="/getting-started/manage-git-repositories/setting-up-gitops"
           >
             Share and manage your Git repositories.
-          </HomeCard>
-        </HomeCardGrid>
+          </CardLink>
+        </CardLinkGrid>
       </Section>
       <Section>
         <SectionHeading>
-          <H2>Join the community</H2>
+          <H2 id={tableOfContents[2].id}>{tableOfContents[2].title}</H2>
           <Body2>
             Join the group of Plural users and contributors that are helping
             shape the future of DevOps.
           </Body2>
         </SectionHeading>
-        <HomeCardGrid>
-          <HomeCard
+        <CardLinkGrid>
+          <CardLink
             heading="Discord"
             icon={<DiscordIcon />}
             href="https://discord.gg/pluralsh"
+            target="_blank"
+            rel="nofollow noreferrer"
           >
             Join the discussion and get help.
-          </HomeCard>
-          <HomeCard
+          </CardLink>
+          <CardLink
             heading="Become an open-sourcerer"
-            icon={<SourcererIcon />}
+            icon={<SourcererHatIcon />}
             href="https://github.com/pluralsh/plural"
+            target="_blank"
+            rel="nofollow noreferrer"
           >
             Start your contribution journey.
-          </HomeCard>
-        </HomeCardGrid>
+          </CardLink>
+        </CardLinkGrid>
       </Section>
     </Sections>
   )
 }
+
+const tableOfContents = [
+  {
+    level: 2,
+    id: 'documentation',
+    title: 'Documentation',
+  },
+  {
+    level: 2,
+    id: 'explore-topics',
+    title: 'Explore Topics',
+  },
+  {
+    level: 2,
+    id: 'join-the-community',
+    title: 'Join the community',
+  },
+]
+
+export async function getStaticProps() {
+  return {
+    props: { tableOfContents },
+  }
+}
+
+export default Index
