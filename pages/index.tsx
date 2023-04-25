@@ -48,6 +48,9 @@ const Hero = styled.div(({ theme }) => ({
       margin: 0,
     },
   },
+  picture: {
+    display: 'contents',
+  },
   '.bgImgLg': {
     display: 'none',
   },
@@ -175,11 +178,17 @@ function Index() {
             </p>
           </div>
         </div>
-        <img
-          className="bgImgLg"
-          aria-hidden="true"
-          src="/images/landing/hero-bg-lg.png"
-        />
+        <picture>
+          <source
+            type="image/avif"
+            srcSet="/images/landing/hero-bg-lg.avif"
+          />
+          <img
+            className="bgImgLg"
+            aria-hidden="true"
+            src="/images/landing/hero-bg-lg.png"
+          />
+        </picture>
       </Hero>
       <Section>
         <SectionHeading>
