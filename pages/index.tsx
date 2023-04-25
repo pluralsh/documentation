@@ -29,7 +29,7 @@ const Hero = styled.div(({ theme }) => ({
   backgroundSize: '100% 100%',
   borderRadius: theme.borderRadiuses.large,
   border: theme.borders['fill-one'],
-  div: {},
+  overflow: 'hidden',
   h1: {
     margin: 0,
     marginBottom: theme.spacing.xsmall,
