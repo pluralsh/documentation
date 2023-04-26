@@ -64,6 +64,7 @@ export type MyPageProps = MarkdocNextJsPageProps & {
   displayDescription?: string
   metaDescription?: string
   repo?: Repo | null
+  tableOfContents?: any
 }
 
 type MyAppProps = AppProps<MyPageProps | undefined> & {
@@ -152,7 +153,9 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
         : markdoc?.frontmatter?.description || META_DESCRIPTION),
   }
 
-  const toc = pageProps?.markdoc?.content
+  const toc = pageProps.tableOfContents
+    ? pageProps.tableOfContents
+    : pageProps?.markdoc?.content
     ? collectHeadings(pageProps?.markdoc.content)
     : []
 

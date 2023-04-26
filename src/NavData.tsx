@@ -44,8 +44,12 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Getting Started',
     sections: [
       {
-        title: 'Introduction',
+        title: 'Overview',
         href: '/',
+      },
+      {
+        title: 'Introduction',
+        href: '/introduction',
       },
       {
         title: 'Concepts',
@@ -287,11 +291,6 @@ const rootNavData: NavMenu = deepFreeze([
       },
     ],
   },
-  // {
-  //   title: 'Test Pages',
-  //   sections: [{ title: 'Callouts', href: '/test/callouts' }],
-  //   sections: [{ title: 'Blockquotes', href: '/test/blockquotes' }],
-  // },
 ])
 
 export const getNavData = ({ repos }: { repos: Repo[] }): NavData => ({

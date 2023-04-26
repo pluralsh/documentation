@@ -32,7 +32,7 @@
     "@markdoc/markdoc": "0.2.2",
     "@markdoc/next.js": "0.2.2",
     "@open-draft/until": "2.1.0",
-    "@pluralsh/design-system": "1.336.2",
+    "@pluralsh/design-system": "1.337.0",
     "@react-aria/ssr": "3.6.0",
     "@react-stately/list": "3.8.0",
     "@react-stately/select": "3.5.0",
