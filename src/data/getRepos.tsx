@@ -3,11 +3,11 @@ import memoizeOne from 'memoize-one'
 
 import client from '../apollo-client'
 import {
+  type RecipeFragment,
+  type RepoFragment,
   ReposDocument,
-  RecipeFragment,
-  RepoFragment,
-  ReposQuery,
-  ReposQueryVariables,
+  type ReposQuery,
+  type ReposQueryVariables,
 } from '../generated/graphqlPlural'
 
 const REMOVE_LIST = ['bootstrap', 'test-harness', 'gcp-config-connector']

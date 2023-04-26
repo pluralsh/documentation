@@ -9,6 +9,63 @@ const fillAvailable = (prop) => ({
 })
 
 const GlobalStyles = createGlobalStyle(({ theme }) => ({
+  //  Text Styles
+  '.hero1': {
+    ...theme.partials.marketingText.hero1,
+  },
+  '.hero2': {
+    ...theme.partials.marketingText.hero2,
+  },
+  '.body1': {
+    ...theme.partials.marketingText.body1,
+  },
+  '.body2': {
+    ...theme.partials.marketingText.body2,
+  },
+  '.body1Bold': {
+    ...theme.partials.marketingText.body1Bold,
+  },
+  '.body2Bold': {
+    ...theme.partials.marketingText.body2Bold,
+  },
+  '.bigHeader': {
+    ...theme.partials.marketingText.bigHeader,
+  },
+  '.componentLink': {
+    ...theme.partials.marketingText.componentLink,
+  },
+  '.componentLinkSmall': {
+    ...theme.partials.marketingText.componentLinkSmall,
+  },
+  '.componentText': {
+    ...theme.partials.marketingText.componentText,
+  },
+  '.inlineLink': {
+    ...theme.partials.marketingText.inlineLink,
+  },
+  '.label': {
+    ...theme.partials.marketingText.label,
+  },
+  '.navLink': {
+    ...theme.partials.marketingText.navLink,
+  },
+  '.standaloneLink': {
+    ...theme.partials.marketingText.standaloneLink,
+  },
+  '.subtitle1': {
+    ...theme.partials.marketingText.subtitle1,
+  },
+  '.subtitle2': {
+    ...theme.partials.marketingText.subtitle2,
+  },
+  '.title1': {
+    ...theme.partials.marketingText.title1,
+  },
+  '.title2': {
+    ...theme.partials.marketingText.title2,
+  },
+  // /* End Text Styles */
+
   '::selection': {
     background: theme.colors['text-primary-accent'],
     color: theme.colors['fill-one'],

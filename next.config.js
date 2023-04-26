@@ -12,11 +12,8 @@ const withTM = require('next-transpile-modules')(
   }
 )
 
-const withVanillaExtract =
-  require('@vanilla-extract/next-plugin').createVanillaExtractPlugin()
-
 module.exports = () => {
-  const plugins = [withMarkdoc, withVanillaExtract, withTM]
+  const plugins = [withMarkdoc, withTM]
 
   return plugins.reduce((acc, next) => next(acc), {
     reactStrictMode: false,
