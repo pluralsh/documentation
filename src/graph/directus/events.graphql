@@ -1,0 +1,14 @@
+fragment Event on events {
+  id
+  name
+  start_date
+  end_date
+  fields
+  chonko
+}
+
+query Events {
+  events {
+    ...Event
+  }
+}

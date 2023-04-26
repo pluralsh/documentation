@@ -65,6 +65,7 @@ module.exports = {
         'next.config.js',
         'tailwind.config.ts',
         'postcss.config.ts',
+        'codegen.ts',
       ],
       parserOptions: {
         project: null,

@@ -1,23 +1,9 @@
 @tailwind base;
+@layer tailwind.base;
 @tailwind components;
+@layer tailwind.components;
 @tailwind utilities;
-
-@layer components {
- .body1 { fontFamily: fontFamilies.sans,
-  fontSize: 18,
-  lineHeight: '140%',
-  fontWeight: 300,
-  letterSpacing: '0.25px',
-  color: semanticColors['text-xlight'],}
-  .body2 {
-    fontFamily: fontFamilies.sans,
-    fontSize: 16,
-    lineHeight: '160%',
-    fontWeight: 300,
-    letterSpacing: '0.5px',
-    color: semanticColors['text-xlight'],
-  }
-}
+@layer tailwind.utilities;
 
 *,
 *::before,
