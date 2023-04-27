@@ -8,13 +8,9 @@ const spacing = {
   }),
   '0': '0',
 }
-
-console.log('spacing', spacing)
 const colors = {
   ...styledTheme.colors,
-  jerry: 'red',
 }
-console.log('colors', colors)
 
 export default {
   content: [

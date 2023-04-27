@@ -1,5 +1,5 @@
+import mapKeys from 'lodash/mapKeys'
 import { createGlobalStyle } from 'styled-components'
-import mapValues from 'lodash/mapValues'
 
 import { mqs } from './Breakpoints'
 
@@ -11,71 +11,21 @@ const fillAvailable = (prop) => ({
 
 // Judo to get around specificity of emotion styles set by honorable
 // and also allow tailwind classes to override
-const textStyleWrap = (selector) => {
-  return `body :is(div, h1, h2, h3, h4, h5, h6, p, *):where(${selector})`
-}
+const textStyleWrap = (selector) =>
+  `body :is(div, h1, h2, h3, h4, h5, h6, p, *):where(${selector})`
 
 const GlobalStyles = createGlobalStyle(({ theme }) => {
-  const mText = theme.partials.marketingText
+  const marketingTextStyles = mapKeys(
+    theme.partials.marketingText,
+    (value, key) => textStyleWrap(`.${key}`)
+  )
+
   return {
     'h1, h2, h3, h4, h5, h6': {
       margin: 0,
     },
     //  Text Styles
-    [textStyleWrap('.hero1')]: {
-      ...mText.hero1,
-    },
-    [textStyleWrap('.hero2')]: {
-      ...mText.hero2,
-    },
-    [textStyleWrap('.body1')]: {
-      ...mText.body1,
-    },
-    [textStyleWrap('.body2')]: {
-      ...mText.body2,
-    },
-    [textStyleWrap('.body1Bold')]: {
-      ...mText.body1Bold,
-    },
-    [textStyleWrap('.body2Bold')]: {
-      ...mText.body2Bold,
-    },
-    [textStyleWrap('.bigHeader')]: {
-      ...mText.bigHeader,
-    },
-    [textStyleWrap('.componentLink')]: {
-      ...mText.componentLink,
-    },
-    [textStyleWrap('.componentLinkSmall')]: {
-      ...mText.componentLinkSmall,
-    },
-    [textStyleWrap('.componentText')]: {
-      ...mText.componentText,
-    },
-    [textStyleWrap('.inlineLink')]: {
-      ...mText.inlineLink,
-    },
-    [textStyleWrap('.label')]: {
-      ...mText.label,
-    },
-    [textStyleWrap('.navLink')]: {
-      ...mText.navLink,
-    },
-    [textStyleWrap('.standaloneLink')]: {
-      ...mText.standaloneLink,
-    },
-    [textStyleWrap('.subtitle1')]: {
-      ...mText.subtitle1,
-    },
-    [textStyleWrap('.subtitle2')]: {
-      ...mText.subtitle2,
-    },
-    [textStyleWrap('.title1')]: {
-      ...mText.title1,
-    },
-    [textStyleWrap('.title2')]: {
-      ...mText.title2,
-    },
+    ...marketingTextStyles,
     // /* End Text Styles */
 
     '::selection': {
