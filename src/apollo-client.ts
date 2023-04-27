@@ -5,4 +5,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 })
 
+const directusToken = process.env.DIRECTUS_ACCESS_TOKEN
+
+export const directusClient = new ApolloClient({
+  uri: `https://directus.plural.sh/graphql${
+    directusToken ? `?access_token=${directusToken}` : ''
+  }`,
+  cache: new InMemoryCache(),
+})
+
 export default client
