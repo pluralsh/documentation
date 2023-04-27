@@ -1,9 +1,11 @@
-@tailwind base;
-@layer tailwind.base;
-@tailwind components;
-@layer tailwind.components;
-@tailwind utilities;
-@layer tailwind.utilities;
+body h1,
+body h2,
+body h3,
+body h4,
+body h5,
+body h6 {
+  margin: 0;
+}
 
 *,
 *::before,
@@ -91,3 +93,7 @@
   font-weight: 600;
   src: url('/fonts/ABCMonumentGroteskMono-Heavy.woff') format('woff');
 }
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;

@@ -1,11 +1,14 @@
-import { container } from './index.css'
-
 export default function Index() {
   return (
-    <div className={`flex flex-wrap text-text ${container}`}>
-      <h1 className="mt-0 w-full md:w-3/4">Hello world!</h1>
-      <h1 className="mb-0 w-full md:w-1/4">Hello world!</h1>
-      <p>This is some paragraph textzz</p>
+    <div>
+      <div className="text-marketing-black text-marketing-white">jimbob</div>
+      <div className="flex flex-wrap">
+        <h1 className="hero1 m-medium w-full md:w-3/4">Hello world!</h1>
+        <h1 className="title2 m-large w-full text-text-xlight md:w-1/4">
+          Hello world!
+        </h1>
+        <p className="text-marketing-white">This is some paragraph textzz</p>
+      </div>
     </div>
   )
 }
