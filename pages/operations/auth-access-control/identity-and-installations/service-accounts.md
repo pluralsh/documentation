@@ -6,9 +6,11 @@ Service Accounts are assumable identities, specifically meant to facilitate grou
 
 To create a service account, from [https://app.plural.sh/](https://app.plural.sh/accounts/edit/service-accounts), navigate to account, then service accounts.
 
+![](/assets/advanced-topics/service-accounts-static.png)
+
 From here, you can create a new service account, and attach users or groups.&#x20;
 
-![](/assets/advanced-topics/service-accounts.gif)
+![](/assets/advanced-topics/service-accounts-create.png)
 
 Once created, you can impersonate the service account by clicking the impersonate button in the dashboard, or via the CLI:
 
