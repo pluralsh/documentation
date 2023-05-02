@@ -81,7 +81,7 @@ Finish creating your service account, and you should see your new service accoun
 
 Select "Add Key" and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
 
-![](/assets/cloud-shell-quickstart/gcp-plural-credentials.png)
+![](/assets/cloud-shell-quickstart/gcp-plural-config.png)
 
 {% /tab %}
 
@@ -127,7 +127,7 @@ Select the Owner role, and click on "Select members" to search for your app name
 
 Return to your Plural onboarding. Enter the values noted above into your Cloud Credential configuration, and proceed to the next step.
 
-![](/assets/cloud-shell-quickstart/plural-azure-config.png)
+![](/assets/cloud-shell-quickstart/azure-plural-config.png)
 {% /tab %}
 {% /tabs %}
 
