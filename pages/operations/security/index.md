@@ -26,11 +26,16 @@ Our console has elevated permissions when running in your Plural Kubernetes clus
 ## What permissions does Plural have to GitHub?
 
 Plural **does not** have access to repositories that have not been created by Plural.
+Plural will only use the Github access token while creating the repo then, then throws away the token once created.
 
 When using the CLI or Cloud Shell, Plural will receive the following permissions:
 
 - Create GitHub repositories on your behalf
 - Commit changes to repositories that Plural has created
+
+## Do I HAVE to oAuth into Github?
+
+No, if you don't want to oAuth, you can create a repo and then run `plural init` inside it to initialize it for Plural.
 
 ## Where is application configuration stored, including credentials?
 
