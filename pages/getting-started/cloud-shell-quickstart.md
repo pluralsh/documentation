@@ -12,7 +12,9 @@ This guide goes over how to get started with Plural using our in-browser Cloud S
 - Provisioned a fully-configured Kubernetes cluster.
 - Installed an application and all its dependencies on your Kubernetes cluster.
 
-in under 30 minutes, all within your browser.
+in under 30 minutes, all within your browser. You can see the process in the video here or follow the instructions step-by-step, esp for unique cloud providers:
+
+{% embed url="https://www.youtube.com/watch?v=mFDA-718RhI&ab_channel=Plural" aspectRatio="16 / 9" /%}
 
 ## Login and Create the Plural Repository
 
