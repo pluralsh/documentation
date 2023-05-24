@@ -49,9 +49,9 @@ If you need to update your AWS CLI for any reason, make sure to run `plural wksp
 
 {% tab title="GCP" %}
 
-- Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud cli.
-- Verify that the cli has been added to your `$PATH`
-- Create a new project in gcp via the cli:
+- Follow the instructions [here](https://cloud.google.com/sdk/docs/install) to install the gcloud CLI.
+- Verify that the CLI has been added to your `$PATH`
+- Create a new project in gcp via the CLI:
 
 ```
 gcloud projects create example-project-name
@@ -59,8 +59,8 @@ gcloud projects create example-project-name
 
 - [Enable the Kubernetes Engine API](https://cloud.google.com/kubernetes-engine/docs/quickstart) for the project you just created.
 - [Enable the Google DNS API](https://excelnotes.com/enable-cloud-dns-api/) for the project you just created.
-- Run `gcloud init` and follow the prompts to configure the gcloud cli and connect it to the project you just created.
-- Verify that your cli has been properly configured. It should look something like this. Make sure that your active configuration is set to the project you just created.
+- Run `gcloud init` and follow the prompts to configure the gcloud CLI and connect it to the project you just created.
+- Verify that your CLI has been properly configured. It should look something like this. Make sure that your active configuration is set to the project you just created.
 
 ```
 > gcloud config list
@@ -75,13 +75,34 @@ project = example-project-name
 Your active configuration is: [example-project-name]
 ```
 
-- If you have multiple projects in GCP and previously have configured your gcloud cli to point to a different project, run
+- It can be the case that you have multiple accounts or projects in GCP and previously have configured your gcloud CLI to point to a different project. Verify your active configuration with
 
 ```
-gcloud auth application-default login
+> gcloud config configurations list                                                        
+NAME                  IS_ACTIVE  ACCOUNT              PROJECT               COMPUTE_DEFAULT_ZONE  COMPUTE_DEFAULT_REGION
+personalprj           False      yirenlu92@gmail.com  personalprj           us-east1-b            us-east1
+example-project-name  True       yirenlu92@gmail.com  example-project-name  us-east1-b            us-east1
 ```
 
-to reset the application default credential and re-authorize the browser. Failure to do this could result in `project requested not found` errors further along.
+- To change the active configuration run
+```
+> gcloud config configurations activate example-project-name
+Activated [example-project-name].
+```
+
+- To refresh the login for this gcloud configuration run 
+```
+> gcloud auth login
+```
+
+- In addition to the gcloud CLI, the Plural CLI, as well as the employed GCP Terraform providers, also use the gcloud SDK. So you will also need to setup [Application Default Credentials](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login). Make sure to use the same account as you used to authenticate your active gcloud CLI configuration!
+
+```
+> gcloud auth application-default login
+```
+
+Failure to do this could result in `project requested not found` or permission related errors further along.
+
 {% /tab %}
 
 {% tab title="Azure" %}
