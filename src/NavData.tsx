@@ -41,14 +41,14 @@ export function findNavItem(
 
 const rootNavData: NavMenu = deepFreeze([
   {
-    title: 'Getting Started',
+    title: 'Overview',
     sections: [
       {
         title: 'Overview',
         href: '/',
       },
       {
-        title: 'Introduction',
+        title: 'What is Plural?',
         href: '/introduction',
       },
       {
@@ -56,60 +56,126 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/concepts',
       },
       {
-        title: 'Quickstart: CLI',
-        href: '/getting-started/quickstart',
+        title: 'What Makes Plural Different?',
+        href: '/getting-started/concepts',
       },
       {
-        href: '/getting-started/cloud-shell-quickstart',
-        title: 'Quickstart: In-Browser',
+        title: 'Cost Structure',
+        href: '/operations/pricing-calculator',
+      },
+    ],
+  },
+  {
+    title: 'Getting Started',
+    sections: [
+      {
+        title: 'Quickstart: CLI',
+        href: '/getting-started/quickstart',
       },
       {
         href: '/getting-started/video-cli-quickstart',
         title: 'Video: CLI Quickstart',
       },
       {
-        href: '/getting-started/manage-git-repositories',
-        title: 'Manage Git Repositories',
-        sections: [
-          {
-            href: '/getting-started/manage-git-repositories/setting-up-gitops',
-            title: 'Setting Up GitOps',
-          },
-          {
-            href: '/getting-started/manage-git-repositories/your-plural-workspace',
-            title: 'Your Plural Workspace',
-          },
-          {
-            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
-            title: 'Sharing Your Git Repositories',
-          },
-          {
-            href: '/getting-started/manage-git-repositories/workspace-encryption',
-            title: 'Workspace Encryption Guide',
-          },
-        ],
+        href: '/getting-started/cloud-shell-quickstart',
+        title: 'Quickstart: In-Browser',
       },
       {
         href: '/getting-started/admin-console',
-        title: 'Install Plural Console',
-      },
-      {
-        href: '/getting-started/openid-connect',
-        title: 'Plural OIDC',
+        title: 'Installing Plural Console',
       },
     ],
   },
   {
-    title: 'Applications',
+    title: 'How To',
     sections: [
       {
-        href: APP_CATALOG_BASE_URL,
-        toMenu: 'appCatalog',
-        title: 'Application Catalog',
+        title: 'Configure my Cluster',
+        href: '/operations/cluster-configuration',
+      },
+      {
+        href: '/operations/cluster-configuration',
+        title: 'Add an Application to a Cluster',
+      },
+      {
+        href: '/operations/managing-applications/add-users-to-application',
+        title: 'Add Users to an Application',
+      },
+      {
+        href: '/operations/managing-applications/update-application',
+        title: 'Update an Application',
+      },
+      {
+        href: '/operations/managing-applications/delete-application',
+        title: 'Delete an Application',
+      },
+      {
+        href: '/operations/managing-applications/bounce-application',
+        title: 'Bounce an Application',
+      },
+      {
+        href: '/operations/managing-applications/connect-application-db',
+        title: 'Connect to Application DB',
+      },
+      {
+        href: '/operations/managing-applications/connect-application-db',
+        title: 'Customize an Application',
+      },
+      {
+        href: '/operations/network-configuration',
+        title: 'Configure your Network',
+      },
+      {
+        title: 'Debug issues on your Plural Cluster',
+        href: '/debugging/application-issues',
+      },
+      {
+        href: '/operations/uninstall',
+        title: 'Destroy the Cluster Safely',
+      },
+      {
+        href: '/operations/dns-setup',
+        title: 'Set up Third Party DNS',
+        sections: [
+          {
+            href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+            title: 'Creating a DNS Zone in Console',
+          },
+        ],
+      },
+      {
+        href: '/operations/cost-management',
+        title: 'Optimize Cluster Costs',
+      },
+      {
+        href: '/adding-new-application/getting-started-with-runbooks',
+        title: 'Create an Application Runbook',
+        sections: [
+          {
+            href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
+            title: '  XML Runbooks',
+          },
+          {
+            href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
+            title: '  YAML Runbooks',
+          },
+        ],
+      },
+      {
+        href: '/operations/auth-access-control/api-tokens',
+        title: 'Create Persistent API Tokens',
+      },
+      {
+        title: 'Share your Plural Git Repository',
+        href: 'getting-started/manage-git-repositories/sharing-git-repositories',
+      },
+      {
+        title: 'Create Multiple Plural Clusters',
+        href: '/operations/auth-access-control/identity-and-installations/service-accounts',
       },
       {
         href: '/adding-new-application',
-        title: 'Add an Application',
+        title: 'Contribute a New Application to the Plural Catalog',
         sections: [
           { href: '/adding-new-application/guide', title: 'Guide' },
           {
@@ -120,125 +186,36 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/adding-new-application/module-library',
             title: 'Module Library',
           },
-          {
-            href: '/adding-new-application/getting-started-with-runbooks',
-            title: 'Getting Started With Runbooks',
-            sections: [
-              {
-                href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
-                title: '  XML Runbooks',
-              },
-              {
-                href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
-                title: '  YAML Runbooks',
-              },
-            ],
-          },
         ],
+      },
+      {
+        href: '/getting-started/openid-connect',
+        title: 'Manage your Own Services with Plural',
       },
     ],
   },
   {
-    title: 'Operations',
+    title: 'FAQ',
     sections: [
-      {
-        href: '/operations/cluster-configuration',
-        title: 'Cluster Configuration',
-      },
-      {
-        href: '/operations/cost-management',
-        title: 'Cost Management',
-        sections: [
-          {
-            href: '/operations/pricing-calculator',
-            title: 'Pricing Calculator',
-          },
-        ],
-      },
-      {
-        href: '/operations/managing-applications',
-        title: 'Managing Applications',
-        sections: [
-          {
-            href: '/operations/managing-applications/update-application',
-            title: 'Update an Application',
-          },
-          {
-            href: '/operations/managing-applications/delete-application',
-            title: 'Delete an Application',
-          },
-          {
-            href: '/operations/managing-applications/add-users-to-application',
-            title: 'Add Users to an Application',
-          },
-          {
-            href: '/operations/managing-applications/bounce-application',
-            title: 'Bounce an Application',
-          },
-          {
-            href: '/operations/managing-applications/connect-application-db',
-            title: 'Connect to Application DB',
-          },
-        ],
-      },
-      {
-        href: '/operations/network-configuration',
-        title: 'Network Configuration',
-      },
-      {
-        href: '/operations/uninstall',
-        title: 'Destroying the Cluster Safely',
-      },
-      {
-        href: '/operations/dns-setup',
-        title: 'Setting up Third Party DNS',
-        sections: [
-          {
-            href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
-            title: 'Creating a DNS Zone in Console',
-          },
-        ],
-      },
       {
         href: '/operations/security',
-        title: 'Security',
+        title: 'What does Plural have access to?',
       },
       {
-        href: '/operations/auth-access-control',
-        title: 'Auth & Access Control',
-        sections: [
-          {
-            href: '/operations/auth-access-control/openid-connect',
-            title: 'OpenID Connect',
-          },
-          {
-            href: '/operations/auth-access-control/api-tokens',
-            title: 'API Tokens',
-          },
-          {
-            href: '/operations/auth-access-control/identity-and-installations',
-            title: 'Identity and Installations',
-            sections: [
-              {
-                href: '/operations/auth-access-control/identity-and-installations/audit-logging',
-                title: 'Audit Logging',
-              },
-              {
-                href: '/operations/auth-access-control/identity-and-installations/service-accounts',
-                title: 'Service Accounts',
-              },
-            ],
-          },
-        ],
+        href: '/operations/auth-access-control/openid-connect',
+        title: 'What is Plural OIDC?',
       },
-    ],
-  },
-  {
-    title: 'Debugging',
-    sections: [
+      {
+        href: '/operations/auth-access-control/identity-and-installations/audit-logging',
+        title: 'What audit logging does Plural do?',
+      },
+      {
+        href: '/operations/auth-access-control/identity-and-installations',
+        title: 'How does auth and access control work for Plural?',
+      },
       {
         href: '/debugging',
-        title: 'Debugging',
+        title: 'What debugging tools are available for Plural?',
         sections: [
           {
             href: '/debugging/health-checks',
@@ -254,19 +231,51 @@ const rootNavData: NavMenu = deepFreeze([
           },
         ],
       },
+    ],
+  },
+  {
+    title: 'Application Catalog',
+    sections: [
       {
-        title: 'Troubleshooting',
-        href: '/reference/troubleshooting',
-      },
-      {
-        title: 'Application Issues',
-        href: '/debugging/application-issues',
+        href: APP_CATALOG_BASE_URL,
+        toMenu: 'appCatalog',
+        title: 'Application Catalog',
       },
     ],
   },
   {
     title: 'Reference',
     sections: [
+      {
+        title: 'Cloud Provider CLI Setup',
+        href: '/reference/configuring-cloud-provider',
+      },
+      {
+        title: 'GitOps Configuration',
+        href: '/getting-started/manage-git-repositories/setting-up-gitops',
+      },
+      {
+        href: '/getting-started/manage-git-repositories',
+        title: 'Manage Git Repositories',
+        sections: [
+          {
+            href: '/getting-started/manage-git-repositories/setting-up-gitops',
+            title: 'Setting Up GitOps',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
+            title: 'Sharing Your Git Repositories',
+          },
+          {
+            href: '/getting-started/manage-git-repositories/workspace-encryption',
+            title: 'Workspace Encryption Guide',
+          },
+        ],
+      },
+      {
+        href: '/getting-started/manage-git-repositories/your-plural-workspace',
+        title: 'Plural Workspace Layout',
+      },
       {
         title: 'API / Developer Tools',
         href: '/reference/api',
@@ -282,12 +291,29 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        title: 'Cloud Provider CLI Setup',
-        href: '/reference/configuring-cloud-provider',
-      },
-      {
         title: 'CLI Command Reference',
         href: '/reference/cli-reference',
+      },
+      {
+        href: '/adding-new-application/plural-custom-resources',
+        title: 'Plural Custom Resources',
+      },
+      {
+        href: '/adding-new-application/module-library',
+        title: 'Module Library',
+      },
+      {
+        title: 'Common Errors',
+        href: '/reference/troubleshooting',
+      },
+    ],
+  },
+  {
+    title: 'Changelog',
+    sections: [
+      {
+        href: '/getting-started/manage-git-repositories/your-plural-workspace',
+        title: 'Release Notes',
       },
     ],
   },
