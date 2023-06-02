@@ -56,8 +56,8 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/concepts',
       },
       {
-        title: 'What Makes Plural Different?',
-        href: '/getting-started/concepts',
+        title: 'What makes Plural different?',
+        href: '/getting-started/plural-difference',
       },
       {
         title: 'Cost Structure',
@@ -94,7 +94,7 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/operations/cluster-configuration',
       },
       {
-        href: '/operations/cluster-configuration',
+        href: '/operations/managing-applications/add-application-to-cluster',
         title: 'Add an Application to a Cluster',
       },
       {
@@ -118,7 +118,7 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Connect to Application DB',
       },
       {
-        href: '/operations/managing-applications/connect-application-db',
+        href: '/operations/managing-applications/customize-application',
         title: 'Customize an Application',
       },
       {
@@ -189,7 +189,7 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/getting-started/openid-connect',
+        href: '/first-party/manage-your-microservices',
         title: 'Manage your Own Services with Plural',
       },
     ],
@@ -230,6 +230,18 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Logs',
           },
         ],
+      },
+      {
+        href: '/operations/auth-access-control/identity-and-installations',
+        title: 'What certifications does Plural have?',
+      },
+      {
+        href: '/operations/auth-access-control/identity-and-installations',
+        title: 'How do the paid Plural tiers work?',
+      },
+      {
+        href: '/operations/auth-access-control/identity-and-installations',
+        title: 'Can I develop locally?',
       },
     ],
   },
@@ -304,6 +316,10 @@ const rootNavData: NavMenu = deepFreeze([
       },
       {
         title: 'Common Errors',
+        href: '/reference/troubleshooting',
+      },
+      {
+        title: 'Certifications',
         href: '/reference/troubleshooting',
       },
     ],
