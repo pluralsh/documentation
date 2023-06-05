@@ -1,5 +1,5 @@
 ---
-title: Cost Management
+title: Cost Optimization
 description: Controlling the cost of your cluster and applications.
 ---
 

@@ -7,7 +7,9 @@ description: >-
 
 ## Overview
 
-This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). If you'd prefer a video walkthrough, check out our video tutorial [here](/getting-started/video-cli-quickstart).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). You can see the process in the video here or follow the instructions step-by-step, especially for unique cloud providers:
+
+{% embed url="https://www.youtube.com/watch?v=O9BEwphNDLc&ab_channel=Plural" aspectRatio="16 / 9" /%}
 
 ## Prerequisites
 

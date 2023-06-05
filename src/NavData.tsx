@@ -73,10 +73,6 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/quickstart',
       },
       {
-        href: '/getting-started/video-cli-quickstart',
-        title: 'Video: CLI Quickstart',
-      },
-      {
         href: '/getting-started/cloud-shell-quickstart',
         title: 'Quickstart: In-Browser',
       },
@@ -167,7 +163,7 @@ const rootNavData: NavMenu = deepFreeze([
       },
       {
         title: 'Share your Plural Git Repository',
-        href: 'getting-started/manage-git-repositories/sharing-git-repositories',
+        href: '/getting-started/manage-git-repositories/sharing-git-repositories',
       },
       {
         title: 'Create Multiple Plural Clusters',
@@ -232,15 +228,15 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/operations/auth-access-control/identity-and-installations',
+        href: '/faq/certifications',
         title: 'What certifications does Plural have?',
       },
       {
-        href: '/operations/auth-access-control/identity-and-installations',
+        href: '/faq/plural-paid-tiers',
         title: 'How do the paid Plural tiers work?',
       },
       {
-        href: '/operations/auth-access-control/identity-and-installations',
+        href: '/faq/local-development',
         title: 'Can I develop locally?',
       },
     ],
@@ -263,20 +259,12 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/reference/configuring-cloud-provider',
       },
       {
-        title: 'GitOps Configuration',
-        href: '/getting-started/manage-git-repositories/setting-up-gitops',
-      },
-      {
         href: '/getting-started/manage-git-repositories',
         title: 'Manage Git Repositories',
         sections: [
           {
             href: '/getting-started/manage-git-repositories/setting-up-gitops',
             title: 'Setting Up GitOps',
-          },
-          {
-            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
-            title: 'Sharing Your Git Repositories',
           },
           {
             href: '/getting-started/manage-git-repositories/workspace-encryption',
@@ -318,17 +306,13 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Common Errors',
         href: '/reference/troubleshooting',
       },
-      {
-        title: 'Certifications',
-        href: '/reference/troubleshooting',
-      },
     ],
   },
   {
     title: 'Changelog',
     sections: [
       {
-        href: '/getting-started/manage-git-repositories/your-plural-workspace',
+        href: '/reference/release-notes',
         title: 'Release Notes',
       },
     ],
