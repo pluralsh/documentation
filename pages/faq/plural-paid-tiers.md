@@ -21,6 +21,7 @@ See below for a comparison of different tiers, and you can find more information
 - Everything in open-source, plus:
 - 24 hour SLAs
 - Advanced user management (use of Roles, Groups, and Service Accounts)
+- Multi-cluster management
 - Audit logs
 - VPN interface
 - Prioritized emergency hotfixes
