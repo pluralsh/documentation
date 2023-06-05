@@ -13,6 +13,10 @@ If you originally set up your Plural cluster with the in-browser Cloud Shell opt
 
 This will re-launch your Install Wizard, where you can configure and deploy new applications. For more detailed information on the Install Wizard, refer to the [In-Browser setup guide](/getting-started/cloud-shell-quickstart).
 
+If for any reason your deployment fails, try rebuilding and redeploying the application by clicking "Rebuild" from the installed apps dropdown.
+
+![](/assets/operations/application-rebuild.png)
+
 ## Install from the CLI
 
 If you originally set up your Plural cluster with the local CLI, you can add new installations with a CLI command.
