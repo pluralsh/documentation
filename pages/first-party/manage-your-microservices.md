@@ -1,6 +1,6 @@
 ---
 title: Manage your own microservices with Plural
-description: How to manage first party applications with Plural
+description: How to manage your organization's internal applications with Plural
 ---
 
 The Plural team is currently exploring a solution to allow our customers to deploy their in-house services using Plural.

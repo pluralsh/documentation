@@ -17,7 +17,7 @@ This is a guide on how to get Plural running using our CLI. If you prefer an in-
 
 - **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
 - **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
-- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
+- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system. Follow the instructions [in our GitOps resources](/getting-started/manage-git-repositories/setting-up-gitops) for more information.
 
 ## Install Plural CLI
 
