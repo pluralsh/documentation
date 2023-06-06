@@ -44,23 +44,19 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Overview',
     sections: [
       {
-        title: 'Overview',
-        href: '/',
-      },
-      {
-        title: 'What is Plural?',
+        title: 'Introduction',
         href: '/introduction',
-      },
-      {
-        title: 'Concepts',
-        href: '/getting-started/concepts',
       },
       {
         title: 'What makes Plural different?',
         href: '/getting-started/plural-difference',
       },
       {
-        title: 'Cost Structure',
+        title: 'Concepts',
+        href: '/getting-started/concepts',
+      },
+      {
+        title: 'How much does it cost?',
         href: '/operations/pricing-calculator',
       },
     ],
@@ -69,12 +65,12 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Getting Started',
     sections: [
       {
-        title: 'Quickstart: CLI',
+        title: 'Quickstart with our CLI',
         href: '/getting-started/quickstart',
       },
       {
         href: '/getting-started/cloud-shell-quickstart',
-        title: 'Quickstart: In-Browser',
+        title: 'Quickstart from your Browser',
       },
       {
         href: '/getting-started/admin-console',
@@ -263,6 +259,10 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/reference/configuring-cloud-provider',
       },
       {
+        title: 'Common Errors',
+        href: '/reference/troubleshooting',
+      },
+      {
         href: '/getting-started/manage-git-repositories',
         title: 'Manage Git Repositories',
         sections: [
@@ -305,10 +305,6 @@ const rootNavData: NavMenu = deepFreeze([
       {
         href: '/adding-new-application/module-library',
         title: 'Module Library',
-      },
-      {
-        title: 'Common Errors',
-        href: '/reference/troubleshooting',
       },
     ],
   },
