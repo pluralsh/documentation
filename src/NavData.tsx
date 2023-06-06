@@ -114,6 +114,10 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Connect to Application DB',
       },
       {
+        href: '/operations/managing-applications/credentials-non-oidc',
+        title: 'Find Credentials for non-OIDC applications',
+      },
+      {
         href: '/operations/managing-applications/customize-application',
         title: 'Customize an Application',
       },
