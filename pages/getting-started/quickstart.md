@@ -79,7 +79,7 @@ plural init
 The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf.
 
 {% callout severity="info" %}
-Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+If you'd prefer to set up Git manually vs. using OAuth, refer to our guide on [setting up Gitops](/getting-started/manage-git-repositories/setting-up-gitops).
 {% /callout %}
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
@@ -87,6 +87,10 @@ Along the `plural init` workflow, we will set the Git attributes to configure en
 You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. We recommend that you use our DNS service if you don't have any security reasons that prevent you from doing so. The hostname that you configure with us will determine where your applications are hosted. For example, if you enter `singular.onplural.sh`, your applications will be available at `$APP_NAME.singular.onplural.sh`.
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
+
+{% callout severity="info" %}
+Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+{% /callout %}
 
 ## Install Plural Applications
 
