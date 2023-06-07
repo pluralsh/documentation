@@ -5,6 +5,8 @@ description: >-
   Plural marketplace.
 ---
 
+To add your own application, you'll need the Helm chart for your application and corresponding Terraform.
+
 ## 1. Create a new directory in plural-artifacts
 
 Clone the [plural-artifacts](https://github.com/pluralsh/plural-artifacts) repository

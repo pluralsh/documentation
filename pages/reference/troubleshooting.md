@@ -69,6 +69,10 @@ gcloud auth application-default login
 
 to reset the credential and reauthorize the browser for the correct project.
 
+{% callout severity="info" %}
+If you're experiencing persistent issues with a Cloud Provider CLI, try updating the CLI and/or SDK.
+{% /callout %}
+
 ## Initialization Errors
 
 ### Workspace Initialization

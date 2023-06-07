@@ -6,8 +6,7 @@ description: How to change an application's version.
 Updates to Plural applications are applied **automatically** based on a per-application setting. This setting supports telling Plural to only upgrade for Stable or Warm releases, as well as disabling automatic upgrades altogether. Here's what each of the settings mean:
 
 - **Latest**: Everytime the Plural team tests and publishes a new release, you receive it.
-- **Warm**: You only receive versions that have passed a set of Plural determined tests.
-- **Stable**: You only receive versions once the Plural team has determined them to be stable, through active production usage.
+- **Stable**: You only receive versions that have passed a set of Plural determined tests.
 - **None**: You never receive automatic updates and have to manually update your application versions or change this setting.
 
 You can change this setting in the App settings menu, accessible from each cluster's details page. You can dive into each cluster from the Clusters Overview page [https://app.plural.sh/overview/clusters](https://app.plural.sh/overview/clusters).

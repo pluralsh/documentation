@@ -18,7 +18,7 @@ Plural writes all the Helm, Terraform, and YAML needed for your desired infrastr
 - Automated Upgrades
 - Cross-tool dependency management
 - GitOps workflow with batteries-included transparent secret encryption
-- Built on common open source tools, so if you don't like us, you can always eject your application from Plural and use it as you please.
+- Built on common open-source tools, so if you don't like us, you can always eject your application from Plural and use it as you please.
 
 Notably, we **do not** support bringing your own Kubernetes cluster yet, but it's on our roadmap.
 
