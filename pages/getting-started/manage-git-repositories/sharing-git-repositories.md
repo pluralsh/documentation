@@ -45,3 +45,15 @@ plural deploy
 git add . && git commit -m "set up encryption"
 git push
 ```
+
+### Troubleshooting
+
+If you are facing an issue with sharing repo please follow the instruction:
+ 
+1. go to the repo
+2. add to the .gitignore the new line with .keyid
+3. remove .keyid from the repo
+4. commit and push the changes
+5. execute `plural crypto fingerprint` to generate .keyid again but now only locally (you can also skip it)
+
+Now you should be able to share the repo. 
