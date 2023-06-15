@@ -28,7 +28,7 @@ Ready Components:
 ...
 ```
 
-If a component is not ready, it will also generate hints to kubectl commands which might help debug further.
+If a component is not ready, it will also generate hints to kubectl commands which might help debug them further.
 
 ## Proxies
 
