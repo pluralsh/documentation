@@ -78,19 +78,21 @@ Your active configuration is: [example-project-name]
 - It can be the case that you have multiple accounts or projects in GCP and previously have configured your gcloud CLI to point to a different project. Verify your active configuration with
 
 ```
-> gcloud config configurations list                                                        
+> gcloud config configurations list
 NAME                  IS_ACTIVE  ACCOUNT              PROJECT               COMPUTE_DEFAULT_ZONE  COMPUTE_DEFAULT_REGION
 personalprj           False      yirenlu92@gmail.com  personalprj           us-east1-b            us-east1
 example-project-name  True       yirenlu92@gmail.com  example-project-name  us-east1-b            us-east1
 ```
 
 - To change the active configuration run
+
 ```
 > gcloud config configurations activate example-project-name
 Activated [example-project-name].
 ```
 
-- To refresh the login for this gcloud configuration run 
+- To refresh the login for this gcloud configuration run
+
 ```
 > gcloud auth login
 ```
