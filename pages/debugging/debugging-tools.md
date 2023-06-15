@@ -53,7 +53,7 @@ spec:
     port: 5432
 ```
 
-The interface is quite powerful, and supports things like fetching db credentials and initiating a sql shell, or spawning a web ui via `kubectl port-forward` and printing the credentials to stdout to allow a user easily log in.
+The interface is quite powerful, and supports things like fetching database credentials, initiating a SQL shell, spawning a web UI via `kubectl port-forward`, or printing the credentials to stdout to allow a user to easily log in.
 
 ## Logs
 
