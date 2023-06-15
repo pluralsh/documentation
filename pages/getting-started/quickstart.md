@@ -7,7 +7,9 @@ description: >-
 
 ## Overview
 
-This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). If you'd prefer a video walkthrough, check out our video tutorial [here](/getting-started/video-cli-quickstart).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). You can see the process in the video here or follow the instructions step-by-step, especially for unique cloud providers:
+
+{% embed url="https://www.youtube.com/watch?v=O9BEwphNDLc&ab_channel=Plural" aspectRatio="16 / 9" /%}
 
 ## Prerequisites
 
@@ -15,7 +17,7 @@ This is a guide on how to get Plural running using our CLI. If you prefer an in-
 
 - **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
 - **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
-- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
+- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system. Follow the instructions [in our GitOps resources](/getting-started/manage-git-repositories/setting-up-gitops) for more information.
 
 ## Install Plural CLI
 
@@ -77,7 +79,7 @@ plural init
 The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf.
 
 {% callout severity="info" %}
-Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+If you'd prefer to set up Git manually vs. using OAuth, refer to our guide on [setting up Gitops](/getting-started/manage-git-repositories/setting-up-gitops).
 {% /callout %}
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
@@ -85,6 +87,10 @@ Along the `plural init` workflow, we will set the Git attributes to configure en
 You will also be asked whether you want to use Plural's domain service and if so, what you want the subdomain to be. We recommend that you use our DNS service if you don't have any security reasons that prevent you from doing so. The hostname that you configure with us will determine where your applications are hosted. For example, if you enter `singular.onplural.sh`, your applications will be available at `$APP_NAME.singular.onplural.sh`.
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
+
+{% callout severity="info" %}
+Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+{% /callout %}
 
 ## Install Plural Applications
 

@@ -9,7 +9,12 @@ description: >-
 {% /calculator %}
 
 {% callout severity="info" title="How do we calculate cloud costs?" %}
-Plural deploys a standard configuration on each cloud provider and uses provider-specific price lists to estimate an infrastructure cost for the deployment of your applications. Each initial deployment has a certain amount of headroom for installing applications and will scale accordingly as more are added. Costs to Plural are calculated based on which plan is chosen; Plural Professional is priced by the number of users and clusters.
+By default, Plural deploys the following on a given provider:
+
+- The Kubernetes control plane
+- 3 nodes, each with 2 cores / 8GB
+
+Each initial deployment has a certain amount of headroom for installing applications and will scale accordingly as more are added. Costs to Plural are calculated based on which plan is chosen; Plural Professional is priced by the number of users and clusters.
 {% /callout %}
 
 {% callout severity="info" title="What is a cluster?" %}
