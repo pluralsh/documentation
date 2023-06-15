@@ -4,8 +4,10 @@
     "node": "18.16.0"
   },
   "scripts": {
-    "dev": "concurrently \"next dev\" \"graphql-codegen --watch --config codegen.ts \" ",
-    "build": "next build",
+    "dev": "run-s generate:pages dev:watch",
+    "dev:watch": "concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
+    "build": "run-s prebuild build:next",
+    "build:next": "next build",
     "start": "next start",
     "lint": "run-p lint:format lint:js lint:css",
     "lint:format": "prettier --check --no-error-on-unmatched-pattern ./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}",
@@ -15,7 +17,11 @@
     "fix:format": "prettier --write --no-error-on-unmatched-pattern ./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}",
     "fix:js": "eslint --fix {src,pages} --ext ts,tsx,js,jsx",
     "fix:css": "stylelint src/**/*.css --fix",
-    "graphql:codegen": "graphql-codegen --config codegen.yml"
+    "graphql:codegen": "graphql-codegen --config codegen.yml",
+    "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
+    "prebuild": "run-s build:prebuild generate:pages",
+    "build:prebuild": "cd pre-build && yarn tsc",
+    "generate:pages": "node pre-build/pre-build.mjs"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",

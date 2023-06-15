@@ -60,7 +60,7 @@ module.exports = {
   },
   overrides: [
     {
-      files: ['.eslintrc.js', 'next.config.js'],
+      files: ['.eslintrc.js', 'next.config.js', 'pre-build/**/*'],
       parserOptions: {
         project: null,
       },
