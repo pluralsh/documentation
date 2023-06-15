@@ -4,9 +4,9 @@
     "node": "18.16.0"
   },
   "scripts": {
-    "dev": "run-s generate:pages dev:watch",
+    "dev": "run-s generate:pageindex dev:watch",
     "dev:watch": "concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
-    "build": "run-s prebuild build:next",
+    "build": "run-s generate:pageindex build:next",
     "build:next": "next build",
     "start": "next start",
     "lint": "run-p lint:format lint:js lint:css",
@@ -19,9 +19,7 @@
     "fix:css": "stylelint src/**/*.css --fix",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
-    "prebuild": "run-s build:prebuild generate:pages",
-    "build:prebuild": "cd pre-build && yarn tsc",
-    "generate:pages": "node pre-build/pre-build.mjs"
+    "generate:pageindex": "node index-pages.mjs"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",

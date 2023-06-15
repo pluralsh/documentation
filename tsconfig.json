@@ -24,6 +24,6 @@
       "@pages/*": ["pages/*"]
     }
   },
-  "include": ["next-env.d.ts", "pre-build.ts", "pages/**/*", "src/**/*"],
+  "include": ["next-env.d.ts", "pages/**/*", "src/**/*"],
   "exclude": ["node_modules"]
 }

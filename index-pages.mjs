@@ -7,15 +7,7 @@ const __filename = fileURLToPath(import.meta.url)
 
 const __dirname = path.dirname(__filename)
 
-function writeUrl({
-  location,
-  lastMod,
-  priority = '0.5',
-}: {
-  location: string
-  lastMod: string
-  priority?: string | number
-}) {
+function writeUrl({ location, lastMod, priority = '0.5' }) {
   return `  <url>
     <loc>${process.env.NEXT_PUBLIC_ROOT_URL}/${location}</loc>
     <lastmod>${lastMod}</lastmod>
@@ -24,7 +16,7 @@ function writeUrl({
   </url>`
 }
 
-function wrapSiteMap(content: string) {
+function wrapSiteMap(content) {
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${content}
@@ -42,7 +34,7 @@ const ignore = [
   /^([_.[]|404|500).*$/,
 ]
 
-const pageFilter = (file: Dirent) => {
+const pageFilter = (file) => {
   for (const ig of ignore) {
     if (file.name.match(ig)) {
       return false
@@ -54,7 +46,7 @@ const pageFilter = (file: Dirent) => {
   return file.name.match(/\.(ts|tsx|js|jsx|md|mdoc)$/)
 }
 
-const rootDir = path.join(__dirname, '..')
+const rootDir = __dirname
 
 const PAGES_PATH = '/pages'
 
