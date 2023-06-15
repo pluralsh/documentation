@@ -11008,12 +11008,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"posthog-js@npm:1.66.1":
-  version: 1.66.1
-  resolution: "posthog-js@npm:1.66.1"
+"posthog-js@npm:1.68.1":
+  version: 1.68.1
+  resolution: "posthog-js@npm:1.68.1"
   dependencies:
     fflate: ^0.4.1
-  checksum: 55c2696bd26b0d73aef45d7a08cad82a1ce7b20f79dc65cff434b3fb45f8a5fe65a0d6ad265250ff27404ae236f91181230577fc8eb56f91e8a20912cf4737c0
+  checksum: 8fc57852deb97a7ce091867df413042f8579c299f7e7f9a6564a64b4ed2662e2fd8af6829f5b1bfc4128eb2ddd64785dba321f503211f686d87be7cc099c42e5
   languageName: node
   linkType: hard
 
@@ -11956,7 +11956,7 @@ __metadata:
     next-compose-plugins: 2.2.1
     next-transpile-modules: 10.0.0
     npm-run-all: 4.1.5
-    posthog-js: 1.66.1
+    posthog-js: 1.68.1
     prettier: 2.8.8
     raw-loader: 4.0.2
     react: 18.2.0
