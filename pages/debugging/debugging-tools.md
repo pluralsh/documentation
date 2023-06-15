@@ -4,7 +4,7 @@ description: Additional resources to help you monitor and debug applications.
 ---
 ## Health Checks
 
-Every application has a general application-level health check, which aggregates the statuses of all core kubernetes components and generates a digestable summary for human consumption.  These are viewable in the application switcher in the admin console, or by running:
+Every application has a general application-level health check, which aggregates the statuses of all core Kubernetes components and generates a digestible summary for human viewing.  These are viewable in the application switcher in the admin console, or by running:
 
 ```
 plural watch <app-name>
