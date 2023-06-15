@@ -7,7 +7,9 @@ description: >-
 
 ## Overview
 
-This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). If you'd prefer a video walkthrough, check out our video tutorial [here](/getting-started/video-cli-quickstart).
+This is a guide on how to get Plural running using our CLI. If you prefer an in-browser Cloud Shell experience with all the dependencies loaded, check out our _Quickstart Guide for Cloud Shell_ [here](/getting-started/cloud-shell-quickstart). You can see the process in the video here or follow the instructions step-by-step, especially for unique cloud providers:
+
+{% embed url="https://www.youtube.com/watch?v=O9BEwphNDLc&ab_channel=Plural" aspectRatio="16 / 9" /%}
 
 ## Prerequisites
 
@@ -15,7 +17,7 @@ This is a guide on how to get Plural running using our CLI. If you prefer an in-
 
 - **A cloud account**: Plural will deploy directly into your cloud provider of choice. We currently support AWS, GCP and Azure. Follow [this guide](/reference/configuring-cloud-provider) to make sure it's set up correctly.
 - **Your cloud provider CLI installed and configured**: Plural will leverage your cloud provider's CLI tooling in places. If need to install the cloud provider CLI, or aren't sure if it's properly configured you can follow [this guide](/reference/configuring-cloud-provider).
-- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system.
+- **A GitHub/GitLab account**: Plural manages the state of your infrastructure using a git-ops workflow, so you'll need an account with a version control management system. Follow the instructions [in our GitOps resources](/getting-started/manage-git-repositories/setting-up-gitops) for more information.
 
 ## Install Plural CLI
 
@@ -64,20 +66,6 @@ Before you proceed, make sure that your cloud provider CLI is properly configure
 {% /callout %}
 {% /tab %}
 
-{% tab title="Docker" %}
-We offer a docker image with the plural CLI installed along with all CLI dependencies: terraform, helm, kubectl, and all the major cloud CLI's: `gcr.io/pluralsh/plural-cli-cloud:0.5.20`. We also provide a decent configuration of zsh in it, so you can drive the entire plural workflow in an interactive session. The best strategy is probably to mount the config dir of the cloud provider you're using, like (\~/.aws), in the docker run command:
-
-```
-docker run -it --volume $HOME/.aws:/home/plural/aws \
-               --volume $HOME/.plural:/home/plural/.plural \
-               --volume $HOME/.ssh:/home/plural/.ssh \
-               --volume $HOME/PATH_TO_INSTALLATION_REPO:/home/plural/workspace \ # optional if you want to manage git via a volume
-    gcr.io/pluralsh/plural-cli-cloud:0.6.8 zsh
-```
-
-Once you're in the container's zsh, you'll want to clone the repo you'll use for your installations state there, or alternatively you can clone it outside your container and mount another volume pointing to it.
-{% /tab %}
-
 {% /tabs %}
 
 ## Create your Plural Repo
@@ -91,7 +79,7 @@ plural init
 The Plural CLI will then guide you through a workflow using GitHub/GitLab OAuth to create a repository on your behalf.
 
 {% callout severity="info" %}
-Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+If you'd prefer to set up Git manually vs. using OAuth, refer to our guide on [setting up Gitops](/getting-started/manage-git-repositories/setting-up-gitops).
 {% /callout %}
 
 Along the `plural init` workflow, we will set the Git attributes to configure encryption and configure your cloud provider for this installation.
@@ -100,11 +88,26 @@ You will also be asked whether you want to use Plural's domain service and if so
 
 This process will generate a `workspace.yaml` file at the root of your repo that stores your cloud provider configuration information.
 
+{% callout severity="info" %}
+Currently we're limited to a one cluster to one repo mapping, but eventually that will be relaxed. We also strongly urge users to store installations in a fresh, separate repository to avoid our automation trampling existing files.
+{% /callout %}
+
 ## Install Plural Applications
 
 To view the applications you can install on Plural, head to [this link](https://app.plural.sh/explore/public).
 
-Alternatively, you can run `plural repos list` on the CLI or Cloud Shell.
+Once you've selected your applications, you can install Plural bundles using our interactive GUI. To start the GUI, run:
+
+```
+plural install
+```
+
+You should see a window pop up like the below:
+![](/assets/cli-quickstart/local-installer.png)
+
+You can then follow a guided flow to select and configure your applications.
+
+Alternatively, you can run `plural repos list` on the CLI or Cloud Shell and find the bundle name specific to your cloud provider.
 
 Run `plural bundle list <app-name>` to find installation commands and information about each application available for install. For example, to list the bundle information for the Plural console, a powerful Kubernetes control plane:
 
@@ -152,6 +155,12 @@ plural bundle install console console-azure
 
 {% /tab %}
 {% /tabs %}
+
+As of CLI version 0.6.19, the bundle name can be inferred from primary bundles, optionally shortening the command to:
+
+```
+plural bundle install console
+```
 
 After running the install command, you will be asked a few questions about how your app will be configured, including whether you want to enable **Plural OIDC** (single sign-on). Unless you don't wish to use Plural as an identity provider due to internal company security requirements, you should enter (Y). This will enable you to use your existing `app.plural.sh` login information to access Plural-deployed applications. This will add an extra layer of security for applications without built-in authentication.
 

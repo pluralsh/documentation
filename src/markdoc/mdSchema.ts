@@ -1,21 +1,23 @@
+import { getRuntimeSchema } from '@pluralsh/design-system/dist/markdoc'
+import merge from 'lodash/merge'
+
 import * as config from './config'
 import * as functions from './functions'
-import { getSchema } from './mdSchemaTransforms'
 import * as nodes from './nodes'
 import * as tags from './tags'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 
-const baseSchema = {
-  nodes,
-  functions,
-  tags,
-  ...config,
-}
+const baseSchema = merge(
+  {
+    nodes,
+    functions,
+    tags,
+  },
+  config
+)
 
-export default baseSchema
-
-const { components, ...schemaConfig } = getSchema(baseSchema)
+const { components, ...schemaConfig } = getRuntimeSchema(baseSchema)
 
 export { components, schemaConfig as config }
 

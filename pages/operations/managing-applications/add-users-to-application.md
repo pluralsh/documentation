@@ -3,13 +3,13 @@ title: Add Users to an Application
 description: How to give end users access to an application installed using Plural.
 ---
 
-If you've enabled OIDC for a set of applications, you can easily give users or groups access to that application. To enable access to a particular application, you can add permissions via the Plural Marketplace or Plural Console. Any changes made in either the Marketplace or Console will be synced.
+If you've enabled OIDC for a set of applications, you can easily give users or groups access to that application. To enable access to a particular application, you can add permissions via the App Settings for a specific cluster or from the Plural Console. Any changes made in either location will be synced.
 
-## Through Plural Marketplace
+## Through Plural App Settings
 
-Admin users who have installed an application have the ability to add users to that application. To add users, navigate to the installed application in the Plural Marketplace. Click the application and select "OpenID Connect" in the sidebar on the left. This will open the form to add user or group bindings for this application. Add any new users or groups and click "Save" in the bottom right.
+Admin users who have installed an application have the ability to add users to that application. To add users, navigate to the installed application from your Clusters Overview page. Click the three dots on the application and select "App settings" in the menu. Select OpenID Connect from the sidebar on the left, and add any new users or groups and click "Save" in the bottom right.
 
-![](/assets/operations/marketplace-add-users.png)
+![](/assets/operations/app-settings-add-users.png)
 
 ## Through Plural Console
 

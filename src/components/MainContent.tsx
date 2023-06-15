@@ -4,6 +4,7 @@ import { useContext } from 'react'
 import { GitHubLogoIcon } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
 
+import { Heading } from '@pluralsh/design-system/dist/markdoc/components'
 import styled from 'styled-components'
 
 import { APP_CATALOG_BASE_URL } from '../consts/routes'
@@ -12,7 +13,6 @@ import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
 import AppsList from './AppsList'
 import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
-import { Heading } from './md/Heading'
 import { FooterLink } from './PageFooter'
 import { PagePropsContext } from './PagePropsContext'
 

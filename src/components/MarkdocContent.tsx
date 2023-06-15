@@ -2,9 +2,7 @@ import React from 'react'
 
 import { renderers } from '@markdoc/markdoc'
 
-import { components } from '../markdoc/mdSchema'
-
-import type { MarkdocPage } from '../markdoc/mdSchema'
+import { type MarkdocPage, components } from '../markdoc/mdSchema'
 
 export default function MarkdocComponent({
   markdoc,

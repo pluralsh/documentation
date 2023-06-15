@@ -54,7 +54,7 @@ export const readMdFileCached = async (
 
     return cacheAndReturn(ret)
   } catch (e) {
-    console.error(e)
+    // console.error(e)
 
     return cacheAndReturn(null)
   }

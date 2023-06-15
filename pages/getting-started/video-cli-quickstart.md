@@ -10,4 +10,4 @@ description: A short video on installing applications on Plural with the CLI
 - Install an instance of the Plural console
 - Install an instance of Airbyte on your cluster
 
-{% embed url="https://www.youtube.com/watch?v=suvTJyJ6PzI" aspectRatio="16 / 9" /%}
+{% embed url="https://www.youtube.com/watch?v=O9BEwphNDLc&ab_channel=Plural" aspectRatio="16 / 9" /%}

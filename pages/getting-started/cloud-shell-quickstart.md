@@ -12,21 +12,23 @@ This guide goes over how to get started with Plural using our in-browser Cloud S
 - Provisioned a fully-configured Kubernetes cluster.
 - Installed an application and all its dependencies on your Kubernetes cluster.
 
-in under 30 minutes, all within your browser.
+in under 30 minutes, all within your browser. You can see the process in the video here or follow the instructions step-by-step, esp for unique cloud providers:
+
+{% embed url="https://www.youtube.com/watch?v=mFDA-718RhI&ab_channel=Plural" aspectRatio="16 / 9" /%}
 
 ## Login and Create the Plural Repository
 
-Head over to [app.plural.sh](https://app.plural.sh) and set up an account.
-
-Navigate to [app.plural.sh/shell](https://app.plural.sh/shell) to access the Cloud Shell (if this is your first time using app.plural.sh, you should be automatically redirected to the onboarding flow). You'll be prompted to OAuth with either GitHub or GitLab. We're just getting your permission to create a repository for Plural configuration on your behalf. Give your repository a name, being sure to select the right organization or individual account in the first box. Your repository name must be unique within your account, which will be checked before you can advance to the next step.
-
-![](/assets/cloud-shell-quickstart/github-config.png)
+Once you're logged in, you'll land on the Clusters Overview page. You can click on the "Start onboarding" button to kick off your onboarding process in your shell [app.plural.sh/shell](https://app.plural.sh/shell).
 
 ### Set up a Cloud Provider
 
-Choose the option to continue your setup in the browser. If you'd prefer to use the CLI, choose "Local terminal" and switch to the CLI quickstart.
+Choose either the option to set up Plural using your own cloud credentials, or try our free 6-hour GCP sandbox demo. If you use your own cloud credentials, choose our Cloud Shell setup option. If you'd prefer to use the CLI, choose "Local terminal" and switch to the CLI quickstart.
 
 ![](/assets/cloud-shell-quickstart/setup-options.png)
+
+You'll then be prompted to OAuth with either GitHub or GitLab. We're just getting your permission to create a repository for Plural configuration on your behalf. Give your repository a name, being sure to select the right organization or individual account in the first box. Your repository name must be unique within your account, which will be checked before you can advance to the next step.
+
+![](/assets/cloud-shell-quickstart/github-config.png)
 
 Plural can be set up on AWS, GCP, or Azure. You can provide your credentials in the following screen:
 
@@ -81,7 +83,7 @@ Finish creating your service account, and you should see your new service accoun
 
 Select "Add Key" and save the generated file. This will be used to configure your GCP credentials in your Plural onboarding.
 
-![](/assets/cloud-shell-quickstart/gcp-plural-credentials.png)
+![](/assets/cloud-shell-quickstart/gcp-plural-config.png)
 
 {% /tab %}
 
@@ -127,7 +129,7 @@ Select the Owner role, and click on "Select members" to search for your app name
 
 Return to your Plural onboarding. Enter the values noted above into your Cloud Credential configuration, and proceed to the next step.
 
-![](/assets/cloud-shell-quickstart/plural-azure-config.png)
+![](/assets/cloud-shell-quickstart/azure-plural-config.png)
 {% /tab %}
 {% /tabs %}
 
@@ -167,7 +169,7 @@ In the Install Wizard on the left-hand side of the screen, choose the applicatio
 
 You'll now be guided through a setup wizard for the applications you chose. For help with Plural Console configuration, refer to [this guide](/applications/console) for explanations on each step. For help with configuring Airflow, refer to [this guide](/applications/airflow). Required fields are indicated with a star and will appear in red until they've been populated. Many fields have default values populated; you can use those defaults or provide your own inputs. Any steps without required configuration will be auto-skipped.
 
-![](/assets/cloud-shell-quickstart/airflow-configuration.png)
+![](/assets/cloud-shell-quickstart/airbyte-configuration.png)
 
 After configuration, you'll be provided with an overview screen of exactly which applications will be installed. When you're happy with the configuration, click `Install` to proceed.
 
@@ -181,7 +183,7 @@ Now it's time for Plural to write all the Helm and Terraform required to bring u
 
 Now grab a coffee or your favorite hot beverage while we wait for your cloud provider to provision your infrastructure.
 
-When your applications are finished installing, you'll be able to see the domains for each application in the terminal window.
+When your applications are finished installing, you'll be able to see the domains for each application in the terminal window, and you can launch them once all components are ready.
 
 ![](/assets/cloud-shell-quickstart/application-domains.png)
 

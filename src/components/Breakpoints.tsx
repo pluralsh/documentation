@@ -1,10 +1,17 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react'
 import type { PropsWithChildren } from 'react'
 
-type Breakpoint = '' | 'twoColumn' | 'fullHeader' | 'threeColumn' | 'maxWidth'
+type Breakpoint =
+  | ''
+  | 'md'
+  | 'twoColumn'
+  | 'fullHeader'
+  | 'threeColumn'
+  | 'maxWidth'
 
 export const breakpoints: Record<Breakpoint, number> = {
   '': 0,
+  md: 720,
   twoColumn: 1000,
   fullHeader: 1000,
   threeColumn: 1280,
