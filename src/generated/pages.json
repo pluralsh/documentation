@@ -1,0 +1,260 @@
+[
+  {
+    "path": "/adding-new-application/getting-started-with-runbooks"
+  },
+  {
+    "path": "/adding-new-application/getting-started-with-runbooks/runbook-xml"
+  },
+  {
+    "path": "/adding-new-application/getting-started-with-runbooks/runbook-yaml"
+  },
+  {
+    "path": "/adding-new-application/guide"
+  },
+  {
+    "path": "/adding-new-application"
+  },
+  {
+    "path": "/adding-new-application/module-library"
+  },
+  {
+    "path": "/adding-new-application/plural-custom-resources"
+  },
+  {
+    "path": "/applications"
+  },
+  {
+    "path": "/archive/architecture"
+  },
+  {
+    "path": "/archive/basics/AdminConsole"
+  },
+  {
+    "path": "/archive/basics/Architecture"
+  },
+  {
+    "path": "/archive/basics/GettingStarted"
+  },
+  {
+    "path": "/archive/basics/SecretManagement"
+  },
+  {
+    "path": "/archive/basics/WorkspaceLayout"
+  },
+  {
+    "path": "/archive/cloud-shell"
+  },
+  {
+    "path": "/archive/introduction"
+  },
+  {
+    "path": "/archive/secret-management"
+  },
+  {
+    "path": "/archive/sharing-existing-repos"
+  },
+  {
+    "path": "/archive/workspace-structure"
+  },
+  {
+    "path": "/debugging/application-issues"
+  },
+  {
+    "path": "/debugging/health-checks"
+  },
+  {
+    "path": "/debugging"
+  },
+  {
+    "path": "/debugging/logs"
+  },
+  {
+    "path": "/debugging/proxies"
+  },
+  {
+    "path": "/faq/certifications"
+  },
+  {
+    "path": "/faq/local-development"
+  },
+  {
+    "path": "/faq/plural-paid-tiers"
+  },
+  {
+    "path": "/first-party/manage-your-microservices"
+  },
+  {
+    "path": "/getting-started/admin-console"
+  },
+  {
+    "path": "/getting-started/cloud-shell-quickstart"
+  },
+  {
+    "path": "/getting-started/concepts"
+  },
+  {
+    "path": "/getting-started/manage-git-repositories"
+  },
+  {
+    "path": "/getting-started/manage-git-repositories/setting-up-gitops"
+  },
+  {
+    "path": "/getting-started/manage-git-repositories/sharing-git-repositories"
+  },
+  {
+    "path": "/getting-started/manage-git-repositories/workspace-encryption"
+  },
+  {
+    "path": "/getting-started/manage-git-repositories/your-plural-workspace"
+  },
+  {
+    "path": "/getting-started/openid-connect"
+  },
+  {
+    "path": "/getting-started/plural-difference"
+  },
+  {
+    "path": "/getting-started/quickstart"
+  },
+  {
+    "path": "/getting-started/video-cli-quickstart"
+  },
+  {
+    "path": "/"
+  },
+  {
+    "path": "/introduction"
+  },
+  {
+    "path": "/operations/auth-access-control/api-tokens"
+  },
+  {
+    "path": "/operations/auth-access-control/identity-and-installations/audit-logging"
+  },
+  {
+    "path": "/operations/auth-access-control/identity-and-installations"
+  },
+  {
+    "path": "/operations/auth-access-control/identity-and-installations/service-accounts"
+  },
+  {
+    "path": "/operations/auth-access-control"
+  },
+  {
+    "path": "/operations/auth-access-control/openid-connect"
+  },
+  {
+    "path": "/operations/cluster-configuration"
+  },
+  {
+    "path": "/operations/cost-management"
+  },
+  {
+    "path": "/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console"
+  },
+  {
+    "path": "/operations/dns-setup"
+  },
+  {
+    "path": "/operations/managing-applications/add-application-to-cluster"
+  },
+  {
+    "path": "/operations/managing-applications/add-users-to-application"
+  },
+  {
+    "path": "/operations/managing-applications/bounce-application"
+  },
+  {
+    "path": "/operations/managing-applications/connect-application-db"
+  },
+  {
+    "path": "/operations/managing-applications/credentials-non-oidc"
+  },
+  {
+    "path": "/operations/managing-applications/customize-application"
+  },
+  {
+    "path": "/operations/managing-applications/delete-application"
+  },
+  {
+    "path": "/operations/managing-applications"
+  },
+  {
+    "path": "/operations/managing-applications/update-application"
+  },
+  {
+    "path": "/operations/network-configuration"
+  },
+  {
+    "path": "/operations/pricing-calculator"
+  },
+  {
+    "path": "/operations/security"
+  },
+  {
+    "path": "/operations/uninstall"
+  },
+  {
+    "path": "/reference/api/console-api"
+  },
+  {
+    "path": "/reference/api"
+  },
+  {
+    "path": "/reference/api/plural-api"
+  },
+  {
+    "path": "/reference/cli-reference"
+  },
+  {
+    "path": "/reference/configuring-cloud-provider"
+  },
+  {
+    "path": "/reference/faq"
+  },
+  {
+    "path": "/reference/glossary"
+  },
+  {
+    "path": "/reference"
+  },
+  {
+    "path": "/reference/operator-guides/adding-kubecost-for-cost-analysis"
+  },
+  {
+    "path": "/reference/operator-guides"
+  },
+  {
+    "path": "/reference/release-notes"
+  },
+  {
+    "path": "/reference/troubleshooting"
+  },
+  {
+    "path": "/test/blockquotes"
+  },
+  {
+    "path": "/test/buttons"
+  },
+  {
+    "path": "/test/callouts"
+  },
+  {
+    "path": "/test/codefence"
+  },
+  {
+    "path": "/test/codetabs"
+  },
+  {
+    "path": "/test/global-variables"
+  },
+  {
+    "path": "/test/images"
+  },
+  {
+    "path": "/test"
+  },
+  {
+    "path": "/test/tabs"
+  }
+]
