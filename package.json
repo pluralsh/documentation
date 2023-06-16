@@ -23,7 +23,7 @@
   },
   "dependencies": {
     "@apollo/client": "3.7.15",
-    "@docsearch/react": "3.5.0",
+    "@docsearch/react": "3.5.1",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@graphql-codegen/add": "5.0.0",
