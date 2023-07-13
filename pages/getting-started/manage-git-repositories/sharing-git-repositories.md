@@ -17,7 +17,7 @@ To register a key for your current machine, run:
 plural crypto setup-keys --name <name-for-key-pair>
 ```
 
-This will generate a new keypair and automatically register the public key with the Plural API. You should be able to see it listed [here](https://app.plural.sh/me/edit/keys) in our web app and the keypair will be stored in `~/.plural/identity`.
+This will generate a new keypair and automatically register the public key with the Plural API. You should be able to see it listed [here](https://app.plural.sh/profile/keys) in our web app and the keypair will be stored in `~/.plural/identity`.
 
 ### Share the repository
 
