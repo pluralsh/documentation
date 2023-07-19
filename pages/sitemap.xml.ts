@@ -36,11 +36,11 @@ export default function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
-async function generateSiteMap({
+function generateSiteMap({
   repos,
 }: {
-  repos: Awaited<ReturnType<typeof getRepos>>
-}) {
+  repos?: Awaited<ReturnType<typeof getRepos>>
+} = {}) {
   const lastMod = new Date().toISOString()
 
   // We generate the XML sitemap with the posts data
@@ -56,7 +56,7 @@ async function generateSiteMap({
   return sitemap
 }
 
-let cachedSiteMap: string
+let cachedSiteMap: string = generateSiteMap()
 
 export async function getServerSideProps({ res }) {
   // We make an API call to gather the URLs for our site
@@ -66,6 +66,7 @@ export async function getServerSideProps({ res }) {
 
   if (!reposError) {
     sitemap = await generateSiteMap({ repos })
+    cachedSiteMap = sitemap
   }
 
   res.setHeader('Content-Type', 'text/xml')
