@@ -39,6 +39,7 @@ export type Account = {
   paymentMethods?: Maybe<PaymentMethodConnection>;
   rootUser?: Maybe<User>;
   subscription?: Maybe<PlatformSubscription>;
+  trialed?: Maybe<Scalars['Boolean']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   userCount?: Maybe<Scalars['String']['output']>;
   workosConnectionId?: Maybe<Scalars['String']['output']>;
@@ -1363,6 +1364,7 @@ export type IntegrationWebhookEdge = {
 export type Invite = {
   __typename?: 'Invite';
   account?: Maybe<Account>;
+  admin?: Maybe<Scalars['Boolean']['output']>;
   email?: Maybe<Scalars['String']['output']>;
   existing: Scalars['Boolean']['output'];
   expiresAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1375,6 +1377,7 @@ export type Invite = {
 };
 
 export type InviteAttributes = {
+  admin?: InputMaybe<Scalars['Boolean']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   inviteGroups?: InputMaybe<Array<InputMaybe<BindingAttributes>>>;
 };
@@ -1621,7 +1624,8 @@ export enum NotificationType {
   IncidentUpdate = 'INCIDENT_UPDATE',
   Locked = 'LOCKED',
   Mention = 'MENTION',
-  Message = 'MESSAGE'
+  Message = 'MESSAGE',
+  Pending = 'PENDING'
 }
 
 export type OauthAttributes = {
@@ -2026,6 +2030,7 @@ export type PlatformPlan = {
   lineItems?: Maybe<Array<Maybe<PlatformPlanItem>>>;
   name: Scalars['String']['output'];
   period: PaymentPeriod;
+  trial?: Maybe<Scalars['Boolean']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   visible: Scalars['Boolean']['output'];
 };
@@ -2043,9 +2048,12 @@ export type PlatformSubscription = {
   __typename?: 'PlatformSubscription';
   externalId?: Maybe<Scalars['String']['output']>;
   id: Scalars['ID']['output'];
+  insertedAt?: Maybe<Scalars['DateTime']['output']>;
   latestInvoice?: Maybe<Invoice>;
   lineItems?: Maybe<Array<Maybe<PlatformSubscriptionLineItems>>>;
   plan?: Maybe<PlatformPlan>;
+  trialUntil?: Maybe<Scalars['DateTime']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type PlatformSubscriptionLineItems = {
@@ -2627,6 +2635,7 @@ export type RootMutationType = {
   acceptIncident?: Maybe<Incident>;
   acceptLogin?: Maybe<OauthResponse>;
   acquireLock?: Maybe<ApplyLock>;
+  beginTrial?: Maybe<PlatformSubscription>;
   cancelPlatformSubscription?: Maybe<PlatformSubscription>;
   completeIncident?: Maybe<Incident>;
   createArtifact?: Maybe<Artifact>;
@@ -2729,6 +2738,7 @@ export type RootMutationType = {
   realizeInvite?: Maybe<User>;
   realizeResetToken?: Maybe<Scalars['Boolean']['output']>;
   rebootShell?: Maybe<CloudShell>;
+  release?: Maybe<Scalars['Boolean']['output']>;
   releaseLock?: Maybe<ApplyLock>;
   resetInstallations?: Maybe<Scalars['Int']['output']>;
   restartShell?: Maybe<Scalars['Boolean']['output']>;
@@ -3285,6 +3295,13 @@ export type RootMutationTypeRealizeInviteArgs = {
 export type RootMutationTypeRealizeResetTokenArgs = {
   attributes: ResetTokenRealization;
   id: Scalars['ID']['input'];
+};
+
+
+export type RootMutationTypeReleaseArgs = {
+  repositoryId?: InputMaybe<Scalars['ID']['input']>;
+  repositoryName?: InputMaybe<Scalars['String']['input']>;
+  tags?: InputMaybe<Array<Scalars['String']['input']>>;
 };
 
 
