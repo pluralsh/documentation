@@ -101,20 +101,22 @@ export default function MainContent({ Component, title, description }) {
         <Breadcrumbs />
       </BreadcrumbsWrapper>
       <ContentWrapper>
-        {(title || description) && (
-          <ContentHeader
-            title={title}
-            description={description}
-            pageHasContent={(markdoc?.content as any)?.children?.length > 0}
-          />
-        )}
-        <Component {...pageProps} />
-        {isAppCatalogIndex && (
-          <>
-            <Heading level={2}>Our Catalog</Heading>
-            <AppsList />
-          </>
-        )}
+        <article className="primary-content">
+          {(title || description) && (
+            <ContentHeader
+              title={title}
+              description={description}
+              pageHasContent={(markdoc?.content as any)?.children?.length > 0}
+            />
+          )}
+          <Component {...pageProps} />
+          {isAppCatalogIndex && (
+            <>
+              <Heading level={2}>Our Catalog</Heading>
+              <AppsList />
+            </>
+          )}
+        </article>
         <PageDivider />
         {markdoc?.file?.path && (
           <EditOnGithub>
