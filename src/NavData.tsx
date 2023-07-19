@@ -263,6 +263,10 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/reference/troubleshooting',
       },
       {
+        title: 'Handling Partial Deployments',
+        href: '/reference/partial-installation',
+      },
+      {
         href: '/getting-started/manage-git-repositories',
         title: 'Manage Git Repositories',
         sections: [
