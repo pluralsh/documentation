@@ -1380,6 +1380,8 @@ export type InviteAttributes = {
   admin?: InputMaybe<Scalars['Boolean']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
   inviteGroups?: InputMaybe<Array<InputMaybe<BindingAttributes>>>;
+  oidcProviderId?: InputMaybe<Scalars['ID']['input']>;
+  serviceAccountId?: InputMaybe<Scalars['ID']['input']>;
 };
 
 export type InviteConnection = {
@@ -1731,6 +1733,7 @@ export type OidcProvider = {
   consent?: Maybe<ConsentRequest>;
   id: Scalars['ID']['output'];
   insertedAt?: Maybe<Scalars['DateTime']['output']>;
+  invites?: Maybe<Array<Maybe<Invite>>>;
   redirectUris?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
@@ -3621,6 +3624,7 @@ export type RootQueryType = {
   tokens?: Maybe<PersistedTokenConnection>;
   upgradeQueue?: Maybe<UpgradeQueue>;
   upgradeQueues?: Maybe<Array<Maybe<UpgradeQueue>>>;
+  user?: Maybe<User>;
   users?: Maybe<UserConnection>;
   versions?: Maybe<VersionConnection>;
   webhooks?: Maybe<WebhookConnection>;
@@ -4154,6 +4158,11 @@ export type RootQueryTypeTokensArgs = {
 
 export type RootQueryTypeUpgradeQueueArgs = {
   id?: InputMaybe<Scalars['ID']['input']>;
+};
+
+
+export type RootQueryTypeUserArgs = {
+  id: Scalars['ID']['input'];
 };
 
 
@@ -4738,6 +4747,7 @@ export type User = {
   address?: Maybe<Address>;
   avatar?: Maybe<Scalars['String']['output']>;
   backgroundColor?: Maybe<Scalars['String']['output']>;
+  /** the roles attached to this user, only fetch this when querying an individual user */
   boundRoles?: Maybe<Array<Maybe<Role>>>;
   cards?: Maybe<CardConnection>;
   defaultQueueId?: Maybe<Scalars['ID']['output']>;
@@ -4747,11 +4757,14 @@ export type User = {
   email: Scalars['String']['output'];
   emailConfirmBy?: Maybe<Scalars['DateTime']['output']>;
   emailConfirmed?: Maybe<Scalars['Boolean']['output']>;
+  /** the groups attached to this user, only fetch this when querying an individual user */
+  groups?: Maybe<Array<Maybe<Group>>>;
   hasInstallations?: Maybe<Scalars['Boolean']['output']>;
   hasShell?: Maybe<Scalars['Boolean']['output']>;
   id: Scalars['ID']['output'];
   impersonationPolicy?: Maybe<ImpersonationPolicy>;
   insertedAt?: Maybe<Scalars['DateTime']['output']>;
+  invites?: Maybe<Array<Maybe<Invite>>>;
   jwt?: Maybe<Scalars['String']['output']>;
   loginMethod?: Maybe<LoginMethod>;
   name: Scalars['String']['output'];
@@ -4777,6 +4790,7 @@ export type UserAttributes = {
   avatar?: InputMaybe<Scalars['UploadOrUrl']['input']>;
   confirm?: InputMaybe<Scalars['String']['input']>;
   email?: InputMaybe<Scalars['String']['input']>;
+  groupIds?: InputMaybe<Array<Scalars['ID']['input']>>;
   loginMethod?: InputMaybe<LoginMethod>;
   name?: InputMaybe<Scalars['String']['input']>;
   onboarding?: InputMaybe<OnboardingState>;
