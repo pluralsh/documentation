@@ -4,33 +4,29 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
   ':root': {
     '--docsearch-primary-color': theme.colors['action-primary'],
     '--docsearch-text-color': 'rgb(28, 30, 33)',
-    '--docsearch-spacing': theme.spacing.medium,
+    '--docsearch-spacing': `${theme.spacing.medium}px`,
     '--docsearch-icon-stroke-width': '1.4',
     '--docsearch-highlight-color': theme.colors['action-primary'],
     '--docsearch-muted-color': 'rgb(150, 159, 175)',
     '--docsearch-container-background': 'rgba(101, 108, 133, 0.8)',
     '--docsearch-logo-color': theme.colors['action-primary'],
-
     /* modal */
     '--docsearch-modal-width': '620px',
     '--docsearch-modal-height': '600px',
     '--docsearch-modal-background': 'rgb(245, 246, 247)',
     '--docsearch-modal-shadow': `inset 1px 1px 0 0 rgba(255, 255, 255, 0.5),
       0 3px 8px 0 rgba(85, 90, 100, 1);`,
-
     /* searchbox */
     '--docsearch-searchbox-height': '48px',
     '--docsearch-searchbox-background': 'rgb(235, 237, 240)',
     '--docsearch-searchbox-focus-background': '#fff',
     '--docsearch-searchbox-shadow': `inset 0 0 0 1px ${theme.colors.border}`,
-
     /* hit */
-    '--docsearch-hit-height': theme.spacing.xxxlarge,
+    '--docsearch-hit-height': `${theme.spacing.xxxlarge}px`,
     '--docsearch-hit-color': 'rgb(68, 73, 80)',
     '--docsearch-hit-active-color': '#fff',
     '--docsearch-hit-background': '#fff',
     '--docsearch-hit-shadow': '0 1px 3px 0 rgb(212, 217, 225)',
-
     /* key */
     '--docsearch-key-gradient': `linear-gradient(
       -225deg,
@@ -39,16 +35,13 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     )`,
     '--docsearch-key-shadow': `inset 0 -2px 0 0 rgb(205, 205, 230),
       inset 0 0 1px 1px #fff, 0 1px 2px 1px rgba(30, 35, 90, 0.4)`,
-
     /* footer */
     '--docsearch-footer-height': '44px',
     '--docsearch-footer-background': '#fff',
     '--docsearch-footer-shadow': `0 -1px 0 0 rgb(224, 227, 232),
       0 -3px 6px 0 rgba(69, 98, 155, 0.12)`,
   },
-
   /* Darkmode */
-
   'html[data-theme="dark"]': {
     '--docsearch-text-color': theme.colors.text,
     '--docsearch-container-background': 'rgba(23, 26, 33, 0.6)',
@@ -66,7 +59,6 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     '--docsearch-logo-color': theme.colors['text-xlight'],
     '--docsearch-muted-color': theme.colors['text-xlight'],
   },
-
   /* Overrides */
   '.DocSearch': {
     ...theme.partials.marketingText.body2,
@@ -75,7 +67,6 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     {
       display: 'none',
     },
-
   '.DocSearch-Form:focus-within': {
     boxShadow: theme.boxShadows.focused,
   },
