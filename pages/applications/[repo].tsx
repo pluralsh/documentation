@@ -20,16 +20,16 @@ import MarkdocComponent from '@src/components/MarkdocContent'
 import { getAppMetaDescription } from '@src/consts'
 import { APP_CATALOG_BASE_URL } from '@src/consts/routes'
 import { getRepos } from '@src/data/getRepos'
-import { RecipesDocument } from '@src/generated/graphql'
+import {
+  type RecipeFragment,
+  RecipesDocument,
+  type RecipesQuery,
+  type RecipesQueryVariables,
+} from '@src/generated/graphql'
 import { readMdFileCached } from '@src/markdoc/mdParser'
 import { providerToProviderName } from '@src/utils/text'
 
 import type { MarkdocHeading, MyPageProps } from '../_app'
-import type {
-  RecipeFragment,
-  RecipesQuery,
-  RecipesQueryVariables,
-} from '@src/generated/graphql'
 
 function collectHeadings(node: any, sections: MarkdocHeading[] = []) {
   if (node) {
@@ -68,8 +68,8 @@ export default function Repo({
 
   const headings = collectHeadings(markdoc?.content)
 
-  const mdHasConfig = !!headings.find((heading) =>
-    heading?.title?.match(/configuration/gi)
+  const mdHasConfig = !!headings.find(
+    (heading) => heading?.title?.match(/configuration/gi)
   )
 
   const tabs = recipes?.filter(isRecipe).map((recipe) => ({
@@ -110,13 +110,14 @@ export default function Repo({
         <>
           <Heading level={2}>Setup Configuration</Heading>
           <List ordered={false}>
-            {recipeSections.map((section) =>
-              section?.configuration?.map((x, configIdx) => (
-                <ListItem key={configIdx}>
-                  <InlineCode>{x?.name}</InlineCode>:{' '}
-                  {x?.longform || x?.documentation}
-                </ListItem>
-              ))
+            {recipeSections.map(
+              (section) =>
+                section?.configuration?.map((x, configIdx) => (
+                  <ListItem key={configIdx}>
+                    <InlineCode>{x?.name}</InlineCode>:{' '}
+                    {x?.longform || x?.documentation}
+                  </ListItem>
+                ))
             )}
           </List>
         </>

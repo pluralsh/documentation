@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-import { useMemo } from 'react'
+import { type ReactNode, useMemo } from 'react'
 
 import { DocumentIcon } from '@pluralsh/design-system'
 import { Button } from 'honorable'

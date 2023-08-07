@@ -3,14 +3,12 @@ import { DiscordIcon } from '@pluralsh/design-system'
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 
-import { FullNav } from './FullNav'
+import { FullNav, type NavContextValue } from './FullNav'
 import GithubStars from './GithubStars'
 import useScrollLock from './hooks/useScrollLock'
 import { MainLink } from './PageHeader'
 import { SocialLink } from './PageHeaderButtons'
 import { TopHeading } from './SideNav'
-
-import type { NavContextValue } from './FullNav'
 
 type MobileMenuProps = NavContextValue & {
   className?: string

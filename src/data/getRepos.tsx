@@ -2,13 +2,12 @@ import capitalize from 'lodash/capitalize'
 import memoizeOne from 'memoize-one'
 
 import client from '../apollo-client'
-import { ReposDocument } from '../generated/graphql'
-
-import type {
-  RecipeFragment,
-  RepoFragment,
-  ReposQuery,
-  ReposQueryVariables,
+import {
+  type RecipeFragment,
+  type RepoFragment,
+  ReposDocument,
+  type ReposQuery,
+  type ReposQueryVariables,
 } from '../generated/graphql'
 
 const REMOVE_LIST = ['bootstrap', 'test-harness', 'gcp-config-connector']

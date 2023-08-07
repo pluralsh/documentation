@@ -4,9 +4,7 @@ import path from 'path'
 import Markdoc from '@markdoc/markdoc'
 import yaml from 'js-yaml'
 
-import { config as schemaConfig } from './mdSchema'
-
-import type { MarkdocPage } from './mdSchema'
+import { type MarkdocPage, config as schemaConfig } from './mdSchema'
 
 const fileCache = new Map<string, MarkdocPage | null>()
 

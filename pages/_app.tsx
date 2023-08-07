@@ -52,11 +52,10 @@ import {
 } from '@src/consts'
 import { NavDataProvider } from '@src/contexts/NavDataContext'
 import { ReposProvider } from '@src/contexts/ReposContext'
-import { getRepos, reposCache } from '@src/data/getRepos'
+import { type Repo, getRepos, reposCache } from '@src/data/getRepos'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
-import type { Repo } from '@src/data/getRepos'
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   displayTitle?: string

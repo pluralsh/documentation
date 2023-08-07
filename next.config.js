@@ -3,20 +3,25 @@
 const withMarkdoc = require('@markdoc/next.js')(
   /* config: https://markdoc.io/docs/nextjs#options */ {
     schemaPath: './src/markdoc',
-  })
-const withTM = require('next-transpile-modules')(['@pluralsh/design-system', 'honorable', 'honorable-theme-default'],
-  {
-    debug: false,
-  })
+  }
+)
 
 module.exports = () => {
-  const plugins = [withMarkdoc, withTM]
+  const plugins = [withMarkdoc]
 
   return plugins.reduce((acc, next) => next(acc), {
+    transpilePackages: [
+      '@pluralsh/design-system',
+      'honorable',
+      'honorable-theme-default',
+      'honorable-recipe-mapper',
+    ],
     reactStrictMode: false,
     compiler: {
       // https://nextjs.org/docs/advanced-features/compiler#styled-components
-      styledComponents: true,
+      styledComponents: {
+        ssr: true,
+      },
       emotion: true,
     },
     i18n: {
@@ -53,12 +58,14 @@ module.exports = () => {
         },
         {
           source: '/getting-started/getting-started-with-runbooks/runbook-yaml',
-          destination: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
+          destination:
+            '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
           permanent: true,
         },
         {
           source: '/basic-setup-and-deployment/setting-up-gitops',
-          destination: '/getting-started/managing-git-repository/setting-up-gitops',
+          destination:
+            '/getting-started/managing-git-repository/setting-up-gitops',
           permanent: true,
         },
         {
@@ -87,7 +94,8 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/reference/operator-guides/adding-kubecost-for-cost-analysis',
+          source:
+            '/reference/operator-guides/adding-kubecost-for-cost-analysis',
           destination: '/repositories/kubecost',
           permanent: true,
         },
@@ -132,8 +140,10 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
-          destination: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+          source:
+            '/advanced-topics/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+          destination:
+            '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
           permanent: true,
         },
         {
@@ -143,7 +153,8 @@ module.exports = () => {
         },
         {
           source: '/advanced-topics/security/secret-management',
-          destination: '/getting-started/manage-git-repositories/sharing-git-repositories',
+          destination:
+            '/getting-started/manage-git-repositories/sharing-git-repositories',
           permanent: true,
         },
         {
@@ -172,12 +183,14 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/introduction',
+          source:
+            '/advanced-topics/identity-and-access-management/introduction',
           destination: '/operations/auth-access-control',
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/openid-connect',
+          source:
+            '/advanced-topics/identity-and-access-management/openid-connect',
           destination: '/operations/auth-access-control/openid-connect',
           permanent: true,
         },
@@ -187,28 +200,37 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/identity-and-installations',
-          destination: '/operations/auth-access-control/identity-and-installations',
+          source:
+            '/advanced-topics/identity-and-access-management/identity-and-installations',
+          destination:
+            '/operations/auth-access-control/identity-and-installations',
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/identity-and-installations/audit-logging',
-          destination: '/operations/auth-access-control/identity-and-installations/audit-logging',
+          source:
+            '/advanced-topics/identity-and-access-management/identity-and-installations/audit-logging',
+          destination:
+            '/operations/auth-access-control/identity-and-installations/audit-logging',
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts',
-          destination: '/operations/auth-access-control/identity-and-installations/service-accounts',
+          source:
+            '/advanced-topics/identity-and-access-management/identity-and-installations/service-accounts',
+          destination:
+            '/operations/auth-access-control/identity-and-installations/service-accounts',
           permanent: true,
         },
         {
-          source: '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
-          destination: '/getting-started/manage-git-repositories/sharing-git-repository',
+          source:
+            '/advanced-topics/identity-and-access-management/identity-and-installations/sharing-existing-repos',
+          destination:
+            '/getting-started/manage-git-repositories/sharing-git-repository',
           permanent: true,
         },
         {
           source: '/reference/workspaces',
-          destination: '/getting-started/manage-git-repositories/your-plural-workspace',
+          destination:
+            '/getting-started/manage-git-repositories/your-plural-workspace',
           permanent: true,
         },
       ]

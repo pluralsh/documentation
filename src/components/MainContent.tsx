@@ -1,5 +1,4 @@
-import type { ReactNode } from 'react'
-import { useContext } from 'react'
+import { type ReactNode, useContext } from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
