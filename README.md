@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/58af7361-4aec-4e82-a963-7b192690851a/deploy-status)](https://app.netlify.com/sites/pluraldocs/deploys)
+
 Documentation site for [Plural](https://www.plural.sh/), the open-source, unified, application deployment platform that makes it easy to run open-source software on Kubernetes. Our marketplace has dozens of top tier applications ready to deploy.
 
 Built with [Next.js](https://nextjs.org/) and [Markdoc](https://markdoc.dev/).
@@ -23,5 +25,5 @@ Finally, make sure to add your new document to the NavData.tsx file located [her
 
 ### Updating structure
 
-If you are making any changes to the documentation structure or organization, you'll likely need to set up page redirects. These can be added in [next.config.js](next.config.js). Make sure to 
+If you are making any changes to the documentation structure or organization, you'll likely need to set up page redirects. These can be added in [next.config.js](next.config.js). Make sure to
 look for internal usages throughout all the documents on the site to make sure that there are no broken links.
