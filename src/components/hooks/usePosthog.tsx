@@ -9,9 +9,11 @@ function setAllowTracking(on?: boolean) {
   // opt_in_capturing() or opt_out_capturing() without having run
   // posthog.init() first. This generally only occurs when running locally.
   if (window && process.env.NEXT_PUBLIC_POSTHOG_API_KEY) {
-    if (on) {
+    if (on && !posthog.has_opted_in_capturing()) {
       posthog.opt_in_capturing()
-    } else {
+      // Make sure to capture initial page view after opting in
+      posthog.capture('$pageview')
+    } else if (!on && !posthog.has_opted_out_capturing()) {
       posthog.opt_out_capturing()
     }
   }
@@ -26,8 +28,7 @@ export function usePosthog() {
         api_host:
           process.env.NEXT_PUBLIC_POSTHOG_API_HOST ||
           'https://posthog.plural.sh',
-        opt_out_capturing_by_default:
-          window.Cookiebot?.consent?.statistics ?? false,
+        opt_out_capturing_by_default: !window.Cookiebot?.consent?.statistics,
         loaded: () => {
           setAllowTracking(window.Cookiebot?.consent?.statistics)
         },
