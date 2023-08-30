@@ -40,7 +40,7 @@ You can toggle any release channel in the `/clusters` page of https://app.plural
 
 When a new version of a helm chart or terraform module is pushed into a release channel, our api will update your installation for you and then push an upgrade into your upgrade queue for the console to apply for you. This is an ordered list which is meant to be dependency ordered to properly guide the console to safely apply an upgrade.
 
-That said the source of truth of what you install is your terraform/helm installation in our api and this is really a sequence of commands the console is meant to execute on your behalf.
+That said, the source of truth of what you install is your terraform/helm installation in our API, and this is really a sequence of commands the console is meant to execute on your behalf.
 
 You can see an upgrade queue for a cluster in the clusters tab in app.plural.sh at any point in time as well.
 
