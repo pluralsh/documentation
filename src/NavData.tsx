@@ -76,6 +76,10 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/admin-console',
         title: 'Installing Plural Console',
       },
+      {
+        href: '/getting-started/understanding-upgrades',
+        title: 'Understanding Application Upgrades',
+      },
     ],
   },
   {
