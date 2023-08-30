@@ -15,7 +15,7 @@ The purpose of this doc is to help users understand the nuts-and-bolts of how up
 
 ## Installation States
 
-Any Plural user can have a set of installations bound to them. These include an installation of a specific app, eg Airbyte, and submodules for that app, eg a helm chart at some version, and a terraform module at that version. At any given point in time that installation can be:
+Any Plural user can have a set of installations bound to them. These include an installation of a specific app (e.g. Airbyte) and submodules for that app (e.g. a helm chart at some version, and a terraform module at that version). At any given point in time that installation can be:
 
 - Synced/Unsynced - this basically means the installation has changed versions in our api but has not yet been applied in your infrastructure. Generally running `plural deploy` for that app will mark it as synced
 - Locked/Unlocked - this state is used when a manual change is needed, some changes like kubernetes upgrades or heavy app migrations need to be applied manually and not by our console, and this state is meant to pause upgrades for that app until you explicitly mark it as having been applied with `plural repos unlock <app>`
