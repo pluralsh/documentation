@@ -12,7 +12,8 @@ When a user sets up a new Plural workspace in a git repository (we sometimes cal
 
 Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module. The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API. The CLI will then generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using the values saved in the `context.yaml` using its templating engine.
 
-E.g. the `tree` of the Plural Console application in your deployment repository after a `plural build console` might look like this:
+For example, after the `plural build dagster` command the `tree` of the built Dagster application in your deployment repository might look like this:
+
 ```console
 $ tree .
 .
@@ -20,11 +21,11 @@ $ tree .
 ├── deploy.hcl
 ├── diff.hcl
 ├── helm
-│   └── console
+│   └── dagster
 │       ├── Chart.lock
 │       ├── Chart.yaml
 │       ├── charts
-│       │   └── console-0.7.79.tgz
+│       │   └── dagster-0.1.44.tgz
 │       ├── default-values.yaml
 │       ├── templates
 │       │   ├── NOTES.txt
@@ -37,8 +38,10 @@ $ tree .
 └── terraform
     ├── aws
     │   ├── deps.yaml
+    │   ├── iam.tf
     │   ├── main.tf
-    │   ├── node-group.tf
+    │   ├── outputs.tf
+    │   ├── postgres.tf
     │   └── variables.tf
     ├── main.tf
     └── outputs.tf
@@ -46,9 +49,92 @@ $ tree .
 
 ## Plural application artifacts
 
-As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation. Some extra configuration files are necessary in the applications artifact Helm charts and Terraform modules for Plural to be able to understand their dependencies and run them through its templating engine. Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
+As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation.
+Some extra configuration files are necessary in the applications artifact for Plural to be able to understand
+- the Helm charts and Terraform modules dependencies to run them through its templating engine
+- dependencies on other Plural artifacts
+- platform specific components and infrastructure configurations
+- as well as Plural's own package and version specs.
+
+As an example Dagster's artifact `tree` would look like this:
+
+```console
+$ tree .
+.
+├── Pluralfile
+├── helm
+│   └── dagster
+│       ├── Chart.lock
+│       ├── Chart.yaml
+│       ├── README.md
+│       ├── charts
+│       │   ├── config-overlays-0.1.1.tgz
+│       │   ├── dagster-1.4.10.tgz
+│       │   ├── postgres-0.1.16.tgz
+│       │   └── test-base-0.1.10.tgz
+│       ├── deps.yaml
+│       ├── runbooks
+│       │   └── scaling-manual.xml
+│       ├── templates
+│       │   ├── _helpers.tpl
+│       │   ├── oidc.yaml
+│       │   ├── runbooks.yaml
+│       │   └── secret.yaml
+│       ├── values.yaml
+│       └── values.yaml.tpl
+├── plural
+│   ├── docs
+│   │   ├── private-ingress.md
+│   │   └── user-code.md
+│   ├── icons
+│   │   ├── dagster-primary-mark.png
+│   │   └── dagster.png
+│   ├── notes.tpl
+│   ├── recipes
+│   │   ├── dagster-aws.yaml
+│   │   ├── dagster-azure.yaml
+│   │   └── dagster-gcp.yaml
+│   └── tags
+│       ├── helm
+│       │   └── dagster.yaml
+│       └── terraform
+│           ├── aws.yaml
+│           ├── azure.yaml
+│           └── gcp.yaml
+├── repository.yaml
+├── terraform
+│   ├── aws
+│   │   ├── deps.yaml
+│   │   ├── iam.tf
+│   │   ├── main.tf
+│   │   ├── outputs.tf
+│   │   ├── postgres.tf
+│   │   ├── terraform.tfvars
+│   │   └── variables.tf
+│   ├── azure
+│   │   ├── deps.yaml
+│   │   ├── main.tf
+│   │   ├── terraform.tfvars
+│   │   └── variables.tf
+│   └── gcp
+│       ├── deps.yaml
+│       ├── main.tf
+│       ├── outputs.tf
+│       ├── terraform.tfvars
+│       └── variables.tf
+└── vendor_images.yaml
+```
+
+Let's disect what's going on here.
+
+
+
+Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
 
 During a `plural build` inside the deployment repository the `values.yaml.tpl` and `terraform.tfvars` files of the artifact are run through the Plural templating engine, which is similar to that of Helm, and are used to generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module.
+
+
+### Templating
 
 The next example is a snippet of the `values.yaml.tpl` file for Grafana:
 
