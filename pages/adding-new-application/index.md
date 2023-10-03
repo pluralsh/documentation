@@ -6,17 +6,49 @@ description: >-
   guide outlines the process.
 ---
 
-The two main functionalities that make Plural work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
+The two main functionalities that make the apps in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
 
 When a user sets up a new Plural workspace in a git repository a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under. Next, the user can install an application using the `plural bundle <app_name> <bundle>` CLI command. The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application. These inputs are saved in the `context.yaml` file.
 
-Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module. The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the Plural API, which the CLI downloads. The CLI will then generate the `values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using the values saved in the `context.yaml` using its templating engine.
+Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module. The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API. The CLI will then generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using the values saved in the `context.yaml` using its templating engine.
+
+E.g. the `tree` of the Plural Console application in your deployment repository after a `plural build console` might look like this:
+```console
+$ tree .
+.
+├── build.hcl
+├── deploy.hcl
+├── diff.hcl
+├── helm
+│   └── console
+│       ├── Chart.lock
+│       ├── Chart.yaml
+│       ├── charts
+│       │   └── console-0.7.79.tgz
+│       ├── default-values.yaml
+│       ├── templates
+│       │   ├── NOTES.txt
+│       │   ├── application.yaml
+│       │   ├── license.yaml
+│       │   └── secret.yaml
+│       └── values.yaml
+├── manifest.yaml
+├── output.yaml
+└── terraform
+    ├── aws
+    │   ├── deps.yaml
+    │   ├── main.tf
+    │   ├── node-group.tf
+    │   └── variables.tf
+    ├── main.tf
+    └── outputs.tf
+```
 
 ## Plural application artifacts
 
-As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation. Some extra files are necessary in Helm charts and Terraform modules for Plural to be able to understand their dependencies and run them through its templating engine. Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
+As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation. Some extra configuration files are necessary in the applications artifact Helm charts and Terraform modules for Plural to be able to understand their dependencies and run them through its templating engine. Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
 
-The `values.yaml.tpl` and `terraform.tfvars` files are run through the Plural templating engine, which is similar to that of Helm, and are used to generate the `values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module.
+During a `plural build` inside the deployment repository the `values.yaml.tpl` and `terraform.tfvars` files of the artifact are run through the Plural templating engine, which is similar to that of Helm, and are used to generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module.
 
 The next example is a snippet of the `values.yaml.tpl` file for Grafana:
 
