@@ -232,21 +232,24 @@ The `helm` directory contains the app's Helm chart as it will be available throu
 Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions of them (if they're actively maintained, allow for required customization and fit Plural's quality standards)
 as well as other helper charts, e.g. from Plural's module-library (#TODO: insert link).
 If any additional resources are necessary, they can be added and templated in the same manner as in any other Helm chart.
-Any default chart parametrization goes into your standard `values.yaml` file, e.g. resource requirements or limits, labels, annotation, entrypoint customizations, ....
+Any default chart parametrization goes into your standard `values.yaml` file, e.g. resource requirements or limits, labels, annotations, entrypoint customizations, and so on.
 
 One thing that is unique about a Plural artifact's Helm chart is the ability to template values from other parts of the infrastructure, that cannot be known ahead of deployment time, in the dedicated `values.yaml.tpl` file.
 It gives a means to parametrize values for resources that depend on application components that do not live in the cluster, but in your cloud account and that are deployed with terraform and not helm.
 The ARN of an AWS role or bucket, or VPC subnet ids are common examples for this.
-Another example would be configuration output from another Plural deployed application that lives in the same cluster, or configuration that you query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
+Another supported use case would be to pass configuration output from another Plural deployed applications that live in the same cluster, or configuration that you query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
 See [Templating](###Templating) for how powerful this additional templating layer can be.
 
 ### Terraform
 The `terraform` directory contains the app's provider-specific terraform modules any application component that does not live inside the cluster.
+One module for each cloud provider that the artifact will publish a bundle for.
 Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts, if their deployment cannot be achieved by means of the artifact's Helm chart in a convenient manner.
 > One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
 ### Plural 
+In the `plural` directory
+
 ### Glue Files
 
 Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
