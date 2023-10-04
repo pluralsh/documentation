@@ -45,3 +45,20 @@ plural deploy
 git add . && git commit -m "set up encryption"
 git push
 ```
+
+### Decrypt the repository
+
+There are two ways the person you shared encryption can decrypt the repository. The simplest is to use the `plural clone` command:
+
+```shell
+plural clone git@github.com:your/repository.git
+```
+
+This will both run a standard git clone and then the following commands:
+
+```shell
+plural crypto init
+plural crypto unlock
+```
+
+If you chose to run a standard `git clone``, the above commands would still be required.
