@@ -7,14 +7,23 @@ description: >-
 ---
 
 The two main functionalities that make the apps in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
+When you install an app from the marketplace into your cluster a number of things happen along the way across different components of Plural's architecture.
+A good unerstanding of an app's journey into your cluster will go a long way if you want to contribute your own application to the marketplace.
+
+## Install and Configure an Application
+
+In this section we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
 
 When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
 Next, the user can install an application using the `plural bundle install <app_name> <bundle>` CLI command.
 The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
-For example, the `tree` of your deployment repository might look like this:
+For example, the `tree` of a deployment repository, where we installed Dagster with `plural bundle install dagster dagster-aws` (among others),  might look like this:
+
 ```console
+$ pwd
+~/Repos/deployment-repository
 $ tree -L 1 .
 .
 ├── bootstrap
@@ -48,7 +57,7 @@ spec:
   context: {}
 ```
 
-And the `context.yaml` like this. In the `configuration` section you can see the user input parametrization of each artifact.
+And the `context.yaml` like this. In the `spec.configuration` section you can see the user input parametrization of each artifact.
 ```yaml
 apiVersion: plural.sh/v1alpha1
 kind: Context
@@ -89,7 +98,7 @@ spec:
 ```
 
 
-Next, the user would run `plural build` or `plural build --only <app name>` which will create a wrapper Helm chart and Terraform module for that app in their deployment repository.
+Next, the user would run `plural build` or `plural build --only <app name>` which will create a wrapper Helm chart and Terraform module for that app under a dedicated directory in their deployment repository.
 The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API.
 During this step the CLI will generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using its templating engine.
 More precisely, the content of `default-values.yaml` will be a blend of both the artifact chart's default parametrization in its `values.yaml` and the interpolated templated values from its `values.yaml.tpl` (see below) that are derived by injecting the values saved in the `context.yaml` at `spec.configuration`.
