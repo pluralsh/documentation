@@ -9,7 +9,7 @@ description: >-
 The two main functionalities that make the apps in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
 
 When a user sets up a new Plural workspace in a git repository (we shall call that a *deployment repository* from here on out) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
-Next, the user can install an application using the `plural bundle <app_name> <bundle>` CLI command.
+Next, the user can install an application using the `plural bundle install <app_name> <bundle>` CLI command.
 The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
