@@ -8,13 +8,97 @@ description: >-
 
 The two main functionalities that make the apps in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
 
-When a user sets up a new Plural workspace in a git repository (we sometimes call that a **deployment repository**) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under. Next, the user can install an application using the `plural bundle <app_name> <bundle>` CLI command. The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application. These inputs are saved in the `context.yaml` file.
+When a user sets up a new Plural workspace in a git repository (we sometimes call that a **deployment repository**) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
+Next, the user can install an application using the `plural bundle <app_name> <bundle>` CLI command.
+The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
+These inputs are saved in the `context.yaml` file.
 
-Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module. The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API. The CLI will then generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using the values saved in the `context.yaml` using its templating engine.
+For example, the `tree` of your deployment repository might look like this:
+```console
+❯ tree -L 1 .
+.
+├── bootstrap
+├── cert-manager
+├── console
+├── dagster
+├── postgres
+├── terraform.tfstate
+├── workspace.yaml
+└── context.yaml
+```
 
-For example, after the `plural build dagster` command the `tree` of the built Dagster application in your deployment repository might look like this:
+The `workspace.yaml` might look like this:
+```
+apiVersion: plural.sh/v1alpha1
+kind: ProjectManifest
+metadata:
+  name: pluraldev
+spec:
+  cluster: pluraldev
+  bucket: pluraldevsh-tf-state
+  project: "123456765432"
+  provider: aws
+  region: us-east-2
+  owner:
+    email: plural-dev@pluraldev.sh
+  network:
+    subdomain: dev.plural.sh
+    pluraldns: false
+  bucketPrefix: pluraldev
+  context: {}
+```
+
+And the `context.yaml` like this. In the `configuration` section you can see the user input parametrization of the artifact.
+```
+apiVersion: plural.sh/v1alpha1
+kind: Context
+spec:
+  bundles:
+  - repository: dagster
+    name: dagster-aws
+  - repository: plural
+    name: plural-aws
+  - repository: console
+    name: console-aws
+  - repository: bootstrap
+    name: aws-efs
+  - repository: cert-manager
+    name: cert-manager-aws
+  - repository: ingress-nginx
+    name: ingress-nginx-aws
+  buckets:
+  - pluraldev-pluraldev-dagster
+  domains:
+  - console.dev.plural.sh
+  - dagster.dev.plural.sh
+  configuration:
+    bootstrap:
+      vpc_name: pluraldev
+    cert-manager: {}
+    console:
+      admin_name: admin
+      console_dns: console.dev.plural.sh
+      ...
+      repo_url: git@github.com:pluralsh/deployment-repo.git
+    dagster:
+      dagsterBucket: pluraldev-pluraldev-dagster
+      hostname: dagster.dev.plural.sh
+    ingress-nginx: {}
+    postgres:
+      wal_bucket: pluraldev-pluraldev-postgres-wal
+```
+
+
+Next, the user runs `plural build` which will create a wrapper Helm chart and Terraform module.
+The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API.
+The CLI will then generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using its templating engine.
+More precisely, the content of `default-values.yaml` will be a blend of both the artifact chart's default parametrization in its `values.yaml` and the interpolated templated values from its `values.yaml.tpl` injecting the values saved in the `context.yaml`.
+
+For example, after the `plural build dagster` command, the `tree` of the built Dagster application in your deployment repository might look like this:
 
 ```console
+$ pwd
+~/Repos/deployment-repository/dagster
 $ tree .
 .
 ├── build.hcl
@@ -47,6 +131,9 @@ $ tree .
     └── outputs.tf
 ```
 
+Here you can see the wrapper Helm chart in `./helm/dagster` around the `./helm/dagster/charts/dagster-0.1.44.tgz`, i.e. the artifact's Helm chart that the Plural CLI downloads for you.
+Similarly the wrapper Terraform module in `./terraform` will contain a local copy of the artifact's Terraform module inside `./terraform/aws`.
+
 ## Plural application artifacts
 
 As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation.
@@ -59,6 +146,8 @@ Some extra configuration files are necessary in the applications artifact for Pl
 As an example Dagster's artifact `tree` would look like this:
 
 ```console
+$ pwd
+~/Repos/plural-artifacts/dagster
 $ tree .
 .
 ├── Pluralfile
@@ -126,6 +215,8 @@ $ tree .
 ```
 
 Let's disect what's going on here.
+
+...
 
 
 
