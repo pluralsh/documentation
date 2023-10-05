@@ -232,23 +232,92 @@ The `helm` directory contains the app's Helm chart as it will be available throu
 Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions of them (if they're actively maintained, allow for required customization and fit Plural's quality standards)
 as well as other helper charts, e.g. from Plural's module-library (#TODO: insert link).
 If any additional resources are necessary, they can be added and templated in the same manner as in any other Helm chart.
-Any default chart parametrization goes into your standard `values.yaml` file, e.g. resource requirements or limits, labels, annotations, entrypoint customizations, and so on.
+Any default chart parametrization goes into your standard `values.yaml` file, most prominently resource requirements or limits, labels, annotations, entrypoint customizations, and so on.
 
-One thing that is unique about a Plural artifact's Helm chart is the ability to template values from other parts of the infrastructure, that cannot be known ahead of deployment time, in the dedicated `values.yaml.tpl` file.
-It gives a means to parametrize values for resources that depend on application components that do not live in the cluster, but in your cloud account and that are deployed with terraform and not helm.
+One thing that is unique about a Plural artifact's Helm chart is the ability to template in values from other parts of the infrastructure, that cannot be known ahead of deployment time, in the dedicated `values.yaml.tpl` file.
+This enables us to parametrize values for resources that depend on application components that do not live in the cluster, but in your cloud account and that are deployed with terraform and not helm.
 The ARN of an AWS role or bucket, or VPC subnet ids are common examples for this.
-Another supported use case would be to pass configuration output from another Plural deployed applications that live in the same cluster, or configuration that you query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
+Another supported use case is to pass output from other Plural deployed applications that live in the same cluster,
+or configuration that you can query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
 See [Templating](###Templating) for how powerful this additional templating layer can be.
 
 ### Terraform
-The `terraform` directory contains the app's provider-specific terraform modules any application component that does not live inside the cluster.
-One module for each cloud provider that the artifact will publish a bundle for.
-Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts, if their deployment cannot be achieved by means of the artifact's Helm chart in a convenient manner.
+The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
+For each cloud provider that the artifact offers a bundle for there will be one under the related directory name.
+Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts,
+if their deployment cannot be achieved by means of the artifact's Helm chart in a convenient manner.
 > One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
-### Plural 
-In the `plural` directory
+### Plural Files
+The `plural` directory contains the artifact's packaging information (`plural/recipes`), metadata (`plural/tags` and `plural/icons`), and application specific instructions (`plural/docs` and `plural/notes.tpl`).
+On the top-level directory of each artifact you'll also find a`repository.yaml`.
+
+The `repository.yaml` and recipe YAMLs are of particular importance and integral part of Plural's artifact packaging format.
+
+`repository.yaml`:
+The metadata in this file informs the Plural API about the application this artifact encapsulates.
+From its name, category and description, over where it can find the icon and docs to display in the marketplace,
+over the notes template to prompt after installation,
+to upstream repositories and homepage if applicable.
+
+`oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
+Behind the scenes, every `plural bundle install` triggers the OIDC client creation, so you can use your Plural user to access an applications frontend.
+
+```yaml
+name: dagster
+description: A data orchestration platform for the development, production, and observation of data assets.
+category: DATA
+private: false
+docs: plural/docs
+icon: plural/icons/dagster-primary-mark.png
+notes: plural/notes.tpl
+gitUrl: https://github.com/dagster-io/dagster
+homepage: https://dagster.io/
+oauthSettings:
+  uriFormat: https://{domain}/oauth2/callback
+  authMethod: POST
+tags:
+- tag: dag
+- tag: data
+- tag: data-pipelines
+```
+
+
+`plural/receipes/dagster-aws.yaml`:
+
+```yaml
+name: dagster-aws
+description: Installs dagster on an aws eks cluster
+provider: AWS
+primary: true
+dependencies:
+- repo: bootstrap
+  name: aws-k8s
+- repo: ingress-nginx
+  name: ingress-nginx-aws
+- repo: postgres
+  name: aws-postgres
+oidcSettings:
+  uriFormat: https://{domain}/oauth2/callback
+  authMethod: POST
+  domainKey: hostname
+sections:
+- name: dagster
+  configuration:
+  - name: dagsterBucket
+    type: BUCKET
+    documentation: s3 bucket for storing dagster logs
+    default: dagster
+  - name: hostname
+    type: DOMAIN
+    documentation: fqdn on which to deploy your dagster instance
+  items:
+  - type: TERRAFORM
+    name: aws
+  - type: HELM
+    name: dagster
+```
 
 ### Glue Files
 
