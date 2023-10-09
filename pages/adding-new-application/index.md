@@ -396,7 +396,6 @@ Let's step through this file.
 - `provider` defines the targeted cloud provider of this recipe.
 - The `primary` flag ... (#TODO ?)
 - The apps listed in `dependencies` tell Plural on which other Plural bundles this bundle depends on.
-  This fullfills a 
   > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
 - Similar to `oauthSettings` in the `repository.yaml`, `oidcSettings` in the recipe YAML should specify the same configuration at the bundle level.
 - `sections[0].configuration` defines the user-provided values to prompt for during installation .
