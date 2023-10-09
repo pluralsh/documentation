@@ -230,9 +230,9 @@ Let's disect this artifact's structure.
 ### Helm
 
 The `helm` directory contains the app's Helm chart as it will be available through the Plural API and used by the Plural CLI to configure and deploy the app's Kubernetes components into your cluster.
-Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions of them (if they're actively maintained, allow for required customization and fit Plural's quality standards)
-as well as other helper charts, e.g. from Plural's module-library (#TODO: insert link).
-If any additional resources are necessary, they can be added and templated in the same manner as in any other Helm chart.
+Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions (if they're actively maintained, allow for required customization and fit Plural's quality standards)
+as well as other helper charts, e.g. from Plural's [module-library](https://github.com/pluralsh/module-library).
+If any additional resources are necessary, they can be added and templated in the same manner as with any other Helm chart.
 Any default chart parametrization goes into your standard `values.yaml` file, most prominently resource requirements or limits, labels, annotations, entrypoint customizations, and so on.
 
 One thing that is unique about a Plural artifact's Helm chart is the ability to template in values from other parts of the infrastructure, that cannot be known ahead of deployment time, in the dedicated `values.yaml.tpl` file.
@@ -249,6 +249,7 @@ For example, for Dagster's Helm chart you would list required dependencies on:
 - the `bootstrap` application's Helm chart 
 - the `ingress-nginx` application's Helm chart
 - the `postrges` operator application's Helm chart
+
 as well as optional dependencies the Dagster application's own Terraform modules to convey the intent that those are installed before the Helm chart.
 
 ```yaml
@@ -298,7 +299,7 @@ if their deployment cannot be achieved through the artifact's Helm chart in a co
 > One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
-Just like the Helm chart, the Terraform modules also contain a `deps.yaml` file that inform the Plural API about the order of dependencies on other modules.
+Just like the Helm chart, the Terraform modules also contain a `deps.yaml` file that inform the Plural API about dependencies on other modules.
 ```
 apiVersion: plural.sh/v1alpha1
 kind: Dependencies
@@ -344,8 +345,8 @@ tags:
 ```
 
 The metadata in this file informs the Plural API about the application this artifact envelopes.
-From its name, category and description, over where it can find the icon and docs to display in the marketplace,
-the notes template to prompt after installation, to upstream repositories and homepage if applicable.
+It will store its name, category and description, where it can find the icon and docs to display in the marketplace,
+the notes template to prompt after installation, as well as links to any upstream git repository or homepage if applicable.
 
 `oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
 > Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
