@@ -401,11 +401,10 @@ Let's step through this file.
 - `sections[0].configuration` defines the user-provided values to prompt for during installation .
   This is basically the signature of the bundle, it contains all required user-provided parameters that can be used in templating expressions in the `values.yaml.tpl` or in the terraform module (e.g. in the `.tfvars` file).
   The Plural API has a built-in type checker that will validate any passed string's format against its type, e.g. to guarantee a valid domain name.
-  For examples on types check other Plural artifacts.
+  For examples on available types check other Plural artifacts.
   The Plural CLI will store the passed values in the according section in the `context.yaml` as discussed above.
-  > A bundle can technically have multiple sections, but this feature's not yet used.
 - `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories respectively that are part of this bundle.
-
+> A bundle can technically have multiple sections, but this feature's not yet used.
 
 ```yaml
 apiVersion: plural.sh/v1alpha1
