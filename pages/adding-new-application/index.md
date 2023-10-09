@@ -344,6 +344,10 @@ tags:
 - tag: data-pipelines
 ```
 
+private recipe
+private repository
+sharing a private app between different plural accounts
+
 The metadata in this file informs the Plural API about the application this artifact envelopes.
 It will store its name, category and description, where it can find the icon and docs to display in the marketplace,
 the notes template to prompt after installation, as well as links to any upstream git repository or homepage if applicable.
@@ -395,7 +399,7 @@ It informs the Plural API about the bundle's parameter signature, metadata, depe
 Let's step through this file.
 
 - `provider` defines the targeted cloud provider of this recipe.
-- The `primary` flag ... (#TODO ?)
+- For every artifact one of the recipes can be marked as `primary` which will make it possible to install with simply a `plural bundle install <app_name>` (leaving out the `<bundle>`).
 - The apps listed in `dependencies` tell Plural on which other Plural bundles this bundle depends on.
   > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
 - Similar to `oauthSettings` in the `repository.yaml`, `oidcSettings` in the recipe YAML should specify the same configuration at the bundle level.
@@ -421,7 +425,6 @@ spec:
     version: '>= 0.1.1'
   providers:
   - aws
-
 ```
 
 
