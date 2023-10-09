@@ -6,7 +6,7 @@ description: >-
   guide outlines the process.
 ---
 
-The two main functionalities that make the apps in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
+The two main functionalities that make the applications in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
 When you install an app from the marketplace into your cluster a number of things happen along the way across different components of Plural's architecture.
 A good unerstanding of an app's journey into your cluster will go a long way if you want to contribute your own application to the marketplace.
 
@@ -15,7 +15,8 @@ A good unerstanding of an app's journey into your cluster will go a long way if 
 In this section we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
 
 When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
-Next, the user can install an application using the `plural bundle install <app_name> <bundle>` CLI command.
+Next, the user can install an application bundle using the `plural bundle install <app_name> <bundle>` CLI command.
+> Most applications come with more than bundle, one for each targeted cloud provider.
 The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
@@ -245,7 +246,7 @@ See [Templating](###Templating) for how powerful this additional templating laye
 The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
 For each cloud provider that the artifact offers a bundle for there will be one under the related directory name.
 Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts,
-if their deployment cannot be achieved by means of the artifact's Helm chart in a convenient manner.
+if their deployment cannot be achieved through the artifact's Helm chart in a convenient manner.
 > One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
@@ -253,17 +254,9 @@ if their deployment cannot be achieved by means of the artifact's Helm chart in 
 The `plural` directory contains the artifact's packaging information (`plural/recipes`), metadata (`plural/tags` and `plural/icons`), and application specific instructions (`plural/docs` and `plural/notes.tpl`).
 On the top-level directory of each artifact you'll also find a`repository.yaml`.
 
-The `repository.yaml` and recipe YAMLs are of particular importance and integral part of Plural's artifact packaging format.
+The `repository.yaml` and recipe YAMLs are an integral part of Plural's artifact packaging format.
 
 `repository.yaml`:
-The metadata in this file informs the Plural API about the application this artifact encapsulates.
-From its name, category and description, over where it can find the icon and docs to display in the marketplace,
-over the notes template to prompt after installation,
-to upstream repositories and homepage if applicable.
-
-`oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
-Behind the scenes, every `plural bundle install` triggers the OIDC client creation, so you can use your Plural user to access an applications frontend.
-
 ```yaml
 name: dagster
 description: A data orchestration platform for the development, production, and observation of data assets.
@@ -283,9 +276,19 @@ tags:
 - tag: data-pipelines
 ```
 
+The metadata in this file informs the Plural API about the application this artifact envelopes.
+From its name, category and description, over where it can find the icon and docs to display in the marketplace,
+the notes template to prompt after installation, to upstream repositories and homepage if applicable.
+
+`oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
+> Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
+  This happens, because every Client needs to be created before a `plural build` which then inputs the client info into the helm chart.
+
+The `private` flag controls whether the artifact's bundles are published publicly or privately. (#TODO what does this mean for the end user exactly, how does one get access to public repositories)
+Once the artifact makes it into the `main` branch of the [Plural artifact repository](https://github.com/pluralsh/plural-artifacts) on a successful PR the Github Actions workflow will publish it and its components.
+
 
 `plural/receipes/dagster-aws.yaml`:
-
 ```yaml
 name: dagster-aws
 description: Installs dagster on an aws eks cluster
@@ -318,6 +321,24 @@ sections:
   - type: HELM
     name: dagster
 ```
+
+The recipe file ties a bundle together, with one dedicated recipe per cloud provider.
+It contains the bundle's parameter signature, metadata and dependency information that the Plural API needs to know.
+Let's step through this file.
+
+- `provider` defines the targeted cloud provider of this recipe.
+- The `primary` flag ... (#TODO ?)
+- The apps listed in `dependencies` tell Plural on which other Plural bundles this bundle depends on.
+  > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
+- Similar to `oauthSettings` in the `repository.yaml` `oidcSettings` specifies the same configuration at the bundle level.
+- `sections[0].configuration` defines the user-provided values to prompt for during installation .
+  This is basically the signature of the bundle, it contains all required user-provided parameters that can be used in the `values.yaml.tpl` or in the terraform module (e.g. in the `.tfvars` file).
+  The Plural API has a built-in type checker that will validate the string's format passed to the configuration parameter against its type, e.g. to guarantee a valid domain name.
+  For examples on types check other Plural artifacts.
+  The Plural CLI will store the passed values in the according section in the `context.yaml` as discussed above.
+  > A bundle can technically have multiple sections, but this feature's not yet used.
+- `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories respectively that are part of this bundle.
+
 
 ### Glue Files
 
