@@ -1,17 +1,4 @@
----
-title: Add an Application
-description: >-
-  Is something missing from the Plural marketplace? Are you a vendor who wants
-  to add your solution? We'd love for you to onboard your application! This
-  guide outlines the process.
----
-
-The two main functionalities that make the applications in Plural's marketplace work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
-When you install an app from the marketplace into your cluster a number of things happen along the way across different components of Plural's architecture.
-A good unerstanding of an app's journey into your cluster will go a long way if you want to contribute your own application to the marketplace.
-
-
-## Templating
+# Templating
 
 The next example is a snippet of the `values.yaml.tpl` file for Grafana:
 
