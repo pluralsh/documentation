@@ -403,7 +403,7 @@ Let's step through this file.
   The Plural API has a built-in type checker that will validate any passed string's format against its type, e.g. to guarantee a valid domain name.
   For examples on available types check other Plural artifacts.
   The Plural CLI will store the passed values in the according section in the `context.yaml` as discussed above.
-- `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories respectively that are part of this bundle.
+- `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories that are part of this bundle.
 > A bundle can technically have multiple sections, but this feature's not yet used.
 
 ```yaml
