@@ -399,7 +399,7 @@ Let's step through this file.
   > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
 - Similar to `oauthSettings` in the `repository.yaml`, `oidcSettings` in the recipe YAML should specify the same configuration at the bundle level.
 - `sections[0].configuration` defines the user-provided values to prompt for during installation .
-  This is basically the signature of the bundle, it contains all required user-provided parameters that can be used in the `values.yaml.tpl` or in the terraform module (e.g. in the `.tfvars` file).
+  This is basically the signature of the bundle, it contains all required user-provided parameters that can be used in templating expressions in the `values.yaml.tpl` or in the terraform module (e.g. in the `.tfvars` file).
   The Plural API has a built-in type checker that will validate the string's format passed to the configuration parameter against its type, e.g. to guarantee a valid domain name.
   For examples on types check other Plural artifacts.
   The Plural CLI will store the passed values in the according section in the `context.yaml` as discussed above.
