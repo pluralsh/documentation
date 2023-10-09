@@ -242,7 +242,55 @@ Another supported use case is to pass output from other Plural deployed applicat
 or configuration that you can query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
 See [Templating](###Templating) for how powerful this additional templating layer can be.
 
+Plural leverages dependency tracking of applications to achieve a high degree of resource efficiency and modularity.
+Dependencies between artifacts are defined in the recipe files (see below).
+At the level of the Helm charts and Terraform modules the cross-application dependencies are tracked in a dedicated `deps.yaml` at each chart's or module's top-level directory.
+For example, for Dagster's Helm chart you would list required dependencies on:
+- the `bootstrap` application's Helm chart 
+- the `ingress-nginx` application's Helm chart
+- the `postrges` operator application's Helm chart
+as well as optional dependencies the Dagster application's own Terraform modules to convey the intent that those are installed before the Helm chart.
+
+```yaml
+apiVersion: plural.sh/v1alpha1
+kind: Dependencies
+metadata:
+  application: true
+  description: Deploys dagster crafted for the target cloud
+spec:
+  breaking: true
+  dependencies:
+  - type: helm
+    name: bootstrap
+    repo: bootstrap
+    version: '>= 0.5.1'
+  - type: helm
+    name: ingress-nginx
+    repo: ingress-nginx
+    version: ">= 0.1.2"
+  - type: helm
+    name: postgres
+    repo: postgres
+    version: ">= 0.1.6"
+  - type: terraform
+    name: aws
+    repo: dagster
+    version: '>= 0.1.0'
+    optional: true
+  - type: terraform
+    name: azure
+    repo: dagster
+    version: '>= 0.1.0'
+    optional: true
+  - type: terraform
+    name: gcp
+    repo: dagster
+    version: '>= 0.1.0'
+    optional: true
+```
+
 ### Terraform
+
 The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
 For each cloud provider that the artifact offers a bundle for there will be one under the related directory name.
 Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts,
@@ -250,7 +298,26 @@ if their deployment cannot be achieved through the artifact's Helm chart in a co
 > One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
+Just like the Helm chart, the Terraform modules also contain a `deps.yaml` file that inform the Plural API about the order of dependencies on other modules.
+```
+apiVersion: plural.sh/v1alpha1
+kind: Dependencies
+metadata:
+  description: dagster aws setup
+  version: 0.1.2
+spec:
+  dependencies:
+  - name: aws-bootstrap
+    repo: bootstrap
+    type: terraform
+    version: '>= 0.1.1'
+  providers:
+  - aws
+```
+
+
 ### Plural Files
+
 The `plural` directory contains the artifact's packaging information (`plural/recipes`), metadata (`plural/tags` and `plural/icons`), and application specific instructions (`plural/docs` and `plural/notes.tpl`).
 On the top-level directory of each artifact you'll also find a`repository.yaml`.
 
@@ -323,14 +390,15 @@ sections:
 ```
 
 The recipe file ties a bundle together, with one dedicated recipe per cloud provider.
-It contains the bundle's parameter signature, metadata and dependency information that the Plural API needs to know.
+It informs the Plural API about the bundle's parameter signature, metadata, dependencies and sequence order of installations and upgrades.
 Let's step through this file.
 
 - `provider` defines the targeted cloud provider of this recipe.
 - The `primary` flag ... (#TODO ?)
 - The apps listed in `dependencies` tell Plural on which other Plural bundles this bundle depends on.
+  This fullfills a 
   > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
-- Similar to `oauthSettings` in the `repository.yaml` `oidcSettings` specifies the same configuration at the bundle level.
+- Similar to `oauthSettings` in the `repository.yaml`, `oidcSettings` in the recipe YAML should specify the same configuration at the bundle level.
 - `sections[0].configuration` defines the user-provided values to prompt for during installation .
   This is basically the signature of the bundle, it contains all required user-provided parameters that can be used in the `values.yaml.tpl` or in the terraform module (e.g. in the `.tfvars` file).
   The Plural API has a built-in type checker that will validate the string's format passed to the configuration parameter against its type, e.g. to guarantee a valid domain name.
@@ -340,14 +408,25 @@ Let's step through this file.
 - `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories respectively that are part of this bundle.
 
 
-### Glue Files
+```yaml
+apiVersion: plural.sh/v1alpha1
+kind: Dependencies
+metadata:
+  description: dagster aws setup
+  version: 0.1.2
+spec:
+  dependencies:
+  - name: aws-bootstrap
+    repo: bootstrap
+    type: terraform
+    version: '>= 0.1.1'
+  providers:
+  - aws
 
-Namely, a `deps.yaml` file which lists the dependencies of the Helm chart or Terraform module, and the `values.yaml.tpl` and `terraform.tfvars` file for Helm and Terraform respectively.
-
-During a `plural build` inside the deployment repository the `values.yaml.tpl` and `terraform.tfvars` files of the artifact are run through the Plural templating engine, which is similar to that of Helm, and are used to generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module.
+```
 
 
-### Templating
+## Templating
 
 The next example is a snippet of the `values.yaml.tpl` file for Grafana:
 
