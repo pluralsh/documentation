@@ -184,7 +184,7 @@ On the top-level directory of each artifact you'll also find a`repository.yaml`.
 
 The `repository.yaml` and recipe YAMLs are an integral part of Plural's artifact packaging format.
 
-`repository.yaml`:
+### `repository.yaml`
 ```yaml
 name: dagster
 description: A data orchestration platform for the development, production, and observation of data assets.
@@ -213,10 +213,8 @@ the notes template to prompt after installation, as well as links to any upstrea
   This happens, because every client needs to be created before a `plural build` which then inputs the client info into the helm chart.
 
 The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push`.
-It should be set to the same value as the `private` flag in inside the `repository.yaml`.
 
-
-`plural/receipes/dagster-aws.yaml`:
+### `plural/receipes/dagster-aws.yaml`
 ```yaml
 name: dagster-aws
 description: Installs dagster on an aws eks cluster
@@ -267,20 +265,3 @@ Let's step through this file.
 - `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories that are part of this bundle.
 
 > A bundle can technically have multiple sections, but this feature's not yet used.
-
-```yaml
-apiVersion: plural.sh/v1alpha1
-kind: Dependencies
-metadata:
-  description: dagster aws setup
-  version: 0.1.2
-spec:
-  dependencies:
-  - name: aws-bootstrap
-    repo: bootstrap
-    type: terraform
-    version: '>= 0.1.1'
-  providers:
-  - aws
-```
-
