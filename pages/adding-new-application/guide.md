@@ -1,5 +1,5 @@
 ---
-title: Guide
+title: Guide on Creating a New Application Artifact
 description: >-
   This guide is for anyone who wants to make an open-source application available on the Plural marketplace and create a new Plural artifact.
 ---
