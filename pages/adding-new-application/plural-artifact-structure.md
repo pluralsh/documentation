@@ -6,7 +6,7 @@ description: >-
 
 As mentioned in [Background on Application Installations](/adding-new-application/background-app-install),
 the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user provided values for that installation.
-Some extra configuration files are necessary in the applications artifact for the Plural API to be able to understand:
+Some extra configuration files are necessary in the application's artifact for the Plural API to be able to understand:
 - the Helm charts and Terraform modules dependencies to run them through its templating engine
 - dependencies on other Plural artifacts
 - platform specific components and infrastructure configurations
@@ -153,8 +153,9 @@ spec:
 
 The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
 For each cloud provider, that the artifact offers a bundle for, there will be one under the related directory name.
-Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts,
-if their deployment cannot be achieved through the artifact's Helm chart in a convenient manner.
+Most commonly you'd find object storage alongside their IAM resources, or additional node groups, if your app needs a GPU.
+Sometimes it will also include Kubernetes resources like service accounts, if their deployment cannot be achieved through the artifact's Helm chart in a convenient manner.
+
 > One peculiarity about the Terraform modules is that, at the very least, they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
