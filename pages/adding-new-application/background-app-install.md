@@ -1,9 +1,10 @@
 ---
-title: Background on Application Installation
+title: Background on Application Installations
 description: >-
-  In this guide we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
   A good unerstanding of an app's journey into your cluster will go a long way if you want to contribute your own application to the marketplace.
 ---
+
+In this guide we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
 
 When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
 Next, the user can install an application bundle using the `plural bundle install <app_name> <bundle>` CLI command.
