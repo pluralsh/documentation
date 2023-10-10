@@ -7,7 +7,7 @@ If you don't want to publish an application publicly straight away and make it a
 
 ## Create a publisher
 
-To publish an artifact you need to create a publisher with your Plural account admin first.
+To publish an artifact you first need to create a publisher with your Plural account admin.
 
 1. Click on your profile on the bottom left on `app.plural.sh`.
 2. Select `create publisher`.
@@ -21,7 +21,6 @@ When you're done with implementing your artifact and you have created a publishe
 1. Navigate to the directory of your artifact in your local copy of the [Plural artifacts git repository](https://github.com/pluralsh/plural-artifacts).
 2. Locate the `Pluralfile`.
 3. Enter the name of your publisher as the first argument in the `ATTRIBUTES` line. E.g. if your publisher is called `mypublisher`, it should look like this:
-
 ```
 REPO dagster
 ATTRIBUTES mypublisher repository.yaml
@@ -30,7 +29,6 @@ TF terraform/*
 HELM helm/*
 RECIPE plural/recipes/*
 ```
-
 4. Finally, publish your artifact with the command `plural apply -f Pluralfile`. E.g. for our dagster example
 ```console
 $ plural apply -f Pluralfile
