@@ -3,7 +3,7 @@ title: Publishing a Plural Artifact
 ---
 
 Every Plural account holder can act as a publisher to publish artifacts and in that way contribute open source applications to Plural's marketplace.
-If you don't want to publish an application publicly straight away and make it available to everybody you can first test it by releasing it privately whereby only users of your Plural account can install it.
+If you don't want to publish an application publicly straight away and make it available to everybody, you can first test it by releasing it privately whereby only users of your Plural account can install it.
 
 ## Create a publisher
 
@@ -44,5 +44,4 @@ pushing recipe plural/recipes/dagster-aws.yaml✓
 
 Artifacts can be published with a `private: true` or `private: false` setting in the `repository.yaml`.
 Bundles from private artifacts are only visible for, and can only be downloaded and installed by, users from the same account the publisher was created in.
-If you want to publish your artifact publicly, too, you need to open a PR in the [Plural artifacts git repository](https://github.com/pluralsh/plural-artifacts), so the Plural team can review your code.
 Artifacts published publicly by you are also visible in the public marketplace.

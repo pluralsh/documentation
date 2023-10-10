@@ -178,7 +178,7 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Contribute a New Application to the Plural Catalog',
         sections: [
           { href: '/adding-new-application/background-app-install', title: 'Background on Application Installations'},
-          { href: '/adding-new-application/application-artifact-package', title: 'Plural Artifact Structure'},
+          { href: '/adding-new-application/plural-artifact-structure', title: 'Plural Artifact Structure'},
           { href: '/adding-new-application/templating', title: 'Plural Artifact Templating'},
           { href: '/adding-new-application/guide', title: 'Guide on Creating a New Application Artifact' },
           { href: '/adding-new-application/publishing', title: 'Guide on Publishing a Plural Artifact'},

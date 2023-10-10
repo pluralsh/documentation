@@ -11,7 +11,7 @@ Next, the user can install an application bundle using the `plural bundle instal
 
 > Most applications come with more than one bundle, one for each targeted cloud provider.
 
-The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
+The CLI will then prompt the user for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
 For example, let's have a look how the `tree` of a deployment repository, where we installed Dagster with `plural bundle install dagster dagster-aws` (among others), might look like:
