@@ -1,6 +1,10 @@
-# Plural Application Artifact
+---
+title: Plural Application Artifact Structure
+description: >-
+  In this guide we will lay out how a Plural artifact is constructed.
+---
 
-As mentioned above, the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation.
+As mentioned in (Background on Application Installations)[/adding-new-application/background-app-install], the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation.
 Some extra configuration files are necessary in the applications artifact for Plural to be able to understand
 - the Helm charts and Terraform modules dependencies to run them through its templating engine
 - dependencies on other Plural artifacts
@@ -81,7 +85,7 @@ $ tree .
 Let's disect this artifact's structure.
 
 
-### Helm
+## Helm
 
 The `helm` directory contains the app's Helm chart as it will be available through the Plural API and used by the Plural CLI to configure and deploy the app's Kubernetes components into your cluster.
 Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions (if they're actively maintained, allow for required customization and fit Plural's quality standards)
@@ -144,7 +148,7 @@ spec:
     optional: true
 ```
 
-### Terraform
+## Terraform
 
 The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
 For each cloud provider that the artifact offers a bundle for there will be one under the related directory name.
@@ -171,7 +175,7 @@ spec:
 ```
 
 
-### Plural Files
+## Plural Files
 
 The `plural` directory contains the artifact's packaging information (`plural/recipes`), metadata (`plural/tags` and `plural/icons`), and application specific instructions (`plural/docs` and `plural/notes.tpl`).
 On the top-level directory of each artifact you'll also find a`repository.yaml`.
