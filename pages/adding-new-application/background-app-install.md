@@ -8,7 +8,9 @@ In this guide we will lay out how your user provided values tie in with the depl
 
 When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
 Next, the user can install an application bundle using the `plural bundle install <app_name> <bundle>` CLI command.
+
 > Most applications come with more than one bundle, one for each targeted cloud provider.
+
 The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
