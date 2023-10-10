@@ -214,7 +214,7 @@ the notes template to prompt after installation, as well as links to any upstrea
 
 The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push`.
 
-### `plural/receipes/dagster-aws.yaml`
+### `plural/recipes/dagster-aws.yaml`
 ```yaml
 name: dagster-aws
 description: Installs dagster on an aws eks cluster
