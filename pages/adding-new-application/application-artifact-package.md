@@ -198,10 +198,6 @@ tags:
 - tag: data-pipelines
 ```
 
-private recipe
-private repository
-sharing a private app between different plural accounts
-
 The metadata in this file informs the Plural API about the application this artifact envelopes.
 It will store its name, category and description, where it can find the icon and docs to display in the marketplace,
 the notes template to prompt after installation, as well as links to any upstream git repository or homepage if applicable.
@@ -210,8 +206,8 @@ the notes template to prompt after installation, as well as links to any upstrea
 > Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
   This happens, because every Client needs to be created before a `plural build` which then inputs the client info into the helm chart.
 
-The `private` flag controls whether the artifact's bundles are published publicly or privately. (#TODO what does this mean for the end user exactly, how does one get access to public repositories)
-Once the artifact makes it into the `main` branch of the [Plural artifact repository](https://github.com/pluralsh/plural-artifacts) on a successful PR the Github Actions workflow will publish it and its components.
+The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push`.
+It should be set to the same value as the `private` flag in inside the `repository.yaml`.
 
 
 `plural/receipes/dagster-aws.yaml`:
