@@ -212,7 +212,7 @@ the notes template to prompt after installation, as well as links to any upstrea
 > Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
   This happens, because every client needs to be created before a `plural build` which then inputs the client info into the helm chart.
 
-The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push`.
+The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push` or `plural apply` (see [Publishing](/adding-new-application/publishing)).
 
 ### `plural/recipes/dagster-aws.yaml`
 ```yaml
