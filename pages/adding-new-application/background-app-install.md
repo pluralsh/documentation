@@ -93,7 +93,7 @@ spec:
 Next, the user would run `plural build` or `plural build --only <app name>` which will create a wrapper Helm chart and Terraform module for that app under a dedicated directory in the deployment repository.
 The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API.
 During this step the CLI will generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using its templating engine.
-More precisely, `default-values.yaml` will contain the interpolated templated values from its `values.yaml.tpl` see ([Templating](/adding-new-application/templating)) that are derived by injecting the values saved in the `context.yaml` at `spec.configuration`.
+More precisely, `default-values.yaml` will contain the interpolated templated values from its `values.yaml.tpl` (see [Templating](/adding-new-application/templating)) that are derived by injecting the values saved in the `context.yaml` at `spec.configuration`.
 
 For example, after the `plural build --only dagster` command, the `tree` of the built Dagster application in your deployment repository would look like this:
 
