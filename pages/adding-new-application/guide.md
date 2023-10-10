@@ -1,8 +1,7 @@
 ---
 title: Guide
 description: >-
-  This guide is for anyone who wants to make an open-source application available on the
-  Plural marketplace.
+  This guide is for anyone who wants to make an open-source application available on the Plural marketplace and create a new Plural artifact.
 ---
 
 To add your own application, you'll need the Helm chart for your application and corresponding Terraform.

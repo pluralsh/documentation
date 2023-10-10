@@ -2,15 +2,16 @@
 title: Background on Application Installation
 description: >-
   In this guide we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
+  A good unerstanding of an app's journey into your cluster will go a long way if you want to contribute your own application to the marketplace.
 ---
 
 When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
 Next, the user can install an application bundle using the `plural bundle install <app_name> <bundle>` CLI command.
-> Most applications come with more than bundle, one for each targeted cloud provider.
+> Most applications come with more than one bundle, one for each targeted cloud provider.
 The CLI will then prompt the user for for inputs needed to setup that application, along with any dependencies of the application.
 These inputs are saved in the `context.yaml` file.
 
-For example, the `tree` of a deployment repository, where we installed Dagster with `plural bundle install dagster dagster-aws` (among others),  might look like this:
+For example, let's have a look how the `tree` of a deployment repository, where we installed Dagster with `plural bundle install dagster dagster-aws` (among others), might look like:
 
 ```console
 $ pwd
@@ -27,7 +28,7 @@ $ tree -L 1 .
 └── context.yaml
 ```
 
-The `workspace.yaml` might look like this:
+The `workspace.yaml` would look like this:
 ```yaml
 apiVersion: plural.sh/v1alpha1
 kind: ProjectManifest
@@ -48,7 +49,7 @@ spec:
   context: {}
 ```
 
-And the `context.yaml` like this. In the `spec.configuration` section you can see the user input parametrization of each artifact.
+And the `context.yaml` like this. In the `spec.configuration` section you can see the recorded user input for each artifact.
 ```yaml
 apiVersion: plural.sh/v1alpha1
 kind: Context
@@ -88,13 +89,12 @@ spec:
       wal_bucket: pluraldev-pluraldev-postgres-wal
 ```
 
-
-Next, the user would run `plural build` or `plural build --only <app name>` which will create a wrapper Helm chart and Terraform module for that app under a dedicated directory in their deployment repository.
+Next, the user would run `plural build` or `plural build --only <app name>` which will create a wrapper Helm chart and Terraform module for that app under a dedicated directory in the deployment repository.
 The wrapper Helm chart and Terraform module depend on the application Helm chart(s) and Terraform module(s) it gets from the application's artifact repository via the Plural API.
 During this step the CLI will generate the `default-values.yaml` for the wrapper helm chart and `main.tf` for the wrapper Terraform module using its templating engine.
-More precisely, `default-values.yaml` will contain the interpolated templated values from its `values.yaml.tpl` (see below) that are derived by injecting the values saved in the `context.yaml` at `spec.configuration`.
+More precisely, `default-values.yaml` will contain the interpolated templated values from its `values.yaml.tpl` see ([Templating](/adding-new-application/templating)) that are derived by injecting the values saved in the `context.yaml` at `spec.configuration`.
 
-For example, after the `plural build --only dagster` command, the `tree` of the built Dagster application in your deployment repository might look like this:
+For example, after the `plural build --only dagster` command, the `tree` of the built Dagster application in your deployment repository would look like this:
 
 ```console
 $ pwd

@@ -1,4 +1,6 @@
-# Publishing a Plural Artifact
+---
+title: Publishing a Plural Artifact
+---
 
 Every Plural account holder can act as a publisher to publish artifacts and in that way contribute open source applications to Plural's marketplace.
 If you don't want to publish an application publicly straight away and make it available to everybody you can first test it by releasing it privately whereby only users of your Plural account can install it.

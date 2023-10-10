@@ -1,17 +1,18 @@
 ---
-title: Plural Application Artifact Structure
+title: Plural Artifact Structure
 description: >-
   In this guide we will lay out how a Plural artifact is constructed.
 ---
 
-As mentioned in (Background on Application Installations)[/adding-new-application/background-app-install], the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user defined values for that installation.
-Some extra configuration files are necessary in the applications artifact for Plural to be able to understand
+As mentioned in [Background on Application Installations](/adding-new-application/background-app-install),
+the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user provided values for that installation.
+Some extra configuration files are necessary in the applications artifact for the Plural API to be able to understand:
 - the Helm charts and Terraform modules dependencies to run them through its templating engine
 - dependencies on other Plural artifacts
 - platform specific components and infrastructure configurations
 - as well as Plural's own package and version specs.
 
-As an example Dagster's artifact `tree` would look like this:
+As an example, Dagster's artifact `tree` would look like this:
 
 ```console
 $ pwd
@@ -87,9 +88,9 @@ Let's disect this artifact's structure.
 
 ## Helm
 
-The `helm` directory contains the app's Helm chart as it will be available through the Plural API and used by the Plural CLI to configure and deploy the app's Kubernetes components into your cluster.
-Many apps in Plural's marketplace define Helm charts in terms of their upstream open source versions (if they're actively maintained, allow for required customization and fit Plural's quality standards)
-as well as other helper charts, e.g. from Plural's [module-library](https://github.com/pluralsh/module-library).
+The `helm` directory contains the app's Helm chart as it will be available through the Plural API and used by the Plural CLI to configure and deploy the Kubernetes components into your cluster.
+Many artifacts define the Helm charts in terms of their upstream open source versions (if they're actively maintained, allow for required customization and fit Plural's quality standards)
+as well as other helper charts, e.g. from Plural's [Module Library](/adding-new-application/module-library).
 If any additional resources are necessary, they can be added and templated in the same manner as with any other Helm chart.
 Any default chart parametrization goes into your standard `values.yaml` file, most prominently resource requirements or limits, labels, annotations, entrypoint customizations, and so on.
 
@@ -98,17 +99,17 @@ This enables us to parametrize values for resources that depend on application c
 The ARN of an AWS role or bucket, or VPC subnet ids are common examples for this.
 Another supported use case is to pass output from other Plural deployed applications that live in the same cluster,
 or configuration that you can query from the Plural API, e.g. OIDC config if you're using Plural as an OIDC provider for your apps, too.
-See [Templating](###Templating) for how powerful this additional templating layer can be.
+See [Templating](/adding-new-application/templating) for how powerful this additional templating layer can be.
 
-Plural leverages dependency tracking of applications to achieve a high degree of resource efficiency and modularity.
+Plural leverages dependency tracking of applications to achieve a high degree of resource efficiency and deduplication.
 Dependencies between artifacts are defined in the recipe files (see below).
-At the level of the Helm charts and Terraform modules the cross-application dependencies are tracked in a dedicated `deps.yaml` at each chart's or module's top-level directory.
+Dependencies are also tracked between the Helm charts and Terraform modules of other applications in a dedicated `deps.yaml` file in each chart's or module's directory.
 For example, for Dagster's Helm chart you would list required dependencies on:
 - the `bootstrap` application's Helm chart 
 - the `ingress-nginx` application's Helm chart
 - the `postrges` operator application's Helm chart
 
-as well as optional dependencies the Dagster application's own Terraform modules to convey the intent that those are installed before the Helm chart.
+as well as optional dependencies on Dagster's own Terraform modules to convey intent that those are installed before the Helm chart.
 
 ```yaml
 apiVersion: plural.sh/v1alpha1
@@ -151,10 +152,10 @@ spec:
 ## Terraform
 
 The `terraform` directory contains the app's provider-specific terraform modules that encapsulate all application components that do not (or cannot) live inside the cluster.
-For each cloud provider that the artifact offers a bundle for there will be one under the related directory name.
+For each cloud provider, that the artifact offers a bundle for, there will be one under the related directory name.
 Most commonly you'd find object storage alongside their IAM resources, but sometimes also Kubernetes resources like service accounts,
 if their deployment cannot be achieved through the artifact's Helm chart in a convenient manner.
-> One peculiarity about the terraform modules is that at the very least they need to contain the Kubernetes namespace for your application.
+> One peculiarity about the Terraform modules is that, at the very least, they need to contain the Kubernetes namespace for your application.
   This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
 Just like the Helm chart, the Terraform modules also contain a `deps.yaml` file that inform the Plural API about dependencies on other modules.
@@ -204,11 +205,11 @@ tags:
 
 The metadata in this file informs the Plural API about the application this artifact envelopes.
 It will store its name, category and description, where it can find the icon and docs to display in the marketplace,
-the notes template to prompt after installation, as well as links to any upstream git repository or homepage if applicable.
+the notes template to prompt after installation, as well as links to any upstream git repository or homepage (if applicable).
 
 `oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
 > Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
-  This happens, because every Client needs to be created before a `plural build` which then inputs the client info into the helm chart.
+  This happens, because every client needs to be created before a `plural build` which then inputs the client info into the helm chart.
 
 The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push`.
 It should be set to the same value as the `private` flag in inside the `repository.yaml`.
@@ -253,7 +254,7 @@ It informs the Plural API about the bundle's parameter signature, metadata, depe
 Let's step through this file.
 
 - `provider` defines the targeted cloud provider of this recipe.
-- For every artifact one of the recipes can be marked as `primary` which will make it possible to install with simply a `plural bundle install <app_name>` (leaving out the `<bundle>`).
+- For every artifact one of the recipes can be marked as `primary` which will make it possible to simply install with a `plural bundle install <app_name>` (leaving out the `<bundle>`).
 - The apps listed in `dependencies` tell Plural on which other Plural bundles this bundle depends on.
   > Most bundles depend on the installation of other Plural applications. For example, every bundle will at least depend on the bootstrap application that packages the cluster itself.
 - Similar to `oauthSettings` in the `repository.yaml`, `oidcSettings` in the recipe YAML should specify the same configuration at the bundle level.
@@ -263,6 +264,7 @@ Let's step through this file.
   For examples on available types check other Plural artifacts.
   The Plural CLI will store the passed values in the according section in the `context.yaml` as discussed above.
 - `sections[0].items` lists the chart and module directories in the `helm` or `terraform` directories that are part of this bundle.
+
 > A bundle can technically have multiple sections, but this feature's not yet used.
 
 ```yaml

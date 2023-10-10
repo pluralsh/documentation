@@ -1,6 +1,13 @@
-# Templating
+---
+title: Templating
+description: >-
+  The two main functionalities that make Plural work are dependency tracking between DevOps tools (Helm and Terraform) and templating.
+  This guide serves as a reference for how you can leverage this feature.
+---
 
-The next example is a snippet of the `values.yaml.tpl` file for Grafana:
+In [Plural Artifact Structure](/adding-new-application/plural-artifact-structure) we layed out how an artifact can be paremtrized.
+
+The example is a snippet of the `values.yaml.tpl` file for Grafana:
 
 ```yaml
 grafana:
