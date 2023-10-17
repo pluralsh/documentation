@@ -19,6 +19,8 @@ plural crypto setup-keys --name <name-for-key-pair>
 
 This will generate a new keypair and automatically register the public key with the Plural API. You should be able to see it listed [here](https://app.plural.sh/profile/keys) in our web app and the keypair will be stored in `~/.plural/identity`.
 
+If the user has not set up their plural cli yet, they'll need to run `plural login` to set up a local access token for your cli and other config files before running `plural crypto setup-keys`.
+
 ### Share the repository
 
 To share a repo, use the following command:
