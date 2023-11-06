@@ -1,5 +1,8 @@
 [
   {
+    "path": "/adding-new-application/background-app-install"
+  },
+  {
     "path": "/adding-new-application/getting-started-with-runbooks"
   },
   {
@@ -18,7 +21,16 @@
     "path": "/adding-new-application/module-library"
   },
   {
+    "path": "/adding-new-application/plural-artifact-structure"
+  },
+  {
     "path": "/adding-new-application/plural-custom-resources"
+  },
+  {
+    "path": "/adding-new-application/publishing"
+  },
+  {
+    "path": "/adding-new-application/templating"
   },
   {
     "path": "/applications"
@@ -115,6 +127,9 @@
   },
   {
     "path": "/getting-started/quickstart"
+  },
+  {
+    "path": "/getting-started/understanding-upgrades"
   },
   {
     "path": "/getting-started/video-cli-quickstart"

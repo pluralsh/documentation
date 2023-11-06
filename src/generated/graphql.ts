@@ -414,6 +414,8 @@ export type Cluster = {
   /** The ID of the cluster. */
   id: Scalars['ID']['output'];
   insertedAt?: Maybe<Scalars['DateTime']['output']>;
+  /** whether any installation in the cluster has been locked */
+  locked?: Maybe<Scalars['Boolean']['output']>;
   /** The name of the cluster. */
   name: Scalars['String']['output'];
   /** The user that owns the cluster. */
@@ -426,9 +428,19 @@ export type Cluster = {
   queue?: Maybe<UpgradeQueue>;
   /** The source of the cluster. */
   source?: Maybe<Source>;
+  /** whether all installations in the cluster have been synced */
+  synced?: Maybe<Scalars['Boolean']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
   /** pending upgrades for each installed app */
   upgradeInfo?: Maybe<Array<Maybe<UpgradeInfo>>>;
+  /** CPU/Memory history for this cluster */
+  usageHistory?: Maybe<Array<Maybe<ClusterUsageHistory>>>;
+};
+
+
+/** A Kubernetes cluster that can be used to deploy applications on with Plural. */
+export type ClusterUsageHistoryArgs = {
+  begin: Scalars['DateTime']['input'];
 };
 
 /** Input for creating or updating a cluster. */
@@ -485,6 +497,17 @@ export type ClusterInformationAttributes = {
   gitCommit?: InputMaybe<Scalars['String']['input']>;
   platform?: InputMaybe<Scalars['String']['input']>;
   version?: InputMaybe<Scalars['String']['input']>;
+};
+
+/** A record of the utilization in a given cluster */
+export type ClusterUsageHistory = {
+  __typename?: 'ClusterUsageHistory';
+  account?: Maybe<Account>;
+  cluster?: Maybe<Cluster>;
+  cpu?: Maybe<Scalars['Int']['output']>;
+  insertedAt?: Maybe<Scalars['DateTime']['output']>;
+  memory?: Maybe<Scalars['Int']['output']>;
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
 export type Community = {
@@ -845,6 +868,10 @@ export type EntityAttributes = {
   type: MessageEntityType;
   userId?: InputMaybe<Scalars['ID']['input']>;
 };
+
+export enum ExternalOidcProvider {
+  GithubActions = 'GITHUB_ACTIONS'
+}
 
 export type File = {
   __typename?: 'File';
@@ -1247,6 +1274,7 @@ export type Installation = {
   license?: Maybe<Scalars['String']['output']>;
   /** The license key for the application. */
   licenseKey?: Maybe<Scalars['String']['output']>;
+  locked?: Maybe<Scalars['Boolean']['output']>;
   /** The OIDC provider for the application. */
   oidcProvider?: Maybe<OidcProvider>;
   /** The last ping time of an installed application. */
@@ -1255,6 +1283,7 @@ export type Installation = {
   repository?: Maybe<Repository>;
   /** The subscription for the application. */
   subscription?: Maybe<RepositorySubscription>;
+  synced?: Maybe<Scalars['Boolean']['output']>;
   /** The tag to track for auto upgrades. */
   trackTag: Scalars['String']['output'];
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
@@ -1771,6 +1800,16 @@ export type OidcStepResponse = {
   repository?: Maybe<Repository>;
 };
 
+export type OidcTrustRelationship = {
+  __typename?: 'OidcTrustRelationship';
+  id: Scalars['ID']['output'];
+  insertedAt?: Maybe<Scalars['DateTime']['output']>;
+  issuer: Scalars['String']['output'];
+  scopes?: Maybe<Array<Scalars['String']['output']>>;
+  trust: Scalars['String']['output'];
+  updatedAt?: Maybe<Scalars['DateTime']['output']>;
+};
+
 export type OnboardingChecklist = {
   __typename?: 'OnboardingChecklist';
   dismissed?: Maybe<Scalars['Boolean']['output']>;
@@ -1984,6 +2023,8 @@ export type PlanFeatureAttributes = {
 export type PlanFeatures = {
   __typename?: 'PlanFeatures';
   audit?: Maybe<Scalars['Boolean']['output']>;
+  cd?: Maybe<Scalars['Boolean']['output']>;
+  databaseManagement?: Maybe<Scalars['Boolean']['output']>;
   userManagement?: Maybe<Scalars['Boolean']['output']>;
   vpn?: Maybe<Scalars['Boolean']['output']>;
 };
@@ -2679,6 +2720,7 @@ export type RootMutationType = {
   createTerraform?: Maybe<Terraform>;
   createTest?: Maybe<Test>;
   createToken?: Maybe<PersistedToken>;
+  createTrustRelationship?: Maybe<OidcTrustRelationship>;
   createUpgrade?: Maybe<Upgrade>;
   createUserEvent?: Maybe<Scalars['Boolean']['output']>;
   createWebhook?: Maybe<Webhook>;
@@ -2713,6 +2755,7 @@ export type RootMutationType = {
   deleteStack?: Maybe<Stack>;
   deleteTerraform?: Maybe<Terraform>;
   deleteToken?: Maybe<PersistedToken>;
+  deleteTrustRelationship?: Maybe<OidcTrustRelationship>;
   deleteUser?: Maybe<User>;
   destroyCluster?: Maybe<Scalars['Boolean']['output']>;
   deviceLogin?: Maybe<DeviceLogin>;
@@ -2725,6 +2768,7 @@ export type RootMutationType = {
   installStack?: Maybe<Array<Maybe<Recipe>>>;
   installStackShell?: Maybe<Array<Maybe<Recipe>>>;
   installTerraform?: Maybe<TerraformInstallation>;
+  installVersion?: Maybe<Scalars['Boolean']['output']>;
   linkPublisher?: Maybe<Publisher>;
   login?: Maybe<User>;
   loginToken?: Maybe<User>;
@@ -2750,6 +2794,7 @@ export type RootMutationType = {
   signup?: Maybe<User>;
   ssoCallback?: Maybe<User>;
   stopShell?: Maybe<Scalars['Boolean']['output']>;
+  synced?: Maybe<Scalars['Boolean']['output']>;
   transferDemoProject?: Maybe<DemoProject>;
   /** transfers ownership of a cluster to a service account */
   transferOwnership?: Maybe<Cluster>;
@@ -3005,6 +3050,11 @@ export type RootMutationTypeCreateTestArgs = {
 };
 
 
+export type RootMutationTypeCreateTrustRelationshipArgs = {
+  attributes: TrustRelationshipAttributes;
+};
+
+
 export type RootMutationTypeCreateUpgradeArgs = {
   attributes: UpgradeAttributes;
   queue: Scalars['String']['input'];
@@ -3161,6 +3211,11 @@ export type RootMutationTypeDeleteTokenArgs = {
 };
 
 
+export type RootMutationTypeDeleteTrustRelationshipArgs = {
+  id: Scalars['ID']['input'];
+};
+
+
 export type RootMutationTypeDeleteUserArgs = {
   id: Scalars['ID']['input'];
 };
@@ -3221,6 +3276,14 @@ export type RootMutationTypeInstallStackShellArgs = {
 export type RootMutationTypeInstallTerraformArgs = {
   attributes: TerraformInstallationAttributes;
   installationId: Scalars['ID']['input'];
+};
+
+
+export type RootMutationTypeInstallVersionArgs = {
+  package: Scalars['String']['input'];
+  repository: Scalars['String']['input'];
+  type: DependencyType;
+  vsn: Scalars['String']['input'];
 };
 
 
@@ -3330,6 +3393,11 @@ export type RootMutationTypeSignupArgs = {
 export type RootMutationTypeSsoCallbackArgs = {
   code: Scalars['String']['input'];
   deviceToken?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+export type RootMutationTypeSyncedArgs = {
+  repository: Scalars['String']['input'];
 };
 
 
@@ -3584,6 +3652,7 @@ export type RootQueryType = {
   oidcConsent?: Maybe<OidcStepResponse>;
   oidcLogin?: Maybe<OidcStepResponse>;
   oidcLogins?: Maybe<OidcLoginConnection>;
+  oidcToken?: Maybe<Scalars['String']['output']>;
   platformMetrics?: Maybe<PlatformMetrics>;
   platformPlans?: Maybe<Array<Maybe<PlatformPlan>>>;
   platformSubscription?: Maybe<PlatformSubscription>;
@@ -3922,6 +3991,13 @@ export type RootQueryTypeOidcLoginsArgs = {
   before?: InputMaybe<Scalars['String']['input']>;
   first?: InputMaybe<Scalars['Int']['input']>;
   last?: InputMaybe<Scalars['Int']['input']>;
+};
+
+
+export type RootQueryTypeOidcTokenArgs = {
+  email: Scalars['String']['input'];
+  idToken: Scalars['String']['input'];
+  provider: ExternalOidcProvider;
 };
 
 
@@ -4624,6 +4700,12 @@ export enum TestType {
   Git = 'GIT'
 }
 
+export type TrustRelationshipAttributes = {
+  issuer: Scalars['String']['input'];
+  scopes?: InputMaybe<Array<Scalars['String']['input']>>;
+  trust: Scalars['String']['input'];
+};
+
 export type UpdatablePlanAttributes = {
   default?: InputMaybe<Scalars['Boolean']['input']>;
   serviceLevels?: InputMaybe<Array<InputMaybe<ServiceLevelAttributes>>>;
@@ -4775,6 +4857,7 @@ export type User = {
   publisher?: Maybe<Publisher>;
   roles?: Maybe<Roles>;
   serviceAccount?: Maybe<Scalars['Boolean']['output']>;
+  trustRelationships?: Maybe<Array<Maybe<OidcTrustRelationship>>>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 
