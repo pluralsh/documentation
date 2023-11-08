@@ -74,19 +74,11 @@ const rootNavData: NavMenu = deepFreeze([
         sections: [
           {
             title: 'Quickstart with our CLI',
-            href: '/getting-started/quickstart',
+            href: '/deployments/cli-quickstart',
           },
           {
-            href: '/getting-started/cloud-shell-quickstart',
+            href: '/deployments/browser-quickstart',
             title: 'Quickstart from your Browser',
-          },
-          {
-            href: '/getting-started/admin-console',
-            title: 'Installing Plural Console',
-          },
-          {
-            href: '/getting-started/understanding-upgrades',
-            title: 'Understanding Application Upgrades',
           },
         ],
       },
@@ -258,6 +250,10 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        title: 'Sharing your Plural Repository',
+        href: '/getting-started/manage-git-repositories/sharing-git-repositories',
+      },
+      {
         href: '/operations/advanced-operations',
         title: 'Advanced Operations',
         sections: [
@@ -278,10 +274,6 @@ const rootNavData: NavMenu = deepFreeze([
           {
             href: '/operations/auth-access-control/api-tokens',
             title: 'Create Persistent API Tokens',
-          },
-          {
-            title: 'Share your Plural Git Repository',
-            href: '/getting-started/manage-git-repositories/sharing-git-repositories',
           },
         ],
       },

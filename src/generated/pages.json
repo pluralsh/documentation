@@ -84,6 +84,51 @@
     "path": "/debugging/proxies"
   },
   {
+    "path": "/deployments/browser-quickstart"
+  },
+  {
+    "path": "/deployments/cluster-config"
+  },
+  {
+    "path": "/deployments/cluster-cost"
+  },
+  {
+    "path": "/deployments/cluster-create"
+  },
+  {
+    "path": "/deployments/cluster-destroy"
+  },
+  {
+    "path": "/deployments/clusters"
+  },
+  {
+    "path": "/deployments/credentials"
+  },
+  {
+    "path": "/deployments/debugging"
+  },
+  {
+    "path": "/deployments/deprecations"
+  },
+  {
+    "path": "/deployments/git"
+  },
+  {
+    "path": "/deployments/global-services"
+  },
+  {
+    "path": "/deployments/manage-your-microservices"
+  },
+  {
+    "path": "/deployments/pipelines"
+  },
+  {
+    "path": "/deployments/services"
+  },
+  {
+    "path": "/deployments/upgrades"
+  },
+  {
     "path": "/faq/certifications"
   },
   {
@@ -93,9 +138,6 @@
     "path": "/faq/plural-paid-tiers"
   },
   {
-    "path": "/first-party/manage-your-microservices"
-  },
-  {
     "path": "/getting-started/admin-console"
   },
   {
@@ -103,6 +145,9 @@
   },
   {
     "path": "/getting-started/concepts"
+  },
+  {
+    "path": "/getting-started/deployments"
   },
   {
     "path": "/getting-started/manage-git-repositories"
@@ -118,6 +163,9 @@
   },
   {
     "path": "/getting-started/manage-git-repositories/your-plural-workspace"
+  },
+  {
+    "path": "/getting-started/marketplace"
   },
   {
     "path": "/getting-started/openid-connect"
