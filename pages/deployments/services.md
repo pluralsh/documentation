@@ -1,4 +1,4 @@
 ---
-title: Deploy Services
-description: XXX
+title: Deployments
+description: How to deploy and configure services in Plural
 ---

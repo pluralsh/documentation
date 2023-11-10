@@ -109,7 +109,7 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/deployments',
+        href: '/deployments/services',
         title: 'Deployments',
         sections: [
           {
@@ -117,7 +117,7 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/git',
           },
           {
-            href: '/deployments/services',
+            href: '/deployments/services-deploy',
             title: 'Deploy Services',
           },
           {

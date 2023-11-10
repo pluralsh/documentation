@@ -5,7 +5,7 @@ description: Deploying your services using the Plural Console UI.
 
 ## Overview
 
-This guide goes over how to start deploying your services with Plural using the Plural Console UI. At the end of this tutorial, you will have:
+This guide goes over how to deploy your services with Plural using the Plural Console UI. At the end of this tutorial, you will have:
 
 - Provisioned new clusters, and/or deployed the Plural Deployment Operator on your existing clusters.
 - Imported the Git repositories containing your code and manifests.
@@ -14,7 +14,7 @@ This guide goes over how to start deploying your services with Plural using the 
 
 in under 30 minutes, all within your browser. You can see the process in the video here or follow the instructions step-by-step:
 
-{% embed url="https://youtu.be/rKXCZtw-vjM?feature=shared" aspectRatio="16 / 9" /%}
+{% embed url="https://www.youtube.com/watch?v=jBlq45ntbBw" aspectRatio="16 / 9" /%}
 
 ## Onboard to Plural and install the Plural Console
 
