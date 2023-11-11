@@ -87,6 +87,9 @@
     "path": "/deployments/browser-quickstart"
   },
   {
+    "path": "/deployments/cli-quickstart"
+  },
+  {
     "path": "/deployments/cluster-config"
   },
   {
@@ -121,6 +124,9 @@
   },
   {
     "path": "/deployments/pipelines"
+  },
+  {
+    "path": "/deployments/services-deploy"
   },
   {
     "path": "/deployments/services"

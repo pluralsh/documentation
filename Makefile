@@ -6,5 +6,5 @@ help:
 yarn-install: .PHONY
 	yarn
 
-web: yarn ## runs the docs site locally
+web: ## runs the docs site locally
 	yarn dev

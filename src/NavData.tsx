@@ -73,6 +73,10 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Getting Started',
         sections: [
           {
+            title: 'Architecture',
+            href: '/deployments/architecture',
+          },
+          {
             title: 'Quickstart with our CLI',
             href: '/deployments/cli-quickstart',
           },
@@ -80,12 +84,20 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/browser-quickstart',
             title: 'Quickstart from your Browser',
           },
+          {
+            href: '/deployments/existing-cluster',
+            title: 'Set Up on your own Cluster',
+          },
         ],
       },
       {
         href: '/deployments/clusters',
         title: 'Cluster Management',
         sections: [
+          {
+            title: 'Import An Existing Cluster',
+            href: '/deployments/import-cluster',
+          },
           {
             title: 'Create Provider Credentials',
             href: '/deployments/credentials',
@@ -127,6 +139,16 @@ const rootNavData: NavMenu = deepFreeze([
           {
             title: 'Upgrades and Rollbacks',
             href: '/deployments/upgrades',
+          },
+        ],
+      },
+      {
+        href: '/deployments/ci',
+        title: 'Integrate With your CI',
+        sections: [
+          {
+            title: 'Overview',
+            href: '/deployments/ci-overview',
           },
         ],
       },
