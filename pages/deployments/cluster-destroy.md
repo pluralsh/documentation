@@ -15,3 +15,11 @@ Before deleting your cluster, you should decide on which you'd prefer to do, if 
 ## Delete a cluster In-Browser
 
 In the cluster list, you can delete a cluster by clicking the trash icon next to it. This will open a confirmation modal and if chosen, will proceed with deletion.
+
+## Delete a cluster via cli
+
+You can delete a cluster with the cli using:
+
+```sh
+plural cd clusters delete @<handle>
+```

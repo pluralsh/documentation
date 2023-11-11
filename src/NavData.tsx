@@ -106,10 +106,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/cluster-create',
             title: 'Create Workload Clusters',
           },
-          {
-            href: '/deployments/cluster-config',
-            title: 'Configure my Cluster',
-          },
+          // {
+          //   href: '/deployments/cluster-config',
+          //   title: 'Configure my Cluster',
+          // },
           {
             title: 'Destroy the Cluster Safely',
             href: '/deployments/cluster-destroy',
@@ -139,6 +139,24 @@ const rootNavData: NavMenu = deepFreeze([
           {
             title: 'Upgrades and Rollbacks',
             href: '/deployments/upgrades',
+          },
+        ],
+      },
+      {
+        href: '/deployments/addons',
+        title: 'Managed Kubernetes Add-Ons',
+        sections: [
+          {
+            title: 'Network Stack',
+            href: '/deployments/network-addons',
+          },
+          {
+            title: 'Monitoring',
+            href: '/deployments/monitoring-addons',
+          },
+          {
+            title: 'Security',
+            href: '/deployments/security-addons',
           },
         ],
       },

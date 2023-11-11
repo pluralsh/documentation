@@ -84,7 +84,19 @@
     "path": "/debugging/proxies"
   },
   {
+    "path": "/deployments/addons"
+  },
+  {
+    "path": "/deployments/architecture"
+  },
+  {
     "path": "/deployments/browser-quickstart"
+  },
+  {
+    "path": "/deployments/ci-overview"
+  },
+  {
+    "path": "/deployments/ci"
   },
   {
     "path": "/deployments/cli-quickstart"
@@ -105,6 +117,9 @@
     "path": "/deployments/clusters"
   },
   {
+    "path": "/deployments/cost-addons"
+  },
+  {
     "path": "/deployments/credentials"
   },
   {
@@ -114,16 +129,31 @@
     "path": "/deployments/deprecations"
   },
   {
+    "path": "/deployments/existing-cluster"
+  },
+  {
     "path": "/deployments/git"
   },
   {
     "path": "/deployments/global-services"
   },
   {
+    "path": "/deployments/import-cluster"
+  },
+  {
     "path": "/deployments/manage-your-microservices"
   },
   {
+    "path": "/deployments/monitoring-addons"
+  },
+  {
+    "path": "/deployments/network-addons"
+  },
+  {
     "path": "/deployments/pipelines"
+  },
+  {
+    "path": "/deployments/security-addons"
   },
   {
     "path": "/deployments/services-deploy"

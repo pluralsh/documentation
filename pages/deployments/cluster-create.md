@@ -18,7 +18,7 @@ Seperating workloads at the kubernetes cluster level has the benefit of minimizi
 
 You can create a new cluster entirely in-browser by first clicking the `Create Cluster` button and filling out the form we provider, it should look something like:
 
-![](assets/deployments/create-cluster.png)
+![](/assets/deployments/create-cluster.png)
 
 Clusters have both names and unique, human readable handles, the name is not guaranteed unique, since cloud providers don't enforce that across project/account/subscriptions. The handle is optional and will default to the name unless otherwise provided.
 
