@@ -426,6 +426,8 @@ export type Cluster = {
   provider: Provider;
   /** The upgrade queue for applications running on the cluster. */
   queue?: Maybe<UpgradeQueue>;
+  /** the services deployed from this cluster */
+  serviceCount?: Maybe<Scalars['Int']['output']>;
   /** The source of the cluster. */
   source?: Maybe<Source>;
   /** whether all installations in the cluster have been synced */
@@ -507,6 +509,7 @@ export type ClusterUsageHistory = {
   cpu?: Maybe<Scalars['Int']['output']>;
   insertedAt?: Maybe<Scalars['DateTime']['output']>;
   memory?: Maybe<Scalars['Int']['output']>;
+  services?: Maybe<Scalars['Int']['output']>;
   updatedAt?: Maybe<Scalars['DateTime']['output']>;
 };
 

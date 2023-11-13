@@ -31,7 +31,7 @@ To deploy additional clusters, click the "Create cluster" button in the top righ
 To import an existing cluster, select the "Import existing" toggle and add a name, handle, and any tags. You then need to run the following command on the cluster itself to install the Plural Deploy Operator:
 
 ```
-plural cd install --url https://<CONSOLE_URL>/ext/gql -- token <TOKEN>
+plural cd install --url https://<CONSOLE_URL>/ext/gql --token <TOKEN>
 ```
 
 Make sure your kubeconfig points to the desired cluster for import.
