@@ -6,7 +6,7 @@ description: >-
 
 In this guide we will lay out how your user provided values tie in with the deployment process as it relates to the configuration and templating of the app.
 
-When a user sets up a new Plural workspace in a git repository (we'll call that a *deployment repository* going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
+When a user sets up a new Plural workspace in a git repository (we'll call that a _deployment repository_ going forward) a `workspace.yaml` file is created that stores global values for that cluster such as the cloud account and region, the cluster and VPC name and what subdomain all the applications will be hosted under.
 Next, the user can install an application bundle using the `plural bundle install <app_name> <bundle>` CLI command.
 
 > Most applications come with more than one bundle, one for each targeted cloud provider.
@@ -32,6 +32,7 @@ $ tree -L 1 .
 ```
 
 The `workspace.yaml` would look like this:
+
 ```yaml
 apiVersion: plural.sh/v1alpha1
 kind: ProjectManifest
@@ -40,7 +41,7 @@ metadata:
 spec:
   cluster: pluraldev
   bucket: pluraldevsh-tf-state
-  project: "123456765432"
+  project: '123456765432'
   provider: aws
   region: us-east-2
   owner:
@@ -53,6 +54,7 @@ spec:
 ```
 
 And the `context.yaml` like this. In the `spec.configuration` section you can see the recorded user input for each artifact.
+
 ```yaml
 apiVersion: plural.sh/v1alpha1
 kind: Context

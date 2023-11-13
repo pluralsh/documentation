@@ -7,6 +7,7 @@ description: >-
 As mentioned in [Background on Application Installations](/adding-new-application/background-app-install),
 the Plural CLI creates a wrapper Helm chart and Terraform module for each installed application and inputs the user provided values for that installation.
 Some extra configuration files are necessary in the application's artifact for the Plural API to be able to understand:
+
 - the Helm charts and Terraform modules dependencies to run them through its templating engine
 - dependencies on other Plural artifacts
 - platform specific components and infrastructure configurations
@@ -83,8 +84,7 @@ $ tree .
 └── vendor_images.yaml
 ```
 
-Let's disect this artifact's structure.
-
+Let's dissect this artifact's structure.
 
 ## Helm
 
@@ -105,7 +105,8 @@ Plural leverages dependency tracking of applications to achieve a high degree of
 Dependencies between artifacts are defined in the recipe files (see below).
 Dependencies are also tracked between the Helm charts and Terraform modules of other applications in a dedicated `deps.yaml` file in each chart's or module's directory.
 For example, for Dagster's Helm chart you would list required dependencies on:
-- the `bootstrap` application's Helm chart 
+
+- the `bootstrap` application's Helm chart
 - the `ingress-nginx` application's Helm chart
 - the `postrges` operator application's Helm chart
 
@@ -120,33 +121,33 @@ metadata:
 spec:
   breaking: true
   dependencies:
-  - type: helm
-    name: bootstrap
-    repo: bootstrap
-    version: '>= 0.5.1'
-  - type: helm
-    name: ingress-nginx
-    repo: ingress-nginx
-    version: ">= 0.1.2"
-  - type: helm
-    name: postgres
-    repo: postgres
-    version: ">= 0.1.6"
-  - type: terraform
-    name: aws
-    repo: dagster
-    version: '>= 0.1.0'
-    optional: true
-  - type: terraform
-    name: azure
-    repo: dagster
-    version: '>= 0.1.0'
-    optional: true
-  - type: terraform
-    name: gcp
-    repo: dagster
-    version: '>= 0.1.0'
-    optional: true
+    - type: helm
+      name: bootstrap
+      repo: bootstrap
+      version: '>= 0.5.1'
+    - type: helm
+      name: ingress-nginx
+      repo: ingress-nginx
+      version: '>= 0.1.2'
+    - type: helm
+      name: postgres
+      repo: postgres
+      version: '>= 0.1.6'
+    - type: terraform
+      name: aws
+      repo: dagster
+      version: '>= 0.1.0'
+      optional: true
+    - type: terraform
+      name: azure
+      repo: dagster
+      version: '>= 0.1.0'
+      optional: true
+    - type: terraform
+      name: gcp
+      repo: dagster
+      version: '>= 0.1.0'
+      optional: true
 ```
 
 ## Terraform
@@ -157,9 +158,10 @@ Most commonly you'd find object storage alongside their IAM resources, or additi
 Sometimes it will also include Kubernetes resources like service accounts, if their deployment cannot be achieved through the artifact's Helm chart in a convenient manner.
 
 > One peculiarity about the Terraform modules is that, at the very least, they need to contain the Kubernetes namespace for your application.
-  This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
+> This is because during a `plural deploy` with the Plural CLI the `terraform apply` will always run before the `helm install` step.
 
 Just like the Helm chart, the Terraform modules also contain a `deps.yaml` file that inform the Plural API about dependencies on other modules.
+
 ```
 apiVersion: plural.sh/v1alpha1
 kind: Dependencies
@@ -176,7 +178,6 @@ spec:
   - aws
 ```
 
-
 ## Plural Files
 
 The `plural` directory contains the artifact's packaging information (`plural/recipes`), metadata (`plural/tags` and `plural/icons`), and application specific instructions (`plural/docs` and `plural/notes.tpl`).
@@ -185,6 +186,7 @@ On the top-level directory of each artifact you'll also find a`repository.yaml`.
 The `repository.yaml` and recipe YAMLs are an integral part of Plural's artifact packaging format.
 
 ### `repository.yaml`
+
 ```yaml
 name: dagster
 description: A data orchestration platform for the development, production, and observation of data assets.
@@ -199,9 +201,9 @@ oauthSettings:
   uriFormat: https://{domain}/oauth2/callback
   authMethod: POST
 tags:
-- tag: dag
-- tag: data
-- tag: data-pipelines
+  - tag: dag
+  - tag: data
+  - tag: data-pipelines
 ```
 
 The metadata in this file informs the Plural API about the application this artifact envelopes.
@@ -209,43 +211,45 @@ It will store its name, category and description, where it can find the icon and
 the notes template to prompt after installation, as well as links to any upstream git repository or homepage (if applicable).
 
 `oauthSettings` specifies the URI format for the OIDC callback address and informs the Plural API how to setup the OIDC endpoint for your application if you use it.
+
 > Behind the scenes, every `plural bundle install` triggers the OIDC client creation when you answer with `yes` on the OIDC prompt.
-  This happens, because every client needs to be created before a `plural build` which then inputs the client info into the helm chart.
+> This happens, because every client needs to be created before a `plural build` which then inputs the client info into the helm chart.
 
 The `private` flag controls whether the artifact's bundles are published publicly or privately on a `plural push` or `plural apply` (see [Publishing](/adding-new-application/publishing)).
 
 ### `plural/recipes/dagster-aws.yaml`
+
 ```yaml
 name: dagster-aws
 description: Installs dagster on an aws eks cluster
 provider: AWS
 primary: true
 dependencies:
-- repo: bootstrap
-  name: aws-k8s
-- repo: ingress-nginx
-  name: ingress-nginx-aws
-- repo: postgres
-  name: aws-postgres
+  - repo: bootstrap
+    name: aws-k8s
+  - repo: ingress-nginx
+    name: ingress-nginx-aws
+  - repo: postgres
+    name: aws-postgres
 oidcSettings:
   uriFormat: https://{domain}/oauth2/callback
   authMethod: POST
   domainKey: hostname
 sections:
-- name: dagster
-  configuration:
-  - name: dagsterBucket
-    type: BUCKET
-    documentation: s3 bucket for storing dagster logs
-    default: dagster
-  - name: hostname
-    type: DOMAIN
-    documentation: fqdn on which to deploy your dagster instance
-  items:
-  - type: TERRAFORM
-    name: aws
-  - type: HELM
-    name: dagster
+  - name: dagster
+    configuration:
+      - name: dagsterBucket
+        type: BUCKET
+        documentation: s3 bucket for storing dagster logs
+        default: dagster
+      - name: hostname
+        type: DOMAIN
+        documentation: fqdn on which to deploy your dagster instance
+    items:
+      - type: TERRAFORM
+        name: aws
+      - type: HELM
+        name: dagster
 ```
 
 The recipe file ties a bundle together, with one dedicated recipe per cloud provider.

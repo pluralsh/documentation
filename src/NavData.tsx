@@ -55,133 +55,306 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Concepts',
         href: '/getting-started/concepts',
       },
-      {
-        title: 'How much does it cost?',
-        href: '/operations/pricing-calculator',
-      },
     ],
   },
   {
-    title: 'Getting Started',
+    title: 'Plural Continuous Deployment',
     sections: [
       {
-        title: 'Quickstart with our CLI',
-        href: '/getting-started/quickstart',
-      },
-      {
-        href: '/getting-started/cloud-shell-quickstart',
-        title: 'Quickstart from your Browser',
-      },
-      {
-        href: '/getting-started/admin-console',
-        title: 'Installing Plural Console',
-      },
-      {
-        href: '/getting-started/understanding-upgrades',
-        title: 'Understanding Application Upgrades',
-      },
-    ],
-  },
-  {
-    title: 'How To',
-    sections: [
-      {
-        title: 'Configure my Cluster',
-        href: '/operations/cluster-configuration',
-      },
-      {
-        href: '/operations/managing-applications/add-application-to-cluster',
-        title: 'Add an Application to a Cluster',
-      },
-      {
-        href: '/operations/managing-applications/add-users-to-application',
-        title: 'Add Users to an Application',
-      },
-      {
-        href: '/operations/managing-applications/update-application',
-        title: 'Update an Application',
-      },
-      {
-        href: '/operations/managing-applications/delete-application',
-        title: 'Delete an Application',
-      },
-      {
-        href: '/operations/managing-applications/bounce-application',
-        title: 'Bounce an Application',
-      },
-      {
-        href: '/operations/managing-applications/connect-application-db',
-        title: 'Connect to Application DB',
-      },
-      {
-        href: '/operations/managing-applications/credentials-non-oidc',
-        title: 'Find Credentials for non-OIDC applications',
-      },
-      {
-        href: '/operations/managing-applications/customize-application',
-        title: 'Customize an Application',
-      },
-      {
-        href: '/operations/network-configuration',
-        title: 'Configure your Network',
-      },
-      {
-        title: 'Debug issues on your Plural Cluster',
-        href: '/debugging/application-issues',
-      },
-      {
-        href: '/operations/uninstall',
-        title: 'Destroy the Cluster Safely',
-      },
-      {
-        href: '/operations/dns-setup',
-        title: 'Set up Third Party DNS',
+        href: '/getting-started/deployments',
+        title: 'Getting Started',
         sections: [
           {
-            href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
-            title: 'Creating a DNS Zone in Console',
+            title: 'Architecture',
+            href: '/deployments/architecture',
+          },
+          {
+            title: 'Quickstart with our CLI',
+            href: '/deployments/cli-quickstart',
+          },
+          {
+            href: '/deployments/browser-quickstart',
+            title: 'Quickstart from your Browser',
+          },
+          {
+            href: '/deployments/existing-cluster',
+            title: 'Set Up on your own Cluster',
           },
         ],
       },
       {
-        href: '/operations/cost-management',
-        title: 'Optimize Cluster Costs',
-      },
-      {
-        href: '/adding-new-application/getting-started-with-runbooks',
-        title: 'Create an Application Runbook',
+        href: '/deployments/clusters',
+        title: 'Cluster Management',
         sections: [
           {
-            href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
-            title: '  XML Runbooks',
+            title: 'Import An Existing Cluster',
+            href: '/deployments/import-cluster',
           },
           {
-            href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
-            title: '  YAML Runbooks',
+            title: 'Create Provider Credentials',
+            href: '/deployments/credentials',
+          },
+          {
+            href: '/deployments/cluster-create',
+            title: 'Create Workload Clusters',
+          },
+          // {
+          //   href: '/deployments/cluster-config',
+          //   title: 'Configure my Cluster',
+          // },
+          {
+            title: 'Destroy the Cluster Safely',
+            href: '/deployments/cluster-destroy',
+          },
+          {
+            title: 'Optimize Cluster Costs',
+            href: '/deployments/cluster-cost',
           },
         ],
       },
       {
-        href: '/operations/auth-access-control/api-tokens',
-        title: 'Create Persistent API Tokens',
+        href: '/deployments/services',
+        title: 'Deployments',
+        sections: [
+          {
+            title: 'Import Git Repositories',
+            href: '/deployments/git',
+          },
+          {
+            href: '/deployments/services-deploy',
+            title: 'Deploy Services',
+          },
+          {
+            href: '/deployments/global-services',
+            title: 'Configure Global Services',
+          },
+          {
+            title: 'Upgrades and Rollbacks',
+            href: '/deployments/upgrades',
+          },
+        ],
       },
       {
-        title: 'Share your Plural Git Repository',
+        href: '/deployments/addons',
+        title: 'Managed Kubernetes Add-Ons',
+        sections: [
+          {
+            title: 'Network Stack',
+            href: '/deployments/network-addons',
+          },
+          {
+            title: 'Monitoring',
+            href: '/deployments/monitoring-addons',
+          },
+          {
+            title: 'Security',
+            href: '/deployments/security-addons',
+          },
+        ],
+      },
+      {
+        href: '/deployments/ci',
+        title: 'Integrate With your CI',
+        sections: [
+          {
+            title: 'Overview',
+            href: '/deployments/ci-overview',
+          },
+          {
+            title: 'Github Actions',
+            href: '/deployments/ci-gh-actions',
+          },
+        ],
+      },
+      {
+        href: '/deployments/pipelines',
+        title: 'Pipelines',
+      },
+      {
+        href: '/deployments/operations',
+        title: 'Advanced Operations',
+        sections: [
+          {
+            title: 'Managing Deprecations and K8s upgrades',
+            href: '/deployments/deprecations',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    title: 'Plural Open Source Marketplace',
+    sections: [
+      {
+        href: '/getting-started/marketplace',
+        title: 'Getting Started',
+        sections: [
+          {
+            title: 'Quickstart with our CLI',
+            href: '/getting-started/quickstart',
+          },
+          {
+            href: '/getting-started/cloud-shell-quickstart',
+            title: 'Quickstart from your Browser',
+          },
+          {
+            href: '/getting-started/admin-console',
+            title: 'Installing Plural Console',
+          },
+          {
+            href: '/getting-started/understanding-upgrades',
+            title: 'Understanding Application Upgrades',
+          },
+        ],
+      },
+      {
+        href: '/operations/clusters',
+        title: 'Cluster Management',
+        sections: [
+          {
+            title: 'Configure my Cluster',
+            href: '/operations/cluster-configuration',
+          },
+          {
+            href: '/operations/uninstall',
+            title: 'Destroy the Cluster Safely',
+          },
+          {
+            href: '/operations/cost-management',
+            title: 'Optimize Cluster Costs',
+          },
+          {
+            title: 'Create Multiple Plural Clusters',
+            href: '/operations/auth-access-control/identity-and-installations/service-accounts',
+          },
+        ],
+      },
+      {
+        href: '/operations/applications',
+        title: 'Application Management',
+        sections: [
+          {
+            href: '/operations/managing-applications/add-application-to-cluster',
+            title: 'Add an Application to a Cluster',
+          },
+          {
+            href: '/operations/managing-applications/add-users-to-application',
+            title: 'Add Users to an Application',
+          },
+          {
+            href: '/operations/managing-applications/update-application',
+            title: 'Update an Application',
+          },
+          {
+            href: '/operations/managing-applications/delete-application',
+            title: 'Delete an Application',
+          },
+          {
+            href: '/operations/managing-applications/bounce-application',
+            title: 'Bounce an Application',
+          },
+          {
+            href: '/operations/managing-applications/connect-application-db',
+            title: 'Connect to Application DB',
+          },
+          {
+            href: '/operations/managing-applications/credentials-non-oidc',
+            title: 'Find Credentials for non-OIDC applications',
+          },
+          {
+            href: '/operations/managing-applications/customize-application',
+            title: 'Customize an Application',
+          },
+          {
+            href: '/adding-new-application/getting-started-with-runbooks',
+            title: 'Create an Application Runbook',
+            sections: [
+              {
+                href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
+                title: '  XML Runbooks',
+              },
+              {
+                href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
+                title: '  YAML Runbooks',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        title: 'Sharing your Plural Repository',
         href: '/getting-started/manage-git-repositories/sharing-git-repositories',
       },
       {
-        title: 'Create Multiple Plural Clusters',
-        href: '/operations/auth-access-control/identity-and-installations/service-accounts',
+        href: '/operations/advanced-operations',
+        title: 'Advanced Operations',
+        sections: [
+          {
+            href: '/operations/network-configuration',
+            title: 'Configure your Network',
+          },
+          {
+            href: '/operations/dns-setup',
+            title: 'Set up Third Party DNS',
+            sections: [
+              {
+                href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
+                title: 'Creating a DNS Zone in Console',
+              },
+            ],
+          },
+          {
+            href: '/operations/auth-access-control/api-tokens',
+            title: 'Create Persistent API Tokens',
+          },
+        ],
+      },
+      {
+        href: '/debugging',
+        title: 'Debugging',
+        sections: [
+          {
+            title: 'Debug issues on your Plural Cluster',
+            href: '/debugging/application-issues',
+          },
+          {
+            href: '/debugging/health-checks',
+            title: '  Health Checks',
+          },
+          {
+            href: '/debugging/proxies',
+            title: 'Proxies',
+          },
+          {
+            href: '/debugging/logs',
+            title: 'Logs',
+          },
+        ],
       },
       {
         href: '/adding-new-application',
         title: 'Contribute a New Application to the Plural Catalog',
         sections: [
-          { href: '/adding-new-application/background-app-install', title: 'Background on Application Installations'},
-          { href: '/adding-new-application/plural-artifact-structure', title: 'Plural Artifact Structure'},
-          { href: '/adding-new-application/templating', title: 'Plural Artifact Templating'},
-          { href: '/adding-new-application/guide', title: 'Guide on Creating a New Application Artifact' },
-          { href: '/adding-new-application/publishing', title: 'Guide on Publishing a Plural Artifact'},
+          {
+            href: '/adding-new-application/background-app-install',
+            title: 'Background on Application Installations',
+          },
+          {
+            href: '/adding-new-application/plural-artifact-structure',
+            title: 'Plural Artifact Structure',
+          },
+          {
+            href: '/adding-new-application/templating',
+            title: 'Plural Artifact Templating',
+          },
+          {
+            href: '/adding-new-application/guide',
+            title: 'Guide on Creating a New Application Artifact',
+          },
+          {
+            href: '/adding-new-application/publishing',
+            title: 'Guide on Publishing a Plural Artifact',
+          },
           {
             href: '/adding-new-application/plural-custom-resources',
             title: 'Plural Custom Resources',
@@ -191,10 +364,6 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Module Library',
           },
         ],
-      },
-      {
-        href: '/first-party/manage-your-microservices',
-        title: 'Manage your Own Services with Plural',
       },
     ],
   },
@@ -218,24 +387,6 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'How does auth and access control work for Plural?',
       },
       {
-        href: '/debugging',
-        title: 'What debugging tools are available for Plural?',
-        sections: [
-          {
-            href: '/debugging/health-checks',
-            title: '  Health Checks',
-          },
-          {
-            href: '/debugging/proxies',
-            title: 'Proxies',
-          },
-          {
-            href: '/debugging/logs',
-            title: 'Logs',
-          },
-        ],
-      },
-      {
         href: '/faq/certifications',
         title: 'What certifications does Plural have?',
       },
@@ -249,16 +400,7 @@ const rootNavData: NavMenu = deepFreeze([
       },
     ],
   },
-  {
-    title: 'Application Catalog',
-    sections: [
-      {
-        href: APP_CATALOG_BASE_URL,
-        toMenu: 'appCatalog',
-        title: 'Application Catalog',
-      },
-    ],
-  },
+
   {
     title: 'Reference',
     sections: [

@@ -1,5 +1,8 @@
 [
   {
+    "path": "/adding-new-application/background-app-install"
+  },
+  {
     "path": "/adding-new-application/getting-started-with-runbooks"
   },
   {
@@ -18,7 +21,16 @@
     "path": "/adding-new-application/module-library"
   },
   {
+    "path": "/adding-new-application/plural-artifact-structure"
+  },
+  {
     "path": "/adding-new-application/plural-custom-resources"
+  },
+  {
+    "path": "/adding-new-application/publishing"
+  },
+  {
+    "path": "/adding-new-application/templating"
   },
   {
     "path": "/applications"
@@ -72,6 +84,93 @@
     "path": "/debugging/proxies"
   },
   {
+    "path": "/deployments/addons"
+  },
+  {
+    "path": "/deployments/architecture"
+  },
+  {
+    "path": "/deployments/browser-quickstart"
+  },
+  {
+    "path": "/deployments/ci-example"
+  },
+  {
+    "path": "/deployments/ci-overview"
+  },
+  {
+    "path": "/deployments/ci"
+  },
+  {
+    "path": "/deployments/cli-quickstart"
+  },
+  {
+    "path": "/deployments/cluster-config"
+  },
+  {
+    "path": "/deployments/cluster-cost"
+  },
+  {
+    "path": "/deployments/cluster-create"
+  },
+  {
+    "path": "/deployments/cluster-destroy"
+  },
+  {
+    "path": "/deployments/clusters"
+  },
+  {
+    "path": "/deployments/cost-addons"
+  },
+  {
+    "path": "/deployments/credentials"
+  },
+  {
+    "path": "/deployments/debugging"
+  },
+  {
+    "path": "/deployments/deprecations"
+  },
+  {
+    "path": "/deployments/existing-cluster"
+  },
+  {
+    "path": "/deployments/git"
+  },
+  {
+    "path": "/deployments/global-services"
+  },
+  {
+    "path": "/deployments/import-cluster"
+  },
+  {
+    "path": "/deployments/manage-your-microservices"
+  },
+  {
+    "path": "/deployments/monitoring-addons"
+  },
+  {
+    "path": "/deployments/network-addons"
+  },
+  {
+    "path": "/deployments/operations"
+  },
+  {
+    "path": "/deployments/pipelines"
+  },
+  {
+    "path": "/deployments/security-addons"
+  },
+  {
+    "path": "/deployments/services-deploy"
+  },
+  {
+    "path": "/deployments/services"
+  },
+  {
+    "path": "/deployments/upgrades"
+  },
+  {
     "path": "/faq/certifications"
   },
   {
@@ -81,9 +180,6 @@
     "path": "/faq/plural-paid-tiers"
   },
   {
-    "path": "/first-party/manage-your-microservices"
-  },
-  {
     "path": "/getting-started/admin-console"
   },
   {
@@ -91,6 +187,9 @@
   },
   {
     "path": "/getting-started/concepts"
+  },
+  {
+    "path": "/getting-started/deployments"
   },
   {
     "path": "/getting-started/manage-git-repositories"
@@ -108,6 +207,9 @@
     "path": "/getting-started/manage-git-repositories/your-plural-workspace"
   },
   {
+    "path": "/getting-started/marketplace"
+  },
+  {
     "path": "/getting-started/openid-connect"
   },
   {
@@ -117,6 +219,9 @@
     "path": "/getting-started/quickstart"
   },
   {
+    "path": "/getting-started/understanding-upgrades"
+  },
+  {
     "path": "/getting-started/video-cli-quickstart"
   },
   {
@@ -124,6 +229,12 @@
   },
   {
     "path": "/introduction"
+  },
+  {
+    "path": "/operations/advanced-operations"
+  },
+  {
+    "path": "/operations/applications"
   },
   {
     "path": "/operations/auth-access-control/api-tokens"
@@ -145,6 +256,9 @@
   },
   {
     "path": "/operations/cluster-configuration"
+  },
+  {
+    "path": "/operations/clusters"
   },
   {
     "path": "/operations/cost-management"
