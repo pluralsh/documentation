@@ -160,6 +160,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Overview',
             href: '/deployments/ci-overview',
           },
+          {
+            title: 'Github Actions',
+            href: '/deployments/ci-gh-actions',
+          },
         ],
       },
       {

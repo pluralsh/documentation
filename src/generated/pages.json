@@ -93,6 +93,9 @@
     "path": "/deployments/browser-quickstart"
   },
   {
+    "path": "/deployments/ci-example"
+  },
+  {
     "path": "/deployments/ci-overview"
   },
   {
@@ -148,6 +151,9 @@
   },
   {
     "path": "/deployments/network-addons"
+  },
+  {
+    "path": "/deployments/operations"
   },
   {
     "path": "/deployments/pipelines"
@@ -225,6 +231,12 @@
     "path": "/introduction"
   },
   {
+    "path": "/operations/advanced-operations"
+  },
+  {
+    "path": "/operations/applications"
+  },
+  {
     "path": "/operations/auth-access-control/api-tokens"
   },
   {
@@ -244,6 +256,9 @@
   },
   {
     "path": "/operations/cluster-configuration"
+  },
+  {
+    "path": "/operations/clusters"
   },
   {
     "path": "/operations/cost-management"
