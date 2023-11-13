@@ -84,7 +84,7 @@ $ tree .
 └── vendor_images.yaml
 ```
 
-Let's disect this artifact's structure.
+Let's dissect this artifact's structure.
 
 ## Helm
 
