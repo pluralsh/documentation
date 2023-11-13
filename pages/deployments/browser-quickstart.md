@@ -34,7 +34,7 @@ To import an existing cluster, select the "Import existing" toggle and add a nam
 plural cd install --url https://<CONSOLE_URL>/ext/gql --token <TOKEN>
 ```
 
-Make sure your kubeconfig points to the desired cluster for import.
+Make sure your kubeconfig points to the desired cluster for import. More information is available in the guide for [existing clusters](/deployments/existing-cluster).
 
 Once you've added the required clusters, you should see them populated on the "Clusters" subtab within your Console.
 
