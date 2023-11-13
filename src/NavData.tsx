@@ -55,14 +55,6 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Concepts',
         href: '/getting-started/concepts',
       },
-      {
-        title: 'How much does Plural cost?',
-        href: '/operations/pricing-calculator',
-      },
-      {
-        title: 'Onboarding Prerequisites',
-        href: '/operations/pricing-calculator',
-      },
     ],
   },
   {
@@ -183,10 +175,6 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/deprecations',
           },
         ],
-      },
-      {
-        href: '/deployments/debugging',
-        title: 'Debugging',
       },
     ],
   },

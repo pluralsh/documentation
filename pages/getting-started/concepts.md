@@ -4,11 +4,15 @@ description: >-
   A brief overview of concepts used throughout our docs.
 ---
 
-## Components
+## Components: Plural
 
-Plural deploys open-source third party `applications` into a net new `cluster` in your cloud environment. You can browse a list of all available applications in the Plural [Marketplace](https://www.plural.sh/marketplace). Plural uses [Terraform](https://www.terraform.io/) to create and manage the cluster, and uses an application’s [Helm charts](https://helm.sh/docs/topics/charts/) to deploy and update that application.
+Plural deploys open-source third-party and proprietary first-party `applications` into `clusters` in your cloud environment. For open-source applications, Plural deploys a net new cluster; for proprietary applications, you can use a new cluster or an existing cluster for deployments.
 
-All the necessary configuration for an individual cluster and its applications is stored in an `installation repository` in your Github or Gitlab account that’s created at the time of deployment.
+Plural creates two types of clusters; a `Management Cluster` where the Plural control plane and CAPI controllers will reside, and `Workload Clusters` where main production/staging services are hosted. Plural will deploy open-source applications into a Management Cluster.
+
+You can browse a list of all available open-source applications in the Plural [Marketplace](https://www.plural.sh/marketplace). Plural uses [Terraform](https://www.terraform.io/) and [Cluster API](https://cluster-api.sigs.k8s.io/) to create and manage the cluster, and uses an application’s [Helm charts](https://helm.sh/docs/topics/charts/) to deploy and update that application.
+
+All the necessary configuration for a Management Cluster and its applications is stored in an `installation repository` in your Github or Gitlab account that’s created at the time of deployment.
 
 Each application has a set of `packages` that encompasses the application’s Helm charts, Terraform, and Docker images necessary to install and manage that application. These packages are stored in a `repository`, and a user can install that repository and the set of packages within.
 
@@ -24,4 +28,4 @@ The Plural `Cloud Shell` is an in-browser alternative to running the Plural CLI 
 
 The Plural `CLI` is a command line interface that can be used to run all Plural commands locally.
 
-The `Console` is a web application created by Plural that runs within a cluster deployed by Plural. The Console serves as a control panel for all your Plural applications by managing automated upgrades delivered from the Kubernetes API, showing application metrics and logs, serving as a built-in K8s dashboard, and being the touchpoint for incidents which can be filed with the owner of an application.
+The `Console` is a web application created by Plural that runs within a cluster deployed by Plural. The Console serves as a control panel for all your applications.
