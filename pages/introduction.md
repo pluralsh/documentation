@@ -43,7 +43,7 @@ We have created a Cloud Shell with all of the tools and dependencies needed to r
 
 - [Using our in-browser Cloud Shell](/getting-started/cloud-shell-quickstart)
 
-If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.gg/pluralsh)
+If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.com/invite/bEBAMXV64s)
 
 ## Architecture
 

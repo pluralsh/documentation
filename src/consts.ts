@@ -8,3 +8,4 @@ export const getAppMetaDescription = (displayName?: string) => {
 
   return `How to easily install and manage ${displayName} on Kubernetes using Plural.`
 }
+export const DISCORD_LINK = 'https://discord.com/invite/bEBAMXV64s'

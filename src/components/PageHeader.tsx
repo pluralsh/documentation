@@ -7,6 +7,8 @@ import { useRouter } from 'next/router'
 import { useKey } from 'rooks'
 import styled, { useTheme } from 'styled-components'
 
+import { DISCORD_LINK } from '@src/consts'
+
 import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
 import MobileMenu from './MobileMenu'
@@ -61,7 +63,7 @@ function PageHeaderUnstyled({ ...props }) {
         <div className="socialIcons">
           <SocialLink
             className="discordIcon"
-            href="https://discord.gg/pluralsh"
+            href={DISCORD_LINK}
             target="_blank"
             rel="noopener noreferrer"
             tabIndex={0}

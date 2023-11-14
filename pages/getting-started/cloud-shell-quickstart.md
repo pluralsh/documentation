@@ -191,7 +191,7 @@ When your applications are finished installing, you'll be able to see the domain
 
 Occasionally errors can crop up during the build and deploy process. If your build or deploy fails, you can try re-running the commands to see if it resolves an intermittent issue. To do this, click into the terminal window and either tap the up arrow key to see the last command or type in `plural build && plural deploy --commit "deploying a few apps with plural"` to relaunch the process from where it left off and commit your changes when finished.
 
-If errors persist, check out our [Troubleshooting documentation](/debugging/common-errors) or [reach out to us on our community Discord](https://discord.gg/pluralsh) for help.
+If errors persist, check out our [Troubleshooting documentation](/debugging/common-errors) or [reach out to us on our community Discord](https://discord.com/invite/bEBAMXV64s) for help.
 
 ## Check out your Deployments
 
@@ -253,4 +253,4 @@ plural shell purge
 
 ### Feedback
 
-If you have any feedback or questions about the experience, [head over to our community Discord](https://discord.gg/pluralsh) and drop us some feedback. The Cloud Shell is still in development and we are dedicated to perfecting the user experience, so any feedback would be immensely helpful to us.
+If you have any feedback or questions about the experience, [head over to our community Discord](https://discord.com/invite/bEBAMXV64s) and drop us some feedback. The Cloud Shell is still in development and we are dedicated to perfecting the user experience, so any feedback would be immensely helpful to us.
