@@ -93,7 +93,7 @@
     "path": "/deployments/browser-quickstart"
   },
   {
-    "path": "/deployments/ci-example"
+    "path": "/deployments/ci-gh-actions"
   },
   {
     "path": "/deployments/ci-overview"

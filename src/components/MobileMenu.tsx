@@ -3,6 +3,8 @@ import { DiscordIcon } from '@pluralsh/design-system'
 import styled from 'styled-components'
 import { useIsomorphicLayoutEffect } from 'usehooks-ts'
 
+import { DISCORD_LINK } from '@src/consts'
+
 import { FullNav } from './FullNav'
 import GithubStars from './GithubStars'
 import useScrollLock from './hooks/useScrollLock'
@@ -38,7 +40,7 @@ function PluralMenuContent({
       <MainLink href="https://app.plural.sh/login">Sign in</MainLink>
       <SocialIcons>
         <SocialLink
-          href="https://discord.gg/pluralsh"
+          href={DISCORD_LINK}
           target="_blank"
           rel="noopener noreferrer"
           tabIndex={0}

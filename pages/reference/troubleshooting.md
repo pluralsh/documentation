@@ -160,4 +160,4 @@ cd application-name/terraform
 terraform import path_to_terraform_resource resource_id
 ```
 
-If you devise a better way to recover crashed terraform state, please give us a shout in our [Discord](https://discord.gg/pluralsh). We'd love to automate this better.
+If you devise a better way to recover crashed terraform state, please give us a shout in our [Discord](https://discord.com/invite/bEBAMXV64s). We'd love to automate this better.

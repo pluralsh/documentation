@@ -23,6 +23,7 @@ import { Heading as MarkdocHeading } from '@pluralsh/design-system/dist/markdoc/
 import styled, { useTheme } from 'styled-components'
 
 import { mqs } from '@src/components/Breakpoints'
+import { DISCORD_LINK } from '@src/consts'
 
 const Hero = styled.div(({ theme }) => ({
   background: 'url(/images/landing/hero-bg-sm.png)',
@@ -256,7 +257,7 @@ function Index() {
           <CardLink
             heading="Discord"
             icon={<DiscordIcon />}
-            href="https://discord.gg/pluralsh"
+            href={DISCORD_LINK}
             target="_blank"
             rel="nofollow noreferrer"
           >
