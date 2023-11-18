@@ -87,6 +87,9 @@
     "path": "/deployments/addons"
   },
   {
+    "path": "/deployments/advanced-configuration"
+  },
+  {
     "path": "/deployments/architecture"
   },
   {
@@ -151,6 +154,9 @@
   },
   {
     "path": "/deployments/network-addons"
+  },
+  {
+    "path": "/deployments/network-configuration"
   },
   {
     "path": "/deployments/operations"
