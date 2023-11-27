@@ -37,6 +37,10 @@ We also strongly recommend you find a secure place to store the generated `value
 
 ## Configure Console Upgrades
 
-The Plural Console has the capability of self-managing its own upgrades in BYOK mode. This can be configured in the global settings page for deployments.
+The Plural Console has the capability of self-managing its own upgrades in BYOK mode. This can be configured in the global settings page for deployments under `/cd/settings/auto-upgrade`. It will ask you to copy in the values file then if it all looks correct, will create a service against our upstream helm chart with those values as overrides. The ui should look something like this:
 
-You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure your constantly up-to-date.
+![](/assets/deployments/auto-upgrade.png)
+
+You can then go to the service it creates at any time to tweak the values as you might need.
+
+You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure you are constantly up-to-date.
