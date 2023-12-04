@@ -7,6 +7,8 @@ description: Change versions of deployed services
 
 Plural will track new revisions for a service when the underlying Git repo or configured secrets are changed. When PRs are merged to the tracked branch in Git, the service will be updated after the next pull. Modifying secrets will also trigger an update.
 
+To upgrade a service deployed with a Helm chart, navigate to the deployments table and click on the three dots at the end of the row. Choose the "Settings" option, select the version of the chart you want to apply, and click "Update".
+
 ## Rollbacks
 
 To roll a service back to a prior revision, you can either select the Rollback icon from the deployments table or the Revisions tab from the Service details page.
