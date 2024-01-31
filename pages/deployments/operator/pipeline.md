@@ -74,6 +74,6 @@ spec:
           type: APPROVAL
 ```
 
-Notice the pipeline has two main objects, the stage, and an edge. It defines a standard vertex/edge datastructure for a directed acyclic graph, with each edge allowing configuration of promotion gates, and each service w/in a stage having promotion criteria (which determines what source service you can promote git/helm configuration from and configuration fields as).
+Notice the pipeline has two main objects, the stage, and an edge. It defines a standard vertex/edge datastructure for a directed acyclic graph, with each edge allowing configuration of promotion gates, and each service within a stage having promotion criteria (which determines what source service you can promote git/helm configuration from and configuration fields as).
 
 In this specific case, there are two k3s upgrade plan services (which control via CRDs in-place upgrades of k3s). A `version` secret defines the exact kubernetes version the system upgrade controller will currently use. Tying that into a pipeline allows for you to test the upgrade on the dev k3s cluster, then promote and perform the upgrade on the prod one.

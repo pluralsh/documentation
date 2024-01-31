@@ -3,7 +3,7 @@ title: Helm Sourced Services
 description: Source manifests from a helm repository registered anywhere
 ---
 
-You can also source manifests from a https or oci-compatible helm repository. This is very useful for provisioning kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where helms versioning independent of git can be valuable. The path here requires creation of a flux `HelmRepository` CR first, then the service, eg:
+You can also source manifests from a https or OCI-compatible helm repository. This is very useful for provisioning kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where helms versioning independent of git can be valuable. The path here requires creation of a Flux `HelmRepository` CR first, then the service, e.g.:
 
 ```yaml
 # the HelmRepository and Cluster resources should ideally be defined elsewhere in your infra repo

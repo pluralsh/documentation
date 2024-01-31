@@ -3,7 +3,7 @@ title: Git Sourced Services
 description: Source manifests directly from git
 ---
 
-The simplest service you can deploy is just referencing a folder w/in a git repository. This pattern is great for deploying a simple microservice owned by a dev team, or perhaps setting up an app-of-apps. The CRs needed to make this work would be:
+The simplest service you can deploy is just referencing a folder within a git repository. This pattern is great for deploying a simple microservice owned by a dev team, or perhaps setting up an app-of-apps. The CRs needed to make this work would be:
 
 ```yaml
 # the GitRepository and Cluster resources should ideally be defined elsewhere in your infra repo

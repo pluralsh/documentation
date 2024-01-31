@@ -15,13 +15,13 @@ A quick rundown of what you can get by using a helm repository directly:
 
 This model isn't for all usecases as it still has drawbacks (introducing a new packaging mechanism into your deployment architecture), but some users will find it useful.
 
-## Install flux source controller
+## Install Flux source controller
 
-The first step is to simply install the flux source controller. We already package an add-on for this. You should simply ensure it's installed in your management cluster to be able to get going.
+The first step is to simply install the Flux source controller. We already package an add-on for this. You should simply ensure it's installed in your management cluster to be able to get going.
 
 ## Create initial helm repositories
 
-We recommend you manage the helm repositories via gitops, yourself. Defining them is a simple matter of crafting a crd in a git repo of your choice, we have an example [here](https://github.com/pluralsh/console/tree/master/test-apps/helm-repositories), and then creating a CD service to sync that folder into your management cluster.
+We recommend you manage the helm repositories via GitOps, yourself. Defining them is a simple matter of crafting a crd in a git repo of your choice, we have an example [here](https://github.com/pluralsh/console/tree/master/test-apps/helm-repositories), and then creating a CD service to sync that folder into your management cluster.
 
 Here's a very simple repository CRD you can use for testing as well:
 

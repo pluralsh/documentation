@@ -12,6 +12,6 @@ Plural has a fully featured operator for creating and managing all core resource
 - full auditability of everything deployed referenced to the git repo itself.
 - dropping deployment credentials from Github/Gitlab/etc CI systems, improving overall security posture.
 
-This is in addition to other improvements Plural has made around scalability, eg with its git caching layer and lazy, pull based model sharding work efficiently into source clusters.
+This is in addition to other improvements Plural has made around scalability, e.g. with its git caching layer and lazy, pull based model sharding work efficiently into source clusters.
 
 The operator itself is effectively just a frontend, automating the process to make the necessary api calls but not directly managing the kubernetes resources its syncing or directly interacting with workload clusters itself. This means it can be deployed effectively anywhere if that's needed for some complex usecases, but usually is deployed in the management cluster alongside plural itself.
