@@ -93,6 +93,32 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/deployments/using-operator',
+        title: 'Deploying Using the Plural Operator',
+        sections: [
+          {
+            title: 'Architecture',
+            href: '/deployments/operator/architecture',
+          },
+          {
+            title: 'Git Services',
+            href: '/deployments/operator/git-service',
+          },
+          {
+            title: 'Helm Services',
+            href: '/deployments/operator/helm-service',
+          },
+          {
+            title: 'Global Services',
+            href: '/deployments/operator/global-service',
+          },
+          {
+            title: 'Defining Pipelines',
+            href: '/deployments/operator/pipeline',
+          },
+        ],
+      },
+      {
         href: '/deployments/clusters',
         title: 'Cluster Management',
         sections: [

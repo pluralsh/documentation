@@ -144,6 +144,9 @@
     "path": "/deployments/global-services"
   },
   {
+    "path": "/deployments/helm"
+  },
+  {
     "path": "/deployments/import-cluster"
   },
   {
@@ -162,6 +165,21 @@
     "path": "/deployments/operations"
   },
   {
+    "path": "/deployments/operator/architecture"
+  },
+  {
+    "path": "/deployments/operator/git-service"
+  },
+  {
+    "path": "/deployments/operator/global-service"
+  },
+  {
+    "path": "/deployments/operator/helm-service"
+  },
+  {
+    "path": "/deployments/operator/pipeline"
+  },
+  {
     "path": "/deployments/pipelines"
   },
   {
@@ -175,6 +193,9 @@
   },
   {
     "path": "/deployments/upgrades"
+  },
+  {
+    "path": "/deployments/using-operator"
   },
   {
     "path": "/faq/certifications"
