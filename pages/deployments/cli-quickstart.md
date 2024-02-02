@@ -14,36 +14,67 @@ This guide goes over how to deploy your services with the Plural CLI. At the end
 
 ## Onboard to Plural and install the Plural Console
 
-If you haven't already, you'll need to follow the Plural guide to install Console. You can use the guide for the [in-browser Cloud Shell](/getting-started/cloud-shell-quickstart) or the [CLI](/getting-started/quickstart) to get started.
+If you haven't already, you'll need to follow the Plural guide to install Console. There are two recommended ways to do this:
 
-{% callout severity="info" %}
-`plural cd` is an alias for `plural deployments`, and can be used interchangeably within the CLI.
+- [Bring Your Own Cluster](/deployments/existing-cluster) - you've created a kubernetes cluster your way with all the main prequisites. You can use helm to install the management plane and then use the Console to manage itself from there.
+- `plural up` - a single command to create a new management cluster on the major clouds, wire up a basic GitOps setup and get you started.
+
+Both are pretty flexible, and even if you chose to use the BYOK method, we recommend looking into some of our example `plural up` repos to get some ideas on how to use our CRDs and terraform provider with all the other tools they'll commonly touch. You can see an example `plural up` repository [here](https://github.com/pluralsh/plural-up-demo).
+
+## Use `plural up` to create your first management console
+
+First you'll want to follow our guide [here](getting-started/cli-quickstart) to install our CLI. Once you've done this, you'll simply run:
+
+```sh
+plural up # optionally add --service-account <email> if you want to use a service account to group manage this console
+```
+
+{% callout severity="warn" %}
+`plural up` is best run in an empty repo. That will let it oauth to github/gitlab and create the repository for you, alongside registering pull deploy keys to register it in your new console.
 {% /callout %}
 
-## Set Environment Variables
+This will do a few things:
 
-If you haven't already, you'll need to set your Console URL and Console token. Set them with:
+- create a new repo to house your IaC and yaml manifests
+- execute terraform to create the new cluster
+- execute another terraform stack to provision the GitOps setup for the Plural Console and any other services you'd like to deploy from that repo
+
+We've also generated a README that should give an overview of how the repo can be used for things like:
+
+- creating and registering new workload clusters with terraform
+- adding new services in the main infra repo
+- handling updates to the cluster terraform at your own pace
+
+## Set Up the `plural cd` CLI
+
+If you'd like to configure the plural cli to communicate with your new Console instance, the configuration process is pretty simple, you'll need to set your Console URL and Console token. Set them with:
 
 ```
 PLURAL_CONSOLE_URL
 PLURAL_CONSOLE_TOKEN
 ```
 
-## Create Clusters
+or alternatively you can run `plural cd login` to set them to a config file within `~/.plural`
 
-To deploy additional clusters, use the `plural cd clusters create` command. As an example:
+{% callout severity="info" %}
+`plural cd` is an alias for `plural deployments`, and can be used interchangeably within the CLI.
+{% /callout %}
 
+## List Clusters, Services, Repositories
+
+The following commands can help you list a lot of the clusters, services, etc that have already been registered:
+
+```sh
+plural cd clusters list
+plural cd services list @{cluster-handle}
+plural cd repositories list
 ```
-plural cd clusters create --handle <CLUSTER_HANDLE> --version <K8s_VERSION> CLUSTER_NAME
-```
-
-To import an existing cluster, see the guide for [existing clusters](/deployments/existing-cluster).
 
 ## Import Git Repositories and Deploy services
 
 You'll need to then import the Git repository containing your service and the associated Kubernetes manifests. To do so, use `plural cd repositories create`:
 
-```
+```sh
 plural cd repositories create --url <REPO_URL>
 ```
 
@@ -53,7 +84,7 @@ To then deploy your service, find the repo ID for the service you want to deploy
 
 You can then use the `plural cd services create` command:
 
-```
+```sh
 plural cd services create --name <SERVICE_NAME> --namespace <SERVICE_NAMESPACE> --repo-id <REPO_ID> --git-ref <GIT_REF> --git-folder <GIT_FOLDER> CLUSTER_ID
 
 ```

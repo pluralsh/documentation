@@ -17,4 +17,17 @@ Once created, you'll be able to see a new service named `capi-{cloud}` in your m
 
 ## Create using Terraform
 
-Coming Soon!
+```tf
+resource "plural_provider" "aws_provider" {
+  name = "aws"
+  cloud = "aws"
+  cloud_settings = {
+    aws = {
+      # access_key_id = "" # Required, can be sourced from PLURAL_AWS_ACCESS_KEY_ID
+      # secret_access_key = "" # Required, can be sourced from PLURAL_AWS_SECRET_ACCESS_KEY
+    }
+  }
+}
+```
+
+You can find some more examples at https://github.com/pluralsh/terraform-provider-plural/blob/main/example

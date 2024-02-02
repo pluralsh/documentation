@@ -58,7 +58,7 @@ const rootNavData: NavMenu = deepFreeze([
     ],
   },
   {
-    title: 'Plural Continuous Deployment',
+    title: 'Plural Fleet Management',
     sections: [
       {
         href: '/getting-started/deployments',
@@ -72,10 +72,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Quickstart with our CLI',
             href: '/deployments/cli-quickstart',
           },
-          {
-            href: '/deployments/browser-quickstart',
-            title: 'Quickstart from your Browser',
-          },
+          // {
+          //   href: '/deployments/browser-quickstart',
+          //   title: 'Quickstart from your Browser',
+          // },
           {
             href: '/deployments/existing-cluster',
             title: 'Set Up on your own Cluster',
@@ -132,7 +132,7 @@ const rootNavData: NavMenu = deepFreeze([
           },
           {
             href: '/deployments/cluster-create',
-            title: 'Create Workload Clusters',
+            title: 'Create Cluster API Workload Clusters',
           },
           // {
           //   href: '/deployments/cluster-config',
