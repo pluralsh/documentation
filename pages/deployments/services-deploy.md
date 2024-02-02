@@ -27,6 +27,70 @@ You can find the repo-id for your desired repository by running `plural cd repos
 
 You should then see your service show up when calling `plural cd services list`.
 
+## Create Using GitOps
+
+We definitely recommend you read over our [operator docs](deployments/using-operator) to see the various CRDs you can use to define your services and patterns available there. For most use cases this will be the most robust workflow.
+
 ## Create Using Terraform
 
-Coming Soon!
+There are some times where you'd still want to use terraform to create a service, a common pattern would be in bootstrapping the environment for a team or something similar.
+
+```tf
+data "plural_cluster" "byok_workload_cluster" {
+  handle = "gcp-workload-cluster"
+}
+
+data "plural_git_repository" "cd-test" {
+  url = "https://github.com/pluralsh/plrl-cd-test.git"
+}
+
+resource "plural_service_deployment" "cd-test" {
+  # Required
+  name      = "tf-cd-test"
+  namespace = "tf-cd-test"
+
+  cluster = {
+    handle = data.plural_cluster.byok_workload_cluster.handle
+  }
+
+  repository = {
+    id     = data.plural_git_repository.cd-test.id
+    ref    = "main"
+    folder = "kubernetes"
+  }
+
+  # Optional
+  version = "0.0.2"
+  docs_path = "doc"
+  protect   = false
+
+  configuration = [
+    {
+      name : "host"
+      value : "tf-cd-test.gcp.plural.sh"
+    },
+    {
+      name : "tag"
+      value : "sha-4d01e86"
+    }
+  ]
+
+  sync_config = {
+    namespace_metadata = {
+      annotations = {
+        "testannotationkey" : "testannotationvalue"
+      }
+      labels = {
+        "testlabelkey" : "testlabelvalue"
+      }
+    }
+  }
+
+  depends_on = [
+    data.plural_cluster.byok_workload_cluster,
+    data.plural_git_repository.cd-test
+  ]
+}
+```
+
+You can see some more examples [here](https://github.com/pluralsh/terraform-provider-plural/blob/main/example/service/)

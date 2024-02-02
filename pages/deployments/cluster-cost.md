@@ -19,9 +19,14 @@ We recommend you configure it as a global service, as that will ensure it's inst
 
 ## How Kubernetes Node Autoscaling Works
 
-Kubernetes has its own mechanism of managing autoscaling. Instead of using familiar patterns like EC2 autoscaling groups, ultimately keyed on CPU or memory utilization, kubernetes will add or removed nodes based on whether there are outstanding pods that cannot be scheduled to any worker given the currently configured pod requests.
+Kubernetes has its own mechanism of managing autoscaling. Instead of using familiar patterns like EC2 autoscaling groups, ultimately keyed on CPU or memory utilization, kubernetes will add or remove nodes based on whether there are outstanding pods that cannot be scheduled to any worker given the currently configured pod requests.
 
+<<<<<<< Updated upstream
 There are also some other constraints that kubernetes will cause autoscaling for, e.g. pods that have scheduling constraints preventing them to be scheduling on the same nodes as other (thus requiring a new node), pods that must be in a specific availability zone or other node pool, pods that must remain due to a PodDisruptionBudget.
+=======
+There are also some other constraints that kubernetes will cause autoscaling for, eg pods that have scheduling constraints preventing them to be scheduling on the same nodes as others (thus requiring a new node), pods that must be in a specific availability zone or other node pool, pods that must remain due to a PodDisruptionBudget.
+
+> > > > > > > Stashed changes
 
 This does lead to much more powerful autoscaling constructs but can lead to a bit of confusion for new users. To leverage kubernetes autoscaling properly you'll need to be sure you're putting sane resource requests on your pods and also have some of those edge cases in mind.
 
