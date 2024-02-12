@@ -17,21 +17,19 @@ The general process of setting up your instance is pretty straightforward, and w
 
 ## Intro Video
 
-We think the easiest way to understand the workflow is to take a look at our intro video; we have an upload of it here:
-{% embed url="https://assets.plural.sh/plural-up.mp4" aspectRatio="16 / 9" /%}
+We think the easiest way to understand the workflow is to take a look at our intro video; we have an upload of it [here](https://assets.plural.sh/plural-up.mp4)
 
-
-(It is about 14 minutes long). 
+(It is about 14 minutes long).
 This will give you a brief tour of using the `plural up` command to set up your management cluster, which you can use directly or can use as a starting point to rework the exact setup needed for your enterprise given security constraints and other considerations for your environment.
 
 ## Getting Started Docs
+
 We also have thorough documentation to explain how to get your cluster up and running. We recommend using the following:
 
-- [CLI Quickstart](https://docs.plural.sh/deployments/cli-quickstart) - details of how to install the Plural Console either on an existing cluster using helm or also guides you through the `plural up`  process.
-- [Import An Existing Cluster](https://docs.plural.sh/deployments/import-cluster) - some of the main ways to import a cluster you’ve created into Plural’s fleet manager.  The main method is to simply use our CLI or to use our terraform provider.
+- [CLI Quickstart](https://docs.plural.sh/deployments/cli-quickstart) - details of how to install the Plural Console either on an existing cluster using helm or also guides you through the `plural up` process.
+- [Import An Existing Cluster](https://docs.plural.sh/deployments/import-cluster) - some of the main ways to import a cluster you’ve created into Plural’s fleet manager. The main method is to simply use our CLI or to use our terraform provider.
 - [Terraform Docs](https://registry.terraform.io/providers/pluralsh/plural/latest/docs) - docs for our terraform provider.
-- [Cluster Management](https://docs.plural.sh/deployments/using-operator) - the entire section devoted to documenting all the relevant CRDs within the Plural operator.  This is installed alongside the Console in your management cluster and allows for a fully GitOps management experience of the products core components.
-
+- [Cluster Management](https://docs.plural.sh/deployments/using-operator) - the entire section devoted to documenting all the relevant CRDs within the Plural operator. This is installed alongside the Console in your management cluster and allows for a fully GitOps management experience of the products core components.
 
 ## Example Repos
 
