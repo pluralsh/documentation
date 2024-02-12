@@ -17,7 +17,10 @@ The general process of setting up your instance is pretty straightforward, and w
 
 ## Intro Video
 
-We think the easiest way to understand the workflow is to take a look at our intro video; we have an upload of it [here](https://assets.plural.sh/plural-up.mp4) (It is about 14 minutes long).
+We think the easiest way to understand the workflow is to take a look at our intro video (It is about 14 minutes long):
+
+{% embed url="https://www.youtube.com/watch?v=caDlvskRkAw&ab_channel=Plural" aspectRatio="16 / 9" /%}
+
 This will give you a brief tour of using the `plural up` command to set up your management cluster, which you can use directly or can use as a starting point to rework the exact setup needed for your enterprise given security constraints and other considerations for your environment.
 
 ## Getting Started Docs
