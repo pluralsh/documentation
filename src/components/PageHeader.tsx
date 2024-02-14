@@ -75,7 +75,7 @@ function PageHeaderUnstyled({ ...props }) {
         <div className="buttons">
           <Button
             as="a"
-            href="/contact-sales"
+            href="https://www.plural.sh/contact-sales"
             primary
             fontFamily={theme.fontFamilies.sans}
           >
