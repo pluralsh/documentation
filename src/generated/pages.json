@@ -183,6 +183,15 @@
     "path": "/deployments/pipelines"
   },
   {
+    "path": "/deployments/pr/crds"
+  },
+  {
+    "path": "/deployments/pr/pipelines"
+  },
+  {
+    "path": "/deployments/pr-automation"
+  },
+  {
     "path": "/deployments/security-addons"
   },
   {
@@ -190,6 +199,9 @@
   },
   {
     "path": "/deployments/services"
+  },
+  {
+    "path": "/deployments/terraform-interop"
   },
   {
     "path": "/deployments/upgrades"

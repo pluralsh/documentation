@@ -175,6 +175,16 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/deployments/pr-automation',
+        title: 'Pull Request Automation',
+        sections: [
+          {
+            title: 'On Demand Pull Requests',
+            href: '/deployments/pr/crds',
+          },
+        ],
+      },
+      {
         href: '/deployments/addons',
         title: 'Managed Kubernetes Add-Ons',
         sections: [
@@ -205,6 +215,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/ci-gh-actions',
           },
         ],
+      },
+      {
+        href: '/deployments/terraform-interop',
+        title: 'Service Contexts and Terraform',
       },
       {
         href: '/deployments/pipelines',
