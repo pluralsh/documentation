@@ -182,6 +182,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'On Demand Pull Requests',
             href: '/deployments/pr/crds',
           },
+          {
+            title: 'Pull Request Pipelines',
+            href: '/deployments/pr/pipelines',
+          },
         ],
       },
       {
