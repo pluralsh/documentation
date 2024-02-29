@@ -3,9 +3,9 @@ title: Plural Deployment Operator
 description: GitOps Management using the Plural Operator
 ---
 
-The plural operator defines a set of CRDs that allow you to manage your deployments in a fully GitOps manner. The controller ultimately communicates with our core apis and acts effectively as a frontend to automate provisioning/deprovisioning the requisite resources. The CRD structures also imitate the patterns used by Flux and is interoperable with many Flux types (particularly those from its source controller), with modular distinct types for the various roles in deployments, e.g. git/helm repositories, clusters, and services.
+The Plural operator defines a set of CRDs that allow you to manage your deployments in a fully GitOps manner. The controller ultimately communicates with our core apis and acts effectively as a frontend to automate provisioning/deprovisioning the requisite resources. The CRD structures also imitate the patterns used by Flux and is interoperable with many Flux types (particularly those from its source controller), with modular distinct types for the various roles in deployments, e.g. git/helm repositories, clusters, and services.
 
-To illustrate the flexibility this model provides a very simple example to set up a helm multi-source deployment would look like this: 
+To illustrate the flexibility this model provides a very simple example to set up a helm multi-source deployment would look like this:
 
 ```yaml
 # helm repository to use for the service
