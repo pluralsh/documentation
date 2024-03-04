@@ -44,3 +44,66 @@ The Plural Console has the capability of self-managing its own upgrades in BYOK 
 You can then go to the service it creates at any time to tweak the values as you might need.
 
 You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure you are constantly up-to-date.
+
+## Manage Console Via CRD
+
+You can also define a CRD to manage your console's upgrade lifecycle at your own pace. This is a two step process:
+
+1. Create a secret with your current values file, something like:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: console-values
+  namespace: plrl-console
+stringData:
+  values.yaml: <your values file>
+```
+
+This should be done out of band of git as the values contain sensitive information
+
+2. Create a helm service referencing it in a folder currently being synced via GitOps:
+
+```yaml
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: console
+  namespace: infra # or whatever namespace you prefer
+spec:
+  interval: 5m0s
+  url: https://pluralsh.github.io/console
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Cluster
+metadata:
+  name: mgmt # you'd have likely defined this cluster CRD already, but provided here for completeness
+  namespace: infra
+spec:
+  handle: mgmt
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: console
+  namespace: infra
+spec:
+  namespace: plrl-console # this namespace must be correct
+  name: console
+  helm:
+    version: 0.8.x #  can use floating versions with the .x syntax or pin to specific versions and automate w/ renovate
+    chart: console
+    valuesFrom:
+      namespace: plrl-console
+      name: console-values
+    repository:
+      namespace: infra
+      name: console # referenced helm repository above
+  clusterRef:
+    kind: Cluster
+    name: mgmt # must be set to your management cluster
+    namespace: infra
+```
+
+You can then add additional values configuration using the `values` field of a helm service, or convert it to a multi-source service and source values files directly from git.
