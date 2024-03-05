@@ -29,9 +29,10 @@ For companies that are more comfortable using their own auth provider, and don't
 
 To set it up, you need to configure a few env vars as well, in particular:
 
-`OIDC_CLIENT_ID`: client id for your oidc connection
-`OIDC_CLIENT_SECRET`: client secret for your oidc connection
-`OIDC_DISCOVERY_URL`: the discovery url for your oidc provider, is usually something like `https://{your-idp-domain}/.well-known/openid-configuration`
+- `OIDC_CLIENT_ID`: client id for your oidc connection
+- `OIDC_CLIENT_SECRET`: client secret for your oidc connection
+- `OIDC_DISCOVERY_URL`: the discovery url for your oidc provider, is usually something like `https://{your-idp-domain}/.well-known/openid-configuration`
+- `OIDC_SCOPES` (optional): the scopes to fetch when issuing the oidc userinfo request (defaults to `openid email`). You want to at least make sure the email is fetchable for a user, and if you add groups to the scopes we'll auto-sync them into your instance as well.
 
 ## Self-host git repos
 
