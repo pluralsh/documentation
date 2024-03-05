@@ -85,6 +85,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Advanced Configuration',
             sections: [
               {
+                title: 'Sandboxing Your Cluster',
+                href: '/deployments/sandboxing',
+              },
+              {
                 title: 'Network Configuration',
                 href: '/deployments/network-configuration',
               },
