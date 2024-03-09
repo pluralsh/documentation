@@ -229,9 +229,13 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Service Contexts and Terraform',
       },
       {
-        href: '/deployments/pipelines',
-        title: 'Pipelines',
+        href: '/deployments/notifications',
+        title: 'Notifications',
       },
+      // {
+      //   href: '/deployments/pipelines',
+      //   title: 'Pipelines',
+      // },
       {
         href: '/deployments/operations',
         title: 'Advanced Operations',
