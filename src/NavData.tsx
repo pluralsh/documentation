@@ -165,6 +165,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Deploy Services',
           },
           {
+            href: '/deployments/templating',
+            title: 'Templating Variable Configuration',
+          },
+          {
             href: '/deployments/helm',
             title: 'Helm Repository Sources',
           },
