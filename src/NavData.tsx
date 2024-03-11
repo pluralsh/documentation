@@ -165,6 +165,10 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Deploy Services',
           },
           {
+            href: '/deployments/templating',
+            title: 'Templating Variable Configuration',
+          },
+          {
             href: '/deployments/helm',
             title: 'Helm Repository Sources',
           },
@@ -229,9 +233,13 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Service Contexts and Terraform',
       },
       {
-        href: '/deployments/pipelines',
-        title: 'Pipelines',
+        href: '/deployments/notifications',
+        title: 'Notifications',
       },
+      // {
+      //   href: '/deployments/pipelines',
+      //   title: 'Pipelines',
+      // },
       {
         href: '/deployments/operations',
         title: 'Advanced Operations',
