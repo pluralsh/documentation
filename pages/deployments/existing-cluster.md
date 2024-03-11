@@ -8,7 +8,13 @@ description: Bootstrap Plural CD on an existing cluster
 For users that just want to use our CD capabilities and full control of their kubernetes setup, you can install a simplified version of Plural CD onto an existing kubernetes cluster. We've made this a turnkey process, but there are some prerequisites, namely:
 
 - You'll need to create a postgres db for state storage, and have a jdbc connection string for it ready of the form: `postgres://<user>:<password>@<host>:5432/<db>`
-- You'll need to have your network setup in place so that all clusters you want to deploy to can make outbound network connections to the ingress you configure for plural CD.
+- You'll need to have your network setup in place so that all clusters you want to deploy to can make outbound network connections to the ingress you configure for plural CD, in general this means setting up:
+
+* ingress-nginx - the ingress controller we've configured by default in the chart
+* cert-manager - the chart assumes cert-manager handles cert generation by default but this can be disabled as well if you use a load balancer bound cloud cert manager
+* externaldns - to bind dns entries to the hosts defined in the console's ingress
+
+You are free to customize these at your own risk, usually it's not that challenging. The most likely potential gotcha is ensuring the connection stickiness configuration handles a migration to a different ingress controller from ingress-nginx.
 
 ## Bootstrapping
 
