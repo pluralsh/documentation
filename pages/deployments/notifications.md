@@ -12,7 +12,7 @@ Plural has the ability to deliver notifications to most common chat solutions, p
 
 We also have roadmapped support for other channels like PagerDuty and OpsGenie. Further you can configure your own notification routing rule sets, directing notifications for specific pipelines, clusters, etc to different channels as needed.
 
-The system has two main constructs, a notification `sink` and `router`. Sinks contain all the details needed to connect to an external notification system, and will server as a pointer to it in routers. Routers link to sinks, and can also configure whitelists for the events the router subscribes to alongside filter rules to only deliver for specific subsets of the system (eg only deliver `service.update` events for a specific cluster).
+The system has two main constructs, a notification `sink` and `router`. Sinks contain all the details needed to connect to an external notification system, and will serve as a pointer to it in routers. Routers link to sinks and can also configure whitelists for the events the router subscribes to alongside filter rules to only deliver for specific subsets of the system (e.g. only deliver `service.update` events for a specific cluster).
 
 ## Configure Notification Sinks
 
