@@ -50,8 +50,8 @@ stringData:
 
 ## Safeguarding Sensitive Configurations in Terraform
 
-In some cases you might want to reserve secrets for manual input in the Plural Console, while configure others in the Terraform definition of you service.
-This example demonstrates the exclusion of certain configuration secrets, such as passwords and usernames, allowing manual entry exclusively within the Plural Console by leveraging Terraform's `ignore_changes` feature
+In some cases you might want to reserve secrets for manual input in the Plural Console, yet configure others in the Terraform definition of your service.
+This example demonstrates the exclusion of certain configuration secrets, such as passwords and usernames, allowing manual entry exclusively within the Plural Console by leveraging Terraform's `ignore_changes` feature.
 
 ```tf
 resource "plural_service_deployment" "monitoring" {
@@ -78,4 +78,4 @@ resource "plural_service_deployment" "monitoring" {
 }
 ```
 
-In this example, sensitive configurations like `basicAuthUser` and `basicAuthPassword` are excluded from Terraform's lifecycle management using the ignore_changes parameter.
+In this example, sensitive configurations like `basicAuthUser` and `basicAuthPassword` are excluded from Terraform's lifecycle management using the `ignore_changes` parameter.
