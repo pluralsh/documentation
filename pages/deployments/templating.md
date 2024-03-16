@@ -47,3 +47,35 @@ kind: Secret
 stringData:
   MY_SECRET: { { configuration.secret } }
 ```
+
+## Safeguarding Sensitive Configurations in Terraform
+
+In some cases you might want to reserve secrets for manual input in the Plural Console, yet configure others in the Terraform definition of your service.
+This example demonstrates the exclusion of certain configuration secrets, such as passwords and usernames, allowing manual entry exclusively within the Plural Console by leveraging Terraform's `ignore_changes` feature.
+
+```tf
+resource "plural_service_deployment" "monitoring" {
+  name      = "monitoring"
+  namespace = "monitoring"
+  repository = {...}
+  cluster = {
+    id = "cluster-id"
+  }
+
+  configuration = {
+    monitoringRepo  = plural_git_repository.monitoring.id
+    repoUrl         = local.repo_url
+    namespace       = kubernetes_namespace.monitoring.metadata[0].name
+  }
+
+  # enter these secrets in the service UI safely without risking the next `terraform apply` overwriting them
+  lifecycle {
+    ignore_changes = [
+      configuration["basicAuthPassword"],
+      configuration["basicAuthUser"],
+    ]
+  }
+}
+```
+
+In this example, sensitive configurations like `basicAuthUser` and `basicAuthPassword` are excluded from Terraform's lifecycle management using the `ignore_changes` parameter.
