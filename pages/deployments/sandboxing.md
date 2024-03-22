@@ -34,6 +34,8 @@ To set it up, you need to configure a few env vars as well, in particular:
 - `OIDC_DISCOVERY_URL`: the discovery url for your oidc provider, is usually something like `https://{your-idp-domain}/.well-known/openid-configuration`
 - `OIDC_SCOPES` (optional): the scopes to fetch when issuing the oidc userinfo request (defaults to `openid email`). You want to at least make sure the email is fetchable for a user, and if you add groups to the scopes we'll auto-sync them into your instance as well.
 
+To simplify permission management, you can also configure specific emails to automatically be made admins via another env var: `CONSOLE_ADMIN_EMAILS`. It should be a comma seperated list, and on login we'll provision that user to be an admin w/in your Plural console instance. We'd recommend only setting this for a small set of users, then using group bindings for permissions from then on
+
 ## Self-host git repos
 
 If your enterprise cannot accept external communication to github, we recommend vendoring the above repos into your own source control provider (most have a mechanism for doing this, or can always build a cron to do it as well which we're happy to help with).

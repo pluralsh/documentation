@@ -14,13 +14,13 @@ You can easily configure deployments to these clusters by installing our agent w
 Make sure your local kubeconfig is pointing to the cluster you want to set up, then simply run:
 
 ```sh
-plural cd bootstrap --name {name-for-your-cluster}
+plural cd clusters bootstrap --name {name-for-your-cluster}
 ```
 
 You can also configure a few tags for this cluster at create time with:
 
 ```sh
-plural cd bootstrap --name {name} --tag {name}={value} --tag {name2}={value2}
+plural cd clusters bootstrap --name {name} --tag {name}={value} --tag {name2}={value2}
 ```
 
 ## Terraform
