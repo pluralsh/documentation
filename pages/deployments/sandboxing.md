@@ -44,6 +44,14 @@ The deployment-operator and scaffolds repos were both designed to be forked or v
 
 To reconfigure a self-managed repo for compatibilities and deprecations, you'll need to fork or vendor https://github.com/pluralsh/console then configure the `GITHUB_RAW_URL` env var to point to the new location. The current default is https://raw.githubusercontent.com/pluralsh/console. This will then be appended w/ the branch + path (eg "${GITHUB_RAW_URL}/master/static/compatibilities) to fetch the relevant data for both uis.
 
+Alternatively, we also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
+
+```
+CONSOLE_AIRGAP: "true"
+```
+
+This is a suitable replacement if you're ok with some data staleness and don't have a feasible alternative to vendor the data into your enterprise git source control nor can permit the github egress traffic.
+
 ## Customizing Docker Registries
 
 Lots of enterprises have strict requirements around the docker registries they use, or pull caches that whitelist a limited set of registries. We currently publish our images to dockerhub, gcr and our own registry, dkr.plural.sh. We are also adding quay.io in the near future for orgs that integrate with that as well. The important images for setting up your own instance are:
