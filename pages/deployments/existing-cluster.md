@@ -1,5 +1,5 @@
 ---
-title: Plural CD Bring-your-own-Kubernes
+title: Plural CD Bring-your-own-Kubernetes-cluster
 description: Bootstrap Plural CD on an existing cluster
 ---
 
