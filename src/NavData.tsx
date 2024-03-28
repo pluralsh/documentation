@@ -92,6 +92,10 @@ const rootNavData: NavMenu = deepFreeze([
                 title: 'Network Configuration',
                 href: '/deployments/network-configuration',
               },
+              {
+                title: 'Private CAs',
+                href: '/deployments/private-ca',
+              },
             ],
           },
         ],

@@ -98,7 +98,7 @@ spec:
   namespace: plrl-console # this namespace must be correct
   name: console
   helm:
-    version: 0.8.x #  can use floating versions with the .x syntax or pin to specific versions and automate w/ renovate
+    version: 0.9.x #  can use floating versions with the .x syntax or pin to specific versions and automate w/ renovate
     chart: console
     valuesFrom:
       namespace: plrl-console
