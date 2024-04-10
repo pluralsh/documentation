@@ -25,6 +25,14 @@ plural login
 plural cd control-plane
 ```
 
+If you haven't already installed the Plural CLI, we have a homebrew installation available here:
+
+```sh
+brew install pluralsh/plural/plural
+```
+
+If you don't have homebrew, there are more advanced installation instructions [here](/getting-started/quickstart#install-plural-cli).
+
 This will do a few things:
 
 - ask you for basic configuration like fqdns for your CD install and also the postgres jdbc url
@@ -33,23 +41,14 @@ This will do a few things:
 
 You'll then want to run the helm command we provide to you, you have the option to inspect the values we've generated first, and also you can add some last mile configuration here. This can be things like flipping out the ingress class or cert manager issuer (we use `nginx` by default and an issuer of `letsencrypt-prod`).
 
-Then run the helm command generated, which ought to be something along the lines of:
+Then run the helm commands generated, which ought to be something along the lines of:
 
 ```sh
-helm upgrade --install --create-namespace -f values.secret.yaml --repo https://pluralsh.github.io/console console console -n plrl-console
+helm repo add plrl-console https://pluralsh.github.io/console
+helm upgrade --install --create-namespace -f values.secret.yaml console plrl-console/console -n plrl-console
 ```
 
 We also strongly recommend you find a secure place to store the generated `values.secret.yaml` file in case you want to manually manage future console updates. You can use tooling like `git-crypt` or `kops` to secure this in git, or save it in a secret manager.
-
-## Configure Console Upgrades
-
-The Plural Console has the capability of self-managing its own upgrades in BYOK mode. This can be configured in the global settings page for deployments under `/cd/settings/auto-upgrade`. It will ask you to copy in the values file then if it all looks correct, will create a service against our upstream helm chart with those values as overrides. The ui should look something like this:
-
-![](/assets/deployments/auto-upgrade.png)
-
-You can then go to the service it creates at any time to tweak the values as you might need.
-
-You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure you are constantly up-to-date.
 
 ## Manage Console Via CRD
 
@@ -67,7 +66,13 @@ stringData:
   values.yaml: <your values file>
 ```
 
-This should be done out of band of git as the values contain sensitive information
+This should be done out of band of git as the values contain sensitive information. A single command to create this is also:
+
+```sh
+kubectl create secret generic console-values --from-file=values.yaml=values.secret.yaml -n plrl-console
+```
+
+(you'll want to run this in the same directory as your `values.secret.yaml` file, otherwise specify it's relative path in the `--from-file` flag)
 
 2. Create a helm service referencing it in a folder currently being synced via GitOps:
 
@@ -113,3 +118,13 @@ spec:
 ```
 
 You can then add additional values configuration using the `values` field of a helm service, or convert it to a multi-source service and source values files directly from git.
+
+## Configure Console Upgrades
+
+You can also configure automatic upgrades in the global settings page for deployments under `/cd/settings/auto-upgrade`. It will ask you to copy in the values file then if it all looks correct, will create a service against our upstream helm chart with those values as overrides. The ui should look something like this:
+
+![](/assets/deployments/auto-upgrade.png)
+
+You can then go to the service it creates at any time to tweak the values as you might need.
+
+You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure you are constantly up-to-date.
