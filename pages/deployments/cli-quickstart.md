@@ -12,6 +12,16 @@ This guide goes over how to deploy your services with the Plural CLI. At the end
 - Deployed your code onto your clusters of choice.
 - Optionally updated any configurations and permissions for the clusters and services.
 
+## Install the Plural CLI
+
+The Plural cli is available on homebrew, a single line install can be done with:
+
+```sh
+brew install pluralsh/plural/plural
+```
+
+If you are using a machine that is not compatible with homebrew, we recommend simply downloading a pre-built release on github and installing it onto your machines path. The releases can be found here: https://github.com/pluralsh/plural-cli/releases.
+
 ## Onboard to Plural and install the Plural Console
 
 If you haven't already, you'll need to follow the Plural guide to install Console. There are two recommended ways to do this:
