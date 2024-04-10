@@ -141,3 +141,60 @@ spec:
   context:
     version: 6.5.4
 ```
+
+## Add an integration test
+
+Many orgs will want more advanced promotion criteria than manual approval. In particular, running an integration test on a test cluster is a best practice to confirm a service is ready to be promoted to the next stage. Plural pipelines have the capability to spawn those as part of the gates along the pipeline edge. An example of that is as follows modifying our existing `pipeline.yaml`:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Pipeline
+metadata:
+  name: pr-automation
+spec:
+  stages:
+    - name: dev
+      services:
+        - serviceRef:
+            name: podinfo-dev
+            namespace: infra
+          criteria:
+            prAutomationRef:
+              name: podinfo-pipeline
+    - name: prod
+      services:
+        - serviceRef:
+            name: podinfo-prod
+            namespace: infra
+          criteria:
+            prAutomationRef:
+              name: podinfo-pipeline
+  edges:
+    - from: dev
+      to: prod
+      gates:
+      - clusterRef:
+          name: boot-staging # run on the staging cluster alongside the dev service
+          namespace: infra
+        name: integration tests
+        spec:
+          job:
+            containers:
+            - args:
+              - /bin/sh
+              - -c
+              - echo "Hello, World!"
+              - echo $TEST_ENV_VAR
+              env: # can also add env vars as needed
+              - name: TEST_ENV_VAR
+                value: pipeline
+              image: alpine:3.7
+            labels:  # you can add job labels and annotations
+              plural.sh/test-annotation: test
+            annotations:
+              plural.sh/test-annotation: test
+            namespace: podinfo
+            serviceAccount: default
+        - name: approval-gate
+          type: APPROVAL
+```
