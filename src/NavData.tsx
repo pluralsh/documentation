@@ -125,7 +125,7 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/operator/pipeline',
           },
           {
-            title: 'Api Reference',
+            title: 'API Reference',
             href: '/deployments/operator/api',
           },
         ],
