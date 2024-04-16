@@ -8,3 +8,6 @@ yarn-install: .PHONY
 
 web: ## runs the docs site locally
 	yarn dev
+
+crd-docs:
+	curl -L https://raw.githubusercontent.com/pluralsh/console/master/controller/docs/api.md --output pages/deployments/operator/api.md
