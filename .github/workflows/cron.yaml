@@ -1,0 +1,23 @@
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  gendocs:
+    runs-on: ubuntu-latest
+    steps:
+    - name: 'Checkout'
+      uses: actions/checkout@v3
+    - name: 'Regenerate Docs'
+      run: make crd-docs
+    - id: date
+      run: date +%Y%m%d%H%M%S >> $GITHUB_OUTPUT
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v5
+      with:
+        title: Generating Api Docs for ${{jobs.gendocs.outputs.date}}
+        body: Automated pull request to regenerate api docs for the Plural operator
+        commit-message: Update docs for operator
+        branch: docs-${{jobs.gendocs.outputs.date}}
+        labels: release
+        base: master
