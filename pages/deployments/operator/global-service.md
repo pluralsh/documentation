@@ -111,12 +111,12 @@ From there, your `externaldns.yaml.liquid` might look something like:
 
 ```yaml
 domainFilters:
-  - { { cluster.metadata.domain } }
+  - {{ cluster.metadata.domain }}
 
 serviceAccount:
   enabled: true
   annotations:
-    eks.amazonaws.com/role-arn: { { cluster.metadata.externaldnsRoleArm } }
+    eks.amazonaws.com/role-arn: {{ cluster.metadata.externaldnsRoleArm }}
 ```
 
 If you added secrets, you can access them with something like `{{ configuration.YOUR_SECRET_NAME }}` and if you want to use service contexts, we recommend checking the docs [here](/deployments/terraform-interop).
