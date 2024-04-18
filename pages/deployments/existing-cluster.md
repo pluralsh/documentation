@@ -69,7 +69,7 @@ stringData:
 This should be done out of band of git as the values contain sensitive information. A single command to create this is also:
 
 ```sh
-kubectl create secret generic console-values --from-file=values.yaml=values.secret.yaml -n plrl-console
+kubectl create secret generic console-values --from-file=values.yaml=values.secret.yaml -n infra
 ```
 
 (you'll want to run this in the same directory as your `values.secret.yaml` file, otherwise specify it's relative path in the `--from-file` flag)
@@ -106,7 +106,7 @@ spec:
     version: 0.3.x #  can use floating versions with the .x syntax or pin to specific versions and automate w/ renovate
     chart: console
     valuesFrom:
-      namespace: plrl-console
+      namespace: infra
       name: console-values
     repository:
       namespace: infra
