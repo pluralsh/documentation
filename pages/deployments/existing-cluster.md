@@ -16,6 +16,13 @@ For users that just want to use our CD capabilities and full control of their ku
 
 You are free to customize these at your own risk, usually it's not that challenging. The most likely potential gotcha is ensuring the connection stickiness configuration handles a migration to a different ingress controller from ingress-nginx.
 
+{% callout severity="info" %}
+If you're unfamiliar with how to set up these components for your cloud, we have a number of useful example terraform setups at https://github.com/pluralsh/bootstrap/tree/main/existing.
+
+It will walk you through effectively everything needed below
+{% /callout %}
+
+
 ## Bootstrapping
 
 Make sure your kubeconfig is pointing to the management cluster you want to deploy to, then run the following:
