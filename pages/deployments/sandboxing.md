@@ -27,6 +27,8 @@ As part of an enterprise agreement, we can issue you a year-long license key tha
 
 For companies that are more comfortable using their own auth provider, and don't require the ease of use of just plugging in ours, you can configure your own. If you don't have an OIDC compatible identity provider, we recommend installing [dex](https://dexidp.io/docs/getting-started/) as a passthrough. It can communicate with SAML or other auth providers and convert them to a conformant OIDC interface.
 
+OIDC providers require you to configure a redirect url, which for the Plural console will simply be: `https://{your-console-fqdn}/oauth/callback`.
+
 To set it up, you need to configure a few env vars as well, in particular:
 
 - `OIDC_CLIENT_ID`: client id for your oidc connection
