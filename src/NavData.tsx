@@ -237,6 +237,10 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/deployments/dashboard',
+        title: 'Kubernetes Dashboard',
+      },
+      {
         href: '/deployments/terraform-interop',
         title: 'Service Contexts and Terraform',
       },
