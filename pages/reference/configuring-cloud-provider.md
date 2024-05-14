@@ -134,6 +134,19 @@ When deploying via GCP, you may run into a Terraform error around permissions. P
 - `owner`
 - `storage.admin`
 
+You can fix this with the following CLI commands updating `PROJECT_ID` with your GCP Project ID and `USER_EMAIL` with your GCP service account ID
+```
+> gcloud projects add-iam-policy-binding PROJECT_ID \
+    --member=user:USER_EMAIL \
+    --role=roles/owner
+```
+
+```
+> gcloud projects add-iam-policy-binding PROJECT_ID \
+    --member=user:USER_EMAIL \
+    --role=roles/storage.admin
+```
+
 Follow [these steps](https://cloud.google.com/sdk/docs/authorizing#authorize_with_a_service_account) to authorize your GCloud CLI with a new or existing Service Account.
 {% /tab %}
 
