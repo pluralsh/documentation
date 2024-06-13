@@ -12,6 +12,8 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [Cluster](#cluster)
 - [ClusterRestore](#clusterrestore)
 - [ClusterRestoreTrigger](#clusterrestoretrigger)
+- [CustomStackRun](#customstackrun)
+- [DeploymentSettings](#deploymentsettings)
 - [GitRepository](#gitrepository)
 - [GlobalService](#globalservice)
 - [InfrastructureStack](#infrastructurestack)
@@ -22,6 +24,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [PipelineContext](#pipelinecontext)
 - [PrAutomation](#prautomation)
 - [PrAutomationTrigger](#prautomationtrigger)
+- [Project](#project)
 - [Provider](#provider)
 - [ScmConnection](#scmconnection)
 - [ServiceDeployment](#servicedeployment)
@@ -38,6 +41,7 @@ Binding ...
 
 _Appears in:_
 - [Bindings](#bindings)
+- [DeploymentSettingsBindings](#deploymentsettingsbindings)
 - [PrAutomationBindings](#prautomationbindings)
 
 | Field | Description | Default | Validation |
@@ -53,13 +57,16 @@ _Appears in:_
 
 
 
-Bindings ...
+Bindings represents a policy bindings that
+can be used to define read/write permissions
+to this resource for users/groups in the system.
 
 
 
 _Appears in:_
 - [ClusterSpec](#clusterspec)
 - [InfrastructureStackSpec](#infrastructurestackspec)
+- [ProjectSpec](#projectspec)
 - [ServiceSpec](#servicespec)
 
 | Field | Description | Default | Validation |
@@ -353,6 +360,7 @@ _Appears in:_
 | `handle` _string_ | Handle is a short, unique human-readable name used to identify this cluster.<br />Does not necessarily map to the cloud resource name.<br />This has to be specified in order to adopt existing cluster. |  | Optional: {} <br />Type: string <br /> |
 | `version` _string_ | Version of Kubernetes to use for this cluster. Can be skipped only for BYOK. |  | Optional: {} <br />Type: string <br /> |
 | `providerRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProviderRef references provider to use for this cluster. Can be skipped only for BYOK. |  | Optional: {} <br /> |
+| `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references project this cluster belongs to.<br />If not provided, it will use the default project. |  | Optional: {} <br /> |
 | `cloud` _string_ | Cloud provider to use for this cluster. |  | Enum: [aws azure gcp byok] <br />Optional: {} <br />Type: string <br /> |
 | `protect` _boolean_ | Protect cluster from being deleted. |  | Optional: {} <br /> |
 | `tags` _object (keys:string, values:string)_ | Tags used to filter clusters. |  | Optional: {} <br /> |
@@ -382,6 +390,24 @@ _Appears in:_
 | `clusterRefs` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core) array_ |  |  |  |
 
 
+#### CommandAttributes
+
+
+
+
+
+
+
+_Appears in:_
+- [CustomStackRunSpec](#customstackrunspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cmd` _string_ | the command this hook will execute |  |  |
+| `args` _string array_ | optional arguments to pass to the command |  | Optional: {} <br /> |
+| `dir` _string_ |  |  | Optional: {} <br /> |
+
+
 #### ComponentState
 
 _Underlying type:_ _string_
@@ -409,7 +435,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `field` _string_ |  |  | Required: {} <br /> |
-| `operation` _[Operation](#operation)_ |  |  | Required: {} <br /> |
+| `operation` _[Operation](#operation)_ |  |  | Enum: [NOT GT LT EQ GTE LTE PREFIX SUFFIX] <br />Required: {} <br /> |
 | `value` _string_ |  |  | Optional: {} <br /> |
 
 
@@ -419,11 +445,123 @@ _Appears in:_
 
 
 
+#### Container
+
+
+
+
+
+
+
+_Appears in:_
+- [JobSpec](#jobspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `image` _string_ |  |  | Required: {} <br />Type: string <br /> |
+| `args` _string array_ |  |  | Optional: {} <br /> |
+| `env` _[Env](#env) array_ |  |  | Optional: {} <br /> |
+| `envFrom` _[EnvFrom](#envfrom) array_ |  |  | Optional: {} <br /> |
+
+
+#### CustomStackRun
+
+
+
+CustomStackRun is the Schema for the customstackruns API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `CustomStackRun` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[CustomStackRunSpec](#customstackrunspec)_ |  |  |  |
+
+
+#### CustomStackRunSpec
+
+
+
+CustomStackRunSpec defines the desired state of CustomStackRun
+
+
+
+_Appears in:_
+- [CustomStackRun](#customstackrun)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name of this CustomStackRun. If not provided CustomStackRun's own name from CustomStackRun.ObjectMeta will be used. |  | Optional: {} <br /> |
+| `stackRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ |  |  | Optional: {} <br /> |
+| `documentation` _string_ | Documentation to explain what this will do |  | Optional: {} <br /> |
+| `commands` _[CommandAttributes](#commandattributes) array_ | Commands the commands for this custom run |  |  |
+| `configuration` _[PrAutomationConfiguration](#prautomationconfiguration) array_ | Configuration self-service configuration which will be presented in UI before triggering |  |  |
+
+
+#### DeploymentSettings
+
+
+
+DeploymentSettings is the Schema for the deploymentsettings API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `DeploymentSettings` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[DeploymentSettingsSpec](#deploymentsettingsspec)_ |  |  |  |
+
+
+#### DeploymentSettingsBindings
+
+
+
+
+
+
+
+_Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `read` _[Binding](#binding) array_ | Read bindings. |  | Optional: {} <br /> |
+| `write` _[Binding](#binding) array_ | Write bindings. |  | Optional: {} <br /> |
+| `create` _[Binding](#binding) array_ | Create bindings. |  | Optional: {} <br /> |
+| `git` _[Binding](#binding) array_ | Git bindings. |  | Optional: {} <br /> |
+
+
+#### DeploymentSettingsSpec
+
+
+
+DeploymentSettingsSpec defines the desired state of DeploymentSettings
+
+
+
+_Appears in:_
+- [DeploymentSettings](#deploymentsettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `agentHelmValues` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | AgentHelmValues custom helm values to apply to all agents (useful for things like adding customary annotations/labels) |  | Optional: {} <br /> |
+| `stacks` _[StackSettings](#stacksettings)_ | Stacks global configuration for stack execution |  |  |
+| `bindings` _[DeploymentSettingsBindings](#deploymentsettingsbindings)_ | Bindings |  | Optional: {} <br /> |
+| `prometheusConnection` _[HTTPConnection](#httpconnection)_ | PrometheusConnection connection details for a prometheus instance to use |  |  |
+| `lokiConnection` _[HTTPConnection](#httpconnection)_ | connection details for a loki instance to use |  |  |
 
 
 #### Env
 
-
+_Underlying type:_ _[struct{Name string "json:\"name\""; Value string "json:\"value\""}](#struct{name-string-"json:\"name\"";-value-string-"json:\"value\""})_
 
 
 
@@ -432,15 +570,11 @@ _Appears in:_
 _Appears in:_
 - [Container](#container)
 
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `name` _string_ |  |  | Required: {} <br />Type: string <br /> |
-| `value` _string_ |  |  | Required: {} <br />Type: string <br /> |
 
 
 #### EnvFrom
 
-
+_Underlying type:_ _[struct{Secret string "json:\"secret\""; ConfigMap string "json:\"configMap\""}](#struct{secret-string-"json:\"secret\"";-configmap-string-"json:\"configmap\""})_
 
 
 
@@ -449,31 +583,6 @@ _Appears in:_
 _Appears in:_
 - [Container](#container)
 
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `secret` _string_ |  |  | Type: string <br /> |
-| `configMap` _string_ |  |  | Type: string <br /> |
-
-
-#### GateJob
-
-
-
-GateJob is a spec for a job gate.
-
-
-
-_Appears in:_
-- [GateSpec](#gatespec)
-
-| Field | Description | Default | Validation |
-| --- | --- | --- | --- |
-| `namespace` _string_ |  |  | Required: {} <br />Type: string <br /> |
-| `containers` _[Container](#container) array_ |  |  | Optional: {} <br /> |
-| `labels` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
-| `annotations` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
-| `serviceAccount` _string_ |  |  | Optional: {} <br />Type: string <br /> |
-| `raw` _string_ | Raw can be used if you'd rather define the job spec via straight Kubernetes manifest file. |  | Optional: {} <br />Type: string <br /> |
 
 
 #### GateSpec
@@ -489,7 +598,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `job` _[GateJob](#gatejob)_ |  |  | Optional: {} <br /> |
+| `job` _[JobSpec](#jobspec)_ |  |  | Optional: {} <br /> |
 
 
 #### GitHealth
@@ -600,7 +709,26 @@ _Appears in:_
 | `distro` _[ClusterDistro](#clusterdistro)_ | Distro of kubernetes this cluster is running |  | Enum: [GENERIC EKS AKS GKE RKE K3S] <br />Optional: {} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef to replicate across clusters |  | Optional: {} <br /> |
 | `providerRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProviderRef apply to clusters with this provider |  | Optional: {} <br /> |
+| `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef allows a global service to span a specific project only |  | Optional: {} <br /> |
 | `template` _[ServiceTemplate](#servicetemplate)_ |  |  | Optional: {} <br /> |
+
+
+#### HTTPConnection
+
+
+
+
+
+
+
+_Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `host` _string_ |  |  |  |
+| `user` _string_ | user to connect with basic auth |  |  |
+| `password` _string_ | password to connect w/ for basic auth |  |  |
 
 
 
@@ -638,16 +766,44 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this Stack. If not provided InfrastructureStack's own name from InfrastructureStack.ObjectMeta will be used. |  | Optional: {} <br /> |
 | `type` _[StackType](#stacktype)_ | Type specifies the tool to use to apply it |  | Enum: [TERRAFORM ANSIBLE] <br /> |
-| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef to source IaC from |  |  |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef to source IaC from |  | Required: {} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Required: {} <br /> |
+| `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references project this stack belongs to.<br />If not provided, it will use the default project. |  | Optional: {} <br /> |
 | `git` _[GitRef](#gitref)_ | Git reference w/in the repository where the IaC lives |  |  |
-| `jobSpec` _[JobSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#jobspec-v1-batch)_ | JobSpec optional k8s job configuration for the job that will apply this stack |  | Optional: {} <br /> |
+| `manageState` _boolean_ | Whether you want Plural to manage the state of this stack |  | Optional: {} <br /> |
+| `workdir` _string_ | The working directory within the git spec you want to run commands in (useful for projects with external modules) |  | Optional: {} <br /> |
+| `jobSpec` _[JobSpec](#jobspec)_ | JobSpec optional k8s job configuration for the job that will apply this stack |  | Optional: {} <br /> |
 | `configuration` _[StackConfiguration](#stackconfiguration)_ | Configuration version/image config for the tool you're using |  |  |
 | `approval` _boolean_ | Approval whether to require approval |  | Optional: {} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this cluster |  | Optional: {} <br /> |
 | `environment` _[StackEnvironment](#stackenvironment) array_ |  |  | Optional: {} <br /> |
-| `files` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ | Files reference to ConfigMap with a key as a path and value as a content |  | Optional: {} <br /> |
-| `detach` _boolean_ | Detach determined if user want to delete or detach stack |  |  |
+| `files` _[StackFile](#stackfile) array_ | Files reference to Secret with a key as a part of mount path and value as a content |  | Optional: {} <br /> |
+| `detach` _boolean_ | If true, detach the stack on CR deletion, leaving all cloud resources in-place. |  | Optional: {} <br /> |
+| `actor` _string_ | User email to use for default Plural authentication in this stack. |  | Optional: {} <br /> |
+| `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Optional: {} <br /> |
+
+
+#### JobSpec
+
+
+
+JobSpec is a spec for a job gate.
+
+
+
+_Appears in:_
+- [GateSpec](#gatespec)
+- [InfrastructureStackSpec](#infrastructurestackspec)
+- [StackSettings](#stacksettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `namespace` _string_ |  |  | Required: {} <br />Type: string <br /> |
+| `containers` _[Container](#container) array_ |  |  | Optional: {} <br /> |
+| `labels` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
+| `annotations` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
+| `serviceAccount` _string_ |  |  | Optional: {} <br />Type: string <br /> |
+| `raw` _[JobSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#jobspec-v1-batch)_ | Raw can be used if you'd rather define the job spec via straight Kubernetes manifest file. |  | Optional: {} <br /> |
 
 
 #### ManagedNamespace
@@ -689,6 +845,7 @@ _Appears in:_
 | `pullSecrets` _string array_ | PullSecrets a list of pull secrets to attach to this namespace |  | Optional: {} <br /> |
 | `service` _[ServiceTemplate](#servicetemplate)_ |  |  | Optional: {} <br /> |
 | `target` _[ClusterTarget](#clustertarget)_ |  |  | Optional: {} <br /> |
+| `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef allows a managed namespace to span a specific project only |  | Optional: {} <br /> |
 
 
 #### NamespacedName
@@ -891,6 +1048,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `stages` _[PipelineStage](#pipelinestage) array_ | Stages of a pipeline. |  |  |
 | `edges` _[PipelineEdge](#pipelineedge) array_ | Edges of a pipeline. |  |  |
+| `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references project this stack belongs to.<br />If not provided, it will use the default project. |  | Optional: {} <br /> |
 
 
 #### PipelineStage
@@ -992,12 +1150,13 @@ PrAutomationConfiguration ...
 
 
 _Appears in:_
+- [CustomStackRunSpec](#customstackrunspec)
 - [PrAutomationSpec](#prautomationspec)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ |  |  | Required: {} <br /> |
-| `type` _[ConfigurationType](#configurationtype)_ |  |  | Required: {} <br /> |
+| `type` _[ConfigurationType](#configurationtype)_ |  |  | Enum: [STRING INT BOOL DOMAIN BUCKET FILE FUNCTION PASSWORD] <br />Required: {} <br /> |
 | `condition` _[Condition](#condition)_ |  |  | Optional: {} <br /> |
 | `default` _string_ |  |  | Optional: {} <br /> |
 | `documentation` _string_ |  |  | Optional: {} <br /> |
@@ -1125,6 +1284,44 @@ _Appears in:_
 | `regexes` _string array_ | Regexes ... |  | Optional: {} <br /> |
 | `replaceTemplate` _string_ | ReplaceTemplate ... |  | Optional: {} <br /> |
 | `yq` _string_ | Yq ... |  | Optional: {} <br /> |
+
+
+#### Project
+
+
+
+Project is a unit of organization to control
+permissions for a set of objects within your
+Console instance.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `Project` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[ProjectSpec](#projectspec)_ | Spec reflects a Console API project spec. |  | Required: {} <br /> |
+
+
+#### ProjectSpec
+
+
+
+
+
+
+
+_Appears in:_
+- [Project](#project)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is a project name. |  | Required: {} <br />Type: string <br /> |
+| `description` _string_ | Description is a description of this project. |  | Optional: {} <br />Type: string <br /> |
+| `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this project. |  | Optional: {} <br /> |
 
 
 #### Provider
@@ -1264,6 +1461,22 @@ _Appears in:_
 | `version` _string_ |  |  | Optional: {} <br /> |
 
 
+#### ServiceDependency
+
+
+
+
+
+
+
+_Appears in:_
+- [ServiceSpec](#servicespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | The name of a service on the same cluster this service depends on |  |  |
+
+
 #### ServiceDeployment
 
 
@@ -1316,6 +1529,7 @@ _Appears in:_
 | `valuesFrom` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | Fetches the helm values from a secret in this cluster, will consider any key with yaml data a values file and merge them iteratively |  | Optional: {} <br /> |
 | `valuesConfigMapRef` _[ConfigMapKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#configmapkeyselector-v1-core)_ |  |  | Optional: {} <br /> |
 | `release` _string_ | name of the helm release to use when applying |  | Optional: {} <br /> |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | reference to a GitRepository to source the helm chart from (useful if you're using a multi-source configuration for values files) |  | Optional: {} <br /> |
 | `values` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | arbitrary yaml values to overlay |  | Optional: {} <br /> |
 | `valuesFiles` _string array_ | individual values files to overlay |  | Optional: {} <br /> |
 | `chart` _string_ | chart to use |  | Optional: {} <br /> |
@@ -1366,9 +1580,10 @@ _Appears in:_
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Required: {} <br /> |
 | `configurationRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | ConfigurationRef is a secret reference which should contain service configuration. |  | Optional: {} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this cluster |  | Optional: {} <br /> |
-| `dependencies` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core) array_ | Dependencies contain dependent services |  | Optional: {} <br /> |
+| `dependencies` _[ServiceDependency](#servicedependency) array_ | Dependencies contain dependent services |  | Optional: {} <br /> |
 | `contexts` _string array_ | Contexts contain dependent service context names |  | Optional: {} <br /> |
 | `templated` _boolean_ | Templated should apply liquid templating to raw yaml files, defaults to true |  | Optional: {} <br /> |
+| `detach` _boolean_ | Detach determined if user want to delete or detach service |  | Optional: {} <br /> |
 
 
 
@@ -1447,6 +1662,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `image` _string_ | Image optional custom image you might want to use |  | Optional: {} <br /> |
 | `version` _string_ | Version the semver of the tool you wish to use |  |  |
+| `hooks` _[StackHook](#stackhook) array_ | Hooks to run at various stages of the stack run |  | Optional: {} <br /> |
 
 
 #### StackEnvironment
@@ -1463,10 +1679,61 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ |  |  |  |
-| `value` _string_ |  |  |  |
-| `secret` _boolean_ |  |  | Optional: {} <br /> |
+| `value` _string_ |  |  | Optional: {} <br /> |
+| `secretKeyRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ |  |  | Optional: {} <br /> |
+| `configMapRef` _[ConfigMapKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#configmapkeyselector-v1-core)_ |  |  | Optional: {} <br /> |
 
 
+#### StackFile
+
+
+
+
+
+
+
+_Appears in:_
+- [InfrastructureStackSpec](#infrastructurestackspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `mountPath` _string_ |  |  |  |
+| `secretRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ |  |  |  |
+
+
+#### StackHook
+
+
+
+
+
+
+
+_Appears in:_
+- [StackConfiguration](#stackconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cmd` _string_ | the command this hook will execute |  |  |
+| `args` _string array_ | optional arguments to pass to the command |  | Optional: {} <br /> |
+| `afterStage` _[StepStage](#stepstage)_ |  |  | Enum: [INIT PLAN VERIFY APPLY] <br /> |
+
+
+#### StackSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `jobSpec` _[JobSpec](#jobspec)_ | JobSpec optional k8s job configuration for the job that will apply this stack |  | Optional: {} <br /> |
+| `connectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ConnectionRef reference to ScmConnection |  | Optional: {} <br /> |
 
 
 #### Status
