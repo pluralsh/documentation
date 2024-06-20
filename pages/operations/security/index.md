@@ -3,29 +3,40 @@ title: Security Concepts
 description: Learn about what Plural has access to at various steps of deployment.
 ---
 
-## Cloud Access
+## What access does Plural have to my Cloud account?
 
-### Plural CLI
+There are 2 methods to deploy via Plural. The access that we have to your cloud account is discussed per each method below.
 
-Plural **does not** have access to any cloud environments when deployed through the CLI. We generate deployment manifests in the Plural Git repository and then use your configured cloud provider's CLI on your behalf. We cannot perform anything outside of deploying and managing the manifests that are created in your Plural Git repository.
+### When using the Plural CLI
 
-### Plural Cloud Shell
+Plural **does not** have access to any cloud environments when deployed through the CLI. We generate deployment manifests in the Plural Git repository and then use your locally configured cloud provider's CLI on your behalf. We cannot perform anything outside of deploying and managing the manifests that are created in your Plural Git repository.
 
-Plural **does** have access to your cloud credentials when deployed through the Cloud Shell. In order to streamline the Cloud Shell experience, we securely store cloud credentials to create resources on your behalf. You can eject from the Cloud Shell to the CLI at any time to save your configuration and revoke our access. This is done with the following steps:
+### When using the Plural Cloud Shell
+
+Plural **does** have access to your cloud credentials when deployed through the Cloud Shell. In order to streamline the Cloud Shell experience, we securely store ecrypted cloud credentials to create resources on your behalf. You can eject from the Cloud Shell to the CLI at any time to save your configuration and revoke our access. This is done with the following steps:
 
 1. [Install the Plural CLI](/getting-started/quickstart).
 2. Run `plural shell sync` on your local machine.
 3. Run `plural shell purge` in the Cloud Shell to destroy it.
 
-## Plural Console
+## What permissions does the Plural Console have?
 
 Our console has elevated permissions when running in your Plural Kubernetes cluster, but it runs in its own environment to alleviate security concerns. Its permissions are required in order to listen for new versions of packages to apply automated updates to your applications.
 
-## GitHub
+## What permissions does Plural have to GitHub?
+
+Plural **does not** have access to repositories that have not been created by Plural.
+Plural will only use the Github access token while creating the repo then, then throws away the token once created.
 
 When using the CLI or Cloud Shell, Plural will receive the following permissions:
 
 - Create GitHub repositories on your behalf
 - Commit changes to repositories that Plural has created
 
-Plural **does not** have access to repositories that have not been created by Plural.&#x20;
+## Do I HAVE to oAuth into Github?
+
+No, if you don't want to oAuth, you can create a repo and then run `plural init` inside it to initialize it for Plural.
+
+## Where is application configuration stored, including credentials?
+
+Configuration is stored in your Git repo. Credentials are stored encrypted in configuration.
