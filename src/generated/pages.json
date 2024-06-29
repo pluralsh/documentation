@@ -129,6 +129,9 @@
     "path": "/deployments/credentials"
   },
   {
+    "path": "/deployments/dashboard"
+  },
+  {
     "path": "/deployments/debugging"
   },
   {
@@ -162,7 +165,13 @@
     "path": "/deployments/network-configuration"
   },
   {
+    "path": "/deployments/notifications"
+  },
+  {
     "path": "/deployments/operations"
+  },
+  {
+    "path": "/deployments/operator/api"
   },
   {
     "path": "/deployments/operator/architecture"
@@ -192,6 +201,12 @@
     "path": "/deployments/pr-automation"
   },
   {
+    "path": "/deployments/private-ca"
+  },
+  {
+    "path": "/deployments/sandboxing"
+  },
+  {
     "path": "/deployments/security-addons"
   },
   {
@@ -199,6 +214,12 @@
   },
   {
     "path": "/deployments/services"
+  },
+  {
+    "path": "/deployments/stacks"
+  },
+  {
+    "path": "/deployments/templating"
   },
   {
     "path": "/deployments/terraform-interop"
@@ -385,6 +406,21 @@
   },
   {
     "path": "/reference/troubleshooting"
+  },
+  {
+    "path": "/stacks/customize-runners"
+  },
+  {
+    "path": "/stacks/local-execution"
+  },
+  {
+    "path": "/stacks/manual-runs"
+  },
+  {
+    "path": "/stacks/overview"
+  },
+  {
+    "path": "/stacks/pr-workflow"
   },
   {
     "path": "/test/blockquotes"

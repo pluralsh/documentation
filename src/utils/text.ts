@@ -47,6 +47,7 @@ export const providerToProviderName: Record<Provider, string> = {
   EQUINIX: 'Equinix',
   KIND: 'kind',
   CUSTOM: 'Custom',
+  LINODE: 'Linode',
   KUBERNETES: 'Kubernetes',
   GENERIC: 'Generic',
 }

@@ -161,6 +161,32 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/stacks/',
+        title: 'Iac Management with Stacks',
+        sections: [
+          {
+            title: 'Overview',
+            href: '/stacks/overview',
+          },
+          {
+            title: 'Customizing Stack Runners',
+            href: '/stacks/customize-runners',
+          },
+          {
+            title: 'Pull Request Workflow',
+            href: '/stacks/pr-workflow',
+          },
+          {
+            title: 'Manual Runs',
+            href: '/stacks/manual-runs',
+          },
+          {
+            title: 'Executing IaC Locally',
+            href: '/stacks/local-execution',
+          },
+        ],
+      },
+      {
         href: '/deployments/services',
         title: 'Deployments',
         sections: [
