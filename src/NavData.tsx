@@ -217,6 +217,10 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/deployments/multi-tenancy',
+        title: 'Projects and Multi-Tenancy',
+      },
+      {
         href: '/deployments/pr-automation',
         title: 'Pull Request Automation',
         sections: [

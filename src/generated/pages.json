@@ -159,6 +159,9 @@
     "path": "/deployments/monitoring-addons"
   },
   {
+    "path": "/deployments/multi-tenancy"
+  },
+  {
     "path": "/deployments/network-addons"
   },
   {
