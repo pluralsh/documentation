@@ -130,36 +130,36 @@ const rootNavData: NavMenu = deepFreeze([
           },
         ],
       },
-      {
-        href: '/deployments/clusters',
-        title: 'Cluster Management',
-        sections: [
-          {
-            title: 'Import An Existing Cluster',
-            href: '/deployments/import-cluster',
-          },
-          {
-            title: 'Create Provider Credentials',
-            href: '/deployments/credentials',
-          },
-          {
-            href: '/deployments/cluster-create',
-            title: 'Create Cluster API Workload Clusters',
-          },
-          // {
-          //   href: '/deployments/cluster-config',
-          //   title: 'Configure my Cluster',
-          // },
-          {
-            title: 'Destroy the Cluster Safely',
-            href: '/deployments/cluster-destroy',
-          },
-          {
-            title: 'Optimize Cluster Costs',
-            href: '/deployments/cluster-cost',
-          },
-        ],
-      },
+      // {
+      //   href: '/deployments/clusters',
+      //   title: 'Cluster Management',
+      //   sections: [
+      //     {
+      //       title: 'Import An Existing Cluster',
+      //       href: '/deployments/import-cluster',
+      //     },
+      //     {
+      //       title: 'Create Provider Credentials',
+      //       href: '/deployments/credentials',
+      //     },
+      //     {
+      //       href: '/deployments/cluster-create',
+      //       title: 'Create Cluster API Workload Clusters',
+      //     },
+      //     // {
+      //     //   href: '/deployments/cluster-config',
+      //     //   title: 'Configure my Cluster',
+      //     // },
+      //     {
+      //       title: 'Destroy the Cluster Safely',
+      //       href: '/deployments/cluster-destroy',
+      //     },
+      //     {
+      //       title: 'Optimize Cluster Costs',
+      //       href: '/deployments/cluster-cost',
+      //     },
+      //   ],
+      // },
       {
         href: '/stacks/',
         title: 'Iac Management with Stacks',
@@ -199,10 +199,6 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Deploy Services',
           },
           {
-            href: '/deployments/templating',
-            title: 'Templating Variable Configuration',
-          },
-          {
             href: '/deployments/helm',
             title: 'Helm Repository Sources',
           },
@@ -215,10 +211,6 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/upgrades',
           },
         ],
-      },
-      {
-        href: '/deployments/multi-tenancy',
-        title: 'Projects and Multi-Tenancy',
       },
       {
         href: '/deployments/pr-automation',
@@ -235,22 +227,24 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/deployments/addons',
-        title: 'Managed Kubernetes Add-Ons',
-        sections: [
-          {
-            title: 'Network Stack',
-            href: '/deployments/network-addons',
-          },
-          {
-            title: 'Monitoring',
-            href: '/deployments/monitoring-addons',
-          },
-          {
-            title: 'Security',
-            href: '/deployments/security-addons',
-          },
-        ],
+        href: '/deployments/multi-tenancy',
+        title: 'Projects and Multi-Tenancy',
+      },
+      {
+        href: '/deployments/dashboard',
+        title: 'Kubernetes Dashboard',
+      },
+      {
+        href: '/deployments/templating',
+        title: 'Service Templating',
+      },
+      {
+        href: '/deployments/terraform-interop',
+        title: 'Service Contexts and Terraform',
+      },
+      {
+        href: '/deployments/notifications',
+        title: 'Notifications',
       },
       {
         href: '/deployments/ci',
@@ -266,22 +260,6 @@ const rootNavData: NavMenu = deepFreeze([
           },
         ],
       },
-      {
-        href: '/deployments/dashboard',
-        title: 'Kubernetes Dashboard',
-      },
-      {
-        href: '/deployments/terraform-interop',
-        title: 'Service Contexts and Terraform',
-      },
-      {
-        href: '/deployments/notifications',
-        title: 'Notifications',
-      },
-      // {
-      //   href: '/deployments/pipelines',
-      //   title: 'Pipelines',
-      // },
       {
         href: '/deployments/operations',
         title: 'Advanced Operations',
