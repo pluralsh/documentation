@@ -116,6 +116,10 @@ const rootNavData: NavMenu = deepFreeze([
                 title: 'Plural Console',
                 href: '/how-to/set-up/plural-console',
               },
+              {
+                title: 'Plural CLI',
+                href: '/how-to/set-up/plural-cli',
+              },
             ],
           },
           {

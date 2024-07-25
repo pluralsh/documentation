@@ -3,25 +3,9 @@ title: Setting Up Plural Console
 description: How to Deploy the Plural Console to a MGMT Cluster
 ---
 
-# Pre Reqs
+# Pre Req
 
-#### [Mac Homebrew](https://brew.sh/)
-```sh
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-brew update
-```
-##### [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-```sh
-brew install awscli
-```
-#### [Helm CLI](https://helm.sh/docs/intro/install/)
-```sh
-brew install helm
-```
-#### [Plural CLI](https://github.com/pluralsh/plural-cli/?tab=readme-ov-file#installation)
-```sh
-brew install pluralsh/plural/plural
-```
+
 ### Configure AWS CLI Config
 ```ini
 #~/.aws/config

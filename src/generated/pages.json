@@ -288,6 +288,30 @@
     "path": "/getting-started/video-cli-quickstart"
   },
   {
+    "path": "/how-to"
+  },
+  {
+    "path": "/how-to/set-up"
+  },
+  {
+    "path": "/how-to/set-up/new-mgmt-cluster"
+  },
+  {
+    "path": "/how-to/set-up/plural-console"
+  },
+  {
+    "path": "/how-to/use"
+  },
+  {
+    "path": "/how-to/use/plural-api"
+  },
+  {
+    "path": "/how-to/use/plural-console"
+  },
+  {
+    "path": "/how-to/use/plural-docs"
+  },
+  {
     "path": "/"
   },
   {
