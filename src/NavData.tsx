@@ -105,16 +105,30 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'How To',
         sections: [
           {
-            title: 'Section 1',
-            href: '/how-to/1',
-          },
-          {
-            href: '/how-to/2',
-            title: 'Section 2',
+            href: '/how-to/set-up',
+            title: 'Set Up',
             sections: [
               {
-                title: 'Section 2.1',
-                href: '/how-to/2.1',
+                title: 'New MGMT Cluster',
+                href: '/how-to/set-up/new-mgmt-cluster',
+              },
+              {
+                title: 'Plural Console',
+                href: '/how-to/set-up/plural-console',
+              },
+            ],
+          },
+          {
+            href: '/how-to/use',
+            title: 'Use',
+            sections: [
+              {
+                title: 'Plural Console',
+                href: '/how-to/use/plural/console',
+              },
+              {
+                title: 'Plural API',
+                href: '/how-to/use/plural/api',
               },
             ],
           },
