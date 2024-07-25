@@ -101,6 +101,26 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/how-to',
+        title: 'How To',
+        sections: [
+          {
+            title: 'Section 1',
+            href: '/how-to/1',
+          },
+          {
+            href: '/how-to/2',
+            title: 'Section 2',
+            sections: [
+              {
+                title: 'Section 2.1',
+                href: '/how-to/2.1',
+              },
+            ],
+          },
+        ],
+      },
+      {
         href: '/deployments/using-operator',
         title: 'Deploying Using the Plural Operator',
         sections: [
