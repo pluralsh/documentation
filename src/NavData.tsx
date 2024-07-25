@@ -124,11 +124,11 @@ const rootNavData: NavMenu = deepFreeze([
             sections: [
               {
                 title: 'Plural Console',
-                href: '/how-to/use/plural/console',
+                href: '/how-to/use/plural-console',
               },
               {
                 title: 'Plural API',
-                href: '/how-to/use/plural/api',
+                href: '/how-to/use/plural-api',
               },
             ],
           },
