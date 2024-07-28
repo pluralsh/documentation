@@ -10,4 +10,4 @@ web: ## runs the docs site locally
 	yarn dev
 
 crd-docs:
-	curl -L https://raw.githubusercontent.com/pluralsh/console/master/controller/docs/api.md --output pages/deployments/operator/api.md
+	curl -L https://raw.githubusercontent.com/pluralsh/console/master/go/controller/docs/api.md --output pages/deployments/operator/api.md
