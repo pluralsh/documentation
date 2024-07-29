@@ -3,14 +3,14 @@ title: Installing the Plural CLI
 description: Guides for installing the Plural CLI
 ---
 
-### Prerequisites
+### Install Prerequisites
 
 [Mac Homebrew](https://brew.sh/)
 ```sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew update
 ```
- [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html), [Helm CLI](https://helm.sh/docs/intro/install/), [Terraform](https://developer.hashicorp.com/terraform/install), [kubectl](https://kubernetes.io/docs/tasks/tools/install-kubectl-macos/) 
+ [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-welcome.html), [Helm CLI](https://helm.sh/), [Terraform](https://developer.hashicorp.com/terraform/intro), [kubectl](https://kubernetes.io/docs/reference/kubectl/) 
 ```sh
 brew install awscli helm terraform kubectl
 ```
@@ -20,9 +20,9 @@ brew install awscli helm terraform kubectl
 brew install pluralsh/plural/plural
 ```
 
-### Issue a Command
+### Validate Install
 ```sh
-plural cd login
+plural login
 ```
 
 

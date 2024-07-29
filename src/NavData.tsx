@@ -109,7 +109,7 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Set Up',
             sections: [
               {
-                title: 'New MGMT Cluster',
+                title: 'MGMT Cluster',
                 href: '/how-to/set-up/new-mgmt-cluster',
               },
               {
