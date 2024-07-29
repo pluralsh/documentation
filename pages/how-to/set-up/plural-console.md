@@ -5,12 +5,14 @@ description: How to Deploy the Plural Console to a MGMT Cluster
 
 ### Prerequisites
 [Plural CLI](/how-to/set-up/plural-cli)  
-[AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html) Access
 
-
-##### Ensure AWS CLI Authentication
+### Deploy Plural Console
 ```sh
-aws sts get-caller-identity
+plural login
+# Note: If you deployed using bootstrap terraform you can get the PSQL connection string from running: terraform output --json
+plural cd control-plane
+helm repo add plrl-console https://pluralsh.github.io/console
+helm upgrade --install --create-namespace -f values.secret.yaml console plrl-console/console -n plrl-console
 ```
-
-
+The `plural cd control-plane` command creates the _`values.secret.yaml`_  
+and we use `helm` to apply them to the cluster
