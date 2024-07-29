@@ -41,17 +41,8 @@ plural up
 
 # Troubleshooting
 ### Get Kubeconfig for the MGMT Cluster
-AWS 
 ```sh
-aws eks update-kubeconfig --name [CLUSTER_NAME] 
-```
-AZ
-```sh
-az aks get-credentials --name [CLUSTER_NAME]
-```
-GCP
-```sh
-gcloud container clusters get-credentials [CLUSTER_NAME]
+plural wkspace kube-init
 ```
 
 Use `kubectl` with the newly added kube context  
@@ -71,34 +62,5 @@ were taking a bit longer to download and initialize.
 Once the services were _up_ in the cli, I was able to access the console url
 
 ### Cannot list resources in the Kubernetes Dashboard
-This is due to missing [RBAC Bindings](https://github.com/pluralsh/documentation/blob/8e205adfede17b0e412a2c8d81ac511dd71fe59b/pages/deployments/dashboard.md) for the console users  
 ![alt text](/images/how-to/k8s-dash-403.png)
-
-##### Add the RBAC Helm Values in the MGMT Cluster Repo
-```sh
-./helm-values/ConsoleClusterRoleBindings.yaml
-```
-##### Configure the Cluster Role Binding for console User
-```sh
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: console-binding-someone-your-company-com
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: admin
-subjects:
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: someone@your.company.com
-```
-You can list existing Cluster Roles with `kubectl get clusterroles`  
-There are several ways to manage [RBAC Bindings](https://github.com/pluralsh/documentation/blob/8e205adfede17b0e412a2c8d81ac511dd71fe59b/pages/deployments/dashboard.md)  
-This example binds the _`admin`_ cluster role to a single _someone@your.company.com_ user  
-
-
-##### Apply the Bindings
-```sh
-kubectl apply -f ./helm-values/ConsoleClusterRoleBindings.yaml
-```
+This is expected and due to missing [RBAC Bindings](https://github.com/pluralsh/documentation/blob/main/pages/deployments/dashboard.md) for the console users  
