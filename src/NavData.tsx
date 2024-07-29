@@ -184,6 +184,14 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Executing IaC Locally',
             href: '/stacks/local-execution',
           },
+          {
+            title: 'Custom Stacks',
+            href: '/stacks/custom-stacks',
+          },
+          {
+            title: 'Auto-Cancellation',
+            href: '/stacks/auto-cancellation',
+          },
         ],
       },
       {
