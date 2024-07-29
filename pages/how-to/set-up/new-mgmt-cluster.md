@@ -22,21 +22,17 @@ GCP
 gcloud auth list
 ```
 
-
-### Create a New Repo for Plural
-```sh
-git clone git@github.com:pluralsh/plrl-how-to.git
-cd plrl-how-to
-```
-
 ### Setup Repo and Deploy Resources
 Ensure your _[app.plural.sh](https://app.plural.sh/profile/me)_ User has `admin` permissions  
 Follow the onscreen prompts to setup the repo and deploy resources  
-* Use the provided Plural DNS Services for the MGMT Cluster
-  * When providing a domain name provide the _canonical_ name, e.g. how-to-plrl.onplural.sh
+
 * The Plural CLI will create a new repository
   * If there are permission related repository creation constraints  
     the repo can be cloned before running `plural` commands
+
+* Use the provided Plural DNS Services for the MGMT Cluster
+  * When providing a domain name provide the _canonical_ name, e.g. how-to-plrl.onplural.sh
+
 ```sh
 plural login
 plural up
