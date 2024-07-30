@@ -109,37 +109,49 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Set Up',
             sections: [
               {
-                title: 'MGMT Cluster',
-                href: '/how-to/set-up/new-mgmt-cluster',
-              },
-              {
-                title: 'Plural Console',
-                href: '/how-to/set-up/plural-console',
-              },
-              {
                 title: 'Plural CLI',
                 href: '/how-to/set-up/plural-cli',
               },
+              {
+                title: 'MGMT Cluster',
+                href: '/how-to/set-up/mgmt-cluster',
+              },
+              {
+                title: 'Workload Cluster',
+                href: '/how-to/set-up/workload-cluster',
+              },
+              {
+                title: 'Controllers',
+                href: '/how-to/set-up/controllers',
+              },
+              {
+                title: 'Pipelines',
+                href: '/how-to/set-up/pipelines',
+              },
+              {
+                title: 'PR Automation',
+                href: '/how-to/set-up/pr-automation',
+              },
             ],
           },
-          // {
-          //   href: '/how-to/use',
-          //   title: 'Use',
-          //   sections: [
-          //     {
-          //       title: 'Plural Documentation',
-          //       href: '/how-to/use/plural-docs',
-          //     },
-          //     {
-          //       title: 'Plural Console',
-          //       href: '/how-to/use/plural-console',
-          //     },
-          //     {
-          //       title: 'Plural API',
-          //       href: '/how-to/use/plural-api',
-          //     },
-          //   ],
-          // },
+          {
+            href: '/how-to/upgrade',
+            title: 'Upgrade',
+            sections: [
+              {
+                title: 'Plural CLI',
+                href: '/how-to/upgrade/plural-cli',
+              },
+              {
+                title: 'MGMT Cluster',
+                href: '/how-to/upgrade/mgmt-cluster',
+              },
+              {
+                title: 'Workload Cluster',
+                href: '/how-to/upgrade/workload-cluster',
+              },
+            ],
+          },
         ],
       },
       {

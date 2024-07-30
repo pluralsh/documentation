@@ -7,7 +7,7 @@ description: Using Plural CLI to Deploy a MGMT Kubernetes Cluster
 [Plural CLI](/how-to/set-up/plural-cli)
 
 ##### Ensure Cloud Provider CLI Authentication
-Plural uses the _default_ profile when deploying resources  
+**Plural** uses the _default_ profile when deploying resources  
 
 AWS  
 ```sh
@@ -26,11 +26,11 @@ gcloud auth list
 Ensure your _[app.plural.sh](https://app.plural.sh/profile/me)_ User has `admin` permissions  
 Follow the onscreen prompts to setup the repo and deploy resources  
 
-* The Plural CLI will create a new repository
+* The **Plural** CLI will create a new repository in the current directory
   * If there are permission related repository creation constraints  
     the repo can be cloned before running `plural` commands
 
-* Use the provided Plural DNS Services for the MGMT Cluster
+* Use the provided **Plural** DNS Services for the MGMT Cluster
   * When providing a domain name provide the _canonical_ name, e.g. how-to-plrl.onplural.sh
 
 ```sh
