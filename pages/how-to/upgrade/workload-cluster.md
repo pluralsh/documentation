@@ -1,6 +1,6 @@
 ---
-title: Setting Up a Pipeline
-description: Using Plural Deploy Pipelines
+title: Upgrading a Workload Cluster
+description: Using Plural CLI to Upgrade a Workload Kubernetes Cluster
 ---
 
 # Prerequisites
@@ -29,13 +29,7 @@ plural login
 ```
 
 # Set Up
-Set Up a dev -> staging -> prod pipeline
-
-include creation of the rest of the cluster fleet with stacks
-
-include CRDs
-
-use the prior microservice
+Create first workload cluster with Stacks (should use the cluster-creator PR automation from plural up)
 
 # Troubleshooting
 #### Get Kubeconfig for the MGMT Cluster
