@@ -101,6 +101,60 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/how-to',
+        title: 'How To',
+        sections: [
+          {
+            href: '/how-to/set-up',
+            title: 'Set Up',
+            sections: [
+              {
+                title: 'Plural CLI',
+                href: '/how-to/set-up/plural-cli',
+              },
+              {
+                title: 'MGMT Cluster',
+                href: '/how-to/set-up/mgmt-cluster',
+              },
+              {
+                title: 'Workload Cluster',
+                href: '/how-to/set-up/workload-cluster',
+              },
+              {
+                title: 'Controllers',
+                href: '/how-to/set-up/controllers',
+              },
+              {
+                title: 'Pipelines',
+                href: '/how-to/set-up/pipelines',
+              },
+              {
+                title: 'PR Automation',
+                href: '/how-to/set-up/pr-automation',
+              },
+            ],
+          },
+          {
+            href: '/how-to/upgrade',
+            title: 'Upgrade',
+            sections: [
+              {
+                title: 'Plural CLI',
+                href: '/how-to/upgrade/plural-cli',
+              },
+              {
+                title: 'MGMT Cluster',
+                href: '/how-to/upgrade/mgmt-cluster',
+              },
+              {
+                title: 'Workload Cluster',
+                href: '/how-to/upgrade/workload-cluster',
+              },
+            ],
+          },
+        ],
+      },
+      {
         href: '/deployments/using-operator',
         title: 'Deploying Using the Plural Operator',
         sections: [

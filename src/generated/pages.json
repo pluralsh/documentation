@@ -288,6 +288,45 @@
     "path": "/getting-started/video-cli-quickstart"
   },
   {
+    "path": "/how-to"
+  },
+  {
+    "path": "/how-to/set-up/controllers"
+  },
+  {
+    "path": "/how-to/set-up"
+  },
+  {
+    "path": "/how-to/set-up/mgmt-cluster"
+  },
+  {
+    "path": "/how-to/set-up/pipelines"
+  },
+  {
+    "path": "/how-to/set-up/plural-cli"
+  },
+  {
+    "path": "/how-to/set-up/plural-console"
+  },
+  {
+    "path": "/how-to/set-up/pr-automation"
+  },
+  {
+    "path": "/how-to/set-up/workload-cluster"
+  },
+  {
+    "path": "/how-to/upgrade"
+  },
+  {
+    "path": "/how-to/upgrade/mgmt-cluster"
+  },
+  {
+    "path": "/how-to/upgrade/plural-cli"
+  },
+  {
+    "path": "/how-to/upgrade/workload-cluster"
+  },
+  {
     "path": "/"
   },
   {
