@@ -25,6 +25,7 @@ Some things you'll need to run this tutorial:
   * This is only required when creating the webhook
   * The workload cluster can still be created without the SCM webhook
 
+<<<<<<< HEAD
 ## Create a New SCM Connection
 
 Creating an SCM Connection is easiest just using our UI.  You can then reference that created resource via k8s CRD to drive other workflows.  Step by step, you'll want to:
@@ -50,6 +51,27 @@ Once the connection is created in the UI we can reference it with a CRD instance
   * ❕ Ensure the Name Provided in the UI matches the `spec.name` in the CRD Exactly
   * An [`ScmConnection`](/deployments/operator/api#scmconnection) yaml template for GitHub exists in `bootstrap/pr-automation/scm.yaml`, you'll simply need to uncomment it. It should look like this:
 
+=======
+# Set Up
+### Create a New SCM Connection
+* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/scm`**  
+* **Click the _Create Connection_ Button at the Top Right**  
+![Create SCM Connection Button](/images/how-to/console_create-scm-btn.png)
+
+* **Fil in the Required Fields**
+  * **Provider Type**: The SCM Provider Hosting Git Repositories  
+  * **Name**: Reference Name for the Provider  
+    * ℹ️ **NOTE**: The _cluster-creator_ PR Automation looks for `github` by default
+  * **Token**: The Deploy Token to use  
+     
+![Create SCM Connection Modal](/images/how-to/console_create-scm-modal.png)  
+
+### **Create an [`ScmConnection`](https://docs.plural.sh/deployments/operator/api#scmconnection) CRD Instance**  
+Once the connection is created in the UI we can reference it with a CRD instance
+  * ❕ Ensure the Name Provided in the UI matches the `spec.name` in the CRD Exactly
+  * The [`ScmConnection`](https://docs.plural.sh/deployments/operator/api#scmconnection) yaml can be saved in your MGMT Cluster Repo
+  * You can use `kubectl` to apply it to the MGMT cluster 
+>>>>>>> 0a3170e (workload-cluster)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ScmConnection
@@ -59,6 +81,7 @@ spec:
   name: github
   type: GITHUB
 ```
+<<<<<<< HEAD
 
 You should now be able to commit and push, and Plural will sync it in (or create a PR to merge it into your main branch):
 
@@ -82,16 +105,32 @@ If you want that functionality, simply add a webhook in your SCM by doing the fo
 
 * **Navigate to `https://{your-console-domain}/pr/scm-webhooks`**  
 * **Click the `Create Webhook` Button**  
+=======
+### **Add an SCM Provider Webhook**
+If you navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/queue`  
+You'll see even though the SCM connection is complete  
+and the PR is merged the status of the cluster creator PR is still _open_  
+
+We need to add an SCM Webhook to fix this.  
+* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/scm-webhooks`**  
+* **Click the `Create Webhook` Button**  
+![](/images/how-to/create-scm-webhook-btn.png)
+>>>>>>> 0a3170e (workload-cluster)
 * **Fill the Required Fields**
   * **Provider Type**: The SCM Provider Hosting Git Repositories
       * This may be obvious, but you need to select the same provider as the console webhook
   * **Owner**: The Organization or Group Within the SCM Provider
+<<<<<<< HEAD
   * **Secret**: The Webhook Secret to Share, you can generate a cryptographically secure one with `plural crypto random`
+=======
+  * **Secret**: The Webhook Secret to Share
+>>>>>>> 0a3170e (workload-cluster)
 ![](/images/how-to/create-scm-webhook-modal-0.png)
 * **Click `Create`**
     * Copy the Webhook URL and note the secret to use within the SCM Provider Webhook 
 ![](/images/how-to/create-scm-webhook-modal-1.png)
 
+<<<<<<< HEAD
 * **Create the Webhook with the SCM Provider**  
 
 You can create this webhook at whatever scope you'd prefer.  Depending on the scope, the permissions needed will likely vary.  A simple place to start is just creating a webhook scoped to your `plural up` repository.
@@ -102,3 +141,34 @@ Here's some docs to help you work through the webhook creation process for a lot
   * [GitHub Organization Webhooks](https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks#creating-an-organization-webhook)
   * [GitLab Group Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#group-webhooks)
   * [Bitbucket Webhooks](https://confluence.atlassian.com/bitbucketserver/manage-webhooks-938025878.html)
+=======
+
+* **Create the Webhook with the SCM Provider**  
+❕ You Must be an Owner or Have Admin Access to Create Webhooks
+  * [GitHub Organization Webhooks](https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks#creating-an-organization-webhook)
+  * [GitLab Group Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#group-webhooks)
+  * [Bitbucket Webhooks](https://confluence.atlassian.com/bitbucketserver/manage-webhooks-938025878.html)
+
+
+
+
+# Troubleshooting
+
+#### Get Kubeconfig for the MGMT Cluster
+```sh
+plural wkspace kube-init
+```
+
+Use `kubectl` with the newly added kube context  
+The key namespaces to check are:   
+* plrl-console
+* plrl-deploy-operator
+* plrl-runtime
+
+#### Check the Status of the SCM Connection
+```sh
+kubectl describe ScmConnection github
+```
+Take note of the status conditions.  
+The Messages will provide failure or success messages.
+>>>>>>> 0a3170e (workload-cluster)
