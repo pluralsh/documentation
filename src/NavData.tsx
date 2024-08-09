@@ -121,6 +121,10 @@ const rootNavData: NavMenu = deepFreeze([
                 href: '/how-to/set-up/workload-cluster',
               },
               {
+                title: 'SCM Connection',
+                href: '/how-to/set-up/scm-connection',
+              },
+              {
                 title: 'Controllers',
                 href: '/how-to/set-up/controllers',
               },
@@ -134,24 +138,24 @@ const rootNavData: NavMenu = deepFreeze([
               },
             ],
           },
-          {
-            href: '/how-to/upgrade',
-            title: 'Upgrade',
-            sections: [
-              {
-                title: 'Plural CLI',
-                href: '/how-to/upgrade/plural-cli',
-              },
-              {
-                title: 'MGMT Cluster',
-                href: '/how-to/upgrade/mgmt-cluster',
-              },
-              {
-                title: 'Workload Cluster',
-                href: '/how-to/upgrade/workload-cluster',
-              },
-            ],
-          },
+          // {
+          //   href: '/how-to/upgrade',
+          //   title: 'Upgrade',
+          //   sections: [
+          //     {
+          //       title: 'Plural CLI',
+          //       href: '/how-to/upgrade/plural-cli',
+          //     },
+          //     {
+          //       title: 'MGMT Cluster',
+          //       href: '/how-to/upgrade/mgmt-cluster',
+          //     },
+          //     {
+          //       title: 'Workload Cluster',
+          //       href: '/how-to/upgrade/workload-cluster',
+          //     },
+          //   ],
+          // },
         ],
       },
       {
