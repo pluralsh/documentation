@@ -312,6 +312,9 @@
     "path": "/how-to/set-up/pr-automation"
   },
   {
+    "path": "/how-to/set-up/scm-connection"
+  },
+  {
     "path": "/how-to/set-up/workload-cluster"
   },
   {

@@ -128,14 +128,14 @@ const rootNavData: NavMenu = deepFreeze([
                 title: 'Controllers',
                 href: '/how-to/set-up/controllers',
               },
-              {
-                title: 'Pipelines',
-                href: '/how-to/set-up/pipelines',
-              },
-              {
-                title: 'PR Automation',
-                href: '/how-to/set-up/pr-automation',
-              },
+              // {
+              //   title: 'Pipelines',
+              //   href: '/how-to/set-up/pipelines',
+              // },
+              // {
+              //   title: 'PR Automation',
+              //   href: '/how-to/set-up/pr-automation',
+              // },
             ],
           },
           // {
