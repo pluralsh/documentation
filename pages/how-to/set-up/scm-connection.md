@@ -30,8 +30,8 @@ description: Connecting Plural to a Source Control Management Provider
 ### **Create an [`ScmConnection`](https://docs.plural.sh/deployments/operator/api#scmconnection) CRD Instance**  
 Once the connection is created in the UI we can reference it with a CRD instance
   * ❕ Ensure the Name Provided in the UI matches the `spec.name` in the CRD Exactly
-  * The [`ScmConnection`](https://docs.plural.sh/deployments/operator/api#scmconnection) yaml can be saved in your MGMT Cluster Repo
-  * You can use `kubectl` to apply it to the MGMT cluster 
+  * An [`ScmConnection`](https://docs.plural.sh/deployments/operator/api#scmconnection) yaml template for GitHub exists in `./app/services/pr-automation/scm.yaml`  
+  * Use `kubectl` to apply it to the MGMT cluster 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ScmConnection

@@ -83,7 +83,7 @@ subjects:
 # This will create a single binding for the someone@your.company.com user to the cluster-admin k8s role
 ```
 
-* **Create a `services` dir in your MGMT repo**  
+* **In the  `./apps/services` dir in your MGMT repo**  
   * Add a Service Deployment CRD  
     This will create a service to sync the rbac bindings  
 ```yaml
