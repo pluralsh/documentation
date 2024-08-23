@@ -74,68 +74,36 @@ spec:
   interval: 5m0s
   url: https://kubernetes-sigs.github.io/external-dns
 ```
+* **Add `./terraform/modules/clusters/aws/external-dns.tf`**
+```sh
+module "external-dns_irsa_role" {
+  source  = "terraform-aws-modules/iam/aws//modules/iam-role-for-service-accounts-eks"
+  version = "~> 5.33"
 
-* **Create new Stack Run**
-![](/images/how-to/create-stack-modal-0.png)
-* **Click `Select Repository`**
-![](/images/how-to/create-stack-modal-1.png)
-* **Click `Setup Environment`**
-![](/images/how-to/create-stack-modal-2.png)
-Make sure to add `PLURAL_ACCESS_TOKEN`
-* **Click Add Env Vars**
+  role_name                  = "${module.eks.cluster_name}-external-dns"
+  attach_external_dns_policy = true
 
-* **Add a new [`ServiceDeployment`](https://docs.plural.sh/deployments/operator/api#servicedeployment) CRD YAML to `./apps/services`**
-  * Example: `externaldns.yaml.liquid`
-  {% callout severity="info" %}
-* The `.liquid` extension on `external-dns.yaml.liquid` tells the deployment agent to attempt to template the values file, otherwise it will interpret it as plain yaml.  
-* You can use `plural cd services template` to test templates locally.
-{% /callout %}
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
-metadata:
-  namespace: infra
-spec:
-  namespace: external-dns
-  git:
-    folder: helm-values
-    ref: main
-  repositoryRef:
-    kind: GitRepository
-    name: infra
-    namespace: infra
-  contexts:
-    - externaldns # binds the externaldns context to this service
-  helm:
-    version: '6.14.1'
-    chart: external-dns
-    valuesFiles:
-      - external-dns.yaml.liquid # we're using a multi-source service sourcing this values file from `helm-values/external-dns.yaml.liquid` in the infra repo above
-    repository:
-      namespace: infra
-      name: external-dns
-  clusterRef:
-    kind: Cluster
-    name: plrl-how-to-workload-00-dev
-    namespace: infra
+  oidc_providers = {
+    main = {
+      provider_arn               = module.eks.oidc_provider_arn
+      namespace_service_accounts = ["${var.external-dns-namespace}:external-dns"]
+    }
+  }
+}
 ```
-* **Commit and Push the Changes**
+  * And any additional variables to `./terraform/modules/clusters/aws/variables.tf`
+```sh
+variable "external-dns-namespace" {
+  type    = string
+  default = "external-dns"
+}
+```
+* **Commit and Push the Changes**  
+Adding the terraform in the `~/terraform/modules/cluster/aws` directory  
+will ensure all AWS cluster, other than MGMT, will contain those configurations.  
+The Cluster Creator Stack Run is configured to watch that directory and deploy any committed changes.
 
-
-
-
-
-* ** **
-* ** **
-* ** **
-
-
-
-
-
-
-
-* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/cd/services`**  
+* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/stacks`** to see the status of the run
 
 
 # Troubleshooting
