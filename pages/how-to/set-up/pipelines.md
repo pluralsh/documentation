@@ -4,23 +4,6 @@ description: Using Plural Deploy Pipelines
 ---
 
 # Prerequisites
-[Plural CLI](/how-to/set-up/plural-cli)
-
-#### Ensure Cloud Provider CLI Authentication
-**Plural** uses the _default_ profile when deploying resources  
-
-AWS  
-```sh
-aws sts get-caller-identity
-```  
-AZ
-```sh
-az account show
-```
-GCP
-```sh
-gcloud auth list
-```
 
 #### Ensure your _[app.plural.sh](https://app.plural.sh/profile/me)_ User has `admin` permissions  
 
