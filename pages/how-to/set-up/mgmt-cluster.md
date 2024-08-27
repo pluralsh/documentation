@@ -50,10 +50,14 @@ roleRef:
   kind: ClusterRole
   name: cluster-admin
 subjects:
+# This will create a single binding for the someone@your.company.com user to the cluster-admin k8s role
   - apiGroup: rbac.authorization.k8s.io
     kind: User
     name: someone@your.company.com
-# This will create a single binding for the someone@your.company.com user to the cluster-admin k8s role
+# The following will bind the role to everyone in the `sre` group
+  - apiGroup
+    kind: Group
+    name: sre
 ```
 
 * **In the  `./apps/services` dir in your MGMT repo**  
