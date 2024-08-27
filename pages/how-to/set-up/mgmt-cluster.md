@@ -4,23 +4,7 @@ description: Using Plural CLI to Deploy a MGMT Kubernetes Cluster
 ---
 
 ### Prerequisites
-[Plural CLI](https://docs.plural.sh/getting-started/quickstart)
-
-##### Ensure Cloud Provider CLI Authentication
-**Plural** uses the _default_ profile when deploying resources  
-
-AWS  
-```sh
-aws sts get-caller-identity
-```  
-AZ
-```sh
-az account show
-```
-GCP
-```sh
-gcloud auth list
-```
+[Plural CLI](/getting-started/quickstart)
 
 ### Setup Repo and Deploy Resources
 Ensure your _[app.plural.sh](https://app.plural.sh/profile/me)_ User has `admin` permissions  
@@ -39,17 +23,6 @@ plural up
 ```
 
 # Troubleshooting
-### Get Kubeconfig for the MGMT Cluster
-```sh
-plural wkspace kube-init
-```
-
-Use `kubectl` with the newly added kube context  
-The key namespaces to check are:   
-* plrl-console
-* plrl-deploy-operator
-* plrl-runtime
-
 ### "Console failed to become ready"
 Sometimes the DNS Resolution can take longer than the expected five minutes  
 It's also possible the console services take a bit longer to become ready  
@@ -133,3 +106,14 @@ spec:
 * **(Optionally) Save the Global Service YAML**
   * Saving the global service yaml is not required once it is applied to the cluster
   * I keep the applied yaml in `services/global-rbac.yaml` for reference
+
+### As a Last Resort, Use `kubectl`
+```sh
+plural wkspace kube-init
+```
+
+Use `kubectl` with the newly added kube context  
+The key namespaces to check are:   
+* plrl-console
+* plrl-deploy-operator
+* plrl-runtime
