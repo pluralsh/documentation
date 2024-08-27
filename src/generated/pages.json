@@ -318,18 +318,6 @@
     "path": "/how-to/set-up/workload-cluster"
   },
   {
-    "path": "/how-to/upgrade"
-  },
-  {
-    "path": "/how-to/upgrade/mgmt-cluster"
-  },
-  {
-    "path": "/how-to/upgrade/plural-cli"
-  },
-  {
-    "path": "/how-to/upgrade/workload-cluster"
-  },
-  {
     "path": "/"
   },
   {
