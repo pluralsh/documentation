@@ -22,7 +22,7 @@ description: Connecting Plural to a Source Control Management Provider
 * **Fil in the Required Fields**
   * **Provider Type**: The SCM Provider Hosting Git Repositories  
   * **Name**: Reference Name for the Provider  
-    * ℹ️ **NOTE**: The _cluster-creator_ PR Automation looks for `github` by default
+    * ℹ️ **NOTE**: The _cluster-creator_ PR Automation looks for `github` by default, but is arbitrary and can be changed
   * **Token**: The Deploy Token to use  
      
 ![Create SCM Connection Modal](/images/how-to/console_create-scm-modal.png)  
