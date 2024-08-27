@@ -114,7 +114,8 @@ const rootNavData: NavMenu = deepFreeze([
               },
               {
                 title: 'Management Cluster',
-                href: '/how-to/set-up/mgmt-cluster',
+                // href: '/how-to/set-up/mgmt-cluster',
+                href: '/deployments/cli-quickstart',
               },
               {
                 title: 'Workload Cluster',
