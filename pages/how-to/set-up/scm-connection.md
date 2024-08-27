@@ -15,7 +15,7 @@ description: Connecting Plural to a Source Control Management Provider
 
 # Set Up
 ### Create a New SCM Connection
-* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/scm`**  
+* **Navigate to `https://{your-console-domain}/pr/scm`**  
 * **Click the _Create Connection_ Button at the Top Right**  
 ![Create SCM Connection Button](/images/how-to/console_create-scm-btn.png)
 
@@ -42,12 +42,12 @@ spec:
   type: GITHUB
 ```
 ### **Add an SCM Provider Webhook**
-If you navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/queue`  
+If you navigate to `https://{your-console-domain}/pr/queue`  
 You'll see even though the SCM connection is complete  
 and the PR is merged the status of the cluster creator PR is still _open_  
 
 We need to add an SCM Webhook to fix this.  
-* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/scm-webhooks`**  
+* **Navigate to `https://{your-console-domain}/pr/scm-webhooks`**  
 * **Click the `Create Webhook` Button**  
 ![](/images/how-to/create-scm-webhook-btn.png)
 * **Fill the Required Fields**
@@ -66,26 +66,3 @@ We need to add an SCM Webhook to fix this.
   * [GitHub Organization Webhooks](https://docs.github.com/en/webhooks/using-webhooks/creating-webhooks#creating-an-organization-webhook)
   * [GitLab Group Webhooks](https://docs.gitlab.com/ee/user/project/integrations/webhooks.html#group-webhooks)
   * [Bitbucket Webhooks](https://confluence.atlassian.com/bitbucketserver/manage-webhooks-938025878.html)
-
-
-
-
-# Troubleshooting
-
-#### Get Kubeconfig for the MGMT Cluster
-```sh
-plural wkspace kube-init
-```
-
-Use `kubectl` with the newly added kube context  
-The key namespaces to check are:   
-* plrl-console
-* plrl-deploy-operator
-* plrl-runtime
-
-#### Check the Status of the SCM Connection
-```sh
-kubectl describe ScmConnection github
-```
-Take note of the status conditions.  
-The Messages will provide failure or success messages.

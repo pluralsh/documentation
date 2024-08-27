@@ -14,7 +14,7 @@ But the [Plural SCM Connection](/how-to/set-up/scm-connection) needs to be insta
 
 ### **Create a Workload Cluster**  
 To create a new workload cluster we can use the builtin Plural _cluster-creator_ PR Automation  
-* **Navigate to `https://console.[YOUR DOMAIN].onplural.sh/pr/automations`**  
+* **Navigate to `https://{your-console-domain}/pr/automations`**  
 * **Click `Create a PR` in the `cluster-creator` Automation Object**  
 ![cluster-creator pr button](/images/how-to/cluster-creator-obj.png)
 * **Fill in the Required Fields**  
@@ -31,7 +31,7 @@ To create a new workload cluster we can use the builtin Plural _cluster-creator_
 ![cluster-creator modal 2](/images/how-to/cluster-creator-modal-2.png)
 * **Merge the PR**
 * **Approve the Stack Run changes**
-  * Navigate to `https://console.[YOUR DOMAIN].onplural.sh/staacks`
+  * Navigate to `https://{your-console-domain}/staacks`
 * **Click `Pending Approval` Button on the Newly Created Stack** 
 ![](/images/how-to/pending-approval-btn.png)
 * **Once Approved the Stack Run will Execute**
@@ -39,15 +39,5 @@ To create a new workload cluster we can use the builtin Plural _cluster-creator_
 
 
 # Troubleshooting
-Adding A GH PR Webhook
+[Adding A GH PR Webhook](/how-to/set-up/scm-connection#add-an-scm-provider-webhook)
 
-#### Get Kubeconfig for the MGMT Cluster
-```sh
-plural wkspace kube-init
-```
-
-Use `kubectl` with the newly added kube context  
-The key namespaces to check are:   
-* plrl-console
-* plrl-deploy-operator
-* plrl-runtime

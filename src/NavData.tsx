@@ -110,10 +110,10 @@ const rootNavData: NavMenu = deepFreeze([
             sections: [
               {
                 title: 'Plural CLI',
-                href: '/how-to/set-up/plural-cli',
+                href: '/getting-started/quickstart',
               },
               {
-                title: 'MGMT Cluster',
+                title: 'Management Cluster',
                 href: '/how-to/set-up/mgmt-cluster',
               },
               {
@@ -128,34 +128,8 @@ const rootNavData: NavMenu = deepFreeze([
                 title: 'Controllers',
                 href: '/how-to/set-up/controllers',
               },
-              // {
-              //   title: 'Pipelines',
-              //   href: '/how-to/set-up/pipelines',
-              // },
-              // {
-              //   title: 'PR Automation',
-              //   href: '/how-to/set-up/pr-automation',
-              // },
             ],
           },
-          // {
-          //   href: '/how-to/upgrade',
-          //   title: 'Upgrade',
-          //   sections: [
-          //     {
-          //       title: 'Plural CLI',
-          //       href: '/how-to/upgrade/plural-cli',
-          //     },
-          //     {
-          //       title: 'MGMT Cluster',
-          //       href: '/how-to/upgrade/mgmt-cluster',
-          //     },
-          //     {
-          //       title: 'Workload Cluster',
-          //       href: '/how-to/upgrade/workload-cluster',
-          //     },
-          //   ],
-          // },
         ],
       },
       {

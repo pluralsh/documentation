@@ -4,7 +4,7 @@ description: Using Plural CLI to Deploy a MGMT Kubernetes Cluster
 ---
 
 ### Prerequisites
-[Plural CLI](/how-to/set-up/plural-cli)
+[Plural CLI](https://docs.plural.sh/getting-started/quickstart)
 
 ##### Ensure Cloud Provider CLI Authentication
 **Plural** uses the _default_ profile when deploying resources  
@@ -62,7 +62,7 @@ Once the services were _up_ in the cli, I was able to access the console url
 
 ### "Cannot list resources in the Kubernetes Dashboard"
 ![alt text](/images/how-to/k8s-dash-403.png)
-This is expected and due to missing [RBAC Bindings](https://github.com/pluralsh/documentation/blob/main/pages/deployments/dashboard.md) for the console users  
+This is expected and due to missing [RBAC Bindings](/deployments/dashboard#rbac) for the console users  
 
 ##### Creating an RBAC Service
 * **Create an `rbac` dir in your MGMT repo 
@@ -110,9 +110,8 @@ spec:
 `kubectl apply -f ./services/rbac.yaml`
 
 #### (Optionally) Make the RBAC Service Global
-###### ℹ️ If you created a service with the Console UI 
-###### you need to manually apply the service CRD referenced by the Global Service
-* **Navigate to `https://console.[your-sub-domain].onplural.sh/cd/globalservices`**
+**ℹ️ Services created with the Console UI need to have the CRDs applied manually**
+* **Navigate to `https://{your-console-domain}/cd/globalservices`**
 
 * **Click the `New Global Service` button**  
   * Service Name: Name of the Existing Service
