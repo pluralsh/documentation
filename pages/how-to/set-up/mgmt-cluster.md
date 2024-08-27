@@ -1,6 +1,6 @@
 ---
-title: Setting Up a New MGMT Cluster
-description: Using Plural CLI to Deploy a MGMT Kubernetes Cluster
+title: Setting Up a New Management (MGMT) Cluster
+description: Using Plural CLI to Deploy a Management (MGMT) Kubernetes Cluster
 ---
 
 ### Prerequisites
@@ -14,7 +14,7 @@ Follow the onscreen prompts to setup the repo and deploy resources
   * If there are permission related repository creation constraints  
     the repo can be cloned before running `plural` commands
 
-* Use the provided **Plural** DNS Services for the MGMT Cluster
+* Use the provided **Plural** DNS Services for the Management (MGMT) Cluster
   * When providing a domain name provide the _canonical_ name, e.g. how-to-plrl.onplural.sh
 
 ```sh
