@@ -49,7 +49,7 @@ spec:
         enabled: true
         className: nginx
         annotations: 
-          cert-manager.io/cluster-issuer: letsencrypt-prod
+          cert-manager.io/cluster-issuer: letsencrypt-staging
         hosts:
           - host: cd-demo.plrl.livingroom.cloud
             paths:
