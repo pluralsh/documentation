@@ -229,6 +229,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/pr/crds',
           },
           {
+            title: "Testing PR Automations",
+            href: '/deployments/pr/testing',
+          },
+          {
             title: 'Pull Request Pipelines',
             href: '/deployments/pr/pipelines',
           },
