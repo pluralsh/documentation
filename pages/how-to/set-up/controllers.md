@@ -295,3 +295,20 @@ spec:
       ref: main
       folder: services/cluster-issuer # simply source the raw yaml from the services/cluster-issuer folder 
 ```
+
+## Push to Deploy
+
+We registered all these manifests under the root `bootstrap` folder a `plural up`-derived management cluster listens to by default, so all you should need to do is either:
+
+```sh
+git commit -m "setup our cluster runtime"
+git push
+```
+
+or create a PR, approve it, and merge to have the global deploy to all your clusters.  
+
+{% callout severity="info" %}
+You might need to wait a minute or two for the system to poll git and realize there's a new change.
+{% /callout %}
+
+Once you've configured all of these, you should see the new Global Services at https://{your-console-domain}/cd/globalservices.

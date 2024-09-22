@@ -47,14 +47,6 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Introduction',
         href: '/introduction',
       },
-      {
-        title: 'What makes Plural different?',
-        href: '/getting-started/plural-difference',
-      },
-      {
-        title: 'Concepts',
-        href: '/getting-started/concepts',
-      },
     ],
   },
   {
@@ -68,10 +60,6 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Architecture',
             href: '/deployments/architecture',
           },
-          // {
-          //   href: '/deployments/browser-quickstart',
-          //   title: 'Quickstart from your Browser',
-          // },
           {
             href: '/deployments/existing-cluster',
             title: 'Set Up on your own Cluster',
@@ -120,68 +108,20 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Set Up a Network Stack and other K8s Add-Ons',
             href: '/how-to/set-up/controllers',
           },
-        ],
-      },
-      {
-        href: '/deployments/using-operator',
-        title: 'Deploying Using the Plural Operator',
-        sections: [
           {
-            title: 'Architecture',
-            href: '/deployments/operator/architecture',
+            title: "Set Up a Basic Self-Service Worklfow with PR Automations",
+            href: '/how-to/deploy/pr-automation',
           },
           {
-            title: 'Git Services',
-            href: '/deployments/operator/git-service',
+            title: 'Deploy Your First Microservice to a Workload Cluster',
+            href: '/how-to/deploy/microservice',
           },
           {
-            title: 'Helm Services',
-            href: '/deployments/operator/helm-service',
-          },
-          {
-            title: 'Global Services',
-            href: '/deployments/operator/global-service',
-          },
-          {
-            title: 'Defining Pipelines',
-            href: '/deployments/operator/pipeline',
-          },
-          {
-            title: 'API Reference',
-            href: '/deployments/operator/api',
+            title: 'Setup Your First Microservice Promotion Pipeline',
+            href: '/how-to/deploy/pipelines',
           },
         ],
       },
-      // {
-      //   href: '/deployments/clusters',
-      //   title: 'Cluster Management',
-      //   sections: [
-      //     {
-      //       title: 'Import An Existing Cluster',
-      //       href: '/deployments/import-cluster',
-      //     },
-      //     {
-      //       title: 'Create Provider Credentials',
-      //       href: '/deployments/credentials',
-      //     },
-      //     {
-      //       href: '/deployments/cluster-create',
-      //       title: 'Create Cluster API Workload Clusters',
-      //     },
-      //     // {
-      //     //   href: '/deployments/cluster-config',
-      //     //   title: 'Configure my Cluster',
-      //     // },
-      //     {
-      //       title: 'Destroy the Cluster Safely',
-      //       href: '/deployments/cluster-destroy',
-      //     },
-      //     {
-      //       title: 'Optimize Cluster Costs',
-      //       href: '/deployments/cluster-cost',
-      //     },
-      //   ],
-      // },
       {
         href: '/stacks/',
         title: 'Iac Management with Stacks',
@@ -217,28 +157,32 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/deployments/services',
-        title: 'Deployments',
+        href: '/deployments/using-operator',
+        title: 'Deploying Using the Plural Operator',
         sections: [
           {
-            title: 'Import Git Repositories',
-            href: '/deployments/git',
+            title: 'Architecture',
+            href: '/deployments/operator/architecture',
           },
           {
-            href: '/deployments/services-deploy',
-            title: 'Deploy Services',
+            title: 'API Reference',
+            href: '/deployments/operator/api',
           },
           {
-            href: '/deployments/helm',
-            title: 'Helm Repository Sources',
+            title: 'Git Services',
+            href: '/deployments/operator/git-service',
           },
           {
-            href: '/deployments/global-services',
-            title: 'Configure Global Services',
+            title: 'Helm Services',
+            href: '/deployments/operator/helm-service',
           },
           {
-            title: 'Upgrades and Rollbacks',
-            href: '/deployments/upgrades',
+            title: 'Global Services',
+            href: '/deployments/operator/global-service',
+          },
+          {
+            title: 'Defining Pipelines',
+            href: '/deployments/operator/pipeline',
           },
         ],
       },
@@ -279,20 +223,6 @@ const rootNavData: NavMenu = deepFreeze([
       {
         href: '/deployments/notifications',
         title: 'Notifications',
-      },
-      {
-        href: '/deployments/ci',
-        title: 'Integrate With your CI',
-        sections: [
-          {
-            title: 'Overview',
-            href: '/deployments/ci-overview',
-          },
-          {
-            title: 'Github Actions',
-            href: '/deployments/ci-gh-actions',
-          },
-        ],
       },
       {
         href: '/deployments/operations',
@@ -410,6 +340,68 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/getting-started/manage-git-repositories/sharing-git-repositories',
       },
       {
+        title: 'Reference',
+        href: '/reference',
+        sections: [
+          {
+            title: 'Cloud Provider CLI Setup',
+            href: '/reference/configuring-cloud-provider',
+          },
+          {
+            title: 'Common Errors',
+            href: '/reference/troubleshooting',
+          },
+          {
+            title: 'Handling Partial Deployments',
+            href: '/reference/partial-installation',
+          },
+          {
+            href: '/getting-started/manage-git-repositories',
+            title: 'Manage Git Repositories',
+            sections: [
+              {
+                href: '/getting-started/manage-git-repositories/setting-up-gitops',
+                title: 'Setting Up GitOps',
+              },
+              {
+                href: '/getting-started/manage-git-repositories/workspace-encryption',
+                title: 'Workspace Encryption Guide',
+              },
+            ],
+          },
+          {
+            href: '/getting-started/manage-git-repositories/your-plural-workspace',
+            title: 'Plural Workspace Layout',
+          },
+          {
+            title: 'API / Developer Tools',
+            href: '/reference/api',
+            sections: [
+              {
+                href: '/reference/api/plural-api',
+                title: 'Plural API',
+              },
+              {
+                title: 'Console API',
+                href: '/reference/api/console-api',
+              },
+            ],
+          },
+          {
+            title: 'CLI Command Reference',
+            href: '/reference/cli-reference',
+          },
+          {
+            href: '/adding-new-application/plural-custom-resources',
+            title: 'Plural Custom Resources',
+          },
+          {
+            href: '/adding-new-application/module-library',
+            title: 'Module Library',
+          },
+        ],
+      },
+      {
         href: '/operations/advanced-operations',
         title: 'Advanced Operations',
         sections: [
@@ -503,86 +495,12 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'What is Plural OIDC?',
       },
       {
-        href: '/operations/auth-access-control/identity-and-installations/audit-logging',
-        title: 'What audit logging does Plural do?',
-      },
-      {
-        href: '/operations/auth-access-control/identity-and-installations',
-        title: 'How does auth and access control work for Plural?',
-      },
-      {
         href: '/faq/certifications',
         title: 'What certifications does Plural have?',
       },
       {
         href: '/faq/plural-paid-tiers',
         title: 'How do the paid Plural tiers work?',
-      },
-      {
-        href: '/faq/local-development',
-        title: 'Can I develop locally?',
-      },
-    ],
-  },
-
-  {
-    title: 'Reference',
-    sections: [
-      {
-        title: 'Cloud Provider CLI Setup',
-        href: '/reference/configuring-cloud-provider',
-      },
-      {
-        title: 'Common Errors',
-        href: '/reference/troubleshooting',
-      },
-      {
-        title: 'Handling Partial Deployments',
-        href: '/reference/partial-installation',
-      },
-      {
-        href: '/getting-started/manage-git-repositories',
-        title: 'Manage Git Repositories',
-        sections: [
-          {
-            href: '/getting-started/manage-git-repositories/setting-up-gitops',
-            title: 'Setting Up GitOps',
-          },
-          {
-            href: '/getting-started/manage-git-repositories/workspace-encryption',
-            title: 'Workspace Encryption Guide',
-          },
-        ],
-      },
-      {
-        href: '/getting-started/manage-git-repositories/your-plural-workspace',
-        title: 'Plural Workspace Layout',
-      },
-      {
-        title: 'API / Developer Tools',
-        href: '/reference/api',
-        sections: [
-          {
-            href: '/reference/api/plural-api',
-            title: 'Plural API',
-          },
-          {
-            title: 'Console API',
-            href: '/reference/api/console-api',
-          },
-        ],
-      },
-      {
-        title: 'CLI Command Reference',
-        href: '/reference/cli-reference',
-      },
-      {
-        href: '/adding-new-application/plural-custom-resources',
-        title: 'Plural Custom Resources',
-      },
-      {
-        href: '/adding-new-application/module-library',
-        title: 'Module Library',
       },
     ],
   },

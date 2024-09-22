@@ -1,90 +1,21 @@
 ---
 title: Introduction
 description: >-
-  Plural empowers you to build and maintain production-ready applications on
-  Kubernetes in minutes with no management overhead.
+  Plural is your single pane of glass for Enterprise-Grade Kubernetes Fleet Management
 ---
 
-## What is Plural?
+# What is Plural?
 
-Plural is a self-hosted, open-source, unified application deployment platform that deploys your selected applictions into a Kubernetes cluster in the cloud provider of your choice. Plural acts as:
+Plural is a unified cloud orchestrator for the management of Kubernetes at scale.  In particular, the fleet management problem as we understand it is decomposed into providing a consistent workflow for 4 main concerns:
 
-- An infrastructure provisioner, spinning up new clusters as needed
-- A continuous deployment solution, allowing you to deploy your services across environments
-- A single pane of glass for complete visibility into what's deployed where
-- An open-source marketplace to deploy 3rd party software into your clusters
+1. Kubernetes Continuous Deployment - you need a GitOps-based, drift-detecting mechanism to sync kubernetes yaml manifests, written in helm, kustomize, raw yaml, etc, into target kubernetes clusters.  It should also be orchestrable via API to support a scalable workflow to any fleet size.
+2. Kubernetes Dashboarding - A secure, SSO-integrated Kubernetes dashboard layer for ad-hoc troubleshooting.  GitOps should handle anything on a write-path, but you still need a strong read-path that's not burdened with friction.
+3. Infrastructure-As-Code Management - implemented via [Stacks](/stacks/overview), this provides a k8s-native, API-driven mechanism to scalably manage the terraform complexity that immediately arises when using kubernetes in earnest.
+4. Self-Service Code Generation - the glue that ties everything together, a repeatable PR Automation API that allows you to self-serviceably generate the manifests for any workflow in 1-3 with a simple UI wizard.  Think of it like Backstage for Kubernetes.
 
-Plural leverages Cluster API, Helm, Terraform, and YAML to create your desired infrastructure. Spinning up a first cluster is as easy as running `plural build`, and all configuration within your Plural Git repository is fully ejectable from the platform and ecosystem.
+In addition, we support a robust, enterprise-ready [Architecture](/deployments/architecture). This uses a separation of management cluster and an agent w/in each workload cluster to achieve scalability and enhanced security to compensate for the risks caused by introducing a Single-Pane-of-Glass to Kubernetes.  The agent can only communicate to the management cluster via egress networking, and executes all write operations with local credentials, removing the need for the management cluster to be a repository of global credentials.  If you want to learn more about the nuts-and-bolts feel free to visit our [Architecture Page](/deployments/architecture).
 
-![](/assets/introduction/introduction-marketplace.png)
-![](/assets/deployments/deployment-services.png)
+## Plural Open Source Marketplace
 
-**Some key features of the platform include:**
+We also maintain a catalog of open source applications like Airbyte, Airflow, etc. that can be deployed to kubernetes on most major clouds.  We're in progress to merging that experience with our modernized Fleet Management platform, but if you're interested in any of them, we're happy to support them in the context of a commercial plan.
 
-- Bundled infrastructure provisioning and application deployment
-- Automated upgrades for open-source software
-- Cross-tool dependency management
-- GitOps workflow with batteries-included transparent secret encryption
-- Built on common open-source tools, so if you don't like us, you can always eject your application from Plural and use it as you please.
-
-Notably, we support bringing your own Kubernetes cluster for our continuous deployment workflows.
-
-## Deployment Options
-
-### Plural CLI
-
-This is the current standard deployment method. Click below for a quickstart to managing configuration locally.
-
-- [Quickstart: Using the Plural CLI on your Machine](/getting-started/quickstart)
-
-### Plural Cloud Shell
-
-We have created a Cloud Shell with all of the tools and dependencies needed to run Plural. This is available [here](https://app.plural.sh/shell) to try out. If you want to **try out Plural without entering cloud credentials**, we offer a demo environment of our Plural Console that you can access [here](https://www.plural.sh/demo-login).
-
-- [Using our in-browser Cloud Shell](/getting-started/cloud-shell-quickstart)
-
-If you need support getting your Plural deployment up and running, join the [Plural Discord here!](https://discord.com/invite/bEBAMXV64s)
-
-## Architecture
-
-The Plural architecture has three main components:
-
-- Plural Console for management of all applications on your infrastructure
-- Plural API and Catalog site (available at [https://app.plural.sh](https://app.plural.sh))
-- Plural CLI and Git SCM to maintain the state of a user's applications
-
-### Plural Console
-
-The Plural Console is the operational hub for all applications managed by Plural. It is deployed in-cluster alongside applications and provides a few key features:
-
-- Horizontally scalable Git cache - we should be able to ingest as many git repos as you'd like and auto-shard them throughout your cluster automatically and efficiently.
-- Configuration Management - supports re-configurable backends, but allows you to easily parameterize services with information like hostnames, docker image tags, and other secret and non-secret information.
-- Auth Proxy - this is a secure bidirectional grpc channel initiated by a deployment agent used to make kubernetes api calls no matter where a cluster may live and give you full dashboarding capabilities from the Plural CD UI.
-- Cluster API Providers - Plural CD natively integrates with cluster api and allows you to create and manage new clusters at scale and fork your own kubernetes cluster APIs on top of existing setups for services like EKS, AKS and GKE or on-prem solutions like Rancher
-- Support - in-person support can be handled in our chat interface available directly in the admin console, with a lot of nice features like direct zoom integration
-
-It's deployed as a highly available, scalable web service, with postgres as its datastore. It also directly integrates with Plural's OIDC for login and user management.
-
-See our [Plural CD Architecture page](/deployments/architecture) for more information
-
-### Plural API
-
-The primary responsibility of the Plural API is to store the packages needed for open-source application installation - terraform, helm - and ingesting high-level dependency information about them. This allows us to properly sequence installations. It also serves as a publish-subscribe layer to communicate updates to clusters that have installed those applications, and can leverage the dependency information ingested to delay updates until a cluster has caught up with all the necessary dependencies.
-
-It also can serve as an identity provider for any Plural application, delegating authentication via OIDC and also maintaining user group info and communicating it down to applications.
-
-### Plural CLI
-
-The Plural CLI can be used for interaction with the Plural API and Plural Console. The CLI effectively uses the Plural API as a package manager, and works as a higher level build tool on top of the DevOps packages it supports.
-
-It also is responsible for managing secret encryption of all application state in plural installation repos and provides a few useful tools for troubleshooting an application our admin console might not be well-suited to solve.
-
-Finally it also provides the toolchain for publishing applications to the plural API.
-
-## Docs Translations
-
-### Japanese
-
-The wonderful team at [St-Hakky](https://www.about.st-hakky.com/) has translated most of our docs to Japanese on their website. To view the [translated docs, click here](https://book.st-hakky.com/docs/plural-overview).
-
-St-Hakky のすばらしいチームが、ウェブサイトでほとんどのドキュメントを日本語に翻訳してくれました。 翻訳されたドキュメントを表示するには、ここをクリックしてください。

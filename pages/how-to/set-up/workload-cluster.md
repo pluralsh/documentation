@@ -53,3 +53,15 @@ By default these stacks require approval for safety (terraform can do the strang
 {% callout severity="info" %}
 Cluster provisioning usually takes quite a while.  On AWS, expect the process to take upwards of 20m, it can be more like 10m on GCP.
 {% /callout %}
+
+## Overview of the GitOps Manifests Created
+
+This PRA creates basically three GitOps manifests:
+
+* A `ServiceDeployment` at `bootstrap/clusters.yaml`.  This spawns a new service syncing the `services/clusters` folder.  This is meant to reduce bloat in the main `bootstrap` folder, and is technically optional.
+* An `InfrastructureStack` at `services/clusters/{cloud}/stacks/{name}.yaml`.  This configures the Stacks api to create a new terraform stack to manage the provisioning of the underlying EKS/AKS/etc cluster.  It is tracking the `terraform/modules/clusters/{cloud}` folder.
+* A `Cluster` CRD at `services/clusters/{cloud}/clusters/{name}.yaml`.  This creates a pointer CRD which is often used in other CRDs like `ServiceDeployment` to reference clusters.
+
+{% callout severity="warning" %}
+The `Cluster` CRD is not created by default when registering a cluster. This is why the PR Automation creates it, and if you registered clusters another way, you'll need to create an instance of it as well if you want to use the other CRDs which reference it. 
+{% /callout %}

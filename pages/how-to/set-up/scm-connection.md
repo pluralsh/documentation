@@ -35,7 +35,7 @@ Creating an SCM Connection is easiest just using our UI.  You can then reference
   * **Provider Type**: The SCM Provider Hosting Git Repositories  
   * **Name**: Reference Name for the Provider  
     * ℹ️ **NOTE**: The _cluster-creator_ PR Automation looks for `github` by default, but is arbitrary and can be changed
-  * **Token**: The Deploy Token to use.
+  * **Token**: The Personal Access Token to use.
 * **Click `Create`**
      
 ![Create SCM Connection Modal](/images/how-to/console_create-scm-modal.png)  
