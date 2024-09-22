@@ -3,29 +3,24 @@ title: Security Concepts
 description: Learn about what Plural has access to at various steps of deployment.
 ---
 
-## Cloud Access
+# Plural Console
 
-### Plural CLI
+The Plural Console by default has access to nothing in your cloud.  To grant it access you'll have to do one of the following:
 
-Plural **does not** have access to any cloud environments when deployed through the CLI. We generate deployment manifests in the Plural Git repository and then use your configured cloud provider's CLI on your behalf. We cannot perform anything outside of deploying and managing the manifests that are created in your Plural Git repository.
+* manually configure a SCM connection to connect to your Source Control Provider (eg Github)
+* manually bind a workload identity role to the service account used by a Plural console-related pod (eg for stack runners)
 
-### Plural Cloud Shell
+In addition, the Console only will make two outbound network requests, outside of those used to run terraform or pull from Git:
 
-Plural **does** have access to your cloud credentials when deployed through the Cloud Shell. In order to streamline the Cloud Shell experience, we securely store cloud credentials to create resources on your behalf. You can eject from the Cloud Shell to the CLI at any time to save your configuration and revoke our access. This is done with the following steps:
+* A request to validate your instances license.  This can be replaced with a cryptographic license key, and thus disabled.
+* A request to compile our deprecation tables using our upstream dataset.  This can also be replaced by an airgapped version with the tables baked into our binary.  The tradeoff will be staleness.
 
-1. [Install the Plural CLI](/getting-started/quickstart).
-2. Run `plural shell sync` on your local machine.
-3. Run `plural shell purge` in the Cloud Shell to destroy it.
+# Plural Cloud
 
-## Plural Console
+A Plural Console running in Plural Cloud can collect creds in a few ways:
 
-Our console has elevated permissions when running in your Plural Kubernetes cluster, but it runs in its own environment to alleviate security concerns. Its permissions are required in order to listen for new versions of packages to apply automated updates to your applications.
+1. Plural-managed terraform state could have various credentials inside it
+2. SCM credentials are stored row-encrypted in our database (but can be revoked at any time).
+3. Service secrets are stored row-encrypted in our database (but you can use cloud-native secret managers if you prefer robustness over convenience).
 
-## GitHub
-
-When using the CLI or Cloud Shell, Plural will receive the following permissions:
-
-- Create GitHub repositories on your behalf
-- Commit changes to repositories that Plural has created
-
-Plural **does not** have access to repositories that have not been created by Plural.&#x20;
+Since you'll still need to create a small management cluster to attach to your cloud console, that will be what is bound any cloud creds for executing terraform, etc, and so you do not need to exchange any cloud credentials with Plural to use Plural Cloud.

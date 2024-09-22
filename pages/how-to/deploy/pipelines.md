@@ -146,7 +146,7 @@ A pipeline is triggered by binding a pipeline context to it.  To test, it can be
 
 1. Navigate to https://{your-console-domain}/cd/pipelines and click on the `cd-demo` row
 2. Click `Add Context` at the bottom of the dev stage
-3. Enter a json blob like `{"version": "<some-docker-tag>"}` to setup a new context.  The context should match `spec.configuration` from the PR Automation `cd-demo-pipeline` you created for this pipeline.
+3. Enter a json blob like `{"version": "0.1.0"}` to setup a new context (`0.1.0` is just another valid tag for our image).  The context should match `spec.configuration` from the PR Automation `cd-demo-pipeline` you created for this pipeline.
 
 You can also trigger the pipeline via CRD, wich can be done by writing a file to `bootstrap/cd-demo/context.yaml`:
 
@@ -160,7 +160,7 @@ spec:
     name: cd-demo
     namespace: infra
   context:
-    version: {{some-docker-tag}}
+    version: 0.1.0
 ```
 
 ## Use an Observer to Automate Pipeline Context Creation (EXTRA CREDIT)
