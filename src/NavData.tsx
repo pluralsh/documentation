@@ -102,34 +102,23 @@ const rootNavData: NavMenu = deepFreeze([
       },
       {
         href: '/how-to',
-        title: 'How To',
+        title: 'How To Use Plural',
         sections: [
           {
-            href: '/how-to/set-up',
-            title: 'Set Up',
-            sections: [
-              {
-                title: 'Plural CLI',
-                href: '/getting-started/quickstart',
-              },
-              {
-                title: 'Management Cluster',
-                // href: '/how-to/set-up/mgmt-cluster',
-                href: '/deployments/cli-quickstart',
-              },
-              {
-                title: 'Workload Cluster',
-                href: '/how-to/set-up/workload-cluster',
-              },
-              {
-                title: 'SCM Connection',
-                href: '/how-to/set-up/scm-connection',
-              },
-              {
-                title: 'Controllers',
-                href: '/how-to/set-up/controllers',
-              },
-            ],
+            title: 'Setting Up Your Management Cluster',
+            href: '/how-to/set-up/mgmt-cluster'
+          },
+          {
+            title: 'Integrate with your Source Control Provider',
+            href: '/how-to/set-up/scm-connection',
+          },
+          {
+            title: 'Set Up Your First Workload Cluster',
+            href: '/how-to/set-up/workload-cluster',
+          },
+          {
+            title: 'Set Up a Network Stack and other K8s Add-Ons',
+            href: '/how-to/set-up/controllers',
           },
         ],
       },

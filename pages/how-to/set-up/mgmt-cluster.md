@@ -3,121 +3,47 @@ title: Setting Up a New Management (MGMT) Cluster
 description: Using Plural CLI to Deploy a Management (MGMT) Kubernetes Cluster
 ---
 
-### Prerequisites
-[Plural CLI](/getting-started/quickstart)
+# Overview
 
-### Setup Repo and Deploy Resources
-Ensure your _[app.plural.sh](https://app.plural.sh/profile/me)_ User has `admin` permissions  
-Follow the onscreen prompts to setup the repo and deploy resources  
+Plural's architecture, described [here](/deployments/architecture) has two tiers:
 
-* The **Plural** CLI will create a new repository in the current directory
-  * If there are permission related repository creation constraints  
-    the repo can be cloned before running `plural` commands
+* Management Cluster - a single management plane that will oversee the core responsibilities of fleet management: CD, terraform management, dashboarding, etc.
+* Workload Cluster - a zoo of clusters you provision to run actual development and production workloads for your enterprise.
 
-* Use the provided **Plural** DNS Services for the Management (MGMT) Cluster
-  * When providing a domain name provide the _canonical_ name, e.g. how-to-plrl.onplural.sh
+To get started with Plural, you need to provision your management cluster. There are two paths for this:
+
+* Plural Cloud - a fully managed instance of the Plural Console.  We offer bother shared infrastructure hosting with usage limits and lower cost, or dedicated hosting which is more secure and enterprise-ready
+* Self-Hosted - deploy and manage yourself on your own cloud environment, and we've provided a seamless getting started experience with `plural up` to do this.
+
+## Plural Cloud (easiest)
+
+Plural Cloud is a fully managed solution for provisioning Plural's core management software.  It will host the Plural Console, alongside its git cache, underlying postgres database, and the kubernetes-agent-server api.  To get started, create an account on https://app.plural.sh and go through the process for setting up your Plural Cloud instance.
+
+There are two options, `shared` and `dedicated`.  
+* A `shared` instance can be created on a free trial but has a hard cap on 10 clusters to use to avoid overloading other tenants.  
+* `dedicated` cloud instances get a dedicated k8s cluster and database, and are built to scale effectively infinitely.  To use a `dedicated` instance, an enterprise plan is required, so please contact sales and we can get you set up as quickly as possible if that fits your use-case.
+
+The UI should guide you through the entire process, once your console is up, you'll be greated with a modal explaining how to finalize the onboarding.  You'll need to still create a small management cluster in your cloud to host the Plural operator and any cloud-specific secrets.  This is to ensure your cloud is fully secured and allow you to use Plural Cloud without exchanging root-level cloud permissions.  You'll do that by simply running:
 
 ```sh
-plural login
-plural up
+plural up --cloud
 ```
 
-# Troubleshooting
-### "Console failed to become ready"
-Sometimes the DNS Resolution can take longer than the expected five minutes  
-It's also possible the console services take a bit longer to become ready  
-```sh
-2024/07/29 12:31:03 Console failed to become ready after 5 minutes, you might want to inspect the resources in the plrl-console namespace
-```
-In this instance the images in the _`plrl-console`_ namespace  
-were taking a bit longer to download and initialize.  
-Once the services were _up_ in the cli, I was able to access the console url
+Since it doesn't require setup of ingress controllers, SSL certs, etc, it's usually a very repeatable process.
 
-### "Cannot list resources in the Kubernetes Dashboard"
-![alt text](/images/how-to/k8s-dash-403.png)
-This is expected and due to missing [RBAC Bindings](/deployments/dashboard#rbac) for the console users  
+{% callout severity="info" %}
+Another benefit of the `plural up` command is it bootstraps an entire GitOps repo for you, making it much easier to get started with production-ready infrastructure than having to hand-code it all yourself
+{% /callout %}
 
-##### Creating an RBAC Service
-* **Create an `rbac` dir in your MGMT repo 
-and add the desired [k8s yaml](https://github.com/pluralsh/documentation/blob/main/pages/deployments/dashboard.md)** 
-```yaml
-apiVersion: rbac.authorization.k8s.io/v1
-kind: ClusterRoleBinding
-metadata:
-  name: someones-binding
-roleRef:
-  apiGroup: rbac.authorization.k8s.io
-  kind: ClusterRole
-  name: cluster-admin
-subjects:
-# This will create a single binding for the someone@your.company.com user to the cluster-admin k8s role
-  - apiGroup: rbac.authorization.k8s.io
-    kind: User
-    name: someone@your.company.com
-# The following will bind the role to everyone in the `sre` group
-  - apiGroup
-    kind: Group
-    name: sre
-```
+## `plural up` (still pretty easy)
 
-* **In the  `./apps/services` dir in your MGMT repo**  
-  * Add a Service Deployment CRD  
-    This will create a service to sync the rbac bindings  
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
-metadata:
-  name: rbac
-spec:
-  clusterRef:
-    kind: Cluster
-    name: mgmt
-    namespace: infra
-  namespace: plrl-rbac
-  git:
-    folder: rbac
-    ref: main
-  repositoryRef:
-    kind: GitRepository
-    name: infra # can point to any git repository CRD
-    namespace: infra
-```
-* **Commit and push your changes**
-* **Apply the Service CRD to the MGMT Cluster**  
-`kubectl apply -f ./services/rbac.yaml`
+`plural up` is a single command to spawn our management cluster from zero in any of the big three clouds (AWS, Azure, GCP).  We have docs thoroughly going over the process to use it [here](/deployments/cli-quickstart).
 
-#### (Optionally) Make the RBAC Service Global
-**ℹ️ Services created with the Console UI need to have the CRDs applied manually**
-* **Navigate to `https://{your-console-domain}/cd/globalservices`**
+There are a few reasons you'd consider using this over Plural Cloud:
 
-* **Click the `New Global Service` button**  
-  * Service Name: Name of the Existing Service
-  * (Optionally) Add Cluster Tags
-  * Select the Cloud Provider Distributions to Propagate the changes
-* **Click `Continue`**  
-* **Copy and Modify the Generated YAML**  
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: GlobalService
-metadata:
-  name: global-rbac
-  namespace: infra
-spec:
-  serviceRef:
-    name: rbac # ⬅️ We need to update this with the service we created for rbac
-    namespace: infra
-```
-* **(Optionally) Save the Global Service YAML**
-  * Saving the global service yaml is not required once it is applied to the cluster
-  * I keep the applied yaml in `services/global-rbac.yaml` for reference
+* Security - you want to ensure Plural hosts absolutely no cloud-related permissions.  You can even follow our [sandboxing guide](/deployments/sandboxing) to remove all egress to Plural (this requires an enterprise license key)
+* Networking - you want to host the Plural Console on a private network entirely.  Plural Cloud currently is always publicly hosted.
+* Integration - Oftentimes resources needed by Plural are themselves hosted on private networks, for instance Git Repositories.  In that case, it's logistically easier to self-host and place it in an integrated network. 
+* Scaling - you want complete control as to how Plural Scales for your enterprise.  `dedicated` cloud hosting does this perfectly well too, but some orgs want their own hands on the wheel.
 
-### As a Last Resort, Use `kubectl`
-```sh
-plural wkspace kube-init
-```
-
-Use `kubectl` with the newly added kube context  
-The key namespaces to check are:   
-* plrl-console
-* plrl-deploy-operator
-* plrl-runtime
+Plural is meant to be architecturally simple and efficient.  Most organizations that do chose to self-host are shocked at how streamlined managing it is, especially compared to some more bloated CNCF projects, so it is a surprisingly viable way to manage the software if that is what your organization desires.
