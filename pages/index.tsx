@@ -7,14 +7,12 @@ import {
 } from 'react'
 
 import {
-  AppsIcon,
   DiscordIcon,
   GitPullIcon,
   IconFrame,
   MagicWandIcon,
   PadlockLockedIcon,
   SourcererHatIcon,
-  TerminalIcon,
   ToolsIcon,
 } from '@pluralsh/design-system'
 import Link, { type LinkProps } from 'next/link'
@@ -202,9 +200,9 @@ function Index() {
           <CardLink
             heading="Quickstart"
             icon={<MagicWandIcon />}
-            href="/getting-started/quickstart"
+            href="/how-to/set-up/mgmt-cluster"
           >
-            A guide to getting up and running.
+            A guide to setting up a cluster quickly 
           </CardLink>
           <CardLink
             heading="Security"
@@ -214,18 +212,11 @@ function Index() {
             What does Plural have access to?
           </CardLink>
           <CardLink
-            heading="Cloud Shell"
-            icon={<TerminalIcon />}
-            href="/getting-started/cloud-shell-quickstart"
+            heading="Guided tour"
+            icon={<GitPullIcon />}
+            href="/how-to"
           >
-            Setting up your first cluster in browser.
-          </CardLink>
-          <CardLink
-            heading="Application catalog"
-            icon={<AppsIcon />}
-            href="/applications"
-          >
-            Applications you can install with Plural.
+            A guided walkthrough of the majority of Plural's Fleet Management capabilties.
           </CardLink>
           <CardLink
             heading="Troubleshooting"
@@ -233,13 +224,6 @@ function Index() {
             href="/reference/troubleshooting"
           >
             Common issues or errors.
-          </CardLink>
-          <CardLink
-            heading="GitOps"
-            icon={<GitPullIcon />}
-            href="/getting-started/manage-git-repositories/setting-up-gitops"
-          >
-            Share and manage your Git repositories.
           </CardLink>
         </CardLinkGrid>
       </Section>
