@@ -101,6 +101,28 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        href: '/how-to',
+        title: 'How To Use Plural',
+        sections: [
+          {
+            title: 'Setting Up Your Management Cluster',
+            href: '/how-to/set-up/mgmt-cluster'
+          },
+          {
+            title: 'Integrate with your Source Control Provider',
+            href: '/how-to/set-up/scm-connection',
+          },
+          {
+            title: 'Set Up Your First Workload Cluster',
+            href: '/how-to/set-up/workload-cluster',
+          },
+          {
+            title: 'Set Up a Network Stack and other K8s Add-Ons',
+            href: '/how-to/set-up/controllers',
+          },
+        ],
+      },
+      {
         href: '/deployments/using-operator',
         title: 'Deploying Using the Plural Operator',
         sections: [
