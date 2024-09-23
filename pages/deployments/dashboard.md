@@ -55,7 +55,7 @@ We recommend leveraging a global service by placing your fleet-wide RBAC policy 
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
+kind: GlobalService
 metadata:
   name: rbac
 spec:
@@ -66,7 +66,7 @@ spec:
       ref: main
     repositoryRef:
       kind: GitRepository
-      name: infra # can point to any git repository CRD
+      name: infra # should point to a CRD that references the repo you're working in
       namespace: infra
 ```
 

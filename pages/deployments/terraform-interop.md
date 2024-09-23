@@ -3,7 +3,15 @@ title: Terraform Interop with Service Contexts
 description: Communicate data between terraform and kubernetes using Service Contexts
 ---
 
-A common and incredibly frustrating challenge with managing kubernetes, especially at scale, is sharing state between terraform and the common tools used to manage Kubernetes configuration like helm and kustomize. We've created a system called Service Contexts to facilitate this. At its core, it is simply named bundles of configuration that can be created via api (thus easily integrated with Terraform or Pulumi) and mounted to Plural services. Here's a simple example, involving setting up an IRSA role for external-dns:
+# Overview
+
+A common and incredibly frustrating challenge with managing kubernetes, especially at scale, is sharing state between terraform and the common tools used to manage Kubernetes configuration like helm and kustomize, or with other independent sections of terraform code. 
+
+We've created an API called Service Contexts to facilitate this. At its core, it is simply named bundles of configuration that can be created via api (thus easily integrated with Terraform or Pulumi) and mounted to Plural services, or imported as data resources in other stacks. This will guide you through how to leverage the api throughout your IAC Usage.
+
+## Defining a service context
+
+Here's a simple example, involving setting up an IRSA role for external-dns:
 
 ```tf
 module "assumable_role_externaldns" {
@@ -24,7 +32,24 @@ resource "plural_service_context" "externaldns" {
 }
 ```
 
-You could then attach it to an externaldns service like so:
+## Using in another Plural Terraform stack
+
+Refering a service context in another stack is simple:
+
+```tf
+data "plural_service_context "externaldns" {
+  name = "externaldns"
+}
+
+local {
+  # can wire it in wherever, this is just an example
+  external_dns_arn = data.plural_service_context.externaldns.configuration.roleArn 
+}
+```
+
+## Attaching to a Plural CD ServiceDeployment
+
+You can also attach it to an externaldns service like so:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
@@ -35,7 +60,7 @@ metadata:
 spec:
   namespace: external-dns
   git:
-    folder: helm-values
+    folder: helm
     ref: main
   repositoryRef:
     kind: GitRepository
@@ -46,11 +71,9 @@ spec:
   helm:
     version: '6.14.1'
     chart: external-dns
+    url: https://charts.bitnami.com/bitnami
     valuesFiles:
       - external-dns.yaml.liquid # we're using a multi-source service sourcing this values file from `helm-values/external-dns.yaml.liquid` in the infra repo above
-    repository:
-      namespace: infra
-      name: external-dns
   clusterRef:
     kind: Cluster
     name: target-cluster
@@ -61,15 +84,16 @@ spec:
 The `.liquid` extension on `external-dns.yaml.liquid` tells the deployment agent to attempt to template the values file, otherwise it will interpret it as plain yaml.
 {% /callout %}
 
-Then in `helm-values/external-dns.yaml.liquid` you could easily template in the role arn like so:
+Then in `helm/external-dns.yaml.liquid` you could easily template in the role arn like so:
 
 ```yaml
 serviceAccount:
   create: true
   annotations:
-    eks.amazonaws.com/role-arn: { { contexts.externaldns.roleArn } }
+    eks.amazonaws.com/role-arn: {{ contexts.externaldns.roleArn }}
 ```
 
 (You can of course layer on any additional externaldns configuration you'd like, we're only interested in the eks iam role attachment here)
 
-What this is doing is on each attempt to retemplate the service, we're pulling the current value of the context alongside the service and injecting it into the passed values file. This helps simplify the process of managing the disparate toolchains and their independent state systems and it also dramatically reduces the risk of drift throughout your infrastructure.
+
+Under the hood, on each attempt to retemplate the service, we're pulling the current value of the context alongside the service and injecting it into the passed values file. Ensuring your k8s configuration is always in sync with the desired state in the upstream cloud infrastructure.
