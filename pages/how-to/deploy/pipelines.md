@@ -80,6 +80,18 @@ spec:
     documentation: The version tag to use
 ```
 
+This PR Automation file should hopefully be self-descriptive, but if not, it's basically doing the following:
+
+* select the `bootstrap/cd-demo/{stage}.yaml` file (`context.pipeline.stage.name` is system defined when a pipeline spawns a pr automation), and make a single regex replacement on the `tag: .* # VERSION` line
+  * NB this `# VERSION` or similar comment based hack is useful for a lot of file operations in the PR Automation api, and if you're familiar with tools like Renovate, it's a similar workflow
+* It'll use a blob like `{"version": "..."}` as the PipelineContext, as defined in `spec.configuration` to template out the change
+* Will create a git commit with `spec.message` and a PR with title `spec.title`.
+* You can merge whenever and it'll sync in the new configuration for your service via our CD tooling.
+
+{% callout severity="info" %}
+Further on in the docs, we're going to create what's called a PipelineContext, that will simply be the json with fields defined in `spec.configuration`.  You can add contexts with a number of mechanisms, with one of the more elegant mechanisms being to use our Observer api.
+{% /callout %}
+
 ## Define Your Pipeline
 
 Now that those two resources are in-place, you should be able to define your pipeline:
