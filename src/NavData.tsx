@@ -94,7 +94,7 @@ const rootNavData: NavMenu = deepFreeze([
         sections: [
           {
             title: 'Setting Up Your Management Cluster',
-            href: '/how-to/set-up/mgmt-cluster'
+            href: '/how-to/set-up/mgmt-cluster',
           },
           {
             title: 'Integrate with your Source Control Provider',
@@ -109,7 +109,7 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/how-to/set-up/controllers',
           },
           {
-            title: "Set Up a Basic Self-Service Worklfow with PR Automations",
+            title: 'Set Up a Basic Self-Service Worklfow with PR Automations',
             href: '/how-to/deploy/pr-automation',
           },
           {
@@ -119,6 +119,32 @@ const rootNavData: NavMenu = deepFreeze([
           {
             title: 'Setup Your First Microservice Promotion Pipeline',
             href: '/how-to/deploy/pipelines',
+          },
+        ],
+      },
+      {
+        href: '/deployments/using-operator',
+        title: 'Deploying Using Plural Continuous Deployment',
+        sections: [
+          {
+            title: 'Architecture',
+            href: '/deployments/operator/architecture',
+          },
+          {
+            title: 'API Reference',
+            href: '/deployments/operator/api',
+          },
+          {
+            title: 'Git Services',
+            href: '/deployments/operator/git-service',
+          },
+          {
+            title: 'Helm Services',
+            href: '/deployments/operator/helm-service',
+          },
+          {
+            title: 'Global Services',
+            href: '/deployments/operator/global-service',
           },
         ],
       },
@@ -154,35 +180,9 @@ const rootNavData: NavMenu = deepFreeze([
             title: 'Auto-Cancellation',
             href: '/stacks/auto-cancellation',
           },
-        ],
-      },
-      {
-        href: '/deployments/using-operator',
-        title: 'Deploying Using the Plural Operator',
-        sections: [
           {
-            title: 'Architecture',
-            href: '/deployments/operator/architecture',
-          },
-          {
-            title: 'API Reference',
-            href: '/deployments/operator/api',
-          },
-          {
-            title: 'Git Services',
-            href: '/deployments/operator/git-service',
-          },
-          {
-            title: 'Helm Services',
-            href: '/deployments/operator/helm-service',
-          },
-          {
-            title: 'Global Services',
-            href: '/deployments/operator/global-service',
-          },
-          {
-            title: 'Defining Pipelines',
-            href: '/deployments/operator/pipeline',
+            href: '/deployments/terraform-interop',
+            title: 'Service Contexts',
           },
         ],
       },
@@ -195,7 +195,7 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/pr/crds',
           },
           {
-            title: "Testing PR Automations",
+            title: 'Testing PR Automations',
             href: '/deployments/pr/testing',
           },
           {
@@ -215,10 +215,6 @@ const rootNavData: NavMenu = deepFreeze([
       {
         href: '/deployments/templating',
         title: 'Service Templating',
-      },
-      {
-        href: '/deployments/terraform-interop',
-        title: 'Service Contexts and Terraform',
       },
       {
         href: '/deployments/notifications',

@@ -5,68 +5,11 @@ description: GitOps Management using the Plural Operator
 
 The Plural operator defines a set of CRDs that allow you to manage your deployments in a fully GitOps manner. The controller ultimately communicates with our core apis and acts effectively as a frontend to automate provisioning/deprovisioning the requisite resources. The CRD structures also imitate the patterns used by Flux and is interoperable with many Flux types (particularly those from its source controller), with modular distinct types for the various roles in deployments, e.g. git/helm repositories, clusters, and services.
 
-To illustrate the flexibility this model provides a very simple example to set up a helm multi-source deployment would look like this:
-
-```yaml
-# helm repository to use for the service
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: nginx
-  namespace: infra
-spec:
-  interval: 5m0s
-  url: https://kubernetes.github.io/ingress-nginx
----
-# cluster to deploy to
-apiVersion: deployments.plural.sh/v1alpha1
-kind: Cluster
-metadata:
-  name: k3s-test
-  namespace: infra
-spec:
-  handle: k3s-test
----
-apiVersion: deployments.plural.sh/v1alpha1
-kind: GitRepository
-metadata:
-  name: infra
-  namespace: infra
-spec:
-  url: git@github.com:some/repo.git # source repo for helm values
----
-apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
-metadata:
-  name: nginx-threes-test
-  namespace: infra
-spec:
-  namespace: ingress-nginx
-  name: ingress-nginx
-  git:
-    folder: helm-values
-    ref: main
-  repositoryRef:
-    kind: GitRepository
-    name: infra
-    namespace: infra
-  helm:
-    version: 4.4.x
-    chart: ingress-nginx
-    valuesFiles:
-      - ingress-nginx.yaml # values file sourced from the git repository
-    repository:
-      namespace: infra
-      name: nginx # referenced helm repository above
-  clusterRef:
-    kind: Cluster
-    name: k3s-test
-    namespace: infra
-```
+In general, Plural tries to be fully GitOps compliant, meaning virtually any write operation in the system can be realized via a CRD defined by our operator.  That ensures you always have full auditability and reproducibility for all changes executed in your kubernetes infrastructure.
 
 ## Full API Spec
 
-The full api spec can be found by looking through the go types [here](https://github.com/pluralsh/console/tree/master/controller/api/v1alpha1) (full docsite coming soon!)
+The full api spec can be found by looking through the go types [here](/deployments/operator/api).  You can also look at the code [here](https://github.com/pluralsh/console/tree/master/go/controller/api/v1alpha1).
 
 ## Read-Only vs Write resources
 

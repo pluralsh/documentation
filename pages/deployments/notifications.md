@@ -63,3 +63,41 @@ spec:
 ```
 
 Once those resources are configured, you should start to see events trickle in to whatever channel you've configured them against.
+
+## Supported Notification Events
+
+At the moment, a router will receive the following notification events:
+
+* `service.update`
+* `pipeline.update` 
+* `pr.create` 
+* `pr.close` 
+* `cluster.create`
+* `stack.run`
+
+We'll update this list as future events are defined.
+
+## Supported Notification Sink Types
+
+We currently support the following notification sink types:
+
+* `SLACK` - a Slack incoming webhook
+* `TEAMS` - a Microsoft Teams incoming webhook
+* `PLURAL` - in-app Plural Console notifications
+
+The `PLURAL` sink type is unique in that it pairs with the `bindings` attribute of the sink to control what users receive notifications.  For instance you could use:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: NotificationSink
+metadata:
+  name: sres
+  namespace: infra # can be any namespace you wish of course
+spec:
+  type: PLURAL
+  name: sres
+  bindings:
+  - groupName: sre
+```
+
+To only deliver in-app notifications to the `sre` group.  This doesn't work for external notification sinks because Console user groups are not meaningful constructs in Slack, Teams, etc.
