@@ -3,8 +3,8 @@ import merge from 'lodash/merge'
 
 import * as config from './config'
 import * as functions from './functions'
-import * as nodes from './nodes'
-import * as tags from './tags'
+import { nodes } from './nodes'
+import { tags } from './tags'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
 

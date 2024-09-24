@@ -48,6 +48,7 @@
     "graphql": "16.6.0",
     "honorable": "0.194.0",
     "honorable-theme-default": "0.77.0",
+    "htmlparser2": "9.1.0",
     "immer": "10.0.2",
     "js-yaml": "4.1.0",
     "lodash": "4.17.21",
