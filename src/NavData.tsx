@@ -219,8 +219,8 @@ const rootNavData: NavMenu = deepFreeze([
           {
             href: '/deployments/templating-filters',
             title: 'Supported Liquid Filters',
-          }
-        ]
+          },
+        ],
       },
       {
         href: '/deployments/notifications',
