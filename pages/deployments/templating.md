@@ -43,18 +43,7 @@ stringData:
 
 ## Available Functions
 
-Our code is open source, so you can reference the code to find the deinitive function list we support is defined here: https://github.com/pluralsh/polly/blob/main/template/liquid.go#L35
-
-That said there are a few good to know functions:
-
-* `b64enc` - encodes a string as base64
-* `b64dec` - decodes a string from base64
-* `to_json` - converts a map to json
-* `from_json` - parses a json map
-* `default` - uses a default value if the first argument is falsy, used like `{{ configuration.cluster.metadata.role_arn | default: "dummy-arn" }}`
-* `ternary` - returns one of two values depending on whether a condition is truthy
-
-Additionally, we support virtually all the functions in the Sprig library used by helm.  See the full documentation [here](https://masterminds.github.io/sprig/).
+You can find the list of all Liquid filter functions that we support [here](/deployments/templating-filters).
 
 ## End-to-End Example
 

@@ -201,6 +201,9 @@
     "path": "/deployments/pr/pipelines"
   },
   {
+    "path": "/deployments/pr/testing"
+  },
+  {
     "path": "/deployments/pr-automation"
   },
   {
@@ -220,6 +223,9 @@
   },
   {
     "path": "/deployments/stacks"
+  },
+  {
+    "path": "/deployments/templating-filters"
   },
   {
     "path": "/deployments/templating"
@@ -288,34 +294,22 @@
     "path": "/getting-started/video-cli-quickstart"
   },
   {
+    "path": "/how-to/deploy/microservice"
+  },
+  {
+    "path": "/how-to/deploy/pipelines"
+  },
+  {
+    "path": "/how-to/deploy/pr-automation"
+  },
+  {
     "path": "/how-to"
   },
   {
     "path": "/how-to/set-up/controllers"
   },
   {
-    "path": "/how-to/set-up"
-  },
-  {
     "path": "/how-to/set-up/mgmt-cluster"
-  },
-  {
-    "path": "/how-to/set-up/micro-service"
-  },
-  {
-    "path": "/how-to/set-up/pipelines"
-  },
-  {
-    "path": "/how-to/set-up/plural-cli"
-  },
-  {
-    "path": "/how-to/set-up/plural-cli"
-  },
-  {
-    "path": "/how-to/set-up/plural-console"
-  },
-  {
-    "path": "/how-to/set-up/pr-automation"
   },
   {
     "path": "/how-to/set-up/scm-connection"
@@ -399,9 +393,6 @@
     "path": "/operations/network-configuration"
   },
   {
-    "path": "/operations/pricing-calculator"
-  },
-  {
     "path": "/operations/security"
   },
   {
@@ -445,6 +436,12 @@
   },
   {
     "path": "/reference/troubleshooting"
+  },
+  {
+    "path": "/stacks/auto-cancellation"
+  },
+  {
+    "path": "/stacks/custom-stacks"
   },
   {
     "path": "/stacks/customize-runners"
