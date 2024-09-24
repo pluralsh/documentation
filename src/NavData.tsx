@@ -215,6 +215,12 @@ const rootNavData: NavMenu = deepFreeze([
       {
         href: '/deployments/templating',
         title: 'Service Templating',
+        sections: [
+          {
+            href: '/deployments/templating-filters',
+            title: 'Supported Liquid Filters',
+          }
+        ]
       },
       {
         href: '/deployments/notifications',
