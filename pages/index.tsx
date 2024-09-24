@@ -202,7 +202,7 @@ function Index() {
             icon={<MagicWandIcon />}
             href="/how-to/set-up/mgmt-cluster"
           >
-            A guide to setting up a cluster quickly 
+            A guide to setting up a cluster quickly
           </CardLink>
           <CardLink
             heading="Security"
@@ -216,7 +216,8 @@ function Index() {
             icon={<GitPullIcon />}
             href="/how-to"
           >
-            A guided walkthrough of the majority of Plural's Fleet Management capabilties.
+            A guided walkthrough of the majority of Plural's Fleet Management
+            capabilties.
           </CardLink>
           <CardLink
             heading="Troubleshooting"

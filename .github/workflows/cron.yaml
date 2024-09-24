@@ -1,10 +1,10 @@
-name: Refresh Operator Docs
+name: Refresh Docs
 on:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
-  gendocs:
+  operator-docs:
     runs-on: ubuntu-latest
     permissions:
       contents: 'write'
@@ -26,3 +26,22 @@ jobs:
         branch: docs-${{steps.date.outputs.date}}
         labels: release
         base: main
+  liquid-docs:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: 'write'
+      id-token: 'write'
+      pull-requests: 'write'
+    steps:
+      - uses: actions/checkout@v3
+      - run: make liquid-docs
+      - id: date
+        run: echo "date=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
+      - uses: peter-evans/create-pull-request@v5
+        with:
+          title: "docs: Update supported Liquid filters docs"
+          body: Automated pull request to regenerate supported Liquid filters docs.
+          commit-message: update supported Liquid filters docs
+          branch: docs-${{steps.date.outputs.date}}
+          labels: enhancement
+          base: main
