@@ -1,5 +1,13 @@
-/* Markdoc tags must be exported from this file to work with markdoc/nextjs plugin */
-/* Use this file to export your markdoc tags */
+import * as designSystemTags from '@pluralsh/design-system/dist/markdoc/tags'
 
-export * from '@pluralsh/design-system/dist/markdoc/tags'
-export { comment, head, script, link } from './nextjs.markdoc'
+import { htmlTag } from './htmlTag.markdoc'
+import { comment, head, link, script } from './nextjs.markdoc'
+
+export const tags = {
+  ...designSystemTags,
+  comment,
+  head,
+  script,
+  link,
+  'html-tag': htmlTag,
+}

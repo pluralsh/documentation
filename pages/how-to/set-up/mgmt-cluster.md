@@ -46,4 +46,4 @@ There are a few reasons you'd consider using this over Plural Cloud:
 * Integration - Oftentimes resources needed by Plural are themselves hosted on private networks, for instance Git Repositories.  In that case, it's logistically easier to self-host and place it in an integrated network. 
 * Scaling - you want complete control as to how Plural Scales for your enterprise.  `dedicated` cloud hosting does this perfectly well too, but some orgs want their own hands on the wheel.
 
-Plural is meant to be architecturally simple and efficient.  Most organizations that do chose to self-host are shocked at how streamlined managing it is, especially compared to some more bloated CNCF projects, so it is a surprisingly viable way to manage the software if that is what your organization desires.
+Plural is meant to be architecturally simple and efficient.  Most organizations that do choose to self-host are shocked at how streamlined managing it is, especially compared to some more bloated CNCF projects, so it is a surprisingly viable way to manage the software if that is what your organization desires.
