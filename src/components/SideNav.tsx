@@ -62,39 +62,39 @@ const KeyboardNavContext = createContext<{
   keyboardNavigable: true,
 })
 
-const StyledLink = styled(NextLink)<{ $desktop: boolean }>(
-  ({ $desktop, theme }) => ({
+const StyledLink = styled(NextLink as any)<{
+  $desktop: boolean
+}>(({ $desktop, theme }) => ({
+  display: 'flex',
+  gap: theme.spacing.small,
+  cursor: 'pointer',
+  flexGrow: 1,
+  flexShrink: 1,
+  margin: 0,
+  padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
+  ...theme.partials.text.body2,
+  textDecoration: 'none',
+  color: theme.colors['text-light'],
+  '.iconRight': {
     display: 'flex',
-    gap: theme.spacing.small,
-    cursor: 'pointer',
+    justifyContent: 'right',
     flexGrow: 1,
-    flexShrink: 1,
-    margin: 0,
-    padding: `${theme.spacing.xsmall}px ${theme.spacing.medium}px`,
-    ...theme.partials.text.body2,
-    textDecoration: 'none',
-    color: theme.colors['text-light'],
-    '.iconRight': {
-      display: 'flex',
-      justifyContent: 'right',
-      flexGrow: 1,
-    },
-    '&:hover': {
-      color: theme.colors.text,
-    },
-    '&:focus, &:focus-visible': {
-      outline: 'none',
-      boxShadow: 'none',
-    },
-    '&:focus-visible::after': {
-      borderStartStartRadius: theme.borderRadiuses.medium,
-      borderEndStartRadius: theme.borderRadiuses.medium,
-      borderStartEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
-      borderEndEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
-      ...theme.partials.focus.insetAbsolute,
-    },
-  })
-)
+  },
+  '&:hover': {
+    color: theme.colors.text,
+  },
+  '&:focus, &:focus-visible': {
+    outline: 'none',
+    boxShadow: 'none',
+  },
+  '&:focus-visible::after': {
+    borderStartStartRadius: theme.borderRadiuses.medium,
+    borderEndStartRadius: theme.borderRadiuses.medium,
+    borderStartEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
+    borderEndEndRadius: $desktop ? 0 : theme.borderRadiuses.medium,
+    ...theme.partials.focus.insetAbsolute,
+  },
+}))
 
 type LinkBaseProps = Partial<ComponentProps<typeof StyledLink>> & {
   iconLeft?: ReactElement
@@ -382,7 +382,7 @@ const SubSectionsList = styled(
         })}
       </ul>
     )
-  })
+  }) as any
 )(({ theme, indentLevel }) => ({
   margin: 0,
   padding: 0,

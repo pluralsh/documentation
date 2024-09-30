@@ -55,7 +55,7 @@ const ListItem = styled.li(() => ({
   listStyle: 'none',
 }))
 
-const StyledLink = styled(NextLink)<{ $active: boolean }>(
+const StyledLink = styled(NextLink as any)<{ $active: boolean }>(
   ({ theme, $active }) => ({
     position: 'relative',
     display: 'block',
