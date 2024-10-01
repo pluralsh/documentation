@@ -17,14 +17,14 @@ To get started with Plural, you need to provision your management cluster. There
 
 ## Plural Cloud (easiest)
 
-Plural Cloud is a fully managed solution for provisioning Plural's core management software.  It will host the Plural Console, alongside its git cache, underlying postgres database, and the kubernetes-agent-server api.  To get started, create an account on https://app.plural.sh and go through the process for setting up your Plural Cloud instance.
+Plural Cloud is a fully managed solution for provisioning Plural's core management software.  It will host the Plural Console, alongside its git cache, underlying postgres database, and the kubernetes-agent-server api.  To get started, create an account on <https://app.plural.sh> and go through the process for setting up your Plural Cloud instance.
 
 There are two options, `shared` and `dedicated`.  
 * A `shared` instance can be created on a free trial but has a hard cap on 10 clusters to use to avoid overloading other tenants.  
 * `dedicated` cloud instances get a dedicated k8s cluster and database, and are built to scale effectively infinitely.  To use a `dedicated` instance, an enterprise plan is required, so please contact sales and we can get you set up as quickly as possible if that fits your use-case.
 
 The UI should guide you through the entire process, once your console is up, you'll be greated with a modal explaining how to finalize the onboarding.  You'll need to still create a small management cluster in your cloud to host the Plural operator and any cloud-specific secrets.  This is to ensure your cloud is fully secured and allow you to use Plural Cloud without exchanging root-level cloud permissions.  You'll do that by simply running:
-
+a
 ```sh
 plural up --cloud
 ```
