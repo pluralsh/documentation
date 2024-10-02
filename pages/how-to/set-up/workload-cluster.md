@@ -1,6 +1,6 @@
 ---
-title: Setting Up a Your First Workload Cluster
-description: Use a Self-Service PR Automation to Provision Your first Workload Cluster
+title: Setting Up Your First Workload Cluster
+description: Using a self-service PR automation to provision your first workload cluster
 ---
 
 # Overview
@@ -37,7 +37,7 @@ Now that that PR Automation is configured, we should be able to spawn our cluste
 * **Enter the Name of the Branch to Create the PR**
 ![cluster-creator modal 1](/images/how-to/cluster-creator-modal-1.png)
 * **Click `Create`**
-  * Optionally [View The PR](https://github.com/pluralsh/plrl-how-to/pull/1) that was created
+  * Optionally view the PR that was created
 ![cluster-creator modal 2](/images/how-to/cluster-creator-modal-2.png)
 * **Merge the PR**
 

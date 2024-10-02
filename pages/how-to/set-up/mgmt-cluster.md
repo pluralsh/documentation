@@ -1,6 +1,6 @@
 ---
 title: Setting Up a New Management (MGMT) Cluster
-description: Using Plural CLI to Deploy a Management (MGMT) Kubernetes Cluster
+description: Using Plural CLI to deploy a management (MGMT) Kubernetes cluster
 ---
 
 # Overview

@@ -1,6 +1,6 @@
 ---
-title: Setting Up an Example Micro Service
-description: Deploying a basic Microservice to a cluster managed by Plural
+title: Setting Up an Example Microservice
+description: Deploying a basic microservice to a cluster managed by Plural
 ---
 
 # Overview
