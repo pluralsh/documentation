@@ -22,7 +22,7 @@ If it's not showing, navigate to the `apps` service, and you can filter on `PrAu
 
 ## **Create a Workload Cluster** 
 
-Now that that PR Automation is configured, we should be able to spawn our cluster seamlessly.  The steps are:
+Now that PR Automation is configured, we should be able to spawn our cluster seamlessly.  The steps are:
 
 * **Navigate to `https://{your-console-domain}/pr/automations`**  
 * **Click `Create a PR` on the `cluster-creator` Automation Row**  

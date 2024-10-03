@@ -52,7 +52,7 @@ spec:
     type: STRING
     documentation: the name of this blob store (if using s3, this would become an s3 bucket name)
     validation:
-      regex: "[a-z][a-z\-0-9]+"
+      regex: "[a-z][a-z-0-9]+"
   - name: type
     type: ENUM
     documentation: the type of blob storage to provision
