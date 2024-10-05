@@ -71,9 +71,13 @@ spec:
         tag: latest # VERSION
   clusterRef:
     kind: Cluster
-    name: plrl-how-to-workload-00-dev # replace this with whatever you might have named your dev cluster
+    name: YOUR_DEV_CLUSTER_NAME # replace this with whatever you might have named your dev cluster
     namespace: infra
 ```
+
+{% callout severity="warning" %}
+The `clusterRef` field on a service deployment is immutable.  If you happen to chose the wrong one, it's not a big deal, but you'll need to delete that ServiceDeployment CRD manually then let the underlying service recreate it from scratch.  This can be done in the Plural Kubernetes dashboard UI easily.
+{% /callout %}
 
 ## Push to Deploy
 
