@@ -14,7 +14,7 @@ Now that you have a management cluster and your SCM connected, you can test-out 
 This Guide will not work properly unless you've finished the tutorial [Integrate with your Source Control Provider](/how-to/set-up/scm-connection).
 {% /callout %}
 
-## Enable the `cluster-creator` PR Automation
+## Enable the cluster-creator PR Automation
 
 There should be a crd at `bootstrap/pr-automation/cluster-creator.yaml` which will create the PRA that drives this tutorial.  By default it references a `github` SCMConnection crd, you'll need to have created that fully, and eventually the operator will also create the PR Automation in our API, and it will be visible in the UI as well.
 

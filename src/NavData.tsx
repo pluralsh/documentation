@@ -97,6 +97,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/how-to/set-up/mgmt-cluster',
           },
           {
+            title: 'Setting Up Your Kubernetes Dashboard with RBAC',
+            href: '/how-to/set-up/rbac',
+          },
+          {
             title: 'Integrate with your Source Control Provider',
             href: '/how-to/set-up/scm-connection',
           },
