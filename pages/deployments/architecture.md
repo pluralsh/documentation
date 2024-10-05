@@ -5,7 +5,7 @@ description: Secure, Scalable Pull-Based Architecture
 
 ## Overview
 
-Plural CD is based on a scalable, secure, agent-based pull architecture. It doesn't require direct access to any of the clusters it deploys to, meaning it can manage workloads in any cloud, on-prem, on the edge, or even on a local laptop running KIND. Further since it doesn't require networking intensive kubernetes watch streams, central access to kubernetes, or relies on single-mastered operator control loops, it should scale to virtually any size kubernetes fleet. We also enhance your kubernetes setup with a auth proxy, allowing you to have full visibility to your workloads without compromising the network security of your setup or require the creation of complex multi-cloud networking setups.
+Plural CD is based on a scalable, secure, agent-based pull architecture. It doesn't require direct access to any of the clusters it deploys to, meaning it can manage workloads in any cloud, on-prem, on the edge, or even on a local laptop running KIND. Further since it doesn't require networking intensive kubernetes watch streams, central access to kubernetes, or rely on single-mastered operator control loops, it should scale to virtually any size kubernetes fleet. We also enhance your kubernetes setup with an auth proxy, allowing you to have full visibility to your workloads without compromising the network security of your setup or require the creation of complex multi-cloud networking setups.
 
 Here's a quick diagram of the setup:
 

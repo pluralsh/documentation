@@ -1,6 +1,6 @@
 ---
 title: Integrate with your Source Control Provider
-description: Set Up a SCM Connection in Plural to integrate with Github, GitLab, or BitBucket
+description: Setting up an SCM Connection in Plural to integrate with Github, GitLab, or BitBucket
 ---
 
 # Overview
@@ -69,6 +69,8 @@ git push
 
 {% callout severity="info" %}
 `plural up` by default creates an `apps` service syncing all subfolders of the `bootstrap` folder in the repo it creates.  Since we created this file in `bootstrap/pr-automation` that means that root service-of-services will sync it appropriately and we just need to `git push` to apply the change.
+
+You can also check this service in the console (CD > Services > apps) to see if the CRD was deployed successfully. You should see 10/10 components in "Running" state.
 {% /callout %}
 
 ## **Add an SCM Provider Webhook**

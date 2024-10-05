@@ -11,7 +11,7 @@ A very common problem a user will need to solve when setting up a new cluster is
 * DNS registration - you can use externaldns to automate listening for new hostname registrations in ingress resources and registering them with standard DNS services like route53
 * SSL Cert Management - the standard K8s approach to this is using Cert Manager.
 
-`plural up` gets you 90% of the way there out of the box, you'll just need to configure a few basic things.  We also provide a consolidated [runtime chart](https://github.com/pluralsh/bootstrap/tree/main/charts/runtime) that makes installing these in one swoop much easier, but you can also mix-and-match from the CNCF ecosystem as well based on your organizations requirements and preferences.
+`plural up` gets you 90% of the way there out of the box, you'll just need to configure a few basic things.  We provide a consolidated [runtime chart](https://github.com/pluralsh/bootstrap/tree/main/charts/runtime) that makes installing these in one swoop much easier, but you can also mix-and-match from the CNCF ecosystem as well based on your organizations requirements and preferences.
 
 The tooling you'll use here should also generalize to any other common runtime add-ons you might need to apply, which are all optimally managed via global services and if the templating is done well, will require a very small set of files to maintain.  Some of these concerns can be:
 
@@ -27,14 +27,14 @@ We're going to use our [runtime chart](https://github.com/pluralsh/bootstrap/tre
 First, let's create a global service for the runtime chart.  This will ensure it's installed on all clusters with a common tagset.  Writing this to `bootstrap/components/runtime.yaml`
 
 {% callout severity="info" %}
-The global services will all be written to a subfolder of `bootstrap`.  This is because `plural up` initializes a bootstrap service-of-services under that folder and so we can guarantee any file written there will be synced.  Sets of configuration that should be deployed independently and not to the mgmt cluster ought to live in their own folder structure, which we typically put under `services/**`. 
+The global services will all be written to a subfolder of `bootstrap`.  This is because `plural up` initializes a bootstrap service-of-services under that folder, so we can guarantee any file written there will be synced.  Sets of configuration that should be deployed independently and not to the mgmt cluster ought to live in their own folder structure, which we typically put under `services/**`. 
 
 *Changes will not be applied until they are pushed or merged to your main branch that the root `apps` service is listening to.*
 {% /callout %}
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
-kind: ServiceDeployment
+kind: GlobalService
 metadata:
   name: plrl-runtime
   namespace: infra
@@ -51,7 +51,7 @@ spec:
       name: infra # this should point to your `plural up` repo
       namespace: infra
     helm:
-      version: 4.4.x
+      version: x.x.x
       chart: runtime
       url: https://pluralsh.github.io/bootstrap
       valuesFiles:
@@ -73,7 +73,7 @@ external-dns:
 
   provider: aws
 
-  txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unqiue, to be the externaldns owner id
+  txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unique, to be the externaldns owner id
 
   policy: sync
   
@@ -83,16 +83,29 @@ external-dns:
   serviceAccount:
     annotations:
       eks.amazonaws.com/role-arn: {{ cluster.metadata.iam.external_dns }} # check terraform/modules/clusters/aws/plural.tf for where this is set
+  
+  {% if cluster.distro == "EKS" %}
+  ingress-nginx:
+    config:
+      compute-full-forwarded-for: 'true'
+      use-forwarded-headers: 'true'
+      use-proxy-protocol: 'true'
+  ingress-nginx-private:
+    config:
+      compute-full-forwarded-for: 'true'
+      use-forwarded-headers: 'true'
+      use-proxy-protocol: 'true'
+  {% endif %}
 ```
 
 You'll also want to modify `terraform/modules/clusters/aws/plural.tf` to add the `dns_zone` to the metadata, it will look something like this once complete:
 
 {% callout severity="info" %}
-Usually DNS is managed by systems that predate adoption of Plural and so we don't provision it by default.  We often recommend users create subdomains and register them w/ their root domain using an NS record to give their k8s cluster a sandboxed scope to register their dns entries in.
+Usually DNS is managed by systems that predate adoption of Plural, so we don't provision it by default.  We often recommend users create subdomains and register them w/ their root domain using an NS record to give their k8s cluster a sandboxed scope to register their dns entries in.
 {% /callout %}
 
 ```tf
-local {
+locals {
   dns_zone_name = <my-dns-zone> # you might also want to register this in the module, or likely register it elsewhere.  Just the name is sufficient.
 }
 
@@ -108,7 +121,7 @@ resource "plural_cluster" "this" {
     }
 
     metadata = jsonencode({
-      dns_zone = local.dns_zone_name
+      dns_zone = local.dns_zone_name # reference the local variable we created above
 
       iam = {
         load_balancer      = module.addons.gitops_metadata.aws_load_balancer_controller_iam_role_arn
@@ -172,7 +185,7 @@ spec:
     namespace: kube-system
     protect: true # protect prevents deletion in the UI, but also tunes the cluster drain behavior to leave this service in-place which can help w/ cleanup
     helm:
-      version: "x.x.x"
+      version: "1.8.2"
       chart: aws-load-balancer-controller
       url: https://aws.github.io/eks-charts
       valuesFiles:
@@ -216,6 +229,8 @@ spec:
   tags:
     role: workload
   template:
+    name: cert-manager
+    namespace: cert-manager
     repositoryRef:
       kind: GitRepository
       name: infra
@@ -249,7 +264,7 @@ securityContext:
 The `runtime` chart does provision a `letsencrypt-prod` issuer using the http01 ACME protocol, which usually requires no additional configuration. It might be suitable for your usecase, in which case the following is unnecessary.  We have noticed it's more prone to flaking vs dns01. Also it can only work on publicly accessible endpoints since it requires an HTTP call to a service hosted by your ingress.
 {% /callout %}
 
-This sets up IRSA auth to cert-manager to allow dns01 ACME cert validations to succeed using Route53.  You'll then want to create another service to spawn the cluster issuer resources cert-manager uses, you can do this by adding a file in `services/cluster-issuer/clusterissuer.yaml`:
+This sets up IRSA auth to cert-manager to allow dns01 ACME cert validations to succeed using Route53.  You'll then want to create another service to spawn the cluster issuer resources cert-manager uses, you can do this by adding a file at `services/cluster-issuer/clusterissuer.yaml`:
 
 ```yaml
 apiVersion: cert-manager.io/v1
@@ -258,7 +273,7 @@ metadata:
   name: dns01
 spec:
   acme:
-    server: https://acme-v02.api.letsencrypt.org/
+    server: https://acme-v02.api.letsencrypt.org/directory
     email: <your email> # replace here
 
     privateKeySecretRef:
@@ -305,7 +320,7 @@ git commit -m "setup our cluster runtime"
 git push
 ```
 
-or create a PR, approve it, and merge to have the global deploy to all your clusters.  
+or create a PR, approve it, and merge to have the global service deploy to all your clusters.  
 
 {% callout severity="info" %}
 You might need to wait a minute or two for the system to poll git and realize there's a new change.

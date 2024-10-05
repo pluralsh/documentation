@@ -1,6 +1,6 @@
 ---
-title: Setting Up a Your First Workload Cluster
-description: Use a Self-Service PR Automation to Provision Your first Workload Cluster
+title: Setting Up Your First Workload Cluster
+description: Using a self-service PR automation to provision your first workload cluster
 ---
 
 # Overview
@@ -14,7 +14,7 @@ Now that you have a management cluster and your SCM connected, you can test-out 
 This Guide will not work properly unless you've finished the tutorial [Integrate with your Source Control Provider](/how-to/set-up/scm-connection).
 {% /callout %}
 
-## Enable the `cluster-creator` PR Automation
+## Enable the cluster-creator PR Automation
 
 There should be a crd at `bootstrap/pr-automation/cluster-creator.yaml` which will create the PRA that drives this tutorial.  By default it references a `github` SCMConnection crd, you'll need to have created that fully, and eventually the operator will also create the PR Automation in our API, and it will be visible in the UI as well.
 
@@ -22,7 +22,7 @@ If it's not showing, navigate to the `apps` service, and you can filter on `PrAu
 
 ## **Create a Workload Cluster** 
 
-Now that that PR Automation is configured, we should be able to spawn our cluster seamlessly.  The steps are:
+Now that PR Automation is configured, we should be able to spawn our cluster seamlessly.  The steps are:
 
 * **Navigate to `https://{your-console-domain}/pr/automations`**  
 * **Click `Create a PR` on the `cluster-creator` Automation Row**  
@@ -37,7 +37,7 @@ Now that that PR Automation is configured, we should be able to spawn our cluste
 * **Enter the Name of the Branch to Create the PR**
 ![cluster-creator modal 1](/images/how-to/cluster-creator-modal-1.png)
 * **Click `Create`**
-  * Optionally [View The PR](https://github.com/pluralsh/plrl-how-to/pull/1) that was created
+  * Optionally view the PR that was created
 ![cluster-creator modal 2](/images/how-to/cluster-creator-modal-2.png)
 * **Merge the PR**
 

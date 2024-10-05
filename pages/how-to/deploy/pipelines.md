@@ -48,13 +48,17 @@ spec:
         tag: latest # VERSION
   clusterRef:
     kind: Cluster
-    name: plrl-how-to-workload-00-prod # replace this with whatever you might have named your dev cluster
+    name: REPLACE_ME_WITH_PROD_CLUSTER_NAME # replace this with whatever you might have named your prod cluster
     namespace: infra
 ```
 
+{% callout severity="warning" %}
+The `clusterRef` field on a service deployment is immutable.  If you happen to chose the wrong one, it's not a big deal, but you'll need to delete that ServiceDeployment CRD manually then let the underlying service recreate it from scratch.  This can be done in the Plural Kubernetes dashboard UI easily.
+{% /callout %}
+
 ## Setup The PR Automation to Perform Promotions
 
-We're going to use PR-based pipelining.  The main goal of this is to ensure all changes made to the system are recorded in Git for auditing and to ensure your setup is fully repeatable.  The PR Automation needed is relatively simple:
+We're going to use PR-based pipelining.  The main goal of this is to ensure all changes made to the system are recorded in Git for auditing and to ensure your setup is fully repeatable.  The PR Automation needed is relatively simple, you can write it to `bootstrap/cd-demo/pipeline-pr-automation.yaml`:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
@@ -94,7 +98,7 @@ Further on in the docs, we're going to create what's called a PipelineContext, t
 
 ## Define Your Pipeline
 
-Now that those two resources are in-place, you should be able to define your pipeline:
+Now that those two resources are in-place, you can define your pipeline in `bootstrap/cd-demo/pipeline.yaml`:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1

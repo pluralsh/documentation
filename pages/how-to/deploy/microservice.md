@@ -1,11 +1,11 @@
 ---
-title: Setting Up an Example Micro Service
-description: Deploying a basic Microservice to a cluster managed by Plural
+title: Setting Up an Example Microservice
+description: Deploying a basic microservice to a cluster managed by Plural
 ---
 
 # Overview
 
-Now that you have a few clusters up, you'll likely want to start deploying real workloads into them.  This will show you a relatively basic usecase with an example repo we've created at https://github.com/pluralsh/plrl-cd-demo.git.
+Now that you have a few clusters up, you'll likely want to start deploying real workloads into them.  This will show you a relatively basic use case with an example repo we've created [here](https://github.com/pluralsh/plrl-cd-demo.git).
 
 You will:
 * add a new git repository to your Plural Console
