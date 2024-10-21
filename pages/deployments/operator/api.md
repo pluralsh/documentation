@@ -23,6 +23,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [NamespaceCredentials](#namespacecredentials)
 - [NotificationRouter](#notificationrouter)
 - [NotificationSink](#notificationsink)
+- [OIDCProvider](#oidcprovider)
 - [ObservabilityProvider](#observabilityprovider)
 - [Observer](#observer)
 - [Pipeline](#pipeline)
@@ -1241,6 +1242,43 @@ _Appears in:_
 | `bindings` _[Binding](#binding) array_ | Bindings to determine users/groups to be notified for PLURAL sync types |  | Optional: {} <br /> |
 
 
+#### OIDCProvider
+
+
+
+OIDCProvider is the Schema for the OIDCProviders API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `OIDCProvider` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[OIDCProviderSpec](#oidcproviderspec)_ |  |  |  |
+
+
+#### OIDCProviderSpec
+
+
+
+OIDCProviderSpec defines the desired state of OIDCProvider
+
+
+
+_Appears in:_
+- [OIDCProvider](#oidcprovider)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name of this OIDCProvider. If not provided OIDCProvider's own name<br />from OIDCProvider.ObjectMeta will be used. |  | Optional: {} <br /> |
+| `description` _string_ | Description can be used to describe this OIDCProvider. |  | Optional: {} <br /> |
+| `redirectUris` _string array_ | RedirectUris is a list of custom run steps that will be executed as<br />part of the stack run. |  | Optional: {} <br /> |
+| `credentialsSecretRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ | CredentialsSecretRef is a local reference to the secret that contains OIDC provider credentials.<br />It will be created once OIDCProvider is created in the Console API.<br /><br />Secret will contain 2 keys:<br />- 'clientId'<br />- 'clientSecret' |  | Required: {} <br /> |
+
+
 #### ObservabilityProvider
 
 
@@ -2240,6 +2278,7 @@ _Appears in:_
 | `chart` _string_ | chart to use |  | Optional: {} <br /> |
 | `version` _string_ | chart version to use |  | Optional: {} <br /> |
 | `repository` _[NamespacedName](#namespacedname)_ | pointer to the FluxCD helm repository to use |  | Optional: {} <br /> |
+| `ignoreHooks` _boolean_ | whether you want to completely ignore any helm hooks when actualizing this service |  | Optional: {} <br /> |
 
 
 #### ServiceImport
