@@ -129,7 +129,7 @@ Now with the username in the name of this secret and the decrypted password, you
 
 ## Using the Database with other Plural Applications
 
-A common use case for spinning up a new Postgres database is using it with another Plural application, for example, Superset. To connect any application
+A common use case for spinning up a new Postgres database is using it with another Plural application, for example, Apache Superset. To connect any application
 to the Postgres database on the same Kubernetes cluster, use the following address:
 
 `{POSTGRES_POD_NAME}.postgres:5432`
