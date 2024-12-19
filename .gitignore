@@ -6,6 +6,7 @@
 .vercel
 yalc.lock
 .yalc/
+.vscode/
 node_modules/
 
 # dependencies
