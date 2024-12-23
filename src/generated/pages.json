@@ -33,6 +33,18 @@
     "path": "/adding-new-application/templating"
   },
   {
+    "path": "/ai/architecture"
+  },
+  {
+    "path": "/ai/cost"
+  },
+  {
+    "path": "/ai/overview"
+  },
+  {
+    "path": "/ai/setup"
+  },
+  {
     "path": "/applications"
   },
   {
@@ -67,6 +79,15 @@
   },
   {
     "path": "/archive/workspace-structure"
+  },
+  {
+    "path": "/catalog/contributing"
+  },
+  {
+    "path": "/catalog/creation"
+  },
+  {
+    "path": "/catalog/overview"
   },
   {
     "path": "/debugging/application-issues"
@@ -310,6 +331,9 @@
   },
   {
     "path": "/how-to/set-up/mgmt-cluster"
+  },
+  {
+    "path": "/how-to/set-up/rbac"
   },
   {
     "path": "/how-to/set-up/scm-connection"
