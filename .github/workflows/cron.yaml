@@ -1,10 +1,10 @@
-name: Refresh Docs
+name: Docs
 on:
   schedule:
     - cron: '0 0 * * *'
 
 jobs:
-  operator-docs:
+  sync-docs:
     runs-on: ubuntu-latest
     permissions:
       contents: 'write'
@@ -14,34 +14,19 @@ jobs:
     - name: 'Checkout'
       uses: actions/checkout@v3
     - name: 'Regenerate Docs'
-      run: make crd-docs
+      run: make sync-docs
     - id: date
       run: echo "date=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
     - name: Create Pull Request
       uses: peter-evans/create-pull-request@v5
       with:
-        title: Generating Api Docs for ${{steps.date.outputs.date}}
-        body: Automated pull request to regenerate api docs for the Plural operator
-        commit-message: Update docs for operator
+        title: "chore: API docs sync"
+        body: |
+          Automated pull request to sync docs for:
+          - Console operator
+          - Deployment operator
+          - Liquid filters
+        commit-message: sync docs
         branch: docs-${{steps.date.outputs.date}}
-        labels: release
+        labels: documentation
         base: main
-  liquid-docs:
-    runs-on: ubuntu-latest
-    permissions:
-      contents: 'write'
-      id-token: 'write'
-      pull-requests: 'write'
-    steps:
-      - uses: actions/checkout@v3
-      - run: make liquid-docs
-      - id: date
-        run: echo "date=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-      - uses: peter-evans/create-pull-request@v5
-        with:
-          title: "docs: Update supported Liquid filters docs"
-          body: Automated pull request to regenerate supported Liquid filters docs.
-          commit-message: update supported Liquid filters docs
-          branch: docs-${{steps.date.outputs.date}}
-          labels: enhancement
-          base: main
