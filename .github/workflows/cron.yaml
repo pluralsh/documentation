@@ -14,16 +14,18 @@ jobs:
       id-token: 'write'
       pull-requests: 'write'
     steps:
-    - name: 'Checkout'
-      uses: actions/checkout@v3
-    - name: 'Regenerate Docs'
+    - name: Checkout
+      uses: actions/checkout@v4
+    - name: Sync docs
       run: make sync-docs
-    - id: date
-      run: echo "date=$(date +%Y%m%d%H%M%S)" >> $GITHUB_OUTPUT
-    - name: Create Pull Request
+    - name: Save date
+      id: date
+      run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
+    - name: Create pull request
+      id: cpr
       uses: peter-evans/create-pull-request@v5
       with:
-        title: "chore: API docs sync"
+        title: "chore: API documentation sync"
         body: |
           Automated pull request to sync docs for:
           - Console operator
@@ -33,3 +35,15 @@ jobs:
         branch: docs-${{steps.date.outputs.date}}
         labels: documentation
         base: az-cli-docs # TODO main
+#    - name: Auto-approve
+#      if: steps.cpr.outputs.pull-request-operation == 'created'
+#      run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
+#      env:
+#        GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Enable pull request auto-merge
+      if: steps.cpr.outputs.pull-request-operation == 'created'
+      uses: peter-evans/enable-pull-request-automerge@v3
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        pull-request-number: ${{ steps.cpr.outputs.pull-request-number }}
+        merge-method: squash
