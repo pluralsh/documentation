@@ -3,6 +3,7 @@ title: Certifications
 description: What certifications does Plural have?
 ---
 
-Plural is currently a part of the **Cloud Native Computing Foundation** and **Cloud Native Landscape**, and is certified to be **GDPR-compliant**.
+Plural is currently a part of the **Cloud Native Computing Foundation** and **Cloud Native Landscape**. In addition we maintain the following certifications:
 
-We are currently working toward **SOC 2 compliance**.
+* **GDPR**
+* **SOC 2 Type 2**
