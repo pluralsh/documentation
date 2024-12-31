@@ -2,10 +2,6 @@ name: Docs
 on:
   schedule:
     - cron: '0 0 * * *'
-  push:
-    branches: [ main ] # TODO
-  pull_request:
-    branches: [ main ] # TODO
 jobs:
   sync-docs:
     runs-on: ubuntu-latest
@@ -34,7 +30,7 @@ jobs:
         commit-message: sync docs
         branch: docs-${{steps.date.outputs.date}}
         labels: documentation
-        base: az-cli-docs # TODO main
+        base: main
 #    - name: Auto-approve
 #      if: steps.cpr.outputs.pull-request-operation == 'created'
 #      run: gh pr review --approve "${{ steps.cpr.outputs.pull-request-number }}"
