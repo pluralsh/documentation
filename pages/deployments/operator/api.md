@@ -15,6 +15,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [ClusterRestoreTrigger](#clusterrestoretrigger)
 - [CustomStackRun](#customstackrun)
 - [DeploymentSettings](#deploymentsettings)
+- [GeneratedSecret](#generatedsecret)
 - [GitRepository](#gitrepository)
 - [GlobalService](#globalservice)
 - [HelmRepository](#helmrepository)
@@ -52,7 +53,9 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `model` _string_ | Model is the LLM model name to use. |  | Required: {} <br /> |
+| `model` _string_ | Model is the LLM model name to use. |  | Optional: {} <br /> |
+| `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `baseUrl` _string_ | A custom base url to use, for reimplementations of the same API scheme (for instance Together.ai uses the OpenAI API spec) |  | Optional: {} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: {} <br /> |
 
 
@@ -70,11 +73,55 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `enabled` _boolean_ | Enabled defines whether to enable the AI integration or not. | false | Optional: {} <br /> |
-| `provider` _[AiProvider](#aiprovider)_ | Provider defines which of the supported LLM providers should be used. | OPENAI | Enum: [OPENAI ANTHROPIC] <br />Optional: {} <br /> |
+| `provider` _[AiProvider](#aiprovider)_ | Provider defines which of the supported LLM providers should be used. | OPENAI | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: {} <br /> |
+| `toolProvider` _[AiProvider](#aiprovider)_ | Provider to use for tool calling, in case you want to use a different LLM more optimized to those tasks |  | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: {} <br /> |
 | `openAI` _[AIProviderSettings](#aiprovidersettings)_ | OpenAI holds the OpenAI provider configuration. |  | Optional: {} <br /> |
 | `anthropic` _[AIProviderSettings](#aiprovidersettings)_ | Anthropic holds the Anthropic provider configuration. |  | Optional: {} <br /> |
+| `ollama` _[OllamaSettings](#ollamasettings)_ | Ollama holds configuration for a self-hosted Ollama deployment, more details available at https://github.com/ollama/ollama |  | Optional: {} <br /> |
+| `azure` _[AzureOpenAISettings](#azureopenaisettings)_ | Azure holds configuration for using AzureOpenAI to generate LLM insights |  | Optional: {} <br /> |
+| `bedrock` _[BedrockSettings](#bedrocksettings)_ | Bedrock holds configuration for using AWS Bedrock to generate LLM insights |  | Optional: {} <br /> |
+| `vertex` _[VertexSettings](#vertexsettings)_ | Vertex holds configuration for using GCP VertexAI to generate LLM insights |  | Optional: {} <br /> |
 
 
+
+
+#### AzureOpenAISettings
+
+
+
+
+
+
+
+_Appears in:_
+- [AISettings](#aisettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `endpoint` _string_ | Your Azure OpenAI endpoint, should be formatted like: https://{endpoint}/openai/deployments/{deployment-id}" |  | Required: {} <br /> |
+| `apiVersion` _string_ | The azure openai Data plane - inference api version to use, defaults to 2024-10-01-preview or the latest available |  | Optional: {} <br /> |
+| `model` _string_ | The OpenAi Model you wish to use.  If not specified, Plural will provide a default |  | Optional: {} <br /> |
+| `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: {} <br /> |
+
+
+#### BedrockSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [AISettings](#aisettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `modelId` _string_ | The AWS Bedrock Model ID to use |  | Required: {} <br /> |
+| `toolModelId` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `accessKeyId` _string_ | An AWS Access Key ID to use, can also use IRSA to acquire credentials |  | Optional: {} <br /> |
+| `secretAccessKeyRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | An AWS Secret Access Key to use, can also use IRSA to acquire credentials |  | Optional: {} <br /> |
 
 
 #### Binding
@@ -695,11 +742,13 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `agentHelmValues` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | AgentHelmValues custom helm values to apply to all agents (useful for things like adding customary annotations/labels) |  | Optional: {} <br /> |
+| `managementRepo` _string_ | The root repo for setting up your infrastructure with Plural.  Usually this will be your `plural up repo` |  | Optional: {} <br /> |
 | `stacks` _[StackSettings](#stacksettings)_ | Stacks global configuration for stack execution |  | Optional: {} <br /> |
 | `bindings` _[DeploymentSettingsBindings](#deploymentsettingsbindings)_ | Bindings |  | Optional: {} <br /> |
 | `prometheusConnection` _[HTTPConnection](#httpconnection)_ | PrometheusConnection connection details for a prometheus instance to use |  | Optional: {} <br /> |
 | `lokiConnection` _[HTTPConnection](#httpconnection)_ | LokiConnection connection details for a loki instance to use |  | Optional: {} <br /> |
 | `ai` _[AISettings](#aisettings)_ | AI settings specifies a configuration for LLM provider clients |  | Optional: {} <br /> |
+| `logging` _[LoggingSettings](#loggingsettings)_ | Settings for connections to log aggregation datastores |  | Optional: {} <br /> |
 
 
 
@@ -720,6 +769,61 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `job` _[JobSpec](#jobspec)_ |  |  | Optional: {} <br /> |
+
+
+#### GeneratedSecret
+
+
+
+GeneratedSecret is the Schema for the generatedsecrets API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `GeneratedSecret` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[GeneratedSecretSpec](#generatedsecretspec)_ |  |  |  |
+
+
+#### GeneratedSecretDestination
+
+
+
+
+
+
+
+_Appears in:_
+- [GeneratedSecretSpec](#generatedsecretspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  |  |
+| `namespace` _string_ |  |  |  |
+
+
+#### GeneratedSecretSpec
+
+
+
+GeneratedSecretSpec defines the desired state of GeneratedSecret
+
+
+
+_Appears in:_
+- [GeneratedSecret](#generatedsecret)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `template` _object (keys:string, values:string)_ | Template secret data in string form. |  | Optional: {} <br /> |
+| `destinations` _[GeneratedSecretDestination](#generatedsecretdestination) array_ | Destinations describe name/namespace for the secrets. |  |  |
+| `configurationRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | ConfigurationRef is a secret reference which should contain data for secrets. |  | Optional: {} <br /> |
+
+
 
 
 #### GitHealth
@@ -845,6 +949,7 @@ _Appears in:_
 
 _Appears in:_
 - [DeploymentSettingsSpec](#deploymentsettingsspec)
+- [LoggingSettings](#loggingsettings)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
@@ -1077,6 +1182,24 @@ _Appears in:_
 | `serviceAccount` _string_ |  |  | Optional: {} <br />Type: string <br /> |
 | `raw` _[JobSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#jobspec-v1-batch)_ | Raw can be used if you'd rather define the job spec via straight Kubernetes manifest file. |  | Optional: {} <br /> |
 | `resources` _[ContainerResources](#containerresources)_ | Resource specification that overrides implicit container resources when containers are not directly configured. |  | Optional: {} <br /> |
+
+
+#### LoggingSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ |  |  | Optional: {} <br /> |
+| `driver` _[LogDriver](#logdriver)_ | The type of log aggregation solution you wish to use |  | Optional: {} <br /> |
+| `victoria` _[HTTPConnection](#httpconnection)_ | Configures a connection to victoria metrics |  | Optional: {} <br /> |
 
 
 #### ManagedNamespace
@@ -1545,6 +1668,25 @@ _Appears in:_
 | `git` _[ObserverGit](#observergit)_ |  |  | Optional: {} <br /> |
 
 
+#### OllamaSettings
+
+
+
+Settings for configuring a self-hosted Ollama LLM, more details at https://github.com/ollama/ollama
+
+
+
+_Appears in:_
+- [AISettings](#aisettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | URL is the url this model is queryable on |  | Required: {} <br /> |
+| `model` _string_ | Model is the Ollama model to use when querying the /chat api |  | Required: {} <br /> |
+| `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the contents of a HTTP Authorization header<br />to send to your ollama api in case authorization is required (eg for an instance hosted on a public network) |  | Optional: {} <br /> |
+
+
 #### Pipeline
 
 
@@ -1805,6 +1947,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `regex` _string_ | A regex to match string-valued configuration items |  | Optional: {} <br /> |
 | `json` _boolean_ | Whether the string value is supposed to be json-encoded |  | Optional: {} <br /> |
+| `uniqBy` _[PrAutomationUniqBy](#prautomationuniqby)_ | How to determine uniquenss for this field |  | Optional: {} <br /> |
 
 
 #### PrAutomationConfirmation
@@ -1877,7 +2020,7 @@ _Appears in:_
 | `icon` _string_ | An icon url to annotate this pr automation |  | Optional: {} <br /> |
 | `darkIcon` _string_ | An darkmode icon url to annotate this pr automation |  | Optional: {} <br /> |
 | `documentation` _string_ | Documentation ... |  | Optional: {} <br /> |
-| `identifier` _string_ | Identifier is a string referencing the repository, i.e. for GitHub it would be "<organization>/<repositoryName>" |  | Optional: {} <br /> |
+| `identifier` _string_ | Identifier is a string referencing the repository, i.e. for GitHub it would be "organization/repositoryName" |  | Optional: {} <br /> |
 | `message` _string_ | Message the commit message this pr will incorporate |  | Optional: {} <br /> |
 | `name` _string_ | Name name of the automation in the console api (defaults to metadata.name) |  | Optional: {} <br /> |
 | `title` _string_ | Title the title of the generated pr |  | Optional: {} <br /> |
@@ -1886,6 +2029,7 @@ _Appears in:_
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef the repository this automation uses. |  | Optional: {} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef the service this PR acts on. |  | Optional: {} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef the project this automation belongs to. |  | Optional: {} <br /> |
+| `catalogRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | CatalogRef the catalog this automation will belong to |  | Optional: {} <br /> |
 | `bindings` _[PrAutomationBindings](#prautomationbindings)_ | Bindings contain read and write policies of pr automation |  | Optional: {} <br /> |
 | `configuration` _[PrAutomationConfiguration](#prautomationconfiguration) array_ | Configuration self-service configuration for the UI wizard generating this PR |  | Optional: {} <br /> |
 | `confirmation` _[PrAutomationConfirmation](#prautomationconfirmation)_ | Additional details to verify all prerequisites are satisfied before generating this pr |  | Optional: {} <br /> |
@@ -1948,6 +2092,22 @@ _Appears in:_
 | `context` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | Context is a [PrAutomation] configuration context |  | Optional: {} <br /> |
 
 
+#### PrAutomationUniqBy
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationConfigurationValidation](#prautomationconfigurationvalidation)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `scope` _[ValidationUniqScope](#validationuniqscope)_ |  |  | Enum: [PROJECT CLUSTER] <br />Required: {} <br /> |
+
+
 #### PrAutomationUpdateConfiguration
 
 
@@ -1964,6 +2124,7 @@ _Appears in:_
 | `files` _string array_ | Files to update |  | Optional: {} <br /> |
 | `matchStrategy` _[MatchStrategy](#matchstrategy)_ | MatchStrategy, see enum for behavior |  | Optional: {} <br /> |
 | `regexReplacements` _[RegexReplacement](#regexreplacement) array_ | Full regex + replacement structs in case there is different behavior per regex |  | Optional: {} <br /> |
+| `yamlOverlays` _[YamlOverlay](#yamloverlay) array_ | Replacement via overlaying a yaml structure on an existing yaml file |  | Optional: {} <br /> |
 | `regexes` _string array_ | The regexes to apply on each file |  | Optional: {} <br /> |
 | `replaceTemplate` _string_ | The template to use when replacing a regex |  | Optional: {} <br /> |
 | `yq` _string_ | (Unused so far) |  | Optional: {} <br /> |
@@ -2350,6 +2511,7 @@ _Appears in:_
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Optional: {} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Required: {} <br /> |
 | `configurationRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | ConfigurationRef is a secret reference which should contain service configuration. |  | Optional: {} <br /> |
+| `configuration` _object (keys:string, values:string)_ | Configuration is a set of non-secret configuration to apply for lightweight templating of manifests in this service |  | Optional: {} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this cluster |  | Optional: {} <br /> |
 | `dependencies` _[ServiceDependency](#servicedependency) array_ | Dependencies contain dependent services |  | Optional: {} <br /> |
 | `contexts` _string array_ | Contexts contain dependent service context names |  | Optional: {} <br /> |
@@ -2577,6 +2739,7 @@ _Appears in:_
 
 _Appears in:_
 - [ClusterStatus](#clusterstatus)
+- [GeneratedSecretStatus](#generatedsecretstatus)
 - [GitRepositoryStatus](#gitrepositorystatus)
 - [ServiceStatus](#servicestatus)
 
@@ -2636,5 +2799,45 @@ TaintEffect is the effect for a Kubernetes taint.
 _Appears in:_
 - [Taint](#taint)
 
+
+
+#### VertexSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [AISettings](#aisettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `model` _string_ | The Vertex AI model to use |  | Optional: {} <br /> |
+| `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `project` _string_ | The GCP project you'll be using |  | Required: {} <br /> |
+| `location` _string_ | The GCP region Vertex is queried from |  | Required: {} <br /> |
+| `endpoint` _string_ | A custom endpoint for self-deployed models |  | Optional: {} <br /> |
+| `serviceAccountJsonSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | An Service Account json file stored w/in a kubernetes secret to use for authentication to GCP |  | Optional: {} <br /> |
+
+
+#### YamlOverlay
+
+
+
+YamlOverlay ...
+
+
+
+_Appears in:_
+- [PrAutomationUpdateConfiguration](#prautomationupdateconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `file` _string_ | the file to execute the overlay on |  | Required: {} <br /> |
+| `yaml` _string_ | the (possibly templated) yaml to use as the overlayed yaml blob written to the file |  | Required: {} <br /> |
+| `templated` _boolean_ | Whether you want to apply templating to the yaml blob before overlaying |  | Optional: {} <br /> |
+| `listMerge` _[ListMerge](#listmerge)_ | How you want list merge to be performed, defaults to OVERWRITE |  | Enum: [OVERWRITE APPEND] <br />Optional: {} <br /> |
 
 

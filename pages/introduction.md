@@ -15,7 +15,26 @@ Plural is a unified cloud orchestrator for the management of Kubernetes at scale
 
 In addition, we support a robust, enterprise-ready [Architecture](/deployments/architecture). This uses a separation of management cluster and an agent w/in each workload cluster to achieve scalability and enhanced security to compensate for the risks caused by introducing a Single-Pane-of-Glass to Kubernetes.  The agent can only communicate to the management cluster via egress networking, and executes all write operations with local credentials, removing the need for the management cluster to be a repository of global credentials.  If you want to learn more about the nuts-and-bolts feel free to visit our [Architecture Page](/deployments/architecture).
 
-## Plural Open Source Marketplace
+## Plural AI
 
-We also maintain a catalog of open source applications like Airbyte, Airflow, etc. that can be deployed to kubernetes on most major clouds.  We're in progress to merging that experience with our modernized Fleet Management platform, but if you're interested in any of them, we're happy to support them in the context of a commercial plan.
+Plural integrates heavily with LLMs to enable complex automation within the realm of GitOps ordinary deterministic methods struggle to get right.  This includes:
+
+* running root cause analysis on failing kubernetes services, using a hand-tailored evidence graph Plural extracts from its own fleet control plane
+* using AI troubleshooting insights to autogenerate fix prs by introspecting Plural's own GitOps and IaC engines
+* using AI code generation to generate PRs for scaling recommendations from our Kubecost integration
+* "Explain with AI" and chat feature to explain any complex kubernetes object in the system to reduce Platform engineering support burden from app developers still new to kubernetes.
+
+The goal of Plural's AI implementation is not to shoehorn LLMs into every infrastructure workflow, which is not just misguided but actually dangerous.  Instead, we're trying to automate all the mindless gruntwork that comes with infrastructure, like troubleshooting well-known bugs, fixing YAML typos, and explaining the details of well-known, established technology like Kubernetes.  This is the sort of thing that wastes precious engineering time, and bogs down enterprises trying to build serious developer platforms.
+
+You can read more about it under [Plural AI](/ai/overview).
+
+## Plural Service Catalog
+
+We also maintain a catalog of open source applications like Airbyte, Airflow, etc. that can be deployed to kubernetes on most major clouds.  The entire infrastructure is extensible and recreatable as users and software vendors as well.  
+
+You can also define your own internal catalogs and vendors can share catalogs of their own software. It is meant to be a standard interface to support developer self-service for virtually any infrastructure provisioning workflow.
+
+The full docs are available under [Service Catalog](/catalog/overview).
+
+
 

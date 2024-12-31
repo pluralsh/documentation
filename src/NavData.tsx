@@ -243,249 +243,40 @@ const rootNavData: NavMenu = deepFreeze([
     ],
   },
   {
-    title: 'Plural Open Source Marketplace',
+    title: 'Plural AI',
     sections: [
       {
-        href: '/getting-started/marketplace',
-        title: 'Getting Started',
-        sections: [
-          {
-            title: 'Quickstart with our CLI',
-            href: '/getting-started/quickstart',
-          },
-          {
-            href: '/getting-started/cloud-shell-quickstart',
-            title: 'Quickstart from your Browser',
-          },
-          {
-            href: '/getting-started/admin-console',
-            title: 'Installing Plural Console',
-          },
-          {
-            href: '/getting-started/understanding-upgrades',
-            title: 'Understanding Application Upgrades',
-          },
-        ],
+        href: '/ai/overview',
+        title: 'What is Plural AI?',
       },
       {
-        href: '/operations/clusters',
-        title: 'Cluster Management',
-        sections: [
-          {
-            title: 'Configure my Cluster',
-            href: '/operations/cluster-configuration',
-          },
-          {
-            href: '/operations/uninstall',
-            title: 'Destroy the Cluster Safely',
-          },
-          {
-            href: '/operations/cost-management',
-            title: 'Optimize Cluster Costs',
-          },
-          {
-            title: 'Create Multiple Plural Clusters',
-            href: '/operations/auth-access-control/identity-and-installations/service-accounts',
-          },
-        ],
+        href: '/ai/setup',
+        title: 'Setting Up Plural AI',
       },
       {
-        href: '/operations/applications',
-        title: 'Application Management',
-        sections: [
-          {
-            href: '/operations/managing-applications/add-application-to-cluster',
-            title: 'Add an Application to a Cluster',
-          },
-          {
-            href: '/operations/managing-applications/add-users-to-application',
-            title: 'Add Users to an Application',
-          },
-          {
-            href: '/operations/managing-applications/update-application',
-            title: 'Update an Application',
-          },
-          {
-            href: '/operations/managing-applications/delete-application',
-            title: 'Delete an Application',
-          },
-          {
-            href: '/operations/managing-applications/bounce-application',
-            title: 'Bounce an Application',
-          },
-          {
-            href: '/operations/managing-applications/connect-application-db',
-            title: 'Connect to Application DB',
-          },
-          {
-            href: '/operations/managing-applications/credentials-non-oidc',
-            title: 'Find Credentials for non-OIDC applications',
-          },
-          {
-            href: '/operations/managing-applications/customize-application',
-            title: 'Customize an Application',
-          },
-          {
-            href: '/adding-new-application/getting-started-with-runbooks',
-            title: 'Create an Application Runbook',
-            sections: [
-              {
-                href: '/adding-new-application/getting-started-with-runbooks/runbook-xml',
-                title: '  XML Runbooks',
-              },
-              {
-                href: '/adding-new-application/getting-started-with-runbooks/runbook-yaml',
-                title: '  YAML Runbooks',
-              },
-            ],
-          },
-        ],
+        href: '/ai/architecture',
+        title: 'How Plural AI Works',
       },
       {
-        title: 'Sharing your Plural Repository',
-        href: '/getting-started/manage-git-repositories/sharing-git-repositories',
+        href: '/ai/cost',
+        title: 'How Much Will Plural AI Cost',
+      },
+    ],
+  },
+  {
+    title: 'Service Catalog',
+    sections: [
+      {
+        href: '/catalog/overview',
+        title: 'Overview',
       },
       {
-        title: 'Reference',
-        href: '/reference',
-        sections: [
-          {
-            title: 'Cloud Provider CLI Setup',
-            href: '/reference/configuring-cloud-provider',
-          },
-          {
-            title: 'Common Errors',
-            href: '/reference/troubleshooting',
-          },
-          {
-            title: 'Handling Partial Deployments',
-            href: '/reference/partial-installation',
-          },
-          {
-            href: '/getting-started/manage-git-repositories',
-            title: 'Manage Git Repositories',
-            sections: [
-              {
-                href: '/getting-started/manage-git-repositories/setting-up-gitops',
-                title: 'Setting Up GitOps',
-              },
-              {
-                href: '/getting-started/manage-git-repositories/workspace-encryption',
-                title: 'Workspace Encryption Guide',
-              },
-            ],
-          },
-          {
-            href: '/getting-started/manage-git-repositories/your-plural-workspace',
-            title: 'Plural Workspace Layout',
-          },
-          {
-            title: 'API / Developer Tools',
-            href: '/reference/api',
-            sections: [
-              {
-                href: '/reference/api/plural-api',
-                title: 'Plural API',
-              },
-              {
-                title: 'Console API',
-                href: '/reference/api/console-api',
-              },
-            ],
-          },
-          {
-            title: 'CLI Command Reference',
-            href: '/reference/cli-reference',
-          },
-          {
-            href: '/adding-new-application/plural-custom-resources',
-            title: 'Plural Custom Resources',
-          },
-          {
-            href: '/adding-new-application/module-library',
-            title: 'Module Library',
-          },
-        ],
+        href: '/catalog/creation',
+        title: 'Creating Your Own Catalog',
       },
       {
-        href: '/operations/advanced-operations',
-        title: 'Advanced Operations',
-        sections: [
-          {
-            href: '/operations/network-configuration',
-            title: 'Configure your Network',
-          },
-          {
-            href: '/operations/dns-setup',
-            title: 'Set up Third Party DNS',
-            sections: [
-              {
-                href: '/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console',
-                title: 'Creating a DNS Zone in Console',
-              },
-            ],
-          },
-          {
-            href: '/operations/auth-access-control/api-tokens',
-            title: 'Create Persistent API Tokens',
-          },
-        ],
-      },
-      {
-        href: '/debugging',
-        title: 'Debugging',
-        sections: [
-          {
-            title: 'Debug issues on your Plural Cluster',
-            href: '/debugging/application-issues',
-          },
-          {
-            href: '/debugging/health-checks',
-            title: '  Health Checks',
-          },
-          {
-            href: '/debugging/proxies',
-            title: 'Proxies',
-          },
-          {
-            href: '/debugging/logs',
-            title: 'Logs',
-          },
-        ],
-      },
-      {
-        href: '/adding-new-application',
-        title: 'Contribute a New Application to the Plural Catalog',
-        sections: [
-          {
-            href: '/adding-new-application/background-app-install',
-            title: 'Background on Application Installations',
-          },
-          {
-            href: '/adding-new-application/plural-artifact-structure',
-            title: 'Plural Artifact Structure',
-          },
-          {
-            href: '/adding-new-application/templating',
-            title: 'Plural Artifact Templating',
-          },
-          {
-            href: '/adding-new-application/guide',
-            title: 'Guide on Creating a New Application Artifact',
-          },
-          {
-            href: '/adding-new-application/publishing',
-            title: 'Guide on Publishing a Plural Artifact',
-          },
-          {
-            href: '/adding-new-application/plural-custom-resources',
-            title: 'Plural Custom Resources',
-          },
-          {
-            href: '/adding-new-application/module-library',
-            title: 'Module Library',
-          },
-        ],
+        href: '/catalog/contributing',
+        title: 'Contributing to the Mainline Plural Catalog',
       },
     ],
   },
