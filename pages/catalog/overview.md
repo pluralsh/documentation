@@ -22,4 +22,4 @@ Plural accomplishes this via our Catalog feature, which allows [PR Automations](
 
 To see this all in action in provisioning a relatively complex application in [Dagster](https://dagster.io/), feel free to browse our live demo video on Youtube of our GenAI integration:
 
-{% embed url="https://youtu.be/5D6myZ7sm2k" aspectRatio="16 / 9" /%}
+{% embed url="https://youtu.be/vinOy376SKE" aspectRatio="16 / 9" /%}

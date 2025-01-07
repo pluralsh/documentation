@@ -22,4 +22,4 @@ In particular, Plural AI has a few differentiators to its approach:
 
 To see this all in action, feel free to browse our live demo video on Youtube of our GenAI integration:
 
-{% embed url="https://youtu.be/LxurfPikps8" aspectRatio="16 / 9" /%}
+{% embed url="https://youtu.be/ef9AuG78W_A" aspectRatio="16 / 9" /%}
