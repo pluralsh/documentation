@@ -51,7 +51,7 @@ subjects:
     name: michael@example.com
 ```
 
-To add the specific user `michael@example.com` identified by that email to the RBAC rules.
+To add the specific user `michael@example.com` identified by that email to the RBAC rules. For the purposes of this tutorial you will need to manually add the user to the Group created above by navigating to Settings > User Managment > Groups going to https://{you-console-instance}/settings/user-management/groups. Find the Edit Members tab in the group and add your member. 
 
 ## Define a GlobalService to sync the rbac fleet-wide
 
