@@ -54,9 +54,9 @@ Once the connection is created in the UI we can reference it with a CRD instance
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ScmConnection
 metadata:
-  name: github
+  name: plural
 spec:
-  name: github
+  name: plural
   type: GITHUB
 ```
 
