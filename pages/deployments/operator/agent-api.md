@@ -313,6 +313,7 @@ _Appears in:_
 | `kubecostServiceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  |  |
 | `kubecostPort` _integer_ |  |  | Optional: \{\} <br /> |
 | `recommendationThreshold` _string_ | RecommendationThreshold float value for example: `1.2 or 0.001` |  |  |
+| `recommendationsSettings` _[RecommendationsSettings](#recommendationssettings)_ |  |  | Optional: \{\} <br /> |
 
 
 #### MetricsAggregate
@@ -387,6 +388,23 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `aws` _[AWSProviderCredentials](#awsprovidercredentials)_ | AWS defines attributes required to auth with AWS API. |  | Optional: \{\} <br /> |
+
+
+#### RecommendationsSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [KubecostExtractorSpec](#kubecostextractorspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `excludeNamespaces` _string array_ |  |  |  |
+| `requireAnnotations` _object (keys:string, values:string)_ |  |  |  |
 
 
 #### Status
