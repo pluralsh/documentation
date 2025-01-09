@@ -35,7 +35,7 @@ metadata:
   name: cd-demo
 spec:
   url: https://github.com/pluralsh/plrl-cd-demo.git
-  scmConnectionRef:
+  connectionRef:
     name: plural
     namespace: infra
 ```
