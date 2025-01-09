@@ -35,8 +35,8 @@ metadata:
   name: cd-demo
 spec:
   url: https://github.com/pluralsh/plrl-cd-demo.git
-  scmConnectionRef:
-    name: github
+  connectionRef:
+    name: plural
     namespace: infra
 ```
 
@@ -78,6 +78,43 @@ spec:
 {% callout severity="warning" %}
 The `clusterRef` field on a service deployment is immutable.  If you happen to chose the wrong one, it's not a big deal, but you'll need to delete that ServiceDeployment CRD manually then let the underlying service recreate it from scratch.  This can be done in the Plural Kubernetes dashboard UI easily.
 {% /callout %}
+
+You will also need to add the `dns_zone` field to the `plural cluster metadata` in `plural.tf`. Set the `dns_zone = "dev.plural.sh"`.
+
+```yaml
+resource "plural_cluster" "this" {
+    handle = var.cluster
+    name   = var.cluster
+    tags   = {
+        fleet = var.fleet
+        tier = var.tier
+        role = "workload"
+    }
+
+    metadata = jsonencode({
+        iam = {
+          load_balancer = module.addons.gitops_metadata.aws_load_balancer_controller_iam_role_arn
+          cluster_autoscaler = module.addons.gitops_metadata.cluster_autoscaler_iam_role_arn
+          external_dns = module.externaldns_irsa_role.iam_role_arn
+        }
+        dns_zone = "dev.plural.sh"   # <- make sure to add this field 
+    })
+
+    kubeconfig = {
+      host                   = module.eks.cluster_endpoint
+      cluster_ca_certificate = base64decode(module.eks.cluster_certificate_authority_data)
+      token                  = data.aws_eks_cluster_auth.cluster.token
+    }
+
+    depends_on = [ 
+      module.vpc,
+      module.addons,
+      module.ebs_csi_irsa_role, 
+      module.vpc_cni_irsa_role, 
+      module.externaldns_irsa_role 
+    ]
+}
+```
 
 ## Push to Deploy
 
