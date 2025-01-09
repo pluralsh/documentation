@@ -2275,16 +2275,6 @@ _Implementation_: `github.com/huandu/xstrings.ToSnakeCase`
 
 _Implementation_: `github.com/Masterminds/sprig/v3.sortAlpha`
 
-##  `split`
-
-
-
-
-
-
-
-_Implementation_: `github.com/Masterminds/sprig/v3.split`
-
 ##  `splitList`
 
 
