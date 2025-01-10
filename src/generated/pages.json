@@ -195,6 +195,9 @@
     "path": "/deployments/operations"
   },
   {
+    "path": "/deployments/operator/agent-api"
+  },
+  {
     "path": "/deployments/operator/api"
   },
   {

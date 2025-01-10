@@ -60,7 +60,7 @@ spec:
 
 Notice this is expecting a `helm/runtime.yaml.liquid` file.  This would look something like:
 
-```yaml
+```yaml {% process=false %}
 plural-certmanager-webhook:
   enabled: false
 
