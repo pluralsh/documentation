@@ -170,7 +170,7 @@ export const MainLink = styled.a(({ theme }) => ({
 
 const PageHeaderLinks = styled(({ ...props }) => (
   <div {...props}>
-    <MainLink href="https://plural.sh/marketplace">Marketplace</MainLink>
+    {/* <MainLink href="https://plural.sh/marketplace">Marketplace</MainLink> */}
     <MainLink href="https://plural.sh/community">Community</MainLink>
   </div>
 ))(({ theme }) => ({
