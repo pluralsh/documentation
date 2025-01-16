@@ -127,16 +127,16 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
+        title: 'API Reference',
+        href: '/deployments/operator/api',
+      },
+      {
         href: '/deployments/using-operator',
         title: 'Deploying Using Plural Continuous Deployment',
         sections: [
           {
             title: 'Architecture',
             href: '/deployments/operator/architecture',
-          },
-          {
-            title: 'API Reference',
-            href: '/deployments/operator/api',
           },
           {
             title: 'Git Services',
