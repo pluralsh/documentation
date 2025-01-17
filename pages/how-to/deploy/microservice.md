@@ -36,7 +36,7 @@ metadata:
 spec:
   url: https://github.com/pluralsh/plrl-cd-demo.git
   scmConnectionRef:
-    name: github
+    name: plural
     namespace: infra
 ```
 
