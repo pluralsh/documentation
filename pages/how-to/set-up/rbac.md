@@ -28,7 +28,11 @@ subjects:
     name: sre
 ```
 
+{% callout severity="info" %}
 This role references the `sre` group in the Plural Console, which you can also configure to sync with your upstream identity provider or SSO.  For the purposes of the walkthrough, you can also manually create that group by navigating to Settings > User Management > Groups or going to https://{you-console-instance}/settings/user-management/groups
+
+For the purposes of this tutorial you will need to manually add user(s) to the Group created above by navigating to Settings > User Managment > Groups going to https://{you-console-instance}/settings/user-management/groups. Find the Edit Members tab in the group and add your member(s). 
+{% /callout %}
 
 {% callout severity="info" %}
 Plural uses a Kubernetes concept called [Impersonation](https://kubernetes.io/docs/reference/access-authn-authz/authentication/#user-impersonation) to authenticate into an end cluster's API server with an identity that looks exactly like the current users' Plural Console identity.  The primary benefit of this is it allows you to mirror your SSO straight into kubernetes itself, rather than deal with cloud-specific authorization complexity.
@@ -51,7 +55,7 @@ subjects:
     name: michael@example.com
 ```
 
-To add the specific user `michael@example.com` identified by that email to the RBAC rules. For the purposes of this tutorial you will need to manually add the user to the Group created above by navigating to Settings > User Managment > Groups going to https://{you-console-instance}/settings/user-management/groups. Find the Edit Members tab in the group and add your member. 
+To add the specific user `michael@example.com` identified by that email to the RBAC rules.
 
 ## Define a GlobalService to sync the rbac fleet-wide
 
