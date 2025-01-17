@@ -20,11 +20,11 @@ The tooling you'll use here should also generalize to any other common runtime a
 * setting up security tooling like trivy or kubescape in your cluster
 * setting up cost management tooling like kubecost 
 
-## Setting Up The Runtime Chart
+## Setting Up A Network Stack
 
-We're going to use our [runtime chart](https://github.com/pluralsh/bootstrap/tree/main/charts/runtime) for now, but the technique can generalize to any other helm chart as well, so if you want to mix and match, feel free to simply use this as inspiration.  
+We're going to use externaldns and ingress nginx for now, but the technique can generalize to any other helm chart as well, so if you want to mix and match, feel free to simply use this as inspiration.  
 
-First, let's create a global service for the runtime chart.  This will ensure it's installed on all clusters with a common tagset.  Writing this to `bootstrap/components/runtime.yaml`
+First, let's create a global service for the external-dns chart.  This will ensure it's installed on all clusters with a common tagset.  Writing this to `bootstrap/components/externaldns.yaml`
 
 {% callout severity="info" %}
 The global services will all be written to a subfolder of `bootstrap`.  This is because `plural up` initializes a bootstrap service-of-services under that folder, so we can guarantee any file written there will be synced.  Sets of configuration that should be deployed independently and not to the mgmt cluster ought to live in their own folder structure, which we typically put under `services/**`. 
@@ -36,7 +36,7 @@ The global services will all be written to a subfolder of `bootstrap`.  This is 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GlobalService
 metadata:
-  name: plrl-runtime
+  name: externaldns
   namespace: infra
 spec:
   tags:
@@ -51,52 +51,131 @@ spec:
       name: infra # this should point to your `plural up` repo
       namespace: infra
     helm:
-      version: x.x.x
-      chart: runtime
-      url: https://pluralsh.github.io/bootstrap
+      version: 8.3.8
+      chart: externaldns
+      url: oci://registry-1.docker.io/bitnamicharts
       valuesFiles:
-      - runtime.yaml.liquid
+      - externaldns.yaml.liquid
 ```
 
-Notice this is expecting a `helm/runtime.yaml.liquid` file.  This would look something like:
+Notice this is expecting a `helm/externaldns.yaml.liquid` file.  This would look something like:
 
 ```yaml {% process=false %}
-plural-certmanager-webhook:
-  enabled: false
+enabled: true
 
-ownerEmail: <your-email>
+provider: aws
 
-external-dns:
-  enabled: true
+txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unique, to be the externaldns owner id
 
-  logLevel: debug
+policy: sync
 
-  provider: aws
+domainFilters:
+- {{ cluster.metadata.dns_zone }} # check terraform/modules/clusters/aws/plural.tf for where this is set
 
-  txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unique, to be the externaldns owner id
-
-  policy: sync
-  
-  domainFilters:
-  - {{ cluster.metadata.dns_zone }} # check terraform/modules/clusters/aws/plural.tf for where this is set
-
-  serviceAccount:
-    annotations:
-      eks.amazonaws.com/role-arn: {{ cluster.metadata.iam.external_dns }} # check terraform/modules/clusters/aws/plural.tf for where this is set
-  
-  {% if cluster.distro == "EKS" %}
-  ingress-nginx:
-    config:
-      compute-full-forwarded-for: 'true'
-      use-forwarded-headers: 'true'
-      use-proxy-protocol: 'true'
-  ingress-nginx-private:
-    config:
-      compute-full-forwarded-for: 'true'
-      use-forwarded-headers: 'true'
-      use-proxy-protocol: 'true'
-  {% endif %}
+serviceAccount:
+  annotations:
+    eks.amazonaws.com/role-arn: {{ cluster.metadata.iam.external_dns }} # check terraform/modules/clusters/aws/plural.tf for where this is set
 ```
+
+Second let's install ingress-nginx, first by defining another global service at `bootstrap/components/ingress-nginx.yaml`
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: GlobalService
+metadata:
+  name: ingress-nginx
+  namespace: infra
+spec:
+  tags:
+    role: workload
+  template:
+    name: runtime
+    namespace: plural-runtime # note this for later
+    git:
+      ref: main
+      folder: helm
+    repositoryRef:
+      name: infra # this should point to your `plural up` repo
+      namespace: infra
+    helm:
+      version: 8.3.8
+      chart: ingress-nginx
+      url: https://kubernetes.github.io/ingress-nginx
+      valuesFiles:
+      - ingress-nginx.yaml.liquid
+```
+
+This will also pair with a yaml values file at `helm/ingress-nginx.yaml.liquid` like so:
+
+```yaml
+controller:
+  controller:
+    image:
+      digest: null
+      digestChroot: null
+    admissionWebhooks:
+      enabled: false
+    service:
+      annotations:
+        service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+        service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+        service.beta.kubernetes.io/aws-load-balancer-type: external
+        service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+        service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
+    config:
+      worker-shutdown-timeout: 240s
+      proxy-body-size: '0'
+      proxy-read-timeout: '3600'
+      proxy-send-timeout: '3600'
+      log-format-escape-json: "true"
+      log-format-upstream: '{"msec":"$msec","connection":"$connection","connection_requests":"$connection_requests","pid":"$pid","request_id":"$request_id","request_length":"$request_length","remote_addr":"$remote_addr","remote_user":"$remote_user","remote_port":"$remote_port","time_local":"$time_local","time_iso8601":"$time_iso8601","request":"$request","request_uri":"$request_uri","args":"$args","status":"$status","body_bytes_sent":"$body_bytes_sent","bytes_sent":"$bytes_sent","http_referer":"$http_referer","http_user_agent":"$http_user_agent","http_x_forwarded_for":"$http_x_forwarded_for","http_host":"$http_host","server_name":"$server_name","request_time":"$request_time","upstream":"$upstream_addr","upstream_connect_time":"$upstream_connect_time","upstream_header_time":"$upstream_header_time","upstream_response_time":"$upstream_response_time","upstream_response_length":"$upstream_response_length","upstream_cache_status":"$upstream_cache_status","ssl_protocol":"$ssl_protocol","ssl_cipher":"$ssl_cipher","scheme":"$scheme","request_method":"$request_method","server_protocol":"$server_protocol","pipe":"$pipe","gzip_ratio":"$gzip_ratio","http_cf_ray":"$http_cf_ray"}'
+    resources:
+      requests:
+        cpu: 100m
+        memory: 250Mi
+    topologySpreadConstraints:
+    - maxSkew: 1
+      topologyKey: topology.kubernetes.io/zone
+      whenUnsatisfiable: DoNotSchedule
+      labelSelector:
+        matchLabels:
+          app.kubernetes.io/instance: ingress-nginx
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 11
+      targetCPUUtilizationPercentage: ""
+      targetMemoryUtilizationPercentage: 95
+      behavior:
+        scaleDown:
+          stabilizationWindowSeconds: 300
+          policies:
+          - type: Pods
+            value: 1
+            periodSeconds: 180
+        scaleUp:
+          stabilizationWindowSeconds: 300
+          policies:
+          - type: Pods
+            value: 2
+            periodSeconds: 60
+    metrics:
+      enabled: true
+      service:
+        annotations:
+          prometheus.io/scrape: "true"
+          prometheus.io/port: "10254"
+          prometheus.io/path: "/metrics"
+          prometheus.io/scheme: http
+      serviceMonitor:
+        enabled: false
+      prometheusRule:
+        enabled: false
+```
+
+This is a tad verbose but is mostly just adding some nice defaults to productionize your setup and ensure a NLB is used in AWS.
 
 You'll also want to modify `terraform/modules/clusters/aws/plural.tf` to add the `dns_zone` to the metadata, it will look something like this once complete:
 
