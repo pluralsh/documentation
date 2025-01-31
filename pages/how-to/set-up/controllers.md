@@ -109,70 +109,69 @@ This will also pair with a yaml values file at `helm/ingress-nginx.yaml.liquid` 
 
 ```yaml
 controller:
-  controller:
-    image:
-      digest: null
-      digestChroot: null
-    admissionWebhooks:
-      enabled: false
+  image:
+    digest: null
+    digestChroot: null
+  admissionWebhooks:
+    enabled: false
+  service:
+    annotations:
+      service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
+      service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
+      service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
+      service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
+      service.beta.kubernetes.io/aws-load-balancer-type: external
+      service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
+      service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
+  config:
+    worker-shutdown-timeout: 240s
+    proxy-body-size: '0'
+    proxy-read-timeout: '3600'
+    proxy-send-timeout: '3600'
+    log-format-escape-json: "true"
+    log-format-upstream: '{"msec":"$msec","connection":"$connection","connection_requests":"$connection_requests","pid":"$pid","request_id":"$request_id","request_length":"$request_length","remote_addr":"$remote_addr","remote_user":"$remote_user","remote_port":"$remote_port","time_local":"$time_local","time_iso8601":"$time_iso8601","request":"$request","request_uri":"$request_uri","args":"$args","status":"$status","body_bytes_sent":"$body_bytes_sent","bytes_sent":"$bytes_sent","http_referer":"$http_referer","http_user_agent":"$http_user_agent","http_x_forwarded_for":"$http_x_forwarded_for","http_host":"$http_host","server_name":"$server_name","request_time":"$request_time","upstream":"$upstream_addr","upstream_connect_time":"$upstream_connect_time","upstream_header_time":"$upstream_header_time","upstream_response_time":"$upstream_response_time","upstream_response_length":"$upstream_response_length","upstream_cache_status":"$upstream_cache_status","ssl_protocol":"$ssl_protocol","ssl_cipher":"$ssl_cipher","scheme":"$scheme","request_method":"$request_method","server_protocol":"$server_protocol","pipe":"$pipe","gzip_ratio":"$gzip_ratio","http_cf_ray":"$http_cf_ray"}'
+  resources:
+    requests:
+      cpu: 100m
+      memory: 250Mi
+  topologySpreadConstraints:
+  - maxSkew: 1
+    topologyKey: topology.kubernetes.io/zone
+    whenUnsatisfiable: DoNotSchedule
+    labelSelector:
+      matchLabels:
+        app.kubernetes.io/instance: ingress-nginx
+  autoscaling:
+    enabled: true
+    minReplicas: 2
+    maxReplicas: 11
+    targetCPUUtilizationPercentage: ""
+    targetMemoryUtilizationPercentage: 95
+    behavior:
+      scaleDown:
+        stabilizationWindowSeconds: 300
+        policies:
+        - type: Pods
+          value: 1
+          periodSeconds: 180
+      scaleUp:
+        stabilizationWindowSeconds: 300
+        policies:
+        - type: Pods
+          value: 2
+          periodSeconds: 60
+  metrics:
+    enabled: true
     service:
       annotations:
-        service.beta.kubernetes.io/aws-load-balancer-scheme: internet-facing
-        service.beta.kubernetes.io/azure-load-balancer-health-probe-request-path: /healthz
-        service.beta.kubernetes.io/aws-load-balancer-backend-protocol: tcp
-        service.beta.kubernetes.io/aws-load-balancer-cross-zone-load-balancing-enabled: 'true'
-        service.beta.kubernetes.io/aws-load-balancer-type: external
-        service.beta.kubernetes.io/aws-load-balancer-nlb-target-type: ip
-        service.beta.kubernetes.io/aws-load-balancer-connection-idle-timeout: '3600'
-    config:
-      worker-shutdown-timeout: 240s
-      proxy-body-size: '0'
-      proxy-read-timeout: '3600'
-      proxy-send-timeout: '3600'
-      log-format-escape-json: "true"
-      log-format-upstream: '{"msec":"$msec","connection":"$connection","connection_requests":"$connection_requests","pid":"$pid","request_id":"$request_id","request_length":"$request_length","remote_addr":"$remote_addr","remote_user":"$remote_user","remote_port":"$remote_port","time_local":"$time_local","time_iso8601":"$time_iso8601","request":"$request","request_uri":"$request_uri","args":"$args","status":"$status","body_bytes_sent":"$body_bytes_sent","bytes_sent":"$bytes_sent","http_referer":"$http_referer","http_user_agent":"$http_user_agent","http_x_forwarded_for":"$http_x_forwarded_for","http_host":"$http_host","server_name":"$server_name","request_time":"$request_time","upstream":"$upstream_addr","upstream_connect_time":"$upstream_connect_time","upstream_header_time":"$upstream_header_time","upstream_response_time":"$upstream_response_time","upstream_response_length":"$upstream_response_length","upstream_cache_status":"$upstream_cache_status","ssl_protocol":"$ssl_protocol","ssl_cipher":"$ssl_cipher","scheme":"$scheme","request_method":"$request_method","server_protocol":"$server_protocol","pipe":"$pipe","gzip_ratio":"$gzip_ratio","http_cf_ray":"$http_cf_ray"}'
-    resources:
-      requests:
-        cpu: 100m
-        memory: 250Mi
-    topologySpreadConstraints:
-    - maxSkew: 1
-      topologyKey: topology.kubernetes.io/zone
-      whenUnsatisfiable: DoNotSchedule
-      labelSelector:
-        matchLabels:
-          app.kubernetes.io/instance: ingress-nginx
-    autoscaling:
-      enabled: true
-      minReplicas: 2
-      maxReplicas: 11
-      targetCPUUtilizationPercentage: ""
-      targetMemoryUtilizationPercentage: 95
-      behavior:
-        scaleDown:
-          stabilizationWindowSeconds: 300
-          policies:
-          - type: Pods
-            value: 1
-            periodSeconds: 180
-        scaleUp:
-          stabilizationWindowSeconds: 300
-          policies:
-          - type: Pods
-            value: 2
-            periodSeconds: 60
-    metrics:
-      enabled: true
-      service:
-        annotations:
-          prometheus.io/scrape: "true"
-          prometheus.io/port: "10254"
-          prometheus.io/path: "/metrics"
-          prometheus.io/scheme: http
-      serviceMonitor:
-        enabled: false
-      prometheusRule:
-        enabled: false
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "10254"
+        prometheus.io/path: "/metrics"
+        prometheus.io/scheme: http
+    serviceMonitor:
+      enabled: false
+    prometheusRule:
+      enabled: false
 ```
 
 This is a tad verbose but is mostly just adding some nice defaults to productionize your setup and ensure a NLB is used in AWS.
