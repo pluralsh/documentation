@@ -61,12 +61,12 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/deployments/architecture',
           },
           {
-            href: '/deployments/existing-cluster',
-            title: 'Set Up on your own Cluster',
-          },
-          {
             title: 'Quickstart with our CLI',
             href: '/deployments/cli-quickstart',
+          },
+          {
+            href: '/deployments/existing-cluster',
+            title: 'Set Up on your own Cluster',
           },
           {
             href: '/deployments/advanced-configuration',
