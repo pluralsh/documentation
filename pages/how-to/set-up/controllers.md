@@ -36,14 +36,14 @@ The global services will all be written to a subfolder of `bootstrap`.  This is 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GlobalService
 metadata:
-  name: externaldns
+  name: external-dns
   namespace: infra
 spec:
   tags:
     role: workload
   template:
-    name: runtime
-    namespace: plural-runtime # note this for later
+    name: external-dns
+    namespace: external-dns # note this for later
     git:
       ref: main
       folder: helm
