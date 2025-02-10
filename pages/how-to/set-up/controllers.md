@@ -52,20 +52,20 @@ spec:
       namespace: infra
     helm:
       version: 8.3.8
-      chart: externaldns
+      chart: external-dns
       url: oci://registry-1.docker.io/bitnamicharts
       valuesFiles:
-      - externaldns.yaml.liquid
+      - external-dns.yaml.liquid
 ```
 
-Notice this is expecting a `helm/externaldns.yaml.liquid` file.  This would look something like:
+Notice this is expecting a `helm/external-dns.yaml.liquid` file.  This would look something like:
 
 ```yaml {% process=false %}
 enabled: true
 
 provider: aws
 
-txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unique, to be the externaldns owner id
+txtOwnerId: plrl-{{ cluster.handle }} # templating in the cluster handle, which is unique, to be the external-dns owner id
 
 policy: sync
 
