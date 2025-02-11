@@ -126,12 +126,3 @@ spec:
 
 You can then add additional values configuration using the `values` field of a helm service, or convert it to a multi-source service and source values files directly from git.
 
-## Configure Console Upgrades
-
-You can also configure automatic upgrades in the global settings page for deployments under `/cd/settings/auto-upgrade`. It will ask you to copy in the values file then if it all looks correct, will create a service against our upstream helm chart with those values as overrides. The ui should look something like this:
-
-![](/assets/deployments/auto-upgrade.png)
-
-You can then go to the service it creates at any time to tweak the values as you might need.
-
-You can also self-manage the chart to control your own upgrade cadence. We recommend you use our self-management though to simplify this process and ensure you are constantly up-to-date.
