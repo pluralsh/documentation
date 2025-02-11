@@ -89,13 +89,12 @@ spec:
   tags:
     role: workload
   template:
-    name: runtime
-    namespace: plural-runtime # note this for later
+    namespace: ingress-nginx
     git:
       ref: main
       folder: helm
     repositoryRef:
-      name: infra # this should point to your `plural up` repo
+      name: infra # if you check in `bootstrap/setup.yaml` you should find the custom resource this points to
       namespace: infra
     helm:
       version: 8.3.8
