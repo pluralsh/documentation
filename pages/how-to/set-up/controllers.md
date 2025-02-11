@@ -97,7 +97,7 @@ spec:
       name: infra # if you check in `bootstrap/setup.yaml` you should find the custom resource this points to
       namespace: infra
     helm:
-      version: 8.3.8
+      version: x.x.x
       chart: ingress-nginx
       url: https://kubernetes.github.io/ingress-nginx
       valuesFiles:
