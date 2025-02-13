@@ -3799,6 +3799,7 @@ export type RootQueryType = {
   invoices?: Maybe<InvoiceConnection>;
   keyBackup?: Maybe<KeyBackup>;
   keyBackups?: Maybe<KeyBackupConnection>;
+  licenseKey?: Maybe<Scalars['String']['output']>;
   loginMethod?: Maybe<LoginMethodResponse>;
   loginMetrics?: Maybe<Array<Maybe<GeoMetric>>>;
   me?: Maybe<User>;
