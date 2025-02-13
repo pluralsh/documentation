@@ -153,13 +153,9 @@ const rootNavData: NavMenu = deepFreeze([
         ],
       },
       {
-        href: '/stacks/',
-        title: 'Iac Management with Stacks',
+        href: '/deployments/stacks/',
+        title: 'IaC Management with Stacks',
         sections: [
-          {
-            title: 'Overview',
-            href: '/stacks/overview',
-          },
           {
             title: 'Customizing Stack Runners',
             href: '/stacks/customize-runners',
