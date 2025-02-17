@@ -1,38 +1,5 @@
 [
   {
-    "path": "/adding-new-application/background-app-install"
-  },
-  {
-    "path": "/adding-new-application/getting-started-with-runbooks"
-  },
-  {
-    "path": "/adding-new-application/getting-started-with-runbooks/runbook-xml"
-  },
-  {
-    "path": "/adding-new-application/getting-started-with-runbooks/runbook-yaml"
-  },
-  {
-    "path": "/adding-new-application/guide"
-  },
-  {
-    "path": "/adding-new-application"
-  },
-  {
-    "path": "/adding-new-application/module-library"
-  },
-  {
-    "path": "/adding-new-application/plural-artifact-structure"
-  },
-  {
-    "path": "/adding-new-application/plural-custom-resources"
-  },
-  {
-    "path": "/adding-new-application/publishing"
-  },
-  {
-    "path": "/adding-new-application/templating"
-  },
-  {
     "path": "/ai/architecture"
   },
   {
@@ -43,66 +10,6 @@
   },
   {
     "path": "/ai/setup"
-  },
-  {
-    "path": "/applications"
-  },
-  {
-    "path": "/archive/architecture"
-  },
-  {
-    "path": "/archive/basics/AdminConsole"
-  },
-  {
-    "path": "/archive/basics/Architecture"
-  },
-  {
-    "path": "/archive/basics/GettingStarted"
-  },
-  {
-    "path": "/archive/basics/SecretManagement"
-  },
-  {
-    "path": "/archive/basics/WorkspaceLayout"
-  },
-  {
-    "path": "/archive/cloud-shell"
-  },
-  {
-    "path": "/archive/introduction"
-  },
-  {
-    "path": "/archive/secret-management"
-  },
-  {
-    "path": "/archive/sharing-existing-repos"
-  },
-  {
-    "path": "/archive/workspace-structure"
-  },
-  {
-    "path": "/catalog/contributing"
-  },
-  {
-    "path": "/catalog/creation"
-  },
-  {
-    "path": "/catalog/overview"
-  },
-  {
-    "path": "/debugging/application-issues"
-  },
-  {
-    "path": "/debugging/health-checks"
-  },
-  {
-    "path": "/debugging"
-  },
-  {
-    "path": "/debugging/logs"
-  },
-  {
-    "path": "/debugging/proxies"
   },
   {
     "path": "/deployments/addons"
@@ -267,19 +174,10 @@
     "path": "/faq/certifications"
   },
   {
-    "path": "/faq/local-development"
-  },
-  {
     "path": "/faq/plural-paid-tiers"
   },
   {
-    "path": "/getting-started/admin-console"
-  },
-  {
     "path": "/getting-started/cloud-shell-quickstart"
-  },
-  {
-    "path": "/getting-started/concepts"
   },
   {
     "path": "/getting-started/deployments"
@@ -465,6 +363,15 @@
     "path": "/reference/troubleshooting"
   },
   {
+    "path": "/service-catalog/contributing"
+  },
+  {
+    "path": "/service-catalog/creation"
+  },
+  {
+    "path": "/service-catalog/overview"
+  },
+  {
     "path": "/stacks/auto-cancellation"
   },
   {
@@ -478,9 +385,6 @@
   },
   {
     "path": "/stacks/manual-runs"
-  },
-  {
-    "path": "/stacks/overview"
   },
   {
     "path": "/stacks/pr-workflow"

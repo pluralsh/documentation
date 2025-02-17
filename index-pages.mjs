@@ -32,6 +32,7 @@ const ignore = [
   // [nextjs_dynamic_pages]
   // 404 and 500 error pages
   /^([_.[]|404|500).*$/,
+  /^__components\/.*/
 ]
 
 const pageFilter = (file) => {
