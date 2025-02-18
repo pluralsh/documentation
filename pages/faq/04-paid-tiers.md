@@ -29,7 +29,6 @@ See below for a comparison of different tiers, and you can find more information
 ## Plural Custom
 
 - Tailored pricing
-- Everything in Plural Professional, plus:
 - 4 hour SLAs
 - Dedicated SRE support
 - SSO integration
