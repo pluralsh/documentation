@@ -274,11 +274,11 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'FAQ',
     sections: [
       {
-        href: '/operations/security',
+        href: '/faq/security',
         title: 'What does Plural have access to?',
       },
       {
-        href: '/operations/auth-access-control/openid-connect',
+        href: '/faq/openid-connect',
         title: 'What is Plural OIDC?',
       },
       {
