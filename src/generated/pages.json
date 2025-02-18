@@ -33,37 +33,13 @@
     "path": "/deployments/existing-cluster"
   },
   {
-    "path": "/deployments/git"
-  },
-  {
-    "path": "/deployments/global-services"
-  },
-  {
-    "path": "/deployments/helm"
-  },
-  {
-    "path": "/deployments/import-cluster"
-  },
-  {
-    "path": "/deployments/manage-your-microservices"
-  },
-  {
-    "path": "/deployments/monitoring-addons"
-  },
-  {
     "path": "/deployments/multi-tenancy"
-  },
-  {
-    "path": "/deployments/network-addons"
   },
   {
     "path": "/deployments/network-configuration"
   },
   {
     "path": "/deployments/notifications"
-  },
-  {
-    "path": "/deployments/operations"
   },
   {
     "path": "/deployments/operator/api"
@@ -79,9 +55,6 @@
   },
   {
     "path": "/deployments/operator/helm-service"
-  },
-  {
-    "path": "/deployments/pipelines"
   },
   {
     "path": "/deployments/pr/crds"
@@ -102,15 +75,6 @@
     "path": "/deployments/sandboxing"
   },
   {
-    "path": "/deployments/security-addons"
-  },
-  {
-    "path": "/deployments/services-deploy"
-  },
-  {
-    "path": "/deployments/services"
-  },
-  {
     "path": "/deployments/stacks"
   },
   {
@@ -121,9 +85,6 @@
   },
   {
     "path": "/deployments/terraform-interop"
-  },
-  {
-    "path": "/deployments/upgrades"
   },
   {
     "path": "/deployments/using-operator"
@@ -141,43 +102,7 @@
     "path": "/faq/04-paid-tiers"
   },
   {
-    "path": "/getting-started/cloud-shell-quickstart"
-  },
-  {
     "path": "/getting-started/deployments"
-  },
-  {
-    "path": "/getting-started/manage-git-repositories"
-  },
-  {
-    "path": "/getting-started/manage-git-repositories/setting-up-gitops"
-  },
-  {
-    "path": "/getting-started/manage-git-repositories/sharing-git-repositories"
-  },
-  {
-    "path": "/getting-started/manage-git-repositories/workspace-encryption"
-  },
-  {
-    "path": "/getting-started/manage-git-repositories/your-plural-workspace"
-  },
-  {
-    "path": "/getting-started/marketplace"
-  },
-  {
-    "path": "/getting-started/openid-connect"
-  },
-  {
-    "path": "/getting-started/plural-difference"
-  },
-  {
-    "path": "/getting-started/quickstart"
-  },
-  {
-    "path": "/getting-started/understanding-upgrades"
-  },
-  {
-    "path": "/getting-started/video-cli-quickstart"
   },
   {
     "path": "/how-to/deploy/microservice"

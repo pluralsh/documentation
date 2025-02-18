@@ -119,6 +119,6 @@ serviceAccount:
     eks.amazonaws.com/role-arn: {{ cluster.metadata.externaldnsRoleArm }}
 ```
 
-If you added secrets, you can access them with something like `{{ configuration.YOUR_SECRET_NAME }}` and if you want to use service contexts, we recommend checking the docs [here](/deployments/terraform-interop).
+If you added secrets, you can access them with something like `{{ configuration.YOUR_SECRET_NAME }}` and if you want to use service contexts, we recommend checking the docs {% doclink to="terraform-interop" %}here{% /doclink %}.
 
 Very commonly there's actually a lot of overlap between configuration on the same cluster, so the metadata blob will be smaller than you might expect as well. We've found this is an elegant and maintainable solution for users that are fine with the manual copy paste into yaml, whereas service contexts go a step further and automate the entire process.

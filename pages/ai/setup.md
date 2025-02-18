@@ -37,7 +37,7 @@ spec:
         key: vertex
 ```
 
-You can see the full schema at our [Operator API Reference](/deployments/operator/api#deploymentsettings).  
+You can see the full schema at our {% doclink to="operator-api" %}Operator API Reference{% /doclink %}.  
 
 In all these cases, you need to create an additional secret in the `plrl-deploy-operator` namespace to reference api keys and auth secrets.  It would look something like this:
 

@@ -1,9 +1,6 @@
 import type { ReactElement } from 'react'
-
 import deepFreeze from 'deep-freeze'
-
 import { APP_CATALOG_BASE_URL } from './consts/routes'
-
 import type { Repo } from './data/getRepos'
 
 export type NavMenuId = 'docs' | 'appCatalog'
@@ -41,264 +38,288 @@ export function findNavItem(
 
 const rootNavData: NavMenu = deepFreeze([
   {
-    title: 'Overview',
-    sections: [
-      {
-        title: 'Introduction',
-        href: '/introduction',
-      },
-    ],
+    title: 'Introduction',
+    href: '/introduction',
   },
   {
-    title: 'Plural Fleet Management',
+    title: 'AI',
     sections: [
       {
-        href: '/getting-started/deployments',
-        title: 'Getting Started',
-        sections: [
-          {
-            title: 'Architecture',
-            href: '/deployments/architecture',
-          },
-          {
-            title: 'Quickstart with our CLI',
-            href: '/deployments/cli-quickstart',
-          },
-          {
-            href: '/deployments/existing-cluster',
-            title: 'Set Up on your own Cluster',
-          },
-          {
-            href: '/deployments/advanced-configuration',
-            title: 'Advanced Configuration',
-            sections: [
-              {
-                title: 'Sandboxing Your Cluster',
-                href: '/deployments/sandboxing',
-              },
-              {
-                title: 'Network Configuration',
-                href: '/deployments/network-configuration',
-              },
-              {
-                title: 'Private CAs',
-                href: '/deployments/private-ca',
-              },
-            ],
-          },
-        ],
+        title: 'AI Architecture',
+        href: '/ai/architecture',
       },
       {
-        href: '/how-to',
-        title: 'How To Use Plural',
-        sections: [
-          {
-            title: 'Setting Up Your Management Cluster',
-            href: '/how-to/set-up/mgmt-cluster',
-          },
-          {
-            title: 'Setting Up Your Kubernetes Dashboard with RBAC',
-            href: '/how-to/set-up/rbac',
-          },
-          {
-            title: 'Integrate with your Source Control Provider',
-            href: '/how-to/set-up/scm-connection',
-          },
-          {
-            title: 'Set Up Your First Workload Cluster',
-            href: '/how-to/set-up/workload-cluster',
-          },
-          {
-            title: 'Set Up a Network Stack and other K8s Add-Ons',
-            href: '/how-to/set-up/controllers',
-          },
-          {
-            title: 'Set Up a Basic Self-Service Worklfow with PR Automations',
-            href: '/how-to/deploy/pr-automation',
-          },
-          {
-            title: 'Deploy Your First Microservice to a Workload Cluster',
-            href: '/how-to/deploy/microservice',
-          },
-          {
-            title: 'Setup Your First Microservice Promotion Pipeline',
-            href: '/how-to/deploy/pipelines',
-          },
-        ],
+        title: 'AI Cost',
+        href: '/ai/cost',
       },
       {
-        title: 'API Reference',
-        href: '/deployments/operator/api',
+        title: 'AI Overview',
+        href: '/ai/overview',
       },
       {
-        href: '/deployments/using-operator',
-        title: 'Deploying Using Plural Continuous Deployment',
+        title: 'AI Setup',
+        href: '/ai/setup',
+      },
+    ],
+    href: '/ai',
+  },
+  {
+    title: 'Deployments',
+    sections: [
+      {
+        title: 'Advanced Configuration',
+        href: '/deployments/advanced-configuration',
+      },
+      {
+        title: 'Deployments Architecture',
+        href: '/deployments/architecture',
+      },
+      {
+        title: 'CLI Quickstart',
+        href: '/deployments/cli-quickstart',
+      },
+      {
+        title: 'Kubernetes Dashboard',
+        href: '/deployments/dashboard',
+      },
+      {
+        title: 'Deprecations',
+        href: '/deployments/deprecations',
+      },
+      {
+        title: 'Using Existing Cluster',
+        href: '/deployments/existing-cluster',
+      },
+      {
+        title: 'Projects and Multi Tenancy',
+        href: '/deployments/multi-tenancy',
+      },
+      {
+        title: 'Network Configuration',
+        href: '/deployments/network-configuration',
+      },
+      {
+        title: 'Notifications',
+        href: '/deployments/notifications',
+      },
+      {
+        title: 'Operator',
         sections: [
           {
-            title: 'Architecture',
+            title: 'Operator API Reference',
+            href: '/deployments/operator/api',
+          },
+          {
+            title: 'Operator Architecture',
             href: '/deployments/operator/architecture',
           },
           {
-            title: 'Git Services',
+            title: 'Git Service',
             href: '/deployments/operator/git-service',
           },
           {
-            title: 'Helm Services',
-            href: '/deployments/operator/helm-service',
-          },
-          {
-            title: 'Global Services',
+            title: 'Global Service',
             href: '/deployments/operator/global-service',
           },
-        ],
-      },
-      {
-        href: '/deployments/stacks/',
-        title: 'IaC Management with Stacks',
-        sections: [
           {
-            title: 'Customizing Stack Runners',
-            href: '/stacks/customize-runners',
-          },
-          {
-            title: 'Pull Request Workflow',
-            href: '/stacks/pr-workflow',
-          },
-          {
-            title: 'Manual Runs',
-            href: '/stacks/manual-runs',
-          },
-          {
-            title: 'Executing IaC Locally',
-            href: '/stacks/local-execution',
-          },
-          {
-            title: 'Custom Stacks',
-            href: '/stacks/custom-stacks',
-          },
-          {
-            title: 'Auto-Cancellation',
-            href: '/stacks/auto-cancellation',
-          },
-          {
-            href: '/deployments/terraform-interop',
-            title: 'Service Contexts',
+            title: 'Helm Service',
+            href: '/deployments/operator/helm-service',
           },
         ],
+        href: '/deployments/operator',
       },
       {
-        href: '/deployments/pr-automation',
-        title: 'Pull Request Automation',
+        title: 'PR',
         sections: [
           {
-            title: 'On Demand Pull Requests',
+            title: 'PR CRDs',
             href: '/deployments/pr/crds',
           },
           {
-            title: 'Testing PR Automations',
-            href: '/deployments/pr/testing',
-          },
-          {
-            title: 'Pull Request Pipelines',
+            title: 'PR Pipelines',
             href: '/deployments/pr/pipelines',
           },
-        ],
-      },
-      {
-        href: '/deployments/multi-tenancy',
-        title: 'Projects and Multi-Tenancy',
-      },
-      {
-        href: '/deployments/dashboard',
-        title: 'Kubernetes Dashboard',
-      },
-      {
-        href: '/deployments/templating',
-        title: 'Service Templating',
-        sections: [
           {
-            href: '/deployments/templating-filters',
-            title: 'Supported Liquid Filters',
+            title: 'PR Testing',
+            href: '/deployments/pr/testing',
           },
         ],
+        href: '/deployments/pr',
       },
       {
-        href: '/deployments/notifications',
-        title: 'Notifications',
+        title: 'PR Automation',
+        href: '/deployments/pr-automation',
       },
       {
-        title: 'Deprecations and upgrades',
-        href: '/deployments/deprecations',
+        title: 'Private CA',
+        href: '/deployments/private-ca',
+      },
+      {
+        title: 'Sandboxing',
+        href: '/deployments/sandboxing',
+      },
+      {
+        title: 'Stacks',
+        href: '/deployments/stacks',
+      },
+      {
+        title: 'Templating Filters',
+        href: '/deployments/templating-filters',
+      },
+      {
+        title: 'Service Templating',
+        href: '/deployments/templating',
+      },
+      {
+        title: 'Terraform Interoperability',
+        href: '/deployments/terraform-interop',
+      },
+      {
+        title: 'Using the Operator',
+        href: '/deployments/using-operator',
       },
     ],
+    href: '/deployments',
   },
   {
-    title: 'Plural AI',
+    title: 'Faq',
     sections: [
       {
-        href: '/ai/overview',
-        title: 'What is Plural AI?',
+        title: 'Security FAQ',
+        href: '/faq/security',
       },
       {
-        href: '/ai/setup',
-        title: 'Setting Up Plural AI',
+        title: 'Plural OIDC FAQ',
+        href: '/faq/plural-oidc',
       },
       {
-        href: '/ai/architecture',
-        title: 'How Plural AI Works',
+        title: 'Certifications FAQ',
+        href: '/faq/certifications',
       },
       {
-        href: '/ai/cost',
-        title: 'How Much Will Plural AI Cost',
+        title: 'Paid Tiers FAQ',
+        href: '/faq/paid-tiers',
       },
     ],
+    href: '/faq',
+  },
+  {
+    title: 'Getting Started',
+    sections: [
+      {
+        title: 'Getting Started with Deployments',
+        href: '/getting-started/deployments',
+      },
+    ],
+    href: '/getting-started',
+  },
+  {
+    title: 'How To Guides',
+    sections: [
+      {
+        title: 'Deploy',
+        sections: [
+          {
+            title: 'Deploy Microservice',
+            href: '/how-to/deploy/microservice',
+          },
+          {
+            title: 'Deploy Pipelines',
+            href: '/how-to/deploy/pipelines',
+          },
+          {
+            title: 'Deploy PR Automation',
+            href: '/how-to/deploy/pr-automation',
+          },
+        ],
+        href: '/how-to/deploy',
+      },
+      {
+        title: 'Set Up',
+        sections: [
+          {
+            title: 'Set Up Controllers',
+            href: '/how-to/set-up/controllers',
+          },
+          {
+            title: 'Set Up Management Cluster',
+            href: '/how-to/set-up/mgmt-cluster',
+          },
+          {
+            title: 'Set Up RBAC',
+            href: '/how-to/set-up/rbac',
+          },
+          {
+            title: 'Set Up SCM Connection',
+            href: '/how-to/set-up/scm-connection',
+          },
+          {
+            title: 'Set Up Workload Cluster',
+            href: '/how-to/set-up/workload-cluster',
+          },
+        ],
+        href: '/how-to/set-up',
+      },
+    ],
+    href: '/how-to',
+  },
+  {
+    title: 'Reference',
+    sections: [
+      {
+        title: 'Release Notes',
+        href: '/reference/release-notes',
+      },
+    ],
+    href: '/reference',
   },
   {
     title: 'Service Catalog',
     sections: [
       {
-        href: '/service-catalog/overview',
-        title: 'Overview',
-      },
-      {
-        href: '/service-catalog/creation',
-        title: 'Creating Your Own Catalog',
-      },
-      {
+        title: 'Contributing to Service Catalog',
         href: '/service-catalog/contributing',
-        title: 'Contributing to the Mainline Plural Catalog',
+      },
+      {
+        title: 'Create Service Catalog',
+        href: '/service-catalog/creation',
+      },
+      {
+        title: 'Service Catalog Overview',
+        href: '/service-catalog/overview',
       },
     ],
+    href: '/service-catalog',
   },
   {
-    title: 'FAQ',
+    title: 'Stacks',
     sections: [
       {
-        href: '/faq/security',
-        title: 'What does Plural have access to?',
+        title: 'Auto-Cancellation',
+        href: '/stacks/auto-cancellation',
       },
       {
-        href: '/faq/plural-oidc',
-        title: 'What is Plural OIDC?',
+        title: 'Custom Stacks',
+        href: '/stacks/custom-stacks',
       },
       {
-        href: '/faq/certifications',
-        title: 'What certifications does Plural have?',
+        title: 'Customize Stack Runners',
+        href: '/stacks/customize-runners',
       },
       {
-        href: '/faq/paid-tiers',
-        title: 'How do the paid Plural tiers work?',
+        title: 'Local Execution',
+        href: '/stacks/local-execution',
+      },
+      {
+        title: 'Manual Runs',
+        href: '/stacks/manual-runs',
+      },
+      {
+        title: 'PR Workflow',
+        href: '/stacks/pr-workflow',
       },
     ],
-  },
-  {
-    title: 'Changelog',
-    sections: [
-      {
-        href: '/reference/release-notes',
-        title: 'Release Notes',
-      },
-    ],
+    href: '/stacks',
   },
 ])
 

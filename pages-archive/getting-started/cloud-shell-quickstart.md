@@ -239,7 +239,7 @@ To also delete the Cloud Shell itself (e.g., to change Cloud Providers or restar
 
 ### Leaving the Shell Experience
 
-If you want to start using the CLI locally, just [install the Plural CLI](/getting-started/quickstart#install-plural-cli) and run:
+If you want to start using the CLI locally, just {% doclink to="quickstart" %}install the Plural CLI{% /doclink %} and run:
 
 ```shell {% showHeader=false %}
 plural shell sync

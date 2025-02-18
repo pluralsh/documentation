@@ -4,9 +4,9 @@
     "node": "18.16.1"
   },
   "scripts": {
-    "dev": "run-s generate:pageindex dev:watch",
+    "dev": "run-s update:docs && concurrently \"next dev\" \"yarn graphql:codegen:watch\" \"yarn watch:routes\"",
     "dev:watch": "concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
-    "build": "run-s generate:pageindex build:next",
+    "build": "run-s update:docs build:next",
     "build:next": "next build",
     "start": "next start",
     "lint": "run-p lint:format lint:js lint:css",
@@ -19,7 +19,12 @@
     "fix:css": "stylelint src/**/*.css --fix",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
-    "generate:pageindex": "node index-pages.mjs"
+    "generate:routes": "ts-node scripts/generate-routes.ts",
+    "generate:nav": "ts-node scripts/generate-nav-data.ts",
+    "find:links": "ts-node scripts/find-internal-links.ts",
+    "replace:links": "ts-node scripts/replace-links.ts",
+    "watch:routes": "ts-node scripts/watch-routes.ts",
+    "update:docs": "run-s generate:routes generate:nav find:links replace:links"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",
@@ -82,6 +87,7 @@
     "@types/react-dom": "18.3.0",
     "@types/styled-components": "5.1.26",
     "@typescript-eslint/eslint-plugin": "5.59.11",
+    "chokidar": "^4.0.3",
     "concurrently": "8.2.0",
     "eslint": "8.42.0",
     "eslint-config-next": "13.4.5",
@@ -92,6 +98,7 @@
     "eslint-plugin-jsx-a11y": "6.7.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "gray-matter": "^4.0.3",
     "husky": "8.0.3",
     "lint-staged": "13.2.2",
     "npm-run-all": "4.1.5",
@@ -99,6 +106,7 @@
     "react-hooks": "1.0.1",
     "stylelint": "15.7.0",
     "stylelint-config-prettier": "9.0.5",
+    "ts-node": "^10.9.2",
     "typescript": "5.4.5"
   },
   "packageManager": "yarn@3.6.0",

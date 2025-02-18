@@ -9,7 +9,7 @@ In general, Plural tries to be fully GitOps compliant, meaning virtually any wri
 
 ## Full API Spec
 
-The full api spec can be found by looking through the go types [here](/deployments/operator/api).  You can also look at the code [here](https://github.com/pluralsh/console/tree/master/go/controller/api/v1alpha1).
+The full api spec can be found by looking through the go types {% doclink to="operator-api" %}here{% /doclink %}.  You can also look at the code [here](https://github.com/pluralsh/console/tree/master/go/controller/api/v1alpha1).
 
 ## Read-Only vs Write resources
 

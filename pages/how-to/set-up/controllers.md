@@ -240,7 +240,7 @@ module "externaldns_irsa_role" {
 }
 ```
 
-And uses some off-the-shelf tf modules they have created.  It's output is then plumbed to the `plural_cluster.this` resource which allows the dynamic templating in the `runtime.yaml.liquid` file.  In general, any file can add a `.liquid` extension, and our agent will dynamically template it.  You can read more about that [here](/deployments/templating).
+And uses some off-the-shelf tf modules they have created.  It's output is then plumbed to the `plural_cluster.this` resource which allows the dynamic templating in the `runtime.yaml.liquid` file.  In general, any file can add a `.liquid` extension, and our agent will dynamically template it.  You can read more about that {% doclink to="templating" %}here{% /doclink %}.
 
 ## Setting Up AWS Load Balancer Controller (AWS only)
 

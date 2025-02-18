@@ -29,7 +29,7 @@ You should then see your service show up when calling `plural cd services list`.
 
 ## Create Using GitOps
 
-We definitely recommend you read over our [operator docs](deployments/using-operator) to see the various CRDs you can use to define your services and patterns available there. For most use cases this will be the most robust workflow.
+We definitely recommend you read over our {% doclink to="using-operator" %}operator docs{% /doclink %} to see the various CRDs you can use to define your services and patterns available there. For most use cases this will be the most robust workflow.
 
 ## Create Using Terraform
 

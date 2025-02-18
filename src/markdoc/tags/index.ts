@@ -2,6 +2,7 @@ import * as designSystemTags from '@pluralsh/design-system/dist/markdoc/tags'
 
 import { htmlTag } from './htmlTag.markdoc'
 import { comment, head, link, script } from './nextjs.markdoc'
+import { doclink } from './doclink'
 
 export const tags = {
   ...designSystemTags,
@@ -10,4 +11,5 @@ export const tags = {
   script,
   link,
   'html-tag': htmlTag,
+  doclink,
 }

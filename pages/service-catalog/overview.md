@@ -4,7 +4,7 @@ description: Enterprise Grade Self-Service with Plural
 ---
 
 {% callout severity="info" %}
-If you just want to skip the text and see it in action, skip to the [demo video](/catalog/overview#demo-video)
+If you just want to skip the text and see it in action, skip to the {% doclink to="svc-cat-overview" %}demo video{% /doclink %}
 {% /callout %}
 
 Plural provides a full-stack GitOps platform for provisioning resources with both IaC frameworks like terraform and Kubernetes manifests like helm and kustomize.  This alone is very powerful, but most enterprises want to go a step beyond and implement full self-service.  This provides two main benefits:
@@ -12,7 +12,7 @@ Plural provides a full-stack GitOps platform for provisioning resources with bot
 * Reduction of manual toil and error in repeatable infrastructure provisioning paths
 * Ensuring compliance with enterprise cybersecurity and reliabilty standards in the creation of new infrastructure, eg the creation of "Golden Paths".
 
-Plural accomplishes this via our Catalog feature, which allows [PR Automations](/deployments/pr-automation) to be bundled according to common infrastructure provisioning usecases.  We like the code generation approach for a number of reasons:
+Plural accomplishes this via our Catalog feature, which allows {% doclink to="pr-auto" %}PR Automations{% /doclink %} to be bundled according to common infrastructure provisioning usecases.  We like the code generation approach for a number of reasons:
 
 * Clear tie-in with established review-and-approval mechanisms in the PR-process
 * Great customizability throughout the lifecycle.

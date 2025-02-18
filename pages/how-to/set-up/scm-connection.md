@@ -44,11 +44,11 @@ Creating an SCM Connection is easiest just using our UI.  You can then reference
 For `github` tokens, the minimal permissions needed will be `repo` permissions.  You can also use a Github App if you'd like the token to not be scoped to a specific user.  For Github Apps, recommended permisions are read/write for Code, Pull Requests and Workflows (so you can write PR Automations for Github Actions, but technically optional).
 {% /callout %}
 
-## **Create an [`ScmConnection`](/deployments/operator/api#scmconnection) CRD Instance**  
+## **Create an {% doclink to="operator-api" %}`ScmConnection`{% /doclink %} CRD Instance**  
 
 Once the connection is created in the UI we can reference it with a CRD instance
   * ❕ Ensure the Name Provided in the UI matches the `spec.name` in the CRD Exactly
-  * An [`ScmConnection`](/deployments/operator/api#scmconnection) yaml template for GitHub exists in `bootstrap/pr-automation/scm.yaml`, you'll simply need to uncomment it. It should look like this:
+  * An {% doclink to="operator-api" %}`ScmConnection`{% /doclink %} yaml template for GitHub exists in `bootstrap/pr-automation/scm.yaml`, you'll simply need to uncomment it. It should look like this:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1

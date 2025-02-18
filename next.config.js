@@ -4,8 +4,7 @@ const withTM = require('next-transpile-modules')(
   ['@pluralsh/design-system', 'honorable', 'honorable-theme-default'],
   {
     debug: false,
-  }
-)
+  })
 
 module.exports = () => {
   const plugins = [withTM]
@@ -22,11 +21,12 @@ module.exports = () => {
       defaultLocale: 'en-US',
     },
     pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
-    webpack: (config) => {
+    webpack: config => {
       config.module.rules.push({
         test: /\.md$/,
         use: 'raw-loader',
       })
+
       return config
     },
     async redirects() {

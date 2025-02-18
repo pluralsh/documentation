@@ -5,13 +5,13 @@ description: Using a self-service PR automation to provision your first workload
 
 # Overview
 
-Now that you have a management cluster and your SCM connected, you can test-out our self-service provisioning using PR Automations and our terraform management system called [Stacks](/stacks/overview).  At a high level, this is going to:
+Now that you have a management cluster and your SCM connected, you can test-out our self-service provisioning using PR Automations and our terraform management system called {% doclink to="stacks-overview" %}Stacks{% /doclink %}.  At a high level, this is going to:
 
 * utilize a PR Automation (PRA) to instantiate a few CRDs into folders syncable by the root service-of-services in the `bootstrap` folder
 * The `InfrastructureStack` CRD created by the PRA will create a terraform stack referencing code in the `terraform/modules/clusters/aws` folder to provision a new cluster.  Your management cluster should already have been configured with sufficient IAM perms to create this cluster.  Any future commits to that folder will also be tracked and generate new terraform runs to sync in changes to the desired infrastructure.
 
 {% callout severity="warning" %}
-This Guide will not work properly unless you've finished the tutorial [Integrate with your Source Control Provider](/how-to/set-up/scm-connection).
+This Guide will not work properly unless you've finished the tutorial {% doclink to="setup-scm" %}Integrate with your Source Control Provider{% /doclink %}.
 {% /callout %}
 
 ## Enable the cluster-creator PR Automation
