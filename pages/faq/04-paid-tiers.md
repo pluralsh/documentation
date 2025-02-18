@@ -15,7 +15,7 @@ See below for a comparison of different tiers, and you can find more information
 - OAuth integration
 - Community support (Discord)
 
-## Plural Professional
+<!-- ## Plural Professional
 
 - $399/Cluster/Month + $49/User/Month
 - Everything in open-source, plus:
@@ -24,7 +24,7 @@ See below for a comparison of different tiers, and you can find more information
 - Multi-cluster management
 - Audit logs
 - VPN interface
-- Prioritized emergency hotfixes
+- Prioritized emergency hotfixes -->
 
 ## Plural Custom
 
