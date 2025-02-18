@@ -9,4 +9,3 @@ To see what's new with Plural, check out the following resources:
 - [Plural artifacts release notes](https://github.com/pluralsh/plural-artifacts/releases)
 - [Plural CLI release notes](https://github.com/pluralsh/plural-cli/releases)
 - [Plural Console release notes](https://github.com/pluralsh/console/releases)
-- [Plural In-App Roadmap](https://app.plural.sh/roadmap)

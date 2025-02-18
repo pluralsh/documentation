@@ -1,5 +1,8 @@
 [
   {
+    "path": "/01-introduction"
+  },
+  {
     "path": "/ai/architecture"
   },
   {
@@ -12,55 +15,16 @@
     "path": "/ai/setup"
   },
   {
-    "path": "/deployments/addons"
-  },
-  {
     "path": "/deployments/advanced-configuration"
   },
   {
     "path": "/deployments/architecture"
   },
   {
-    "path": "/deployments/browser-quickstart"
-  },
-  {
-    "path": "/deployments/ci-gh-actions"
-  },
-  {
-    "path": "/deployments/ci-overview"
-  },
-  {
-    "path": "/deployments/ci"
-  },
-  {
     "path": "/deployments/cli-quickstart"
   },
   {
-    "path": "/deployments/cluster-config"
-  },
-  {
-    "path": "/deployments/cluster-cost"
-  },
-  {
-    "path": "/deployments/cluster-create"
-  },
-  {
-    "path": "/deployments/cluster-destroy"
-  },
-  {
-    "path": "/deployments/clusters"
-  },
-  {
-    "path": "/deployments/cost-addons"
-  },
-  {
-    "path": "/deployments/credentials"
-  },
-  {
     "path": "/deployments/dashboard"
-  },
-  {
-    "path": "/deployments/debugging"
   },
   {
     "path": "/deployments/deprecations"
@@ -102,9 +66,6 @@
     "path": "/deployments/operations"
   },
   {
-    "path": "/deployments/operator/agent-api"
-  },
-  {
     "path": "/deployments/operator/api"
   },
   {
@@ -118,9 +79,6 @@
   },
   {
     "path": "/deployments/operator/helm-service"
-  },
-  {
-    "path": "/deployments/operator/pipeline"
   },
   {
     "path": "/deployments/pipelines"
@@ -174,7 +132,13 @@
     "path": "/faq/certifications"
   },
   {
+    "path": "/faq/openid-connect"
+  },
+  {
     "path": "/faq/plural-paid-tiers"
+  },
+  {
+    "path": "/faq/security"
   },
   {
     "path": "/getting-started/cloud-shell-quickstart"
@@ -246,121 +210,7 @@
     "path": "/"
   },
   {
-    "path": "/introduction"
-  },
-  {
-    "path": "/operations/advanced-operations"
-  },
-  {
-    "path": "/operations/applications"
-  },
-  {
-    "path": "/operations/auth-access-control/api-tokens"
-  },
-  {
-    "path": "/operations/auth-access-control/identity-and-installations/audit-logging"
-  },
-  {
-    "path": "/operations/auth-access-control/identity-and-installations"
-  },
-  {
-    "path": "/operations/auth-access-control/identity-and-installations/service-accounts"
-  },
-  {
-    "path": "/operations/auth-access-control"
-  },
-  {
-    "path": "/operations/auth-access-control/openid-connect"
-  },
-  {
-    "path": "/operations/cluster-configuration"
-  },
-  {
-    "path": "/operations/clusters"
-  },
-  {
-    "path": "/operations/cost-management"
-  },
-  {
-    "path": "/operations/dns-setup/creating-dns-zone-in-your-cloud-provider-console"
-  },
-  {
-    "path": "/operations/dns-setup"
-  },
-  {
-    "path": "/operations/managing-applications/add-application-to-cluster"
-  },
-  {
-    "path": "/operations/managing-applications/add-users-to-application"
-  },
-  {
-    "path": "/operations/managing-applications/bounce-application"
-  },
-  {
-    "path": "/operations/managing-applications/connect-application-db"
-  },
-  {
-    "path": "/operations/managing-applications/credentials-non-oidc"
-  },
-  {
-    "path": "/operations/managing-applications/customize-application"
-  },
-  {
-    "path": "/operations/managing-applications/delete-application"
-  },
-  {
-    "path": "/operations/managing-applications"
-  },
-  {
-    "path": "/operations/managing-applications/update-application"
-  },
-  {
-    "path": "/operations/network-configuration"
-  },
-  {
-    "path": "/operations/security"
-  },
-  {
-    "path": "/operations/uninstall"
-  },
-  {
-    "path": "/reference/api/console-api"
-  },
-  {
-    "path": "/reference/api"
-  },
-  {
-    "path": "/reference/api/plural-api"
-  },
-  {
-    "path": "/reference/cli-reference"
-  },
-  {
-    "path": "/reference/configuring-cloud-provider"
-  },
-  {
-    "path": "/reference/faq"
-  },
-  {
-    "path": "/reference/glossary"
-  },
-  {
-    "path": "/reference"
-  },
-  {
-    "path": "/reference/operator-guides/adding-kubecost-for-cost-analysis"
-  },
-  {
-    "path": "/reference/operator-guides"
-  },
-  {
-    "path": "/reference/partial-installation"
-  },
-  {
     "path": "/reference/release-notes"
-  },
-  {
-    "path": "/reference/troubleshooting"
   },
   {
     "path": "/service-catalog/contributing"
@@ -388,32 +238,5 @@
   },
   {
     "path": "/stacks/pr-workflow"
-  },
-  {
-    "path": "/test/blockquotes"
-  },
-  {
-    "path": "/test/buttons"
-  },
-  {
-    "path": "/test/callouts"
-  },
-  {
-    "path": "/test/codefence"
-  },
-  {
-    "path": "/test/codetabs"
-  },
-  {
-    "path": "/test/global-variables"
-  },
-  {
-    "path": "/test/images"
-  },
-  {
-    "path": "/test"
-  },
-  {
-    "path": "/test/tabs"
   }
 ]
