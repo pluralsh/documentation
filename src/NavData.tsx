@@ -274,19 +274,19 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'FAQ',
     sections: [
       {
-        href: '/faq/security',
+        href: '/faq/01-security',
         title: 'What does Plural have access to?',
       },
       {
-        href: '/faq/openid-connect',
+        href: '/faq/02-plural-oidc',
         title: 'What is Plural OIDC?',
       },
       {
-        href: '/faq/certifications',
+        href: '/faq/03-certifications',
         title: 'What certifications does Plural have?',
       },
       {
-        href: '/faq/plural-paid-tiers',
+        href: '/faq/04-paid-tiers',
         title: 'How do the paid Plural tiers work?',
       },
     ],
