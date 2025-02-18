@@ -227,14 +227,8 @@ const rootNavData: NavMenu = deepFreeze([
         title: 'Notifications',
       },
       {
-        href: '/deployments/operations',
-        title: 'Advanced Operations',
-        sections: [
-          {
-            title: 'Managing Deprecations and K8s upgrades',
-            href: '/deployments/deprecations',
-          },
-        ],
+        title: 'Deprecations and upgrades',
+        href: '/deployments/deprecations',
       },
     ],
   },
@@ -263,15 +257,15 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'Service Catalog',
     sections: [
       {
-        href: '/catalog/overview',
+        href: '/service-catalog/overview',
         title: 'Overview',
       },
       {
-        href: '/catalog/creation',
+        href: '/service-catalog/creation',
         title: 'Creating Your Own Catalog',
       },
       {
-        href: '/catalog/contributing',
+        href: '/service-catalog/contributing',
         title: 'Contributing to the Mainline Plural Catalog',
       },
     ],
@@ -280,11 +274,11 @@ const rootNavData: NavMenu = deepFreeze([
     title: 'FAQ',
     sections: [
       {
-        href: '/operations/security',
+        href: '/faq/security',
         title: 'What does Plural have access to?',
       },
       {
-        href: '/operations/auth-access-control/openid-connect',
+        href: '/faq/openid-connect',
         title: 'What is Plural OIDC?',
       },
       {

@@ -46,12 +46,20 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const relativePath = path.relative(pagesDirectory, file)
     const parsedPath = path.parse(relativePath)
 
-    const dirSegments = parsedPath.dir ? parsedPath.dir.split(path.sep) : []
+    // Remove numeric prefixes from directory names and file name
+    const cleanDirName = parsedPath.dir
+      .split(path.sep)
+      .map((segment) => segment.replace(/^\d+-/, ''))
+      .join(path.sep)
+
+    const cleanFileName = parsedPath.name.replace(/^\d+-/, '')
+
+    const dirSegments = cleanDirName ? cleanDirName.split(path.sep) : []
 
     let slug: string[]
 
-    if (parsedPath.name === 'index') slug = dirSegments
-    else slug = [...dirSegments, parsedPath.name]
+    if (cleanFileName === 'index') slug = dirSegments
+    else slug = [...dirSegments, cleanFileName]
 
     return {
       params: {
@@ -76,12 +84,19 @@ export const getStaticProps: GetStaticProps<
 
   const slugPath = params.slug.join('/')
 
-  // looks for folder/name/index.md first, then folder/name.md
-  const filePath =
-    [
-      path.join('pages', slugPath, 'index.md'),
-      path.join('pages', `${slugPath}.md`),
-    ].find(fs.existsSync) || null
+  // Try both with and without numeric prefixes
+  const possiblePaths = [
+    path.join('pages', slugPath, 'index.md'),
+    path.join('pages', `${slugPath}.md`),
+    // Add these new patterns
+    ...fs
+      .readdirSync('pages')
+      .filter((f) => f.match(/^\d+-.*\.md$/))
+      .filter((f) => f.replace(/^\d+-/, '').replace(/\.md$/, '') === slugPath)
+      .map((f) => path.join('pages', f)),
+  ]
+
+  const filePath = possiblePaths.find(fs.existsSync) || null
 
   if (!filePath) {
     return { notFound: true }

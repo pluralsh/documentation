@@ -24,7 +24,7 @@ import { RecipesDocument } from '@src/generated/graphql'
 import { readMdFileCached } from '@src/markdoc/mdParser'
 import { providerToProviderName } from '@src/utils/text'
 
-import type { MarkdocHeading, MyPageProps } from '../_app'
+import type { MarkdocHeading, MyPageProps } from '../../pages/_app'
 import type {
   RecipeFragment,
   RecipesQuery,
