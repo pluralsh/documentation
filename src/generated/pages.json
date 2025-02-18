@@ -129,16 +129,16 @@
     "path": "/deployments/using-operator"
   },
   {
-    "path": "/faq/certifications"
+    "path": "/faq/01-security"
   },
   {
-    "path": "/faq/openid-connect"
+    "path": "/faq/02-plural-oidc"
   },
   {
-    "path": "/faq/plural-paid-tiers"
+    "path": "/faq/03-certifications"
   },
   {
-    "path": "/faq/security"
+    "path": "/faq/04-paid-tiers"
   },
   {
     "path": "/getting-started/cloud-shell-quickstart"
