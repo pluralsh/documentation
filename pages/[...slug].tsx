@@ -46,20 +46,26 @@ export const getStaticPaths: GetStaticPaths = async () => {
     const relativePath = path.relative(pagesDirectory, file)
     const parsedPath = path.parse(relativePath)
 
-    // Remove numeric prefixes from directory names and file name
-    const cleanDirName = parsedPath.dir
-      .split(path.sep)
-      .map((segment) => segment.replace(/^\d+-/, ''))
-      .join(path.sep)
+    // Split the directory path into segments
+    const dirSegments = parsedPath.dir ? parsedPath.dir.split(path.sep) : []
 
+    // Clean numeric prefixes from each directory segment and the filename
+    const cleanDirSegments = dirSegments.map((segment) =>
+      segment.replace(/^\d+-/, '')
+    )
     const cleanFileName = parsedPath.name.replace(/^\d+-/, '')
 
-    const dirSegments = cleanDirName ? cleanDirName.split(path.sep) : []
-
+    // Construct the final slug
     let slug: string[]
 
-    if (cleanFileName === 'index') slug = dirSegments
-    else slug = [...dirSegments, cleanFileName]
+    if (cleanFileName === 'index') {
+      slug = cleanDirSegments
+    } else {
+      slug = [...cleanDirSegments, cleanFileName]
+    }
+
+    // Filter out any empty segments
+    slug = slug.filter(Boolean)
 
     return {
       params: {
@@ -83,24 +89,83 @@ export const getStaticProps: GetStaticProps<
   }
 
   const slugPath = params.slug.join('/')
+  const pagesDir = 'pages'
 
-  // Try both with and without numeric prefixes
+  // Helper function to find files with numeric prefixes in a directory
+  const findMatchingFile = (dir: string, targetPath: string): string | null => {
+    if (!fs.existsSync(dir)) return null
+
+    const entries = fs.readdirSync(dir, { withFileTypes: true })
+
+    for (const entry of entries) {
+      if (entry.isFile() && entry.name.endsWith('.md')) {
+        const cleanName = entry.name.replace(/^\d+-/, '').replace(/\.md$/, '')
+
+        if (cleanName === targetPath) {
+          return path.join(dir, entry.name)
+        }
+      }
+    }
+
+    return null
+  }
+
+  // Helper function to find the actual path with numeric prefixes
+  const findActualPath = (targetPath: string): string | null => {
+    const segments = targetPath.split('/')
+    let currentPath = pagesDir
+    const finalSegments: string[] = []
+
+    // Handle each path segment
+    for (let i = 0; i < segments.length; i++) {
+      const segment = segments[i]
+      const isLast = i === segments.length - 1
+
+      if (isLast) {
+        // For the last segment, look for a matching file
+        const matchingFile = findMatchingFile(currentPath, segment)
+
+        if (matchingFile) {
+          finalSegments.push(path.basename(matchingFile))
+
+          return path.join(pagesDir, ...finalSegments)
+        }
+      } else {
+        // For directory segments, look for matching directory with or without numeric prefix
+        const entries = fs.readdirSync(currentPath, { withFileTypes: true })
+        const matchingDir = entries.find(
+          (entry) =>
+            entry.isDirectory() && entry.name.replace(/^\d+-/, '') === segment
+        )
+
+        if (matchingDir) {
+          finalSegments.push(matchingDir.name)
+          currentPath = path.join(currentPath, matchingDir.name)
+          continue
+        }
+      }
+
+      return null
+    }
+
+    return null
+  }
+
+  // Try different possible paths
   const possiblePaths = [
-    path.join('pages', slugPath, 'index.md'),
-    path.join('pages', `${slugPath}.md`),
-    // Add these new patterns
-    ...fs
-      .readdirSync('pages')
-      .filter((f) => f.match(/^\d+-.*\.md$/))
-      .filter((f) => f.replace(/^\d+-/, '').replace(/\.md$/, '') === slugPath)
-      .map((f) => path.join('pages', f)),
-  ]
+    // Try exact match first
+    path.join(pagesDir, `${slugPath}.md`),
+    path.join(pagesDir, slugPath, 'index.md'),
+    // Try finding the actual path with numeric prefixes
+    findActualPath(slugPath),
+  ].filter(Boolean) as string[]
 
-  const filePath = possiblePaths.find(fs.existsSync) || null
+  const filePath = possiblePaths.find((p) => fs.existsSync(p)) || null
 
   if (!filePath) {
     return { notFound: true }
   }
+
   const markdoc = await readMdFileCached(filePath)
 
   return {
