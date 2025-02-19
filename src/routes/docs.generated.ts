@@ -443,6 +443,7 @@ export function getRouteByPath(path: string): DocRoute | undefined {
   const directMatch = Object.values(docRoutes).find(
     (route) => route.path === path
   )
+
   if (directMatch) return directMatch
 
   // Then check redirects

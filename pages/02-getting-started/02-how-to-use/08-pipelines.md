@@ -10,13 +10,13 @@ We've already gone over provisioning clusters, deploying a basic cluster runtime
 This tutorial will cover:
 
 * Using the cluster-creator PR Automation (PRA) to setup a prod cluster.
-* Using the same technique as in the {% doclink to="getting_started_deploy_microservice" %}Deploying a Microservice{% /doclink %} tutorial to set up an example prod service
+* Using the same technique as in the {% doclink to="getting_started_how_to_use_microservice" %}Deploying a Microservice{% /doclink %} tutorial to set up an example prod service
 * Setting up a `PrAutomation` for generating the promotion related GitOps codechanges needed
 * Setting up a `Pipeline` to orchestrate our promotion process.
 
 ## Setup Your Prod Cluster
 
-Go through the {% doclink to="getting_started_workload_cluster" %}Setting Up Your First Workload Cluster{% /doclink %} tutorial again to create another cluster which will serve as the prod cluster. This will involve:
+Go through the {% doclink to="getting_started_how_to_use_workload_cluster" %}Setting Up Your First Workload Cluster{% /doclink %} tutorial again to create another cluster which will serve as the prod cluster. This will involve:
 
 1. Call the `cluster-creator` PRA to generate a PR to create your cluster.  Approve and merge it.
 2. Wait for the new stack to be spawned, and approve its run.
@@ -24,7 +24,7 @@ Go through the {% doclink to="getting_started_workload_cluster" %}Setting Up You
 
 ## Setup the Prod Instance of the `cd-demo` Service
 
-Imitating the {% doclink to="getting_started_deploy_microservice" %}Setting Up a Microservice{% /doclink %} tutorial, write a new `ServiceDeployment` to `bootstrap/cd-demo/prod.yaml`:
+Imitating the {% doclink to="getting_started_how_to_use_microservice" %}Setting Up a Microservice{% /doclink %} tutorial, write a new `ServiceDeployment` to `bootstrap/cd-demo/prod.yaml`:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
