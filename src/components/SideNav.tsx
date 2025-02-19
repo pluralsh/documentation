@@ -1,4 +1,10 @@
 import {
+  type ComponentProps,
+  type Dispatch,
+  type Key,
+  type MutableRefObject,
+  type ReactElement,
+  type SetStateAction,
   createContext,
   forwardRef,
   useCallback,
@@ -7,14 +13,6 @@ import {
   useMemo,
   useRef,
   useState,
-} from 'react'
-import type {
-  ComponentProps,
-  Dispatch,
-  Key,
-  MutableRefObject,
-  ReactElement,
-  SetStateAction,
 } from 'react'
 
 import {

@@ -1,6 +1,8 @@
-import path from 'path'
 import fs from 'fs'
+import path from 'path'
+
 import matter from 'gray-matter'
+
 import { type DocRoute } from './types'
 
 /**
@@ -19,13 +21,10 @@ export function pathToId(filePath: string): string {
  * Convert a file path to a route path
  */
 export function normalizeRoutePath(filePath: string): string {
-  return (
-    '/' +
-    filePath
-      .replace(/^pages\//, '')
-      .replace(/\.md$/, '')
-      .replace(/\/index$/, '')
-  )
+  return `/${filePath
+    .replace(/^pages\//, '')
+    .replace(/\.md$/, '')
+    .replace(/\/index$/, '')}`
 }
 
 /**
@@ -33,6 +32,7 @@ export function normalizeRoutePath(filePath: string): string {
  */
 export function getSection(filePath: string): string {
   const parts = filePath.replace(/^pages\//, '').split('/')
+
   return parts.length > 1 ? parts[0] : 'overview'
 }
 
@@ -41,9 +41,11 @@ export function getSection(filePath: string): string {
  */
 export function getTitle(filePath: string, content: string): string {
   const { data } = matter(content)
+
   if (data.title) return data.title
 
   const basename = path.basename(filePath, '.md')
+
   return basename
     .split('-')
     .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
@@ -62,7 +64,7 @@ export function validateRoute(route: DocRoute): string[] {
 
   // Check if file exists
   const possiblePaths = [
-    path.join(process.cwd(), 'pages', route.path + '.md'),
+    path.join(process.cwd(), 'pages', `${route.path}.md`),
     path.join(process.cwd(), 'pages', route.path, 'index.md'),
     path.join(process.cwd(), 'pages', route.path),
   ]
@@ -93,6 +95,7 @@ export function findRouteByPath(
 ): DocRoute | undefined {
   // First try direct path match
   const directMatch = routes.find((route) => route.path === path)
+
   if (directMatch) return directMatch
 
   // Then check redirects

@@ -2,7 +2,6 @@
  * @file This file is auto-generated. DO NOT EDIT DIRECTLY!
  */
 
-import { z } from 'zod'
 import { routeSchema, type DocRoute, type DocRouteMap } from './types'
 
 // Central route registry

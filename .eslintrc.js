@@ -1,36 +1,30 @@
 module.exports = {
-  root: true,
-  extends: ['@pluralsh/eslint-config-pluralsh'],
-  parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint'],
   settings: {
     'import/resolver': {
-      typescript: {
-        extensions: ['.ts', '.tsx'],
-      },
-    },
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
+      typescript: {}, // this loads <rootdir>/tsconfig.json to eslint
     },
   },
+  parser: '@typescript-eslint/parser',
   parserOptions: {
+    project: true,
     tsconfigRootDir: __dirname,
-    project: ['./tsconfig.json', './scripts/tsconfig.json'],
-    ecmaVersion: 2020,
-    sourceType: 'module',
-    ecmaFeatures: {
-      jsx: true,
-    },
+  },
+  extends: ['@pluralsh/eslint-config-typescript', 'prettier'],
+  plugins: ['prettier'],
+  globals: {
+    JSX: true,
   },
   rules: {
-    'import/extensions': [
+    'prettier/prettier': 'error',
+    'react/no-unknown-property': ['error', { ignore: ['css'] }],
+    '@typescript-eslint/consistent-type-exports': 'error',
+    '@typescript-eslint/consistent-type-imports': [
       'error',
-      'ignorePackages',
-      {
-        ts: 'never',
-        tsx: 'never',
-      },
+      { fixStyle: 'inline-type-imports' },
     ],
+    'no-duplicate-imports': 'off',
+    'import/no-duplicates': ['error', { 'prefer-inline': true }],
+    'import-newlines/enforce': 'off',
     'import/order': [
       'error',
       {
@@ -51,7 +45,10 @@ module.exports = {
             position: 'before',
           },
         ],
-        pathGroupsExcludedImportTypes: ['react', '{next/*,next,@pluralsh/design-system,honorable}'],
+        pathGroupsExcludedImportTypes: [
+          'react',
+          '{next/*,next,@pluralsh/design-system,honorable}',
+        ],
         groups: [
           'builtin',
           'external',
@@ -65,12 +62,34 @@ module.exports = {
         ],
       },
     ],
+    'jsx-a11y/label-has-associated-control': [
+      2,
+      {
+        labelComponents: ['Label'],
+        controlComponents: ['Input'],
+        assert: 'either',
+        depth: 3,
+      },
+    ],
   },
+  // Disable TS parser and rules that depend on a parser for config files
   overrides: [
     {
-      files: ['.eslintrc.js', 'next.config.js', 'index-pages.mjs'],
+      files: [
+        '.eslintrc.js',
+        'next.config.js',
+        'tailwind.config.ts',
+        'postcss.config.js',
+        'codegen.ts',
+        'index-pages.mjs',
+        'next-sitemap.config.js',
+      ],
       parserOptions: {
         project: null,
+      },
+      rules: {
+        '@typescript-eslint/consistent-type-exports': 'off',
+        '@typescript-eslint/consistent-type-imports': 'off',
       },
     },
   ],

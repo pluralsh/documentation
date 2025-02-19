@@ -5,7 +5,7 @@ import matter from 'gray-matter'
 function titleCase(str: string): string {
   return str
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
@@ -13,13 +13,15 @@ function generateDescription(title: string): string {
   return `Documentation and guides for working with ${title}.`
 }
 
-function getArticlesInSection(dirPath: string): { title: string; path: string }[] {
+function getArticlesInSection(
+  dirPath: string
+): { title: string; path: string }[] {
   const files = fs.readdirSync(dirPath)
   const articles: { title: string; path: string }[] = []
-  
-  files.forEach(file => {
+
+  files.forEach((file) => {
     if (file === 'index.md') return
-    
+
     if (file.endsWith('.md')) {
       const filePath = path.join(dirPath, file)
       const content = fs.readFileSync(filePath, 'utf8')
@@ -28,11 +30,11 @@ function getArticlesInSection(dirPath: string): { title: string; path: string }[
       const cleanName = name.replace(/^\d+-/, '')
       articles.push({
         title: data.title || titleCase(cleanName),
-        path: cleanName
+        path: cleanName,
       })
     }
   })
-  
+
   return articles
 }
 
@@ -40,14 +42,14 @@ function updateIndexFile(indexPath: string) {
   const dirPath = path.dirname(indexPath)
   const dirName = path.basename(dirPath).replace(/^\d+-/, '')
   let content = ''
-  
+
   // Read existing content if file exists
   if (fs.existsSync(indexPath)) {
     content = fs.readFileSync(indexPath, 'utf8')
   }
-  
+
   const { data: frontmatter = {}, content: mainContent = '' } = matter(content)
-  
+
   // Update or add frontmatter
   if (!frontmatter.title) {
     frontmatter.title = titleCase(dirName)
@@ -55,7 +57,7 @@ function updateIndexFile(indexPath: string) {
   if (!frontmatter.description) {
     frontmatter.description = generateDescription(frontmatter.title)
   }
-  
+
   // Remove any "ARTICLES IN THIS SECTION" content and article links at the top
   let newContent = mainContent
     // Remove ARTICLES IN THIS SECTION blocks
@@ -69,7 +71,7 @@ function updateIndexFile(indexPath: string) {
   if (!newContent.trim()) {
     newContent = `## Overview\n\n${frontmatter.description}`
   }
-  
+
   // Write the updated content
   const updatedContent = matter.stringify(newContent, frontmatter)
   fs.writeFileSync(indexPath, updatedContent)
@@ -78,11 +80,11 @@ function updateIndexFile(indexPath: string) {
 // Find all index.md files recursively
 function processDirectory(dir: string) {
   const files = fs.readdirSync(dir)
-  
-  files.forEach(file => {
+
+  files.forEach((file) => {
     const fullPath = path.join(dir, file)
     const stat = fs.statSync(fullPath)
-    
+
     if (stat.isDirectory()) {
       processDirectory(fullPath)
     } else if (file === 'index.md') {
@@ -98,4 +100,4 @@ if (!fs.existsSync('scripts')) {
 }
 
 // Start processing from pages directory
-processDirectory('pages') 
+processDirectory('pages')

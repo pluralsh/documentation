@@ -30,6 +30,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 
   // Use cached files list if available and not expired
   const now = Date.now()
+
   if (
     process.env.NODE_ENV === 'development' &&
     markdownFilesCache &&
@@ -47,9 +48,12 @@ export const getStaticPaths: GetStaticPaths = async () => {
         cleanFileName === 'index'
           ? cleanDirSegments
           : [...cleanDirSegments, cleanFileName]
+
       slug = slug.filter(Boolean)
+
       return { params: { slug } }
     })
+
     return { paths, fallback: 'blocking' }
   }
 
@@ -90,7 +94,9 @@ export const getStaticPaths: GetStaticPaths = async () => {
       cleanFileName === 'index'
         ? cleanDirSegments
         : [...cleanDirSegments, cleanFileName]
+
     slug = slug.filter(Boolean)
+
     return { params: { slug } }
   })
 
@@ -126,6 +132,7 @@ export const getStaticProps: GetStaticProps<
         if (!fs.existsSync(dir)) return null
         dirCache.set(dir, fs.readdirSync(dir, { withFileTypes: true }))
       }
+
       return dirCache.get(dir)!
     }
 
@@ -135,6 +142,7 @@ export const getStaticProps: GetStaticProps<
       const isLast = i === segments.length - 1
 
       const entries = getDirEntries(currentPath)
+
       if (!entries) return null
 
       if (isLast) {
@@ -151,8 +159,10 @@ export const getStaticProps: GetStaticProps<
           const indexEntries = getDirEntries(
             path.join(currentPath, matchingDir.name)
           )
+
           if (indexEntries) {
             const indexFile = indexEntries.find((e) => e.name === 'index.md')
+
             if (indexFile) {
               return path.join(pagesDir, ...finalSegments, indexFile.name)
             }
@@ -169,6 +179,7 @@ export const getStaticProps: GetStaticProps<
 
         if (matchingFile) {
           finalSegments.push(matchingFile.name)
+
           return path.join(pagesDir, ...finalSegments)
         }
       } else {

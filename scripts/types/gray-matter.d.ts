@@ -8,4 +8,4 @@ declare module 'gray-matter' {
   function matter(input: string): GrayMatterData
 
   export = matter
-} 
+}

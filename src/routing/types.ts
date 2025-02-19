@@ -1,5 +1,7 @@
 import { z } from 'zod'
 
+import type { docRoutes } from './registry'
+
 // Core route schema
 export const routeSchema = z.object({
   path: z.string(),
@@ -28,5 +30,4 @@ export type NavMenuId = 'docs' | 'appCatalog'
 export type MenuId = NavMenuId | 'plural'
 export type NavData = Record<NavMenuId, NavMenu>
 
-// Type-safe route key type
-export type RouteKey = keyof typeof import('./registry').docRoutes
+export type RouteKey = keyof typeof docRoutes

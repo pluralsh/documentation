@@ -1,5 +1,10 @@
-import type { ReactNode } from 'react'
-import React, { Suspense, useContext, useEffect, useState } from 'react'
+import {
+  type ReactNode,
+  Suspense,
+  useContext,
+  useEffect,
+  useState,
+} from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
@@ -79,13 +84,6 @@ function ContentHeaderUnstyled({
       )}
     </div>
   )
-}
-
-ContentHeaderUnstyled.defaultProps = {
-  title: undefined,
-  description: undefined,
-  className: undefined,
-  pageHasContent: true,
 }
 
 export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({

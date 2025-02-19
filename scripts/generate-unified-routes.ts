@@ -19,10 +19,7 @@ const { routes, navigation, routeCode } = generateRoutingData(
 )
 
 // Write routes to registry file
-fs.writeFileSync(
-  path.join(process.cwd(), 'src/routing/registry.ts'),
-  routeCode
-)
+fs.writeFileSync(path.join(process.cwd(), 'src/routing/registry.ts'), routeCode)
 
 // Write navigation to file
 const navCode = `/**
@@ -33,12 +30,9 @@ import type { NavMenu } from './types'
 
 export const docNavigation: NavMenu = ${JSON.stringify(navigation, null, 2)}`
 
-fs.writeFileSync(
-  path.join(process.cwd(), 'src/routing/navigation.ts'),
-  navCode
-)
+fs.writeFileSync(path.join(process.cwd(), 'src/routing/navigation.ts'), navCode)
 
 console.log('\n✅ Generated files:')
 console.log('  - src/routing/registry.ts')
 console.log('  - src/routing/navigation.ts')
-console.log('\nPlease review the changes before committing.') 
+console.log('\nPlease review the changes before committing.')
