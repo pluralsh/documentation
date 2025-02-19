@@ -7,13 +7,10 @@ import {
 } from 'react'
 
 import {
-  DiscordIcon,
   GitPullIcon,
   IconFrame,
   MagicWandIcon,
   PadlockLockedIcon,
-  SourcererHatIcon,
-  ToolsIcon,
 } from '@pluralsh/design-system'
 import Link, { type LinkProps } from 'next/link'
 
@@ -21,7 +18,6 @@ import { Heading as MarkdocHeading } from '@pluralsh/design-system/dist/markdoc/
 import styled, { useTheme } from 'styled-components'
 
 import { mqs } from '@src/components/Breakpoints'
-import { DISCORD_LINK } from '@src/consts'
 
 const Hero = styled.div(({ theme }) => ({
   background: 'url(/images/landing/hero-bg-sm.png)',
