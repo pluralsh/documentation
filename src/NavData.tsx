@@ -38,288 +38,256 @@ export function findNavItem(
 
 const rootNavData: NavMenu = deepFreeze([
   {
-    title: 'Introduction',
-    href: '/introduction',
-  },
-  {
-    title: 'AI',
+    title: 'Overview',
     sections: [
       {
-        title: 'AI Architecture',
-        href: '/ai/architecture',
+        title: 'Introduction',
+        href: '/overview/introduction',
       },
       {
-        title: 'AI Cost',
-        href: '/ai/cost',
-      },
-      {
-        title: 'AI Overview',
-        href: '/ai/overview',
-      },
-      {
-        title: 'AI Setup',
-        href: '/ai/setup',
+        title: 'Architecture',
+        href: '/overview/architecture',
       },
     ],
-    href: '/ai',
+    href: '/overview',
   },
   {
-    title: 'Deployments',
+    title: 'Getting Started',
     sections: [
       {
-        title: 'Advanced Configuration',
-        href: '/deployments/advanced-configuration',
-      },
-      {
-        title: 'Deployments Architecture',
-        href: '/deployments/architecture',
-      },
-      {
-        title: 'CLI Quickstart',
-        href: '/deployments/cli-quickstart',
-      },
-      {
-        title: 'Kubernetes Dashboard',
-        href: '/deployments/dashboard',
-      },
-      {
-        title: 'Deprecations',
-        href: '/deployments/deprecations',
-      },
-      {
-        title: 'Using Existing Cluster',
-        href: '/deployments/existing-cluster',
-      },
-      {
-        title: 'Projects and Multi Tenancy',
-        href: '/deployments/multi-tenancy',
-      },
-      {
-        title: 'Network Configuration',
-        href: '/deployments/network-configuration',
-      },
-      {
-        title: 'Notifications',
-        href: '/deployments/notifications',
-      },
-      {
-        title: 'Operator',
+        title: 'First Steps',
         sections: [
           {
-            title: 'Operator API Reference',
-            href: '/deployments/operator/api',
+            title: 'CLI Quickstart',
+            href: '/getting-started/first-steps/cli-quickstart',
           },
           {
-            title: 'Operator Architecture',
-            href: '/deployments/operator/architecture',
+            title: 'Existing Cluster',
+            href: '/getting-started/first-steps/existing-cluster',
+          },
+        ],
+        href: '/getting-started/first-steps',
+      },
+      {
+        title: 'How To Use',
+        sections: [
+          {
+            title: 'Management Cluster',
+            href: '/getting-started/how-to-use/mgmt-cluster',
+          },
+          {
+            title: 'RBAC',
+            href: '/getting-started/how-to-use/rbac',
+          },
+          {
+            title: 'SCM Connection',
+            href: '/getting-started/how-to-use/scm-connection',
+          },
+          {
+            title: 'Workload Cluster',
+            href: '/getting-started/how-to-use/workload-cluster',
+          },
+          {
+            title: 'Controllers',
+            href: '/getting-started/how-to-use/controllers',
+          },
+          {
+            title: 'PR Automation',
+            href: '/getting-started/how-to-use/pr-automation',
+          },
+          {
+            title: 'Microservice',
+            href: '/getting-started/how-to-use/microservice',
+          },
+          {
+            title: 'Pipelines',
+            href: '/getting-started/how-to-use/pipelines',
+          },
+        ],
+        href: '/getting-started/how-to-use',
+      },
+      {
+        title: 'Advanced Config',
+        sections: [
+          {
+            title: 'Sandboxing',
+            href: '/getting-started/advanced-config/sandboxing',
+          },
+          {
+            title: 'Network Configuration',
+            href: '/getting-started/advanced-config/network-configuration',
+          },
+          {
+            title: 'Private CA',
+            href: '/getting-started/advanced-config/private-ca',
+          },
+        ],
+        href: '/getting-started/advanced-config',
+      },
+    ],
+    href: '/getting-started',
+  },
+  {
+    title: 'Plural Features',
+    sections: [
+      {
+        title: 'Continuous Deployment',
+        sections: [
+          {
+            title: 'Deployment Architecture',
+            href: '/plural-features/continuous-deployment/deployment-architecture',
           },
           {
             title: 'Git Service',
-            href: '/deployments/operator/git-service',
-          },
-          {
-            title: 'Global Service',
-            href: '/deployments/operator/global-service',
+            href: '/plural-features/continuous-deployment/git-service',
           },
           {
             title: 'Helm Service',
-            href: '/deployments/operator/helm-service',
+            href: '/plural-features/continuous-deployment/helm-service',
+          },
+          {
+            title: 'Global Service',
+            href: '/plural-features/continuous-deployment/global-service',
           },
         ],
-        href: '/deployments/operator',
+        href: '/plural-features/continuous-deployment',
       },
       {
-        title: 'PR',
+        title: 'Stacks Iac Management',
         sections: [
           {
-            title: 'PR CRDs',
-            href: '/deployments/pr/crds',
+            title: 'Customize Runners',
+            href: '/plural-features/stacks-iac-management/customize-runners',
           },
           {
-            title: 'PR Pipelines',
-            href: '/deployments/pr/pipelines',
+            title: 'PR Workflow',
+            href: '/plural-features/stacks-iac-management/pr-workflow',
           },
           {
-            title: 'PR Testing',
-            href: '/deployments/pr/testing',
+            title: 'Manual Runs',
+            href: '/plural-features/stacks-iac-management/manual-runs',
+          },
+          {
+            title: 'Local Execution',
+            href: '/plural-features/stacks-iac-management/local-execution',
+          },
+          {
+            title: 'Custom Stacks',
+            href: '/plural-features/stacks-iac-management/custom-stacks',
+          },
+          {
+            title: 'Auto Cancellation',
+            href: '/plural-features/stacks-iac-management/auto-cancellation',
+          },
+          {
+            title: 'Service Contexts',
+            href: '/plural-features/stacks-iac-management/service-contexts',
           },
         ],
-        href: '/deployments/pr',
+        href: '/plural-features/stacks-iac-management',
+      },
+      {
+        title: 'Service Catalog',
+        sections: [
+          {
+            title: 'Overview',
+            href: '/plural-features/service-catalog/overview',
+          },
+          {
+            title: 'Creation',
+            href: '/plural-features/service-catalog/creation',
+          },
+          {
+            title: 'Contributing',
+            href: '/plural-features/service-catalog/contributing',
+          },
+        ],
+        href: '/plural-features/service-catalog',
+      },
+      {
+        title: 'Plural AI',
+        sections: [
+          {
+            title: 'Setup',
+            href: '/plural-features/plural-ai/setup',
+          },
+          {
+            title: 'Architecture',
+            href: '/plural-features/plural-ai/architecture',
+          },
+          {
+            title: 'Cost',
+            href: '/plural-features/plural-ai/cost',
+          },
+        ],
+        href: '/plural-features/plural-ai',
       },
       {
         title: 'PR Automation',
-        href: '/deployments/pr-automation',
-      },
-      {
-        title: 'Private CA',
-        href: '/deployments/private-ca',
-      },
-      {
-        title: 'Sandboxing',
-        href: '/deployments/sandboxing',
-      },
-      {
-        title: 'Stacks',
-        href: '/deployments/stacks',
-      },
-      {
-        title: 'Templating Filters',
-        href: '/deployments/templating-filters',
+        sections: [
+          {
+            title: 'CRDs',
+            href: '/plural-features/pr-automation/crds',
+          },
+          {
+            title: 'Testing',
+            href: '/plural-features/pr-automation/testing',
+          },
+          {
+            title: 'Pipelines',
+            href: '/plural-features/pr-automation/pipelines',
+          },
+        ],
+        href: '/plural-features/pr-automation',
       },
       {
         title: 'Service Templating',
-        href: '/deployments/templating',
-      },
-      {
-        title: 'Terraform Interoperability',
-        href: '/deployments/terraform-interop',
-      },
-      {
-        title: 'Using the Operator',
-        href: '/deployments/using-operator',
+        sections: [
+          {
+            title: 'Templating Filters',
+            href: '/plural-features/service-templating/templating-filters',
+          },
+        ],
+        href: '/plural-features/service-templating',
       },
     ],
-    href: '/deployments',
+    href: '/plural-features',
   },
   {
     title: 'Faq',
     sections: [
       {
-        title: 'Security FAQ',
+        title: 'Security',
         href: '/faq/security',
       },
       {
-        title: 'Plural OIDC FAQ',
+        title: 'Plural OIDC',
         href: '/faq/plural-oidc',
       },
       {
-        title: 'Certifications FAQ',
+        title: 'Certifications',
         href: '/faq/certifications',
       },
       {
-        title: 'Paid Tiers FAQ',
+        title: 'Paid Tiers',
         href: '/faq/paid-tiers',
       },
     ],
     href: '/faq',
   },
   {
-    title: 'Getting Started',
-    sections: [
-      {
-        title: 'Getting Started with Deployments',
-        href: '/getting-started/deployments',
-      },
-    ],
-    href: '/getting-started',
-  },
-  {
-    title: 'How To Guides',
-    sections: [
-      {
-        title: 'Deploy',
-        sections: [
-          {
-            title: 'Deploy Microservice',
-            href: '/how-to/deploy/microservice',
-          },
-          {
-            title: 'Deploy Pipelines',
-            href: '/how-to/deploy/pipelines',
-          },
-          {
-            title: 'Deploy PR Automation',
-            href: '/how-to/deploy/pr-automation',
-          },
-        ],
-        href: '/how-to/deploy',
-      },
-      {
-        title: 'Set Up',
-        sections: [
-          {
-            title: 'Set Up Controllers',
-            href: '/how-to/set-up/controllers',
-          },
-          {
-            title: 'Set Up Management Cluster',
-            href: '/how-to/set-up/mgmt-cluster',
-          },
-          {
-            title: 'Set Up RBAC',
-            href: '/how-to/set-up/rbac',
-          },
-          {
-            title: 'Set Up SCM Connection',
-            href: '/how-to/set-up/scm-connection',
-          },
-          {
-            title: 'Set Up Workload Cluster',
-            href: '/how-to/set-up/workload-cluster',
-          },
-        ],
-        href: '/how-to/set-up',
-      },
-    ],
-    href: '/how-to',
-  },
-  {
-    title: 'Reference',
+    title: 'Resources',
     sections: [
       {
         title: 'Release Notes',
-        href: '/reference/release-notes',
+        href: '/resources/release-notes',
+      },
+      {
+        title: 'API',
+        href: '/resources/api',
       },
     ],
-    href: '/reference',
-  },
-  {
-    title: 'Service Catalog',
-    sections: [
-      {
-        title: 'Contributing to Service Catalog',
-        href: '/service-catalog/contributing',
-      },
-      {
-        title: 'Create Service Catalog',
-        href: '/service-catalog/creation',
-      },
-      {
-        title: 'Service Catalog Overview',
-        href: '/service-catalog/overview',
-      },
-    ],
-    href: '/service-catalog',
-  },
-  {
-    title: 'Stacks',
-    sections: [
-      {
-        title: 'Auto-Cancellation',
-        href: '/stacks/auto-cancellation',
-      },
-      {
-        title: 'Custom Stacks',
-        href: '/stacks/custom-stacks',
-      },
-      {
-        title: 'Customize Stack Runners',
-        href: '/stacks/customize-runners',
-      },
-      {
-        title: 'Local Execution',
-        href: '/stacks/local-execution',
-      },
-      {
-        title: 'Manual Runs',
-        href: '/stacks/manual-runs',
-      },
-      {
-        title: 'PR Workflow',
-        href: '/stacks/pr-workflow',
-      },
-    ],
-    href: '/stacks',
+    href: '/resources',
   },
 ])
 

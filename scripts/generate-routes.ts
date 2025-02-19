@@ -9,6 +9,7 @@ function pathToId(filePath: string): string {
     .replace(/^pages\//, '')
     .replace(/\.md$/, '')
     .replace(/\/index$/, '')
+    .replace(/\d+-/g, '') // Remove numeric prefixes from all path segments
     .replace(/[/-]/g, '_')
     .toLowerCase()
 }
@@ -19,6 +20,7 @@ function normalizeRoutePath(filePath: string): string {
     .replace(/^pages\//, '')
     .replace(/\.md$/, '')
     .replace(/\/index$/, '')
+    // Keep numeric prefixes in the path
 }
 
 // Get all markdown files recursively
@@ -41,7 +43,8 @@ function getAllMarkdownFiles(dir: string): string[] {
 // Extract section from file path
 function getSection(filePath: string): string {
   const parts = filePath.replace(/^pages\//, '').split('/')
-  return parts.length > 1 ? parts[0] : 'overview'
+  const section = parts.length > 1 ? parts[0] : 'overview'
+  return section.replace(/^\d+-/, '') // Remove numeric prefix from section
 }
 
 // Get title from frontmatter or filename

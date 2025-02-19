@@ -2,7 +2,6 @@
 title: Service Templating
 description: Applying On-The-Fly Configuration to Your Plural Services
 ---
-
 # Overview
 
 Plural allows a number of different mechanism to template service configuration into your yaml before applying to the destination cluster. There are a few key usecases for this:

@@ -2,7 +2,6 @@
 title: Pull Request Automation
 description: Self-Service GitOps with PR Automation
 ---
-
 GitOps and Infrastructure as Code workflows are extremely powerful, but they include a fair amount of manual care and feeding to operate longterm. Each reconfiguration requires a code change which usually involves manual human effort that is expensive and prone to error. Plural intends to solve that by providing a toolkit to automate on top of your IaC workflows using a number of key patterns:
 
 - custom Renovate build meant to provide turnkey setup for PR generation for dependency releases, like helm charts

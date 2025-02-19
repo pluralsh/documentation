@@ -2,7 +2,6 @@
 title: Projects and Multi Tenancy
 description: Handling Enterprise-Grade Complexity with Plural Projects
 ---
-
 ## Overview
 
 One of the key challenges for implementing fleet management throughout an enterprise is balancing the competing concerns of gaining single-pane-of-glass management over your Kubernetes estate across multiple organizations or lines of business, and adhering to principals of least privilege and other security best practices that can easily be thrown by the wayside in implementing that degree of automation. In particular, these main concerns need to be satisfied to confidently implement fleet management:

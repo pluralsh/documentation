@@ -2,7 +2,6 @@
 title: Stacks
 description: How to manage Infrastructure as Code at Scale Using Plural
 ---
-
 The goal of Plural Stacks is to provide a scalable framework to manage infrastructure as code like Terraform, Ansible and Pulumi with a kubernetes-friendly, api-driven approach.  The core workflow is as follows:
 
 * Declaratively define a stack with a type (terraform, ansible, etc), a location in a git repository to source code from, and a cluster on which it will execute

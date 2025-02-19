@@ -1872,7 +1872,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@emotion/react@npm:11.11.1":
+"@emotion/react@npm:^11.11.1":
   version: 11.11.1
   resolution: "@emotion/react@npm:11.11.1"
   dependencies:
@@ -13999,7 +13999,7 @@ __metadata:
   dependencies:
     "@apollo/client": 3.7.15
     "@docsearch/react": 3.5.1
-    "@emotion/react": 11.11.1
+    "@emotion/react": ^11.11.1
     "@emotion/styled": 11.11.0
     "@graphql-codegen/add": 5.0.0
     "@graphql-codegen/cli": 4.0.1
@@ -14018,6 +14018,7 @@ __metadata:
     "@react-aria/ssr": 3.6.0
     "@react-stately/list": 3.8.1
     "@react-stately/select": 3.5.1
+    "@react-stately/selection": ^3.19.0
     "@types/node": 20.3.1
     "@types/react": 18.3.3
     "@types/react-dom": 18.3.0

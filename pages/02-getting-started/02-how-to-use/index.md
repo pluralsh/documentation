@@ -2,7 +2,6 @@
 title: How To
 description: How To Guides for Getting the Most Out of Plural
 ---
-
 These tutorials will guide you through a miniaturized example of the Kubernetes adoption process.  The basic steps are:
 
 1. Setup your management cluster

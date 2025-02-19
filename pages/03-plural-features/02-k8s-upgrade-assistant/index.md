@@ -2,7 +2,6 @@
 title: Managing Deprecations and K8s upgrades
 description: Navigating Kubernetes API deprecations with Plural
 ---
-
 The Kubernetes API is constantly evolving, and APIs are periodically changed and deprecated. Before upgrading the Kubernetes version running on a cluster, you must make sure any API changes are addressed.
 
 Plural will automatically surface deprecated resources detected on the cluster, and link to the location in Github for review.

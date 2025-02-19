@@ -1,9 +1,7 @@
 ---
 title: Getting Started with Plural CD
-description: >-
-  Guides you can use to get up and running quickly with Plural CD.
+description: Guides you can use to get up and running quickly with Plural CD.
 ---
-
 ## Overview
 
 This guide is meant to give you an overview of all the materials needed to get started with Plural’s Fleet Management solution.

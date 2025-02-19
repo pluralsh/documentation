@@ -2,7 +2,6 @@
 title: Kubernetes Dashboard
 description: Configure Access to the embedded Kubernetes Dashboard
 ---
-
 ## Introduction
 
 Your Plural console comes with a fully embedded Kubernetes dashboard.  This is meant to solve for a few things:

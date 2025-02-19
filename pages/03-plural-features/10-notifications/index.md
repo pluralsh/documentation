@@ -2,7 +2,6 @@
 title: Notification Configuration
 description: Configure fine-grain notification routing with CRDs
 ---
-
 ## Overview
 
 Plural has the ability to deliver notifications to most common chat solutions, particularly:

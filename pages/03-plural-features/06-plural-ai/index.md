@@ -2,7 +2,6 @@
 title: Plural AI
 description: Plural's AI Engine Removes the Gruntwork from Infrastructure
 ---
-
 {% callout severity="info" %}
 If you just want to skip the text and see it in action, skip to the {% doclink to="ai-overview" %}demo video{% /doclink %}
 {% /callout %}

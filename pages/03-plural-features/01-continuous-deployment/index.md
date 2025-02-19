@@ -1,8 +1,7 @@
 ---
 title: Cluster Management
-description: Manage a Kubernetes Fleet at Scale with Cluster API, or at your own pace
+description: 'Manage a Kubernetes Fleet at Scale with Cluster API, or at your own pace'
 ---
-
 ## Overview
 
 Plural has a fully featured operator for creating and managing all core resources within its api. This enables a complete GitOps flow, which opens has a few nice workflows for managing your resources:
