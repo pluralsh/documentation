@@ -19,12 +19,11 @@
     "fix:css": "stylelint src/**/*.css --fix",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
-    "generate:routes": "ts-node scripts/generate-routes.ts",
-    "generate:nav": "ts-node scripts/generate-nav-data.ts",
+    "generate:routes": "ts-node scripts/generate-unified-routes.ts",
     "find:links": "ts-node scripts/find-internal-links.ts",
     "replace:links": "ts-node scripts/replace-links.ts",
     "watch:routes": "ts-node scripts/watch-routes.ts",
-    "update:docs": "run-s generate:routes generate:nav find:links replace:links"
+    "update:docs": "run-s generate:routes find:links replace:links"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",

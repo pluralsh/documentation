@@ -14,5 +14,19 @@ export const routeSchema = z.object({
 export type DocRoute = z.infer<typeof routeSchema>
 export type DocRouteMap = Record<string, DocRoute>
 
+// Navigation types
+export type NavItem = {
+  title: string
+  href: string
+  toMenu?: 'docs' | 'appCatalog' | 'plural'
+  icon?: any
+  sections?: NavItem[]
+}
+
+export type NavMenu = NavItem[]
+export type NavMenuId = 'docs' | 'appCatalog'
+export type MenuId = NavMenuId | 'plural'
+export type NavData = Record<NavMenuId, NavMenu>
+
 // Type-safe route key type
 export type RouteKey = keyof typeof import('./registry').docRoutes
