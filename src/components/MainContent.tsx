@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import { useContext } from 'react'
+import React, { Suspense, useContext, useEffect, useState } from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
@@ -65,7 +65,6 @@ function ContentHeaderUnstyled({
   pageHasContent?: boolean
 }) {
   const router = useRouter()
-
   const isAppCatalog = isAppCatalogRoute(router.asPath)
 
   return (
@@ -82,14 +81,34 @@ function ContentHeaderUnstyled({
   )
 }
 
+ContentHeaderUnstyled.defaultProps = {
+  title: undefined,
+  description: undefined,
+  className: undefined,
+  pageHasContent: true,
+}
+
 export const ContentHeader = styled(ContentHeaderUnstyled)(({ theme }) => ({
   marginBottom: theme.spacing.xxlarge,
 }))
 
-export default function MainContent({ Component, title, description }) {
+export default function MainContent({
+  Component,
+  title,
+  description,
+}: {
+  Component: React.ComponentType<any>
+  title?: ReactNode
+  description?: ReactNode
+}) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps || {}
   const router = useRouter()
+  const [isClient, setIsClient] = useState(false)
+
+  useEffect(() => {
+    setIsClient(true)
+  }, [])
 
   const isAppCatalogIndex =
     isAppCatalogRoute(router.asPath) &&
@@ -109,12 +128,20 @@ export default function MainContent({ Component, title, description }) {
               pageHasContent={(markdoc?.content as any)?.children?.length > 0}
             />
           )}
-          <Component {...pageProps} />
-          {isAppCatalogIndex && (
-            <>
-              <Heading level={2}>Our Catalog</Heading>
-              <AppsList />
-            </>
+          {isClient ? (
+            <Suspense fallback={<div>Loading content...</div>}>
+              <Component {...pageProps} />
+            </Suspense>
+          ) : (
+            <Component {...pageProps} />
+          )}
+          {isAppCatalogIndex && isClient && (
+            <Suspense fallback={<div>Loading catalog...</div>}>
+              <>
+                <Heading level={2}>Our Catalog</Heading>
+                <AppsList />
+              </>
+            </Suspense>
           )}
         </article>
         <PageDivider />
@@ -136,4 +163,9 @@ export default function MainContent({ Component, title, description }) {
       </ContentWrapper>
     </>
   )
+}
+
+MainContent.defaultProps = {
+  title: undefined,
+  description: undefined,
 }
