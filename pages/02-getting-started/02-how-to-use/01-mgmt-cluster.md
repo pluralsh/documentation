@@ -5,7 +5,7 @@ description: Using Plural CLI to deploy a management (MGMT) Kubernetes cluster
 
 # Overview
 
-Plural's architecture, described {% doclink to="deploy-arch" %}here{% /doclink %} has two tiers:
+Plural's architecture, described {% doclink to="overview_architecture" %}here{% /doclink %} has two tiers:
 
 * Management Cluster - a single management plane that will oversee the core responsibilities of fleet management: CD, terraform management, dashboarding, etc.
 * Workload Cluster - a zoo of clusters you provision to run actual development and production workloads for your enterprise.
@@ -37,11 +37,11 @@ Another benefit of the `plural up` command is it bootstraps an entire GitOps rep
 
 ## `plural up` (still pretty easy)
 
-`plural up` is a single command to spawn our management cluster from zero in any of the big three clouds (AWS, Azure, GCP).  We have docs thoroughly going over the process to use it {% doclink to="cli-quick" %}here{% /doclink %}.
+`plural up` is a single command to spawn our management cluster from zero in any of the big three clouds (AWS, Azure, GCP).  We have docs thoroughly going over the process to use it {% doclink to="getting_started_first_steps_cli_quickstart" %}here{% /doclink %}.
 
 There are a few reasons you'd consider using this over Plural Cloud:
 
-* Security - you want to ensure Plural hosts absolutely no cloud-related permissions.  You can even follow our {% doclink to="sandbox" %}sandboxing guide{% /doclink %} to remove all egress to Plural (this requires an enterprise license key)
+* Security - you want to ensure Plural hosts absolutely no cloud-related permissions.  You can even follow our {% doclink to="getting_started_advanced_config_sandboxing" %}sandboxing guide{% /doclink %} to remove all egress to Plural (this requires an enterprise license key)
 * Networking - you want to host the Plural Console on a private network entirely.  Plural Cloud currently is always publicly hosted.
 * Integration - Oftentimes resources needed by Plural are themselves hosted on private networks, for instance Git Repositories.  In that case, it's logistically easier to self-host and place it in an integrated network. 
 * Scaling - you want complete control as to how Plural Scales for your enterprise.  `dedicated` cloud hosting does this perfectly well too, but some orgs want their own hands on the wheel.

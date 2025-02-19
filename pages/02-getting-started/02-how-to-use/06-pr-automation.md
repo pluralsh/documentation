@@ -13,7 +13,7 @@ We'll show how this can work beyond just a K8s provisioning usecase, to provisio
 * Using that PRA to create an `InfrastructureStack` to provision the s3 bucket using a Plural terraform stack.
 
 {% callout severity="warning" %}
-This Guide will not work properly unless you've finished the tutorial {% doclink to="setup-scm" %}Integrate with your Source Control Provider{% /doclink %}.
+This Guide will not work properly unless you've finished the tutorial {% doclink to="getting_started_scm_connection" %}Integrate with your Source Control Provider{% /doclink %}.
 {% /callout %}
 
 ## Define the PR Automation

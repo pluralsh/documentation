@@ -38,7 +38,7 @@ If you haven't already installed the Plural CLI, we have a homebrew installation
 brew install pluralsh/plural/plural
 ```
 
-If you don't have homebrew, there are more advanced installation instructions {% doclink to="quickstart" %}here{% /doclink %}.
+If you don't have homebrew, there are more advanced installation instructions {% doclink to="getting_started_quickstart" %}here{% /doclink %}.
 
 This will do a few things:
 

@@ -1,6 +1,6 @@
 import fs from 'fs'
 import path from 'path'
-import { docRoutes } from '../src/routes/docs'
+import { docRoutes } from '../src/routes/docs.generated'
 
 // Regular expression to find markdown links
 const MARKDOWN_LINK_REGEX = /\[([^\]]+)\]\(([^)]+)\)/g

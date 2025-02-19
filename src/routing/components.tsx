@@ -17,7 +17,6 @@ export function DocLink({
   to,
   fallbackText,
   children,
-  className,
   ...props
 }: DocLinkProps) {
   // Handle both direct route keys and route IDs
@@ -53,7 +52,6 @@ export function DocLink({
   return (
     <DSLink
       href={href}
-      className={className}
       {...props}
     >
       {children}
