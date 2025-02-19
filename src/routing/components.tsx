@@ -1,8 +1,10 @@
 import { type ComponentProps } from 'react'
+
 import { Link as DSLink } from '@pluralsh/design-system/dist/markdoc/components'
+
 import { docRoutes } from './registry'
-import { findRouteById } from './utils'
 import { type DocRoute } from './types'
+import { findRouteById } from './utils'
 
 type DocLinkProps = Omit<ComponentProps<typeof DSLink>, 'href'> & {
   to: string
@@ -35,6 +37,7 @@ export function DocLink({
   // If still not found, try normalizing the path
   if (!route) {
     const normalizedTo = to.toLowerCase().replace(/[^a-z0-9-]/g, '-')
+
     route = findRouteById(Object.values(docRoutes), normalizedTo)
   }
 
@@ -43,6 +46,7 @@ export function DocLink({
       `No route found for: ${to}. Available routes:`,
       Object.keys(docRoutes)
     )
+
     return fallbackText || children
   }
 
@@ -57,4 +61,8 @@ export function DocLink({
       {children}
     </DSLink>
   )
+}
+
+DocLink.defaultProps = {
+  fallbackText: undefined,
 }

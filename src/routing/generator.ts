@@ -1,6 +1,8 @@
 import fs from 'fs'
 import path from 'path'
+
 import matter from 'gray-matter'
+
 import {
   type DocRoute,
   type DocRouteMap,
@@ -36,13 +38,10 @@ function pathToId(filePath: string): string {
 
 // Utility to convert path to route path
 function normalizeRoutePath(filePath: string): string {
-  return (
-    '/' +
-    filePath
-      .replace(/^pages\//, '')
-      .replace(/\.md$/, '')
-      .replace(/\/index$/, '')
-  )
+  return `/${filePath
+    .replace(/^pages\//, '')
+    .replace(/\.md$/, '')
+    .replace(/\/index$/, '')}`
 }
 
 // Get all markdown files recursively
@@ -52,6 +51,7 @@ function getAllMarkdownFiles(dir: string): string[] {
 
   // First check for index.md in current directory
   const indexEntry = entries.find((e) => e.isFile() && e.name === 'index.md')
+
   if (indexEntry) {
     files.push(path.join(dir, 'index.md'))
   }
@@ -59,6 +59,7 @@ function getAllMarkdownFiles(dir: string): string[] {
   // Then process other entries
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name)
+
     if (
       entry.isDirectory() &&
       !entry.name.startsWith('_') &&
@@ -82,6 +83,7 @@ function getSection(filePath: string): string {
   const parts = filePath.replace(/^pages\//, '').split('/')
   // Use the first path segment as section, even for top-level index files
   const section = parts[0]
+
   return section.replace(/^\d+-/, '') // Remove numeric prefix from section
 }
 
@@ -96,6 +98,7 @@ function formatTitle(text: string): string {
     .map((part) => {
       // Check for special cases first
       const lowerPart = part.toLowerCase()
+
       if (SPECIAL_CASES[lowerPart]) {
         return SPECIAL_CASES[lowerPart]
       }
@@ -114,10 +117,12 @@ function formatTitle(text: string): string {
 // Get title from frontmatter or filename
 function getTitle(filePath: string, content: string): string {
   const { data } = matter(content)
+
   if (data.title) return data.title
 
   // Fall back to filename
   const basename = path.basename(filePath, '.md')
+
   return basename === 'index'
     ? formatTitle(path.basename(path.dirname(filePath)))
     : formatTitle(basename)
@@ -133,7 +138,7 @@ function validateRoute(route: DocRoute): string[] {
 
   // Check if file exists
   const possiblePaths = [
-    path.join(process.cwd(), 'pages', route.path + '.md'),
+    path.join(process.cwd(), 'pages', `${route.path}.md`),
     path.join(process.cwd(), 'pages', route.path, 'index.md'),
     path.join(process.cwd(), 'pages', route.path),
   ]
@@ -173,10 +178,12 @@ function generateRoutes(
     if (existing) {
       // Preserve existing route with its metadata
       const [key, route] = existing
+
       newRoutes[key] = route
 
       // Validate existing route
       const routeErrors = validateRoute(route)
+
       if (routeErrors.length > 0) {
         errors[key] = routeErrors
       }
@@ -191,6 +198,7 @@ function generateRoutes(
 
       // Validate new route
       const routeErrors = validateRoute(newRoute)
+
       if (routeErrors.length > 0) {
         errors[id] = routeErrors
       } else {
@@ -202,10 +210,11 @@ function generateRoutes(
   // Print validation errors
   if (Object.keys(errors).length > 0) {
     console.error('\nRoute validation errors:')
-    Object.entries(errors).forEach(([key, routeErrors]) => {
+    for (const [key, routeErrors] of Object.entries(errors)) {
       console.error(`\n${key}:`)
       routeErrors.forEach((error) => console.error(`  - ${error}`))
-    })
+    }
+    throw new Error('Invalid route configuration')
   }
 
   return newRoutes
@@ -234,6 +243,7 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
         href: `/${section}`,
         sections: [],
       }
+
       sectionMap.set(section, sectionItem)
       nav.push(sectionItem)
     }
@@ -264,6 +274,7 @@ function generateRouteCode(routes: DocRouteMap): string {
           if (typeof v === 'string') {
             return `    ${k}: '${v}',`
           }
+
           return `    ${k}: ${v},`
         })
         .join('\n')
