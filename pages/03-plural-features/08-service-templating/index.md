@@ -29,7 +29,7 @@ You will have the following data fields available for templating:
 - `configuration` - a `map[string]string` which contains any secrets configured for that service
 - `cluster` - a stripped down struct containing metadata about a cluster
 - `imports` - imported data from Plural Stacks
-- `contexts` - a `map[string]map[string]interface{}` containing a map of maps, keyed on context name. The contexts are usually created in other tools like terraform, and can be bound to a service by name. See our {% doclink to="terraform-interop" %}docs{% /doclink %} on terraform interoperability to learn more
+- `contexts` - a `map[string]map[string]interface{}` containing a map of maps, keyed on context name. The contexts are usually created in other tools like terraform, and can be bound to a service by name. See our {% doclink to="plural_features_stacks_iac_management_service_contexts" %}docs{% /doclink %} on terraform interoperability to learn more
 
 You can access them using `{{ }}`. As an example, if you wanted to template a service secret into a kubernetes secret, it might look something like:
 
@@ -42,7 +42,7 @@ stringData:
 
 ## Available Functions
 
-You can find the list of all Liquid filter functions that we support {% doclink to="templating-filters" %}here{% /doclink %}.
+You can find the list of all Liquid filter functions that we support {% doclink to="plural_features_service_templating_templating_filters" %}here{% /doclink %}.
 
 ## End-to-End Example
 

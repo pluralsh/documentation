@@ -3,7 +3,7 @@ title: Plural AI
 description: Plural's AI Engine Removes the Gruntwork from Infrastructure
 ---
 {% callout severity="info" %}
-If you just want to skip the text and see it in action, skip to the {% doclink to="ai-overview" %}demo video{% /doclink %}
+If you just want to skip the text and see it in action, skip to the {% doclink to="plural_features_plural_ai" %}demo video{% /doclink %}
 {% /callout %}
 
 Managing infrastructure is full of mind-numbing tasks, from troubleshooting the same misconfiguration for the hundredth time, to whack-a-moling Datadog alerts, to playing internal IT support to application developers who cannot be bothered to learn the basics of foundational technology like Kubernetes.  Plural AI allows you to outsource all those time-sucks to LLMs so you can focus on building value-added platforms for your enterprise.

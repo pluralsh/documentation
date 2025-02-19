@@ -6,7 +6,7 @@ description: Defining your own service catalogs with Plural
 ## Overview
 
 {% callout severity="info" %}
-TLDR: skip to {% doclink to="svc-cat-create" %}Examples{% /doclink %} to see a link to our Github repository with our full default catalog for working examples
+TLDR: skip to {% doclink to="plural_features_service_catalog_creation" %}Examples{% /doclink %} to see a link to our Github repository with our full default catalog for working examples
 {% /callout %}
 
 Plural Service Catalogs are ultimately driven off of two kubernetes custom resources: `Catalog` and `PrAutomation`.  Here are examples of both:

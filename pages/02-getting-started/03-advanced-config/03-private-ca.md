@@ -107,7 +107,7 @@ spec:
 
 ## Configure your agents
 
-The agent similarly allows for configuring volumes/volumeMounts. You'll want to modify your installation to use custom values. This involves modifying the global agent settings for your installation then passing custom values as you install the agent via cli or terraform. The documentation {% doclink to="sandbox" %}here{% /doclink %} should provide a good overview of how to do this, geared towards customizing docker image registries.
+The agent similarly allows for configuring volumes/volumeMounts. You'll want to modify your installation to use custom values. This involves modifying the global agent settings for your installation then passing custom values as you install the agent via cli or terraform. The documentation {% doclink to="getting_started_advanced_config_sandboxing" %}here{% /doclink %} should provide a good overview of how to do this, geared towards customizing docker image registries.
 
 The specific values to bind the CA bundle to the agent container would be:
 
