@@ -4,6 +4,7 @@ const nextConfig = {
     '@pluralsh/design-system',
     'honorable',
     'honorable-theme-default',
+    'honorable-recipe-mapper',
   ],
   reactStrictMode: false,
   compiler: {
