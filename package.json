@@ -1,7 +1,7 @@
 {
   "private": true,
   "engines": {
-    "node": "18.16.1"
+    "node": "18.17.0"
   },
   "scripts": {
     "dev": "run-s generate:routes && concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
@@ -55,9 +55,7 @@
     "js-yaml": "4.1.0",
     "lodash": "4.17.21",
     "memoize-one": "6.0.0",
-    "next": "13.4.5",
-    "next-compose-plugins": "2.2.1",
-    "next-transpile-modules": "10.0.0",
+    "next": "14.2.15",
     "posthog-js": "1.68.1",
     "raw-loader": "4.0.2",
     "react": "18.3.1",
