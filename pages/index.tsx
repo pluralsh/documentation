@@ -194,68 +194,30 @@ function Index() {
           <Heading id={tableOfContents[1].id}>
             {tableOfContents[1].title}
           </Heading>
-          <Body2>Find what’s most relevant to you</Body2>
+          <Body2>Find what's most relevant to you</Body2>
         </SectionHeading>
         <CardLinkGrid>
           <CardLink
             heading="Quickstart"
             icon={<MagicWandIcon />}
-            href="/how-to/set-up/mgmt-cluster"
+            href="/getting-started/first-steps"
           >
             A guide to setting up a cluster quickly
           </CardLink>
           <CardLink
             heading="Security"
             icon={<PadlockLockedIcon />}
-            href="/operations/security"
+            href="/faq/plural-oidc"
           >
             What does Plural have access to?
           </CardLink>
           <CardLink
             heading="Guided tour"
             icon={<GitPullIcon />}
-            href="/how-to"
+            href="/getting-started/how-to-use"
           >
             A guided walkthrough of the majority of Plural's Fleet Management
             capabilties.
-          </CardLink>
-          <CardLink
-            heading="Troubleshooting"
-            icon={<ToolsIcon />}
-            href="/reference/troubleshooting"
-          >
-            Common issues or errors.
-          </CardLink>
-        </CardLinkGrid>
-      </Section>
-      <Section>
-        <SectionHeading>
-          <Heading id={tableOfContents[2].id}>
-            {tableOfContents[2].title}
-          </Heading>
-          <Body2>
-            Join the group of Plural users and contributors that are helping
-            shape the future of DevOps.
-          </Body2>
-        </SectionHeading>
-        <CardLinkGrid>
-          <CardLink
-            heading="Discord"
-            icon={<DiscordIcon />}
-            href={DISCORD_LINK}
-            target="_blank"
-            rel="nofollow noreferrer"
-          >
-            Join the discussion and get help.
-          </CardLink>
-          <CardLink
-            heading="Become an open-sourcerer"
-            icon={<SourcererHatIcon />}
-            href="https://github.com/pluralsh/plural"
-            target="_blank"
-            rel="nofollow noreferrer"
-          >
-            Start your contribution journey.
           </CardLink>
         </CardLinkGrid>
       </Section>
@@ -273,11 +235,6 @@ const tableOfContents = [
     level: 2,
     id: 'explore-topics',
     title: 'Explore Topics',
-  },
-  {
-    level: 2,
-    id: 'join-the-community',
-    title: 'Join the community',
   },
 ]
 
