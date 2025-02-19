@@ -26,14 +26,14 @@ If you are using a machine that is not compatible with homebrew, we recommend si
 
 If you haven't already, you'll need to follow the Plural guide to install Console. There are two recommended ways to do this:
 
-- {% doclink to="getting_started_existing_cluster" %}Bring Your Own Cluster{% /doclink %} - you've created a kubernetes cluster your way with all the main prequisites. You can use helm to install the management plane and then use the Console to manage itself from there.
+- {% doclink to="getting_started_first_steps_existing_cluster" %}Bring Your Own Cluster{% /doclink %} - you've created a kubernetes cluster your way with all the main prequisites. You can use helm to install the management plane and then use the Console to manage itself from there.
 - `plural up` - a single command to create a new management cluster on the major clouds, wire up a basic GitOps setup and get you started.
 
 Both are pretty flexible, and even if you chose to use the BYOK method, we recommend looking into some of our example `plural up` repos to get some ideas on how to use our CRDs and terraform provider with all the other tools they'll commonly touch. You can see an example `plural up` repository [here](https://github.com/pluralsh/plural-up-demo).
 
 ## Use `plural up` to create your first management console
 
-First you'll want to follow our guide [here](getting-started/cli-quickstart) to install our CLI. Once you've done this, you'll simply run:
+First you'll want to follow our guide {% doclink to="getting_started_first_steps_cli_quickstart" %}here{% /doclink %} to install our CLI. Once you've done this, you'll simply run:
 
 ```sh
 plural up # optionally add --service-account <email> if you want to use a service account to group manage this console
