@@ -171,6 +171,11 @@ function buildNavStructure(dirPath: string, basePath: string = ''): NavItem[] {
     return a.name.localeCompare(b.name)
   })
 
+  // Check if directory has an index file
+  const hasIndex = sortedEntries.some(entry => 
+    entry.isFile() && (entry.name === 'index.md' || entry.name === 'index.mdoc' || entry.name === 'index.tsx')
+  )
+
   for (const entry of sortedEntries) {
     // Skip hidden files, Next.js special files, and non-content files
     if (entry.name.startsWith('.') || isNextSpecialFile(entry.name)) {
@@ -182,16 +187,17 @@ function buildNavStructure(dirPath: string, basePath: string = ''): NavItem[] {
 
     if (entry.isDirectory()) {
       const subItems = buildNavStructure(fullPath, relativePath)
-      if (subItems.length > 0) {
-        const dirItem: NavItem = {
-          title: getTitle(relativePath),
-          sections: subItems,
-          // Always add href for directories that have items
-          href: normalizeHref(relativePath)
-        }
-
-        items.push(dirItem)
+      // Create directory item even if it only has an index file
+      const dirItem: NavItem = {
+        title: getTitle(relativePath),
+        href: normalizeHref(relativePath)
       }
+      
+      if (subItems.length > 0) {
+        dirItem.sections = subItems
+      }
+      
+      items.push(dirItem)
     } else if (isContentFile(entry.name)) {
       // Skip index files as they're handled with directories
       if (entry.name === 'index.md' || entry.name === 'index.mdoc' || entry.name === 'index.tsx') {

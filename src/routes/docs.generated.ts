@@ -50,6 +50,13 @@ export const docRoutes: DocRouteMap = {
     section: 'overview',
   },
 
+  getting_started_first_steps: {
+    path: '/02-getting-started/01-first-steps',
+    title: 'Getting Started with Plural CD',
+    id: 'getting_started_first_steps',
+    section: 'getting-started',
+  },
+
   getting_started_first_steps_cli_quickstart: {
     path: '/02-getting-started/01-first-steps/01-cli-quickstart',
     title: 'Plural CD CLI Quickstart',
@@ -64,10 +71,10 @@ export const docRoutes: DocRouteMap = {
     section: 'getting-started',
   },
 
-  getting_started_first_steps: {
-    path: '/02-getting-started/01-first-steps',
-    title: 'Getting Started with Plural CD',
-    id: 'getting_started_first_steps',
+  getting_started_how_to_use: {
+    path: '/02-getting-started/02-how-to-use',
+    title: 'How To',
+    id: 'getting_started_how_to_use',
     section: 'getting-started',
   },
 
@@ -127,10 +134,10 @@ export const docRoutes: DocRouteMap = {
     section: 'getting-started',
   },
 
-  getting_started_how_to_use: {
-    path: '/02-getting-started/02-how-to-use',
-    title: 'How To',
-    id: 'getting_started_how_to_use',
+  getting_started_advanced_config: {
+    path: '/02-getting-started/03-advanced-config',
+    title: 'Advanced Config',
+    id: 'getting_started_advanced_config',
     section: 'getting-started',
   },
 
@@ -155,11 +162,11 @@ export const docRoutes: DocRouteMap = {
     section: 'getting-started',
   },
 
-  getting_started_advanced_config: {
-    path: '/02-getting-started/03-advanced-config',
-    title: 'Advanced Config',
-    id: 'getting_started_advanced_config',
-    section: 'getting-started',
+  plural_features_continuous_deployment: {
+    path: '/03-plural-features/01-continuous-deployment',
+    title: 'Cluster Management',
+    id: 'plural_features_continuous_deployment',
+    section: 'plural-features',
   },
 
   plural_features_continuous_deployment_deployment_architecture: {
@@ -190,17 +197,17 @@ export const docRoutes: DocRouteMap = {
     section: 'plural-features',
   },
 
-  plural_features_continuous_deployment: {
-    path: '/03-plural-features/01-continuous-deployment',
-    title: 'Cluster Management',
-    id: 'plural_features_continuous_deployment',
-    section: 'plural-features',
-  },
-
   plural_features_k8s_upgrade_assistant: {
     path: '/03-plural-features/02-k8s-upgrade-assistant',
     title: 'Managing Deprecations and K8s upgrades',
     id: 'plural_features_k8s_upgrade_assistant',
+    section: 'plural-features',
+  },
+
+  plural_features_stacks_iac_management: {
+    path: '/03-plural-features/03-stacks-iac-management',
+    title: 'Stacks',
+    id: 'plural_features_stacks_iac_management',
     section: 'plural-features',
   },
 
@@ -253,10 +260,10 @@ export const docRoutes: DocRouteMap = {
     section: 'plural-features',
   },
 
-  plural_features_stacks_iac_management: {
-    path: '/03-plural-features/03-stacks-iac-management',
-    title: 'Stacks',
-    id: 'plural_features_stacks_iac_management',
+  plural_features_service_catalog: {
+    path: '/03-plural-features/04-service-catalog',
+    title: 'Service Catalog',
+    id: 'plural_features_service_catalog',
     section: 'plural-features',
   },
 
@@ -281,17 +288,17 @@ export const docRoutes: DocRouteMap = {
     section: 'plural-features',
   },
 
-  plural_features_service_catalog: {
-    path: '/03-plural-features/04-service-catalog',
-    title: 'Service Catalog',
-    id: 'plural_features_service_catalog',
-    section: 'plural-features',
-  },
-
   plural_features_kubernetes_dashboard: {
     path: '/03-plural-features/05-kubernetes-dashboard',
     title: 'Kubernetes Dashboard',
     id: 'plural_features_kubernetes_dashboard',
+    section: 'plural-features',
+  },
+
+  plural_features_plural_ai: {
+    path: '/03-plural-features/06-plural-ai',
+    title: 'Plural AI',
+    id: 'plural_features_plural_ai',
     section: 'plural-features',
   },
 
@@ -316,10 +323,10 @@ export const docRoutes: DocRouteMap = {
     section: 'plural-features',
   },
 
-  plural_features_plural_ai: {
-    path: '/03-plural-features/06-plural-ai',
-    title: 'Plural AI',
-    id: 'plural_features_plural_ai',
+  plural_features_pr_automation: {
+    path: '/03-plural-features/07-pr-automation',
+    title: 'Pull Request Automation',
+    id: 'plural_features_pr_automation',
     section: 'plural-features',
   },
 
@@ -344,10 +351,10 @@ export const docRoutes: DocRouteMap = {
     section: 'plural-features',
   },
 
-  plural_features_pr_automation: {
-    path: '/03-plural-features/07-pr-automation',
-    title: 'Pull Request Automation',
-    id: 'plural_features_pr_automation',
+  plural_features_service_templating: {
+    path: '/03-plural-features/08-service-templating',
+    title: 'Service Templating',
+    id: 'plural_features_service_templating',
     section: 'plural-features',
   },
 
@@ -355,13 +362,6 @@ export const docRoutes: DocRouteMap = {
     path: '/03-plural-features/08-service-templating/01-templating-filters',
     title: '01 Templating Filters',
     id: 'plural_features_service_templating_templating_filters',
-    section: 'plural-features',
-  },
-
-  plural_features_service_templating: {
-    path: '/03-plural-features/08-service-templating',
-    title: 'Service Templating',
-    id: 'plural_features_service_templating',
     section: 'plural-features',
   },
 

@@ -39,6 +39,7 @@ export function findNavItem(
 const rootNavData: NavMenu = deepFreeze([
   {
     title: 'Overview',
+    href: '/overview',
     sections: [
       {
         title: 'Introduction',
@@ -49,13 +50,14 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/overview/architecture',
       },
     ],
-    href: '/overview',
   },
   {
     title: 'Getting Started',
+    href: '/getting-started',
     sections: [
       {
         title: 'First Steps',
+        href: '/getting-started/first-steps',
         sections: [
           {
             title: 'CLI Quickstart',
@@ -66,10 +68,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/getting-started/first-steps/existing-cluster',
           },
         ],
-        href: '/getting-started/first-steps',
       },
       {
         title: 'How To Use',
+        href: '/getting-started/how-to-use',
         sections: [
           {
             title: 'Management Cluster',
@@ -104,10 +106,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/getting-started/how-to-use/pipelines',
           },
         ],
-        href: '/getting-started/how-to-use',
       },
       {
         title: 'Advanced Config',
+        href: '/getting-started/advanced-config',
         sections: [
           {
             title: 'Sandboxing',
@@ -122,16 +124,16 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/getting-started/advanced-config/private-ca',
           },
         ],
-        href: '/getting-started/advanced-config',
       },
     ],
-    href: '/getting-started',
   },
   {
     title: 'Plural Features',
+    href: '/plural-features',
     sections: [
       {
         title: 'Continuous Deployment',
+        href: '/plural-features/continuous-deployment',
         sections: [
           {
             title: 'Deployment Architecture',
@@ -150,10 +152,14 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/plural-features/continuous-deployment/global-service',
           },
         ],
-        href: '/plural-features/continuous-deployment',
+      },
+      {
+        title: 'K8s Upgrade Assistant',
+        href: '/plural-features/k8s-upgrade-assistant',
       },
       {
         title: 'Stacks Iac Management',
+        href: '/plural-features/stacks-iac-management',
         sections: [
           {
             title: 'Customize Runners',
@@ -184,10 +190,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/plural-features/stacks-iac-management/service-contexts',
           },
         ],
-        href: '/plural-features/stacks-iac-management',
       },
       {
         title: 'Service Catalog',
+        href: '/plural-features/service-catalog',
         sections: [
           {
             title: 'Overview',
@@ -202,10 +208,14 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/plural-features/service-catalog/contributing',
           },
         ],
-        href: '/plural-features/service-catalog',
+      },
+      {
+        title: 'Kubernetes Dashboard',
+        href: '/plural-features/kubernetes-dashboard',
       },
       {
         title: 'Plural AI',
+        href: '/plural-features/plural-ai',
         sections: [
           {
             title: 'Setup',
@@ -220,10 +230,10 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/plural-features/plural-ai/cost',
           },
         ],
-        href: '/plural-features/plural-ai',
       },
       {
         title: 'PR Automation',
+        href: '/plural-features/pr-automation',
         sections: [
           {
             title: 'CRDs',
@@ -238,23 +248,30 @@ const rootNavData: NavMenu = deepFreeze([
             href: '/plural-features/pr-automation/pipelines',
           },
         ],
-        href: '/plural-features/pr-automation',
       },
       {
         title: 'Service Templating',
+        href: '/plural-features/service-templating',
         sections: [
           {
             title: 'Templating Filters',
             href: '/plural-features/service-templating/templating-filters',
           },
         ],
-        href: '/plural-features/service-templating',
+      },
+      {
+        title: 'Projects And Multi Tenancy',
+        href: '/plural-features/projects-and-multi-tenancy',
+      },
+      {
+        title: 'Notifications',
+        href: '/plural-features/notifications',
       },
     ],
-    href: '/plural-features',
   },
   {
     title: 'Faq',
+    href: '/faq',
     sections: [
       {
         title: 'Security',
@@ -273,10 +290,10 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/faq/paid-tiers',
       },
     ],
-    href: '/faq',
   },
   {
     title: 'Resources',
+    href: '/resources',
     sections: [
       {
         title: 'Release Notes',
@@ -287,7 +304,6 @@ const rootNavData: NavMenu = deepFreeze([
         href: '/resources/api',
       },
     ],
-    href: '/resources',
   },
 ])
 

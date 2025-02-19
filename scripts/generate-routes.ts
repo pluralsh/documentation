@@ -28,11 +28,18 @@ function getAllMarkdownFiles(dir: string): string[] {
   const files: string[] = []
   const entries = fs.readdirSync(dir, { withFileTypes: true })
 
+  // First check for index.md in current directory
+  const indexEntry = entries.find(e => e.isFile() && e.name === 'index.md')
+  if (indexEntry) {
+    files.push(path.join(dir, 'index.md'))
+  }
+
+  // Then process other entries
   for (const entry of entries) {
     const fullPath = path.join(dir, entry.name)
     if (entry.isDirectory() && !entry.name.startsWith('_') && !entry.name.startsWith('.')) {
       files.push(...getAllMarkdownFiles(fullPath))
-    } else if (entry.isFile() && entry.name.endsWith('.md')) {
+    } else if (entry.isFile() && entry.name.endsWith('.md') && entry.name !== 'index.md') {
       files.push(fullPath)
     }
   }
@@ -43,7 +50,8 @@ function getAllMarkdownFiles(dir: string): string[] {
 // Extract section from file path
 function getSection(filePath: string): string {
   const parts = filePath.replace(/^pages\//, '').split('/')
-  const section = parts.length > 1 ? parts[0] : 'overview'
+  // Use the first path segment as section, even for top-level index files
+  const section = parts[0]
   return section.replace(/^\d+-/, '') // Remove numeric prefix from section
 }
 
