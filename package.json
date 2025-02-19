@@ -4,9 +4,9 @@
     "node": "18.16.1"
   },
   "scripts": {
-    "dev": "run-s update:docs && concurrently \"next dev\" \"yarn graphql:codegen:watch\" \"yarn watch:routes\"",
+    "dev": "run-s generate:routes && concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
     "dev:watch": "concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
-    "build": "run-s update:docs build:next",
+    "build": "run-s generate:routes build:next",
     "build:next": "next build",
     "start": "next start",
     "lint": "run-p lint:format lint:js lint:css",
@@ -19,9 +19,7 @@
     "fix:css": "stylelint src/**/*.css --fix",
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
-    "generate:routes": "ts-node scripts/generate-unified-routes.ts",
-    "watch:routes": "ts-node scripts/watch-routes.ts",
-    "update:docs": "yarn generate:routes"
+    "generate:routes": "ts-node scripts/generate-unified-routes.ts"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",
