@@ -25,10 +25,10 @@ This will give you a brief tour of using the `plural up` command to set up your 
 
 We also have thorough documentation to explain how to get your cluster up and running. We recommend using the following:
 
-- [CLI Quickstart](https://docs.plural.sh/deployments/cli-quickstart) - details of how to install the Plural Console either on an existing cluster using helm or also guides you through the `plural up` process.
-- [Import An Existing Cluster](https://docs.plural.sh/deployments/import-cluster) - some of the main ways to import a cluster you’ve created into Plural’s fleet manager. The main method is to simply use our CLI or to use our terraform provider.
+- {% doclink to="getting_started_first_steps_cli_quickstart" %}CLI Quickstart{% /doclink %} - details of how to install the Plural Console either on an existing cluster using helm or also guides you through the `plural up` process.
+- {% doclink to="getting_started_first_steps_existing_cluster" %}Import An Existing Cluster{% /doclink %} - some of the main ways to import a cluster you've created into Plural's fleet manager. The main method is to simply use our CLI or to use our terraform provider.
 - [Terraform Docs](https://registry.terraform.io/providers/pluralsh/plural/latest/docs) - docs for our terraform provider.
-- [Cluster Management](https://docs.plural.sh/deployments/using-operator) - the entire section devoted to documenting all the relevant CRDs within the Plural operator. This is installed alongside the Console in your management cluster and allows for a fully GitOps management experience of the products core components.
+- {% doclink to="plural_features_continuous_deployment" %}Cluster Management{% /doclink %} - the entire section devoted to documenting all the relevant CRDs within the Plural operator. This is installed alongside the Console in your management cluster and allows for a fully GitOps management experience of the products core components.
 
 ## Example Repos
 
