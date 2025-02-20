@@ -157,11 +157,13 @@ function generateRoutes(
   const files = getAllMarkdownFiles(pagesDir)
   const newRoutes: DocRouteMap = {}
   const existingRoutesByPath = new Map<string, [string, DocRoute]>()
+  const existingRoutesByTitle = new Map<string, [string, DocRoute]>()
   const errors: Record<string, string[]> = {}
 
-  // Index existing routes by path for quick lookup
+  // Index existing routes by path and title for quick lookup
   Object.entries(existingRoutes).forEach(([key, route]) => {
     existingRoutesByPath.set(route.path, [key, route])
+    existingRoutesByTitle.set(route.title, [key, route])
   })
 
   // Generate new routes while preserving existing metadata
@@ -169,19 +171,24 @@ function generateRoutes(
     const relativePath = path.relative(pagesDir, file)
     const routePath = normalizeRoutePath(relativePath)
     const content = fs.readFileSync(file, 'utf8')
-    const id = pathToId(relativePath)
+    const title = getTitle(relativePath, content)
 
-    // Check if we have an existing route for this path
-    const existing = existingRoutesByPath.get(routePath)
+    // First try to find existing route by path
+    let existing = existingRoutesByPath.get(routePath)
+
+    // If not found by path, try to find by title to handle moved files
+    if (!existing) {
+      existing = existingRoutesByTitle.get(title)
+    }
 
     if (existing) {
-      // Update existing route with new title but preserve other metadata
+      // Update existing route with new path but preserve ID and other metadata
       const [key, route] = existing
-      const newTitle = getTitle(relativePath, content)
 
       newRoutes[key] = {
         ...route,
-        title: newTitle, // Always update the title from frontmatter
+        path: routePath, // Update path
+        title, // Update title
       }
 
       // Validate existing route
@@ -191,10 +198,11 @@ function generateRoutes(
         errors[key] = routeErrors
       }
     } else {
-      // Create new route
+      // Create new route with stable ID
+      const id = pathToId(relativePath)
       const newRoute: DocRoute = {
         path: routePath,
-        title: getTitle(relativePath, content),
+        title,
         id,
         section: getSection(relativePath),
       }

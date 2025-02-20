@@ -2,11 +2,8 @@ import { type ComponentProps } from 'react'
 
 import { Link as DSLink } from '@pluralsh/design-system/dist/markdoc/components'
 
-import {
-  type DocRoute,
-  docRoutes,
-  getRouteById,
-} from '../routes/docs.generated'
+import { docRoutes, getRouteById } from '../routes/docs.generated'
+import { type DocRoute } from '../routing/types'
 
 type DocLinkProps = Omit<ComponentProps<typeof DSLink>, 'href'> & {
   to: string
@@ -32,7 +29,7 @@ export function DocLink({
 
   console.debug('DocLink: Attempting to resolve route for:', to)
 
-  // First try direct lookup
+  // First try direct lookup from docRoutes
   if (to in docRoutes) {
     console.debug('DocLink: Found route via direct lookup')
     route = docRoutes[to as keyof typeof docRoutes]
@@ -58,6 +55,21 @@ export function DocLink({
     route = getRouteById(normalizedTo)
     if (route) {
       console.debug('DocLink: Found route via normalized path:', route)
+    }
+  }
+
+  // If still not found, try matching by path
+  if (!route) {
+    const cleanPath = stripNumberedPrefixes(to)
+    const pathMatch = Object.values(docRoutes).find(
+      (r) =>
+        stripNumberedPrefixes(r.path) === cleanPath ||
+        r.redirectFrom?.includes(cleanPath)
+    )
+
+    if (pathMatch) {
+      console.debug('DocLink: Found route via path matching:', pathMatch)
+      route = pathMatch
     }
   }
 

@@ -114,6 +114,11 @@ export const docNavigation: NavMenu = [
           },
         ],
       },
+      {
+        title: 'Test',
+        href: '/getting-started/test',
+        sortPath: '/02-getting-started/04-test',
+      },
     ],
   },
   {
