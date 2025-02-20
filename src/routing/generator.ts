@@ -229,34 +229,83 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
     a.path.localeCompare(b.path)
   )
 
+  // First pass: build nested structure
   sortedRoutes.forEach((route) => {
     const pathParts = route.path.split('/').filter(Boolean)
-    const section = pathParts[0]
 
-    if (!section) return // Skip root level
+    // Skip empty paths
+    if (pathParts.length === 0) return
 
-    // Create or get section
-    if (!sectionMap.has(section)) {
-      const sectionItem: NavItem = {
-        title: formatTitle(section),
-        href: `/${section}`,
-        sections: [],
+    let currentLevel = nav
+    let currentPath = ''
+
+    // Iterate through path parts to build nested structure
+    for (let i = 0; i < pathParts.length; i++) {
+      const part = pathParts[i]
+      currentPath = currentPath ? `${currentPath}/${part}` : `/${part}`
+
+      // Find or create section at current level
+      let section = currentLevel.find((item) => item.href === currentPath)
+
+      if (!section) {
+        section = {
+          title:
+            i === pathParts.length - 1
+              ? route.title
+              : formatTitle(part.replace(/^\d+-/, '')),
+          href: currentPath,
+          sections: [],
+        }
+        currentLevel.push(section)
       }
 
-      sectionMap.set(section, sectionItem)
-      nav.push(sectionItem)
-    }
-
-    const sectionItem = sectionMap.get(section)!
-
-    // Add route to section
-    if (pathParts.length > 1) {
-      sectionItem.sections!.push({
-        title: route.title,
-        href: route.path,
-      })
+      // Move to next level
+      currentLevel = section.sections!
     }
   })
+
+  // Second pass: clean up sections with only index files
+  const cleanupSections = (items: NavItem[]) => {
+    for (let i = items.length - 1; i >= 0; i--) {
+      const item = items[i]
+
+      if (item.sections) {
+        // Recursively clean up nested sections first
+        cleanupSections(item.sections)
+
+        // Check if this section only contains itself (index) or no items
+        const sectionPath = item.href
+        const hasOtherFiles = sortedRoutes.some(
+          (route) =>
+            route.path.startsWith(sectionPath + '/') &&
+            route.path !== sectionPath &&
+            route.path !== sectionPath + '/index'
+        )
+
+        // If it has no other files besides index, remove the sections array
+        if (!hasOtherFiles) {
+          delete item.sections
+        }
+        // If sections array is empty after cleanup, remove it
+        else if (item.sections.length === 0) {
+          delete item.sections
+        }
+      }
+    }
+  }
+
+  // Sort and clean up the navigation
+  const sortNavLevel = (items: NavItem[]) => {
+    items.sort((a, b) => a.href!.localeCompare(b.href!))
+    items.forEach((item) => {
+      if (item.sections && item.sections.length > 0) {
+        sortNavLevel(item.sections)
+      }
+    })
+  }
+
+  sortNavLevel(nav)
+  cleanupSections(nav)
 
   return nav
 }
