@@ -1,6 +1,6 @@
 ---
-title: Plural Paid Tiers
-description: What is included with Plural's paid offerings?
+title: How do Plural paid tiers work?
+description: What is included with Plural paid offerings?
 ---
 
 In addition to Plural's open-source offering, there are two paid tiers that provide additional features and support over our baseline.

@@ -1,5 +1,5 @@
 ---
-title: Setting Up an Example Microservice
+title: Deploy the first microservice
 description: Deploying a basic microservice to a cluster managed by Plural
 ---
 

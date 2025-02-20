@@ -1,5 +1,5 @@
 ---
-title: Plural Deployment Operator
+title: The deployment operator
 description: GitOps Management using the Plural Operator
 ---
 

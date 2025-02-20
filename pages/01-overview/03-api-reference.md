@@ -1,4 +1,9 @@
-# API Reference
+---
+title: API Reference
+description: API reference for Plural
+---
+
+
 
 ## Packages
 - [deployments.plural.sh/v1alpha1](#deploymentspluralshv1alpha1)

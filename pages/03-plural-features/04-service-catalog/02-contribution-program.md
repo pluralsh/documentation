@@ -1,5 +1,5 @@
 ---
-title: Contribution Program
+title: Contribution program
 description: Contributing to Plural's Service Catalog
 ---
 

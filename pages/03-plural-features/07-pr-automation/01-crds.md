@@ -1,5 +1,5 @@
 ---
-title: PR Automation Custom Resources
+title: PR automation custom resources
 description: Define your own Pull Request Automations with Kubernetes CRDs
 ---
 

@@ -5,7 +5,7 @@ description: Deploying your services using the Plural Console UI.
 
 ## Overview
 
-Plural CD is meant to help you separate the concerns around software delivery and deployment from your CI provider, which is usually purpose built for running unit tests and compiling build artifacts. There are some major motivations for this separation, among them being:
+Plural is meant to help you separate the concerns around software delivery and deployment from your CI provider, which is usually purpose built for running unit tests and compiling build artifacts. There are some major motivations for this separation, among them being:
 
 - Deployment is frequently a much longer running process than a standard code change, encompassing staged releases across multiple environments with multiple rounds of integration testing.
 - A seperated CD system can make it easy to manage drift in micro-service dependencies by allowing them to be tested in tandem and rolled back independently.

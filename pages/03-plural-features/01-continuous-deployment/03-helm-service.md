@@ -1,5 +1,5 @@
 ---
-title: Helm Sourced Services
+title: Helm-sourced services
 description: Source manifests from a helm repository registered anywhere
 ---
 

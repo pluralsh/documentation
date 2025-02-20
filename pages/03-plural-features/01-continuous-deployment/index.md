@@ -1,5 +1,5 @@
 ---
-title: Cluster Management
+title: Continuous deployment
 description: 'Manage a Kubernetes Fleet at Scale with Cluster API, or at your own pace'
 ---
 ## Overview

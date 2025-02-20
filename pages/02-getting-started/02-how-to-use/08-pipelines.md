@@ -1,5 +1,5 @@
 ---
-title: Setting Up a Dev->Prod Pipeline
+title: Setup a dev -> prod pipeline
 description: Using Plural PR-based Pipelines to automate Dev -> Staging -> Prod Promotions 
 ---
 

@@ -23,7 +23,7 @@ If you'd like to learn more about more advanced uses of it, here are the [docs](
 
 We provide a sane base-install of Cert Manager, using the http01 solver for letsencrypt. All it will ask for is an email for cert issuance notifications that letsencrypt sends as part of their protocol (they can be ignored for the most part).
 
-If you want to set up your own issuers, I'd recommend reading the [docs](https://cert-manager.io/docs/configuration/acme/dns01/) and you are free to either fork our setup or create a new service in Plural CD defining your own issuer custom resources.
+If you want to set up your own issuers, I'd recommend reading the [docs](https://cert-manager.io/docs/configuration/acme/dns01/) and you are free to either fork our setup or create a new service in Plural defining your own issuer custom resources.
 
 ## ExternalDNS
 

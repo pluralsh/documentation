@@ -1,5 +1,5 @@
 ---
-title: Git Sourced Services
+title: Git-sourced services
 description: Source manifests directly from git
 ---
 

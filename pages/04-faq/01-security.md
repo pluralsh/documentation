@@ -1,5 +1,5 @@
 ---
-title: Security Concepts
+title: Is Plural secure?
 description: Learn about what Plural has access to at various steps of deployment.
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Network Configuration
+title: Network configuration
 description: Modifying ingress controller and setting up public/private endpoints for your console
 ---
 

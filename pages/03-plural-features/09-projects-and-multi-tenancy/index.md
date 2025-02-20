@@ -1,6 +1,6 @@
 ---
-title: Projects and Multi Tenancy
-description: Handling Enterprise-Grade Complexity with Plural Projects
+title: Projects and multi-tenancy
+description: Handling enterprise-grade complexity with Plural projects
 ---
 ## Overview
 

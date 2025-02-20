@@ -1,6 +1,6 @@
 ---
-title: Global Services
-description: Replicate Services to all or part of your fleet
+title: Global services
+description: Replicate services to all or part of your fleet
 ---
 
 Plural natively supports a concept of global services, e.g. a service that's replicated across a subset of your fleet. This is particular for low level kubernetes system add-ons like ingress controllers, service meshes, cert manager, etc. To define a global service, you first need to define a service that will serve as a source, then use the `GlobalService` CRD:

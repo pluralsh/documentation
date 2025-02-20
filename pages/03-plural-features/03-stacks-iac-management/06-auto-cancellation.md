@@ -1,5 +1,5 @@
 ---
-title: Auto Cancellation
+title: Auto cancellation
 description: Automatically cancel complex Terraform applies when alarms fire
 ---
 

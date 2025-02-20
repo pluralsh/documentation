@@ -1,5 +1,5 @@
 ---
-title: How To
+title: How to use Plural
 description: How To Guides for Getting the Most Out of Plural
 ---
 These tutorials will guide you through a miniaturized example of the Kubernetes adoption process.  The basic steps are:

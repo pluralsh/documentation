@@ -1,5 +1,5 @@
 ---
-title: Use PR Automations for General Self-Service
+title: Use PR automations for self-service
 description: Use a PR Automation for an example Self-Service S3 bucket creation workflow
 ---
 

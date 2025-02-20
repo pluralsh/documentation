@@ -1,6 +1,6 @@
 ---
-title: Plural AI
-description: Plural's AI Engine Removes the Gruntwork from Infrastructure
+title: Plural AI helper
+description: Plural's AI engine removes the gruntwork from infrastructure
 ---
 {% callout severity="info" %}
 If you just want to skip the text and see it in action, skip to the {% doclink to="plural_features_plural_ai" %}demo video{% /doclink %}

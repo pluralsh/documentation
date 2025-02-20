@@ -1,5 +1,5 @@
 ---
-title: Local Execution
+title: Local execution
 description: Executing IaC from Plural Stacks Locally
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Customize Stack Runners
+title: Customize stack runners
 description: Configure runner pods to enable workload identity or EKS IRSA
 ---
 

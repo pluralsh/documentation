@@ -1,5 +1,5 @@
 ---
-title: Sandboxing Your Cluster
+title: Sandboxing your cluster
 description: Deploy an instance with no outbound network dependencies to Plural
 ---
 

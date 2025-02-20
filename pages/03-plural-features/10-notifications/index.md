@@ -1,5 +1,5 @@
 ---
-title: Notification Configuration
+title: Notification configuration
 description: Configure fine-grain notification routing with CRDs
 ---
 ## Overview

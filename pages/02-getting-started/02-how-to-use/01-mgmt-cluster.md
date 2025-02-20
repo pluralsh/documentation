@@ -1,5 +1,5 @@
 ---
-title: Setting Up a New Management (MGMT) Cluster
+title: Provision a management cluster
 description: Using Plural CLI to deploy a management (MGMT) Kubernetes cluster
 ---
 

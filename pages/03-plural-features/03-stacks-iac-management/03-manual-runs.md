@@ -1,5 +1,5 @@
 ---
-title: Manual Runs
+title: Manual runs
 description: Repair errors or one-off tasks in the stack environment
 ---
 

@@ -15,9 +15,14 @@ export const docNavigation: NavMenu = [
         sortPath: '/01-overview/01-introduction',
       },
       {
-        title: 'Plural CD Architecture',
+        title: 'Architecture',
         href: '/overview/architecture',
         sortPath: '/01-overview/02-architecture',
+      },
+      {
+        title: 'API Reference',
+        href: '/overview/api-reference',
+        sortPath: '/01-overview/03-api-reference',
       },
     ],
   },
@@ -26,84 +31,84 @@ export const docNavigation: NavMenu = [
     href: '/getting-started',
     sections: [
       {
-        title: 'Getting Started with Plural CD',
+        title: 'First steps',
         href: '/getting-started/first-steps',
         sections: [
           {
-            title: 'Plural CD CLI Quickstart',
+            title: 'Quickstart with the Plural CLI',
             href: '/getting-started/first-steps/cli-quickstart',
             sortPath: '/02-getting-started/01-first-steps/01-cli-quickstart',
           },
           {
-            title: 'Plural CD Bring-your-own-Kubernetes-cluster',
+            title: 'Bring your own K8s cluster',
             href: '/getting-started/first-steps/existing-cluster',
             sortPath: '/02-getting-started/01-first-steps/02-existing-cluster',
           },
         ],
       },
       {
-        title: 'How To',
+        title: 'How to use Plural',
         href: '/getting-started/how-to-use',
         sections: [
           {
-            title: 'Setting Up a New Management (MGMT) Cluster',
+            title: 'Provision a management cluster',
             href: '/getting-started/how-to-use/mgmt-cluster',
             sortPath: '/02-getting-started/02-how-to-use/01-mgmt-cluster',
           },
           {
-            title: 'Setting Up a RBAC in Your Kubernetes Dashboard',
+            title: 'Add RBAC to the K8s dashboard',
             href: '/getting-started/how-to-use/rbac',
             sortPath: '/02-getting-started/02-how-to-use/02-rbac',
           },
           {
-            title: 'Integrate with your Source Control Provider',
+            title: 'Connect a source control provider',
             href: '/getting-started/how-to-use/scm-connection',
             sortPath: '/02-getting-started/02-how-to-use/03-scm-connection',
           },
           {
-            title: 'Setting Up Your First Workload Cluster',
+            title: 'Provision a workload cluster',
             href: '/getting-started/how-to-use/workload-cluster',
             sortPath: '/02-getting-started/02-how-to-use/04-workload-cluster',
           },
           {
-            title: 'Setting Up Ingress on a Cluster',
+            title: 'Set up ingress on a cluster',
             href: '/getting-started/how-to-use/controllers',
             sortPath: '/02-getting-started/02-how-to-use/05-controllers',
           },
           {
-            title: 'Use PR Automations for General Self-Service',
+            title: 'Use PR automations for self-service',
             href: '/getting-started/how-to-use/pr-automation',
             sortPath: '/02-getting-started/02-how-to-use/06-pr-automation',
           },
           {
-            title: 'Setting Up an Example Microservice',
+            title: 'Deploy the first microservice',
             href: '/getting-started/how-to-use/microservice',
             sortPath: '/02-getting-started/02-how-to-use/07-microservice',
           },
           {
-            title: 'Setting Up a Dev->Prod Pipeline',
+            title: 'Setup a dev -> prod pipeline',
             href: '/getting-started/how-to-use/pipelines',
             sortPath: '/02-getting-started/02-how-to-use/08-pipelines',
           },
         ],
       },
       {
-        title: 'Advanced Config',
+        title: 'Advanced configuration',
         href: '/getting-started/advanced-config',
         sections: [
           {
-            title: 'Sandboxing Your Cluster',
+            title: 'Sandboxing your cluster',
             href: '/getting-started/advanced-config/sandboxing',
             sortPath: '/02-getting-started/03-advanced-config/01-sandboxing',
           },
           {
-            title: 'Network Configuration',
+            title: 'Network configuration',
             href: '/getting-started/advanced-config/network-configuration',
             sortPath:
               '/02-getting-started/03-advanced-config/02-network-configuration',
           },
           {
-            title: 'Handling Private CAs',
+            title: 'Handling private CAs',
             href: '/getting-started/advanced-config/private-ca',
             sortPath: '/02-getting-started/03-advanced-config/03-private-ca',
           },
@@ -116,29 +121,29 @@ export const docNavigation: NavMenu = [
     href: '/plural-features',
     sections: [
       {
-        title: 'Cluster Management',
+        title: 'Continuous deployment',
         href: '/plural-features/continuous-deployment',
         sections: [
           {
-            title: 'Plural Deployment Operator',
-            href: '/plural-features/continuous-deployment/deployment-architecture',
+            title: 'The deployment operator',
+            href: '/plural-features/continuous-deployment/deployment-operator',
             sortPath:
-              '/03-plural-features/01-continuous-deployment/01-deployment-architecture',
+              '/03-plural-features/01-continuous-deployment/01-deployment-operator',
           },
           {
-            title: 'Git Sourced Services',
+            title: 'Git-sourced services',
             href: '/plural-features/continuous-deployment/git-service',
             sortPath:
               '/03-plural-features/01-continuous-deployment/02-git-service',
           },
           {
-            title: 'Helm Sourced Services',
+            title: 'Helm-sourced services',
             href: '/plural-features/continuous-deployment/helm-service',
             sortPath:
               '/03-plural-features/01-continuous-deployment/03-helm-service',
           },
           {
-            title: 'Global Services',
+            title: 'Global services',
             href: '/plural-features/continuous-deployment/global-service',
             sortPath:
               '/03-plural-features/01-continuous-deployment/04-global-service',
@@ -146,52 +151,52 @@ export const docNavigation: NavMenu = [
         ],
       },
       {
-        title: 'Managing Deprecations and K8s upgrades',
+        title: 'Plural upgrade assistant',
         href: '/plural-features/k8s-upgrade-assistant',
         sortPath: '/03-plural-features/02-k8s-upgrade-assistant',
       },
       {
-        title: 'Stacks',
+        title: 'Stacks — IaC management',
         href: '/plural-features/stacks-iac-management',
         sections: [
           {
-            title: 'Customize Stack Runners',
+            title: 'Customize stack runners',
             href: '/plural-features/stacks-iac-management/customize-runners',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/01-customize-runners',
           },
           {
-            title: 'Stack PR Workflow',
+            title: 'Stack PR workflow',
             href: '/plural-features/stacks-iac-management/pr-workflow',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/02-pr-workflow',
           },
           {
-            title: 'Manual Runs',
+            title: 'Manual runs',
             href: '/plural-features/stacks-iac-management/manual-runs',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/03-manual-runs',
           },
           {
-            title: 'Local Execution',
+            title: 'Local execution',
             href: '/plural-features/stacks-iac-management/local-execution',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/04-local-execution',
           },
           {
-            title: 'Custom Stacks',
+            title: 'Custom stacks',
             href: '/plural-features/stacks-iac-management/custom-stacks',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/05-custom-stacks',
           },
           {
-            title: 'Auto Cancellation',
+            title: 'Auto cancellation',
             href: '/plural-features/stacks-iac-management/auto-cancellation',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/06-auto-cancellation',
           },
           {
-            title: 'Terraform Interop with Service Contexts',
+            title: 'Terraform interop with service contexts',
             href: '/plural-features/stacks-iac-management/service-contexts',
             sortPath:
               '/03-plural-features/03-stacks-iac-management/07-service-contexts',
@@ -199,33 +204,29 @@ export const docNavigation: NavMenu = [
         ],
       },
       {
-        title: 'Service Catalog',
+        title: 'Service catalog',
         href: '/plural-features/service-catalog',
         sections: [
           {
-            title: 'Service Catalog',
-            href: '/plural-features/service-catalog/overview',
-            sortPath: '/03-plural-features/04-service-catalog/01-overview',
-          },
-          {
-            title: 'Creating Your Own Catalog',
+            title: 'Creating your own catalog',
             href: '/plural-features/service-catalog/creation',
-            sortPath: '/03-plural-features/04-service-catalog/02-creation',
+            sortPath: '/03-plural-features/04-service-catalog/01-creation',
           },
           {
-            title: 'Contribution Program',
-            href: '/plural-features/service-catalog/contributing',
-            sortPath: '/03-plural-features/04-service-catalog/03-contributing',
+            title: 'Contribution program',
+            href: '/plural-features/service-catalog/contribution-program',
+            sortPath:
+              '/03-plural-features/04-service-catalog/02-contribution-program',
           },
         ],
       },
       {
-        title: 'Kubernetes Dashboard',
+        title: 'Kubernetes dashboard',
         href: '/plural-features/kubernetes-dashboard',
         sortPath: '/03-plural-features/05-kubernetes-dashboard',
       },
       {
-        title: 'Plural AI',
+        title: 'Plural AI helper',
         href: '/plural-features/plural-ai',
         sections: [
           {
@@ -239,39 +240,39 @@ export const docNavigation: NavMenu = [
             sortPath: '/03-plural-features/06-plural-ai/02-architecture',
           },
           {
-            title: 'Plural AI Cost Analysis',
+            title: 'Plural AI cost analysis',
             href: '/plural-features/plural-ai/cost',
             sortPath: '/03-plural-features/06-plural-ai/03-cost',
           },
         ],
       },
       {
-        title: 'Pull Request Automation',
+        title: 'Pull request automation',
         href: '/plural-features/pr-automation',
         sections: [
           {
-            title: 'PR Automation Custom Resources',
+            title: 'PR automation custom resources',
             href: '/plural-features/pr-automation/crds',
             sortPath: '/03-plural-features/07-pr-automation/01-crds',
           },
           {
-            title: 'PR Automation Testing',
+            title: 'PR automation testing',
             href: '/plural-features/pr-automation/testing',
             sortPath: '/03-plural-features/07-pr-automation/02-testing',
           },
           {
-            title: 'PR Automation Pipelines',
+            title: 'PR automation pipelines',
             href: '/plural-features/pr-automation/pipelines',
             sortPath: '/03-plural-features/07-pr-automation/03-pipelines',
           },
         ],
       },
       {
-        title: 'Service Templating',
+        title: 'Service templating',
         href: '/plural-features/service-templating',
         sections: [
           {
-            title: 'Templating Filters',
+            title: 'Supporting liquid filters',
             href: '/plural-features/service-templating/templating-filters',
             sortPath:
               '/03-plural-features/08-service-templating/01-templating-filters',
@@ -279,12 +280,12 @@ export const docNavigation: NavMenu = [
         ],
       },
       {
-        title: 'Projects and Multi Tenancy',
+        title: 'Projects and multi-tenancy',
         href: '/plural-features/projects-and-multi-tenancy',
         sortPath: '/03-plural-features/09-projects-and-multi-tenancy',
       },
       {
-        title: 'Notification Configuration',
+        title: 'Notification configuration',
         href: '/plural-features/notifications',
         sortPath: '/03-plural-features/10-notifications',
       },
@@ -295,22 +296,22 @@ export const docNavigation: NavMenu = [
     href: '/faq',
     sections: [
       {
-        title: 'Security Concepts',
+        title: 'Is Plural secure?',
         href: '/faq/security',
         sortPath: '/04-faq/01-security',
       },
       {
-        title: 'OpenID Connect',
+        title: 'Does Plural support OpenID Connect?',
         href: '/faq/plural-oidc',
         sortPath: '/04-faq/02-plural-oidc',
       },
       {
-        title: 'Certifications',
+        title: 'What certifications does Plural have?',
         href: '/faq/certifications',
         sortPath: '/04-faq/03-certifications',
       },
       {
-        title: 'Plural Paid Tiers',
+        title: 'How do Plural paid tiers work?',
         href: '/faq/paid-tiers',
         sortPath: '/04-faq/04-paid-tiers',
       },
@@ -324,11 +325,6 @@ export const docNavigation: NavMenu = [
         title: 'Release Notes',
         href: '/resources/release-notes',
         sortPath: '/05-resources/01-release-notes',
-      },
-      {
-        title: 'API',
-        href: '/resources/api',
-        sortPath: '/05-resources/02-api',
       },
     ],
   },

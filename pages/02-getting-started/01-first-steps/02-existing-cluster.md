@@ -1,11 +1,11 @@
 ---
-title: Plural CD Bring-your-own-Kubernetes-cluster
-description: Bootstrap Plural CD on an existing cluster
+title: Bring your own K8s cluster
+description: Bootstrap Plural on an existing cluster
 ---
 
 ## Overview
 
-For users that just want to use our CD capabilities and full control of their kubernetes setup, you can install a simplified version of Plural CD onto an existing kubernetes cluster. We've made this a turnkey process, but there are some prerequisites, namely:
+For users that just want to use our CD capabilities and full control of their kubernetes setup, you can install a simplified version of Plural onto an existing kubernetes cluster. We've made this a turnkey process, but there are some prerequisites, namely:
 
 - You'll need to create a postgres db for state storage, and have a jdbc connection string for it ready of the form: `postgres://<user>:<password>@<host>:5432/<db>`
 - You'll need to have your network setup in place so that all clusters you want to deploy to can make outbound network connections to the ingress you configure for plural CD, in general this means setting up:

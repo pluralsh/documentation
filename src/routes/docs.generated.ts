@@ -45,28 +45,28 @@ export const docRoutes: DocRouteMap = {
 
   overview_architecture: {
     path: '/01-overview/02-architecture',
-    title: 'Plural CD Architecture',
+    title: 'Plural Architecture',
     id: 'overview_architecture',
     section: 'overview',
   },
 
   getting_started_first_steps: {
     path: '/02-getting-started/01-first-steps',
-    title: 'Getting Started with Plural CD',
+    title: 'Getting Started with Plural',
     id: 'getting_started_first_steps',
     section: 'getting-started',
   },
 
   getting_started_first_steps_cli_quickstart: {
     path: '/02-getting-started/01-first-steps/01-cli-quickstart',
-    title: 'Plural CD CLI Quickstart',
+    title: 'Plural CLI Quickstart',
     id: 'getting_started_first_steps_cli_quickstart',
     section: 'getting-started',
   },
 
   getting_started_first_steps_existing_cluster: {
     path: '/02-getting-started/01-first-steps/02-existing-cluster',
-    title: 'Plural CD Bring-your-own-Kubernetes-cluster',
+    title: 'Plural Bring-your-own-Kubernetes-cluster',
     id: 'getting_started_first_steps_existing_cluster',
     section: 'getting-started',
   },

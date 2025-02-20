@@ -1,5 +1,5 @@
 ---
-title: Kubernetes Dashboard
+title: Kubernetes dashboard
 description: Configure Access to the embedded Kubernetes Dashboard
 ---
 ## Introduction

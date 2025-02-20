@@ -1,6 +1,6 @@
 ---
-title: PR Automation Testing
-description: Tools and Strategies for Testing your PR Automations
+title: PR automation testing
+description: Tools and strategies for testing your PR automations
 ---
 
 Testing template code is always a bit of a challenge.  In the case of a Plural PR automation, you can always experiment using our UI, but if you need more thorough QA we provide two testing strategies:

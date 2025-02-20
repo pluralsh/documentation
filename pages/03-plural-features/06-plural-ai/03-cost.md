@@ -1,5 +1,5 @@
 ---
-title: Plural AI Cost Analysis
+title: Plural AI cost analysis
 description: How much will Plural AI cost me?
 ---
 

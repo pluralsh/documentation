@@ -1,5 +1,5 @@
 ---
-title: Plural CD CLI Quickstart
+title: Quickstart with the Plural CLI
 description: Deploying your services using the Plural CLI.
 ---
 

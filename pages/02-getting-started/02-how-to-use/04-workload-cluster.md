@@ -1,5 +1,5 @@
 ---
-title: Setting Up Your First Workload Cluster
+title: Provision a workload cluster
 description: Using a self-service PR automation to provision your first workload cluster
 ---
 

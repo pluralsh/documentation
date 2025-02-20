@@ -1,5 +1,5 @@
 ---
-title: Creating Your Own Catalog
+title: Creating your own catalog
 description: Defining your own service catalogs with Plural
 ---
 

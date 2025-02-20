@@ -1,6 +1,6 @@
 ---
-title: Service Templating
-description: Applying On-The-Fly Configuration to Your Plural Services
+title: Service templating
+description: Applying on-the-fly configuration to your Plural services
 ---
 # Overview
 

@@ -1,5 +1,5 @@
 ---
-title: Stack PR Workflow
+title: Stack PR workflow
 description: API-Driven Infrastructure As Code CD
 ---
 

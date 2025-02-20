@@ -1,5 +1,5 @@
 ---
-title: Stacks
+title: Stacks — IaC management
 description: How to manage Infrastructure as Code at Scale Using Plural
 ---
 The goal of Plural Stacks is to provide a scalable framework to manage infrastructure as code like Terraform, Ansible and Pulumi with a kubernetes-friendly, api-driven approach.  The core workflow is as follows:

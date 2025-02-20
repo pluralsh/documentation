@@ -1,6 +1,6 @@
 ---
-title: Advanced Config
-description: Documentation and guides for working with Advanced Config.
+title: Advanced configuration
+description: Documentation and guides for working with Advanced Configuration.
 ---
 ## Overview
 

@@ -1,6 +1,6 @@
 ---
 title: Plural AI Architecture
-description: How Plural AI Works
+description: How Plural AI works
 ---
 
 ## Overview

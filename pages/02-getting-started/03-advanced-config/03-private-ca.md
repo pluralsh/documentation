@@ -1,5 +1,5 @@
 ---
-title: Handling Private CAs
+title: Handling private CAs
 description: Configure certificate bundles in environments requiring a private CA
 ---
 

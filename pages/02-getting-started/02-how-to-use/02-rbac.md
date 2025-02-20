@@ -1,5 +1,5 @@
 ---
-title: Setting Up a RBAC in Your Kubernetes Dashboard
+title: Add RBAC to the K8s dashboard
 description: Use a simple global service to configure organization wide Kubernetes RBAC for end users
 ---
 

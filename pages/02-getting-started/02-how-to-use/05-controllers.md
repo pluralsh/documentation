@@ -1,5 +1,5 @@
 ---
-title: Setting Up Ingress on a Cluster
+title: Set up ingress on a cluster
 description: Setting up your edge networking on a cluster, and learn a bit about GlobalServices and Add-Ons
 ---
 

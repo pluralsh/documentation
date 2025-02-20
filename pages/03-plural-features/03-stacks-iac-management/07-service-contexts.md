@@ -1,5 +1,5 @@
 ---
-title: Terraform Interop with Service Contexts
+title: Terraform interop with service contexts
 description: Communicate data between terraform and kubernetes using Service Contexts
 ---
 
@@ -47,7 +47,7 @@ local {
 }
 ```
 
-## Attaching to a Plural CD ServiceDeployment
+## Attaching to a Plural ServiceDeployment
 
 You can also attach it to an externaldns service like so:
 

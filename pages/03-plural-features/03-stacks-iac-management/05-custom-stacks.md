@@ -1,5 +1,5 @@
 ---
-title: Custom Stacks
+title: Custom stacks
 description: Define your own command workflows to be executed via Stacks
 ---
 

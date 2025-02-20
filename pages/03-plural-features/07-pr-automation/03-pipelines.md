@@ -1,6 +1,6 @@
 ---
-title: PR Automation Pipelines
-description: Use PR Automations to generate revisions throughout a Pipeline
+title: PR automation pipelines
+description: Use PR automations to generate revisions throughout a pipeline
 ---
 
 Plural Pipelines do not ordinarily require human intervention to deploy the services within them, instead relying on common conventions like passing along git shas plus configured secrets to ferry along code changes. That said, there are still cases where you would like a PR to perform each update:

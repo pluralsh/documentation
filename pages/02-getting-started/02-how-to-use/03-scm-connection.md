@@ -1,5 +1,5 @@
 ---
-title: Integrate with your Source Control Provider
+title: Connect a source control provider
 description: Setting up an SCM Connection in Plural to integrate with Github, GitLab, or BitBucket
 ---
 
