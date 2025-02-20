@@ -175,13 +175,17 @@ function generateRoutes(
     const existing = existingRoutesByPath.get(routePath)
 
     if (existing) {
-      // Preserve existing route with its metadata
+      // Update existing route with new title but preserve other metadata
       const [key, route] = existing
+      const newTitle = getTitle(relativePath, content)
 
-      newRoutes[key] = route
+      newRoutes[key] = {
+        ...route,
+        title: newTitle, // Always update the title from frontmatter
+      }
 
       // Validate existing route
-      const routeErrors = validateRoute(route)
+      const routeErrors = validateRoute(newRoutes[key])
 
       if (routeErrors.length > 0) {
         errors[key] = routeErrors
@@ -219,18 +223,31 @@ function generateRoutes(
   return newRoutes
 }
 
+// Get title from index file if it exists
+function getTitleFromIndex(
+  currentPath: string,
+  routes: DocRouteMap
+): string | null {
+  // Check if there's a matching route with /index
+  const indexRoute = Object.values(routes).find(
+    (route) =>
+      route.path === currentPath || route.path === `${currentPath}/index`
+  )
+
+  return indexRoute?.title || null
+}
+
 // Generate navigation structure from routes
 function generateNavigation(routes: DocRouteMap): NavMenu {
   const nav: NavMenu = []
   const sectionMap = new Map<string, NavItem>()
 
   // Helper to strip numeric prefixes from path parts
-  const stripNumericPrefix = (path: string) => {
-    return path
+  const stripNumericPrefix = (path: string) =>
+    path
       .split('/')
       .map((part) => part.replace(/^\d+-/, ''))
       .join('/')
-  }
 
   // Sort routes by original path (with numeric prefixes) to ensure correct ordering
   const sortedRoutes = Object.values(routes).sort((a, b) =>
@@ -251,6 +268,7 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
     // Iterate through path parts to build nested structure
     for (let i = 0; i < pathParts.length; i++) {
       const part = pathParts[i]
+
       sortPath = sortPath ? `${sortPath}/${part}` : `/${part}`
       currentPath = currentPath
         ? `${currentPath}/${stripNumericPrefix(part)}`
@@ -260,11 +278,15 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
       let section = currentLevel.find((item) => item.href === currentPath)
 
       if (!section) {
+        // Get title from index file or use formatted directory name
+        const title =
+          i === pathParts.length - 1
+            ? route.title // Use route title for leaf nodes
+            : getTitleFromIndex(sortPath, routes) ||
+              formatTitle(part.replace(/^\d+-/, ''))
+
         section = {
-          title:
-            i === pathParts.length - 1
-              ? route.title
-              : formatTitle(part.replace(/^\d+-/, '')),
+          title,
           href: currentPath,
           sortPath, // Store original path for sorting
           sections: [],
@@ -290,10 +312,11 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
         const sectionPath = item.href
         const hasOtherFiles = sortedRoutes.some((route) => {
           const cleanRoute = `/${stripNumericPrefix(route.path.slice(1))}`
+
           return (
-            cleanRoute.startsWith(sectionPath + '/') &&
+            cleanRoute.startsWith(`${sectionPath}/`) &&
             cleanRoute !== sectionPath &&
-            cleanRoute !== sectionPath + '/index'
+            cleanRoute !== `${sectionPath}/index`
           )
         })
 
