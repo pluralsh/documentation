@@ -1,5 +1,5 @@
 ---
-title: Plural AI helper
+title: Plural AI
 description: Plural's AI engine removes the gruntwork from infrastructure
 ---
 {% callout severity="info" %}
