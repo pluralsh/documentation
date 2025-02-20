@@ -351,8 +351,8 @@ export function getRouteByPath(path: string): DocRoute | undefined {
   if (directMatch) return directMatch
 
   // Then check redirects
-  return Object.values(docRoutes).find((route) =>
-    route.redirectFrom?.includes(path)
+  return Object.values(docRoutes).find(
+    (route) => route.redirectFrom?.includes(path)
   )
 }
 

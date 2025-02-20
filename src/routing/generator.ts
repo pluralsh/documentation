@@ -374,7 +374,7 @@ function generateRouteCode(routes: DocRouteMap): string {
  * @file This file is auto-generated. DO NOT EDIT DIRECTLY!
  */
 
-import { routeSchema, type DocRoute, type DocRouteMap } from '../routing/types'
+import { type DocRoute, type DocRouteMap, routeSchema } from '../routing/types'
 
 // Central route registry
 export const docRoutes: DocRouteMap = {
@@ -388,18 +388,21 @@ export function getRoute(id: keyof typeof docRoutes): DocRoute {
 
 // Get route by ID
 export function getRouteById(id: string): DocRoute | undefined {
-  return Object.values(docRoutes).find(route => route.id === id)
+  return Object.values(docRoutes).find((route) => route.id === id)
 }
 
 // Get route by path (including redirects)
 export function getRouteByPath(path: string): DocRoute | undefined {
   // First try direct path match
-  const directMatch = Object.values(docRoutes).find(route => route.path === path)
+  const directMatch = Object.values(docRoutes).find(
+    (route) => route.path === path
+  )
+
   if (directMatch) return directMatch
 
   // Then check redirects
-  return Object.values(docRoutes).find(route => 
-    route.redirectFrom?.includes(path)
+  return Object.values(docRoutes).find(
+    (route) => route.redirectFrom?.includes(path)
   )
 }
 
@@ -410,7 +413,8 @@ Object.entries(docRoutes).forEach(([key, route]) => {
   } catch (error) {
     console.error(\`Invalid route configuration for "\${key}":\`, error)
   }
-})`
+})
+`
 }
 
 // Main export: Generate both routes and navigation
