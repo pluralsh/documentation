@@ -1,15 +1,14 @@
 import fs from 'fs'
 import path from 'path'
 
+import { docRoutes as existingDocRoutes } from '../src/routes/docs.generated'
 import { generateRoutingData } from '../src/routing/generator'
 
 // Load existing routes if available
 let existingRoutes = {}
 
 try {
-  const { docRoutes } = require('../src/routing/registry')
-
-  existingRoutes = docRoutes
+  existingRoutes = existingDocRoutes
 } catch (error) {
   // No existing routes file, start fresh
   console.log('No existing routes found, generating from scratch')
@@ -25,12 +24,15 @@ const { routes, navigation, routeCode } = generateRoutingData(
 
 console.log(`Found ${Object.keys(routes).length} routes`)
 
-const registryPath = path.join(process.cwd(), 'src/routing/registry.ts')
+const docsGeneratedPath = path.join(
+  process.cwd(),
+  'src/routes/docs.generated.ts'
+)
 const navigationPath = path.join(process.cwd(), 'src/routing/navigation.ts')
 
 // Write routes to registry file
-console.log(`Writing registry to ${registryPath}`)
-fs.writeFileSync(registryPath, routeCode)
+console.log(`Writing routes to ${docsGeneratedPath}`)
+fs.writeFileSync(docsGeneratedPath, routeCode)
 
 // Write navigation to file
 const navCode = `/**
@@ -45,15 +47,15 @@ console.log(`Writing navigation to ${navigationPath}`)
 fs.writeFileSync(navigationPath, navCode)
 
 console.log('\n✅ Generated files:')
-console.log(`  - ${registryPath}`)
+console.log(`  - ${docsGeneratedPath}`)
 console.log(`  - ${navigationPath}`)
 
 // Verify files were written
 console.log('\nVerifying files...')
-if (fs.existsSync(registryPath)) {
-  console.log('✅ Registry file exists')
+if (fs.existsSync(docsGeneratedPath)) {
+  console.log('✅ Routes file exists')
 } else {
-  console.log('❌ Registry file not found!')
+  console.log('❌ Routes file not found!')
 }
 
 if (fs.existsSync(navigationPath)) {

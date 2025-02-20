@@ -240,7 +240,6 @@ function getTitleFromIndex(
 // Generate navigation structure from routes
 function generateNavigation(routes: DocRouteMap): NavMenu {
   const nav: NavMenu = []
-  const sectionMap = new Map<string, NavItem>()
 
   // Helper to strip numeric prefixes from path parts
   const stripNumericPrefix = (path: string) =>
@@ -377,7 +376,7 @@ function generateRouteCode(routes: DocRouteMap): string {
  * @file This file is auto-generated. DO NOT EDIT DIRECTLY!
  */
 
-import { routeSchema, type DocRoute, type DocRouteMap } from './types'
+import { routeSchema, type DocRoute, type DocRouteMap } from '../routing/types'
 
 // Central route registry
 export const docRoutes: DocRouteMap = {
