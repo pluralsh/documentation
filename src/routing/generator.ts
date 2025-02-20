@@ -224,7 +224,15 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
   const nav: NavMenu = []
   const sectionMap = new Map<string, NavItem>()
 
-  // Sort routes by path to ensure consistent ordering
+  // Helper to strip numeric prefixes from path parts
+  const stripNumericPrefix = (path: string) => {
+    return path
+      .split('/')
+      .map((part) => part.replace(/^\d+-/, ''))
+      .join('/')
+  }
+
+  // Sort routes by original path (with numeric prefixes) to ensure correct ordering
   const sortedRoutes = Object.values(routes).sort((a, b) =>
     a.path.localeCompare(b.path)
   )
@@ -238,11 +246,15 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
 
     let currentLevel = nav
     let currentPath = ''
+    let sortPath = '' // Keep original path for sorting
 
     // Iterate through path parts to build nested structure
     for (let i = 0; i < pathParts.length; i++) {
       const part = pathParts[i]
-      currentPath = currentPath ? `${currentPath}/${part}` : `/${part}`
+      sortPath = sortPath ? `${sortPath}/${part}` : `/${part}`
+      currentPath = currentPath
+        ? `${currentPath}/${stripNumericPrefix(part)}`
+        : `/${stripNumericPrefix(part)}`
 
       // Find or create section at current level
       let section = currentLevel.find((item) => item.href === currentPath)
@@ -254,6 +266,7 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
               ? route.title
               : formatTitle(part.replace(/^\d+-/, '')),
           href: currentPath,
+          sortPath, // Store original path for sorting
           sections: [],
         }
         currentLevel.push(section)
@@ -275,12 +288,14 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
 
         // Check if this section only contains itself (index) or no items
         const sectionPath = item.href
-        const hasOtherFiles = sortedRoutes.some(
-          (route) =>
-            route.path.startsWith(sectionPath + '/') &&
-            route.path !== sectionPath &&
-            route.path !== sectionPath + '/index'
-        )
+        const hasOtherFiles = sortedRoutes.some((route) => {
+          const cleanRoute = `/${stripNumericPrefix(route.path.slice(1))}`
+          return (
+            cleanRoute.startsWith(sectionPath + '/') &&
+            cleanRoute !== sectionPath &&
+            cleanRoute !== sectionPath + '/index'
+          )
+        })
 
         // If it has no other files besides index, remove the sections array
         if (!hasOtherFiles) {
@@ -296,10 +311,14 @@ function generateNavigation(routes: DocRouteMap): NavMenu {
 
   // Sort and clean up the navigation
   const sortNavLevel = (items: NavItem[]) => {
-    items.sort((a, b) => a.href!.localeCompare(b.href!))
+    items.sort((a, b) =>
+      (a.sortPath || a.href).localeCompare(b.sortPath || b.href)
+    )
     items.forEach((item) => {
       if (item.sections && item.sections.length > 0) {
         sortNavLevel(item.sections)
+        // Clean up sortPath after sorting
+        delete item.sortPath
       }
     })
   }

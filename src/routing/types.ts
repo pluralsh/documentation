@@ -23,6 +23,7 @@ export type NavItem = {
   toMenu?: 'docs' | 'appCatalog' | 'plural'
   icon?: any
   sections?: NavItem[]
+  sortPath?: string
 }
 
 export type NavMenu = NavItem[]
