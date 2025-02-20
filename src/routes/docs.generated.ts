@@ -2,7 +2,7 @@
  * @file This file is auto-generated. DO NOT EDIT DIRECTLY!
  */
 
-import { routeSchema, type DocRoute, type DocRouteMap } from '../routing/types'
+import { type DocRoute, type DocRouteMap, routeSchema } from '../routing/types'
 
 // Central route registry
 export const docRoutes: DocRouteMap = {
@@ -347,6 +347,7 @@ export function getRouteByPath(path: string): DocRoute | undefined {
   const directMatch = Object.values(docRoutes).find(
     (route) => route.path === path
   )
+
   if (directMatch) return directMatch
 
   // Then check redirects

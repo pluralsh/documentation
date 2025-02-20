@@ -1,7 +1,5 @@
 import type { ReactElement } from 'react'
 
-import deepFreeze from 'deep-freeze'
-
 import { APP_CATALOG_BASE_URL } from './consts/routes'
 import { docNavigation } from './routing/navigation'
 
