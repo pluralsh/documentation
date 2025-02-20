@@ -35,6 +35,3 @@ We also maintain a catalog of open source applications like Airbyte, Airflow, et
 You can also define your own internal catalogs and vendors can share catalogs of their own software. It is meant to be a standard interface to support developer self-service for virtually any infrastructure provisioning workflow.
 
 The full docs are available under {% doclink to="plural_features_service_catalog_overview" %}Service Catalog{% /doclink %}.
-
-
-
