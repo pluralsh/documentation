@@ -1,6 +1,6 @@
 ---
 title: Github Actions Example
-description: Call Plural CD from a simple Github Actions workflow
+description: Call Plural from a simple Github Actions workflow
 ---
 
 ## Overview

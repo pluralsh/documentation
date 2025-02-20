@@ -7,7 +7,7 @@ description: Spawn New Clusters with Cluster API
 
 Plural supports both a Bring-Your-Own-Kubernetes model of cluster creation, and the ability to do full provisioning and lifecycle management of Kubernetes with Cluster API. If you'd rather define your clusters yourself using tools like terraform or Pulumi, feel free to check out the docs [here](deployments/import-cluster).
 
-There are two tiers of cluster within Plural CD:
+There are two tiers of cluster within Plural:
 
 - Management Cluster - where the Plural control plane resides and also where CAPI controllers will reside. You are free to use this to host other services if you like, but security/reliability best-practices would suggest you at least segregate it from production systems
 - Workload Cluster - where main production/staging services are hosted

@@ -1,5 +1,5 @@
 ---
-title: Plural CD In-Browser Quickstart
+title: Plural In-Browser Quickstart
 description: Deploying your services using the Plural Console UI.
 ---
 

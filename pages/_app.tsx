@@ -1,4 +1,12 @@
-import { type ComponentProps, forwardRef, useMemo } from 'react'
+import {
+  type ComponentProps,
+  Suspense,
+  forwardRef,
+  startTransition,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react'
 
 import {
   FillLevelProvider,
@@ -52,11 +60,10 @@ import {
 } from '@src/consts'
 import { NavDataProvider } from '@src/contexts/NavDataContext'
 import { ReposProvider } from '@src/contexts/ReposContext'
-import { getRepos, reposCache } from '@src/data/getRepos'
+import { type Repo, getRepos, reposCache } from '@src/data/getRepos'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
-import type { Repo } from '@src/data/getRepos'
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   displayTitle?: string
@@ -134,7 +141,16 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
   const router = useRouter()
   const markdoc = pageProps?.markdoc
-  const navData = useMemo(() => getNavData({ repos }), [repos])
+  const [isClient, setIsClient] = useState(false)
+  const [navData, setNavData] = useState(() => getNavData({ repos }))
+
+  useEffect(() => {
+    setIsClient(true)
+    startTransition(() => {
+      setNavData(getNavData({ repos }))
+    })
+  }, [repos])
+
   const { metaTitle, metaDescription } = pageProps
 
   const displayTitle = pageProps?.displayTitle || markdoc?.frontmatter?.title
@@ -156,8 +172,8 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
   const toc = pageProps.tableOfContents
     ? pageProps.tableOfContents
     : pageProps?.markdoc?.content
-    ? collectHeadings(pageProps?.markdoc.content)
-    : []
+      ? collectHeadings(pageProps?.markdoc.content)
+      : []
 
   const app = (
     <>
@@ -171,7 +187,13 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
         <Page>
           <PageGrid>
             <SideNavContainer>
-              <FullNav desktop />
+              {isClient ? (
+                <Suspense fallback={<div>Loading navigation...</div>}>
+                  <FullNav desktop />
+                </Suspense>
+              ) : (
+                <FullNav desktop />
+              )}
             </SideNavContainer>
             <ContentContainer>
               <MainContent
@@ -182,7 +204,13 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
               <PageFooter />
             </ContentContainer>
             <SideCarContainer>
-              <TableOfContents toc={toc} />
+              {isClient ? (
+                <Suspense fallback={<div>Loading table of contents...</div>}>
+                  <TableOfContents toc={toc} />
+                </Suspense>
+              ) : (
+                <TableOfContents toc={toc} />
+              )}
             </SideCarContainer>
           </PageGrid>
         </Page>

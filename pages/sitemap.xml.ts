@@ -44,14 +44,12 @@ function generateSiteMap({
   const lastMod = new Date().toISOString()
 
   // We generate the XML sitemap with the posts data
-  const sitemap = wrapSiteMap(
-    `${pages
-      ?.map((page) => urlTag({ location: `${page.path}`, lastMod }))
-      .join('\n')}
+  const sitemap = wrapSiteMap(`${pages
+    ?.map((page) => urlTag({ location: `${page.path}`, lastMod }))
+    .join('\n')}
   ${repos
     ?.map((repo) => urlTag({ location: `/applications/${repo.name}`, lastMod }))
-    .join('\n')}`
-  )
+    .join('\n')}`)
 
   return sitemap
 }

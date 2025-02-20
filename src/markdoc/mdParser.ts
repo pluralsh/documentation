@@ -5,9 +5,7 @@ import Markdoc from '@markdoc/markdoc'
 import { Parser } from 'htmlparser2'
 import yaml from 'js-yaml'
 
-import { config as schemaConfig } from './mdSchema'
-
-import type { MarkdocPage } from './mdSchema'
+import { type MarkdocPage, config as schemaConfig } from './mdSchema'
 
 const fileCache = new Map<string, MarkdocPage | null>()
 
