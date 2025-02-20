@@ -139,13 +139,6 @@ export const docRoutes: DocRouteMap = {
     section: 'getting-started',
   },
 
-  overview_test: {
-    path: '/02-getting-started/04-test',
-    title: 'Test',
-    id: 'overview_test',
-    section: 'overview',
-  },
-
   plural_features_continuous_deployment: {
     path: '/03-plural-features/01-continuous-deployment',
     title: 'Continuous deployment',
