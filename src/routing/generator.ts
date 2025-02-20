@@ -77,15 +77,6 @@ function getAllMarkdownFiles(dir: string): string[] {
   return files
 }
 
-// Extract section from file path
-function getSection(filePath: string): string {
-  const parts = filePath.replace(/^pages\//, '').split('/')
-  // Use the first path segment as section, even for top-level index files
-  const section = parts[0]
-
-  return section.replace(/^\d+-/, '') // Remove numeric prefix from section
-}
-
 // Format title from text
 function formatTitle(text: string): string {
   // Remove numeric prefixes
@@ -204,7 +195,6 @@ function generateRoutes(
         path: routePath,
         title,
         id,
-        section: getSection(relativePath),
       }
 
       // Validate new route
@@ -399,11 +389,6 @@ export function getRoute(id: keyof typeof docRoutes): DocRoute {
 // Get route by ID
 export function getRouteById(id: string): DocRoute | undefined {
   return Object.values(docRoutes).find(route => route.id === id)
-}
-
-// Get all routes in a section
-export function getRoutesBySection(section: string): DocRoute[] {
-  return Object.values(docRoutes).filter(route => route.section === section)
 }
 
 // Get route by path (including redirects)

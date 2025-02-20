@@ -28,15 +28,6 @@ export function normalizeRoutePath(filePath: string): string {
 }
 
 /**
- * Extract section from file path
- */
-export function getSection(filePath: string): string {
-  const parts = filePath.replace(/^pages\//, '').split('/')
-
-  return parts.length > 1 ? parts[0] : 'overview'
-}
-
-/**
  * Get title from frontmatter or filename
  */
 export function getTitle(filePath: string, content: string): string {
@@ -74,16 +65,6 @@ export function validateRoute(route: DocRoute): string[] {
   }
 
   return errors
-}
-
-/**
- * Get all routes in a section
- */
-export function getRoutesBySection(
-  routes: DocRoute[],
-  section: string
-): DocRoute[] {
-  return routes.filter((route) => route.section === section)
 }
 
 /**

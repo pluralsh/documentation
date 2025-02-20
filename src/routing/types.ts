@@ -7,7 +7,6 @@ export const routeSchema = z.object({
   path: z.string(),
   title: z.string(),
   id: z.string(),
-  section: z.string(),
   description: z.string().optional(),
   deprecated: z.boolean().optional(),
   redirectFrom: z.array(z.string()).optional(),
