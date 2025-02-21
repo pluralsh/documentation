@@ -12,10 +12,10 @@ web: ## runs the docs site locally
 sync-docs: sync-console-crd-docs sync-operator-crd-docs sync-liquid-docs
 
 sync-console-crd-docs:
-	curl -L https://raw.githubusercontent.com/pluralsh/console/master/go/controller/docs/api.md --output pages/01-overview/03-api-reference.md
+	curl -L https://raw.githubusercontent.com/pluralsh/console/master/go/controller/docs/api.md --output pages/01-overview/03-management-api-reference.md
 
 sync-operator-crd-docs:
-	curl -L https://raw.githubusercontent.com/pluralsh/deployment-operator/main/docs/api.md --output pages/01-overview/04-agent-api.md
+	curl -L https://raw.githubusercontent.com/pluralsh/deployment-operator/main/docs/api.md --output pages/01-overview/04-agent-api-reference.md
 
 sync-liquid-docs:
-	curl -L https://raw.githubusercontent.com/pluralsh/polly/main/docs/liquid-filters.md --output pages/03-plural-features/08-service-templating/01-templating-filters.mdi
+	curl -L https://raw.githubusercontent.com/pluralsh/polly/main/docs/liquid-filters.md --output pages/03-plural-features/08-service-templating/01-supporting-liquid-filters.md

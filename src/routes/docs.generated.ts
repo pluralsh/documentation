@@ -289,7 +289,7 @@ export const docRoutes: DocRouteMap = {
   },
 
   plural_features_service_templating_templating_filters: {
-    path: '/03-plural-features/08-service-templating/01-templating-filters',
+    path: '/03-plural-features/08-service-templating/01-supporting-liquid-filters',
     title: 'Supporting liquid filters',
     id: 'plural_features_service_templating_templating_filters',
   },

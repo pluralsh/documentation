@@ -265,8 +265,8 @@ export const docNavigation: NavMenu = [
         "sections": [
           {
             "title": "Supporting liquid filters",
-            "href": "/plural-features/service-templating/templating-filters",
-            "sortPath": "/03-plural-features/08-service-templating/01-templating-filters"
+            "href": "/plural-features/service-templating/supporting-liquid-filters",
+            "sortPath": "/03-plural-features/08-service-templating/01-supporting-liquid-filters"
           }
         ]
       },
