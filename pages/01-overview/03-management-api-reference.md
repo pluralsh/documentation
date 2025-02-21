@@ -1,9 +1,4 @@
----
-title: API Reference
-description: API reference for Plural
----
-
-
+# API Reference
 
 ## Packages
 - [deployments.plural.sh/v1alpha1](#deploymentspluralshv1alpha1)
@@ -61,6 +56,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `model` _string_ | Model is the LLM model name to use. |  | Optional: {} <br /> |
 | `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `embeddingModel` _string_ | Model to use for generating embeddings |  | Optional: {} <br /> |
 | `baseUrl` _string_ | A custom base url to use, for reimplementations of the same API scheme (for instance Together.ai uses the OpenAI API spec) |  | Optional: {} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: {} <br /> |
 
@@ -82,6 +78,7 @@ _Appears in:_
 | `tools` _[Tools](#tools)_ |  |  | Optional: {} <br /> |
 | `provider` _[AiProvider](#aiprovider)_ | Provider defines which of the supported LLM providers should be used. | OPENAI | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: {} <br /> |
 | `toolProvider` _[AiProvider](#aiprovider)_ | Provider to use for tool calling, in case you want to use a different LLM more optimized to those tasks |  | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: {} <br /> |
+| `embeddingProvider` _[AiProvider](#aiprovider)_ | Provider to use for generating embeddings. Oftentimes foundational model providers do not have embeddings models, and it's better to simply use OpenAI. |  | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: {} <br /> |
 | `openAI` _[AIProviderSettings](#aiprovidersettings)_ | OpenAI holds the OpenAI provider configuration. |  | Optional: {} <br /> |
 | `anthropic` _[AIProviderSettings](#aiprovidersettings)_ | Anthropic holds the Anthropic provider configuration. |  | Optional: {} <br /> |
 | `ollama` _[OllamaSettings](#ollamasettings)_ | Ollama holds configuration for a self-hosted Ollama deployment, more details available at https://github.com/ollama/ollama |  | Optional: {} <br /> |
@@ -109,6 +106,7 @@ _Appears in:_
 | `apiVersion` _string_ | The azure openai Data plane - inference api version to use, defaults to 2024-10-01-preview or the latest available |  | Optional: {} <br /> |
 | `model` _string_ | The OpenAi Model you wish to use.  If not specified, Plural will provide a default |  | Optional: {} <br /> |
 | `toolModel` _string_ | Model to use for tool calling, which is less frequent and often requires more advanced reasoning |  | Optional: {} <br /> |
+| `embeddingModel` _string_ | Model to use for generating embeddings |  | Optional: {} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: {} <br /> |
 
 
@@ -826,6 +824,8 @@ _Appears in:_
 | `ai` _[AISettings](#aisettings)_ | AI settings specifies a configuration for LLM provider clients |  | Optional: {} <br /> |
 | `logging` _[LoggingSettings](#loggingsettings)_ | Settings for connections to log aggregation datastores |  | Optional: {} <br /> |
 | `cost` _[CostSettings](#costsettings)_ | Settings for managing Plural's cost management features |  | Optional: {} <br /> |
+| `deploymentRepositoryRef` _[NamespacedName](#namespacedname)_ | pointer to the deployment GIT repository to use |  | Optional: {} <br /> |
+| `scaffoldsRepositoryRef` _[NamespacedName](#namespacedname)_ | pointer to the Scaffolds GIT repository to use |  | Optional: {} <br /> |
 
 
 #### ElasticsearchConnection
@@ -1260,6 +1260,7 @@ _Appears in:_
 | `observableMetrics` _[ObservableMetric](#observablemetric) array_ |  |  | Optional: {} <br /> |
 | `tags` _object (keys:string, values:string)_ | Tags used to filter stacks. |  | Optional: {} <br /> |
 | `variables` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | Variables represents a file with variables in the stack run environment.<br />It will be automatically passed to the specific tool depending on the<br />stack Type (except [console.StackTypeCustom]). |  | Optional: {} <br /> |
+| `policyEngine` _[PolicyEngine](#policyengine)_ | PolicyEngine is a configuration for applying policy enforcement to a stack. |  | Optional: {} <br /> |
 
 
 #### JobSpec
@@ -1395,6 +1396,7 @@ with the addition of kubebuilder/json annotations for better schema support.
 
 
 _Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
 - [ServiceHelm](#servicehelm)
 
 | Field | Description | Default | Validation |
@@ -1974,6 +1976,23 @@ _Appears in:_
 | `urgent` _boolean_ | Whether to immediately deliver the notification via SMTP |  | Optional: {} <br /> |
 
 
+#### PolicyEngine
+
+
+
+
+
+
+
+_Appears in:_
+- [InfrastructureStackSpec](#infrastructurestackspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `type` _[PolicyEngineType](#policyenginetype)_ | Type is the policy engine to use with this stack |  | Enum: [TRIVY] <br />Required: {} <br /> |
+| `maxSeverity` _[VulnSeverity](#vulnseverity)_ | MaxSeverity is the maximum allowed severity without failing the stack run |  | Enum: [UNKNOWN LOW MEDIUM HIGH CRITICAL NONE] <br />Optional: {} <br /> |
+
+
 #### PrAutomation
 
 
@@ -2402,6 +2421,7 @@ _Appears in:_
 | `baseUrl` _string_ | BaseUrl is a base URL for Git clones for self-hosted versions. |  | Optional: {} <br /> |
 | `apiUrl` _string_ | APIUrl is a base URL for HTTP apis for shel-hosted versions if different from BaseUrl. |  | Optional: {} <br /> |
 | `github` _[ScmGithubConnection](#scmgithubconnection)_ |  |  | Optional: {} <br /> |
+| `default` _boolean_ |  |  | Optional: {} <br /> |
 
 
 #### ScmGithubConnection
