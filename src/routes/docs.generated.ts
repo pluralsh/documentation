@@ -24,6 +24,12 @@ export const docRoutes: DocRouteMap = {
     id: 'overview_management_api_reference',
   },
 
+  overview_agent_api_reference: {
+    path: '/01-overview/04-agent-api-reference',
+    title: 'Agent API Reference',
+    id: 'overview_agent_api_reference',
+  },
+
   getting_started_first_steps: {
     path: '/02-getting-started/01-first-steps',
     title: 'First steps',
@@ -118,12 +124,6 @@ export const docRoutes: DocRouteMap = {
     path: '/02-getting-started/03-advanced-config/03-private-ca',
     title: 'Handling private CAs',
     id: 'getting_started_advanced_config_private_ca',
-  },
-
-  overview_agent_api_reference: {
-    path: '/02-getting-started/04-agent-api-reference',
-    title: 'Agent API Reference',
-    id: 'overview_agent_api_reference',
   },
 
   plural_features_continuous_deployment: {

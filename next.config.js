@@ -27,8 +27,8 @@ const nextConfig = {
   },
   async redirects() {
     return [      {
-        source: '/overview/agent-api-reference',
-        destination: '/getting-started/agent-api-reference',
+        source: '/getting-started/agent-api-reference',
+        destination: '/overview/agent-api-reference',
         permanent: true,
       },
 

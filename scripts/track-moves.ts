@@ -11,6 +11,26 @@ function stripNumberedPrefixes(path: string): string {
     .join('/')
 }
 
+function removeRedirectFromConfig(source: string) {
+  let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
+
+  // Find the redirect entry
+  const redirectRegex = new RegExp(
+    `\\s*\\{\\s*source:\\s*'${source}',[^}]+\\},?\\n?`,
+    'g'
+  )
+
+  // Remove the redirect
+  content = content.replace(redirectRegex, '')
+
+  // Clean up any double newlines created by the removal
+  content = content.replace(/\n\n\n+/g, '\n\n')
+
+  // Write back to the file
+  fs.writeFileSync(CONFIG_FILE, content)
+  console.log(`Removed redirect for: ${source}`)
+}
+
 function addRedirectToConfig(oldPath: string, newPath: string) {
   // Read the current next.config.js
   let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
@@ -29,6 +49,19 @@ function addRedirectToConfig(oldPath: string, newPath: string) {
       .replace(/\.md$/, '')
       .replace(/\/index$/, '')
   )
+
+  // Check if this is a file returning to its original location
+  // by looking for a redirect where this file's new location was the source
+  const returningFileRegex = new RegExp(
+    `source:\\s*'${newUrl}',[^}]+destination:\\s*'${oldUrl}'`
+  )
+
+  if (content.match(returningFileRegex)) {
+    console.log(`File returning to original location: ${newUrl} -> ${oldUrl}`)
+    removeRedirectFromConfig(newUrl)
+
+    return
+  }
 
   // Check if redirect already exists
   if (content.includes(`source: '${oldUrl}'`)) {
@@ -71,9 +104,11 @@ function getMovedFiles(): Array<[string, string]> {
     const movedFiles: Array<[string, string]> = []
 
     gitStatus.split('\n').forEach((line) => {
-      // R = renamed file
-      if (line.startsWith('R ')) {
-        const [_, oldPath, newPath] = line.trim().split(/\s+/)
+      // R = renamed/moved file
+      if (line.startsWith('R ') || line.startsWith(' R')) {
+        // Git status format for renames is: R  old-path -> new-path
+        const [_, paths] = line.trim().split(/\s+(.+)/)
+        const [oldPath, newPath] = paths.split(' -> ')
 
         if (
           oldPath.startsWith('pages/') &&
@@ -81,6 +116,7 @@ function getMovedFiles(): Array<[string, string]> {
           oldPath.endsWith('.md') &&
           newPath.endsWith('.md')
         ) {
+          console.log('Found moved file:', oldPath, '->', newPath)
           movedFiles.push([oldPath, newPath])
         }
       }

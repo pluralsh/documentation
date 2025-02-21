@@ -23,6 +23,11 @@ export const docNavigation: NavMenu = [
         "title": "Management API Reference",
         "href": "/overview/management-api-reference",
         "sortPath": "/01-overview/03-management-api-reference"
+      },
+      {
+        "title": "Agent API Reference",
+        "href": "/overview/agent-api-reference",
+        "sortPath": "/01-overview/04-agent-api-reference"
       }
     ]
   },
@@ -112,11 +117,6 @@ export const docNavigation: NavMenu = [
             "sortPath": "/02-getting-started/03-advanced-config/03-private-ca"
           }
         ]
-      },
-      {
-        "title": "Agent API Reference",
-        "href": "/getting-started/agent-api-reference",
-        "sortPath": "/02-getting-started/04-agent-api-reference"
       }
     ]
   },
