@@ -26,7 +26,12 @@ const nextConfig = {
     return config
   },
   async redirects() {
-    return [
+    return [      {
+        source: '/overview/agent-api-reference',
+        destination: '/getting-started/agent-api-reference',
+        permanent: true,
+      },
+
       {
         source: '/getting-started/readme',
         destination: '/',

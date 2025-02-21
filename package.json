@@ -4,7 +4,7 @@
     "node": "22.12.0"
   },
   "scripts": {
-    "dev": "run-s generate:routes generate:pages && concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
+    "dev": "run-s generate:routes generate:pages track:redirects && concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
     "dev:watch": "concurrently \"next dev\" \"yarn graphql:codegen:watch\"",
     "build": "run-s generate:routes generate:pages build:next",
     "build:next": "next build",
@@ -20,7 +20,8 @@
     "graphql:codegen": "graphql-codegen --config codegen.yml",
     "graphql:codegen:watch": "graphql-codegen --watch --config codegen.yml",
     "generate:routes": "ts-node scripts/generate-unified-routes.ts",
-    "generate:pages": "node index-pages.mjs"
+    "generate:pages": "node index-pages.mjs",
+    "track:redirects": "ts-node scripts/track-moves.ts"
   },
   "dependencies": {
     "@apollo/client": "3.7.15",
