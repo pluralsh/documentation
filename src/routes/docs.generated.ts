@@ -335,12 +335,6 @@ export const docRoutes: DocRouteMap = {
     title: 'Release Notes',
     id: 'resources_release_notes',
   },
-
-  deployments_operator_agent_api: {
-    path: '/deployments/operator/agent-api',
-    title: 'Agent API',
-    id: 'deployments_operator_agent_api',
-  },
 } as const
 
 // Type-safe route getter

@@ -318,22 +318,5 @@ export const docNavigation: NavMenu = [
         "sortPath": "/05-resources/01-release-notes"
       }
     ]
-  },
-  {
-    "title": "Deployments",
-    "href": "/deployments",
-    "sections": [
-      {
-        "title": "Operator",
-        "href": "/deployments/operator",
-        "sections": [
-          {
-            "title": "Agent API",
-            "href": "/deployments/operator/agent-api",
-            "sortPath": "/deployments/operator/agent-api"
-          }
-        ]
-      }
-    ]
   }
 ]
