@@ -1,5 +1,5 @@
 ---
-title: API Reference
+title: API Reference (Management)
 description: API reference for Plural
 ---
 

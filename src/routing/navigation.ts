@@ -20,9 +20,14 @@ export const docNavigation: NavMenu = [
         "sortPath": "/01-overview/02-architecture"
       },
       {
-        "title": "API Reference",
+        "title": "API Reference (Management)",
         "href": "/overview/api-reference",
         "sortPath": "/01-overview/03-api-reference"
+      },
+      {
+        "title": "API reference (Agent)",
+        "href": "/overview/agent-api",
+        "sortPath": "/01-overview/04-agent-api"
       }
     ]
   },
@@ -213,7 +218,7 @@ export const docNavigation: NavMenu = [
         "sortPath": "/03-plural-features/05-kubernetes-dashboard"
       },
       {
-        "title": "Plural AI helper",
+        "title": "Plural AI",
         "href": "/plural-features/plural-ai",
         "sections": [
           {
@@ -311,6 +316,23 @@ export const docNavigation: NavMenu = [
         "title": "Release Notes",
         "href": "/resources/release-notes",
         "sortPath": "/05-resources/01-release-notes"
+      }
+    ]
+  },
+  {
+    "title": "Deployments",
+    "href": "/deployments",
+    "sections": [
+      {
+        "title": "Operator",
+        "href": "/deployments/operator",
+        "sections": [
+          {
+            "title": "Agent API",
+            "href": "/deployments/operator/agent-api",
+            "sortPath": "/deployments/operator/agent-api"
+          }
+        ]
       }
     ]
   }

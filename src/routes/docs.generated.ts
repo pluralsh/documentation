@@ -20,8 +20,14 @@ export const docRoutes: DocRouteMap = {
 
   overview_api_reference: {
     path: '/01-overview/03-api-reference',
-    title: 'API Reference',
+    title: 'API Reference (Management)',
     id: 'overview_api_reference',
+  },
+
+  overview_agent_api: {
+    path: '/01-overview/04-agent-api',
+    title: 'API reference (Agent)',
+    id: 'overview_agent_api',
   },
 
   getting_started_first_steps: {
@@ -230,7 +236,7 @@ export const docRoutes: DocRouteMap = {
 
   plural_features_plural_ai: {
     path: '/03-plural-features/06-plural-ai',
-    title: 'Plural AI helper',
+    title: 'Plural AI',
     id: 'plural_features_plural_ai',
   },
 
@@ -328,6 +334,12 @@ export const docRoutes: DocRouteMap = {
     path: '/05-resources/01-release-notes',
     title: 'Release Notes',
     id: 'resources_release_notes',
+  },
+
+  deployments_operator_agent_api: {
+    path: '/deployments/operator/agent-api',
+    title: 'Agent API',
+    id: 'deployments_operator_agent_api',
   },
 } as const
 

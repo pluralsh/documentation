@@ -1,4 +1,8 @@
-# API Reference
+---
+title: API reference (Agent)
+description: API reference for Plural agent
+---
+
 
 ## Packages
 - [deployments.plural.sh/v1alpha1](#deploymentspluralshv1alpha1)
