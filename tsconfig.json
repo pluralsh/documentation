@@ -1,7 +1,11 @@
 {
   "compilerOptions": {
     "target": "ES6",
-    "lib": ["dom", "dom.iterable", "ESNext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
@@ -19,10 +23,18 @@
     "incremental": true,
     "baseUrl": ".",
     "paths": {
-      "@src/*": ["src/*"],
-      "@pages/*": ["pages/*"]
+      "@src/*": [
+        "src/*"
+      ],
+      "@pages/*": [
+        "pages/*"
+      ]
     },
-    "plugins": [{ "name": "next" }]
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
@@ -30,5 +42,7 @@
     "src/**/*",
     "pages-archive/applications"
   ],
-  "exclude": ["node_modules"]
+  "exclude": [
+    "node_modules"
+  ]
 }

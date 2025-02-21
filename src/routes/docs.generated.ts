@@ -230,7 +230,7 @@ export const docRoutes: DocRouteMap = {
 
   plural_features_plural_ai: {
     path: '/03-plural-features/06-plural-ai',
-    title: 'Plural AI helper',
+    title: 'Plural AI',
     id: 'plural_features_plural_ai',
   },
 
@@ -328,6 +328,12 @@ export const docRoutes: DocRouteMap = {
     path: '/05-resources/01-release-notes',
     title: 'Release Notes',
     id: 'resources_release_notes',
+  },
+
+  deployments_operator_agent_api: {
+    path: '/deployments/operator/agent-api',
+    title: 'Agent API',
+    id: 'deployments_operator_agent_api',
   },
 } as const
 
