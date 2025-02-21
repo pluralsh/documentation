@@ -20,14 +20,14 @@ export const docNavigation: NavMenu = [
         "sortPath": "/01-overview/02-architecture"
       },
       {
-        "title": "API Reference (Management)",
-        "href": "/overview/api-reference",
-        "sortPath": "/01-overview/03-api-reference"
+        "title": "Management API Reference",
+        "href": "/overview/management-api-reference",
+        "sortPath": "/01-overview/03-management-api-reference"
       },
       {
-        "title": "API reference (Agent)",
-        "href": "/overview/agent-api",
-        "sortPath": "/01-overview/04-agent-api"
+        "title": "Agent API Reference",
+        "href": "/overview/agent-api-reference",
+        "sortPath": "/01-overview/04-agent-api-reference"
       }
     ]
   },

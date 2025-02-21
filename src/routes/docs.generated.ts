@@ -18,16 +18,16 @@ export const docRoutes: DocRouteMap = {
     id: 'overview_architecture',
   },
 
-  overview_api_reference: {
-    path: '/01-overview/03-api-reference',
-    title: 'API Reference (Management)',
-    id: 'overview_api_reference',
+  overview_management_api_reference: {
+    path: '/01-overview/03-management-api-reference',
+    title: 'Management API Reference',
+    id: 'overview_management_api_reference',
   },
 
-  overview_agent_api: {
-    path: '/01-overview/04-agent-api',
-    title: 'API reference (Agent)',
-    id: 'overview_agent_api',
+  overview_agent_api_reference: {
+    path: '/01-overview/04-agent-api-reference',
+    title: 'Agent API Reference',
+    id: 'overview_agent_api_reference',
   },
 
   getting_started_first_steps: {
