@@ -1,167 +1,222 @@
 [
   {
-    "path": "/01-introduction"
+    "path": "/overview/introduction",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/ai/architecture"
+    "path": "/overview/architecture",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/ai/cost"
+    "path": "/overview/management-api-reference",
+    "lastmod": "2025-02-21T20:28:52.000Z"
   },
   {
-    "path": "/ai/overview"
+    "path": "/overview/agent-api-reference",
+    "lastmod": "2025-02-21T22:12:08.000Z"
   },
   {
-    "path": "/ai/setup"
+    "path": "/getting-started/first-steps/cli-quickstart",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/advanced-configuration"
+    "path": "/getting-started/first-steps/existing-cluster",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/architecture"
+    "path": "/getting-started/first-steps",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/cli-quickstart"
+    "path": "/getting-started/how-to-use/mgmt-cluster",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/dashboard"
+    "path": "/getting-started/how-to-use/rbac",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/deprecations"
+    "path": "/getting-started/how-to-use/scm-connection",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/existing-cluster"
+    "path": "/getting-started/how-to-use/workload-cluster",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/multi-tenancy"
+    "path": "/getting-started/how-to-use/controllers",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/network-configuration"
+    "path": "/getting-started/how-to-use/pr-automation",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/notifications"
+    "path": "/getting-started/how-to-use/microservice",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/operator/api"
+    "path": "/getting-started/how-to-use/pipelines",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/operator/architecture"
+    "path": "/getting-started/how-to-use",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/operator/git-service"
+    "path": "/getting-started/advanced-config/sandboxing",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/operator/global-service"
+    "path": "/getting-started/advanced-config/network-configuration",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/operator/helm-service"
+    "path": "/getting-started/advanced-config/private-ca",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/pr/crds"
+    "path": "/getting-started/advanced-config",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/pr/pipelines"
+    "path": "/plural-features/continuous-deployment/deployment-operator",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/pr/testing"
+    "path": "/plural-features/continuous-deployment/git-service",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/pr-automation"
+    "path": "/plural-features/continuous-deployment/helm-service",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/private-ca"
+    "path": "/plural-features/continuous-deployment/global-service",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/sandboxing"
+    "path": "/plural-features/continuous-deployment",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/stacks"
+    "path": "/plural-features/k8s-upgrade-assistant",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/templating-filters"
+    "path": "/plural-features/stacks-iac-management/customize-runners",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/templating"
+    "path": "/plural-features/stacks-iac-management/pr-workflow",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/terraform-interop"
+    "path": "/plural-features/stacks-iac-management/manual-runs",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/deployments/using-operator"
+    "path": "/plural-features/stacks-iac-management/local-execution",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/faq/01-security"
+    "path": "/plural-features/stacks-iac-management/custom-stacks",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/faq/02-plural-oidc"
+    "path": "/plural-features/stacks-iac-management/auto-cancellation",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/faq/03-certifications"
+    "path": "/plural-features/stacks-iac-management/service-contexts",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/faq/04-paid-tiers"
+    "path": "/plural-features/stacks-iac-management",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/getting-started/deployments"
+    "path": "/plural-features/service-catalog/creation",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/deploy/microservice"
+    "path": "/plural-features/service-catalog/contribution-program",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/deploy/pipelines"
+    "path": "/plural-features/service-catalog",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/deploy/pr-automation"
+    "path": "/plural-features/kubernetes-dashboard",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to"
+    "path": "/plural-features/plural-ai/setup",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/set-up/controllers"
+    "path": "/plural-features/plural-ai/architecture",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/set-up/mgmt-cluster"
+    "path": "/plural-features/plural-ai/cost",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/set-up/rbac"
+    "path": "/plural-features/plural-ai",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/set-up/scm-connection"
+    "path": "/plural-features/pr-automation/crds",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/how-to/set-up/workload-cluster"
+    "path": "/plural-features/pr-automation/testing",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/"
+    "path": "/plural-features/pr-automation/pipelines",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/reference/release-notes"
+    "path": "/plural-features/pr-automation",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/service-catalog/contributing"
+    "path": "/plural-features/service-templating/supporting-liquid-filters",
+    "lastmod": "2025-02-21T20:53:12.000Z"
   },
   {
-    "path": "/service-catalog/creation"
+    "path": "/plural-features/service-templating",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/service-catalog/overview"
+    "path": "/plural-features/projects-and-multi-tenancy",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/auto-cancellation"
+    "path": "/plural-features/notifications",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/custom-stacks"
+    "path": "/faq/security",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/customize-runners"
+    "path": "/faq/plural-oidc",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/local-execution"
+    "path": "/faq/certifications",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/manual-runs"
+    "path": "/faq/paid-tiers",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/stacks/pr-workflow"
+    "path": "/resources/release-notes",
+    "lastmod": "2025-02-20T19:05:59.000Z"
   }
 ]

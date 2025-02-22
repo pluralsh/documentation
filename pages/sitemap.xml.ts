@@ -1,26 +1,16 @@
-import { until } from '@open-draft/until'
-
-import { getRepos } from '@src/data/getRepos'
-
 import pages from '../src/generated/pages.json'
 
 const S_MAXAGE = 1 * 60 * 60 // 1s * 60s/m * 60m/h = 1 hour
 const STALE_WHILE_REVALIDATE = S_MAXAGE * 2
 
-function urlTag({
-  location,
-  lastMod,
-  priority = '0.5',
-}: {
-  location: string
-  lastMod: string
-  priority?: string | number
-}) {
+function urlTag({ location, lastmod }: { location: string; lastmod?: string }) {
   return `  <url>
-    <loc>${process.env.NEXT_PUBLIC_ROOT_URL}${location}</loc>
-    <lastmod>${lastMod}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${priority || '0.5'}</priority>
+    <loc>${process.env.NEXT_PUBLIC_ROOT_URL}${location}</loc>${
+      lastmod
+        ? `
+    <lastmod>${lastmod}</lastmod>`
+        : ''
+    }
   </url>`
 }
 
@@ -36,36 +26,23 @@ export default function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
-function generateSiteMap({
-  repos,
-}: {
-  repos?: Awaited<ReturnType<typeof getRepos>>
-} = {}) {
-  const lastMod = new Date().toISOString()
+interface PageInfo {
+  path: string
+  lastmod: string
+}
 
-  // We generate the XML sitemap with the posts data
-  const sitemap = wrapSiteMap(`${pages
-    ?.map((page) => urlTag({ location: `${page.path}`, lastMod }))
-    .join('\n')}
-  ${repos
-    ?.map((repo) => urlTag({ location: `/applications/${repo.name}`, lastMod }))
-    .join('\n')}`)
+function generateSiteMap() {
+  const sitemap = wrapSiteMap(
+    (pages as PageInfo[])
+      ?.map((page) => urlTag({ location: page.path, lastmod: page.lastmod }))
+      .join('\n')
+  )
 
   return sitemap
 }
 
-let cachedSiteMap: string = generateSiteMap()
-
 export async function getServerSideProps({ res }) {
-  // We make an API call to gather the URLs for our site
-  const { data: repos, error: reposError } = await until(() => getRepos())
-
-  let sitemap: string = cachedSiteMap
-
-  if (!reposError) {
-    sitemap = await generateSiteMap({ repos })
-    cachedSiteMap = sitemap
-  }
+  const sitemap = generateSiteMap()
 
   res.setHeader('Content-Type', 'text/xml')
   res.setHeader(

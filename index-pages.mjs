@@ -1,4 +1,4 @@
-import { Dirent } from 'fs'
+import { execSync } from 'child_process'
 import { readdir, writeFile } from 'fs/promises'
 import path from 'path'
 import { fileURLToPath } from 'url'
@@ -6,23 +6,6 @@ import { fileURLToPath } from 'url'
 const __filename = fileURLToPath(import.meta.url)
 
 const __dirname = path.dirname(__filename)
-
-function writeUrl({ location, lastMod, priority = '0.5' }) {
-  return `  <url>
-    <loc>${process.env.NEXT_PUBLIC_ROOT_URL}/${location}</loc>
-    <lastmod>${lastMod}</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>${priority || '0.5'}</priority>
-  </url>`
-}
-
-function wrapSiteMap(content) {
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${content}
-</urlset>
-`
-}
 
 const ignore = [
   // sitemaps
@@ -32,7 +15,7 @@ const ignore = [
   // [nextjs_dynamic_pages]
   // 404 and 500 error pages
   /^([_.[]|404|500).*$/,
-  /^__components\/.*/
+  /^__components\/.*/,
 ]
 
 const pageFilter = (file) => {
@@ -41,10 +24,41 @@ const pageFilter = (file) => {
       return false
     }
   }
+
   if (file?.isDirectory()) {
     return true
   }
-  return file.name.match(/\.(ts|tsx|js|jsx|md|mdoc)$/)
+
+  // Only include markdown files
+  return file.name.match(/\.(md|mdoc)$/)
+}
+
+// Function to strip numeric prefixes from path segments
+function stripNumericPrefixes(pathStr) {
+  return pathStr
+    .split('/')
+    .map((segment) => segment.replace(/^\d+-/, ''))
+    .join('/')
+}
+
+// Function to get the last git modification date of a file
+function getGitLastModified(filePath) {
+  try {
+    // Get the last commit date that modified this file in UTC
+    const date = execSync(`git log -1 --format="%cI" -- "${filePath}"`, {
+      encoding: 'utf-8',
+    }).trim()
+
+    if (!date) {
+      return new Date().toISOString()
+    }
+
+    // Convert to UTC and format as ISO string
+    return new Date(date).toISOString()
+  } catch (error) {
+    // Fallback to current date if git command fails
+    return new Date().toISOString()
+  }
 }
 
 const rootDir = __dirname
@@ -58,13 +72,25 @@ async function crawlPages(filePath = '/') {
   const filteredFiles = files.filter(pageFilter)
 
   const pages = []
+
   for (const file of filteredFiles) {
     if (file.isDirectory()) {
       pages.push(...(await crawlPages(path.join(filePath, file.name))))
     } else {
       let pathname = file.name.split('.').slice(0, -1).join('.')
+
       pathname = path.join(filePath, pathname.replace(/(^|\/)index$/g, ''))
-      pages.push({ path: pathname })
+      // Strip numeric prefixes from the entire path
+      pathname = stripNumericPrefixes(pathname)
+
+      // Get git modification time
+      const fullFilePath = path.join(fullPath, file.name)
+      const lastmod = getGitLastModified(fullFilePath)
+
+      pages.push({
+        path: pathname,
+        lastmod,
+      })
     }
   }
 
