@@ -2,6 +2,7 @@ import { execSync } from 'child_process'
 import fs from 'fs'
 
 const CONFIG_FILE = 'next.config.js'
+const BACKUP_FILE = 'next.config.js.bak'
 
 // Strips numbered prefixes like "01-", "02-" from path segments
 function stripNumberedPrefixes(path: string): string {
@@ -11,89 +12,195 @@ function stripNumberedPrefixes(path: string): string {
     .join('/')
 }
 
-function removeRedirectFromConfig(source: string) {
-  let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
-
-  // Find the redirect entry
-  const redirectRegex = new RegExp(
-    `\\s*\\{\\s*source:\\s*'${source}',[^}]+\\},?\\n?`,
-    'g'
+// Helper to normalize paths for comparison
+function normalizeUrlPath(filePath: string): string {
+  return stripNumberedPrefixes(
+    filePath
+      .replace(/^pages\//, '/')
+      .replace(/\.md$/, '')
+      .replace(/\/index$/, '')
+      .toLowerCase() // Normalize case for comparison
   )
-
-  // Remove the redirect
-  content = content.replace(redirectRegex, '')
-
-  // Clean up any double newlines created by the removal
-  content = content.replace(/\n\n\n+/g, '\n\n')
-
-  // Write back to the file
-  fs.writeFileSync(CONFIG_FILE, content)
-  console.log(`Removed redirect for: ${source}`)
 }
 
-function addRedirectToConfig(oldPath: string, newPath: string) {
-  // Read the current next.config.js
-  let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
+// Helper to find all redirects in config
+function parseExistingRedirects(
+  content: string
+): Array<{ source: string; destination: string }> {
+  const redirects: Array<{ source: string; destination: string }> = []
+  const redirectRegex = /{\s*source:\s*'([^']+)',\s*destination:\s*'([^']+)'/g
+  let match: RegExpExecArray | null
 
-  // Convert file paths to URL paths and strip numbered prefixes
-  const oldUrl = stripNumberedPrefixes(
-    oldPath
-      .replace(/^pages\//, '/')
-      .replace(/\.md$/, '')
-      .replace(/\/index$/, '')
-  )
-
-  const newUrl = stripNumberedPrefixes(
-    newPath
-      .replace(/^pages\//, '/')
-      .replace(/\.md$/, '')
-      .replace(/\/index$/, '')
-  )
-
-  // Check if this is a file returning to its original location
-  // by looking for a redirect where this file's new location was the source
-  const returningFileRegex = new RegExp(
-    `source:\\s*'${newUrl}',[^}]+destination:\\s*'${oldUrl}'`
-  )
-
-  if (content.match(returningFileRegex)) {
-    console.log(`File returning to original location: ${newUrl} -> ${oldUrl}`)
-    removeRedirectFromConfig(newUrl)
-
-    return
+  while ((match = redirectRegex.exec(content)) !== null) {
+    redirects.push({
+      source: match[1],
+      destination: match[2],
+    })
   }
 
-  // Check if redirect already exists
-  if (content.includes(`source: '${oldUrl}'`)) {
-    console.log(`Redirect already exists for: ${oldUrl}`)
+  return redirects
+}
 
-    return
+// Helper to detect circular redirects
+function detectCircularRedirects(
+  redirects: Array<{ source: string; destination: string }>,
+  newSource: string,
+  newDestination: string
+): boolean {
+  // Add the new redirect to the list
+  const allRedirects = [
+    ...redirects,
+    { source: newSource, destination: newDestination },
+  ]
+
+  // Build a map of redirects for faster lookup
+  const redirectMap = new Map(
+    allRedirects.map(({ source, destination }) => [source, destination])
+  )
+
+  // Check each redirect for cycles
+  for (const { source } of allRedirects) {
+    let current = source
+    const seen = new Set<string>()
+
+    while (redirectMap.has(current)) {
+      if (seen.has(current)) {
+        return true // Circular redirect detected
+      }
+      seen.add(current)
+      current = redirectMap.get(current)!
+    }
   }
 
-  // Find the redirects array
-  const redirectsStart = content.indexOf('return [')
+  return false
+}
 
-  if (redirectsStart === -1) {
-    console.error('Could not find redirects array in next.config.js')
+// Improved removeRedirectFromConfig function
+function removeRedirectFromConfig(sourcePath: string): void {
+  try {
+    let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
 
-    return
+    // Create a regex that matches the entire redirect object
+    const redirectRegex = new RegExp(
+      `\\s*{\\s*source:\\s*'${sourcePath}',[^}]+},?\\n?`,
+      'g'
+    )
+
+    content = content.replace(redirectRegex, '')
+
+    // Clean up any empty lines or duplicate commas
+    content = content
+      .replace(/,\s*,/g, ',')
+      .replace(/\[\s*,/, '[')
+      .replace(/,\s*\]/, ']')
+
+    // Create backup before writing
+    fs.writeFileSync(BACKUP_FILE, fs.readFileSync(CONFIG_FILE))
+    fs.writeFileSync(CONFIG_FILE, content)
+    console.log(`Removed redirect for: ${sourcePath}`)
+  } catch (error) {
+    console.error('Error removing redirect:', error)
+    throw error
   }
+}
 
-  // Insert the new redirect at the start of the array
-  const newRedirect = `      {
+function addRedirectToConfig(oldPath: string, newPath: string): void {
+  try {
+    // Create backup before modifications
+    fs.copyFileSync(CONFIG_FILE, BACKUP_FILE)
+
+    // Read the current next.config.js
+    let content = fs.readFileSync(CONFIG_FILE, 'utf-8')
+
+    // Normalize paths for comparison
+    const oldUrl = normalizeUrlPath(oldPath)
+    const newUrl = normalizeUrlPath(newPath)
+
+    // Validate paths
+    if (!oldUrl || !newUrl) {
+      throw new Error('Invalid path format')
+    }
+
+    // Don't add redirect if source and destination are the same
+    if (oldUrl === newUrl) {
+      console.log(
+        `Skipping redirect where source equals destination: ${oldUrl}`
+      )
+
+      return
+    }
+
+    // Parse existing redirects
+    const existingRedirects = parseExistingRedirects(content)
+
+    // Check for circular redirects
+    if (detectCircularRedirects(existingRedirects, oldUrl, newUrl)) {
+      console.error(
+        `Adding redirect from ${oldUrl} to ${newUrl} would create a circular reference. Skipping.`
+      )
+
+      return
+    }
+
+    // Check if this is a file returning to its original location
+    const reverseRedirect = existingRedirects.find(
+      (r) => r.source === newUrl && r.destination === oldUrl
+    )
+
+    if (reverseRedirect) {
+      console.log(`File returning to original location: ${newUrl} -> ${oldUrl}`)
+      removeRedirectFromConfig(newUrl)
+
+      return
+    }
+
+    // Check if redirect already exists
+    const existingRedirect = existingRedirects.find((r) => r.source === oldUrl)
+
+    if (existingRedirect) {
+      if (existingRedirect.destination === newUrl) {
+        console.log(`Redirect already exists: ${oldUrl} -> ${newUrl}`)
+
+        return
+      }
+      // Update existing redirect if destination has changed
+      console.log(
+        `Updating existing redirect: ${oldUrl} -> ${existingRedirect.destination} to ${oldUrl} -> ${newUrl}`
+      )
+      removeRedirectFromConfig(oldUrl)
+    }
+
+    // Find the redirects array
+    const redirectsStart = content.indexOf('return [')
+
+    if (redirectsStart === -1) {
+      throw new Error('Could not find redirects array in next.config.js')
+    }
+
+    // Insert the new redirect at the start of the array
+    const newRedirect = `      {
         source: '${oldUrl}',
         destination: '${newUrl}',
         permanent: true,
       },\n`
 
-  content =
-    content.slice(0, redirectsStart + 8) +
-    newRedirect +
-    content.slice(redirectsStart + 8)
+    content =
+      content.slice(0, redirectsStart + 8) +
+      newRedirect +
+      content.slice(redirectsStart + 8)
 
-  // Write back to the file
-  fs.writeFileSync(CONFIG_FILE, content)
-  console.log(`Added redirect: ${oldUrl} -> ${newUrl}`)
+    // Write back to the file
+    fs.writeFileSync(CONFIG_FILE, content)
+    console.log(`Added redirect: ${oldUrl} -> ${newUrl}`)
+  } catch (error) {
+    console.error('Error adding redirect:', error)
+    // Restore backup if it exists
+    if (fs.existsSync(BACKUP_FILE)) {
+      fs.copyFileSync(BACKUP_FILE, CONFIG_FILE)
+      console.log('Restored backup due to error')
+    }
+    throw error
+  }
 }
 
 // Get all renamed/moved markdown files in the pages directory
@@ -131,7 +238,7 @@ function getMovedFiles(): Array<[string, string]> {
 }
 
 // Process all moved files
-function processMovedFiles() {
+function processMovedFiles(): void {
   const movedFiles = getMovedFiles()
 
   if (movedFiles.length === 0) {
@@ -142,8 +249,12 @@ function processMovedFiles() {
 
   console.log('Processing moved files...')
   movedFiles.forEach(([oldPath, newPath]) => {
-    console.log(`\nProcessing move: ${oldPath} -> ${newPath}`)
-    addRedirectToConfig(oldPath, newPath)
+    try {
+      console.log(`\nProcessing move: ${oldPath} -> ${newPath}`)
+      addRedirectToConfig(oldPath, newPath)
+    } catch (error) {
+      console.error(`Error processing move ${oldPath} -> ${newPath}:`, error)
+    }
   })
 }
 
