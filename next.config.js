@@ -289,16 +289,6 @@ const nextConfig = {
         permanent: true,
       },
       {
-        source: '/faq/security',
-        destination: '/faq/security',
-        permanent: true,
-      },
-      {
-        source: '/faq/certifications',
-        destination: '/faq/certifications',
-        permanent: true,
-      },
-      {
         source: '/faq/plural-paid-tiers',
         destination: '/faq/paid-tiers',
         permanent: true,
