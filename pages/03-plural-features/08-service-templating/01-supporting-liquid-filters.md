@@ -1,6 +1,4 @@
----
-title: Supporting liquid filters
----
+# Supported Liquid Filters
 
 ##  `abbrev`
 Truncates a string with ellipses.
