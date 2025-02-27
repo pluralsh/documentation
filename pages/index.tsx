@@ -7,10 +7,13 @@ import {
 } from 'react'
 
 import {
-  GitPullIcon,
+  BookIcon,
+  ClipboardChecked,
   IconFrame,
+  ListIcon,
   MagicWandIcon,
-  PadlockLockedIcon,
+  ProtectedClusterIcon,
+  ShieldLockIcon,
 } from '@pluralsh/design-system'
 import Link, { type LinkProps } from 'next/link'
 
@@ -194,26 +197,46 @@ function Index() {
         </SectionHeading>
         <CardLinkGrid>
           <CardLink
-            heading="Quickstart"
+            heading="Introduction"
+            icon={<BookIcon />}
+            href="/introduction"
+          >
+            Learn more about Plural before diving in
+          </CardLink>
+          <CardLink
+            heading="Architecture"
+            icon={<ProtectedClusterIcon />}
+            href="/architecture"
+          >
+            Explore Plural's underlying architecture
+          </CardLink>
+          <CardLink
+            heading="First steps"
             icon={<MagicWandIcon />}
             href="/getting-started/first-steps"
           >
-            A guide to setting up a cluster quickly
+            Get started with the Plural CLI
+          </CardLink>
+          <CardLink
+            heading="Guided walkthrough"
+            icon={<ClipboardChecked />}
+            href="/getting-started/how-to-use"
+          >
+            Learn how to get the most out of Plural
           </CardLink>
           <CardLink
             heading="Security"
-            icon={<PadlockLockedIcon />}
-            href="/faq/plural-oidc"
+            icon={<ShieldLockIcon />}
+            href="/security"
           >
-            What does Plural have access to?
+            Plural is built with enterprise-grade security
           </CardLink>
           <CardLink
-            heading="Guided tour"
-            icon={<GitPullIcon />}
-            href="/getting-started/how-to-use"
+            heading="Release notes"
+            icon={<ListIcon />}
+            href="/release-notes"
           >
-            A guided walkthrough of the majority of Plural's Fleet Management
-            capabilties.
+            Stay in the know with Plural's recent releases
           </CardLink>
         </CardLinkGrid>
       </Section>
