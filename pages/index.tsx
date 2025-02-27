@@ -168,20 +168,20 @@ function Index() {
               {tableOfContents[0].title}
             </MarkdocHeading>
             <p>
-              Get started, master your operations, and troubleshoot your
-              problems.
+              Get started with Plural Console, the enterprise Kubernetes
+              management platform.
             </p>
           </div>
         </div>
         <picture>
           <source
             type="image/avif"
-            srcSet="/images/landing/hero-bg-lg.avif"
+            srcSet="/images/landing/docs-hero.avif"
           />
           <img
             className="bgImgLg"
             aria-hidden="true"
-            src="/images/landing/hero-bg-lg.png"
+            src="/images/landing/docs-hero.png"
           />
         </picture>
       </Hero>
