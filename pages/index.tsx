@@ -199,14 +199,14 @@ function Index() {
           <CardLink
             heading="Introduction"
             icon={<BookIcon />}
-            href="/introduction"
+            href="/overview/introduction"
           >
             Learn more about Plural before diving in
           </CardLink>
           <CardLink
             heading="Architecture"
             icon={<ProtectedClusterIcon />}
-            href="/architecture"
+            href="/overview/architecture"
           >
             Explore Plural's underlying architecture
           </CardLink>
@@ -227,14 +227,14 @@ function Index() {
           <CardLink
             heading="Security"
             icon={<ShieldLockIcon />}
-            href="/security"
+            href="/faq/security"
           >
             Plural is built with enterprise-grade security
           </CardLink>
           <CardLink
             heading="Release notes"
             icon={<ListIcon />}
-            href="/release-notes"
+            href="resources/release-notes"
           >
             Stay in the know with Plural's recent releases
           </CardLink>
