@@ -48,6 +48,12 @@ export const docRoutes: DocRouteMap = {
     id: 'getting_started_first_steps_existing_cluster',
   },
 
+  getting_started_first_steps_plural_cloud: {
+    path: '/02-getting-started/01-first-steps/03-plural-cloud',
+    title: 'Host Your Plural Console with Plural Cloud',
+    id: 'getting_started_first_steps_plural_cloud',
+  },
+
   getting_started_how_to_use: {
     path: '/02-getting-started/02-how-to-use',
     title: 'How to use Plural',
@@ -84,10 +90,10 @@ export const docRoutes: DocRouteMap = {
     id: 'getting_started_how_to_use_controllers',
   },
 
-  getting_started_how_to_use_pr_automation: {
-    path: '/02-getting-started/02-how-to-use/06-pr-automation',
-    title: 'Use PR automations for self-service',
-    id: 'getting_started_how_to_use_pr_automation',
+  getting_started_how_to_use_observability: {
+    path: '/02-getting-started/02-how-to-use/06-observability',
+    title: 'Set up full stack observability for your fleet',
+    id: 'getting_started_how_to_use_observability',
   },
 
   getting_started_how_to_use_microservice: {
@@ -96,8 +102,14 @@ export const docRoutes: DocRouteMap = {
     id: 'getting_started_how_to_use_microservice',
   },
 
+  getting_started_how_to_use_pr_automation: {
+    path: '/02-getting-started/02-how-to-use/08-pr-automation',
+    title: 'Use PR automations for self-service',
+    id: 'getting_started_how_to_use_pr_automation',
+  },
+
   getting_started_how_to_use_pipelines: {
-    path: '/02-getting-started/02-how-to-use/08-pipelines',
+    path: '/02-getting-started/02-how-to-use/09-pipelines',
     title: 'Setup a dev -> prod pipeline',
     id: 'getting_started_how_to_use_pipelines',
   },
