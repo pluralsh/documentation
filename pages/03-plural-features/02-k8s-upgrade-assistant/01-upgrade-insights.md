@@ -13,7 +13,7 @@ Currently, the following provider is supported:
 - Amazon Elastic Kubernetes Service (EKS)
 
 ## Configuration
-Upgrade Insights can be configured using our Custom Resource Definition (CRD). This configuration allows you to provide
+Upgrade Insights can be configured using our {% doclink to="overview_agent_api_reference" %}Custom Resource Definition (CRD){% /doclink %}. This configuration allows you to provide
 custom credentials, which are used to access the cloud provider's API and gather relevant information. For the EKS
 provider, we automatically configure node-level permissions during the cluster bootstrapping process with Plural,
 enabling our operator to retrieve upgrade insights.
