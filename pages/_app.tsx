@@ -2,7 +2,6 @@ import {
   type ComponentProps,
   Suspense,
   forwardRef,
-  startTransition,
   useEffect,
   useMemo,
   useState,
@@ -25,9 +24,9 @@ import { useRouter } from 'next/router'
 import { until } from '@open-draft/until'
 import { MarkdocContextProvider } from '@pluralsh/design-system/dist/markdoc'
 import { SSRProvider } from '@react-aria/ssr'
+import '@src/styles/globals.css'
 import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
-import '@src/styles/globals.css'
 
 import { BreakpointProvider } from '@src/components/Breakpoints'
 import DocSearchStyles from '@src/components/DocSearchStyles'
@@ -142,9 +141,7 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
 
   useEffect(() => {
     setIsClient(true)
-    startTransition(() => {
-      setNavData(getNavData())
-    })
+    setNavData(getNavData())
   }, [])
 
   const { metaTitle, metaDescription } = pageProps

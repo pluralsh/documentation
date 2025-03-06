@@ -114,7 +114,7 @@ export const ScrollContainer = styled.div(({ theme: _ }) => ({
 
 const scrollThreshold = 48
 
-function TableOfContentsBase({
+export function TableOfContents({
   toc = [],
   ...props
 }: {
@@ -210,7 +210,7 @@ function TableOfContentsBase({
   }
 
   return (
-    <nav
+    <WrapperNavSC
       aria-labelledby={labelId}
       {...props}
     >
@@ -242,11 +242,11 @@ function TableOfContentsBase({
           })}
         </List>
       </ScrollContainer>
-    </nav>
+    </WrapperNavSC>
   )
 }
 
-export const TableOfContents = styled(TableOfContentsBase)(({ theme: _ }) => ({
+const WrapperNavSC = styled.nav(({ theme: _ }) => ({
   display: 'flex',
   flexDirection: 'column',
   position: 'absolute',

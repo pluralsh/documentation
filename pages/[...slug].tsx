@@ -18,11 +18,20 @@ interface Params extends ParsedUrlQuery {
 }
 
 export default function MarkdocContent({
+  slug,
   markdoc,
 }: {
+  slug: string
   markdoc: MarkdocPage | null
 }) {
-  return markdoc && <MarkdocComponent markdoc={markdoc} />
+  return (
+    markdoc && (
+      <MarkdocComponent
+        key={slug} // need to force re-render when slug changes
+        markdoc={markdoc}
+      />
+    )
+  )
 }
 
 export const getStaticPaths: GetStaticPaths = async () => {
@@ -232,6 +241,7 @@ export const getStaticProps: GetStaticProps<
       displayTitle: markdoc?.frontmatter?.title ?? '',
       displayDescription: markdoc?.frontmatter?.description ?? '',
       markdoc,
+      slug: slugPath,
     },
   }
 }
