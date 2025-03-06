@@ -175,9 +175,9 @@ export const docNavigation: NavMenu = [
             "sortPath": "/03-plural-features/03-stacks-iac-management/03-manual-runs"
           },
           {
-            "title": "Local execution",
-            "href": "/plural-features/stacks-iac-management/local-execution",
-            "sortPath": "/03-plural-features/03-stacks-iac-management/04-local-execution"
+            "title": "Sharing Outputs with Continuous Deployment",
+            "href": "/plural-features/stacks-iac-management/sharing-outputs",
+            "sortPath": "/03-plural-features/03-stacks-iac-management/04-sharing-outputs"
           },
           {
             "title": "Custom stacks",
@@ -190,9 +190,14 @@ export const docNavigation: NavMenu = [
             "sortPath": "/03-plural-features/03-stacks-iac-management/06-auto-cancellation"
           },
           {
+            "title": "Local execution",
+            "href": "/plural-features/stacks-iac-management/local-execution",
+            "sortPath": "/03-plural-features/03-stacks-iac-management/07-local-execution"
+          },
+          {
             "title": "Terraform interop with service contexts",
             "href": "/plural-features/stacks-iac-management/service-contexts",
-            "sortPath": "/03-plural-features/03-stacks-iac-management/07-service-contexts"
+            "sortPath": "/03-plural-features/03-stacks-iac-management/08-service-contexts"
           }
         ]
       },
@@ -264,7 +269,7 @@ export const docNavigation: NavMenu = [
         "href": "/plural-features/service-templating",
         "sections": [
           {
-            "title": "Supporting liquid filters",
+            "title": "Supporting Liquid Filters",
             "href": "/plural-features/service-templating/supporting-liquid-filters",
             "sortPath": "/03-plural-features/08-service-templating/01-supporting-liquid-filters"
           }

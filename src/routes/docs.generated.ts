@@ -186,10 +186,10 @@ export const docRoutes: DocRouteMap = {
     id: 'plural_features_stacks_iac_management_manual_runs',
   },
 
-  plural_features_stacks_iac_management_local_execution: {
-    path: '/03-plural-features/03-stacks-iac-management/04-local-execution',
-    title: 'Local execution',
-    id: 'plural_features_stacks_iac_management_local_execution',
+  plural_features_stacks_iac_management_sharing_outputs: {
+    path: '/03-plural-features/03-stacks-iac-management/04-sharing-outputs',
+    title: 'Sharing Outputs with Continuous Deployment',
+    id: 'plural_features_stacks_iac_management_sharing_outputs',
   },
 
   plural_features_stacks_iac_management_custom_stacks: {
@@ -204,8 +204,14 @@ export const docRoutes: DocRouteMap = {
     id: 'plural_features_stacks_iac_management_auto_cancellation',
   },
 
+  plural_features_stacks_iac_management_local_execution: {
+    path: '/03-plural-features/03-stacks-iac-management/07-local-execution',
+    title: 'Local execution',
+    id: 'plural_features_stacks_iac_management_local_execution',
+  },
+
   plural_features_stacks_iac_management_service_contexts: {
-    path: '/03-plural-features/03-stacks-iac-management/07-service-contexts',
+    path: '/03-plural-features/03-stacks-iac-management/08-service-contexts',
     title: 'Terraform interop with service contexts',
     id: 'plural_features_stacks_iac_management_service_contexts',
   },
@@ -290,7 +296,7 @@ export const docRoutes: DocRouteMap = {
 
   plural_features_service_templating_templating_filters: {
     path: '/03-plural-features/08-service-templating/01-supporting-liquid-filters',
-    title: 'Supporting liquid filters',
+    title: 'Supporting Liquid Filters',
     id: 'plural_features_service_templating_templating_filters',
   },
 

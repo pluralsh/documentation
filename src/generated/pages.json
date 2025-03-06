@@ -9,7 +9,7 @@
   },
   {
     "path": "/overview/management-api-reference",
-    "lastmod": "2025-02-21T20:28:52.000Z"
+    "lastmod": "2025-03-03T09:12:53.000Z"
   },
   {
     "path": "/overview/agent-api-reference",
@@ -116,8 +116,8 @@
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/plural-features/stacks-iac-management/local-execution",
-    "lastmod": "2025-02-20T19:05:59.000Z"
+    "path": "/plural-features/stacks-iac-management/sharing-outputs",
+    "lastmod": "2025-03-05T22:14:12.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management/custom-stacks",
@@ -128,8 +128,12 @@
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
+    "path": "/plural-features/stacks-iac-management/local-execution",
+    "lastmod": "2025-03-05T22:14:12.000Z"
+  },
+  {
     "path": "/plural-features/stacks-iac-management/service-contexts",
-    "lastmod": "2025-02-20T19:05:59.000Z"
+    "lastmod": "2025-03-05T22:14:12.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management",
@@ -185,7 +189,7 @@
   },
   {
     "path": "/plural-features/service-templating/supporting-liquid-filters",
-    "lastmod": "2025-02-21T20:53:12.000Z"
+    "lastmod": "2025-03-03T09:12:53.000Z"
   },
   {
     "path": "/plural-features/service-templating",
