@@ -86,7 +86,7 @@ export const docNavigation: NavMenu = [
             "sortPath": "/02-getting-started/02-how-to-use/05-controllers"
           },
           {
-            "title": "Set up full stack observability for your fleet",
+            "title": "Set up full stack observability",
             "href": "/getting-started/how-to-use/observability",
             "sortPath": "/02-getting-started/02-how-to-use/06-observability"
           },

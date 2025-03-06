@@ -19,7 +19,7 @@ import { useRouter } from 'next/router'
 import styled from 'styled-components'
 
 import { useNavData } from '../contexts/NavDataContext'
-import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
+import { getBarePathFromPath } from '../utils/text'
 
 import { PluralMenu } from './MobileMenu'
 import { NavPositionWrapper, SideNav } from './SideNav'
@@ -101,22 +101,16 @@ export function FullNav({
   const thisPath = getBarePathFromPath(router.asPath)
   const previousPath = usePrevious(thisPath)
 
-  const routeIsAppCatalog = isAppCatalogRoute(router.asPath)
-
   useEffect(() => {
     if (thisPath !== previousPath) {
       if (setIsOpen) {
         setIsOpen(false)
       }
-      if (routeIsAppCatalog) {
-        setMenuId('appCatalog')
-      } else {
-        setMenuId('docs')
-      }
+      setMenuId('docs')
     }
-  }, [thisPath, previousPath, setIsOpen, routeIsAppCatalog])
+  }, [thisPath, previousPath, setIsOpen])
 
-  const showNavButton = menuId === 'appCatalog' || routeIsAppCatalog || !desktop
+  const showNavButton = !desktop
   let rightNavButton
   let leftNavButton
 
@@ -137,28 +131,6 @@ export function FullNav({
           onClick={() => setMenuId('plural')}
         >
           Plural menu
-        </NavButton>
-      )
-    }
-  }
-  if (menuId === 'appCatalog') {
-    leftNavButton = (
-      <NavButton
-        navDirection="back"
-        onClick={() => setMenuId('docs')}
-      >
-        All docs
-      </NavButton>
-    )
-  }
-  if (routeIsAppCatalog) {
-    if (menuId === 'docs') {
-      rightNavButton = (
-        <NavButton
-          navDirection="forward"
-          onClick={() => setMenuId('appCatalog')}
-        >
-          App catalog
         </NavButton>
       )
     }

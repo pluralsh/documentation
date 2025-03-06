@@ -59,8 +59,6 @@ import {
   ROOT_TITLE,
 } from '@src/consts'
 import { NavDataProvider } from '@src/contexts/NavDataContext'
-import { ReposProvider } from '@src/contexts/ReposContext'
-import { type Repo, getRepos, reposCache } from '@src/data/getRepos'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
@@ -70,13 +68,11 @@ export type MyPageProps = MarkdocNextJsPageProps & {
   metaTitle?: string
   displayDescription?: string
   metaDescription?: string
-  repo?: Repo | null
   tableOfContents?: any
 }
 
 type MyAppProps = AppProps<MyPageProps | undefined> & {
   errors: Error[]
-  repos: Repo[]
   swrConfig: ComponentProps<typeof SWRConfig>['value']
 }
 
@@ -137,19 +133,19 @@ const Link = forwardRef(
   )
 )
 
-function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
+function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
   usePosthog()
   const router = useRouter()
   const markdoc = pageProps?.markdoc
   const [isClient, setIsClient] = useState(false)
-  const [navData, setNavData] = useState(() => getNavData({ repos }))
+  const [navData, setNavData] = useState(() => getNavData())
 
   useEffect(() => {
     setIsClient(true)
     startTransition(() => {
-      setNavData(getNavData({ repos }))
+      setNavData(getNavData())
     })
-  }, [repos])
+  }, [])
 
   const { metaTitle, metaDescription } = pageProps
 
@@ -229,17 +225,15 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
       <MarkdocContextProvider value={{ variant: 'docs' }}>
         <NavigationContextProvider value={navContextVal}>
           <SWRConfig value={swrConfig}>
-            <ReposProvider value={repos}>
-              <NavDataProvider value={navData}>
-                <BreakpointProvider>
-                  <ThemeProvider theme={honorableTheme}>
-                    <StyledThemeProvider theme={docsStyledTheme}>
-                      <FillLevelProvider value={0}>{app}</FillLevelProvider>
-                    </StyledThemeProvider>
-                  </ThemeProvider>
-                </BreakpointProvider>
-              </NavDataProvider>
-            </ReposProvider>
+            <NavDataProvider value={navData}>
+              <BreakpointProvider>
+                <ThemeProvider theme={honorableTheme}>
+                  <StyledThemeProvider theme={docsStyledTheme}>
+                    <FillLevelProvider value={0}>{app}</FillLevelProvider>
+                  </StyledThemeProvider>
+                </ThemeProvider>
+              </BreakpointProvider>
+            </NavDataProvider>
           </SWRConfig>
         </NavigationContextProvider>
       </MarkdocContextProvider>
@@ -248,7 +242,6 @@ function App({ Component, repos = [], pageProps = {}, swrConfig }: MyAppProps) {
 }
 
 App.getInitialProps = async () => {
-  const { data: repos, error: reposError } = await until(() => getRepos())
   const { data: githubData, error: githubError } = await until(() =>
     getGithubDataServer()
   )
@@ -259,14 +252,10 @@ App.getInitialProps = async () => {
   }
 
   return {
-    repos: repos || reposCache.filtered,
     swrConfig: {
       fallback: swrFallback,
     },
-    errors: [
-      ...(reposError ? [reposError] : []),
-      ...(githubError ? [githubError] : []),
-    ],
+    errors: [...(githubError ? [githubError] : [])],
   }
 }
 

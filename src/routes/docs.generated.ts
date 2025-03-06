@@ -92,7 +92,7 @@ export const docRoutes: DocRouteMap = {
 
   getting_started_how_to_use_observability: {
     path: '/02-getting-started/02-how-to-use/06-observability',
-    title: 'Set up full stack observability for your fleet',
+    title: 'Set up full stack observability',
     id: 'getting_started_how_to_use_observability',
   },
 
