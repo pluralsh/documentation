@@ -162,6 +162,12 @@ export const docRoutes: DocRouteMap = {
     id: 'plural_features_k8s_upgrade_assistant',
   },
 
+  plural_features_k8s_upgrade_assistant_upgrade_insights: {
+    path: '/03-plural-features/02-k8s-upgrade-assistant/01-upgrade-insights',
+    title: 'Upgrade Insights',
+    id: 'plural_features_k8s_upgrade_assistant_upgrade_insights',
+  },
+
   plural_features_stacks_iac_management: {
     path: '/03-plural-features/03-stacks-iac-management',
     title: 'Stacks — IaC management',

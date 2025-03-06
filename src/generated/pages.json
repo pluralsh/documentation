@@ -100,6 +100,10 @@
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
+    "path": "/plural-features/k8s-upgrade-assistant/upgrade-insights",
+    "lastmod": "2025-03-06T14:04:45.056Z"
+  },
+  {
     "path": "/plural-features/k8s-upgrade-assistant",
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
@@ -117,7 +121,7 @@
   },
   {
     "path": "/plural-features/stacks-iac-management/sharing-outputs",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management/custom-stacks",
@@ -129,11 +133,11 @@
   },
   {
     "path": "/plural-features/stacks-iac-management/local-execution",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management/service-contexts",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management",
