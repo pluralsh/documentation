@@ -18,6 +18,21 @@ custom credentials, which are used to access the cloud provider's API and gather
 provider, we automatically configure node-level permissions during the cluster bootstrapping process with Plural,
 enabling our operator to retrieve upgrade insights.
 
+### Relying on Node-Level Permissions
+Alternatively, you can rely on node-level permissions via the cloud provider's assume role feature with 
+the following configuration:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: UpgradeInsights
+metadata:
+  name: eks-upgrade-insights
+spec:
+  distro: EKS
+  clusterName: "<CLUSTER_NAME>"
+  interval: 10m
+```
+
 ### Explicit credentials
 To configure Upgrade Insights with explicit credentials, you can use the following YAML configuration:
 
@@ -50,21 +65,6 @@ spec:
       secretAccessKeyRef:
         name: eks-credentials
         namespace: upgrade-insights
-```
-
-### Relying on Node-Level Permissions
-Alternatively, you can rely on node-level permissions via the cloud provider's assume role feature with 
-the following configuration:
-
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: UpgradeInsights
-metadata:
-  name: eks-upgrade-insights
-spec:
-  distro: EKS
-  clusterName: "<CLUSTER_NAME>"
-  interval: 10m
 ```
 
 ## Required permissions
