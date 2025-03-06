@@ -24,6 +24,10 @@
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
+    "path": "/getting-started/first-steps/plural-cloud",
+    "lastmod": "2025-03-06T16:46:42.000Z"
+  },
+  {
     "path": "/getting-started/first-steps",
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
@@ -48,16 +52,20 @@
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
-    "path": "/getting-started/how-to-use/pr-automation",
-    "lastmod": "2025-02-20T19:05:59.000Z"
+    "path": "/getting-started/how-to-use/observability",
+    "lastmod": "2025-03-06T16:46:42.000Z"
   },
   {
     "path": "/getting-started/how-to-use/microservice",
     "lastmod": "2025-02-20T19:05:59.000Z"
   },
   {
+    "path": "/getting-started/how-to-use/pr-automation",
+    "lastmod": "2025-03-06T16:49:38.539Z"
+  },
+  {
     "path": "/getting-started/how-to-use/pipelines",
-    "lastmod": "2025-02-20T19:05:59.000Z"
+    "lastmod": "2025-03-06T16:49:38.550Z"
   },
   {
     "path": "/getting-started/how-to-use",
@@ -117,7 +125,7 @@
   },
   {
     "path": "/plural-features/stacks-iac-management/sharing-outputs",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management/custom-stacks",
@@ -129,11 +137,11 @@
   },
   {
     "path": "/plural-features/stacks-iac-management/local-execution",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management/service-contexts",
-    "lastmod": "2025-03-05T22:14:12.000Z"
+    "lastmod": "2025-03-06T04:20:30.000Z"
   },
   {
     "path": "/plural-features/stacks-iac-management",

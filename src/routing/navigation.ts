@@ -48,6 +48,11 @@ export const docNavigation: NavMenu = [
             "title": "Bring your own K8s cluster",
             "href": "/getting-started/first-steps/existing-cluster",
             "sortPath": "/02-getting-started/01-first-steps/02-existing-cluster"
+          },
+          {
+            "title": "Host Your Plural Console with Plural Cloud",
+            "href": "/getting-started/first-steps/plural-cloud",
+            "sortPath": "/02-getting-started/01-first-steps/03-plural-cloud"
           }
         ]
       },
@@ -81,9 +86,9 @@ export const docNavigation: NavMenu = [
             "sortPath": "/02-getting-started/02-how-to-use/05-controllers"
           },
           {
-            "title": "Use PR automations for self-service",
-            "href": "/getting-started/how-to-use/pr-automation",
-            "sortPath": "/02-getting-started/02-how-to-use/06-pr-automation"
+            "title": "Set up full stack observability for your fleet",
+            "href": "/getting-started/how-to-use/observability",
+            "sortPath": "/02-getting-started/02-how-to-use/06-observability"
           },
           {
             "title": "Deploy the first microservice",
@@ -91,9 +96,14 @@ export const docNavigation: NavMenu = [
             "sortPath": "/02-getting-started/02-how-to-use/07-microservice"
           },
           {
+            "title": "Use PR automations for self-service",
+            "href": "/getting-started/how-to-use/pr-automation",
+            "sortPath": "/02-getting-started/02-how-to-use/08-pr-automation"
+          },
+          {
             "title": "Setup a dev -> prod pipeline",
             "href": "/getting-started/how-to-use/pipelines",
-            "sortPath": "/02-getting-started/02-how-to-use/08-pipelines"
+            "sortPath": "/02-getting-started/02-how-to-use/09-pipelines"
           }
         ]
       },
