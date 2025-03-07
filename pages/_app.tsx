@@ -58,6 +58,7 @@ import {
   ROOT_TITLE,
 } from '@src/consts'
 import { NavDataProvider } from '@src/contexts/NavDataContext'
+import { collectHeadings } from '@src/markdoc/utils/parseHeadings'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
@@ -82,29 +83,6 @@ export type MarkdocHeading = {
 }
 
 const docsStyledTheme = { ...styledTheme, ...{ docs: { topNavHeight: 72 } } }
-
-function collectHeadings(node, sections: MarkdocHeading[] = []) {
-  if (node) {
-    if (node?.name === 'Heading') {
-      const title = node.children[0]
-
-      if (typeof title === 'string') {
-        sections.push({
-          ...node.attributes,
-          title,
-        })
-      }
-    }
-
-    if (node?.children) {
-      for (const child of node.children) {
-        collectHeadings(child, sections)
-      }
-    }
-  }
-
-  return sections as MarkdocHeading[]
-}
 
 const Page = styled.div(() => ({}))
 
@@ -199,10 +177,16 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
             <SideCarContainer>
               {isClient ? (
                 <Suspense fallback={<div>Loading table of contents...</div>}>
-                  <TableOfContents toc={toc} />
+                  <TableOfContents
+                    key={router.asPath}
+                    toc={toc}
+                  />
                 </Suspense>
               ) : (
-                <TableOfContents toc={toc} />
+                <TableOfContents
+                  key={router.asPath}
+                  toc={toc}
+                />
               )}
             </SideCarContainer>
           </PageGrid>

@@ -1,11 +1,4 @@
-import React, {
-  useCallback,
-  useEffect,
-  useId,
-  useMemo,
-  useRef,
-  useState,
-} from 'react'
+import { useCallback, useEffect, useId, useMemo, useState } from 'react'
 
 import { usePrevious } from '@pluralsh/design-system'
 import NextLink from 'next/link'
@@ -126,22 +119,23 @@ export function TableOfContents({
     [toc]
   )
   const labelId = `nav-label-${useId()}`
-  const firstRender = useRef(true)
+  const [isLoaded, setIsLoaded] = useState(false)
+
   const hashIsInToC = useCallback(
     (hash: string) =>
       !!items.find((item) => `#${item.id}` === hash) || hash === '',
     [items]
   )
 
-  const [headingElements, setHeadingElements] = useState<HTMLElement[]>([])
+  const [headingElements, setHeadingElements] = useState<
+    { id: string; top: number }[]
+  >([])
   const router = useRouter()
 
   const { hash } =
     (typeof window !== 'undefined' && window?.location) ||
     new URL(`http://plural.sh${router.asPath}`)
   const previousHash = usePrevious(hash)
-
-  const ignoreNextScrollEvent = useRef(!!hash)
 
   const [highlightedHash, _setHighlightedHash] = useState(
     hashIsInToC(hash) ? hash : ''
@@ -156,48 +150,45 @@ export function TableOfContents({
   )
 
   useEffect(() => {
-    firstRender.current = false
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
-  useEffect(() => {
-    if (hash !== previousHash && hashIsInToC(hash)) {
-      setHighlightedHash(hash)
-    }
+    if (hash !== previousHash && hashIsInToC(hash)) setHighlightedHash(hash)
   }, [hash, hashIsInToC, previousHash, setHighlightedHash])
 
-  useEffect(() => {
-    setHeadingElements(
-      items
-        .map((item) => (!item.id ? null : document.getElementById(item.id)))
-        .filter(exists)
-    )
-  }, [items])
-
   const scrollListener = useCallback(() => {
-    if (ignoreNextScrollEvent.current) {
-      ignoreNextScrollEvent.current = false
-
-      return
-    }
-    const topNavHeight = Number(
-      getComputedStyle(document.documentElement)
-        ?.getPropertyValue('--top-nav-height')
-        ?.replace(/[^0-9]/g, '') || 0
-    )
-
     let scrollToHash = ''
+    const offset = headingElements[0]?.top || 0 // accounts for starting in the middle of the page
 
     headingElements.forEach((elt) => {
-      const eltTop = elt.getBoundingClientRect()?.top || Infinity
-
-      if (eltTop <= scrollThreshold + topNavHeight) {
+      if (elt.top - offset <= scrollThreshold + window.scrollY)
         scrollToHash = `#${elt.id}`
+    })
+
+    setHighlightedHash(scrollToHash)
+  }, [headingElements, setHighlightedHash])
+
+  // watches document for DOM size changes to account for dynamically rendered chunks (applies to larger pages)
+  useEffect(() => {
+    const observer = new ResizeObserver(() => {
+      const [numRendered, numExpected] = [
+        headingElements.length,
+        items.filter((item) => item.id).length,
+      ]
+
+      if (numRendered < numExpected)
+        setHeadingElements(getRenderedElementTops(items))
+      else {
+        observer.disconnect()
+        scrollListener() // re-run to update the highlighted hash after dynamic scrolling
+        setIsLoaded(true)
       }
     })
-    if (highlightedHash !== scrollToHash) {
-      setHighlightedHash(scrollToHash)
+
+    // observe the entire document for changes
+    observer.observe(document.body)
+
+    return () => {
+      observer.disconnect()
     }
-  }, [headingElements, highlightedHash, setHighlightedHash])
+  }, [headingElements, headingElements.length, items, scrollListener])
 
   useEffect(() => {
     window.addEventListener('scroll', scrollListener)
@@ -221,7 +212,7 @@ export function TableOfContents({
             const href = `#${item.id}`
 
             const active =
-              !firstRender.current &&
+              isLoaded &&
               (highlightedHash === href || (!highlightedHash && i === 0))
 
             return (
@@ -229,10 +220,6 @@ export function TableOfContents({
                 <StyledLink
                   href={href}
                   $active={active}
-                  onClick={() => {
-                    ignoreNextScrollEvent.current = true
-                    setHighlightedHash(href)
-                  }}
                   scroll={false}
                 >
                   {item.title}
@@ -245,6 +232,17 @@ export function TableOfContents({
     </WrapperNavSC>
   )
 }
+
+const getRenderedElementTops = (items: MarkdocHeading[]) =>
+  typeof window !== 'undefined'
+    ? items
+        .map((item) => (!item.id ? null : document.getElementById(item.id)))
+        .filter(exists)
+        .map((elt) => ({
+          id: elt.id,
+          top: elt.getBoundingClientRect().top || Infinity,
+        }))
+    : []
 
 const WrapperNavSC = styled.nav(({ theme: _ }) => ({
   display: 'flex',
