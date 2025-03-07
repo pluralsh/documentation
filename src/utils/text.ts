@@ -1,5 +1,3 @@
-import { APP_CATALOG_BASE_URL } from '../consts/routes'
-
 import type { Provider } from '../generated/graphql'
 
 export * from '@pluralsh/design-system'
@@ -34,10 +32,6 @@ export function getBarePathFromPath(url: string) {
 
 export function isSubrouteOf(route: string, compareRoute: string) {
   return route.startsWith(compareRoute)
-}
-
-export function isAppCatalogRoute(route: string) {
-  return isSubrouteOf(route, APP_CATALOG_BASE_URL)
 }
 
 export const providerToProviderName: Record<Provider, string> = {

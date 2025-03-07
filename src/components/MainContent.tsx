@@ -7,15 +7,9 @@ import {
 } from 'react'
 
 import { GitHubLogoIcon } from '@pluralsh/design-system'
-import { useRouter } from 'next/router'
 
-import { Heading } from '@pluralsh/design-system/dist/markdoc/components'
 import styled from 'styled-components'
 
-import { APP_CATALOG_BASE_URL } from '../consts/routes'
-import { getBarePathFromPath, isAppCatalogRoute } from '../utils/text'
-
-import AppsList from './AppsList'
 import ArticlesInSection from './ArticlesInSection'
 import Breadcrumbs from './Breadcrumbs'
 import { FooterLink } from './PageFooter'
@@ -69,19 +63,14 @@ function ContentHeaderUnstyled({
   className?: string
   pageHasContent?: boolean
 }) {
-  const router = useRouter()
-  const isAppCatalog = isAppCatalogRoute(router.asPath)
-
   return (
     <div className={className}>
       {title && <Title>{title}</Title>}
       {description && <Description>{description}</Description>}
-      {!isAppCatalog && (
-        <ArticlesInSection
-          title="Articles in this section"
-          hasContent={pageHasContent}
-        />
-      )}
+      <ArticlesInSection
+        title="Articles in this section"
+        hasContent={pageHasContent}
+      />
     </div>
   )
 }
@@ -101,16 +90,11 @@ export default function MainContent({
 }) {
   const pageProps = useContext(PagePropsContext)
   const { markdoc } = pageProps || {}
-  const router = useRouter()
   const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
     setIsClient(true)
   }, [])
-
-  const isAppCatalogIndex =
-    isAppCatalogRoute(router.asPath) &&
-    getBarePathFromPath(router.asPath).endsWith(APP_CATALOG_BASE_URL)
 
   return (
     <>
@@ -132,14 +116,6 @@ export default function MainContent({
             </Suspense>
           ) : (
             <Component {...pageProps} />
-          )}
-          {isAppCatalogIndex && isClient && (
-            <Suspense fallback={<div>Loading catalog...</div>}>
-              <>
-                <Heading level={2}>Our Catalog</Heading>
-                <AppsList />
-              </>
-            </Suspense>
           )}
         </article>
         <PageDivider />

@@ -40,7 +40,8 @@
     "next-env.d.ts",
     "pages/**/*",
     "src/**/*",
-    "pages-archive/applications"
+    "pages-archive/applications",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"

@@ -28,10 +28,12 @@ import { animated, useSpring } from 'react-spring'
 import useMeasure from 'react-use-measure'
 import styled, { useTheme } from 'styled-components'
 
+import { type NavMenu } from '@src/routing/types'
+
 import scrollIntoContainerView from '../utils/scrollIntoContainerView'
 import { getBarePathFromPath, removeTrailingSlashes } from '../utils/text'
 
-import type { MenuId, NavItem, NavMenu } from '../NavData'
+import type { MenuId, NavItem } from '../NavData'
 
 export type SideNavProps = {
   navData: NavMenu

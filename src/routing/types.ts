@@ -19,14 +19,14 @@ export type DocRouteMap = Record<string, DocRoute>
 export type NavItem = {
   title: string
   href: string
-  toMenu?: 'docs' | 'appCatalog' | 'plural'
+  toMenu?: 'docs' | 'plural'
   icon?: any
   sections?: NavItem[]
   sortPath?: string
 }
 
 export type NavMenu = NavItem[]
-export type NavMenuId = 'docs' | 'appCatalog'
+export type NavMenuId = 'docs'
 export type MenuId = NavMenuId | 'plural'
 export type NavData = Record<NavMenuId, NavMenu>
 
