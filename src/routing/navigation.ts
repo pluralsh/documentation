@@ -163,7 +163,13 @@ export const docNavigation: NavMenu = [
       {
         "title": "Plural upgrade assistant",
         "href": "/plural-features/k8s-upgrade-assistant",
-        "sortPath": "/03-plural-features/02-k8s-upgrade-assistant"
+        "sections": [
+          {
+            "title": "Upgrade Insights",
+            "href": "/plural-features/k8s-upgrade-assistant/upgrade-insights",
+            "sortPath": "/03-plural-features/02-k8s-upgrade-assistant/01-upgrade-insights"
+          }
+        ]
       },
       {
         "title": "Stacks — IaC management",
