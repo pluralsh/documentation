@@ -3,9 +3,12 @@ title: Upgrade Insights
 description: How to configure and check Upgrade Insights
 ---
 
-Plural integrates insights from specific cloud provider clusters. These cluster insights offer recommendations to 
-help you adhere to best practices for Kubernetes and cloud providers. They also provide information on issues that 
-could prevent upgrades and suggest ways to resolve them.
+Cloud Providers sometimes provide their own Kubernetes upgrade intelligence which Plural can directly integrate with, and in addition, especially with EKS, they have their own add-on ecosystem that users need to be aware of at Kubernetes upgrade-time.  The Plural operator can scrape these endpoints and aggregate them centrally in our API for single-pane-of-glass visibility, this provides a few key benefits:
+
+* Unified dashboard to understand kubernetes upgrade-relevant information (no switching between AWS accounts and regions)
+* Aggregating that information alongside Plural's own upgrade intelligence to get a holistic upgradeability picture
+* Unified understanding of what EKS Add-Ons are present and whether they are latent risks for a future upgrade
+
 
 ## Supported providers
 Currently, the following provider is supported:
@@ -32,6 +35,44 @@ spec:
   clusterName: "<CLUSTER_NAME>"
   interval: 10m
 ```
+
+You can set up the IAM permissions with terraform using the following snippet:
+
+```tf
+resource "aws_iam_role_policy_attachment" "eks_upgrade_insights" {
+  for_each   = module.eks.eks_managed_node_groups # or wherever else the node groups are defined in your terraform code
+  role       = each.value.iam_role_name
+  policy_arn = aws_iam_policy.eks_upgrade_insights.arn
+}
+
+resource "aws_iam_policy" "eks_upgrade_insights" {
+  name_prefix = "eks-upgrade-insights"
+  description = "eks upgrade insights permissions for ${var.cluster_name}"
+  policy      = <<-POLICY
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Action": [
+            "eks:ListInsights",
+            "eks:DescribeInsight",
+            "eks:ListAddons",
+            "eks:DescribeAddon"
+          ],
+          "Effect": "Allow",
+          "Resource": "*"
+        }
+      ]
+    }
+  POLICY
+}
+```
+
+This approach means no advanced secret management and operator reconfiguration is necessary, and is the easiest but still secure path to setting up upgrades insight scraping.
+
+{% callout severity="info" %}
+If you configured your cluster with the base settings from `plural up`, this will be configured for you by default!
+{% /callout %}
 
 ### Explicit credentials
 To configure Upgrade Insights with explicit credentials, you can use the following YAML configuration:
