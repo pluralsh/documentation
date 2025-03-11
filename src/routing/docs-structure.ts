@@ -1,130 +1,175 @@
 export type DocSection = {
   path: string
+  title: string
   sections?: DocSection[]
 }
 
 /**
  * docs structure single source of truth
- * will search for md files with the paths described below, including an index.md file at the root of each section (which takes precedence over a PATH_NAME.md file)
+ * will search for md files with the paths described below, first for an index.md file at the root of each section, then for a PATH_NAME.md file if index isn't found
  * unspecified routes, or specified routes without a corresponding md file, will 404 unless referenced in the redirects object
- * UI sidebar order will match array order
+ * UI sidebar order will match array order, using titles below
  *
  * */
 export const docsStructure: DocSection[] = [
   {
     path: 'overview',
+    title: 'Overview',
     sections: [
-      { path: 'introduction' },
-      { path: 'architecture' },
-      { path: 'management-api-reference' },
-      { path: 'agent-api-reference' },
+      { path: 'introduction', title: 'Introduction' },
+      { path: 'architecture', title: 'Architecture' },
+      { path: 'management-api-reference', title: 'Management API Reference' },
+      { path: 'agent-api-reference', title: 'Agent API Reference' },
     ],
   },
   {
     path: 'getting-started',
+    title: 'Getting Started',
     sections: [
       {
         path: 'first-steps',
+        title: 'First steps',
         sections: [
-          { path: 'cli-quickstart' },
-          { path: 'existing-cluster' },
-          { path: 'plural-cloud' },
+          { path: 'cli-quickstart', title: 'Quickstart with the Plural CLI' },
+          { path: 'existing-cluster', title: 'Bring your own K8s cluster' },
+          {
+            path: 'plural-cloud',
+            title: 'Host Your Plural Console with Plural Cloud',
+          },
         ],
       },
       {
         path: 'how-to-use',
+        title: 'How to use Plural',
         sections: [
-          { path: 'mgmt-cluster' },
-          { path: 'rbac' },
-          { path: 'scm-connection' },
-          { path: 'workload-cluster' },
-          { path: 'controllers' },
-          { path: 'observability' },
-          { path: 'microservice' },
-          { path: 'pr-automation' },
-          { path: 'pipelines' },
+          { path: 'mgmt-cluster', title: 'Provision a management cluster' },
+          { path: 'rbac', title: 'Add RBAC to the K8s dashboard' },
+          {
+            path: 'scm-connection',
+            title: 'Connect a source control provider',
+          },
+          { path: 'workload-cluster', title: 'Provision a workload cluster' },
+          { path: 'controllers', title: 'Set up ingress on a cluster' },
+          { path: 'observability', title: 'Set up full stack observability' },
+          { path: 'microservice', title: 'Deploy the first microservice' },
+          {
+            path: 'pr-automation',
+            title: 'Use PR automations for self-service',
+          },
+          { path: 'pipelines', title: 'Setup a dev -> prod pipeline' },
         ],
       },
       {
         path: 'advanced-config',
+        title: 'Advanced configuration',
         sections: [
-          { path: 'sandboxing' },
-          { path: 'network-configuration' },
-          { path: 'private-ca' },
+          { path: 'sandboxing', title: 'Sandboxing your cluster' },
+          { path: 'network-configuration', title: 'Network configuration' },
+          { path: 'private-ca', title: 'Handling private CAs' },
         ],
       },
     ],
   },
   {
     path: 'plural-features',
+    title: 'Plural Features',
     sections: [
       {
         path: 'continuous-deployment',
+        title: 'Continuous deployment',
         sections: [
-          { path: 'deployment-operator' },
-          { path: 'git-service' },
-          { path: 'helm-service' },
-          { path: 'global-service' },
+          { path: 'deployment-operator', title: 'The deployment operator' },
+          { path: 'git-service', title: 'Git-sourced services' },
+          { path: 'helm-service', title: 'Helm-sourced services' },
+          { path: 'global-service', title: 'Global services' },
         ],
       },
       {
         path: 'k8s-upgrade-assistant',
-        sections: [{ path: 'upgrade-insights' }],
+        title: 'Plural upgrade assistant',
+        sections: [{ path: 'upgrade-insights', title: 'Upgrade Insights' }],
       },
       {
         path: 'stacks-iac-management',
+        title: 'Stacks — IaC management',
         sections: [
-          { path: 'customize-runners' },
-          { path: 'pr-workflow' },
-          { path: 'manual-runs' },
-          { path: 'sharing-outputs' },
-          { path: 'custom-stacks' },
-          { path: 'auto-cancellation' },
-          { path: 'local-execution' },
-          { path: 'service-contexts' },
+          { path: 'customize-runners', title: 'Customize stack runners' },
+          { path: 'pr-workflow', title: 'Stack PR workflow' },
+          { path: 'manual-runs', title: 'Manual runs' },
+          {
+            path: 'sharing-outputs',
+            title: 'Sharing Outputs with Continuous Deployment',
+          },
+          { path: 'custom-stacks', title: 'Custom stacks' },
+          { path: 'auto-cancellation', title: 'Auto cancellation' },
+          { path: 'local-execution', title: 'Local execution' },
+          {
+            path: 'service-contexts',
+            title: 'Terraform interop with service contexts',
+          },
         ],
       },
       {
         path: 'service-catalog',
-        sections: [{ path: 'creation' }, { path: 'contribution-program' }],
+        title: 'Service catalog',
+        sections: [
+          { path: 'creation', title: 'Creating your own catalog' },
+          { path: 'contribution-program', title: 'Contribution program' },
+        ],
       },
-      { path: 'kubernetes-dashboard' },
+      { path: 'kubernetes-dashboard', title: 'Kubernetes dashboard' },
       {
         path: 'plural-ai',
+        title: 'Plural AI',
         sections: [
-          { path: 'setup' },
-          { path: 'architecture' },
-          { path: 'cost' },
+          { path: 'setup', title: 'Setup Plural AI' },
+          { path: 'architecture', title: 'Plural AI Architecture' },
+          { path: 'cost', title: 'Plural AI cost analysis' },
         ],
       },
       {
         path: 'pr-automation',
+        title: 'Pull request automation',
         sections: [
-          { path: 'crds' },
-          { path: 'testing' },
-          { path: 'pipelines' },
+          { path: 'crds', title: 'PR automation custom resources' },
+          { path: 'testing', title: 'PR automation testing' },
+          { path: 'pipelines', title: 'PR automation pipelines' },
         ],
       },
       {
         path: 'service-templating',
-        sections: [{ path: 'supporting-liquid-filters' }],
+        title: 'Service templating',
+        sections: [
+          {
+            path: 'supporting-liquid-filters',
+            title: 'Supporting Liquid Filters',
+          },
+        ],
       },
-      { path: 'projects-and-multi-tenancy' },
-      { path: 'notifications' },
+      {
+        path: 'projects-and-multi-tenancy',
+        title: 'Projects and multi-tenancy',
+      },
+      { path: 'notifications', title: 'Notification configuration' },
     ],
   },
   {
     path: 'faq',
+    title: 'Faq',
     sections: [
-      { path: 'security' },
-      { path: 'plural-oidc' },
-      { path: 'certifications' },
-      { path: 'paid-tiers' },
+      { path: 'security', title: 'Is Plural secure?' },
+      { path: 'plural-oidc', title: 'Does Plural support OpenID Connect?' },
+      {
+        path: 'certifications',
+        title: 'What certifications does Plural have?',
+      },
+      { path: 'paid-tiers', title: 'How do Plural paid tiers work?' },
     ],
   },
   {
     path: 'resources',
-    sections: [{ path: 'release-notes' }],
+    title: 'Resources',
+    sections: [{ path: 'release-notes', title: 'Release Notes' }],
   },
 ]
 
