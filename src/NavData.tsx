@@ -1,11 +1,6 @@
 import type { ReactElement } from 'react'
 
 import { docNavigation } from './routing/navigation'
-import { type NavMenu } from './routing/types'
-
-export type NavMenuId = 'docs'
-export type MenuId = NavMenuId | 'plural'
-export type NavData = Record<NavMenuId, NavMenu>
 
 export type NavItem = {
   title?: string
@@ -14,6 +9,10 @@ export type NavItem = {
   icon?: ReactElement
   sections?: NavItem[]
 }
+export type NavMenu = NavItem[]
+export type NavMenuId = 'docs'
+export type MenuId = NavMenuId | 'plural'
+export type NavData = Record<NavMenuId, NavMenu>
 
 export function findNavItem(
   test: (arg: NavItem) => boolean,

@@ -1,9 +1,15 @@
-import pages from '../src/generated/pages.json'
+import routes from '../generated/routes.json'
 
 const S_MAXAGE = 1 * 60 * 60 // 1s * 60s/m * 60m/h = 1 hour
 const STALE_WHILE_REVALIDATE = S_MAXAGE * 2
 
-function urlTag({ location, lastmod }: { location: string; lastmod?: string }) {
+function urlTag({
+  location,
+  lastmod,
+}: {
+  location: string
+  lastmod?: string | null
+}) {
   return `  <url>
     <loc>${process.env.NEXT_PUBLIC_ROOT_URL}${location}</loc>${
       lastmod
@@ -26,15 +32,13 @@ export default function SiteMap() {
   // getServerSideProps will do the heavy lifting
 }
 
-interface PageInfo {
-  path: string
-  lastmod: string
-}
-
 function generateSiteMap() {
   const sitemap = wrapSiteMap(
-    (pages as PageInfo[])
-      ?.map((page) => urlTag({ location: page.path, lastmod: page.lastmod }))
+    Object.entries(routes)
+      .filter(([_, info]) => info.relPath !== null) // filter out routes without a filepath
+      .map(([route, info]) =>
+        urlTag({ location: route, lastmod: info.lastmod })
+      )
       .join('\n')
   )
 
