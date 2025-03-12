@@ -1,7 +1,7 @@
 {
   "/overview": {
-    "relPath": null,
-    "lastmod": null
+    "relPath": "/overview/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/overview/introduction": {
     "relPath": "/overview/introduction.md",
@@ -20,8 +20,8 @@
     "lastmod": "2025-03-11T17:46:28.000Z"
   },
   "/getting-started": {
-    "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "relPath": "/getting-started/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/getting-started/first-steps": {
     "relPath": "/getting-started/first-steps/index.md",
@@ -96,8 +96,8 @@
     "lastmod": "2025-03-11T17:46:28.000Z"
   },
   "/plural-features": {
-    "relPath": null,
-    "lastmod": null
+    "relPath": "/plural-features/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/plural-features/continuous-deployment": {
     "relPath": "/plural-features/continuous-deployment/index.md",
@@ -228,8 +228,8 @@
     "lastmod": "2025-03-11T17:46:28.000Z"
   },
   "/faq": {
-    "relPath": null,
-    "lastmod": null
+    "relPath": "/faq/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/faq/security": {
     "relPath": "/faq/security.md",
@@ -248,8 +248,8 @@
     "lastmod": "2025-03-11T17:46:28.000Z"
   },
   "/resources": {
-    "relPath": null,
-    "lastmod": null
+    "relPath": "/resources/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/resources/release-notes": {
     "relPath": "/resources/release-notes.md",
@@ -260,12 +260,8 @@
     "lastmod": "2025-03-11T17:46:28.000Z"
   },
   "/getting-started/readme": {
-    "relPath": null,
-    "lastmod": null
-  },
-  "/getting-started/getting-started": {
-    "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "relPath": "/getting-started/index.md",
+    "lastmod": "2025-03-12T03:39:05.000Z"
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",

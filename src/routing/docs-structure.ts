@@ -185,17 +185,7 @@ export const redirects = [
   },
   {
     source: '/getting-started/readme',
-    destination: '/',
-    permanent: true,
-  },
-  {
-    source: '/getting-started/getting-started',
-    destination: '/getting-started/first-steps/cli-quickstart',
-    permanent: true,
-  },
-  {
-    source: '/getting-started',
-    destination: '/getting-started/first-steps/cli-quickstart',
+    destination: '/getting-started',
     permanent: true,
   },
   {

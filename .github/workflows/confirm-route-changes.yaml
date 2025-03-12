@@ -27,15 +27,19 @@ jobs:
       - name: Install dependencies
         run: yarn --immutable
       - name: Backup current routes.json
-        run: cp -f generated/routes.json generated/routes.json.original || true
+        run: cp -f generated/routes.json generated/routes.json.original
       - name: Regenerate routes.json
         run: yarn generate:route-index
-      - name: Compare route files
+      - name: Create comparison files with just routes and filepaths
         run: |
-          if ! diff -q generated/routes.json generated/routes.json.original > /dev/null; then
+          jq 'map_values({relPath})' generated/routes.json > routes.paths.json
+          jq 'map_values({relPath})' generated/routes.json.original > routes.original.paths.json
+      - name: Compare route paths
+        run: |
+          if ! diff -q routes.paths.json routes.original.paths.json > /dev/null; then
             echo "Error: The routes.json file is out of sync with the docs structure."
             echo "Please run 'yarn generate:route-index' and commit the updated file."
-            diff -u generated/routes.json.original generated/routes.json || true
+            diff -u routes.original.paths.json routes.paths.json || true
             exit 1
           fi
           echo "Routes validation passed: routes.json is up to date."
