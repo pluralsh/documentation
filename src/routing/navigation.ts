@@ -168,6 +168,11 @@ export const docNavigation: NavMenu = [
             "title": "Upgrade Insights",
             "href": "/plural-features/k8s-upgrade-assistant/upgrade-insights",
             "sortPath": "/03-plural-features/02-k8s-upgrade-assistant/01-upgrade-insights"
+          },
+          {
+            "title": "Add-on compatibilities",
+            "href": "/plural-features/k8s-upgrade-assistant/addon-compatibilities",
+            "sortPath": "/03-plural-features/02-k8s-upgrade-assistant/02-addon-compatibilities"
           }
         ]
       },

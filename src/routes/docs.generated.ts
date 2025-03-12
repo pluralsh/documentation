@@ -180,6 +180,12 @@ export const docRoutes: DocRouteMap = {
     id: 'plural_features_k8s_upgrade_assistant_upgrade_insights',
   },
 
+  plural_features_k8s_upgrade_assistant_addon_compatibilities: {
+    path: '/03-plural-features/02-k8s-upgrade-assistant/02-addon-compatibilities',
+    title: 'Add-on compatibilities',
+    id: 'plural_features_k8s_upgrade_assistant_addon_compatibilities',
+  },
+
   plural_features_stacks_iac_management: {
     path: '/03-plural-features/03-stacks-iac-management',
     title: 'Stacks — IaC management',
