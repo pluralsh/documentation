@@ -1,14 +1,7 @@
+// needed for ts-node to work on the scripts
 {
+  "extends": "../tsconfig.json",
   "compilerOptions": {
-    "target": "ES2020",
-    "module": "commonjs",
-    "lib": ["ES2020"],
-    "strict": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "resolveJsonModule": true
-  },
-  "include": ["./**/*"],
-  "exclude": ["node_modules"]
-} 
+    "module": "node16"
+  }
+}
