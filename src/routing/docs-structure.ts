@@ -87,7 +87,10 @@ export const docsStructure: DocSection[] = [
       {
         path: 'k8s-upgrade-assistant',
         title: 'Plural upgrade assistant',
-        sections: [{ path: 'upgrade-insights', title: 'Upgrade Insights' }],
+        sections: [
+          { path: 'upgrade-insights', title: 'Upgrade insights' },
+          { path: 'addon-compatibilities', title: 'Add-on compatibilities' },
+        ],
       },
       {
         path: 'stacks-iac-management',
