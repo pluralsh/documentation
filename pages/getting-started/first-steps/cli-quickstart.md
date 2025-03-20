@@ -20,7 +20,7 @@ The Plural cli is available on homebrew, a single line install can be done with:
 brew install pluralsh/plural/plural
 ```
 
-If you are using a machine that is not compatible with homebrew, we recommend simply downloading a pre-built release on github and installing it onto your machines path. The releases can be found here: https://github.com/pluralsh/plural-cli/releases.
+If you are using a machine that is not compatible with homebrew, we recommend simply downloading a pre-built release on github and installing it onto your machines path. The releases can be found [here](https://github.com/pluralsh/plural-cli/releases).
 
 ## Onboard to Plural and install the Plural Console
 
