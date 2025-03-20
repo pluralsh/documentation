@@ -1,271 +1,275 @@
 {
   "/overview": {
     "relPath": "/overview/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/overview/introduction": {
     "relPath": "/overview/introduction.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/overview/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/first-steps": {
     "relPath": "/getting-started/first-steps/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/first-steps/plural-cloud": {
     "relPath": "/getting-started/first-steps/plural-cloud.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use": {
     "relPath": "/getting-started/how-to-use/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/mgmt-cluster": {
     "relPath": "/getting-started/how-to-use/mgmt-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/rbac": {
     "relPath": "/getting-started/how-to-use/rbac.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/scm-connection": {
     "relPath": "/getting-started/how-to-use/scm-connection.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/workload-cluster": {
     "relPath": "/getting-started/how-to-use/workload-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/controllers": {
     "relPath": "/getting-started/how-to-use/controllers.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/observability": {
     "relPath": "/getting-started/how-to-use/observability.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/microservice": {
     "relPath": "/getting-started/how-to-use/microservice.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/pr-automation": {
     "relPath": "/getting-started/how-to-use/pr-automation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/how-to-use/pipelines": {
     "relPath": "/getting-started/how-to-use/pipelines.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/advanced-config": {
     "relPath": "/getting-started/advanced-config/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/advanced-config/private-ca": {
     "relPath": "/getting-started/advanced-config/private-ca.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features": {
     "relPath": "/plural-features/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/continuous-deployment": {
     "relPath": "/plural-features/continuous-deployment/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/continuous-deployment/deployment-operator": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/continuous-deployment/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/continuous-deployment/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/continuous-deployment/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/k8s-upgrade-assistant/upgrade-insights": {
     "relPath": "/plural-features/k8s-upgrade-assistant/upgrade-insights.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/pr-workflow": {
     "relPath": "/plural-features/stacks-iac-management/pr-workflow.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/manual-runs": {
     "relPath": "/plural-features/stacks-iac-management/manual-runs.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/sharing-outputs": {
     "relPath": "/plural-features/stacks-iac-management/sharing-outputs.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/custom-stacks": {
     "relPath": "/plural-features/stacks-iac-management/custom-stacks.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/auto-cancellation": {
     "relPath": "/plural-features/stacks-iac-management/auto-cancellation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/local-execution": {
     "relPath": "/plural-features/stacks-iac-management/local-execution.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/stacks-iac-management/service-contexts": {
     "relPath": "/plural-features/stacks-iac-management/service-contexts.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/service-catalog": {
     "relPath": "/plural-features/service-catalog/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/service-catalog/creation": {
     "relPath": "/plural-features/service-catalog/creation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/service-catalog/contribution-program": {
     "relPath": "/plural-features/service-catalog/contribution-program.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/kubernetes-dashboard": {
     "relPath": "/plural-features/kubernetes-dashboard/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/plural-ai": {
     "relPath": "/plural-features/plural-ai/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/plural-ai/setup": {
     "relPath": "/plural-features/plural-ai/setup.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/plural-ai/architecture": {
     "relPath": "/plural-features/plural-ai/architecture.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/plural-ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/pr-automation/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/pr-automation/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/pr-automation/pipelines": {
     "relPath": "/plural-features/pr-automation/pipelines.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/service-templating": {
     "relPath": "/plural-features/service-templating/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq/security": {
     "relPath": "/faq/security.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq/plural-oidc": {
     "relPath": "/faq/plural-oidc.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq/certifications": {
     "relPath": "/faq/certifications.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq/paid-tiers": {
     "relPath": "/faq/paid-tiers.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/resources": {
     "relPath": "/resources/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/resources/release-notes": {
     "relPath": "/resources/release-notes.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
-    "lastmod": "2025-03-12T03:39:05.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/getting-started/quickstart": {
+    "relPath": "/getting-started/first-steps/index.md",
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/reference/architecture": {
     "relPath": null,
@@ -277,186 +281,186 @@
   },
   "/deployments/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/getting-started/deployments": {
     "relPath": "/getting-started/first-steps/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/set-up/mgmt-cluster": {
     "relPath": "/getting-started/how-to-use/mgmt-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/set-up/rbac": {
     "relPath": "/getting-started/how-to-use/rbac.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/set-up/scm-connection": {
     "relPath": "/getting-started/how-to-use/scm-connection.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/set-up/workload-cluster": {
     "relPath": "/getting-started/how-to-use/workload-cluster.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/set-up/controllers": {
     "relPath": "/getting-started/how-to-use/controllers.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/deploy/pr-automation": {
     "relPath": "/getting-started/how-to-use/pr-automation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/deploy/microservice": {
     "relPath": "/getting-started/how-to-use/microservice.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/deploy/pipelines": {
     "relPath": "/getting-started/how-to-use/pipelines.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/how-to/index": {
     "relPath": "/getting-started/how-to-use/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/private-ca": {
     "relPath": "/getting-started/advanced-config/private-ca.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/operator/architecture": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/operator/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/operator/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/operator/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/using-operator": {
     "relPath": "/plural-features/continuous-deployment/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/deprecations": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/pr-workflow": {
     "relPath": "/plural-features/stacks-iac-management/pr-workflow.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/manual-runs": {
     "relPath": "/plural-features/stacks-iac-management/manual-runs.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/local-execution": {
     "relPath": "/plural-features/stacks-iac-management/local-execution.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/custom-stacks": {
     "relPath": "/plural-features/stacks-iac-management/custom-stacks.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/stacks/auto-cancellation": {
     "relPath": "/plural-features/stacks-iac-management/auto-cancellation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/terraform-interop": {
     "relPath": "/plural-features/stacks-iac-management/service-contexts.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/stacks": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/service-catalog/creation": {
     "relPath": "/plural-features/service-catalog/creation.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/service-catalog/contributing": {
     "relPath": "/plural-features/service-catalog/contribution-program.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/service-catalog/overview": {
     "relPath": "/plural-features/service-catalog/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/dashboard": {
     "relPath": "/plural-features/kubernetes-dashboard/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/ai/setup": {
     "relPath": "/plural-features/plural-ai/setup.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/ai/architecture": {
     "relPath": "/plural-features/plural-ai/architecture.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/ai/overview": {
     "relPath": "/plural-features/plural-ai/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/pr/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/pr/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/pr/pipelines": {
     "relPath": "/plural-features/pr-automation/pipelines.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/templating": {
     "relPath": "/plural-features/service-templating/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/deployments/notifications": {
     "relPath": "/plural-features/notifications/index.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/faq/plural-paid-tiers": {
     "relPath": "/faq/paid-tiers.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/reference/release-notes": {
     "relPath": "/resources/release-notes.md",
-    "lastmod": "2025-03-11T17:46:28.000Z"
+    "lastmod": "2025-03-12T14:59:41.000Z"
   }
 }
