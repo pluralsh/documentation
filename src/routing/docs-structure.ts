@@ -192,6 +192,11 @@ export const redirects = [
     permanent: true,
   },
   {
+    source: '/getting-started/quickstart',
+    destination: '/getting-started/first-steps',
+    permanent: true,
+  },
+  {
     source: '/deployments/architecture',
     destination: '/overview/architecture',
     permanent: true,

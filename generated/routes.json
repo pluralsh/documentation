@@ -267,6 +267,10 @@
     "relPath": "/getting-started/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/getting-started/quickstart": {
+    "relPath": "/getting-started/first-steps/index.md",
+    "lastmod": "2025-03-12T14:59:41.000Z"
+  },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
