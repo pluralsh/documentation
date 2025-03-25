@@ -51,7 +51,7 @@ export const docsStructure: DocSection[] = [
           { path: 'workload-cluster', title: 'Provision a workload cluster' },
           { path: 'controllers', title: 'Set up ingress on a cluster' },
           { path: 'observability', title: 'Set up full stack observability' },
-          { path: 'microservice', title: 'Deploy the first microservice' },
+          { path: 'microservice', title: 'Deploy your first microservice' },
           {
             path: 'pr-automation',
             title: 'Use PR automations for self-service',
@@ -128,6 +128,15 @@ export const docsStructure: DocSection[] = [
           { path: 'setup', title: 'Setup Plural AI' },
           { path: 'architecture', title: 'Plural AI Architecture' },
           { path: 'cost', title: 'Plural AI cost analysis' },
+        ],
+      },
+      {
+        path: 'observability',
+        title: 'Observability Integration',
+        sections: [
+          { path: 'prometheus', title: 'Prometheus' },
+          { path: 'logging', title: 'Log Aggregation' },
+          { path: 'cost', title: 'Cost Management' },
         ],
       },
       {
