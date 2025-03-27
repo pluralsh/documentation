@@ -84,14 +84,6 @@ kubectl create secret generic console-values --from-file=values.yaml=values.secr
 2. Create a helm service referencing it in a folder currently being synced via GitOps:
 
 ```yaml
-apiVersion: source.toolkit.fluxcd.io/v1beta2
-kind: HelmRepository
-metadata:
-  name: console
-  namespace: infra # or whatever namespace you prefer
-spec:
-  interval: 5m0s
-  url: https://pluralsh.github.io/console
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: Cluster
@@ -110,14 +102,12 @@ spec:
   namespace: plrl-console # this namespace must be correct
   name: console
   helm:
-    version: 0.3.x #  can use floating versions with the .x syntax or pin to specific versions and automate w/ renovate
+    version: 0.x.x # VERSION (will be used below, 0.x.x means we float minor and patch versions)
     chart: console
+    url: https://pluralsh.github.io/console
     valuesFrom:
       namespace: infra
-      name: console-values
-    repository:
-      namespace: infra
-      name: console # referenced helm repository above
+      name: console-values # maps to the secret we created above
   clusterRef:
     kind: Cluster
     name: mgmt # must be set to your management cluster
@@ -126,3 +116,56 @@ spec:
 
 You can then add additional values configuration using the `values` field of a helm service, or convert it to a multi-source service and source values files directly from git.
 
+## Generate Console Update PRs instead of floating versions
+
+If you want to pin your console version and generate PRs instead of auto-updating, you can use the following Plural CRs to automate that entirely:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: PrAutomation
+metadata:
+  name: console-upgrader
+spec:
+  name: console-upgrader
+  documentation: Updates the console service to a new helm version
+  updates:
+    regexReplacements:
+    - regex: "version: (.*) # VERSION" # the VERSION comment is simply to assist regex replacement here
+      file: bootstrap/console.yaml # rewrite to whatever the actual version of your console is
+      replacement: "version: {{ context.version }} # VERSION"
+  scmConnectionRef:
+    name: workspaces
+  title: "Update Plural Console helm chart to {{ context.version }}"
+  message: |
+    Update Plural Console helm chart to {{ context.version }}
+
+    Release notes available here: https://github.com/pluralsh/console/releases
+  identifier: ${YOUR_REPO_SLUG} # eg pluralsh/plrl-infra
+  configuration:
+  - name: version
+    type: STRING
+    documentation: version of the new helm chart
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Observer
+metadata:
+  name: console
+spec:
+  crontab: "*/5 * * * *"
+  initial: '0.3.81' # or whatever your current chart version is
+  target:
+    order: SEMVER
+    type: HELM
+    helm:
+      url: https://pluralsh.github.io/console
+      chart: console
+  actions:
+  - type: PR
+    configuration:
+      pr:
+        prAutomationRef:
+          name: console-upgrader # references the PrAutomation CR we created above
+          namespace: infra
+        context:
+          version: $value
+```

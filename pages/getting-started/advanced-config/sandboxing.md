@@ -38,15 +38,30 @@ To set it up, you need to configure a few env vars as well, in particular:
 
 To simplify permission management, you can also configure specific emails to automatically be made admins via another env var: `CONSOLE_ADMIN_EMAILS`. It should be a comma seperated list, and on login we'll provision that user to be an admin w/in your Plural console instance. We'd recommend only setting this for a small set of users, then using group bindings for permissions from then on
 
-## Self-host git repos
+## Self-Host Git Repos
 
-If your enterprise cannot accept external communication to github, we recommend vendoring the above repos into your own source control provider (most have a mechanism for doing this, or can always build a cron to do it as well which we're happy to help with).
+If your enterprise cannot accept external communication to github, we can provide a fully self-hosted git server built with [soft-serve](https://github.com/charmbracelet/soft-serve) with the required Plural repos pre-cloned at a compatible version for your instance of the console.  This can be easily enabled via helm with the following values:
 
-The deployment-operator and scaffolds repos were both designed to be forked or vendored. Once you've decided upon a strategy for both, you can configure them as repositories in your console, then go to https://{your-plural-console}/cd/settings/repositories and chose to rewire the relevant repos as needed. You can also just directly modify the url and authorization information for the https://github.com/pluralsh/deployment-operator.git and other repos if you'd like too.
+```yaml
+extraEnv:
+- name: CONSOLE_DEPLOY_OPERATOR_URL
+  value: http://git-server.plrl-console:23232/deployment-operator.git # uses the git server for deployment operator updates
+- name: CONSOLE_ARITIFACTS_URL
+  value: http://git-server.plrl-console:23232/scaffolds.git # uses the git server for our default service catalog setup artifacts
+gitServer:
+  enabled: true
+```
 
-To reconfigure a self-managed repo for compatibilities and deprecations, you'll need to fork or vendor https://github.com/pluralsh/console then configure the `GITHUB_RAW_URL` env var to point to the new location. The current default is https://raw.githubusercontent.com/pluralsh/console. This will then be appended w/ the branch + path (eg "${GITHUB_RAW_URL}/master/static/compatibilities) to fetch the relevant data for both uis.
+We publish a new version of this every release so you will simply need to ensure it's vendored and ready to pull on each helm upgrade.  Many organizations have a natural way to vendor docker images, and since this is deployed as a fully self-contained container image, you can simply repurpose that process to managing the necessary git repositories as well.
 
-Alternatively, we also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
+If you want to vendor the repositories entirely, the upstream repos are here:
+
+- https://github.com/pluralsh/deployment-operator
+- https://github.com/pluralsh/scaffolds
+
+## Sandboxed Compatibility Tables
+
+We also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
 
 ```
 CONSOLE_AIRGAP: "true"
@@ -63,6 +78,7 @@ Lots of enterprises have strict requirements around the docker registries they u
 - pluralsh/deployment-controller
 - pluralsh/deployment-operator
 - pluralsh/agentk
+- pluralsh/git-server (optional if you want to use our vendored git server)
 
 The first three will be configured in the main console chart and are installed once in your management cluster, the latter two are needed for your deployment agent pod, and require a bit more advanced configuration to manage them in bulk.
 
@@ -110,42 +126,44 @@ First, you'll first want to use our agent settings to configure your helm update
 
 ![](/assets/deployments/agent-update.png)
 
-When you're installing an agent on a new cluster, you'll want to specify your custom values so agent pods can properly bootstrap as well. You have two main options, install via cli or terraform. To configure custom values when using the cli, there's a `--values` flag that can point to a yaml file for your custom values, eg something like:
+This can also be set via CRD using:
 
-```bash
-plural cd clusters bootstrap --name my-new-cluster --values ./agent-values.yaml
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: DeploymentSettings
+metadata:
+  name: global # this is a singleton resource that is always at this location
+  namespace: plrl-deploy-operator
+spec:
+  agentHelmValues: # from values above
+    image:
+      repository: your.enterprise.registry/pluralsh/deployment-operator
+
+    # configure agentk (if this isn't pullable kubernetes dashboarding functionality will break but deployments can still proceed)
+    agentk:
+      image:
+        repository: your.enterprise.registry/pluralsh/agentk
 ```
 
-This will merge in those values with the chart, and you can use the example yaml above to jumpstart writing the exact spec you need.
+From there, both our CLI and terraform provider will ensure these helm values are always applied either in a direct agent install with:
 
-For terraform, our provider also supports passing custom values like the following for eks:
+```bash
+plural cd clusters bootstrap --name my-new-cluster
+```
+
+or via terraform with:
 
 ```tf
-data "aws_eks_cluster" "cluster" {
-  name = var.cluster_name
-}
-
-data "aws_eks_cluster_auth" "cluster" {
-  name = var.cluster_name
-}
-
-# store agent values in an adjacent file for the purpose of this example
-data "local_file" "agent_values" {
-  filename = "${path.module}/../helm-values/agent.yaml"
-}
-
-# this creates the cluster in our api, then performs a helm install w/ the agent chart in one tf resource
 resource "plural_cluster" "my-cluster" {
     handle   = "my-cluster"
-    name     = var.cluster_name
-    tags     = var.tags
-
-    helm_values = data.local_file.agent_values.content # can also just be passed as a raw string instead of using the file import method
-
-    kubeconfig = {
-      host                   = data.aws_eks_cluster.cluster.endpoint
-      cluster_ca_certificate = base64decode(data.aws_eks_cluster.cluster.certificate_authority.0.data)
-      token                  = data.aws_eks_cluster_auth.cluster.token
+    name     = "my-cluster"
+    
+    tags = {
+      tier = "dev"
+      fleet = "my-fleet"
     }
+
+    kubeconfig = { ... }
+
 }
 ```

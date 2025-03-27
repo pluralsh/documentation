@@ -60,45 +60,13 @@ We've also generated a README that should give an overview of how the repo can b
 If you'd like to configure the plural cli to communicate with your new Console instance, the configuration process is pretty simple, you'll need to set your Console URL and Console token. Set them with:
 
 ```
-PLURAL_CONSOLE_URL
-PLURAL_CONSOLE_TOKEN
+plural cd login
 ```
-
-or alternatively you can run `plural cd login` to set them to a config file within `~/.plural`
 
 {% callout severity="info" %}
-`plural cd` is an alias for `plural deployments`, and can be used interchangeably within the CLI.
+You'll need to generate an access token to perform this command, it'll be available at https://{your-console-url}/profile/access-tokens
 {% /callout %}
 
-## List Clusters, Services, Repositories
+or alternatively you can run the env vars `PLURAL_CONSOLE_URL` and `PLURAL_CONSOLE_TOKEN` or set them directly in the config file `~/.plural/console.yml`
 
-The following commands can help you list a lot of the clusters, services, etc that have already been registered:
-
-```sh
-plural cd clusters list
-plural cd services list @{cluster-handle}
-plural cd repositories list
-```
-
-## Import Git Repositories and Deploy services
-
-You'll need to then import the Git repository containing your service and the associated Kubernetes manifests. To do so, use `plural cd repositories create`:
-
-```sh
-plural cd repositories create --url <REPO_URL>
-```
-
-Optionally add flags for Github authorization if necessary.
-
-To then deploy your service, find the repo ID for the service you want to deploy using `plural cd repositories list`.
-
-You can then use the `plural cd services create` command:
-
-```sh
-plural cd services create --name <SERVICE_NAME> --namespace <SERVICE_NAMESPACE> --repo-id <REPO_ID> --git-ref <GIT_REF> --git-folder <GIT_FOLDER> CLUSTER_ID
-
-```
-
-See deployed services with the `plural cd services list` command. Your service should populate initially as `Stale` until your components are Ready, at which point they will flip to `Healthy`.
-
-Congratulations! You've deployed your first service with Plural.
+To validate your cli is properly configured, simply run `plural cd clusters list`
