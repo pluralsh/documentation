@@ -57,12 +57,16 @@ metadata:
   name: global # this is a singleton resource that is always at this location
   namespace: plrl-deploy-operator
 spec:
-  prometheusConnection:
-    host: https://{your-prometheus-url}
-    user: plrl # or whatever user you'd want
-    passwordSecretRef:
-      name: basic-auth-prom
-      key: password
+  logging:
+    enabled: true
+    driver: ELASTIC
+    elastic:
+      host: https://{your-elastic-fqdn}
+      user: plrl
+      index: plrl-logs-* # or whatever index pattern you're currently using with Logstash
+      passwordSecretRef:
+        name: plrl-elastic-user
+        key: password
 ```
 
 ## ElasticSearch as a Vector Store
