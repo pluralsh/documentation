@@ -4,6 +4,7 @@ on:
     - cron: '0 0 * * *'
 jobs:
   sync-docs:
+    name: Sync docs
     runs-on: ubuntu-latest
     permissions:
       contents: 'write'
