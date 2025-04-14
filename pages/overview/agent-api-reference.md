@@ -9,6 +9,7 @@
 Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 API group
 
 ### Resource Types
+- [ClusterDrain](#clusterdrain)
 - [CustomHealth](#customhealth)
 - [IngressReplica](#ingressreplica)
 - [KubecostExtractor](#kubecostextractor)
@@ -96,6 +97,43 @@ _Appears in:_
 | `write` _[Binding](#binding) array_ | Write bindings. |  | Optional: \{\} <br /> |
 
 
+#### ClusterDrain
+
+
+
+ClusterDrain is the Schema for the ClusterDrain object
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `ClusterDrain` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[ClusterDrainSpec](#clusterdrainspec)_ |  |  |  |
+
+
+#### ClusterDrainSpec
+
+
+
+ClusterDrainSpec defines the desired state of ClusterDrain
+
+
+
+_Appears in:_
+- [ClusterDrain](#clusterdrain)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `flowControl` _[FlowControl](#flowcontrol)_ |  |  |  |
+| `labelSelector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#labelselector-v1-meta)_ |  |  |  |
+
+
+
+
 #### ClusterSpec
 
 
@@ -155,6 +193,23 @@ _Appears in:_
 | `script` _string_ |  |  |  |
 
 
+
+
+#### FlowControl
+
+
+
+
+
+
+
+_Appears in:_
+- [ClusterDrainSpec](#clusterdrainspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `percentage` _integer_ |  |  |  |
+| `maxConcurrency` _integer_ |  |  |  |
 
 
 #### GateSpec
@@ -372,6 +427,25 @@ _Appears in:_
 | `gateSpec` _[GateSpec](#gatespec)_ |  |  |  |
 
 
+
+
+#### Progress
+
+
+
+
+
+
+
+_Appears in:_
+- [ClusterDrainStatus](#clusterdrainstatus)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `wave` _integer_ |  |  |  |
+| `percentage` _integer_ |  |  |  |
+| `count` _integer_ |  |  |  |
+| `failures` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core) array_ |  |  |  |
 
 
 #### ProviderCredentials
