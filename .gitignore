@@ -7,6 +7,7 @@
 yalc.lock
 .yalc/
 node_modules/
+.vscode/
 
 # dependencies
 .pnp.*

@@ -1,6 +1,6 @@
 ---
 title: Observability Configuration
-description: Configure metrics and logs provider to directly into the Plural UI 
+description: Configure metrics and logs provider directly into the Plural UI 
 ---
 
 Plural has the ability to query multiple backends for standard observability data and integrate them directly into the mainline Plural experience.  In particular, these are:
@@ -19,12 +19,12 @@ There are a few major benefits of integrating this data with Plural:
 
 ## Plural AI + Observability
 
-Generally, Plural AI is a broad RAG system that ultimately calls into mainline LLMs.  This means the more data we can access the more likely we can find that diamond in the rough that solves your specific problem.
+Generally, Plural AI is a broad RAG system that ultimately calls into mainline LLMs.  This means the more data we can access, the more likely we can find that diamond in the rough that solves your specific problem.
 
 In particular, there are a few major workflows our observability integration pairs with Plural AI:
 
-* Log analysis of low-level Kubernetes components: a few tools, especially external-dns and cert-manager, provided very little error reporting outside of their logs.  With an easier way to extract these, we can automatically root cause failures around DNS registration and certificate issuance, which are both commong annoyances with Kubernetes operators.  This is true of a number of other tools as well, especially solutions like CSI drivers.
-* Application Code Failures - common failure modes like failing health checks, 500 error codes, etc, are usually do to bugs in application code and not at the infrastructure level.  With a combination of log analysis and searchable PR data, we can RCA these issues and cross reference them to the offending code changes.
+* Log analysis of low-level Kubernetes components: a few tools, especially external-dns and cert-manager, provided very little error-reporting outside of their logs.  With an easier way to extract these, we can automatically root cause failures around DNS registration and certificate issuance, which are both commong annoyances with Kubernetes operators.  This is true of a number of other tools as well, especially solutions like CSI drivers.
+* Application Code Failures - common failure modes like failing health checks, 500 error codes, etc, are usually due to bugs in application code and not at the infrastructure level.  With a combination of log analysis and searchable PR data, we can RCA these issues and cross reference them to the offending code changes.
 
 ## CRD Configurability
 
