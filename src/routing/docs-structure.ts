@@ -181,7 +181,10 @@ export const docsStructure: DocSection[] = [
   {
     path: 'resources',
     title: 'Resources',
-    sections: [{ path: 'release-notes', title: 'Release Notes' }],
+    sections: [
+      { path: 'release-notes', title: 'Release Notes' },
+      { path: 'product-updates', title: 'Product Updates' },
+    ],
   },
 ]
 
