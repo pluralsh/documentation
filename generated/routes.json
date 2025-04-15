@@ -13,11 +13,11 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-04-14T15:08:51.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-04-14T15:08:51.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -29,11 +29,11 @@
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-20T18:53:12.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/getting-started/first-steps/plural-cloud": {
     "relPath": "/getting-started/first-steps/plural-cloud.md",
@@ -85,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -201,19 +201,19 @@
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
-    "lastmod": "2025-03-25T00:00:37.000Z"
+    "lastmod": "2025-04-15T01:53:12.000Z"
   },
   "/plural-features/observability/prometheus": {
     "relPath": "/plural-features/observability/prometheus.md",
-    "lastmod": "2025-03-25T00:00:37.000Z"
+    "lastmod": "2025-03-25T13:31:40.000Z"
   },
   "/plural-features/observability/logging": {
     "relPath": "/plural-features/observability/logging.md",
-    "lastmod": "2025-03-25T00:00:37.000Z"
+    "lastmod": "2025-04-08T15:54:07.000Z"
   },
   "/plural-features/observability/cost": {
     "relPath": "/plural-features/observability/cost.md",
-    "lastmod": "2025-03-25T00:00:37.000Z"
+    "lastmod": "2025-03-25T13:31:40.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
@@ -275,9 +275,13 @@
     "relPath": "/resources/release-notes.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/resources/product-updates": {
+    "relPath": "/resources/product-updates.md",
+    "lastmod": "2025-04-15T19:23:57.427Z"
+  },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-04-14T15:08:51.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
@@ -301,11 +305,11 @@
   },
   "/deployments/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-20T18:53:12.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/deployments/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/getting-started/deployments": {
     "relPath": "/getting-started/first-steps/index.md",
@@ -349,7 +353,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-03-27T19:09:28.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
