@@ -446,6 +446,7 @@ _Appears in:_
 | `percentage` _integer_ |  |  |  |
 | `count` _integer_ |  |  |  |
 | `failures` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core) array_ |  |  |  |
+| `cursor` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  |  |
 
 
 #### ProviderCredentials
