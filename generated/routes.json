@@ -17,7 +17,7 @@
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-04-14T15:08:51.000Z"
+    "lastmod": "2025-04-18T01:44:02.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -199,6 +199,22 @@
     "relPath": "/plural-features/plural-ai/cost.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/flows": {
+    "relPath": "/plural-features/flows/index.md",
+    "lastmod": "2025-04-18T18:20:24.042Z"
+  },
+  "/plural-features/flows/create-a-flow": {
+    "relPath": "/plural-features/flows/create-a-flow.md",
+    "lastmod": "2025-04-18T18:20:24.061Z"
+  },
+  "/plural-features/flows/flow-ai": {
+    "relPath": "/plural-features/flows/flow-ai.md",
+    "lastmod": "2025-04-18T18:20:24.084Z"
+  },
+  "/plural-features/flows/mcp": {
+    "relPath": "/plural-features/flows/mcp.md",
+    "lastmod": "2025-04-18T18:20:24.108Z"
+  },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
     "lastmod": "2025-04-15T01:53:12.000Z"
@@ -277,11 +293,11 @@
   },
   "/resources/product-updates": {
     "relPath": "/resources/product-updates.md",
-    "lastmod": "2025-04-15T19:23:57.427Z"
+    "lastmod": "2025-04-15T19:35:43.000Z"
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-04-14T15:08:51.000Z"
+    "lastmod": "2025-04-18T01:44:02.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
