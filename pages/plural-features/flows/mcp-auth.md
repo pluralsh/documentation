@@ -5,7 +5,7 @@ description: Understanding how Plural authenticates and authorizes requests to c
 
 # MCP Server Authentication and Authorization
 
-When integrating Plural Flows with a custom MCP server, such as the example provided in the `/mcp` folder of the Plural repository, it's crucial to understand how authentication and authorization are handled to secure your operations. Plural leverages JSON Web Tokens (JWTs) for secure communication between the Plural platform and your MCP server.
+When integrating Plural Flows with a custom MCP server, such as the example provided in our [example MCP repository](https://github.com/pluralsh/mcp), it's crucial to understand how authentication and authorization are handled to secure your operations. Plural leverages JSON Web Tokens (JWTs) for secure communication between the Plural platform and your MCP server.
 
 ## Authentication
 
@@ -13,7 +13,70 @@ The authentication mechanism relies on JWTs signed using a standard algorithm. T
 
 1.  **Initialization**: Upon startup, the MCP server (as shown in `mcp/src/index.ts`) calls `initializeJWKS()` (from `mcp/src/auth.ts`).
 2.  **JWKS Fetching**: The `initializeJWKS` function retrieves the public signing keys from the JWKS URI specified by the `JWKS_URI` environment variable (e.g., `https://your-console-url/.well-known/jwks.json`). It uses the `jwks-rsa` library to fetch and cache the public key. If no signing keys are found, the server fails to start.
-3.  **Middleware**: The `authenticateJWT` function acts as Express middleware for the `/sse` and `/messages` endpoints.
+
+    ```typescript
+    import jwksClient from "jwks-rsa";
+
+    let publicKey: string | null = null;
+
+    async function initializeJWKS() {
+      const JWKS_URI = process.env.JWKS_URI || "https://your-console-url/.well-known/jwks.json";
+      const client = jwksClient({ jwksUri: JWKS_URI });
+
+      const signingKeys = await client.getSigningKeys();
+      if (signingKeys.length === 0) {
+        throw new Error("No signing keys found in JWKS");
+      }
+      publicKey = signingKeys[0].getPublicKey();
+    }
+
+    export { initializeJWKS };
+    ```
+
+3.  **Middleware**: The `authenticateJWT` function acts as Express middleware for the `/sse` and `/messages` endpoints. This function handles both JWT verification and group-based authorization checks.
+
+    ```typescript
+        // import express and MCP servers
+
+        import { authenticateJWT, initializeJWKS } from "./auth.js";
+        
+        await initializeJWKS();
+
+        // setup MCP server, prompts, tools, etc
+
+        const app = express();
+
+        const transports: { [sessionId: string]: SSEServerTransport } = {};
+
+        app.get("/sse", authenticateJWT, async (_: Request, res: Response) => {
+        try {
+            const transport = new SSEServerTransport('/messages', res);
+            transports[transport.sessionId] = transport;
+            res.on("close", () => {
+            delete transports[transport.sessionId];
+            });
+            console.error("Starting MCP server.connect with session:", transport.sessionId);
+            await server.connect(transport);
+            console.error("MCP connection complete for session:", transport.sessionId);
+        } catch (err) {
+            console.error("Error during server.connect:", err);
+            res.status(500).send("Internal server error");
+        }
+        });
+
+        app.post("/messages", authenticateJWT, async (req: Request, res: Response) => {
+        const sessionId = req.query.sessionId as string;
+        const transport = transports[sessionId];
+        if (transport) {
+            await transport.handlePostMessage(req, res);
+        } else {
+            res.status(400).send('No transport found for sessionId');
+        }
+        });
+
+        console.error("Creating MCP Server on port 3000")
+        app.listen(3000);
+    ```
 4.  **JWT Verification**:
     *   It checks if JWT authentication is enabled via the `JWT_AUTH_ENABLED` environment variable. If not enabled, it skips authentication.
     *   It extracts the Bearer token from the `Authorization` header.
@@ -28,6 +91,48 @@ Once a token is successfully authenticated, the server performs authorization ba
 2.  **Required Groups**: The server checks the `REQUIRED_GROUPS` environment variable. This variable should contain a comma-separated list of Plural group names that are authorized to interact with this specific MCP server.
 3.  **Membership Check**: The middleware verifies if the user's `groups` claim contains at least one of the groups listed in `REQUIRED_GROUPS`.
 4.  **Access Control**: If the user belongs to at least one required group, the request is allowed to proceed (by calling `next()`). Otherwise, a `401 Unauthorized` response is returned, indicating the user lacks the necessary permissions.
+
+Here is the core `authenticateJWT` middleware function from `mcp/src/auth.ts`:
+
+```typescript
+import jwtPkg from "jsonwebtoken";
+import type { Request, Response, NextFunction } from "express";
+
+// Assumes publicKey has been initialized by initializeJWKS()
+
+export function authenticateJWT(req: Request, res: Response, next: NextFunction) {
+  const JWT_AUTH_ENABLED = process.env.JWT_AUTH_ENABLED === "true";
+  const REQUIRED_GROUPS = process.env.REQUIRED_GROUPS?.split(",") ?? [];
+
+  if (!JWT_AUTH_ENABLED) return next();
+  if (!publicKey) return res.status(500).json({ message: "Server not initialized (JWKS public key missing)" });
+
+  const authHeader = req.headers.authorization;
+  if (!authHeader?.startsWith("Bearer ")) {
+    return res.status(401).json({ message: "Missing or malformed token" });
+  }
+
+  const token = authHeader.split(" ")[1];
+  try {
+    const decoded = jwtPkg.verify(token, publicKey);
+    const groups = (decoded as any).groups;
+
+    if (!Array.isArray(groups)) {
+      return res.status(401).json({ message: "Missing 'groups' claim in token" });
+    }
+
+    // Check if user belongs to any required group
+    if (REQUIRED_GROUPS.length > 0 && !REQUIRED_GROUPS.some(g => groups.includes(g))) {
+      return res.status(401).json({ message: "User does not belong to any required group" });
+    }
+
+    (req as any).user = decoded;
+    next(); // Authentication and Authorization successful
+  } catch (err) {
+    return res.status(401).json({ message: "Invalid or expired token" });
+  }
+}
+```
 
 ## Configuration
 
