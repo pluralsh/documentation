@@ -15,13 +15,19 @@ yarn dev # run docs locally
 
 ### Adding a new document
 
-All content can be located under the [pages](/pages) directory. The directory structure directly informs the website URL structure, so consider that when placing your new document.
+All documentation content is defined by the [`docsStructure`](/src/routing/docs-structure.ts) object. This file is the single source of truth for the docs site structure, navigation, and URL mapping. When running `yarn dev` or `yarn build`, the route indexing script will search the paths described, first for an index.md, then for a PATHNAME.md file if an index.md file isn't found (i.e. it will look first for /overview/introduction/index.md, then /overview/introduction.md if index isn't found). 
 
-All of our documents are in standard Markdown (.md) file format. If you are including an image, add it to [public/assets] using the same directory structure as pages.
+The indexing script will reconcile routes into the generated [`routes.json`](/generated/routes.json), which needs to be committed to git so changes can be confirmed/tracked. A github workflow will confirm that route changes have been committed (though lastmod timestamps are ignored, as these lag behind by one commit)
 
-Finally, make sure to add your new document to the NavData.tsx file located [here](/src/NavData.tsx).
+To add a new document:
+- Update [`docsStructure`](/src/routing/docs-structure.ts) to include your new pages/sections. The order and nesting in this object will determine the sidebar navigation and the URL path.
 
-### Updating structure
+- Add your new Markdown (`.md`) file to the corresponding location in the [`pages`](/pages) directory.
 
-If you are making any changes to the documentation structure or organization, you'll likely need to set up page redirects. These can be added in [next.config.js](next.config.js). Make sure to 
-look for internal usages throughout all the documents on the site to make sure that there are no broken links.
+- If you include images, place them in [`public/assets`](/public/assets) using a directory structure that matches your document's location in `pages`.
+
+### Updating structure and redirects
+
+If you change the documentation structure (e.g., move, rename, or remove pages), you may need to add redirects to prevent broken links. Redirects are managed directly in [`docs-structure.ts`](/src/routing/docs-structure.ts) via the `redirects` array at the bottom of the file. Redirects on a path already defined by `docsStructure` will override where it reconciles to, which can be confirmed in [`routes.json`](/generated/routes.json)
+
+Whenever you update the structure or add redirects, review internal links throughout the documentation to ensure there are no broken references.
