@@ -82,6 +82,10 @@ export const docsStructure: DocSection[] = [
           { path: 'git-service', title: 'Git-sourced services' },
           { path: 'helm-service', title: 'Helm-sourced services' },
           { path: 'global-service', title: 'Global services' },
+          {
+            path: 'observer',
+            title: 'Plural Observers in Continuous Deployment',
+          },
         ],
       },
       {
