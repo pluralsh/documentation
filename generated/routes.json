@@ -201,19 +201,23 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-04-18T18:20:24.042Z"
+    "lastmod": "2025-04-21T22:55:16.000Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
-    "lastmod": "2025-04-18T18:20:24.061Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/flows/flow-ai": {
     "relPath": "/plural-features/flows/flow-ai.md",
-    "lastmod": "2025-04-18T18:20:24.084Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
-    "lastmod": "2025-04-18T18:20:24.108Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
+  },
+  "/plural-features/flows/mcp-auth": {
+    "relPath": "/plural-features/flows/mcp-auth.md",
+    "lastmod": "2025-04-22T17:49:06.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
