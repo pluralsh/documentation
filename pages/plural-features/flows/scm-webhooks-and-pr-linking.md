@@ -5,7 +5,7 @@ description: Setting up SCM webhooks and automatically linking Pull Requests to 
 
 # Overview
 
-Plural utilizes SCM (Source Control Management) webhooks to monitor pull request events and integrate with your development workflow. This allows Plural Flows to automatically link associated pull requests, providing seamless tracking and visibility.
+Plural utilizes SCM (Source Control Management) webhooks to monitor pull request events and integrate with your development workflow. This allows Plural Flows to automatically link associated pull requests, enabling codebase root cause investigation in light of an alert or other issue.
 
 ## Setting up SCM Webhooks
 
@@ -59,4 +59,4 @@ Plural Flow: {flow-name}
 
 Replace `{flow-name}` with the exact name of the Plural Flow you want to link the PR to.
 
-When Plural receives the webhook event for the PR creation or update, it will parse the body, find this text, and establish the link between the PR and the specified Flow within the Plural UI. This allows you to easily navigate between a Flow and its related development work. 
+When Plural receives the webhook event for the PR creation or update, it will parse the body, find this text, and establish the link between the PR and the specified Flow within the Plural UI. This allows you to easily navigate between a Flow and its related development work.
