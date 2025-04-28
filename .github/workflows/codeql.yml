@@ -1,11 +1,11 @@
 name: Code Scanning
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
   schedule:
-    - cron: '0 0 * * 1'
+    - cron: "0 0 * * 1"
 jobs:
   codeql:
     permissions:
@@ -13,11 +13,11 @@ jobs:
       contents: read
       security-events: write
     name: CodeQL
-    runs-on: ubuntu-20.04
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        language: [ 'typescript' ]
+        language: ["typescript"]
     steps:
       - uses: actions/checkout@v3
         with:
