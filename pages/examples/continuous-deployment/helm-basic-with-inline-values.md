@@ -17,6 +17,7 @@ Before you begin, make sure you have:
 - A Plural cluster set up with continuous deployment (CD) enabled
 - A Git repository connected to your Plural setup (this is where we'll store our configuration files)
 - Plural Console running on your cluster (this is the web interface we'll use to monitor our deployment)
+- `cert-manager`, ingress controller and `externaldns` installed in the target cluster. Since we are using `mgmt` cluster, these should be already installed by default.
 
 If you're missing any of these, check out {% doclink to="getting_started_first_steps" %}first steps{% /doclink %} first.
 
