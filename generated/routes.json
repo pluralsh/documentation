@@ -201,19 +201,19 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-04-18T18:20:24.042Z"
+    "lastmod": "2025-04-21T22:55:16.000Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
-    "lastmod": "2025-04-18T18:20:24.061Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/flows/flow-ai": {
     "relPath": "/plural-features/flows/flow-ai.md",
-    "lastmod": "2025-04-18T18:20:24.084Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
-    "lastmod": "2025-04-18T18:20:24.108Z"
+    "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
@@ -262,6 +262,22 @@
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/examples": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/examples/continuous-deployment": {
+    "relPath": "/examples/continuous-deployment/index.md",
+    "lastmod": "2025-04-29T12:40:47.970Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-inline-values": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
+    "lastmod": "2025-04-29T12:40:47.979Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-values-file": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
+    "lastmod": "2025-04-29T12:40:47.986Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",

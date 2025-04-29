@@ -175,6 +175,26 @@ export const docsStructure: DocSection[] = [
     ],
   },
   {
+    path: 'examples',
+    title: 'Examples',
+    sections: [
+      {
+        path: 'continuous-deployment',
+        title: 'Continuous deployment',
+        sections: [
+          {
+            path: 'helm-basic-with-inline-values',
+            title: 'Deploy basic helm chart with inline values',
+          },
+          {
+            path: 'helm-basic-with-values-file',
+            title: 'Deploy basic helm chart with values file',
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: 'faq',
     title: 'Faq',
     sections: [
