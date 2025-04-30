@@ -82,3 +82,4 @@ Plural supports integrations with third-party alerting and monitoring tools via 
 ### Supported Integrations
 
 * **Datadog** - Forward metrics, logs, and alerts from Datadog to the Plural Console.
+* **Grafana** - Forward alerts from Grafana to the Plural Console for centralized monitoring and incident management.

@@ -1,5 +1,5 @@
 ---
-title: Datadog Webhook Integration
+title: Datadog Observability Webhook Integration
 description: Configure Datadog webhook to view metrics, logs, and alerts inside the Plural Console. 
 ---
 
@@ -11,7 +11,7 @@ To install the Datadog Observability Webhook, navigate to the `Settings` tab in 
 
 Click `Add webhook`. Give your Datadog Observability Webhook a name and fill in your `base64 encoded` Datadog `basic auth` token.
 
-![](/assets/observability/observability-webhook-config.png)
+![](/assets/observability/datadog-webhook-config.png)
 
 Take the `URL` that is generated and configure your Datadog webhook (in your Datadog UI) to point to it. 
 

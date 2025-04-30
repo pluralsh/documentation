@@ -149,7 +149,10 @@ export const docsStructure: DocSection[] = [
           {
             path: 'observability-webhooks',
             title: 'Observability Webhooks',
-            sections: [{ path: 'datadog', title: 'Datadog' }],
+            sections: [
+              { path: 'datadog', title: 'Datadog' },
+              { path: 'grafana', title: 'Grafana' },
+            ],
           },
         ],
       },
