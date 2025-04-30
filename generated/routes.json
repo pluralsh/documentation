@@ -217,7 +217,7 @@
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
-    "lastmod": "2025-04-30T21:02:21.000Z"
+    "lastmod": "2025-04-30T21:17:22.000Z"
   },
   "/plural-features/observability/prometheus": {
     "relPath": "/plural-features/observability/prometheus.md",
@@ -232,16 +232,16 @@
     "lastmod": "2025-03-25T13:31:40.000Z"
   },
   "/plural-features/observability/observability-webhooks": {
-    "relPath": "/plural-features/observability/observability-webhooks.md",
-    "lastmod": "2025-04-30T21:15:59.393Z"
+    "relPath": null,
+    "lastmod": null
   },
   "/plural-features/observability/observability-webhooks/datadog": {
     "relPath": "/plural-features/observability/observability-webhooks/datadog.md",
-    "lastmod": "2025-04-30T21:02:21.000Z"
+    "lastmod": "2025-04-30T21:17:22.000Z"
   },
   "/plural-features/observability/observability-webhooks/grafana": {
     "relPath": "/plural-features/observability/observability-webhooks/grafana.md",
-    "lastmod": "2025-04-30T21:15:59.423Z"
+    "lastmod": "2025-04-30T21:17:22.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
