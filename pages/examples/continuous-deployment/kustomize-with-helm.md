@@ -142,7 +142,7 @@ spec:
 ```
 
 ### Step 6: Check Plural Console and access WordPress
-After a couple of minutes, the service should be deployed and running. You can check the status in the Plural Console.
+After a couple of minutes, services should be deployed and running. You can check the status in the Plural Console.
 
 ## Key Takeaways
 Congratulations! You've just learned how to:
