@@ -190,6 +190,18 @@ export const docsStructure: DocSection[] = [
             path: 'helm-basic-with-values-file',
             title: 'Deploy basic helm chart with values file',
           },
+          {
+            path: 'kustomize-inflate-helm',
+            title: 'Use kustomize to inflate a helm chart',
+          },
+          {
+            path: 'kustomize-stack-with-liquid',
+            title: 'Extend a helm chart with kustomize and liquid',
+          },
+          {
+            path: 'kustomize-with-helm',
+            title: 'Deploy wordpress with kustomize',
+          },
         ],
       },
     ],

@@ -1,5 +1,5 @@
 ---
-title: Deploy basic helm chart with values file
+title: Deploy basic Helm chart with values file
 description: 'Learn how to deploy a Grafana instance using Helm chart with configuration values stored in a separate values file, including ingress setup and TLS configuration'
 ---
 
@@ -12,58 +12,22 @@ configuration changes over time.
 
 ## Prerequisites
 
-Before you begin, make sure you have:
+Before you begin, make sure to cover [prerequisites and setup](../#prerequisites), and that you have:
+- `cert-manager`, ingress controller and `externaldns` installed in the target cluster.
 
-- A Plural cluster set up with continuous deployment (CD) enabled
-- A Git repository connected to your Plural setup (this is where we'll store our configuration files)
-- Plural Console running on your cluster (this is the web interface we'll use to monitor our deployment)
-- `cert-manager`, ingress controller and `externaldns` installed in the target cluster. Since we are using `mgmt` cluster, these should be already installed by default.
-
-If you're missing any of these, check out {% doclink to="getting_started_first_steps" %}first steps{% /doclink %} first.
+{% callout severity="info" %}
+When using `plural up` and the `mgmt` as the target cluster `cert-manager`, `nginx-ingress` and `externaldns` will already be installed.
+{% /callout %}
 
 ## Step-by-Step Guide: Deploying Grafana with External Values File
 Let's walk through deploying Grafana using a Helm chart with an external values file. Feel free to adjust provided file
 examples according to your needs and commit them to your configured Git repository under the `apps` directory. There is a
 default `apps` service that deploys all resources from that directory.
 
-### Step 1: Create a Cluster resource
-First, we need to adopt a cluster that will serve as a target cluster where our application will be deployed. Normally,
-the `mgmt` cluster should already exist in the `infra` namespace. We can however, adopt as many readonly clusters through
-our custom resources as we want.
-
-#### [cluster.yaml](#TODO)
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: Cluster
-metadata:
-  name: mgmt
-  namespace: examples
-spec:
-  # providing only a handle allows us to adopt the existing cluster
-  handle: mgmt
-```
-
-### Step 2: Create a GitRepository resource
-Next, we need to create a GitRepository resource that will be used to read helm values file that service configuration
-points to.
-
-#### [gitrepository.yaml](#TODO)
-```yaml
-apiVersion: deployments.plural.sh/v1alpha1
-kind: GitRepository
-metadata:
-  name: example
-  namespace: examples
-spec:
-  # This can point to your main infra repository used by the Plural CD engine
-  # or to a different one. It will be used to store helm values file for our service.
-  url: git@github.com:<your_example_repository>.git
-```
-
-### Step 3: Create a values file for your Grafana configuration
+### Step 1: Create a values file for your Grafana configuration
 Create a separate values file to store your Grafana configuration. This approach keeps your configuration neatly separated from the deployment definition.
 
-#### [plrl-02-grafana.yaml](#TODO)
+##### [helm-values/plrl-02-grafana.yaml](#TODO)
 ```yaml
 # Custom values for Grafana
 ingress:
@@ -80,10 +44,10 @@ ingress:
         - grafana-test.your-domain.com
       secretName: grafana-tls
 ```
-### Step 4: Create a ServiceDeployment resource
+### Step 2: Create a ServiceDeployment resource
 Next, create your service deployment that references the external values file you just created.
 
-#### [servicedeployment.yaml](#TODO)
+##### [apps/examples/helm-basic-with-values-file/servicedeployment.yaml](#TODO)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
@@ -118,7 +82,7 @@ spec:
     namespace: examples
 ```
 
-### Step 5: Check Plural Console and access Grafana
+### Step 3: Check Plural Console and access Grafana
 After a couple of minutes, service should be deployed and running.
 ![](/assets/examples/plrl-02-grafana-1.png 'CD tab -> mgmt cluster -> plrl-02-grafana service')
 
