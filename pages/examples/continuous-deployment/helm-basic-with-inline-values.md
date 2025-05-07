@@ -1,5 +1,5 @@
 ---
-title: Deploy Helm chart with inline values
+title: Deploy a Helm chart with inline values
 description: 'Learn how to deploy a Grafana instance using Helm chart with inline configuration values, including ingress setup and TLS configuration'
 ---
 

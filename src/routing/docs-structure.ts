@@ -184,7 +184,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           {
             path: 'helm-basic-with-inline-values',
-            title: 'Deploy helm chart with inline values',
+            title: 'Deploy a helm chart with inline values',
           },
           {
             path: 'helm-basic-with-values-file',
