@@ -51,7 +51,10 @@ resources:
 helmGlobals:
   chartHome: .
 helmCharts:
-  # Must match the directory name with the unpacked chart
+  # Must match the directory name with the unpacked chart.
+  # There is a 'wordpress.tar' in this directory that contains a packed chart.
+  # It needs to be unpacked first to the same directory as `kustomization.yaml`
+  # to be used.
   - name: wordpress
     releaseName: wordpress
     namespace: examples
