@@ -24,11 +24,11 @@ First, we'll create a `GeneratedSecret` resource to generate secure credentials 
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GeneratedSecret
 metadata:
-  name: plrl-05-wordpress-config
+  name: plrl-04-wordpress-config
   namespace: examples
 spec:
   destinations:
-    - name: plrl-05-wordpress-config
+    - name: plrl-04-wordpress-config
       namespace: examples
   template:
     dbUser: admin
@@ -104,7 +104,7 @@ Finally, we'll create a ServiceDeployment resource that uses Kustomize to inflat
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
-  name: plrl-05-wordpress
+  name: plrl-04-wordpress
   namespace: examples
 spec:
   repositoryRef:
@@ -118,7 +118,7 @@ spec:
     path: '.'
     enableHelm: true
   configurationRef:
-    name: plrl-05-wordpress-config
+    name: plrl-04-wordpress-config
     namespace: examples
   clusterRef:
     name: mgmt
@@ -128,7 +128,7 @@ spec:
 ### Step 4: Check Plural Console and access WordPress
 After a couple of minutes, the service should be deployed and running. You can check the status in the Plural Console.
 
-![](/assets/examples/plrl-05-console.png 'CD tab -> mgmt cluster -> plrl-05-wordpress service')
+![](/assets/examples/plrl-04-console.png 'CD tab -> mgmt cluster -> plrl-04-wordpress service')
 
 You can access your `wordpress` instance using i.e. `kubectl`.
 ```shell
@@ -136,7 +136,7 @@ kubectl -n examples port-forward svc/wordpress 8080:80
 ```
 
 It will be accessible at `localhost:8080`.
-![](/assets/examples/plrl-05-wordpress.png 'localhost:8080')
+![](/assets/examples/plrl-04-wordpress.png 'localhost:8080')
 
 ## Key Takeaways
 Congratulations! You've just learned how to:

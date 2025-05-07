@@ -198,10 +198,6 @@ export const docsStructure: DocSection[] = [
             path: 'kustomize-stack-with-liquid',
             title: 'Extend a helm chart with kustomize and liquid',
           },
-          {
-            path: 'kustomize-with-helm',
-            title: 'Deploy wordpress with kustomize',
-          },
         ],
       },
     ],

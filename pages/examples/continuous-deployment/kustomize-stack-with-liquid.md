@@ -256,6 +256,8 @@ spec:
 ### Step 5: Check Plural Console and access WordPress
 After a couple of minutes, the service should be deployed and running. You can check the status in the Plural Console.
 
+![](/assets/examples/plrl-03-wordpress.png 'CD tab -> mgmt cluster -> plrl-03-wordpress service')
+
 ## Key Takeaways
 Congratulations! You've just learned how to:
 - Deploy WordPress with MySQL using Kustomize
