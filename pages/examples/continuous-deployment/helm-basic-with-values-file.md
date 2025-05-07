@@ -24,10 +24,10 @@ Let's walk through deploying Grafana using a Helm chart with an external values 
 examples according to your needs and commit them to your configured Git repository under the `apps` directory. There is a
 default `apps` service that deploys all resources from that directory.
 
-### Step 1: Create a values file for your Grafana configuration
+### Step 1: Create values file for your Grafana configuration
 Create a separate values file to store your Grafana configuration. This approach keeps your configuration neatly separated from the deployment definition.
 
-##### [helm-values/plrl-02-grafana.yaml](#TODO)
+##### [helm-values/plrl-02-grafana.yaml.liquid](#TODO)
 ```yaml
 # Custom values for Grafana
 ingress:
@@ -37,11 +37,11 @@ ingress:
   ingressClassName: nginx
   
   hosts:
-    - grafana-test.your-domain.com
+    - {{ configuration.host }}
 
   tls:
     - hosts:
-        - grafana-test.your-domain.com
+        - {{ configuration.host }}
       secretName: grafana-tls
 ```
 ### Step 2: Create a ServiceDeployment resource
@@ -74,7 +74,10 @@ spec:
     # Reference to our external values file
     valuesFiles:
       # a relative path to the values file based on the configured git folder
-      - plrl-02-grafana.yaml
+      - plrl-02-grafana.yaml.liquid
+  # inline configuration that will be passed as a context to the liquid helm values file
+  configuration:
+    host: 'grafana-test.your-domain.com'
   # A reference to the cluster resource instance we've created in the previous step
   clusterRef:
     kind: Cluster
