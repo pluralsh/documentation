@@ -1,5 +1,5 @@
 ---
-title: Deploy basic Helm chart with values file
+title: Deploy Helm chart with values file
 description: 'Learn how to deploy a Grafana instance using Helm chart with configuration values stored in a separate values file, including ingress setup and TLS configuration'
 ---
 
