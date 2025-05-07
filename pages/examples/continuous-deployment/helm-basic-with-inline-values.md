@@ -28,7 +28,7 @@ default `apps` service that deploys all resources from that directory.
 Create our service deployment that uses a remote helm chart and inline values to deploy a fully
 functional Grafana instance.
 
-##### [apps/examples/helm-basic-with-inline-values/servicedeployment.yaml](#TODO)
+##### [apps/examples/helm-basic-with-inline-values/servicedeployment.yaml](https://github.com/pluralsh/scaffolds/blob/main/examples/helm-basic-with-inline-values/servicedeployment.yaml)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment

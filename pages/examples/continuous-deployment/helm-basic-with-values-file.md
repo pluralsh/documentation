@@ -27,7 +27,7 @@ default `apps` service that deploys all resources from that directory.
 ### Step 1: Create values file for your Grafana configuration
 Create a separate values file to store your Grafana configuration. This approach keeps your configuration neatly separated from the deployment definition.
 
-##### [helm-values/plrl-02-grafana.yaml.liquid](#TODO)
+##### [helm-values/plrl-02-grafana.yaml.liquid](https://github.com/pluralsh/scaffolds/blob/main/examples/helm-basic-with-values-file/helm-values/plrl-02-grafana.yaml.liquid)
 ```yaml
 # Custom values for Grafana
 ingress:
@@ -47,7 +47,7 @@ ingress:
 ### Step 2: Create a ServiceDeployment resource
 Next, create your service deployment that references the external values file you just created.
 
-##### [apps/examples/helm-basic-with-values-file/servicedeployment.yaml](#TODO)
+##### [apps/examples/helm-basic-with-values-file/servicedeployment.yaml](https://github.com/pluralsh/scaffolds/blob/main/examples/helm-basic-with-values-file/servicedeployment.yaml)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
