@@ -188,7 +188,7 @@ export const docsStructure: DocSection[] = [
           },
           {
             path: 'helm-basic-with-values-file',
-            title: 'Deploy helm chart with values file',
+            title: 'Deploy a helm chart with git-sourced values file',
           },
           {
             path: 'kustomize-inflate-helm',
