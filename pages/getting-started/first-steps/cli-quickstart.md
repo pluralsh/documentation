@@ -14,13 +14,28 @@ This guide goes over how to deploy your services with the Plural CLI. At the end
 
 ## Install the Plural CLI
 
-The Plural cli is available on homebrew, a single line install can be done with:
+The Plural CLI is available on Homebrew, a single line installation can be done with:
 
 ```sh
 brew install pluralsh/plural/plural
 ```
 
-If you are using a machine that is not compatible with homebrew, we recommend simply downloading a pre-built release on github and installing it onto your machines path. The releases can be found [here](https://github.com/pluralsh/plural-cli/releases).
+If you are using a machine that is not compatible with Homebrew,
+we recommend simply downloading a pre-built release on GitHub and installing it onto your machines path.
+The latest release can be found [here](https://github.com/pluralsh/plural-cli/releases/latest).
+
+{% codetabs  %}
+
+```yaml  {% title="macOS Apple Silicon 64-bit" %}
+https://github.com/pluralsh/plural-cli/releases/download/latest/plural-cli_0.12.3_Darwin_arm64.tar.gz
+```
+
+```yaml  {% title="macOS 64-bit" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_arm64.tar.gz
+```
+{% /codetabs %}
+
 
 ## Onboard to Plural and install the Plural Console
 
