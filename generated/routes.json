@@ -269,27 +269,23 @@
   },
   "/examples/continuous-deployment": {
     "relPath": "/examples/continuous-deployment/index.md",
-    "lastmod": "2025-04-29T12:47:12.000Z"
+    "lastmod": "2025-05-06T14:37:43.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-inline-values": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
-    "lastmod": "2025-04-29T14:19:44.000Z"
+    "lastmod": "2025-05-07T10:04:11.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-values-file": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
-    "lastmod": "2025-04-29T14:19:44.000Z"
+    "lastmod": "2025-05-07T10:04:11.000Z"
   },
   "/examples/continuous-deployment/kustomize-inflate-helm": {
     "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
-    "lastmod": "2025-05-06T13:30:29.260Z"
+    "lastmod": "2025-05-07T10:09:03.000Z"
   },
   "/examples/continuous-deployment/kustomize-stack-with-liquid": {
     "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
-    "lastmod": "2025-05-06T13:30:29.268Z"
-  },
-  "/examples/continuous-deployment/kustomize-with-helm": {
-    "relPath": "/examples/continuous-deployment/kustomize-with-helm.md",
-    "lastmod": "2025-05-06T13:30:29.276Z"
+    "lastmod": "2025-05-07T10:09:03.000Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",
