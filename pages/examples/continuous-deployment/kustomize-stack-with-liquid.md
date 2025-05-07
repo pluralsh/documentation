@@ -256,7 +256,15 @@ spec:
 ### Step 5: Check Plural Console and access WordPress
 After a couple of minutes, the service should be deployed and running. You can check the status in the Plural Console.
 
-![](/assets/examples/plrl-03-wordpress.png 'CD tab -> mgmt cluster -> plrl-03-wordpress service')
+![](/assets/examples/plrl-03-console.png 'CD tab -> mgmt cluster -> plrl-03-wordpress service')
+
+You can access your `wordpress` instance using i.e. `kubectl`.
+```shell
+kubectl -n examples port-forward svc/wordpress 8080:80
+```
+
+It will be accessible at `localhost:8080`.
+![](/assets/examples/plrl-wordpress.png 'localhost:8080')
 
 ## Key Takeaways
 Congratulations! You've just learned how to:

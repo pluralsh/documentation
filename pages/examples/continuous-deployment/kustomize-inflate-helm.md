@@ -136,7 +136,7 @@ kubectl -n examples port-forward svc/wordpress 8080:80
 ```
 
 It will be accessible at `localhost:8080`.
-![](/assets/examples/plrl-04-wordpress.png 'localhost:8080')
+![](/assets/examples/plrl-wordpress.png 'localhost:8080')
 
 ## Key Takeaways
 Congratulations! You've just learned how to:

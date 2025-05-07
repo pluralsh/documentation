@@ -65,10 +65,10 @@ spec:
 
 ### Step 2: Check Plural Console and access Grafana
 After a couple of minutes, service should be deployed and running. 
-![](/assets/examples/plrl-01-grafana-1.png 'CD tab -> mgmt cluster -> plrl-01-grafana service')
+![](/assets/examples/plrl-01-console.png 'CD tab -> mgmt cluster -> plrl-01-grafana service')
 
 Grafana should now be accessible at the configured address.
-![](/assets/examples/plrl-01-grafana-2.png 'https://grafana-test.your-domain.com')
+![](/assets/examples/plrl-grafana.png 'https://grafana-test.your-domain.com')
 
 ## Key Takeaways
 
