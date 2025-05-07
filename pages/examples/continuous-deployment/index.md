@@ -37,7 +37,7 @@ For simplicity, all examples in this guide use the `mgmt` cluster as the deploym
 ### Create a read-only cluster resource
 First, we'll create and adopt a cluster that will serve as the target for our examples. While the `mgmt` cluster typically exists in the `infra` namespace, we can adopt additional read-only clusters through our custom resources as needed
 
-#### [apps/examples/cluster.yaml](#TODO)
+##### [apps/examples/cluster.yaml](#TODO)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: Cluster
@@ -52,7 +52,7 @@ spec:
 ### Create a GitRepository resource
 Next, create a GitRepository resource to access files you'll commit while working through these examples.
 
-#### [apps/examples/gitrepository.yaml](#TODO)
+##### [apps/examples/gitrepository.yaml](#TODO)
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GitRepository
