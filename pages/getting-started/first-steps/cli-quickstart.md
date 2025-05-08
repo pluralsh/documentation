@@ -22,17 +22,34 @@ brew install pluralsh/plural/plural
 
 If you are using a machine that is not compatible with Homebrew,
 we recommend simply downloading a pre-built release on GitHub and installing it onto your machines path.
-The latest release can be found [here](https://github.com/pluralsh/plural-cli/releases/latest).
+
+The latest release can be found on [GitHub](https://github.com/pluralsh/plural-cli/releases/latest) or downloaded with
+the following commands:
 
 {% codetabs  %}
-
-```yaml  {% title="macOS Apple Silicon 64-bit" %}
-https://github.com/pluralsh/plural-cli/releases/download/latest/plural-cli_0.12.3_Darwin_arm64.tar.gz
-```
-
-```yaml  {% title="macOS 64-bit" %}
+```yaml  {% title="Linux AMD64" %}
 VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_arm64.tar.gz
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Linux_amd64.tar.gz | tar zx
+```
+```yaml  {% title="Linux ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Linux_arm64.tar.gz | tar zx
+```
+```yaml  {% title="macOS AMD64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_amd64.tar.gz | tar zx
+```
+```yaml  {% title="macOS ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_arm64.tar.gz | tar zx
+```
+```yaml  {% title="Windows AMD64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Windows_amd64.tar.gz | tar zx
+```
+```yaml  {% title="Windows ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
+curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Windows_arm64.tar.gz | tar zx
 ```
 {% /codetabs %}
 
