@@ -52,7 +52,6 @@ curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-c
 ```
 {% /codetabs %}
 
-
 ## Onboard to Plural and install the Plural Console
 
 If you haven't already, you'll need to follow the Plural guide to install Console. There are two recommended ways to do this:
