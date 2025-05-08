@@ -22,9 +22,8 @@ brew install pluralsh/plural/plural
 
 If you are using a machine that is not compatible with Homebrew,
 we recommend simply downloading a pre-built release on GitHub and installing it onto your machines path.
-
-The latest release can be found on [GitHub](https://github.com/pluralsh/plural-cli/releases/latest) or downloaded with
-the following commands:
+The latest release can be found on [GitHub](https://github.com/pluralsh/plural-cli/releases/latest)
+or downloaded with the following commands:
 
 {% codetabs  %}
 ```yaml  {% title="Linux AMD64" %}
