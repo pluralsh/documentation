@@ -27,28 +27,28 @@ or downloaded with the following commands:
 
 {% codetabs  %}
 ```yaml  {% title="Linux AMD64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Linux_amd64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Linux_amd64.tar.gz | tar zx
 ```
 ```yaml  {% title="Linux ARM64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Linux_arm64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Linux_arm64.tar.gz | tar zx
 ```
 ```yaml  {% title="macOS AMD64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_amd64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Darwin_amd64.tar.gz | tar zx
 ```
 ```yaml  {% title="macOS ARM64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Darwin_arm64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Darwin_arm64.tar.gz | tar zx
 ```
 ```yaml  {% title="Windows AMD64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Windows_amd64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Windows_amd64.tar.gz | tar zx
 ```
 ```yaml  {% title="Windows ARM64" %}
-VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/tags | jq -r '.[0].name')
-curl -L https://github.com/pluralsh/plural-cli/releases/download/${VERSION}/plural-cli_${VERSION//v}_Windows_arm64.tar.gz | tar zx
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Windows_arm64.tar.gz | tar zx
 ```
 {% /codetabs %}
 
