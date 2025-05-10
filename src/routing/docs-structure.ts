@@ -183,6 +183,34 @@ export const docsStructure: DocSection[] = [
     ],
   },
   {
+    path: 'examples',
+    title: 'Examples',
+    sections: [
+      {
+        path: 'continuous-deployment',
+        title: 'Continuous deployment',
+        sections: [
+          {
+            path: 'helm-basic-with-inline-values',
+            title: 'Deploy a helm chart with inline values',
+          },
+          {
+            path: 'helm-basic-with-values-file',
+            title: 'Deploy a helm chart with git-sourced values file',
+          },
+          {
+            path: 'kustomize-inflate-helm',
+            title: 'Use kustomize to inflate a helm chart',
+          },
+          {
+            path: 'kustomize-stack-with-liquid',
+            title: 'Extend a helm chart with kustomize and liquid',
+          },
+        ],
+      },
+    ],
+  },
+  {
     path: 'faq',
     title: 'Faq',
     sections: [

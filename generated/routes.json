@@ -275,6 +275,30 @@
     "relPath": "/plural-features/notifications/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/examples": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/examples/continuous-deployment": {
+    "relPath": "/examples/continuous-deployment/index.md",
+    "lastmod": "2025-05-07T11:15:56.000Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-inline-values": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
+    "lastmod": "2025-05-07T11:12:43.000Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-values-file": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
+    "lastmod": "2025-05-07T11:12:43.000Z"
+  },
+  "/examples/continuous-deployment/kustomize-inflate-helm": {
+    "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
+    "lastmod": "2025-05-07T11:12:43.000Z"
+  },
+  "/examples/continuous-deployment/kustomize-stack-with-liquid": {
+    "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
+    "lastmod": "2025-05-07T11:12:43.000Z"
+  },
   "/faq": {
     "relPath": "/faq/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
