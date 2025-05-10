@@ -119,6 +119,10 @@
     "relPath": "/plural-features/continuous-deployment/global-service.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/continuous-deployment/observer": {
+    "relPath": "/plural-features/continuous-deployment/observer.md",
+    "lastmod": "2025-04-28T11:49:02.395Z"
+  },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
