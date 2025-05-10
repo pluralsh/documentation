@@ -146,6 +146,14 @@ export const docsStructure: DocSection[] = [
           { path: 'prometheus', title: 'Prometheus' },
           { path: 'logging', title: 'Log Aggregation' },
           { path: 'cost', title: 'Cost Management' },
+          {
+            path: 'observability-webhooks',
+            title: 'Observability Webhooks',
+            sections: [
+              { path: 'datadog', title: 'Datadog' },
+              { path: 'grafana', title: 'Grafana' },
+            ],
+          },
         ],
       },
       {
