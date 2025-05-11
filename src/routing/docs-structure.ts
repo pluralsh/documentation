@@ -140,6 +140,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'create-a-flow', title: 'Create a flow' },
           { path: 'flow-ai', title: 'Plural AI and Flows' },
+          { path: 'preview-environments', title: 'Preview Environments' },
           { path: 'mcp', title: 'Flow MCP Server Integration' },
         ],
       },

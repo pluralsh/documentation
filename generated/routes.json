@@ -29,7 +29,7 @@
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-05-08T09:00:26.000Z"
+    "lastmod": "2025-05-08T12:32:16.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -121,7 +121,7 @@
   },
   "/plural-features/continuous-deployment/observer": {
     "relPath": "/plural-features/continuous-deployment/observer.md",
-    "lastmod": "2025-04-28T11:49:02.395Z"
+    "lastmod": "2025-05-10T04:29:16.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
@@ -215,13 +215,17 @@
     "relPath": "/plural-features/flows/flow-ai.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
   },
+  "/plural-features/flows/preview-environments": {
+    "relPath": "/plural-features/flows/preview-environments.md",
+    "lastmod": "2025-05-11T22:10:38.846Z"
+  },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
-    "lastmod": "2025-04-30T21:17:22.000Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/observability/prometheus": {
     "relPath": "/plural-features/observability/prometheus.md",
@@ -241,11 +245,11 @@
   },
   "/plural-features/observability/observability-webhooks/datadog": {
     "relPath": "/plural-features/observability/observability-webhooks/datadog.md",
-    "lastmod": "2025-04-30T21:17:22.000Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/observability/observability-webhooks/grafana": {
     "relPath": "/plural-features/observability/observability-webhooks/grafana.md",
-    "lastmod": "2025-04-30T21:17:22.000Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
@@ -285,23 +289,23 @@
   },
   "/examples/continuous-deployment": {
     "relPath": "/examples/continuous-deployment/index.md",
-    "lastmod": "2025-05-07T11:15:56.000Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-inline-values": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
-    "lastmod": "2025-05-07T11:12:43.000Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-values-file": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
-    "lastmod": "2025-05-07T11:12:43.000Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/kustomize-inflate-helm": {
     "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
-    "lastmod": "2025-05-07T11:12:43.000Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/kustomize-stack-with-liquid": {
     "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
-    "lastmod": "2025-05-07T11:12:43.000Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",
@@ -361,7 +365,7 @@
   },
   "/deployments/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-05-08T09:00:26.000Z"
+    "lastmod": "2025-05-08T12:32:16.000Z"
   },
   "/deployments/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
