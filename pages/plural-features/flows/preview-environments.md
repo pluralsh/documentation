@@ -102,6 +102,21 @@ jobs:
         GIT_COMMIT=${{ github.sha }}
 ```
 
+## Templating variables
+
+The fields of `PreviewEnvironment.spec.template` can include liquid templating with the following preconfigured context variable schema:
+
+```yaml
+commitSha: string
+pr:
+  owner: string # the org or group owning this repo
+  repo: string # the name of the repo
+  number: number | string # the pull request uniq id
+  attributes: {string: string} # a string kv map gathered from using Plural Attribute: {key}={value} in your pr body for additional configuration
+```
+
+Like in the case above, you can use that to templatize useful fields like namespace/service names and helm values subfields.
+
 ## Constraints
 
 Plural enforces a few constraints on how preview environments can be created:
