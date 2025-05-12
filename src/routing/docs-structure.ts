@@ -141,6 +141,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'create-a-flow', title: 'Create a flow' },
           { path: 'flow-ai', title: 'Plural AI and Flows' },
+          { path: 'preview-environments', title: 'Preview Environments' },
           { path: 'mcp', title: 'Flow MCP Server Integration' },
         ],
       },
@@ -151,6 +152,14 @@ export const docsStructure: DocSection[] = [
           { path: 'prometheus', title: 'Prometheus' },
           { path: 'logging', title: 'Log Aggregation' },
           { path: 'cost', title: 'Cost Management' },
+          {
+            path: 'observability-webhooks',
+            title: 'Observability Webhooks',
+            sections: [
+              { path: 'datadog', title: 'Datadog' },
+              { path: 'grafana', title: 'Grafana' },
+            ],
+          },
         ],
       },
       {
@@ -177,6 +186,34 @@ export const docsStructure: DocSection[] = [
         title: 'Projects and multi-tenancy',
       },
       { path: 'notifications', title: 'Notification configuration' },
+    ],
+  },
+  {
+    path: 'examples',
+    title: 'Examples',
+    sections: [
+      {
+        path: 'continuous-deployment',
+        title: 'Continuous deployment',
+        sections: [
+          {
+            path: 'helm-basic-with-inline-values',
+            title: 'Deploy a helm chart with inline values',
+          },
+          {
+            path: 'helm-basic-with-values-file',
+            title: 'Deploy a helm chart with git-sourced values file',
+          },
+          {
+            path: 'kustomize-inflate-helm',
+            title: 'Use kustomize to inflate a helm chart',
+          },
+          {
+            path: 'kustomize-stack-with-liquid',
+            title: 'Extend a helm chart with kustomize and liquid',
+          },
+        ],
+      },
     ],
   },
   {

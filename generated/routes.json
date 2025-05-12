@@ -219,6 +219,10 @@
     "relPath": "/plural-features/flows/flow-ai.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
   },
+  "/plural-features/flows/preview-environments": {
+    "relPath": "/plural-features/flows/preview-environments.md",
+    "lastmod": "2025-05-12T00:16:07.000Z"
+  },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
@@ -238,6 +242,18 @@
   "/plural-features/observability/cost": {
     "relPath": "/plural-features/observability/cost.md",
     "lastmod": "2025-03-25T13:31:40.000Z"
+  },
+  "/plural-features/observability/observability-webhooks": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/plural-features/observability/observability-webhooks/datadog": {
+    "relPath": "/plural-features/observability/observability-webhooks/datadog.md",
+    "lastmod": "2025-05-10T04:27:39.000Z"
+  },
+  "/plural-features/observability/observability-webhooks/grafana": {
+    "relPath": "/plural-features/observability/observability-webhooks/grafana.md",
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
@@ -270,6 +286,30 @@
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/examples": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/examples/continuous-deployment": {
+    "relPath": "/examples/continuous-deployment/index.md",
+    "lastmod": "2025-05-10T04:28:20.000Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-inline-values": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
+    "lastmod": "2025-05-10T04:28:20.000Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-values-file": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
+    "lastmod": "2025-05-10T04:28:20.000Z"
+  },
+  "/examples/continuous-deployment/kustomize-inflate-helm": {
+    "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
+    "lastmod": "2025-05-10T04:28:20.000Z"
+  },
+  "/examples/continuous-deployment/kustomize-stack-with-liquid": {
+    "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",
