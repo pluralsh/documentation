@@ -86,6 +86,7 @@ export const docsStructure: DocSection[] = [
             path: 'observer',
             title: 'Plural Observers in Continuous Deployment',
           },
+          { path: 'pipelines', title: 'Pipelines' },
         ],
       },
       {
