@@ -30,7 +30,6 @@ Further, because it gives us a clear circumference to understand what's related 
 
 Further, Plural Flows can vector index prs, query app log data and respond to incoming alerts, extending the capabilities of our AI insight engine to be able to be a general troubleshooting tool for application code errors alongside the built-in support for Kubernetes misconfiguration.
 
-
 # Demo Video
 
 To see this all in action, feel free to browse our live demo video on Youtube for all that can be done with Plural Flows:

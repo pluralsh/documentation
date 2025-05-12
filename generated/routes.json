@@ -29,7 +29,7 @@
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-08T12:32:16.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -119,10 +119,6 @@
     "relPath": "/plural-features/continuous-deployment/global-service.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
-  "/plural-features/continuous-deployment/pipelines": {
-    "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2025-04-25T13:05:27.000Z"
-  },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -205,19 +201,19 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-04-21T22:55:16.000Z"
+    "lastmod": "2025-04-18T18:20:24.042Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
-    "lastmod": "2025-04-18T18:30:29.000Z"
+    "lastmod": "2025-04-18T18:20:24.061Z"
   },
   "/plural-features/flows/flow-ai": {
     "relPath": "/plural-features/flows/flow-ai.md",
-    "lastmod": "2025-04-18T18:30:29.000Z"
+    "lastmod": "2025-04-18T18:20:24.084Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
-    "lastmod": "2025-04-18T18:30:29.000Z"
+    "lastmod": "2025-04-18T18:20:24.108Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
