@@ -125,7 +125,7 @@
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/plural-features/k8s-upgrade-assistant/upgrade-insights": {
     "relPath": "/plural-features/k8s-upgrade-assistant/upgrade-insights.md",
@@ -134,6 +134,10 @@
   "/plural-features/k8s-upgrade-assistant/addon-compatibilities": {
     "relPath": "/plural-features/k8s-upgrade-assistant/addon-compatibilities.md",
     "lastmod": "2025-03-23T01:07:28.000Z"
+  },
+  "/plural-features/k8s-upgrade-assistant/cluster-drain": {
+    "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
+    "lastmod": "2025-05-12T20:45:36.000Z"
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
@@ -205,7 +209,7 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-04-21T22:55:16.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
@@ -217,7 +221,7 @@
   },
   "/plural-features/flows/preview-environments": {
     "relPath": "/plural-features/flows/preview-environments.md",
-    "lastmod": "2025-05-11T22:10:38.846Z"
+    "lastmod": "2025-05-12T00:16:07.000Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
@@ -445,7 +449,7 @@
   },
   "/deployments/deprecations": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/stacks/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
