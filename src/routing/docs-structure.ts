@@ -95,6 +95,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'upgrade-insights', title: 'Upgrade insights' },
           { path: 'addon-compatibilities', title: 'Add-on compatibilities' },
+          { path: 'cluster-drain', title: 'Cluster Drain Management' },
         ],
       },
       {
