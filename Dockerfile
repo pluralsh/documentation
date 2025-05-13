@@ -4,11 +4,13 @@ WORKDIR /app
 
 RUN apk add --no-cache git
 
-COPY . . 
-# use the Docker-specific yarnrc file
+COPY package.json yarn.lock ./
 COPY .yarnrc.docker.yml ./.yarnrc.yml
-
+COPY .yarn/ ./.yarn/
 RUN yarn install --immutable
+
+COPY . .
+
 RUN yarn build
 
 FROM node:22-alpine AS production
