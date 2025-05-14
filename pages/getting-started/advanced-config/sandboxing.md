@@ -71,14 +71,19 @@ This is a suitable replacement if you're ok with some data staleness and don't h
 
 ## Customizing Docker Registries
 
-Lots of enterprises have strict requirements around the docker registries they use, or pull caches that whitelist a limited set of registries. We currently publish our images to dockerhub, gcr and our own registry, dkr.plural.sh. We are also adding quay.io in the near future for orgs that integrate with that as well. The important images for setting up your own instance are:
+Lots of enterprises have strict requirements around the docker registries they use, or pull caches that whitelist a limited set of registries. The important images for setting up your own instance are:
 
-- pluralsh/console
-- pluralsh/kas
-- pluralsh/deployment-controller
-- pluralsh/deployment-operator
-- pluralsh/agentk
-- pluralsh/git-server (optional if you want to use our vendored git server)
+- ghcr.io/pluralsh/console
+- ghcr.io/pluralsh/kas
+- ghcr.io/pluralsh/deployment-controller
+- ghcr.io/pluralsh/deployment-operator
+- ghcr.io/pluralsh/agentk
+- ghcr.io/pluralsh/git-server (optional if you want to use our vendored git server)
+- ghcr.io/pluralsh/registry/bitnami/redis:7.4.2-debian-12-r5
+
+{% callout severity="info" %}
+All of these images follow semver, and are also published to `gcr.io` and `docker.io` as well for convenience, in the event that either of those are eligible for internal pull-through caches.  The redis instance is not meaningfully customized and any bitnami or equivalent redis container image can theoretically work there.
+{% /callout %}
 
 The first three will be configured in the main console chart and are installed once in your management cluster, the latter two are needed for your deployment agent pod, and require a bit more advanced configuration to manage them in bulk.
 
