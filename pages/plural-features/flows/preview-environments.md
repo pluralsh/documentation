@@ -50,6 +50,18 @@ spec:
       values:
         image:
           tag: "sha-{{ commitSha | slice: 0, 7 }}"
+        
+        ingress:
+          hosts:
+            - host: flow-test-pr-{{ pr.number }}.your.domain # give a unique pr domain for the environment
+              paths:
+                - path: /
+                  pathType: ImplementationSpecific
+          tls:
+            hosts:
+              - flow-test-pr-{{ pr.number }}.your.domain # also ensure certs still work
+            secretName: flow-test-pr-{{ pr.number }}-tls
+          
 ```
 
 This will then tell Plural to create a preview environment clone of the `flow-test-dev` `ServiceDeployment` whenever a PR has the following annotation in its body:
