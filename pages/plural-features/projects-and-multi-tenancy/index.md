@@ -26,30 +26,28 @@ The core of how tenancy is managed at scale is via Projects.  An example of how 
 apiVersion: v1
 kind: Namespace
 metadata:
-  name: gke-fleet
+  name: gke-fleet # this will be the namespace all Plural CRDS for `gke-fleet` live in for your management cluster
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceAccount
 metadata:
   name: gke-fleet
 spec:
-  email: gke-fleet-fleet@plural.sh
+  email: gke-fleet-fleet@plural.sh # the Plural service account user that will be admin for that Project
   tokenSecretRef:
-    name: gke-fleet-sa-token
+    name: gke-fleet-sa-token # a secret that its access token will be dumped to
     namespace: gke-fleet
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: Project
 metadata:
   name: gke-fleet
-  annotations:
-    config.kubernetes.io/depends-on: deployments.plural.sh/ServiceAccount/gke-fleet
 spec:
   name: gke-fleet
   description: resources for managing the gke-fleet fleet
   bindings:
     write:
-    - userEmail: gke-fleet-fleet@plural.sh
+    - userEmail: gke-fleet-fleet@plural.sh # adds the user as a writer for the project (by email)
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: NamespaceCredentials
@@ -57,9 +55,9 @@ metadata:
   name: gke-fleet
 spec:
   namespaces:
-  - gke-fleet
+  - gke-fleet # the namespace we want gke-fleet crs to live in
   secretRef:
-    name: gke-fleet-sa-token
+    name: gke-fleet-sa-token # the token the operator will use in that namespace, ensuring permissions are only scoped to the project
     namespace: gke-fleet
 ```
 
