@@ -85,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -125,7 +125,7 @@
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2025-04-25T13:05:27.000Z"
+    "lastmod": "2025-05-12T06:30:23.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
@@ -141,7 +141,7 @@
   },
   "/plural-features/k8s-upgrade-assistant/cluster-drain": {
     "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
-    "lastmod": "2025-05-12T20:45:36.000Z"
+    "lastmod": "2025-05-13T01:49:39.000Z"
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
@@ -225,7 +225,7 @@
   },
   "/plural-features/flows/preview-environments": {
     "relPath": "/plural-features/flows/preview-environments.md",
-    "lastmod": "2025-05-12T00:16:07.000Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
@@ -275,6 +275,10 @@
     "relPath": "/plural-features/pr-automation/pipelines.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/pr-automation/filters": {
+    "relPath": "/plural-features/pr-automation/filters.md",
+    "lastmod": "2025-05-16T14:21:39.979Z"
+  },
   "/plural-features/service-templating": {
     "relPath": "/plural-features/service-templating/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -285,7 +289,7 @@
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-15T21:02:36.000Z"
   },
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
@@ -421,7 +425,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -541,7 +545,7 @@
   },
   "/deployments/multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-15T21:02:36.000Z"
   },
   "/deployments/notifications": {
     "relPath": "/plural-features/notifications/index.md",
