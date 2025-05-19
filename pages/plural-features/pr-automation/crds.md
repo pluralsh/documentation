@@ -7,7 +7,7 @@ You can use our CRD toolkit to generate new PR Automation flows easily. This can
 
 ## Defining Templates
 
-Most of the PR automation works off of Shopify's [Liquid](https://shopify.github.io/liquid/) templating engine. It's a well-documented, widely used templating library that frankly is a bit nicer than go's builtin text/template library.
+Most of the PR automation works off of Shopify's [Liquid](https://shopify.github.io/liquid/) templating engine. It's a well-documented, widely used templating library that frankly is a bit nicer than go's builtin text/template library. Plural provides a set of custom filters that can be used in your templates. For more information, see [Liquid Filters in PR Automation](filters.md).
 
 For this example there are a few templates that are worth mentioning:
 

@@ -170,6 +170,7 @@ export const docsStructure: DocSection[] = [
           { path: 'crds', title: 'PR automation custom resources' },
           { path: 'testing', title: 'PR automation testing' },
           { path: 'pipelines', title: 'PR automation pipelines' },
+          { path: 'filters', title: 'Liquid Filters in PR Automation' },
         ],
       },
       {
