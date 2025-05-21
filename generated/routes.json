@@ -119,6 +119,14 @@
     "relPath": "/plural-features/continuous-deployment/global-service.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/continuous-deployment/observer": {
+    "relPath": "/plural-features/continuous-deployment/observer.md",
+    "lastmod": "2025-05-21T17:00:32.048Z"
+  },
+  "/plural-features/continuous-deployment/pipelines": {
+    "relPath": "/plural-features/continuous-deployment/pipelines.md",
+    "lastmod": "2025-05-21T17:00:32.059Z"
+  },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -130,6 +138,10 @@
   "/plural-features/k8s-upgrade-assistant/addon-compatibilities": {
     "relPath": "/plural-features/k8s-upgrade-assistant/addon-compatibilities.md",
     "lastmod": "2025-03-23T01:07:28.000Z"
+  },
+  "/plural-features/k8s-upgrade-assistant/cluster-drain": {
+    "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
+    "lastmod": "2025-05-21T17:00:32.101Z"
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
@@ -211,6 +223,10 @@
     "relPath": "/plural-features/flows/flow-ai.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
   },
+  "/plural-features/flows/preview-environments": {
+    "relPath": "/plural-features/flows/preview-environments.md",
+    "lastmod": "2025-05-21T17:00:32.311Z"
+  },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
     "lastmod": "2025-04-18T18:30:29.000Z"
@@ -221,7 +237,7 @@
   },
   "/plural-features/flows/scm-webhooks-and-pr-linking": {
     "relPath": "/plural-features/flows/scm-webhooks-and-pr-linking.md",
-    "lastmod": "2025-04-22T19:56:23.000Z"
+    "lastmod": "2025-05-21T16:56:29.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
@@ -239,6 +255,18 @@
     "relPath": "/plural-features/observability/cost.md",
     "lastmod": "2025-03-25T13:31:40.000Z"
   },
+  "/plural-features/observability/observability-webhooks": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/plural-features/observability/observability-webhooks/datadog": {
+    "relPath": "/plural-features/observability/observability-webhooks/datadog.md",
+    "lastmod": "2025-05-21T17:00:32.402Z"
+  },
+  "/plural-features/observability/observability-webhooks/grafana": {
+    "relPath": "/plural-features/observability/observability-webhooks/grafana.md",
+    "lastmod": "2025-05-21T17:00:32.414Z"
+  },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -255,6 +283,10 @@
     "relPath": "/plural-features/pr-automation/pipelines.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/pr-automation/filters": {
+    "relPath": "/plural-features/pr-automation/filters.md",
+    "lastmod": "2025-05-21T17:00:32.465Z"
+  },
   "/plural-features/service-templating": {
     "relPath": "/plural-features/service-templating/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -270,6 +302,30 @@
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/examples": {
+    "relPath": null,
+    "lastmod": null
+  },
+  "/examples/continuous-deployment": {
+    "relPath": "/examples/continuous-deployment/index.md",
+    "lastmod": "2025-05-21T17:00:32.528Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-inline-values": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
+    "lastmod": "2025-05-21T17:00:32.539Z"
+  },
+  "/examples/continuous-deployment/helm-basic-with-values-file": {
+    "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
+    "lastmod": "2025-05-21T17:00:32.551Z"
+  },
+  "/examples/continuous-deployment/kustomize-inflate-helm": {
+    "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
+    "lastmod": "2025-05-21T17:00:32.563Z"
+  },
+  "/examples/continuous-deployment/kustomize-stack-with-liquid": {
+    "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
+    "lastmod": "2025-05-21T17:00:32.575Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",

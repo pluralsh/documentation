@@ -13,3 +13,7 @@ Deprecations will be surfaced at the cluster level in the "Status" column of the
 To see deprecations relevant to a specific service, navigate to the Service details page. You'll see a notification that you can click to review any changes that need to be made:
 
 ![](/assets/deployments/deprecation-warning.png)
+
+To see it all end-to-end, here's a demo video to show the experience:
+
+{% embed url="https://youtu.be/fJmTrELoAKU" aspectRatio="16 / 9" /%}

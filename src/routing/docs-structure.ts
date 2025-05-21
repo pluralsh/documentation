@@ -82,6 +82,11 @@ export const docsStructure: DocSection[] = [
           { path: 'git-service', title: 'Git-sourced services' },
           { path: 'helm-service', title: 'Helm-sourced services' },
           { path: 'global-service', title: 'Global services' },
+          {
+            path: 'observer',
+            title: 'Plural Observers in Continuous Deployment',
+          },
+          { path: 'pipelines', title: 'Pipelines' },
         ],
       },
       {
@@ -90,6 +95,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'upgrade-insights', title: 'Upgrade insights' },
           { path: 'addon-compatibilities', title: 'Add-on compatibilities' },
+          { path: 'cluster-drain', title: 'Cluster Drain Management' },
         ],
       },
       {
@@ -136,6 +142,7 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'create-a-flow', title: 'Create a flow' },
           { path: 'flow-ai', title: 'Plural AI and Flows' },
+          { path: 'preview-environments', title: 'Preview Environments' },
           { path: 'mcp', title: 'Flow MCP Server Integration' },
           { path: 'mcp-auth', title: 'Flow MCP Server Authentication' },
           {
@@ -151,6 +158,14 @@ export const docsStructure: DocSection[] = [
           { path: 'prometheus', title: 'Prometheus' },
           { path: 'logging', title: 'Log Aggregation' },
           { path: 'cost', title: 'Cost Management' },
+          {
+            path: 'observability-webhooks',
+            title: 'Observability Webhooks',
+            sections: [
+              { path: 'datadog', title: 'Datadog' },
+              { path: 'grafana', title: 'Grafana' },
+            ],
+          },
         ],
       },
       {
@@ -160,6 +175,7 @@ export const docsStructure: DocSection[] = [
           { path: 'crds', title: 'PR automation custom resources' },
           { path: 'testing', title: 'PR automation testing' },
           { path: 'pipelines', title: 'PR automation pipelines' },
+          { path: 'filters', title: 'Liquid Filters in PR Automation' },
         ],
       },
       {
@@ -177,6 +193,34 @@ export const docsStructure: DocSection[] = [
         title: 'Projects and multi-tenancy',
       },
       { path: 'notifications', title: 'Notification configuration' },
+    ],
+  },
+  {
+    path: 'examples',
+    title: 'Examples',
+    sections: [
+      {
+        path: 'continuous-deployment',
+        title: 'Continuous deployment',
+        sections: [
+          {
+            path: 'helm-basic-with-inline-values',
+            title: 'Deploy a helm chart with inline values',
+          },
+          {
+            path: 'helm-basic-with-values-file',
+            title: 'Deploy a helm chart with git-sourced values file',
+          },
+          {
+            path: 'kustomize-inflate-helm',
+            title: 'Use kustomize to inflate a helm chart',
+          },
+          {
+            path: 'kustomize-stack-with-liquid',
+            title: 'Extend a helm chart with kustomize and liquid',
+          },
+        ],
+      },
     ],
   },
   {

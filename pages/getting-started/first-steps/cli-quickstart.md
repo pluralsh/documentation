@@ -14,13 +14,43 @@ This guide goes over how to deploy your services with the Plural CLI. At the end
 
 ## Install the Plural CLI
 
-The Plural cli is available on homebrew, a single line install can be done with:
+The Plural CLI is available on Homebrew, a single line installation can be done with:
 
 ```sh
 brew install pluralsh/plural/plural
 ```
 
-If you are using a machine that is not compatible with homebrew, we recommend simply downloading a pre-built release on github and installing it onto your machines path. The releases can be found [here](https://github.com/pluralsh/plural-cli/releases).
+If you are using a machine that is not compatible with Homebrew,
+we recommend simply downloading a pre-built release on GitHub and installing it onto your machines path.
+The latest release can be found on [GitHub](https://github.com/pluralsh/plural-cli/releases/latest)
+or downloaded with the following commands:
+
+{% codetabs  %}
+```yaml  {% title="Linux AMD64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Linux_amd64.tar.gz | tar zx
+```
+```yaml  {% title="Linux ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Linux_arm64.tar.gz | tar zx
+```
+```yaml  {% title="macOS AMD64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Darwin_amd64.tar.gz | tar zx
+```
+```yaml  {% title="macOS ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Darwin_arm64.tar.gz | tar zx
+```
+```yaml  {% title="Windows AMD64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Windows_amd64.tar.gz | tar zx
+```
+```yaml  {% title="Windows ARM64" %}
+VERSION=$(curl -sL https://api.github.com/repos/pluralsh/plural-cli/releases/latest | jq -r '.tag_name' | tr -d v)
+curl -L https://github.com/pluralsh/plural-cli/releases/latest/download/plural-cli_"$VERSION"_Windows_arm64.tar.gz | tar zx
+```
+{% /codetabs %}
 
 ## Onboard to Plural and install the Plural Console
 
