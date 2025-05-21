@@ -7,6 +7,8 @@ description: Setting up SCM webhooks and automatically linking Pull Requests to 
 
 Plural utilizes SCM (Source Control Management) webhooks to monitor pull request events and integrate with your development workflow. This allows Plural Flows to automatically link associated pull requests, enabling codebase root cause investigation in light of an alert or other issue.
 
+When a pull request is linked to a Flow, Plural automatically creates vector embeddings of the code changes for semantic search and analysis. These indexed changes can be used to identify potential root causes when alerts fire, by finding relevant code modifications that may have contributed to the issue. The vector index is securely stored and access is governed by Flow permissions, ensuring that investigations respect your existing security boundaries and that AI-assisted analysis remains within your configured authorization requirements.
+
 ## Setting up SCM Webhooks
 
 To enable features like automatic PR status labeling and linking PRs to Plural Flows, you need to configure an SCM webhook.
