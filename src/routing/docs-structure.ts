@@ -144,6 +144,11 @@ export const docsStructure: DocSection[] = [
           { path: 'flow-ai', title: 'Plural AI and Flows' },
           { path: 'preview-environments', title: 'Preview Environments' },
           { path: 'mcp', title: 'Flow MCP Server Integration' },
+          { path: 'mcp-auth', title: 'Flow MCP Server Authentication' },
+          {
+            path: 'scm-webhooks-and-pr-linking',
+            title: 'SCM webhooks and PR linking',
+          },
         ],
       },
       {
