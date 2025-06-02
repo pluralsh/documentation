@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-04-14T15:08:51.000Z"
+    "lastmod": "2025-05-16T13:24:36.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -29,7 +29,7 @@
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-08T12:32:16.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -85,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -121,15 +121,15 @@
   },
   "/plural-features/continuous-deployment/observer": {
     "relPath": "/plural-features/continuous-deployment/observer.md",
-    "lastmod": "2025-05-21T17:00:32.048Z"
+    "lastmod": "2025-05-10T04:29:16.000Z"
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2025-05-21T17:00:32.059Z"
+    "lastmod": "2025-05-12T06:30:23.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/plural-features/k8s-upgrade-assistant/upgrade-insights": {
     "relPath": "/plural-features/k8s-upgrade-assistant/upgrade-insights.md",
@@ -141,7 +141,7 @@
   },
   "/plural-features/k8s-upgrade-assistant/cluster-drain": {
     "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
-    "lastmod": "2025-05-21T17:00:32.101Z"
+    "lastmod": "2025-05-13T01:49:39.000Z"
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
@@ -213,7 +213,7 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-04-21T22:55:16.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
@@ -225,7 +225,7 @@
   },
   "/plural-features/flows/preview-environments": {
     "relPath": "/plural-features/flows/preview-environments.md",
-    "lastmod": "2025-05-21T17:00:32.311Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/plural-features/flows/mcp": {
     "relPath": "/plural-features/flows/mcp.md",
@@ -233,15 +233,15 @@
   },
   "/plural-features/flows/mcp-auth": {
     "relPath": "/plural-features/flows/mcp-auth.md",
-    "lastmod": "2025-04-22T17:49:06.000Z"
+    "lastmod": "2025-05-27T02:01:02.000Z"
   },
   "/plural-features/flows/scm-webhooks-and-pr-linking": {
     "relPath": "/plural-features/flows/scm-webhooks-and-pr-linking.md",
-    "lastmod": "2025-05-21T16:56:29.000Z"
+    "lastmod": "2025-05-27T02:01:02.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
-    "lastmod": "2025-04-15T01:53:12.000Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/observability/prometheus": {
     "relPath": "/plural-features/observability/prometheus.md",
@@ -261,11 +261,11 @@
   },
   "/plural-features/observability/observability-webhooks/datadog": {
     "relPath": "/plural-features/observability/observability-webhooks/datadog.md",
-    "lastmod": "2025-05-21T17:00:32.402Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/observability/observability-webhooks/grafana": {
     "relPath": "/plural-features/observability/observability-webhooks/grafana.md",
-    "lastmod": "2025-05-21T17:00:32.414Z"
+    "lastmod": "2025-05-10T04:27:39.000Z"
   },
   "/plural-features/pr-automation": {
     "relPath": "/plural-features/pr-automation/index.md",
@@ -273,7 +273,7 @@
   },
   "/plural-features/pr-automation/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-19T07:10:18.000Z"
   },
   "/plural-features/pr-automation/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
@@ -285,7 +285,7 @@
   },
   "/plural-features/pr-automation/filters": {
     "relPath": "/plural-features/pr-automation/filters.md",
-    "lastmod": "2025-05-21T17:00:32.465Z"
+    "lastmod": "2025-05-19T07:10:18.000Z"
   },
   "/plural-features/service-templating": {
     "relPath": "/plural-features/service-templating/index.md",
@@ -297,7 +297,7 @@
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-15T21:02:36.000Z"
   },
   "/plural-features/notifications": {
     "relPath": "/plural-features/notifications/index.md",
@@ -309,23 +309,23 @@
   },
   "/examples/continuous-deployment": {
     "relPath": "/examples/continuous-deployment/index.md",
-    "lastmod": "2025-05-21T17:00:32.528Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-inline-values": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
-    "lastmod": "2025-05-21T17:00:32.539Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-values-file": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
-    "lastmod": "2025-05-21T17:00:32.551Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/kustomize-inflate-helm": {
     "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
-    "lastmod": "2025-05-21T17:00:32.563Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/examples/continuous-deployment/kustomize-stack-with-liquid": {
     "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
-    "lastmod": "2025-05-21T17:00:32.575Z"
+    "lastmod": "2025-05-10T04:28:20.000Z"
   },
   "/faq": {
     "relPath": "/faq/index.md",
@@ -357,7 +357,7 @@
   },
   "/resources/product-updates": {
     "relPath": "/resources/product-updates.md",
-    "lastmod": "2025-04-15T19:35:43.000Z"
+    "lastmod": "2025-05-01T19:37:01.000Z"
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -385,7 +385,7 @@
   },
   "/deployments/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-08T12:32:16.000Z"
   },
   "/deployments/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -433,7 +433,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-03-27T19:09:28.000Z"
+    "lastmod": "2025-05-14T21:43:40.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -465,7 +465,7 @@
   },
   "/deployments/deprecations": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-11T23:04:59.000Z"
   },
   "/stacks/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
@@ -533,7 +533,7 @@
   },
   "/deployments/pr/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-19T07:10:18.000Z"
   },
   "/deployments/pr/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
@@ -553,7 +553,7 @@
   },
   "/deployments/multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-05-15T21:02:36.000Z"
   },
   "/deployments/notifications": {
     "relPath": "/plural-features/notifications/index.md",

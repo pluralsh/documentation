@@ -11,6 +11,9 @@ RUN yarn install --immutable
 
 COPY . .
 
+ARG NEXT_PUBLIC_ROOT_URL
+ENV NEXT_PUBLIC_ROOT_URL=$NEXT_PUBLIC_ROOT_URL
+
 RUN yarn build
 
 FROM node:22-alpine AS production

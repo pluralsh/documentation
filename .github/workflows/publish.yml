@@ -59,4 +59,4 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
           build-args: |
-            GIT_COMMIT=${{ github.sha }}
+            NEXT_PUBLIC_ROOT_URL="https://docs.plural.sh"
