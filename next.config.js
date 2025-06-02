@@ -22,10 +22,6 @@ const nextConfig = {
     styledComponents: true,
     emotion: true,
   },
-  i18n: {
-    locales: ['en-US'],
-    defaultLocale: 'en-US',
-  },
   pageExtensions: ['js', 'jsx', 'ts', 'tsx'],
   webpack: (config) => {
     config.module.rules.push({
