@@ -29,7 +29,7 @@ spec:
     name: infra
     namespace: infra
   configurationRef:
-    name: mottmac-pull-creds
+    name: plural-pull-creds
     namespace: infra
   helm:
     version: "0.x.x"
