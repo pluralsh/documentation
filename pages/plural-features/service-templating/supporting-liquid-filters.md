@@ -1129,16 +1129,6 @@ _Parameters_:
 
 _Implementation_: `path.IsAbs`
 
-##  `join`
-
-
-
-
-
-
-
-_Implementation_: `github.com/Masterminds/sprig/v3.join`
-
 ##  `kebabcase`
 Converts a string from camelCase to kebab-case.
 
