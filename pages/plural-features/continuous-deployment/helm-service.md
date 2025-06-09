@@ -3,7 +3,10 @@ title: Helm-sourced services
 description: Source manifests from a helm repository registered anywhere
 ---
 
-You can also source manifests from a https or OCI-compatible helm repository. This is very useful for provisioning kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where helms versioning independent of git can be valuable. The path here requires creation of a Flux `HelmRepository` CR first, then the service, e.g.:
+You can also source manifests from a https or OCI-compatible helm repository. This is very useful for provisioning
+kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where helms
+versioning independent of git can be valuable. The path here requires creation of a Flux `HelmRepository` CR first, then
+the service, e.g.:
 
 ```yaml
 # the Cluster resource should ideally be defined in separate files in your infra repo
@@ -43,6 +46,44 @@ spec:
     name: k3s
     namespace: infra
 ```
+
+## Dynamic Helm Configuration via luaScript
+
+Plural supports runtime configuration generation via Lua scripting. This feature allows Helm deployments to
+dynamically compute `values` and `valuesFiles`, enabling powerful CI/CD workflows and context-aware configuration.
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: ServiceDeployment
+metadata:
+  name: nginx
+  namespace: infra
+spec:
+  namespace: ingress-nginx
+  name: ingress-nginx
+  helm:
+    version: 4.4.x
+    chart: ingress-nginx
+    url: https://kubernetes.github.io/ingress-nginx
+    luaScript: |
+      -- Lua code returning:
+      -- { values: table<string, any>, valuesFiles: list<string> }
+      values = {}
+      values["appName"] = "MyApplication"
+      values["version"] = "1.2.3"
+      values["debug"] = true
+      values["maxConnections"] = 100
+
+      valuesFiles = {"config.json", "secrets.yaml"}
+    repository:
+      namespace: infra
+      name: nginx # referenced helm repository above
+  clusterRef:
+    kind: Cluster
+    name: k3s
+    namespace: infra
+```
+For more information, see [Dynamic Helm Configuration with Lua Scripts](lua.md).
 
 ## Multi-Source Helm
 

@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-05-16T13:24:36.000Z"
+    "lastmod": "2025-06-06T08:44:49.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -114,6 +114,10 @@
   "/plural-features/continuous-deployment/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/plural-features/continuous-deployment/lua": {
+    "relPath": "/plural-features/continuous-deployment/lua.md",
+    "lastmod": "2025-06-09T12:07:35.725Z"
   },
   "/plural-features/continuous-deployment/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
@@ -273,7 +277,7 @@
   },
   "/plural-features/pr-automation/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-05-19T07:10:18.000Z"
+    "lastmod": "2025-06-05T13:01:10.000Z"
   },
   "/plural-features/pr-automation/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
@@ -293,7 +297,7 @@
   },
   "/plural-features/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-06-06T08:44:49.000Z"
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
@@ -533,7 +537,7 @@
   },
   "/deployments/pr/crds": {
     "relPath": "/plural-features/pr-automation/crds.md",
-    "lastmod": "2025-05-19T07:10:18.000Z"
+    "lastmod": "2025-06-05T13:01:10.000Z"
   },
   "/deployments/pr/testing": {
     "relPath": "/plural-features/pr-automation/testing.md",
