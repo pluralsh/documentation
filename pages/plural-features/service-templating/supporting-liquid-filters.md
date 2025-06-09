@@ -180,25 +180,6 @@ _Parameters_:
 
 _Implementation_: `github.com/Masterminds/sprig/v3.any`
 
-##  `append`
-Appends a new item to existing list, creating a new list.
-
-
-_Parameters_:
-
-- List
-
-- Item to append
-
-
-
-
-_Example_: `append ( list 1 2 3 ) 5` returns `[1, 2, 3, 5]`.
-
-
-
-_Implementation_: `github.com/Masterminds/sprig/v3.push`
-
 ##  `atoi`
 Converts a string to an integer.
 
