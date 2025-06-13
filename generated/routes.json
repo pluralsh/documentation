@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-06-06T08:44:49.000Z"
+    "lastmod": "2025-06-12T07:56:59.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -113,11 +113,11 @@
   },
   "/plural-features/continuous-deployment/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-06-09T19:18:57.000Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
-    "lastmod": "2025-06-09T12:07:35.725Z"
+    "lastmod": "2025-06-09T19:18:57.000Z"
   },
   "/plural-features/continuous-deployment/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
@@ -297,7 +297,7 @@
   },
   "/plural-features/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-06-06T08:44:49.000Z"
+    "lastmod": "2025-06-10T07:40:44.000Z"
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
@@ -457,7 +457,7 @@
   },
   "/deployments/operator/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-06-09T19:18:57.000Z"
   },
   "/deployments/operator/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",

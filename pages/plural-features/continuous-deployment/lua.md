@@ -120,6 +120,189 @@ end
 **Returns:**
 - `[string]`: Array of relative file paths, or `nil` and error message on failure
 
+### Utils Module
+
+Functions available in Lua as `utils.*`
+
+#### merge
+
+```lua
+utils.merge(destination, source, strategy) -> table, error
+```
+
+Performs a deep merge of two tables, combining their contents recursively.
+
+**Parameters:**
+- `destination` (table): The target table to merge into
+- `source` (table): The source table to merge from
+- `strategy` (string, optional): Merge strategy - "override" (default) or "append"
+
+**Returns:**
+- `table`: Merged table, or `nil` on error
+- `string`: Error message if merging fails
+
+**Merge Strategies:**
+- `"override"`: Source values replace destination values (default behavior)
+- `"append"`: For arrays/slices, append source items to destination instead of replacing
+
+**Example:**
+```lua
+local base = {
+    server = {
+        host = "localhost",
+        port = 8080,
+        ssl = {enabled = false}
+    },
+    features = {"auth", "logging"}
+}
+
+local override = {
+    server = {
+        host = "0.0.0.0",
+        ssl = {enabled = true, cert = "prod.crt"}
+    },
+    features = {"metrics"}
+}
+
+-- Override merge (default)
+local merged = utils.merge(base, override)
+-- Result: server.host = "0.0.0.0", features = {"metrics"}
+
+-- Append merge for arrays
+local appended = utils.merge(base, override, "append")
+-- Result: features = {"auth", "logging", "metrics"}
+```
+
+#### splitString
+
+```lua
+utils.splitString(string, delimiter) -> [string]
+```
+
+Splits a string into an array of substrings using the specified delimiter.
+
+**Parameters:**
+- `string` (string): The string to split
+- `delimiter` (string): The delimiter to split on
+
+**Returns:**
+- `[string]`: Array of string parts
+
+**Example:**
+```lua
+local path = "user/config/settings.json"
+local parts = utils.splitString(path, "/")
+-- Result: {"user", "config", "settings.json"}
+
+local csv = "apple,banana,cherry"
+local fruits = utils.splitString(csv, ",")
+-- Result: {"apple", "banana", "cherry"}
+
+values["pathParts"] = parts
+values["fruits"] = fruits
+```
+
+#### pathJoin
+
+```lua
+utils.pathJoin(parts) -> string
+```
+
+Joins an array of path components into a single path using the OS-appropriate path separator.
+
+**Parameters:**
+- `parts` (table): Array of path components as strings
+
+**Returns:**
+- `string`: Joined path
+
+**Example:**
+```lua
+local pathParts = {"user", "config", "settings.json"}
+local fullPath = utils.pathJoin(pathParts)
+-- Result: "user/config/settings.json" (Unix) or "user\config\settings.json" (Windows)
+
+-- Useful for building file paths dynamically
+local baseDir = "templates"
+local category = "emails"
+local filename = "welcome.html"
+local templatePath = utils.pathJoin({baseDir, category, filename})
+-- Result: "templates/emails/welcome.html"
+
+values["templatePath"] = templatePath
+valuesFiles = {templatePath}
+```
+
+## Error Handling
+
+All functions return errors in a consistent format:
+- File operations return `nil` and error message on failure
+- Encoding operations return `nil` and error message on failure
+- Path security violations return descriptive error messages
+- Merge operations return `nil` and error message on failure
+
+When running Lua code from Go using GopherLua, safe error handling is important to prevent your application from
+panicking due to unhandled Lua runtime errors. What is `pcall` in Lua? The `pcall` stands for `protected call`.
+
+```lua
+ok, result = pcall(function() 
+    error("fail") 
+end)
+```
+- ok: true if no error occurred, false otherwise
+
+- result: the function’s return value or the error message
+
+This prevents Lua from throwing a hard error that would propagate up and crash the engine.
+
+### Example
+Simple Error Handling and Throwing Example
+
+```lua
+
+values = values or {}
+valuesFiles = valuesFiles or {}
+
+-- Example 1: Basic Error Throwing
+function validatePort(port)
+    if not port then
+        error("Port is required")
+    end
+    
+    if type(port) ~= "number" then
+        error("Port must be a number, got " .. type(port))
+    end
+    
+    if port < 1 or port > 65535 then
+        error("Port must be between 1 and 65535, got " .. port)
+    end
+    
+    return true
+end
+
+-- Example 2: Safe Error Handling with pcall
+function safeValidatePort(port)
+    local success, result = pcall(validatePort, port)
+    if success then
+        return true, nil  -- Valid port
+    else
+        return false, result  -- Invalid port with error message
+    end
+end
+
+-- Test different port values
+local testPorts = {8080, "invalid", -1, 99999, nil}
+local portResults = {}
+
+for i, port in ipairs(testPorts) do
+    local isValid, errorMsg = safeValidatePort(port)
+    table.insert(portResults, {
+        port = port,
+        valid = isValid,
+        error = errorMsg
+    })
+end
+```
 
 ## Basic Usage
 
