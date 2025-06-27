@@ -75,6 +75,25 @@ local data = encoding.yamlDecode(yamlStr)
 -- Result: {user = {name = "Charlie", active = true}}
 ```
 
+##### `encoding.jsonSchema(value, pathStr) -> bool, error`
+Accepts a lua value and a string representing a path to a jsonschema definition file, and determines whether the value matches that schema.  `pathStr` must be a relative path within the underlying tarball of your plural service, and `error` will be nil if there's no error fetching or parsing the jsonschema file.
+
+```lua
+local value = {
+    name = "Plural Labs",
+    employees = 10,
+    repositories = [
+        {name = "pluralsh/plural"},
+        {name = "pluralsh/console"}
+    ]
+} 
+local valid, err = encoding.jsonSchema(value, "./schema.json")
+unless valid do
+  error(err) -- return the validation error to the caller
+end
+-- Result: true (if valid)
+```
+
 ### File System Module
 
 The fs module provides secure file operations within a restricted base directory.
