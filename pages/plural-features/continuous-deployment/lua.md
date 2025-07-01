@@ -88,7 +88,7 @@ local value = {
     ]
 } 
 local valid, err = encoding.jsonSchema(value, "./schema.json")
-unless valid do
+if not valid do
   error(err) -- return the validation error to the caller
 end
 -- Result: true (if valid)
