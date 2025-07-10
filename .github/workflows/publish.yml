@@ -60,3 +60,7 @@ jobs:
           cache-to: type=gha,mode=max
           build-args: |
             NEXT_PUBLIC_ROOT_URL="https://docs.plural.sh"
+            NEXT_PUBLIC_GA_ID=${{ vars.NEXT_PUBLIC_GA_ID }}
+            NEXT_PUBLIC_ALGOLIA_APP_ID=${{ vars.NEXT_PUBLIC_ALGOLIA_APP_ID }}
+            NEXT_PUBLIC_ALGOLIA_APP_ID_KEY=${{ vars.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY }}
+            NEXT_PUBLIC_ALGOLIA_INDEX_NAME=${{ vars.NEXT_PUBLIC_ALGOLIA_INDEX_NAME }}

@@ -124,7 +124,7 @@ export default function MainContent({
             <EditOnGithubLink
               target="_blank"
               rel="noopener noreferrer"
-              href={`https://github.com/pluralsh/documentation/blob/${process.env.NEXT_PUBLIC_GITHUB_BRANCH_NAME}/pages${markdoc.file.path}`}
+              href={`https://github.com/pluralsh/documentation/blob/main/pages${markdoc.file.path}`}
             >
               <GitHubLogoIcon
                 size={20}
