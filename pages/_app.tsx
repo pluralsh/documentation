@@ -38,7 +38,6 @@ import {
   isGithubRepoData,
 } from '@src/components/GithubStars'
 import GlobalStyles from '@src/components/GlobalStyles'
-import { usePosthog } from '@src/components/hooks/usePosthog'
 import HtmlHead from '@src/components/HtmlHead'
 import MainContent from '@src/components/MainContent'
 import PageFooter from '@src/components/PageFooter'
@@ -111,7 +110,6 @@ const Link = forwardRef(
 )
 
 function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
-  usePosthog()
   const router = useRouter()
   const markdoc = pageProps?.markdoc
   const [isClient, setIsClient] = useState(false)
