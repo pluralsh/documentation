@@ -64,7 +64,7 @@ spec:
     kind: GitRepository
     name: cd-demo
     namespace: infra
-  helm:
+  helm: # the /helm folder is a working helm chart, so we can optionally add helm values overrides in line and our deployment operator will respect it.
     values:
       image:
         repository: ghcr.io/pluralsh/plrl-cd-test

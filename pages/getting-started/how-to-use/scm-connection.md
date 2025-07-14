@@ -13,6 +13,10 @@ Plural has the ability to spawn pull requests, post review comments, and other f
 
 To get this working you'll first need to give your Plural Console scoped access tokens to your SCM.
 
+{% callout severity="info" %}
+If you're using Plural Cloud, this should have been installed for you by default as part of the setup wizard.
+{% /callout %}
+
 # Prerequisites
 Some things you'll need to run this tutorial:
 

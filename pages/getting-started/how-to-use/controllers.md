@@ -5,6 +5,10 @@ description: Setting up your edge networking on a cluster, and learn a bit about
 
 # Setting the stage
 
+{% callout severity="info" %}
+If you're using Plural Cloud, this will be configured for you by default!
+{% /callout %}
+
 A very common problem a user will need to solve when setting up a new cluster is getting edge networking set up.  This includes solving a few main concerns:
 
 * Ingress - this sets up an ingress controller for load balancing incoming HTTP requests into the microservices on your cluster

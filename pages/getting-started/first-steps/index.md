@@ -17,14 +17,15 @@ The general process of setting up your instance is pretty straightforward, and w
 
 We think the easiest way to understand the workflow is to take a look at our intro video (It is about 14 minutes long):
 
-{% embed url="https://www.youtube.com/watch?v=caDlvskRkAw&ab_channel=Plural" aspectRatio="16 / 9" /%}
+{% embed url="https://www.youtube.com/watch?v=sEb_gflm-ME" aspectRatio="16 / 9" /%}
 
-This will give you a brief tour of using the `plural up` command to set up your management cluster, which you can use directly or can use as a starting point to rework the exact setup needed for your enterprise given security constraints and other considerations for your environment.
+This goes over the setup process for using Plural Cloud in particular, and also shows the `plural up` command and how it connects to your Plural Cloud instance.  That said the workflow is very similar for self-hosted installs as well.
 
 ## Getting Started Docs
 
 We also have thorough documentation to explain how to get your cluster up and running. We recommend using the following:
 
+- {% doclink to="getting_started_first_steps_plural_cloud" %}Plural Cloud Quickstart{% /doclink %} - Explains how to get started quickly with Plural Cloud, ans some of the features it provides.
 - {% doclink to="getting_started_first_steps_cli_quickstart" %}CLI Quickstart{% /doclink %} - details of how to install the Plural Console either on an existing cluster using helm or also guides you through the `plural up` process.
 - {% doclink to="getting_started_first_steps_existing_cluster" %}Import An Existing Cluster{% /doclink %} - some of the main ways to import a cluster you've created into Plural's fleet manager. The main method is to simply use our CLI or to use our terraform provider.
 - [Terraform Docs](https://registry.terraform.io/providers/pluralsh/plural/latest/docs) - docs for our terraform provider.
