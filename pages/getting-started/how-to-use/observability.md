@@ -5,6 +5,10 @@ description: Set up log aggregation with Elastic and Scale out Prometheus with V
 
 # Setting the Stage
 
+{% callout severity="info" %}
+If you're using Plural Cloud, this will be configured for you by default!
+{% /callout %}
+
 If you're actually going to use this infrastructure in earnest, you'll need some form of monitoring and observability.  Plural integrates directly with a number of observability providers, but the easiest *and cheapest* to get going quickly is to use our most streamlined setup, namely:
 
 * Victoria Metrics - a scale-out, prometheus-compatible time series datastore, with a feature rich agent, vmagent.  This gives you unified metrics observability

@@ -12,6 +12,12 @@ This guide goes over how to deploy your services with the Plural CLI. At the end
 - Deployed your code onto your clusters of choice.
 - Optionally updated any configurations and permissions for the clusters and services.
 
+{% callout severity="info" %}
+If you want to get started quickly or want us to manage the Plural experience for you, we strongly recommend using [Plural Cloud](/getting-started/first-steps/plural-cloud).
+
+We'll handle hosting Plural for you, but also it comes with automatic integration with Github and observability with Elastic and Prometheus set up by default.  It should seriously reduce DevOps TCO, especially for resource-constrained teams.
+{% /callout %}
+
 ## Install the Plural CLI
 
 The Plural CLI is available on Homebrew, a single line installation can be done with:

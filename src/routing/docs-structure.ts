@@ -57,6 +57,7 @@ export const docsStructure: DocSection[] = [
             title: 'Use PR automations for self-service',
           },
           { path: 'pipelines', title: 'Setup a dev -> prod pipeline' },
+          { path: 'cleaning-up', title: 'Cleaning Up' },
         ],
       },
       {

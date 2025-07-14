@@ -9,6 +9,9 @@ yarn-install: .PHONY
 web: ## runs the docs site locally
 	yarn dev
 
+routes:
+	yarn generate:route-index
+
 sync-docs: sync-console-crd-docs sync-operator-crd-docs sync-liquid-docs
 
 sync-console-crd-docs:
