@@ -32,14 +32,18 @@ Once you select Plural Cloud, you'll see a wizard like the below:
 ![](/assets/getting-started/cloud-wizard.png)
 
 
-After filling out the wizard, it'll take about 2-3 minutes to instantiate your cluster, from there, you'll be given a wizard to finalize the setup of your instance.
+After filling out the wizard, it'll take about 2-3 minutes to instantiate your cluster, from there, you can log into your Plural Cloud instance, and connect it to your Github and AWS/GCP/Azure infrastructure.
 
 ## Setup Wizard
 
-The setup wizard will cover two main things:
+After logging in, you should be presented with a wizard something like this:
+
+![](/assets/plural-cloud/wizard.png)
+
+The setup wizard will cover three main things:
 
 * Setting up a connection to your SCM provider.  The default is to install our Github App, which is the easiest overall flow, but you can provide an access token manually as well.
-* Setting up a webhook against your SCM provider.  This is used to gather statuses of PRs and for the [Pull Request Workflow](/plural-features/stacks-iac-management/pr-workflow) for Plural Stacks.
+* Setting up a webhook against your SCM provider.  This is used to gather statuses of PRs and for the [Pull Request Workflow](/plural-features/stacks-iac-management/pr-workflow) for Plural Stacks.  It is optional and you can skip it if your access token or app install wasn't granted the necessary permissions.
 * instructing your to run `plural up --cloud` to set up your initial management cluster.
 
 ## The "plural up --cloud" command
