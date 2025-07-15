@@ -1045,6 +1045,25 @@ _Appears in:_
 | `scaffoldsRepositoryRef` _[NamespacedName](#namespacedname)_ | pointer to the Scaffolds GIT repository to use |  | Optional: {} <br /> |
 
 
+#### DiffNormalizers
+
+
+
+
+
+
+
+_Appears in:_
+- [SyncConfigAttributes](#syncconfigattributes)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  |  |
+| `kind` _string_ |  |  |  |
+| `namespace` _string_ |  |  |  |
+| `jsonPointers` _string array_ | A list of json patches to apply to the service which controls how drift detection works |  |  |
+
+
 #### ElasticsearchConnection
 
 
@@ -2332,6 +2351,22 @@ Persona is the Schema for the personas API
 | `spec` _[PersonaSpec](#personaspec)_ |  |  |  |
 
 
+#### PersonaAI
+
+
+
+
+
+
+
+_Appears in:_
+- [PersonaConfiguration](#personaconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `pr` _boolean_ | Enables whether users bound to this persona can use AI to generate PRs. |  | Optional: {} <br /> |
+
+
 #### PersonaConfiguration
 
 
@@ -2350,6 +2385,7 @@ _Appears in:_
 | `deployments` _[PersonaDeployment](#personadeployment)_ | Deployments enable individual parts of the deployments views. |  | Optional: {} <br /> |
 | `sidebar` _[PersonaSidebar](#personasidebar)_ | Sidebar enables individual aspects of the sidebar. |  | Optional: {} <br /> |
 | `services` _[PersonaServices](#personaservices)_ | Services enable individual parts of the services views. |  | Optional: {} <br /> |
+| `ai` _[PersonaAI](#personaai)_ | AI enables individual parts of the ai views. |  | Optional: {} <br /> |
 
 
 #### PersonaDeployment
@@ -3812,6 +3848,7 @@ _Appears in:_
 | `enforceNamespace` _boolean_ |  |  | Optional: {} <br /> |
 | `labels` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
 | `annotations` _object (keys:string, values:string)_ |  |  | Optional: {} <br /> |
+| `diffNormalizers` _[DiffNormalizers](#diffnormalizers) array_ | DiffNormalizers a list of diff normalizers to apply to the service which controls how drift detection works |  | Optional: {} <br /> |
 
 
 #### Taint
