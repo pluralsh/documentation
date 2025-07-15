@@ -127,14 +127,32 @@ end
 Returns a list of all files within the specified directory and its subdirectories.
 
 ```lua
-local files = fs.walk(".")
-if files then
-    values["allFiles"] = files
+-- Example 1: Walk directory without ignoring dotfiles
+local files, err = fs.walk("mydir")
+if not files then
+    print("Error:", err)
+else
+    for _, file in ipairs(files) do
+        print(file)
+    end
 end
+
+-- Example 2: Walk directory while ignoring dotfiles
+local files, err = fs.walk("mydir", true)
+if not files then
+    print("Error:", err)
+else
+    for _, file in ipairs(files) do
+        print(file)
+    end
+end
+
 ```
 
 **Parameters:**
 - `directory` (string): Relative path to the directory within the base directory
+- `ignoreDotfiles` (boolean, optional): When set to `true`, the function will exclude dotfiles and directories starting with `.` from the returned list. Default value: `false`
+
 
 **Returns:**
 - `[string]`: Array of relative file paths, or `nil` and error message on failure
