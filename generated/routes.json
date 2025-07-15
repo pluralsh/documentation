@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-07-09T01:30:04.000Z"
+    "lastmod": "2025-07-15T06:47:44.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -25,11 +25,11 @@
   },
   "/getting-started/first-steps": {
     "relPath": "/getting-started/first-steps/index.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/first-steps/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/first-steps/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -37,7 +37,7 @@
   },
   "/getting-started/first-steps/plural-cloud": {
     "relPath": "/getting-started/first-steps/plural-cloud.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T15:36:50.000Z"
   },
   "/getting-started/how-to-use": {
     "relPath": "/getting-started/how-to-use/index.md",
@@ -53,7 +53,7 @@
   },
   "/getting-started/how-to-use/scm-connection": {
     "relPath": "/getting-started/how-to-use/scm-connection.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/how-to-use/workload-cluster": {
     "relPath": "/getting-started/how-to-use/workload-cluster.md",
@@ -61,15 +61,15 @@
   },
   "/getting-started/how-to-use/controllers": {
     "relPath": "/getting-started/how-to-use/controllers.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/how-to-use/observability": {
     "relPath": "/getting-started/how-to-use/observability.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/how-to-use/microservice": {
     "relPath": "/getting-started/how-to-use/microservice.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/how-to-use/pr-automation": {
     "relPath": "/getting-started/how-to-use/pr-automation.md",
@@ -81,7 +81,7 @@
   },
   "/getting-started/how-to-use/cleaning-up": {
     "relPath": "/getting-started/how-to-use/cleaning-up.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/getting-started/advanced-config": {
     "relPath": "/getting-started/advanced-config/index.md",
@@ -377,7 +377,7 @@
   },
   "/getting-started/quickstart": {
     "relPath": "/getting-started/first-steps/index.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
@@ -393,7 +393,7 @@
   },
   "/deployments/cli-quickstart": {
     "relPath": "/getting-started/first-steps/cli-quickstart.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/deployments/existing-cluster": {
     "relPath": "/getting-started/first-steps/existing-cluster.md",
@@ -401,7 +401,7 @@
   },
   "/getting-started/deployments": {
     "relPath": "/getting-started/first-steps/index.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/how-to/set-up/mgmt-cluster": {
     "relPath": "/getting-started/how-to-use/mgmt-cluster.md",
@@ -413,7 +413,7 @@
   },
   "/how-to/set-up/scm-connection": {
     "relPath": "/getting-started/how-to-use/scm-connection.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/how-to/set-up/workload-cluster": {
     "relPath": "/getting-started/how-to-use/workload-cluster.md",
@@ -421,7 +421,7 @@
   },
   "/how-to/set-up/controllers": {
     "relPath": "/getting-started/how-to-use/controllers.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/how-to/deploy/pr-automation": {
     "relPath": "/getting-started/how-to-use/pr-automation.md",
@@ -429,7 +429,7 @@
   },
   "/how-to/deploy/microservice": {
     "relPath": "/getting-started/how-to-use/microservice.md",
-    "lastmod": "2025-07-14T14:28:27.000Z"
+    "lastmod": "2025-07-14T14:40:01.000Z"
   },
   "/how-to/deploy/pipelines": {
     "relPath": "/getting-started/how-to-use/pipelines.md",
