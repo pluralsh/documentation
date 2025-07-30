@@ -113,7 +113,8 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `accessKeyId` _string_ |  |  |  |
 | `secretAccessKey` _[ObjectKeyReference](#objectkeyreference)_ |  |  |  |
-| `region` _string_ |  |  |  |
+| `region` _string_ | The region this connection applies to |  | Optional: {} <br /> |
+| `regions` _string array_ | A list of regions this connection can query |  | Optional: {} <br /> |
 
 
 
@@ -364,7 +365,8 @@ _Appears in:_
 
 
 
-CloudConnection is the Schema for the cloudconnections API
+CloudConnection is a credential for querying a cloud provider.  It will be used in agentic chats to perform generic sql-like
+queries against cloud configuration data.
 
 
 
@@ -3461,6 +3463,7 @@ _Appears in:_
 | `ignoreCrds` _boolean_ | whether you want to not include the crds in the /crds folder of the chart (useful if reinstantiating the same chart on the same cluster) |  | Optional: {} <br /> |
 | `luaScript` _string_ | a lua script to use to generate helm configuration.  This can ultimately return a lua table with keys "values" and "valuesFiles" to supply overlays for either dynamically<br />based on git state or other metadata |  | Optional: {} <br /> |
 | `luaFile` _string_ | a lua file to use to generate helm configuration.  This can ultimately return a lua table with keys "values" and "valuesFiles" to supply overlays for either dynamically<br />based on git state or other metadata |  | Optional: {} <br /> |
+| `luaFolder` _string_ | a folder of lua files to include in the final script used |  | Optional: {} <br /> |
 
 
 #### ServiceImport
