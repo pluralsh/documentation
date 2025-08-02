@@ -19,6 +19,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [ComplianceReportGenerator](#compliancereportgenerator)
 - [CustomStackRun](#customstackrun)
 - [DeploymentSettings](#deploymentsettings)
+- [FederatedCredential](#federatedcredential)
 - [Flow](#flow)
 - [GeneratedSecret](#generatedsecret)
 - [GitRepository](#gitrepository)
@@ -1110,6 +1111,43 @@ _Appears in:_
 
 
 
+#### FederatedCredential
+
+
+
+FederatedCredential is a way to authenticate users from an external identity provider.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `FederatedCredential` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[FederatedCredentialSpec](#federatedcredentialspec)_ |  |  |  |
+
+
+#### FederatedCredentialSpec
+
+
+
+FederatedCredentialSpec defines the desired state of FederatedCredential.
+
+
+
+_Appears in:_
+- [FederatedCredential](#federatedcredential)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `issuer` _string_ | Issuer is the URL of the identity provider that issues the tokens. |  | Required: {} <br /> |
+| `scopes` _string array_ | Scopes are the scopes that the credential will request from the identity provider. |  | Optional: {} <br /> |
+| `claimsLike` _[RawExtension](https://pkg.go.dev/k8s.io/apimachinery/pkg/runtime#RawExtension)_ | ClaimsLike is a JSON expression that matches the claims in the token.<br />All the value strings should be a valid regular expression.<br /><br />Example:<br />	...<br />	claimsLike:<br />		sub: "repo:myaccount/myrepo:ref:refs/heads/.*" |  | Optional: {} <br /> |
+| `user` _string_ | User is the user email address that will be authenticated by this credential. |  | Required: {} <br /> |
+
+
 #### Flow
 
 
@@ -1360,6 +1398,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `tags` _object (keys:string, values:string)_ | Tags a set of tags to select clusters for this global service |  | Optional: {} <br /> |
 | `reparent` _boolean_ | Whether you'd want this global service to take ownership of existing Plural services |  | Optional: {} <br /> |
+| `interval` _string_ | Interval specifies the interval at which the global service will be reconciled, default is 10m |  | Optional: {} <br /> |
 | `cascade` _[Cascade](#cascade)_ | Cascade deletion options for this global service |  | Optional: {} <br /> |
 | `context` _[TemplateContext](#templatecontext)_ | Context to be used for dynamic template overrides of things like helm chart, version or values files |  | Optional: {} <br /> |
 | `distro` _[ClusterDistro](#clusterdistro)_ | Distro of kubernetes this cluster is running |  | Enum: [GENERIC EKS AKS GKE RKE K3S] <br />Optional: {} <br /> |
@@ -1610,6 +1649,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this Stack. If not provided InfrastructureStack's own name from InfrastructureStack.ObjectMeta will be used. |  | Optional: {} <br /> |
 | `type` _[StackType](#stacktype)_ | Type specifies the tool to use to apply it |  | Enum: [TERRAFORM ANSIBLE CUSTOM] <br />Required: {} <br /> |
+| `interval` _string_ | Interval specifies the interval at which the stack will be reconciled, default is 5m |  | Optional: {} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef to source IaC from |  | Required: {} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  | Required: {} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references project this stack belongs to.<br />If not provided, it will use the default project. |  | Optional: {} <br /> |
