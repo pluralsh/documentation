@@ -89,6 +89,10 @@ export const docsStructure: DocSection[] = [
             title: 'Plural Observers in Continuous Deployment',
           },
           { path: 'pipelines', title: 'Pipelines' },
+          {
+            path: 'github-actions-ci',
+            title: 'Integration with Github Actions/CI',
+          },
         ],
       },
       {
