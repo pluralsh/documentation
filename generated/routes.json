@@ -135,6 +135,10 @@
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
     "lastmod": "2025-05-12T06:30:23.000Z"
   },
+  "/plural-features/continuous-deployment/github-actions-ci": {
+    "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
+    "lastmod": "2025-08-04T01:09:39.000Z"
+  },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
     "lastmod": "2025-05-11T23:04:59.000Z"
