@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-07-15T06:47:44.000Z"
+    "lastmod": "2025-08-11T08:06:59.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -121,7 +121,7 @@
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
-    "lastmod": "2025-07-01T14:46:40.000Z"
+    "lastmod": "2025-07-15T12:44:58.000Z"
   },
   "/plural-features/continuous-deployment/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
@@ -137,7 +137,7 @@
   },
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
-    "lastmod": "2025-08-04T01:09:39.000Z"
+    "lastmod": "2025-08-04T17:41:39.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
@@ -370,6 +370,14 @@
   "/resources/product-updates": {
     "relPath": "/resources/product-updates.md",
     "lastmod": "2025-05-01T19:37:01.000Z"
+  },
+  "/resources/architecture": {
+    "relPath": "/resources/architecture.md",
+    "lastmod": "2025-08-11T16:06:36.000Z"
+  },
+  "/resources/architecture/gitops-architecture": {
+    "relPath": "/resources/architecture/gitops-architecture.md",
+    "lastmod": "2025-08-11T16:06:36.000Z"
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",

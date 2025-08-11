@@ -248,6 +248,13 @@ export const docsStructure: DocSection[] = [
     sections: [
       { path: 'release-notes', title: 'Release Notes' },
       { path: 'product-updates', title: 'Product Updates' },
+      {
+        path: 'architecture',
+        title: 'Advanced Architecture',
+        sections: [
+          { path: 'gitops-architecture', title: 'GitOps Architecture' },
+        ],
+      },
     ],
   },
 ]
