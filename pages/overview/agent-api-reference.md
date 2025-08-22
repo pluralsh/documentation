@@ -9,6 +9,7 @@
 Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 API group
 
 ### Resource Types
+- [AgentConfiguration](#agentconfiguration)
 - [ClusterDrain](#clusterdrain)
 - [CustomHealth](#customhealth)
 - [IngressReplica](#ingressreplica)
@@ -36,6 +37,46 @@ _Appears in:_
 | `region` _string_ | Region is the name of the AWS region cluster lives in. |  | Required: \{\} <br /> |
 | `accessKeyID` _string_ | AccessKeyID is your access key ID used to authenticate against AWS API. |  | Optional: \{\} <br /> |
 | `secretAccessKeyRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | SecretAccessKeyRef is a reference to the secret that contains secret access key.<br />Since UpgradeInsights is a cluster-scoped resource we can't use local reference.<br />SecretAccessKey must be stored in a key named "secretAccessKey".<br />An example secret can look like this:<br />	apiVersion: v1<br />	kind: Secret<br />	metadata:<br />   name: eks-credentials<br />   namespace: upgrade-insights-test<br />	stringData:<br />   secretAccessKey: "changeme"<br />Then it can be referenced like this:<br />   ...<br />   secretAccessKeyRef:<br />     name: eks-credentials<br />     namespace: upgrade-insights-test |  | Optional: \{\} <br /> |
+
+
+#### AgentConfiguration
+
+
+
+AgentConfiguration is the deployment operator configuration
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `AgentConfiguration` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[AgentConfigurationSpec](#agentconfigurationspec)_ |  |  |  |
+
+
+#### AgentConfigurationSpec
+
+
+
+AgentConfigurationSpec defines the desired state of AgentConfiguration
+
+
+
+_Appears in:_
+- [AgentConfiguration](#agentconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `servicePollInterval` _string_ | ServicePollInterval defines how often the agent polls for services.<br />Expected format is a duration string (e.g., "30s", "5m").<br />Set to "0s" to disable service polling. |  |  |
+| `clusterPingInterval` _string_ | ClusterPingInterval specifies the interval at which the agent pings the cluster.<br />Set to "0s" to disable cluster pings. |  |  |
+| `compatibilityUploadInterval` _string_ | CompatibilityUploadInterval determines how frequently the agent uploads compatibility data.<br />Set to "0s" to disable compatibility uploads. |  |  |
+| `stackPollInterval` _string_ | StackPollInterval sets how often the agent polls for stack updates or changes.<br />Set to "0s" to disable stack polling. |  |  |
+| `pipelineGateInterval` _string_ | PipelineGateInterval specifies how frequently the agent checks pipeline gates.<br />Set to "0s" to disable pipeline gate checks. |  |  |
+| `maxConcurrentReconciles` _integer_ | MaxConcurrentReconciles controls the maximum number of concurrent reconcile loops.<br />Higher values can increase throughput at the cost of resource usage. |  |  |
+| `vulnerabilityReportUploadInterval` _string_ | VulnerabilityReportUploadInterval sets how often vulnerability reports are uploaded.<br />Set to "0s" to disable vulnerability report uploads. |  |  |
 
 
 #### AgentHelmConfiguration
