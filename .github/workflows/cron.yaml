@@ -15,12 +15,9 @@ jobs:
       uses: actions/checkout@v4
     - name: Sync docs
       run: make sync-docs
-    - name: Save date
-      id: date
-      run: echo "date=$(date +%Y-%m-%d)" >> $GITHUB_OUTPUT
     - name: Create pull request
       id: cpr
-      uses: peter-evans/create-pull-request@v5
+      uses: peter-evans/create-pull-request@v7
       with:
         title: "chore: API documentation sync"
         body: |
@@ -29,7 +26,7 @@ jobs:
           - Deployment operator
           - Liquid filters
         commit-message: sync docs
-        branch: docs-${{steps.date.outputs.date}}
+        branch: auto-sync
         labels: documentation
         base: main
 #    - name: Auto-approve
