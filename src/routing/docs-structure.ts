@@ -140,6 +140,10 @@ export const docsStructure: DocSection[] = [
           { path: 'setup', title: 'Setup Plural AI' },
           { path: 'architecture', title: 'Plural AI Architecture' },
           { path: 'cost', title: 'Plural AI cost analysis' },
+          {
+            path: 'multi-model-configuration',
+            title: 'Configure Against Multiple Providers',
+          },
         ],
       },
       {

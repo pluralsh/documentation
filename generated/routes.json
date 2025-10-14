@@ -149,7 +149,7 @@
   },
   "/plural-features/k8s-upgrade-assistant/addon-compatibilities": {
     "relPath": "/plural-features/k8s-upgrade-assistant/addon-compatibilities.md",
-    "lastmod": "2025-03-23T01:07:28.000Z"
+    "lastmod": "2025-08-15T02:39:28.000Z"
   },
   "/plural-features/k8s-upgrade-assistant/cluster-drain": {
     "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
@@ -222,6 +222,10 @@
   "/plural-features/plural-ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/plural-features/plural-ai/multi-model-configuration": {
+    "relPath": "/plural-features/plural-ai/multi-model-configuration.md",
+    "lastmod": "2025-10-14T19:52:44.000Z"
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
@@ -373,11 +377,11 @@
   },
   "/resources/architecture": {
     "relPath": "/resources/architecture.md",
-    "lastmod": "2025-08-11T16:06:36.000Z"
+    "lastmod": "2025-08-11T16:38:17.000Z"
   },
   "/resources/architecture/gitops-architecture": {
     "relPath": "/resources/architecture/gitops-architecture.md",
-    "lastmod": "2025-08-11T16:06:36.000Z"
+    "lastmod": "2025-08-11T16:38:17.000Z"
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
