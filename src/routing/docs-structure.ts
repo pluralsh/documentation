@@ -82,6 +82,10 @@ export const docsStructure: DocSection[] = [
           { path: 'deployment-operator', title: 'The deployment operator' },
           { path: 'git-service', title: 'Git-sourced services' },
           { path: 'helm-service', title: 'Helm-sourced services' },
+          {
+            path: 'resource-application-logic',
+            title: 'Resource Application Logic',
+          },
           { path: 'lua', title: 'Dynamic Helm Configuration with Lua Scripts' },
           { path: 'global-service', title: 'Global services' },
           {
