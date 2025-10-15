@@ -1,5 +1,5 @@
 ---
-title: Sync hooks
+title: Resource Application Logic
 description: Control deploy ordering with sync waves, run lifecycle hooks, and clean them up via hook delete policies
 ---
 

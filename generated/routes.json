@@ -119,9 +119,9 @@
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
     "lastmod": "2025-06-09T19:18:57.000Z"
   },
-  "/plural-features/continuous-deployment/sync-hooks": {
-    "relPath": "/plural-features/continuous-deployment/sync-hooks.md",
-    "lastmod": "2025-10-15T11:41:55.083Z"
+  "/plural-features/continuous-deployment/resource-application-logic": {
+    "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
+    "lastmod": "2025-10-15T13:54:02.028Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
