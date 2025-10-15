@@ -81,6 +81,57 @@ stringData:
 ```
 {% /callout %}
 
+## Model Selection Logic
+
+The model selected is generally a waterfall like so.
+
+1. For a use-case demanding a tool-capable model:
+
+| provider | tool model | default model |
+|----------|------------|---------------|
+| tool     | yes        | n/a          |
+| tool     | no         | yes          |
+| default  | yes        | n/a          |
+| default  | no         | yes          |
+
+
+2. For a high-volume usecase, the tool provider is ignored, and the table above is recognized for just the default provider usecases
+
+3. For embedding model selection, the logic is:
+
+| provider  | embedding model | default model |
+|-----------|----------------|---------------|
+| embedding | yes            | n/a           |
+| embedding | no             | yes           |
+| default   | yes            | n/a           |
+| default   | no             | yes           |
+
+(so very similar to the tool provider use-case)
+
+## Recommendations
+
+We've found decent success with the following combinations:
+
+For OpenAI:
+
+1. Any openai model above gpt-4.1-mini, but a tuned setup would chose gpt-4.1 or above for tools, and gpt-4.1-mini for the default
+2. For embeddings, we default to `text-embedding-3-large`
+
+For VertexAI:
+
+1. High volume usecases with `gemini-2.5-flash` and tools with `anthropic/claude-sonnet-4-5` is a realistic combo.
+2. You can use OpenAI as your embedding provider, or any of the Vertex embedding model's as well.
+
+For Anthropic, its important to note they have no embedding model, so you'll always have to mix providers. This is a decent setup:
+
+1. Configure `claude-sonnet-4-5` for tools (set as `toolProvider`)
+2. OpenAI gpt-4.1-mini for volume, which is our default (it's cheaper than most anthropic models) (set as `provider`)
+3. OpenAI `text-embedding-3-large` as your embedding model, which is our default, and would be selected as its the base provider.
+
+{% callout severity="info" %}
+Configuring a default model is usually optional, we chose sane defaults for all major providers.
+{% /callout %}
+
 ## Learn More
 
-You can see the full docs for this resource at https://docs.plural.sh/overview/management-api-reference#deploymentsettingsspec
+You can see the full docs for this resource at our [Agent API docs](https://docs.plural.sh/overview/management-api-reference#deploymentsettingsspec)
