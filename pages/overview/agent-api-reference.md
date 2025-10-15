@@ -10,6 +10,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 
 ### Resource Types
 - [AgentConfiguration](#agentconfiguration)
+- [AgentRuntime](#agentruntime)
 - [ClusterDrain](#clusterdrain)
 - [CustomHealth](#customhealth)
 - [IngressReplica](#ingressreplica)
@@ -99,6 +100,78 @@ _Appears in:_
 | `valuesConfigMapRef` _[ConfigMapKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#configmapkeyselector-v1-core)_ | ValuesConfigMapRef fetches helm values from a config map in this cluster.<br />Use only one of:<br />	- Values<br />	- ValuesSecretRef<br />	- ValuesConfigMapRef |  | Optional: \{\} <br /> |
 
 
+#### AgentRuntime
+
+
+
+AgentRuntime is the Schema for the agentruntimes API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `AgentRuntime` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[AgentRuntimeSpec](#agentruntimespec)_ |  |  |  |
+
+
+#### AgentRuntimeBindings
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `create` _[Binding](#binding) array_ | Create bindings control who can generate new agent runtimes. |  | Optional: \{\} <br /> |
+
+
+#### AgentRuntimeConfig
+
+
+
+AgentRuntimeConfig contains typed configuration for the agent runtime.
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `claude` _[ClaudeConfig](#claudeconfig)_ | Config for Claude CLI runtime. |  | Optional: \{\} <br /> |
+| `opencode` _[OpenCodeConfig](#opencodeconfig)_ | Config for OpenCode CLI runtime. |  | Optional: \{\} <br /> |
+
+
+#### AgentRuntimeSpec
+
+
+
+AgentRuntimeSpec defines the desired state of AgentRuntime
+
+
+
+_Appears in:_
+- [AgentRuntime](#agentruntime)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name of this AgentRuntime.<br />If not provided, the name from AgentRuntime.ObjectMeta will be used. |  | Optional: \{\} <br /> |
+| `type` _[AgentRuntimeType](#agentruntimetype)_ | Type specifies the agent runtime to use for executing the stack.<br />One of CLAUDE, OPENCODE, GEMINI, CUSTOM. |  | Enum: [CLAUDE OPENCODE GEMINI CUSTOM] <br />Required: \{\} <br /> |
+| `bindings` _[AgentRuntimeBindings](#agentruntimebindings)_ | Bindings define the creation permissions for this agent runtime. |  | Optional: \{\} <br /> |
+| `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  | Required: \{\} <br /> |
+| `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  |  |
+| `aiProxy` _boolean_ | AiProxy specifies whether the agent runtime should be proxied through the AI proxy. |  |  |
+
+
 #### Binding
 
 
@@ -108,6 +181,7 @@ Binding ...
 
 
 _Appears in:_
+- [AgentRuntimeBindings](#agentruntimebindings)
 - [Bindings](#bindings)
 
 | Field | Description | Default | Validation |
@@ -136,6 +210,24 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `read` _[Binding](#binding) array_ | Read bindings. |  | Optional: \{\} <br /> |
 | `write` _[Binding](#binding) array_ | Write bindings. |  | Optional: \{\} <br /> |
+
+
+#### ClaudeConfig
+
+
+
+ClaudeConfig contains configuration for the Claude CLI runtime.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfig](#agentruntimeconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Claude API key. |  |  |
+| `model` _string_ | Model Name of the model to use. |  |  |
+| `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
 
 
 #### ClusterDrain
@@ -429,6 +521,24 @@ MetricsAggregate
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 
 
+
+
+#### OpenCodeConfig
+
+
+
+OpenCodeConfig contains configuration for the OpenCode CLI runtime.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfig](#agentruntimeconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `endpoint` _string_ | API endpoint for the OpenCode service. |  |  |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a Kubernetes Secret containing the API token for OpenCode. |  |  |
+| `extraArgs` _string array_ | Extra args for advanced or experimental CLI flags. |  |  |
 
 
 #### PipelineGate
