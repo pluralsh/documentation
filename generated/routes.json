@@ -13,11 +13,11 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-08-11T08:06:59.000Z"
+    "lastmod": "2025-10-15T00:53:52.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-04-18T01:44:02.000Z"
+    "lastmod": "2025-10-15T00:53:52.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -119,6 +119,10 @@
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
     "lastmod": "2025-06-09T19:18:57.000Z"
   },
+  "/plural-features/continuous-deployment/sync-hooks": {
+    "relPath": "/plural-features/continuous-deployment/sync-hooks.md",
+    "lastmod": "2025-10-15T11:41:55.083Z"
+  },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
     "lastmod": "2025-07-15T12:44:58.000Z"
@@ -149,7 +153,7 @@
   },
   "/plural-features/k8s-upgrade-assistant/addon-compatibilities": {
     "relPath": "/plural-features/k8s-upgrade-assistant/addon-compatibilities.md",
-    "lastmod": "2025-08-15T02:39:28.000Z"
+    "lastmod": "2025-08-15T02:54:41.000Z"
   },
   "/plural-features/k8s-upgrade-assistant/cluster-drain": {
     "relPath": "/plural-features/k8s-upgrade-assistant/cluster-drain.md",
@@ -225,7 +229,7 @@
   },
   "/plural-features/plural-ai/multi-model-configuration": {
     "relPath": "/plural-features/plural-ai/multi-model-configuration.md",
-    "lastmod": "2025-10-14T19:52:44.000Z"
+    "lastmod": "2025-10-15T00:52:41.000Z"
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
@@ -385,7 +389,7 @@
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-04-18T01:44:02.000Z"
+    "lastmod": "2025-10-15T00:53:52.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
