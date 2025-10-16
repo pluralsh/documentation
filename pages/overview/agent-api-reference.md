@@ -10,6 +10,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 
 ### Resource Types
 - [AgentConfiguration](#agentconfiguration)
+- [AgentRun](#agentrun)
 - [AgentRuntime](#agentruntime)
 - [ClusterDrain](#clusterdrain)
 - [CustomHealth](#customhealth)
@@ -100,6 +101,67 @@ _Appears in:_
 | `valuesConfigMapRef` _[ConfigMapKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#configmapkeyselector-v1-core)_ | ValuesConfigMapRef fetches helm values from a config map in this cluster.<br />Use only one of:<br />	- Values<br />	- ValuesSecretRef<br />	- ValuesConfigMapRef |  | Optional: \{\} <br /> |
 
 
+#### AgentRun
+
+
+
+AgentRun is the Schema for the agentruns API
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `AgentRun` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[AgentRunSpec](#agentrunspec)_ |  |  |  |
+
+
+#### AgentRunPhase
+
+_Underlying type:_ _string_
+
+AgentRunPhase represents the phase of an agent run
+
+_Validation:_
+- Enum: [Pending Running Succeeded Failed Cancelled]
+
+_Appears in:_
+- [AgentRunStatus](#agentrunstatus)
+
+| Field | Description |
+| --- | --- |
+| `Pending` |  |
+| `Running` |  |
+| `Succeeded` |  |
+| `Failed` |  |
+| `Cancelled` |  |
+
+
+#### AgentRunSpec
+
+
+
+AgentRunSpec defines the desired state of AgentRun
+
+
+
+_Appears in:_
+- [AgentRun](#agentrun)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `runtimeRef` _[AgentRuntimeReference](#agentruntimereference)_ |  |  | Required: \{\} <br /> |
+| `prompt` _string_ | Prompt is the task/prompt given to the agent |  | Required: \{\} <br /> |
+| `repository` _string_ | Repository is the git repository the agent will work with |  | Required: \{\} <br /> |
+| `mode` _[AgentRunMode](#agentrunmode)_ | Mode defines how the agent should run (ANALYZE, WRITE) |  | Required: \{\} <br /> |
+| `flowId` _string_ | FlowID is the flow this agent run is associated with (optional) |  | Optional: \{\} <br /> |
+
+
+
+
 #### AgentRuntime
 
 
@@ -151,6 +213,22 @@ _Appears in:_
 | `opencode` _[OpenCodeConfig](#opencodeconfig)_ | Config for OpenCode CLI runtime. |  | Optional: \{\} <br /> |
 
 
+#### AgentRuntimeReference
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRunSpec](#agentrunspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  | Required: \{\} <br /> |
+
+
 #### AgentRuntimeSpec
 
 
@@ -165,10 +243,11 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this AgentRuntime.<br />If not provided, the name from AgentRuntime.ObjectMeta will be used. |  | Optional: \{\} <br /> |
+| `targetNamespace` _string_ |  |  | Required: \{\} <br /> |
 | `type` _[AgentRuntimeType](#agentruntimetype)_ | Type specifies the agent runtime to use for executing the stack.<br />One of CLAUDE, OPENCODE, GEMINI, CUSTOM. |  | Enum: [CLAUDE OPENCODE GEMINI CUSTOM] <br />Required: \{\} <br /> |
 | `bindings` _[AgentRuntimeBindings](#agentruntimebindings)_ | Bindings define the creation permissions for this agent runtime. |  | Optional: \{\} <br /> |
-| `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  | Required: \{\} <br /> |
-| `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  |  |
+| `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
+| `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
 | `aiProxy` _boolean_ | AiProxy specifies whether the agent runtime should be proxied through the AI proxy. |  |  |
 
 
@@ -580,6 +659,8 @@ _Appears in:_
 
 
 
+
+
 #### Progress
 
 
@@ -642,6 +723,7 @@ _Appears in:_
 
 
 _Appears in:_
+- [AgentRunStatus](#agentrunstatus)
 - [VirtualClusterStatus](#virtualclusterstatus)
 
 | Field | Description | Default | Validation |
