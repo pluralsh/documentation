@@ -213,6 +213,8 @@ _Appears in:_
 | `opencode` _[OpenCodeConfig](#opencodeconfig)_ | Config for OpenCode CLI runtime. |  | Optional: \{\} <br /> |
 
 
+
+
 #### AgentRuntimeReference
 
 
@@ -305,6 +307,28 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Claude API key. |  |  |
+| `model` _string_ | Model Name of the model to use. |  |  |
+| `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
+
+
+#### ClaudeConfigRaw
+
+
+
+ClaudeConfigRaw contains configuration for the Claude CLI runtime.
+
+NOTE: Do not embed this struct directly, use ClaudeConfig instead.
+This is only used to read original ClaudeConfig secret data and be
+able to inject it into the pod as env vars.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfigRaw](#agentruntimeconfigraw)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
 | `model` _string_ | Model Name of the model to use. |  |  |
 | `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
 
@@ -615,9 +639,34 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `endpoint` _string_ | API endpoint for the OpenCode service. |  |  |
-| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a Kubernetes Secret containing the API token for OpenCode. |  |  |
-| `extraArgs` _string array_ | Extra args for advanced or experimental CLI flags. |  |  |
+| `provider` _string_ | Provider is the OpenCode provider to use. |  | Enum: [plural openai] <br />Required: \{\} <br /> |
+| `endpoint` _string_ | Endpoint API endpoint for the OpenCode service. |  | Required: \{\} <br /> |
+| `model` _string_ | Model is the LLM model to use. |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to a Kubernetes Secret containing the API token for OpenCode. |  | Required: \{\} <br /> |
+| `extraArgs` _string array_ | ExtraArgs args for advanced or experimental CLI flags.<br />Deprecated: It is being ignored by the agent harness. |  |  |
+
+
+#### OpenCodeConfigRaw
+
+
+
+OpenCodeConfigRaw contains configuration for the OpenCode CLI runtime.
+
+NOTE: Do not embed this struct directly, use OpenCodeConfig instead.
+This is only used to read original OpenCodeConfig secret data and be
+able to inject it into the pod as env vars.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfigRaw](#agentruntimeconfigraw)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `provider` _string_ | Provider is the OpenCode provider to use. |  |  |
+| `endpoint` _string_ | Endpoint API endpoint for the OpenCode service. |  |  |
+| `model` _string_ | Model is the LLM model to use. |  |  |
+| `tokenSecretRef` _string_ | Token is the raw API token for OpenCode. |  |  |
 
 
 #### PipelineGate
