@@ -245,6 +245,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this AgentRuntime.<br />If not provided, the name from AgentRuntime.ObjectMeta will be used. |  | Optional: \{\} <br /> |
+| `default` _boolean_ | Default indicates whether this is the default agent runtime for coding agents. |  | Optional: \{\} <br /> |
 | `targetNamespace` _string_ |  |  | Required: \{\} <br /> |
 | `type` _[AgentRuntimeType](#agentruntimetype)_ | Type specifies the agent runtime to use for executing the stack.<br />One of CLAUDE, OPENCODE, GEMINI, CUSTOM. |  | Enum: [CLAUDE OPENCODE GEMINI CUSTOM] <br />Required: \{\} <br /> |
 | `bindings` _[AgentRuntimeBindings](#agentruntimebindings)_ | Bindings define the creation permissions for this agent runtime. |  | Optional: \{\} <br /> |
