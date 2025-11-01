@@ -79,6 +79,7 @@ _Appears in:_
 | `pipelineGateInterval` _string_ | PipelineGateInterval specifies how frequently the agent checks pipeline gates.<br />Set to "0s" to disable pipeline gate checks. |  |  |
 | `maxConcurrentReconciles` _integer_ | MaxConcurrentReconciles controls the maximum number of concurrent reconcile loops.<br />Higher values can increase throughput at the cost of resource usage. |  |  |
 | `vulnerabilityReportUploadInterval` _string_ | VulnerabilityReportUploadInterval sets how often vulnerability reports are uploaded.<br />Set to "0s" to disable vulnerability report uploads. |  |  |
+| `baseRegistryURL` _string_ | BaseRegistryURL allows overriding the default base registry URL.<br />For stack run jobs, agent run pods, sentinel run jobs. |  |  |
 
 
 #### AgentHelmConfiguration
