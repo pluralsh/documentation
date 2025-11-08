@@ -143,6 +143,11 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'setup', title: 'Setup Plural AI' },
           { path: 'architecture', title: 'Plural AI Architecture' },
+          {
+            path: 'sentinels',
+            title: 'At-Scale Infrastructure Testing with Sentinels',
+          },
+          { path: 'arch-diagram', title: 'Infrastructure Deep Research' },
           { path: 'cost', title: 'Plural AI cost analysis' },
           {
             path: 'multi-model-configuration',
