@@ -72,7 +72,7 @@ spec:
 ```
 
 {% callout severity="info" %}
-To see the full api spec, go here: https://docs.plural.sh/overview/management-api-reference#sentinel
+To see the full api spec, go to our [Management API Docs](https://docs.plural.sh/overview/management-api-reference#sentinel)
 {% /callout %}
 
 What this particular sentinel will do when run is, in parallel:

@@ -147,6 +147,7 @@ export const docsStructure: DocSection[] = [
             path: 'sentinels',
             title: 'At-Scale Infrastructure Testing with Sentinels',
           },
+          { path: 'arch-diagram', title: 'Infrastructure Deep Research' },
           { path: 'cost', title: 'Plural AI cost analysis' },
           {
             path: 'multi-model-configuration',
