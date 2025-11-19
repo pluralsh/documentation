@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-11-03T09:07:35.000Z"
+    "lastmod": "2025-11-18T00:53:40.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -225,11 +225,11 @@
   },
   "/plural-features/plural-ai/sentinels": {
     "relPath": "/plural-features/plural-ai/sentinels.md",
-    "lastmod": "2025-11-08T15:56:41.000Z"
+    "lastmod": "2025-11-08T16:45:39.000Z"
   },
   "/plural-features/plural-ai/arch-diagram": {
     "relPath": "/plural-features/plural-ai/arch-diagram.md",
-    "lastmod": "2025-11-08T16:28:24.261Z"
+    "lastmod": "2025-11-08T16:45:39.000Z"
   },
   "/plural-features/plural-ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
