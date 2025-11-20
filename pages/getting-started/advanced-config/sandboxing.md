@@ -91,19 +91,16 @@ A starter values file for configuring images for your console in the management 
 
 ```yaml
 # configure main console image
-image:
-  repository: your.enterprise.registry/pluralsh/console
-  tag: 0.8.7 # only if you want to pin a tag (not recommended as it's set by the chart already)
-
-# configure console operator image
-controller:
-  controllerManager:
-    manager:
-      image:
-        repository: your.enterprise.registry/pluralsh/console
+global:
+  registry: your.enterprise.registry
 
 # configure kas image
 kas:
+  agent:
+    proxy:
+      image:
+        repository: your.enteprise.registry/some/nginx
+
   image:
     repository: your.enterprise.registry/pluralsh/kas
 ```
@@ -122,6 +119,23 @@ agentk:
 ```
 
 For more advanced configuration, we definitely recommend consulting the charts directly, they're both open source at https://github.com/pluralsh/console and https://github.com/pluralsh/deployment-operator.
+
+## Disable cert-manager based TLS
+
+Our chart defaults to including TLS reconciled by cert-manager, but if you use a cloud-integrated cert management tool like Amazon Certificate Manager, it is unnecessary and could cause double-encryption.  Disabling is a simple values override, done with:
+
+```yaml
+# main plural ingress
+ingress:
+  tls:
+    enabled: false
+
+# disable for KAS ingress too
+kas:
+  ingress:
+    tls:
+      enabled: false
+```
 
 ## Configuring Agent Helm Values
 
