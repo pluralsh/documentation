@@ -36,6 +36,10 @@ export const docsStructure: DocSection[] = [
             path: 'plural-cloud',
             title: 'Host Your Plural Console with Plural Cloud',
           },
+          {
+            path: 'add-a-cluster',
+            title: 'Add A Cluster To Plural',
+          },
         ],
       },
       {
@@ -85,6 +89,16 @@ export const docsStructure: DocSection[] = [
           {
             path: 'resource-application-logic',
             title: 'Resource Application Logic',
+          },
+          {
+            path: 'service-templating',
+            title: 'Service templating',
+            sections: [
+              {
+                path: 'supporting-liquid-filters',
+                title: 'Supporting Liquid Filters',
+              },
+            ],
           },
           { path: 'lua', title: 'Dynamic Helm Configuration with Lua Scripts' },
           { path: 'global-service', title: 'Global services' },
@@ -195,16 +209,6 @@ export const docsStructure: DocSection[] = [
           { path: 'testing', title: 'PR automation testing' },
           { path: 'pipelines', title: 'PR automation pipelines' },
           { path: 'filters', title: 'Liquid Filters in PR Automation' },
-        ],
-      },
-      {
-        path: 'service-templating',
-        title: 'Service templating',
-        sections: [
-          {
-            path: 'supporting-liquid-filters',
-            title: 'Supporting Liquid Filters',
-          },
         ],
       },
       {
