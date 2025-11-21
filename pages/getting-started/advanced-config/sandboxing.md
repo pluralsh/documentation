@@ -38,7 +38,122 @@ To set it up, you need to configure a few env vars as well, in particular:
 
 To simplify permission management, you can also configure specific emails to automatically be made admins via another env var: `CONSOLE_ADMIN_EMAILS`. It should be a comma seperated list, and on login we'll provision that user to be an admin w/in your Plural console instance. We'd recommend only setting this for a small set of users, then using group bindings for permissions from then on
 
-## Self-Host Git Repos
+## Sandboxed Compatibility Tables
+
+We also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
+
+```
+CONSOLE_AIRGAP: "true"
+```
+
+This is a suitable replacement if you're ok with some data staleness and don't have a feasible alternative to vendor the data into your enterprise git source control nor can permit the github egress traffic.
+
+## Customizing Docker Registries
+
+Lots of enterprises have strict requirements around the docker registries they use, or pull caches that whitelist a limited set of registries. The important images for setting up your own instance are:
+
+Plural maintained images:
+
+```
+Management Cluster:
+- ghcr.io/pluralsh/console
+- ghcr.io/pluralsh/kas
+- ghcr.io/pluralsh/deployment-controller
+- ghcr.io/pluralsh/git-server (optional if you want to use our vendored git server)
+```
+
+```
+Agent:
+- ghcr.io/pluralsh/agentk
+- ghcr.io/pluralsh/deployment-operator
+```
+
+```
+Third party images used by our chart (these are often already vendored in an enterprise environment):
+- ghcr.io/pluralsh/registry/bitnami/redis:7.4.2-debian-12-r5
+- ghcr.io/pluralsh/registry/nginx:stable-alpine3.20-slim (can be any nginx image, ours is not customized)
+- docker.io/kubernetesui/dashboard-api - this is also available via `ghcr.io/pluralsh/registry/kubernetesui/dashboard-api`
+```
+
+If you want to deterministically extract the images from our charts, you can also just use yq, like so:
+
+```sh
+git clone https://github.com/pluralsh/console.git
+cd console
+helm template charts/console | yq '..|.image? | select(.)' | sort -u
+
+git clone https://github.com/pluralsh/deployment-operator.git
+cd deployment-operator
+helm template charts/console | yq '..|.image? | select(.)' | sort -u
+```
+
+If you plan to utilize Stacks, Sentinels or our async coding agent harness, there are a few other images that are utilized by our deployment-operator:
+
+```
+- ghcr.io/pluralsh/harness
+- ghcr.io/pluralsh/sentinel-harness
+- ghcr.io/pluralsh/agent-harness
+```
+
+You can see them all [here](https://github.com/orgs/pluralsh/packages?repo_name=deployment-operator).
+
+The product experience of all these allow bring-your-own image, but if you configure a pull-through cache for these images or vendor them consistently, you can have Plural auto-wire it against an internal registry with the following CRD:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: AgentConfiguration
+metadata:
+  name: global
+  namespace: plrl-deploy-operator
+spec:
+  baseRegistryURL: your.enterprise.registry
+```
+
+See more about this resource [here](/overview/agent-api-reference#agentconfigurationspec)
+
+{% callout severity="info" %}
+All of these images follow semver, and are also published to `gcr.io` and `docker.io` as well for convenience, in the event that either of those are eligible for internal pull-through caches.  The redis instance is not meaningfully customized and any bitnami or equivalent redis container image can theoretically work there.
+{% /callout %}
+
+## Docker Repository Overrides for Your management cluster
+
+For the main Plural helm chart (https://pluralsh.github.io/console), configuring your *management cluster*, you'll want to use the following yaml overlay:
+
+```yaml
+# configure main console image
+global:
+  registry: your.enterprise.registry
+
+# configure kas image
+kas:
+  agent:
+    proxy:
+      image:
+        repository: your.enteprise.registry/some/nginx
+
+  image:
+    repository: your.enterprise.registry/pluralsh/kas
+
+  redis:
+    registry: your.enterprise.registry
+    repository: redis
+
+# if you need to enable the internal git server
+gitServer:
+  repository: your.enterprise.registry/git-server
+
+dashboard:
+  api:
+    image:
+      repository: your.enterprise.registry/kubernetesui/dashboard
+```
+
+Agent helm configuration is covered in a few sections below.
+
+For more advanced configuration, we definitely recommend consulting the charts directly, they're both open source at https://github.com/pluralsh/console and https://github.com/pluralsh/deployment-operator.
+
+
+### Self-Host Git Repos (management cluster)
 
 If your enterprise cannot accept external communication to github, we can provide a fully self-hosted git server built with [soft-serve](https://github.com/charmbracelet/soft-serve) with the required Plural repos pre-cloned at a compatible version for your instance of the console.  This can be easily enabled via helm with the following values:
 
@@ -59,68 +174,7 @@ If you want to vendor the repositories entirely, the upstream repos are here:
 - https://github.com/pluralsh/deployment-operator
 - https://github.com/pluralsh/scaffolds
 
-## Sandboxed Compatibility Tables
-
-We also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
-
-```
-CONSOLE_AIRGAP: "true"
-```
-
-This is a suitable replacement if you're ok with some data staleness and don't have a feasible alternative to vendor the data into your enterprise git source control nor can permit the github egress traffic.
-
-## Customizing Docker Registries
-
-Lots of enterprises have strict requirements around the docker registries they use, or pull caches that whitelist a limited set of registries. The important images for setting up your own instance are:
-
-- ghcr.io/pluralsh/console
-- ghcr.io/pluralsh/kas
-- ghcr.io/pluralsh/deployment-controller
-- ghcr.io/pluralsh/deployment-operator
-- ghcr.io/pluralsh/agentk
-- ghcr.io/pluralsh/git-server (optional if you want to use our vendored git server)
-- ghcr.io/pluralsh/registry/bitnami/redis:7.4.2-debian-12-r5
-
-{% callout severity="info" %}
-All of these images follow semver, and are also published to `gcr.io` and `docker.io` as well for convenience, in the event that either of those are eligible for internal pull-through caches.  The redis instance is not meaningfully customized and any bitnami or equivalent redis container image can theoretically work there.
-{% /callout %}
-
-The first three will be configured in the main console chart and are installed once in your management cluster, the latter two are needed for your deployment agent pod, and require a bit more advanced configuration to manage them in bulk.
-
-A starter values file for configuring images for your console in the management cluster would be:
-
-```yaml
-# configure main console image
-global:
-  registry: your.enterprise.registry
-
-# configure kas image
-kas:
-  agent:
-    proxy:
-      image:
-        repository: your.enteprise.registry/some/nginx
-
-  image:
-    repository: your.enterprise.registry/pluralsh/kas
-```
-
-And for the agent it would be:
-
-```yaml
-# configure main agent
-image:
-  repository: your.enterprise.registry/pluralsh/deployment-operator
-
-# configure agentk (if this isn't pullable kubernetes dashboarding functionality will break but deployments can still proceed)
-agentk:
-  image:
-    repository: your.enterprise.registry/pluralsh/agentk
-```
-
-For more advanced configuration, we definitely recommend consulting the charts directly, they're both open source at https://github.com/pluralsh/console and https://github.com/pluralsh/deployment-operator.
-
-## Disable cert-manager based TLS
+### Disable cert-manager based TLS (management cluster)
 
 Our chart defaults to including TLS reconciled by cert-manager, but if you use a cloud-integrated cert management tool like Amazon Certificate Manager, it is unnecessary and could cause double-encryption.  Disabling is a simple values override, done with:
 
@@ -137,13 +191,26 @@ kas:
       enabled: false
 ```
 
-## Configuring Agent Helm Values
+## Configuring Agent Helm Values (Workload Clusters)
 
-Like we said, the main console deployment is pretty easy to configure, but the agents need to be handled specially since they need to be configured in bulk. We provide a number of utilities to make reconfiguration scalable.
+Agent configuration must to be handled specially since they need to be configured in bulk. We provide a number of utilities to make reconfiguration scalable.
 
-First, you'll first want to use our agent settings to configure your helm updates for agents globally, done at `/cd/settings/agents`. You should see a screen like the following that allows you to edit the helm values for agent charts managed through Plural:
+First, you'll first want to use our agent settings to configure your helm updates for agents globally, done at `{your-console-fqdn}/cd/settings/agents`. You should see a screen like the following that allows you to edit the helm values for agent charts managed through Plural:
 
 ![](/assets/deployments/agent-update.png)
+
+This is the yaml blob that is most relevant:
+
+```yaml
+# configure main agent
+image:
+  repository: your.enterprise.registry/pluralsh/deployment-operator
+
+# configure agentk (if this isn't pullable kubernetes dashboarding functionality will break but deployments can still proceed)
+agentk:
+  image:
+    repository: your.enterprise.registry/pluralsh/agentk
+```
 
 This can also be set via CRD using:
 
