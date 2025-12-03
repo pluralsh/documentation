@@ -23,7 +23,7 @@ There are two options, `shared` and `dedicated`.
 * A `shared` instance can be created on a free trial but has a hard cap on 10 clusters to use to avoid overloading other tenants.  
 * `dedicated` cloud instances get a dedicated k8s cluster and database, and are built to scale effectively infinitely.  To use a `dedicated` instance, an enterprise plan is required, so please contact sales and we can get you set up as quickly as possible if that fits your use-case.
 
-The UI should guide you through the entire process, once your console is up, you'll be greated with a modal explaining how to finalize the onboarding.  You'll need to still create a small management cluster in your cloud to host the Plural operator and any cloud-specific secrets.  This is to ensure your cloud is fully secured and allow you to use Plural Cloud without exchanging root-level cloud permissions.  You'll do that by simply running:
+The UI should guide you through the entire process, once your console is up, you'll be greeted with a modal explaining how to finalize the onboarding.  You'll need to still create a small management cluster in your cloud to host the Plural operator and any cloud-specific secrets.  This is to ensure your cloud is fully secured and allow you to use Plural Cloud without exchanging root-level cloud permissions.  You'll do that by simply running:
 
 ```sh
 plural up --cloud
