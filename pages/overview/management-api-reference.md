@@ -1510,6 +1510,7 @@ _Appears in:_
 - [AiApprovalConfiguration](#aiapprovalconfiguration)
 - [InfrastructureStackSpec](#infrastructurestackspec)
 - [PrAutomationCreateConfiguration](#prautomationcreateconfiguration)
+- [PrAutomationSpec](#prautomationspec)
 - [SentinelCheckIntegrationTestConfiguration](#sentinelcheckintegrationtestconfiguration)
 - [SentinelSpec](#sentinelspec)
 - [ServiceHelm](#servicehelm)
@@ -1608,7 +1609,7 @@ _Appears in:_
 | `interval` _string_ | Interval specifies the reconciliation interval for the global service.<br />This controls how frequently the controller checks and updates the service deployments<br />across target clusters. Defaults to 10 minutes if not specified. |  | Optional: \{\} <br /> |
 | `cascade` _[Cascade](#cascade)_ | Cascade defines the deletion behavior for resources owned by this global service.<br />This controls whether resources are removed from Plural Console only, target clusters only,<br />or both during service deletion operations. |  | Optional: \{\} <br /> |
 | `context` _[TemplateContext](#templatecontext)_ | Context provides data for dynamic template overrides of service deployment properties<br />such as Helm chart versions, values files, or other configuration parameters.<br />This enables environment-specific customization while maintaining a single service definition. |  | Optional: \{\} <br /> |
-| `distro` _[ClusterDistro](#clusterdistro)_ | Distro specifies the Kubernetes distribution type for target cluster selection.<br />This allows targeting services to specific cluster types that may have<br />distribution-specific requirements or optimizations. |  | Enum: [GENERIC EKS AKS GKE RKE K3S] <br />Optional: \{\} <br /> |
+| `distro` _[ClusterDistro](#clusterdistro)_ | Distro specifies the Kubernetes distribution type for target cluster selection.<br />This allows targeting services to specific cluster types that may have<br />distribution-specific requirements or optimizations. |  | Enum: [GENERIC EKS AKS GKE RKE K3S OPENSHIFT] <br />Optional: \{\} <br /> |
 | `mgmt` _boolean_ | Mgmt indicates whether to include management clusters in the target cluster set.<br />Management clusters typically host the Plural Console and operators, and may<br />require special consideration for service deployments. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef references an existing ServiceDeployment to replicate across target clusters.<br />This allows leveraging an existing service definition as a template for global deployment. |  | Optional: \{\} <br /> |
 | `providerRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProviderRef restricts deployment to clusters associated with a specific cloud provider.<br />This enables provider-specific service deployments that may require particular<br />cloud integrations or provider-native services.<br />Deprecated.<br />Do not use. |  | Optional: \{\} <br /> |
@@ -3273,6 +3274,24 @@ _Appears in:_
 | `folders` _string array_ | Entire folders to delete. |  | Optional: \{\} <br /> |
 
 
+#### PrAutomationLuaConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationSpec](#prautomationspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `external` _boolean_ | Whether the lua script is sourced from an external git repo bound to this automation |  | Optional: \{\} <br /> |
+| `script` _string_ | File of a flat script to use |  | Optional: \{\} <br /> |
+| `folder` _string_ | Folder with lua library code and scripts to use |  | Optional: \{\} <br /> |
+
+
 #### PrAutomationSecretConfiguration
 
 
@@ -3338,6 +3357,7 @@ _Appears in:_
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references a specific cluster that this PR operates on. |  | Optional: \{\} <br /> |
 | `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ScmConnectionRef references the SCM connection to use for authentication when creating pull requests. |  | Required: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository resource this automation uses. |  | Optional: \{\} <br /> |
+| `git` _[GitRef](#gitref)_ | Git location to source external files from.  If `creates.git` is also specified, the results will be merged. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef references a specific service that this PR automation acts upon. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references the project this automation belongs to, enabling<br />project-scoped organization and access control. |  | Optional: \{\} <br /> |
 | `catalogRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | CatalogRef references the catalog this automation belongs to for<br />organizational purposes and discoverability in the service catalog. |  | Optional: \{\} <br /> |
@@ -3348,6 +3368,7 @@ _Appears in:_
 | `creates` _[PrAutomationCreateConfiguration](#prautomationcreateconfiguration)_ | Creates defines specifications for generating new files from templates,<br />allowing the automation to add new configuration files to the repository. |  | Optional: \{\} <br /> |
 | `updates` _[PrAutomationUpdateConfiguration](#prautomationupdateconfiguration)_ | Updates specifies how to modify existing files using regex replacements<br />or YAML overlays, enabling precise changes to infrastructure code. |  | Optional: \{\} <br /> |
 | `deletes` _[PrAutomationDeleteConfiguration](#prautomationdeleteconfiguration)_ | Deletes specifies files and folders to remove from the repository as part<br />of the PR, useful for cleanup or migration scenarios. |  | Optional: \{\} <br /> |
+| `lua` _[PrAutomationLuaConfiguration](#prautomationluaconfiguration)_ | Lua specification to source lua scripts to preprocess the PR automation. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 | `labels` _string array_ | Labels to apply to all created PRs from this pr automation |  | Optional: \{\} <br /> |
 
@@ -3780,7 +3801,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name is a human-readable name of the ScmConnection. |  | Required: \{\} <br /> |
-| `type` _[ScmType](#scmtype)_ | Type is the name of the scm service for the ScmConnection.<br />One of (ScmType): [GITHUB, GITLAB, AZURE_DEVOPS, BITBUCKET] |  | Enum: [GITHUB GITLAB BITBUCKET AZURE_DEVOPS] <br />Required: \{\} <br />Type: string <br /> |
+| `type` _[ScmType](#scmtype)_ | Type is the name of the scm service for the ScmConnection.<br />One of (ScmType): [GITHUB, GITLAB, AZURE_DEVOPS, BITBUCKET, BITBUCKET_DATACENTER] |  | Enum: [GITHUB GITLAB BITBUCKET AZURE_DEVOPS BITBUCKET_DATACENTER] <br />Required: \{\} <br />Type: string <br /> |
 | `tokenSecretRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | A secret containing this access token you will use, stored in the `token` data field. |  | Optional: \{\} <br /> |
 | `username` _string_ | Username ... |  | Optional: \{\} <br /> |
 | `baseUrl` _string_ | BaseUrl is a base URL for Git clones for self-hosted versions. |  | Optional: \{\} <br /> |
@@ -4205,7 +4226,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `path` _string_ | Path to the kustomization file to use. |  |  |
+| `path` _string_ | The folder your base kustomization file lives within relative to your main git folder path.  It can be a subdirectory. |  |  |
 | `enableHelm` _boolean_ | EnableHelm indicates whether to enable Helm for this Kustomize deployment.<br />Used for inflating Helm charts. |  | Optional: \{\} <br /> |
 
 
