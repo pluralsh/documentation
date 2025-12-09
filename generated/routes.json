@@ -13,11 +13,11 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-10-15T00:53:52.000Z"
+    "lastmod": "2025-11-03T09:07:35.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-10-15T00:53:52.000Z"
+    "lastmod": "2025-11-03T09:07:35.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -121,7 +121,7 @@
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
-    "lastmod": "2025-10-15T13:54:02.028Z"
+    "lastmod": "2025-10-15T14:09:53.000Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -389,7 +389,7 @@
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-10-15T00:53:52.000Z"
+    "lastmod": "2025-11-03T09:07:35.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",

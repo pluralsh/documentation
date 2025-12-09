@@ -111,6 +111,10 @@ annotation. Multiple policies can be comma-separated.
 Use `hook-succeeded` and/or `hook-failed` to delete the resource after it completes successfully or fails, respectively.
 If no delete policy is set, the resource will be kept.
 
+{% callout severity="info" %}
+Only jobs and pods are automatically deleted. Other resources will need to be deleted manually or via other automation.
+{% /callout %}
+
 {% callout severity="warning" %}
 When a manifest of a hook is updated, the operator will reapply the resource even if it has already completed.
 {% /callout %}
