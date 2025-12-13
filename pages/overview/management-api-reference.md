@@ -1523,6 +1523,7 @@ _Appears in:_
 | `folder` _string_ | Folder is the folder in the Git repository where the manifests are located. |  | Required: \{\} <br /> |
 | `ref` _string_ | Ref is the Git reference (branch, tag, or commit) to use. |  | Required: \{\} <br /> |
 | `files` _string array_ | Optional files to add to the manifests for this service |  | Optional: \{\} <br /> |
+| `url` _string_ | URL of the Git repository. |  |  |
 
 
 #### GitRepository
@@ -1933,8 +1934,9 @@ _Appears in:_
 | `name` _string_ | Name of this stack.<br />If not provided, the name from InfrastructureStack.ObjectMeta will be used. |  | Optional: \{\} <br /> |
 | `type` _[StackType](#stacktype)_ | Type specifies the IaC tool to use for executing the stack.<br />One of TERRAFORM, ANSIBLE, CUSTOM. |  | Enum: [TERRAFORM ANSIBLE CUSTOM] <br />Required: \{\} <br /> |
 | `interval` _string_ | Interval specifies the interval at which the stack will be reconciled, default is 5m |  | Optional: \{\} <br /> |
-| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository containing the IaC source code. |  | Required: \{\} <br /> |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository containing the IaC source code. Leave empty to use git:url instead. |  | Required: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this stack will be executed. |  | Required: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references a project this stack belongs to.<br />If not provided, it will use the default project. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | Git contains reference within the repository where the IaC manifests are located. |  |  |
 | `manageState` _boolean_ | ManageState indicates whether Plural should manage the Terraform state of this stack. |  | Optional: \{\} <br /> |
@@ -2638,6 +2640,7 @@ _Appears in:_
 | `repository` _string_ | Repository overrides the repository slug for the referenced PR automation.<br />Use this when you want to target a different repository than the one<br />configured in the PR automation template. |  | Optional: \{\} <br /> |
 | `branchTemplate` _string_ | BranchTemplate provides a template for generating branch names.<br />Use $value to inject the observed value into the branch name.<br />Example: "update-chart-to-$value" becomes "update-chart-to-1.2.3". |  | Optional: \{\} <br /> |
 | `context` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Context is a templated context that becomes the input for the PR automation.<br />Use $value to interpolate the observed value into the context data.<br />This context is passed to the PR automation for template rendering and file modifications. |  | Optional: \{\} <br /> |
+| `actor` _string_ | Actor specifies the actor to use for the created branch. Should be a user email in Plural. |  | Optional: \{\} <br /> |
 
 
 #### ObserverSpec
@@ -3019,6 +3022,7 @@ _Appears in:_
 | `name` _string_ | Name of this gate. |  | Required: \{\} <br />Type: string <br /> |
 | `type` _[GateType](#gatetype)_ | Type of gate.<br />One of:<br />- APPROVAL (requires human approval)<br />- WINDOW (time-based constraints),<br />- JOB (runs custom validation before allowing promotion).<br />- SENTINEL (runs a Plural Sentinel before allowing promotion). |  | Enum: [APPROVAL WINDOW JOB SENTINEL] <br />Required: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef specifies the target cluster where this gate will execute. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `sentinelRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | SentinelRef specifies the sentinel to execute for the SENTINEL gate. |  | Optional: \{\} <br /> |
 | `spec` _[GateSpec](#gatespec)_ | Spec contains detailed configuration for complex gate types like JOB gates. |  | Optional: \{\} <br /> |
 
@@ -3274,6 +3278,25 @@ _Appears in:_
 | `folders` _string array_ | Entire folders to delete. |  | Optional: \{\} <br /> |
 
 
+#### PrAutomationHelmVendorConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationVendorConfiguration](#prautomationvendorconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | The url of the helm repository to use |  | Required: \{\} <br /> |
+| `chart` _string_ | The name of the chart to use |  | Required: \{\} <br /> |
+| `version` _string_ | The version of the chart to use |  | Required: \{\} <br /> |
+| `destination` _string_ | The directory destination to place the chart in |  | Required: \{\} <br /> |
+
+
 #### PrAutomationLuaConfiguration
 
 
@@ -3355,6 +3378,7 @@ _Appears in:_
 | `patch` _boolean_ | Patch determines whether to generate a patch for this PR instead of<br />creating a full pull request. |  | Optional: \{\} <br /> |
 | `branchPrefix` _string_ | BranchPrefix specifies a prefix to use for the branch name, will be appended with a random string for deduplication. |  | Optional: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references a specific cluster that this PR operates on. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ScmConnectionRef references the SCM connection to use for authentication when creating pull requests. |  | Required: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository resource this automation uses. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | Git location to source external files from.  If `creates.git` is also specified, the results will be merged. |  | Optional: \{\} <br /> |
@@ -3369,6 +3393,7 @@ _Appears in:_
 | `updates` _[PrAutomationUpdateConfiguration](#prautomationupdateconfiguration)_ | Updates specifies how to modify existing files using regex replacements<br />or YAML overlays, enabling precise changes to infrastructure code. |  | Optional: \{\} <br /> |
 | `deletes` _[PrAutomationDeleteConfiguration](#prautomationdeleteconfiguration)_ | Deletes specifies files and folders to remove from the repository as part<br />of the PR, useful for cleanup or migration scenarios. |  | Optional: \{\} <br /> |
 | `lua` _[PrAutomationLuaConfiguration](#prautomationluaconfiguration)_ | Lua specification to source lua scripts to preprocess the PR automation. |  | Optional: \{\} <br /> |
+| `vendor` _[PrAutomationVendorConfiguration](#prautomationvendorconfiguration)_ | Software vendoring logic to perform in this PR |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 | `labels` _string array_ | Labels to apply to all created PRs from this pr automation |  | Optional: \{\} <br /> |
 
@@ -3470,6 +3495,22 @@ _Appears in:_
 | `regexes` _string array_ | Regexes to apply on each file. |  | Optional: \{\} <br /> |
 | `replaceTemplate` _string_ | ReplaceTemplate is a template to use when replacing a regex. |  | Optional: \{\} <br /> |
 | `yq` _string_ | Yq (unused so far) |  | Optional: \{\} <br /> |
+
+
+#### PrAutomationVendorConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationSpec](#prautomationspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `helm` _[PrAutomationHelmVendorConfiguration](#prautomationhelmvendorconfiguration)_ | Specification for vendoring a helm chart |  | Optional: \{\} <br /> |
 
 
 #### PrConfirmationChecklist
@@ -3766,6 +3807,7 @@ _Appears in:_
 | `regex` _string_ | Regex specifies a regular expression pattern for filtering events based on content.<br />This can be used to filter events by URLs, resource names, error messages, or any<br />other textual content within the event data. Use standard regex syntax. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef filters events to only those associated with a specific service deployment. |  | Optional: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef filters events to only those associated with a specific cluster. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `pipelineRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | PipelineRef filters events to only those associated with a specific pipeline. |  | Optional: \{\} <br /> |
 
 
@@ -4253,7 +4295,8 @@ _Appears in:_
 | `helm` _[ServiceHelm](#servicehelm)_ | Helm configuration for deploying Helm charts, including values and repository settings. |  | Optional: \{\} <br /> |
 | `syncConfig` _[SyncConfigAttributes](#syncconfigattributes)_ | SyncConfig contains advanced configuration for how manifests are synchronized to the cluster. |  | Optional: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository CRD containing the service source code. |  | Optional: \{\} <br /> |
-| `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this service will be deployed. |  | Required: \{\} <br /> |
+| `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this service will be deployed. Leave it as an empty struct to use the cluster field instead. |  | Required: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `configurationRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | ConfigurationRef is a secret reference containing service configuration for templating. |  | Optional: \{\} <br /> |
 | `flowRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | FlowRef provides contextual linkage to a broader application Flow this service belongs within. |  | Optional: \{\} <br /> |
 | `configuration` _object (keys:string, values:string)_ | Configuration contains non-secret key-value pairs for lightweight templating of manifests. |  | Optional: \{\} <br /> |
