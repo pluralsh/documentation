@@ -13,11 +13,11 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-11-21T08:11:25.000Z"
+    "lastmod": "2025-12-15T08:09:57.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-11-03T09:07:35.000Z"
+    "lastmod": "2025-11-26T09:01:03.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -41,7 +41,7 @@
   },
   "/getting-started/first-steps/add-a-cluster": {
     "relPath": "/getting-started/first-steps/add-a-cluster.md",
-    "lastmod": "2025-11-21T23:29:53.000Z"
+    "lastmod": "2025-11-21T23:34:41.000Z"
   },
   "/getting-started/how-to-use": {
     "relPath": "/getting-started/how-to-use/index.md",
@@ -49,7 +49,7 @@
   },
   "/getting-started/how-to-use/mgmt-cluster": {
     "relPath": "/getting-started/how-to-use/mgmt-cluster.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-12-03T21:39:43.000Z"
   },
   "/getting-started/how-to-use/rbac": {
     "relPath": "/getting-started/how-to-use/rbac.md",
@@ -93,7 +93,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-11-21T23:29:53.000Z"
+    "lastmod": "2025-11-21T23:34:41.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -125,15 +125,15 @@
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
-    "lastmod": "2025-10-15T14:09:53.000Z"
+    "lastmod": "2025-12-09T11:18:11.000Z"
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2025-12-15T16:45:09.147Z"
+    "lastmod": "2025-12-19T10:52:07.039Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-12-15T16:45:09.164Z"
+    "lastmod": "2025-12-19T10:52:07.055Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -145,7 +145,7 @@
   },
   "/plural-features/continuous-deployment/observer": {
     "relPath": "/plural-features/continuous-deployment/observer.md",
-    "lastmod": "2025-05-10T04:29:16.000Z"
+    "lastmod": "2025-12-15T20:59:31.000Z"
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
@@ -289,7 +289,7 @@
   },
   "/plural-features/observability/logging": {
     "relPath": "/plural-features/observability/logging.md",
-    "lastmod": "2025-04-08T15:54:07.000Z"
+    "lastmod": "2025-12-03T21:39:43.000Z"
   },
   "/plural-features/observability/cost": {
     "relPath": "/plural-features/observability/cost.md",
@@ -321,7 +321,7 @@
   },
   "/plural-features/pr-automation/lua": {
     "relPath": "/plural-features/pr-automation/lua.md",
-    "lastmod": "2025-12-15T16:45:09.784Z"
+    "lastmod": "2025-12-15T20:59:31.000Z"
   },
   "/plural-features/pr-automation/pipelines": {
     "relPath": "/plural-features/pr-automation/pipelines.md",
@@ -405,7 +405,7 @@
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-11-03T09:07:35.000Z"
+    "lastmod": "2025-11-26T09:01:03.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
@@ -441,7 +441,7 @@
   },
   "/how-to/set-up/mgmt-cluster": {
     "relPath": "/getting-started/how-to-use/mgmt-cluster.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2025-12-03T21:39:43.000Z"
   },
   "/how-to/set-up/rbac": {
     "relPath": "/getting-started/how-to-use/rbac.md",
@@ -477,7 +477,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-11-21T23:29:53.000Z"
+    "lastmod": "2025-11-21T23:34:41.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
