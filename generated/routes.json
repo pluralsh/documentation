@@ -13,7 +13,7 @@
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-11-03T09:07:35.000Z"
+    "lastmod": "2025-11-21T08:11:25.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
@@ -38,6 +38,10 @@
   "/getting-started/first-steps/plural-cloud": {
     "relPath": "/getting-started/first-steps/plural-cloud.md",
     "lastmod": "2025-07-14T15:36:50.000Z"
+  },
+  "/getting-started/first-steps/add-a-cluster": {
+    "relPath": "/getting-started/first-steps/add-a-cluster.md",
+    "lastmod": "2025-11-21T23:29:53.000Z"
   },
   "/getting-started/how-to-use": {
     "relPath": "/getting-started/how-to-use/index.md",
@@ -89,7 +93,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-05-14T21:43:40.000Z"
+    "lastmod": "2025-11-21T23:29:53.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -121,7 +125,15 @@
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
-    "lastmod": "2025-12-09T11:18:11.000Z"
+    "lastmod": "2025-10-15T14:09:53.000Z"
+  },
+  "/plural-features/continuous-deployment/service-templating": {
+    "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
+    "lastmod": "2025-12-15T16:45:09.147Z"
+  },
+  "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
+    "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
+    "lastmod": "2025-12-15T16:45:09.164Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -223,6 +235,14 @@
     "relPath": "/plural-features/plural-ai/architecture.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/plural-ai/sentinels": {
+    "relPath": "/plural-features/plural-ai/sentinels.md",
+    "lastmod": "2025-11-08T16:45:39.000Z"
+  },
+  "/plural-features/plural-ai/arch-diagram": {
+    "relPath": "/plural-features/plural-ai/arch-diagram.md",
+    "lastmod": "2025-11-08T16:45:39.000Z"
+  },
   "/plural-features/plural-ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -299,6 +319,10 @@
     "relPath": "/plural-features/pr-automation/testing.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/pr-automation/lua": {
+    "relPath": "/plural-features/pr-automation/lua.md",
+    "lastmod": "2025-12-15T16:45:09.784Z"
+  },
   "/plural-features/pr-automation/pipelines": {
     "relPath": "/plural-features/pr-automation/pipelines.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -306,14 +330,6 @@
   "/plural-features/pr-automation/filters": {
     "relPath": "/plural-features/pr-automation/filters.md",
     "lastmod": "2025-05-19T07:10:18.000Z"
-  },
-  "/plural-features/service-templating": {
-    "relPath": "/plural-features/service-templating/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
-  },
-  "/plural-features/service-templating/supporting-liquid-filters": {
-    "relPath": "/plural-features/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-06-10T07:40:44.000Z"
   },
   "/plural-features/projects-and-multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
@@ -461,7 +477,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-05-14T21:43:40.000Z"
+    "lastmod": "2025-11-21T23:29:53.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",

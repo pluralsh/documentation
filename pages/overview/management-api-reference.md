@@ -24,6 +24,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [GeneratedSecret](#generatedsecret)
 - [GitRepository](#gitrepository)
 - [GlobalService](#globalservice)
+- [Group](#group)
 - [HelmRepository](#helmrepository)
 - [InfrastructureStack](#infrastructurestack)
 - [MCPServer](#mcpserver)
@@ -1509,6 +1510,8 @@ _Appears in:_
 - [AiApprovalConfiguration](#aiapprovalconfiguration)
 - [InfrastructureStackSpec](#infrastructurestackspec)
 - [PrAutomationCreateConfiguration](#prautomationcreateconfiguration)
+- [PrAutomationSpec](#prautomationspec)
+- [SentinelCheckIntegrationTestConfiguration](#sentinelcheckintegrationtestconfiguration)
 - [SentinelSpec](#sentinelspec)
 - [ServiceHelm](#servicehelm)
 - [ServiceSpec](#servicespec)
@@ -1520,6 +1523,7 @@ _Appears in:_
 | `folder` _string_ | Folder is the folder in the Git repository where the manifests are located. |  | Required: \{\} <br /> |
 | `ref` _string_ | Ref is the Git reference (branch, tag, or commit) to use. |  | Required: \{\} <br /> |
 | `files` _string array_ | Optional files to add to the manifests for this service |  | Optional: \{\} <br /> |
+| `url` _string_ | URL of the Git repository. |  |  |
 
 
 #### GitRepository
@@ -1606,13 +1610,14 @@ _Appears in:_
 | `interval` _string_ | Interval specifies the reconciliation interval for the global service.<br />This controls how frequently the controller checks and updates the service deployments<br />across target clusters. Defaults to 10 minutes if not specified. |  | Optional: \{\} <br /> |
 | `cascade` _[Cascade](#cascade)_ | Cascade defines the deletion behavior for resources owned by this global service.<br />This controls whether resources are removed from Plural Console only, target clusters only,<br />or both during service deletion operations. |  | Optional: \{\} <br /> |
 | `context` _[TemplateContext](#templatecontext)_ | Context provides data for dynamic template overrides of service deployment properties<br />such as Helm chart versions, values files, or other configuration parameters.<br />This enables environment-specific customization while maintaining a single service definition. |  | Optional: \{\} <br /> |
-| `distro` _[ClusterDistro](#clusterdistro)_ | Distro specifies the Kubernetes distribution type for target cluster selection.<br />This allows targeting services to specific cluster types that may have<br />distribution-specific requirements or optimizations. |  | Enum: [GENERIC EKS AKS GKE RKE K3S] <br />Optional: \{\} <br /> |
+| `distro` _[ClusterDistro](#clusterdistro)_ | Distro specifies the Kubernetes distribution type for target cluster selection.<br />This allows targeting services to specific cluster types that may have<br />distribution-specific requirements or optimizations. |  | Enum: [GENERIC EKS AKS GKE RKE K3S OPENSHIFT] <br />Optional: \{\} <br /> |
 | `mgmt` _boolean_ | Mgmt indicates whether to include management clusters in the target cluster set.<br />Management clusters typically host the Plural Console and operators, and may<br />require special consideration for service deployments. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef references an existing ServiceDeployment to replicate across target clusters.<br />This allows leveraging an existing service definition as a template for global deployment. |  | Optional: \{\} <br /> |
 | `providerRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProviderRef restricts deployment to clusters associated with a specific cloud provider.<br />This enables provider-specific service deployments that may require particular<br />cloud integrations or provider-native services.<br />Deprecated.<br />Do not use. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef constrains the global service scope to clusters within a specific project.<br />This provides project-level isolation and ensures services are only deployed<br />to clusters belonging to the designated project. |  | Optional: \{\} <br /> |
 | `template` _[ServiceTemplate](#servicetemplate)_ | Template defines the service deployment specification to be applied across target clusters.<br />This contains the core service definition including Helm charts, configurations,<br />and deployment parameters that will be instantiated on each matching cluster. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
+| `ignoreClusters` _string array_ | IgnoreClusters specifies a list of cluster handles to exclude from the target cluster set. |  | Optional: \{\} <br /> |
 
 
 #### GraphStore
@@ -1631,6 +1636,44 @@ _Appears in:_
 | `enabled` _boolean_ | Enabled controls whether the graph store is enabled or not. | false | Optional: \{\} <br /> |
 | `store` _[VectorStore](#vectorstore)_ | Store is the type of the graph store to use. |  | Enum: [ELASTIC] <br />Optional: \{\} <br /> |
 | `elastic` _[ElasticsearchConnectionSettings](#elasticsearchconnectionsettings)_ | Elastic configuration for the graph store. |  | Optional: \{\} <br /> |
+
+
+#### Group
+
+
+
+Group represents a group of users within the system, managed via the Console API.
+It includes specifications for the group's name and description.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `Group` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[GroupSpec](#groupspec)_ | Spec defines the desired state of the Group. |  |  |
+
+
+#### GroupSpec
+
+
+
+GroupSpec defines the desired state of Group.
+
+
+
+_Appears in:_
+- [Group](#group)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name specifies the name for this Group.<br />If not provided, the name from the resource metadata will be used. |  | Optional: \{\} <br /> |
+| `description` _string_ | Description provides a detailed explanation of this Group's purpose. |  | Optional: \{\} <br /> |
+| `global` _boolean_ | Global indicates whether all users in the system are automatically added to this group. | false | Optional: \{\} <br /> |
+| `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
 #### HTTPConnection
@@ -1891,8 +1934,9 @@ _Appears in:_
 | `name` _string_ | Name of this stack.<br />If not provided, the name from InfrastructureStack.ObjectMeta will be used. |  | Optional: \{\} <br /> |
 | `type` _[StackType](#stacktype)_ | Type specifies the IaC tool to use for executing the stack.<br />One of TERRAFORM, ANSIBLE, CUSTOM. |  | Enum: [TERRAFORM ANSIBLE CUSTOM] <br />Required: \{\} <br /> |
 | `interval` _string_ | Interval specifies the interval at which the stack will be reconciled, default is 5m |  | Optional: \{\} <br /> |
-| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository containing the IaC source code. |  | Required: \{\} <br /> |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository containing the IaC source code. Leave empty to use git:url instead. |  | Required: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this stack will be executed. |  | Required: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references a project this stack belongs to.<br />If not provided, it will use the default project. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | Git contains reference within the repository where the IaC manifests are located. |  |  |
 | `manageState` _boolean_ | ManageState indicates whether Plural should manage the Terraform state of this stack. |  | Optional: \{\} <br /> |
@@ -2596,6 +2640,7 @@ _Appears in:_
 | `repository` _string_ | Repository overrides the repository slug for the referenced PR automation.<br />Use this when you want to target a different repository than the one<br />configured in the PR automation template. |  | Optional: \{\} <br /> |
 | `branchTemplate` _string_ | BranchTemplate provides a template for generating branch names.<br />Use $value to inject the observed value into the branch name.<br />Example: "update-chart-to-$value" becomes "update-chart-to-1.2.3". |  | Optional: \{\} <br /> |
 | `context` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Context is a templated context that becomes the input for the PR automation.<br />Use $value to interpolate the observed value into the context data.<br />This context is passed to the PR automation for template rendering and file modifications. |  | Optional: \{\} <br /> |
+| `actor` _string_ | Actor specifies the actor to use for the created branch. Should be a user email in Plural. |  | Optional: \{\} <br /> |
 
 
 #### ObserverSpec
@@ -2975,8 +3020,10 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this gate. |  | Required: \{\} <br />Type: string <br /> |
-| `type` _[GateType](#gatetype)_ | Type of gate.<br />One of:<br />- APPROVAL (requires human approval)<br />- WINDOW (time-based constraints),<br />- JOB (runs custom validation before allowing promotion). |  | Enum: [APPROVAL WINDOW JOB] <br />Required: \{\} <br /> |
+| `type` _[GateType](#gatetype)_ | Type of gate.<br />One of:<br />- APPROVAL (requires human approval)<br />- WINDOW (time-based constraints),<br />- JOB (runs custom validation before allowing promotion).<br />- SENTINEL (runs a Plural Sentinel before allowing promotion). |  | Enum: [APPROVAL WINDOW JOB SENTINEL] <br />Required: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef specifies the target cluster where this gate will execute. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
+| `sentinelRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | SentinelRef specifies the sentinel to execute for the SENTINEL gate. |  | Optional: \{\} <br /> |
 | `spec` _[GateSpec](#gatespec)_ | Spec contains detailed configuration for complex gate types like JOB gates. |  | Optional: \{\} <br /> |
 
 
@@ -3149,7 +3196,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name is the identifier for this configuration field, used as a template variable<br />and as the form field name in the UI. |  | Required: \{\} <br /> |
-| `type` _[ConfigurationType](#configurationtype)_ | Type specifies the input type for this field, determining how it's rendered<br />in the UI and what validation is applied. |  | Enum: [STRING INT BOOL PASSWORD ENUM CLUSTER PROJECT GROUP USER FLOW] <br />Required: \{\} <br /> |
+| `type` _[ConfigurationType](#configurationtype)_ | Type specifies the input type for this field, determining how it's rendered<br />in the UI and what validation is applied. |  | Enum: [STRING INT BOOL JSON PASSWORD ENUM CLUSTER PROJECT GROUP USER FLOW] <br />Required: \{\} <br /> |
 | `condition` _[Condition](#condition)_ | Condition defines when this field should be displayed based on the values<br />of other fields, enabling dynamic forms that adapt to user input. |  | Optional: \{\} <br /> |
 | `default` _string_ | Default provides a default value for this field. |  | Optional: \{\} <br /> |
 | `documentation` _string_ | Documentation provides help text or description for this field to guide users in providing the correct input. |  | Optional: \{\} <br /> |
@@ -3231,6 +3278,43 @@ _Appears in:_
 | `folders` _string array_ | Entire folders to delete. |  | Optional: \{\} <br /> |
 
 
+#### PrAutomationHelmVendorConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationVendorConfiguration](#prautomationvendorconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | The url of the helm repository to use |  | Required: \{\} <br /> |
+| `chart` _string_ | The name of the chart to use |  | Required: \{\} <br /> |
+| `version` _string_ | The version of the chart to use |  | Required: \{\} <br /> |
+| `destination` _string_ | The directory destination to place the chart in |  | Required: \{\} <br /> |
+
+
+#### PrAutomationLuaConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationSpec](#prautomationspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `external` _boolean_ | Whether the lua script is sourced from an external git repo bound to this automation |  | Optional: \{\} <br /> |
+| `script` _string_ | File of a flat script to use |  | Optional: \{\} <br /> |
+| `folder` _string_ | Folder with lua library code and scripts to use |  | Optional: \{\} <br /> |
+
+
 #### PrAutomationSecretConfiguration
 
 
@@ -3294,8 +3378,10 @@ _Appears in:_
 | `patch` _boolean_ | Patch determines whether to generate a patch for this PR instead of<br />creating a full pull request. |  | Optional: \{\} <br /> |
 | `branchPrefix` _string_ | BranchPrefix specifies a prefix to use for the branch name, will be appended with a random string for deduplication. |  | Optional: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references a specific cluster that this PR operates on. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ScmConnectionRef references the SCM connection to use for authentication when creating pull requests. |  | Required: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository resource this automation uses. |  | Optional: \{\} <br /> |
+| `git` _[GitRef](#gitref)_ | Git location to source external files from.  If `creates.git` is also specified, the results will be merged. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef references a specific service that this PR automation acts upon. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references the project this automation belongs to, enabling<br />project-scoped organization and access control. |  | Optional: \{\} <br /> |
 | `catalogRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | CatalogRef references the catalog this automation belongs to for<br />organizational purposes and discoverability in the service catalog. |  | Optional: \{\} <br /> |
@@ -3306,7 +3392,10 @@ _Appears in:_
 | `creates` _[PrAutomationCreateConfiguration](#prautomationcreateconfiguration)_ | Creates defines specifications for generating new files from templates,<br />allowing the automation to add new configuration files to the repository. |  | Optional: \{\} <br /> |
 | `updates` _[PrAutomationUpdateConfiguration](#prautomationupdateconfiguration)_ | Updates specifies how to modify existing files using regex replacements<br />or YAML overlays, enabling precise changes to infrastructure code. |  | Optional: \{\} <br /> |
 | `deletes` _[PrAutomationDeleteConfiguration](#prautomationdeleteconfiguration)_ | Deletes specifies files and folders to remove from the repository as part<br />of the PR, useful for cleanup or migration scenarios. |  | Optional: \{\} <br /> |
+| `lua` _[PrAutomationLuaConfiguration](#prautomationluaconfiguration)_ | Lua specification to source lua scripts to preprocess the PR automation. |  | Optional: \{\} <br /> |
+| `vendor` _[PrAutomationVendorConfiguration](#prautomationvendorconfiguration)_ | Software vendoring logic to perform in this PR |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
+| `labels` _string array_ | Labels to apply to all created PRs from this pr automation |  | Optional: \{\} <br /> |
 
 
 #### PrAutomationTemplate
@@ -3406,6 +3495,22 @@ _Appears in:_
 | `regexes` _string array_ | Regexes to apply on each file. |  | Optional: \{\} <br /> |
 | `replaceTemplate` _string_ | ReplaceTemplate is a template to use when replacing a regex. |  | Optional: \{\} <br /> |
 | `yq` _string_ | Yq (unused so far) |  | Optional: \{\} <br /> |
+
+
+#### PrAutomationVendorConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationSpec](#prautomationspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `helm` _[PrAutomationHelmVendorConfiguration](#prautomationhelmvendorconfiguration)_ | Specification for vendoring a helm chart |  | Optional: \{\} <br /> |
 
 
 #### PrConfirmationChecklist
@@ -3590,6 +3695,8 @@ _Appears in:_
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
+
+
 #### Reconciliation
 
 
@@ -3613,6 +3720,7 @@ _Appears in:_
 - [GeneratedSecretSpec](#generatedsecretspec)
 - [GitRepositorySpec](#gitrepositoryspec)
 - [GlobalServiceSpec](#globalservicespec)
+- [GroupSpec](#groupspec)
 - [HelmRepositorySpec](#helmrepositoryspec)
 - [InfrastructureStackSpec](#infrastructurestackspec)
 - [MCPServerSpec](#mcpserverspec)
@@ -3699,6 +3807,7 @@ _Appears in:_
 | `regex` _string_ | Regex specifies a regular expression pattern for filtering events based on content.<br />This can be used to filter events by URLs, resource names, error messages, or any<br />other textual content within the event data. Use standard regex syntax. |  | Optional: \{\} <br /> |
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef filters events to only those associated with a specific service deployment. |  | Optional: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef filters events to only those associated with a specific cluster. |  | Optional: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `pipelineRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | PipelineRef filters events to only those associated with a specific pipeline. |  | Optional: \{\} <br /> |
 
 
@@ -3734,7 +3843,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name is a human-readable name of the ScmConnection. |  | Required: \{\} <br /> |
-| `type` _[ScmType](#scmtype)_ | Type is the name of the scm service for the ScmConnection.<br />One of (ScmType): [GITHUB, GITLAB, AZURE_DEVOPS, BITBUCKET] |  | Enum: [GITHUB GITLAB BITBUCKET AZURE_DEVOPS] <br />Required: \{\} <br />Type: string <br /> |
+| `type` _[ScmType](#scmtype)_ | Type is the name of the scm service for the ScmConnection.<br />One of (ScmType): [GITHUB, GITLAB, AZURE_DEVOPS, BITBUCKET, BITBUCKET_DATACENTER] |  | Enum: [GITHUB GITLAB BITBUCKET AZURE_DEVOPS BITBUCKET_DATACENTER] <br />Required: \{\} <br />Type: string <br /> |
 | `tokenSecretRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | A secret containing this access token you will use, stored in the `token` data field. |  | Optional: \{\} <br /> |
 | `username` _string_ | Username ... |  | Optional: \{\} <br /> |
 | `baseUrl` _string_ | BaseUrl is a base URL for Git clones for self-hosted versions. |  | Optional: \{\} <br /> |
@@ -3854,6 +3963,8 @@ _Appears in:_
 | `gotestsum` _[SentinelCheckGotestsumConfiguration](#sentinelcheckgotestsumconfiguration)_ | the configuration for the gotestsum test runner for this check |  | Optional: \{\} <br /> |
 | `distro` _[ClusterDistro](#clusterdistro)_ | the distro to run the check on |  | Enum: [GENERIC EKS AKS GKE RKE K3S OPENSHIFT] <br /> |
 | `tags` _object (keys:string, values:string)_ | the cluster tags to select where to run this job |  |  |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository to use for this integration test. |  | Optional: \{\} <br /> |
+| `git` _[GitRef](#gitref)_ | The git location to use for this integration test. |  |  |
 
 
 #### SentinelCheckKubernetesConfiguration
@@ -3955,7 +4066,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `api` _string_ | API specifies a single Console API endpoint name that this service account<br />should be scoped to, such as 'updateServiceDeployment' or 'createCluster'. |  | Optional: \{\} <br /> |
+| `api` _string_ | API specifies a single Console API endpoint name that this service account<br />should be scoped to, such as 'service.write' or 'cluster.read'. |  | Optional: \{\} <br /> |
 | `apis` _string array_ | Apis is a list of Console API endpoint names that this service account<br />should be scoped to. |  | Optional: \{\} <br /> |
 | `identifier` _string_ | Identifier specifies a resource ID in the Console API that this service<br />account should be scoped to. Leave blank or use '*' to scope to all resources<br />within the specified API endpoints. |  | Optional: \{\} <br /> |
 | `ids` _string array_ | Ids is a list of Console API resource IDs that this service account should<br />be scoped to. |  | Optional: \{\} <br /> |
@@ -4157,7 +4268,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `path` _string_ | Path to the kustomization file to use. |  |  |
+| `path` _string_ | The folder your base kustomization file lives within relative to your main git folder path.  It can be a subdirectory. |  |  |
 | `enableHelm` _boolean_ | EnableHelm indicates whether to enable Helm for this Kustomize deployment.<br />Used for inflating Helm charts. |  | Optional: \{\} <br /> |
 
 
@@ -4184,7 +4295,8 @@ _Appears in:_
 | `helm` _[ServiceHelm](#servicehelm)_ | Helm configuration for deploying Helm charts, including values and repository settings. |  | Optional: \{\} <br /> |
 | `syncConfig` _[SyncConfigAttributes](#syncconfigattributes)_ | SyncConfig contains advanced configuration for how manifests are synchronized to the cluster. |  | Optional: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository CRD containing the service source code. |  | Optional: \{\} <br /> |
-| `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this service will be deployed. |  | Required: \{\} <br /> |
+| `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this service will be deployed. Leave it as an empty struct to use the cluster field instead. |  | Required: \{\} <br /> |
+| `cluster` _string_ | Cluster is the handle of the target Cluster where this service will be deployed. Leave it empty to use the clusterRef field instead. |  | Optional: \{\} <br /> |
 | `configurationRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | ConfigurationRef is a secret reference containing service configuration for templating. |  | Optional: \{\} <br /> |
 | `flowRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | FlowRef provides contextual linkage to a broader application Flow this service belongs within. |  | Optional: \{\} <br /> |
 | `configuration` _object (keys:string, values:string)_ | Configuration contains non-secret key-value pairs for lightweight templating of manifests. |  | Optional: \{\} <br /> |
@@ -4355,6 +4467,7 @@ _Appears in:_
 | `crontab` _string_ | The crontab on which to spawn stack runs. |  |  |
 | `autoApprove` _boolean_ | Whether to automatically approve cron-spawned runs. |  | Optional: \{\} <br /> |
 | `overrides` _[StackOverrides](#stackoverrides)_ | Overrides for the cron triggered stack run configuration. |  | Optional: \{\} <br /> |
+| `trackRef` _boolean_ | Whether to track the stack's ref exactly on cron runs versus the last detected commit. This can theoretically cause drift between code if referenced via symlinks. |  | Optional: \{\} <br /> |
 
 
 #### StackDefinition
@@ -4503,6 +4616,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `id` _string_ | ID of the resource in the Console API. |  | Optional: \{\} <br />Type: string <br /> |
 | `sha` _string_ | SHA of last applied configuration. |  | Optional: \{\} <br />Type: string <br /> |
+| `readonly` _boolean_ | ReadOnly indicates whether the resource is read-only. | false |  |
 | `conditions` _[Condition](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#condition-v1-meta) array_ | Represents the observations of a PrAutomation's current state. |  |  |
 
 
