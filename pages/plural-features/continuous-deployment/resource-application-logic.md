@@ -16,11 +16,11 @@ This lets you do things like run database migrations before an app rollout, seed
 and strictly order dependencies across services.
 
 ## Sync options
-You can specify how resources are applied during a sync with `deployment.plural.sh/sync-options` annotation.
-We also support Argo CD `argocd.argoproj.io/sync-options` annotation for compatibility.
+You can specify how resources are applied during a sync with the `deployment.plural.sh/sync-options` annotation.
+We also support the Argo CD `argocd.argoproj.io/sync-options` annotation for compatibility.
 
 Currently, only one option is supported:
-- `Force=True` - If resource application fails, i.e., due to immutable field changes, the operator will delete and recreate the resource.
+- `Force=True` - If resource application fails, e.g., due to immutable field changes, the operator will delete and recreate the resource.
 
 Options are comma-separated key-value case-insensitive pairs. All whitespace is ignored.
 
@@ -28,7 +28,7 @@ Options are comma-separated key-value case-insensitive pairs. All whitespace is 
 
 Sync waves allow you to define the order within a sync phase in which resources are applied. Lower waves run first.
 
-You can use sync waves on any Kubernetes resource by simply adding an `deployment.plural.sh/sync-wave` annotation.
+You can use sync waves on any Kubernetes resource by simply adding the `deployment.plural.sh/sync-wave` annotation.
 We also support the Argo CD `argocd.argoproj.io/sync-wave` and Helm `helm.sh/hook-weight` annotations for compatibility.
 The value is an integer (as a quoted string) and can be negative.
 
@@ -115,7 +115,7 @@ spec:
 ## Hook delete policies (cleanup)
 
 By default, hook resources are left in the cluster after they run. You can opt into automatic cleanup with 
-`deployment.plural.sh/sync-hook-delete-policy` annotation. You can also use Helm `helm.sh/hook-delete-policy`
+the `deployment.plural.sh/sync-hook-delete-policy` annotation. You can also use the Helm `helm.sh/hook-delete-policy`
 annotation. Multiple policies can be comma-separated.
 
 Use `hook-succeeded` and/or `hook-failed` to delete the resource after it completes successfully or fails, respectively.
