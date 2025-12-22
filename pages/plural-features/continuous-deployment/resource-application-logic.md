@@ -7,12 +7,22 @@ description: Control deploy ordering with sync waves, run lifecycle hooks, and c
 
 Plural’s deployment operator supports sync controls on any Kubernetes manifest you manage with Plural. You can:
 
+- Specify the method used to sync resources
 - Order resource application using sync waves
 - Run lifecycle hooks at specific phases of a sync
 - Automatically clean up hook resources with delete policies
 
 This lets you do things like run database migrations before an app rollout, seed data after,
 and strictly order dependencies across services.
+
+## Sync options
+You can specify how resources are applied during a sync with `deployment.plural.sh/sync-options` annotation.
+We also support Argo CD `argocd.argoproj.io/sync-options` annotation for compatibility.
+
+Currently, only one option is supported:
+- `Force=True` - If resource application fails, i.e., due to immutable field changes, the operator will delete and recreate the resource.
+
+Options are comma-separated key-value case-insensitive pairs. All whitespace is ignored.
 
 ## Sync waves
 
