@@ -214,6 +214,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `claude` _[ClaudeConfig](#claudeconfig)_ | Config for Claude CLI runtime. |  | Optional: \{\} <br /> |
 | `opencode` _[OpenCodeConfig](#opencodeconfig)_ | Config for OpenCode CLI runtime. |  | Optional: \{\} <br /> |
+| `gemini` _[GeminiConfig](#geminiconfig)_ | Config for Gemini CLI runtime. |  | Optional: \{\} <br /> |
 
 
 
@@ -494,6 +495,44 @@ _Validation:_
 _Appears in:_
 - [PipelineGateSpec](#pipelinegatespec)
 
+
+
+#### GeminiConfig
+
+
+
+GeminiConfig contains configuration for the Gemini CLI runtime.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfig](#agentruntimeconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | APIKeySecretRef is a reference to a Kubernetes Secret containing the Gemini API key. |  |  |
+| `model` _string_ | Model is the name of the model to use.<br />gemini-2.5-flash-lite and gemini-2.0-flash-lite are the smallest models and are not fit for write (agent) mode.<br />They should only be used for analysis. |  | Enum: [gemini-3-pro-preview gemini-2.5-pro gemini-2.5-flash gemini-2.5-flash-lite gemini-2.0-flash gemini-2.0-flash-lite] <br />Optional: \{\} <br /> |
+
+
+#### GeminiConfigRaw
+
+
+
+GeminiConfigRaw contains configuration for the Gemini CLI runtime.
+
+NOTE: Do not embed this struct directly, use GeminiConfig instead.
+This is only used to read original GeminiConfig secret data and be
+able to inject it into the pod as env vars.
+
+
+
+_Appears in:_
+- [AgentRuntimeConfigRaw](#agentruntimeconfigraw)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKey` _string_ | APIKey is the raw Gemini API key to use. |  |  |
+| `model` _string_ | Model is the name of the model to use. |  |  |
 
 
 
