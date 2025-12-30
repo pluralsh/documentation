@@ -36,6 +36,7 @@ metadata:
   name: plrl-01-grafana
   namespace: examples
 spec:
+  cluster: mgmt
   helm:
     # Remote helm repository
     url: https://grafana.github.io/helm-charts
@@ -56,11 +57,6 @@ spec:
           - hosts:
               - grafana-test.your-domain.com
             secretName: grafana-tls
-  # A reference to the cluster resource instance we've created in the previous step
-  clusterRef:
-    kind: Cluster
-    name: mgmt
-    namespace: examples
 ```
 
 ### Step 2: Check Plural Console and access Grafana

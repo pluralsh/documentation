@@ -9,7 +9,7 @@ description: 'Developer-Facing Portal for your Kubernetes Infrastructure'
 If you just want to skip the text and see it in action, skip to the demo video below.
 {% /callout %}
 
-Kubernetes is often overwhelming for developers to comprehend the state of the applications they're managing, which are often simple stateless services, static frontends, or small sets of microservices.  Platform engineers often solve for this by providing a basic "abstraction layer" on top of their kubernetes clusters, often accomplished with a slapdash of tools like internal UIs, Backstage, ArgoCD and others.
+Kubernetes is often too overwhelming for developers to comprehend the state of the applications they're managing, despite the fact that these are often simple stateless services, static frontends, or small sets of microservices.  Platform engineers often solve for this by providing a basic "abstraction layer" on top of their kubernetes clusters, often accomplished with a slapdash of tools like internal UIs, Backstage, ArgoCD and others.
 
 Plural Flows provide a first-order way to do this, natively integrated with the rest of the Plural experience.  It encompasses:
 
@@ -28,7 +28,7 @@ Further, because it gives us a clear circumference to understand what's related 
 * Ability to call out to Model Context Protocol (MCP) for external operations tasks
 * A built in knowledge graph layer to continuously enrich the context available to the AI
 
-Further, Plural Flows can vector index prs, query app log data and respond to incoming alerts, extending the capabilities of our AI insight engine to be able to be a general troubleshooting tool for application code errors alongside the built-in support for Kubernetes misconfiguration.
+Further, Plural Flows can vector index prs, query app log data and respond to incoming alerts, extending the capabilities of our AI insight engine to be able to be a general troubleshooting tool for application code errors alongside our already built-in support for Kubernetes misconfiguration.
 
 # Demo Video
 

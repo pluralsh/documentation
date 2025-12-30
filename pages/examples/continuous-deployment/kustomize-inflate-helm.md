@@ -107,11 +107,9 @@ metadata:
   name: plrl-04-wordpress
   namespace: examples
 spec:
-  repositoryRef:
-    kind: GitRepository
-    name: example
-    namespace: examples
+  cluster: mgmt
   git:
+    url: https://github.com/yourorg/example.git # the url for your example git repo
     folder: services/examples/kustomize-inflate-helm
     ref: main
   kustomize:
@@ -119,9 +117,6 @@ spec:
     enableHelm: true
   configurationRef:
     name: plrl-04-wordpress-config
-    namespace: examples
-  clusterRef:
-    name: mgmt
     namespace: examples
 ```
 

@@ -55,12 +55,9 @@ metadata:
   name: plrl-02-grafana
   namespace: examples
 spec:
-  # GitRepository reference that points to a git repo where values file is stored
-  repositoryRef:
-    kind: GitRepository
-    name: example
-    namespace: examples
+  cluster: mgmt
   git:
+    url: https://github.com/yourorg/example.git # the url for your example git repo
     # A directory in the git repository with the values file
     folder: helm-values
     ref: main
@@ -78,11 +75,6 @@ spec:
   # inline configuration that will be passed as a context to the liquid helm values file
   configuration:
     host: 'grafana-test.your-domain.com'
-  # A reference to the cluster resource instance we've created in the previous step
-  clusterRef:
-    kind: Cluster
-    name: mgmt
-    namespace: examples
 ```
 
 ### Step 3: Check Plural Console and access Grafana

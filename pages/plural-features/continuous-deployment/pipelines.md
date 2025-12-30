@@ -52,39 +52,25 @@ apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
   name: guestbook-dev
-  namespace: default
+  namespace: infra
 spec:
-  version: 0.0.1
+  cluster: dev
   git:
     folder: guestbook
     ref: master
-  repositoryRef:
-    kind: GitRepository
-    name: guestbook
-    namespace: default
-  clusterRef:
-    kind: Cluster
-    name: dev
-    namespace: default
+    url: git@github.com:pluralsh/guestbook.git # replace with valid git repo
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
   name: guestbook-prod
-  namespace: default
+  namespace: infra
 spec:
-  version: 0.0.1
+  cluster: prod
   git:
     folder: guestbook
     ref: master
-  repositoryRef:
-    kind: GitRepository
-    name: guestbook
-    namespace: default
-  clusterRef:
-    kind: Cluster
-    name: prod
-    namespace: default
+    url: git@github.com:pluralsh/guestbook.git # replace with valid git repo
 ```
 ### Pipeline CRD
 
@@ -93,62 +79,39 @@ apiVersion: deployments.plural.sh/v1alpha1
 kind: Pipeline
 metadata:
   name: test
-  namespace: default
+  namespace: infra
 spec:
   stages:
     - name: dev
       services:
         - serviceRef:
             name: guestbook-dev
-            namespace: default
+            namespace: infra
     - name: prod
       services:
         - serviceRef:
             name: guestbook-prod
-            namespace: default
+            namespace: infra
           criteria:
             serviceRef:
               name: guestbook-dev
-              namespace: default
+              namespace: infra
             secrets:
               - test-secret
   edges:
     - from: dev
       to: prod
       gates:
-        - name: job-gate
-          type: JOB
-          clusterRef:
-            name: dev
-            namespace: default
-          spec:
-            job:
-              namespace: default
-              labels:
-                test: test
-              annotations:
-                plural.sh/annotation: test
-              serviceAccount: default
-              containers:
-                - image: alpine:3.7
-                  args:
-                    - /bin/sh
-                    - -c
-                    - sleep 40
-                  env:
-                    - name: TEST_ENV_VAR
-                      value: pipeline
+        - name: sentinel
+          type: SENTINEL # organize integration testing with a sentinel
+          sentinelRef:
+            name: dev-sentinel
+            namespace: infra
         - name: approval-gate
           type: APPROVAL
 ```
 This edge controls the transition from dev → prod. It includes:
 
- 1. Job Gate: A container runs in the dev cluster and must complete successfully
-    - In this case, it’s an alpine container sleeping for 40 seconds, but in practice this could run tests, linting, etc.
+ 1. Sentinel Gate: leverages a [Plural Sentinel](/plural-features/plural-ai/sentinels) to do deep integration testing for dev.
  2. Approval Gate: Requires manual approval before deploying to prod
 
-You can view the complete working example of a Plural Pipeline including clusters, services, promotion logic, and gates on GitHub:
-
- [pipeline.yaml on GitHub](https://github.com/pluralsh/console/blob/master/go/controller/config/samples/pipeline.yaml)
-
-This example demonstrates a multi-stage deployment from `dev` to `prod`, using both job and approval gates to control promotion.

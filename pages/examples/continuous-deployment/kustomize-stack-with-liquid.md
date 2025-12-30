@@ -238,19 +238,14 @@ metadata:
   name: plrl-03-wordpress
   namespace: examples
 spec:
-  repositoryRef:
-    kind: GitRepository
-    name: example
-    namespace: examples
+  cluster: mgmt
   git:
+    url: https://github.com/yourorg/example.git # the url for your example git repo
     folder: services/examples/kustomize-stack-with-liquid
     ref: main
   configuration:
     wordpressTag: "4.8-apache"
     mysqlTag: "5.6"
-  clusterRef:
-    name: mgmt
-    namespace: examples
 ```
 
 ### Step 5: Check Plural Console and access WordPress

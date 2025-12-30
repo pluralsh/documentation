@@ -19,7 +19,7 @@ The authentication mechanism relies on JWTs signed using a standard algorithm. T
 
     let publicKey: string | null = null;
 
-    async function initializeJWKS() {
+    async function pollJWKS() {
       const JWKS_URI = process.env.JWKS_URI || "https://your-console-url/.well-known/jwks.json";
       const client = jwksClient({ jwksUri: JWKS_URI });
 
@@ -28,6 +28,10 @@ The authentication mechanism relies on JWTs signed using a standard algorithm. T
         throw new Error("No signing keys found in JWKS");
       }
       publicKey = signingKeys[0].getPublicKey();
+    }
+
+    function initializeJWKS() {
+      return setInterval(pollJWKS, 30_000)
     }
 
     export { initializeJWKS };
@@ -40,7 +44,7 @@ The authentication mechanism relies on JWTs signed using a standard algorithm. T
 
         import { authenticateJWT, initializeJWKS } from "./auth.js";
         
-        await initializeJWKS();
+        initializeJWKS();
 
         // setup MCP server, prompts, tools, etc
 
@@ -95,15 +99,15 @@ Once a token is successfully authenticated, the server performs authorization ba
 Here is the core `authenticateJWT` middleware function from `mcp/src/auth.ts`:
 
 ```typescript
-import jwtPkg from "jsonwebtoken";
+import jwt from "jsonwebtoken";
 import type { Request, Response, NextFunction } from "express";
 
 // Assumes publicKey has been initialized by initializeJWKS()
 
-export function authenticateJWT(req: Request, res: Response, next: NextFunction) {
-  const JWT_AUTH_ENABLED = process.env.JWT_AUTH_ENABLED === "true";
-  const REQUIRED_GROUPS = process.env.REQUIRED_GROUPS?.split(",") ?? [];
+const REQUIRED_GROUPS = new Set(process.env.REQUIRED_GROUPS?.split(",") ?? []);
+const JWT_AUTH_ENABLED = process.env.JWT_AUTH_ENABLED === "true";
 
+export function authenticateJWT(req: Request, res: Response, next: NextFunction) {
   if (!JWT_AUTH_ENABLED) return next();
   if (!publicKey) return res.status(500).json({ message: "Server not initialized (JWKS public key missing)" });
 
@@ -114,7 +118,7 @@ export function authenticateJWT(req: Request, res: Response, next: NextFunction)
 
   const token = authHeader.split(" ")[1];
   try {
-    const decoded = jwtPkg.verify(token, publicKey);
+    const decoded = jwt.verify(token, publicKey);
     const groups = (decoded as any).groups;
 
     if (!Array.isArray(groups)) {
@@ -122,12 +126,11 @@ export function authenticateJWT(req: Request, res: Response, next: NextFunction)
     }
 
     // Check if user belongs to any required group
-    if (REQUIRED_GROUPS.length > 0 && !REQUIRED_GROUPS.some(g => groups.includes(g))) {
+    if (REQUIRED_GROUPS.length > 0 && REQUIRED_GROUPS.isDisjointFrom(new Set(groups))) {
       return res.status(401).json({ message: "User does not belong to any required group" });
     }
 
-    (req as any).user = decoded;
-    next(); // Authentication and Authorization successful
+    next();
   } catch (err) {
     return res.status(401).json({ message: "Invalid or expired token" });
   }
