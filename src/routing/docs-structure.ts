@@ -248,24 +248,13 @@ export const docsStructure: DocSection[] = [
     ],
   },
   {
-    path: 'faq',
-    title: 'Faq',
-    sections: [
-      { path: 'security', title: 'Is Plural secure?' },
-      { path: 'plural-oidc', title: 'Does Plural support OpenID Connect?' },
-      {
-        path: 'certifications',
-        title: 'What certifications does Plural have?',
-      },
-      { path: 'paid-tiers', title: 'How do Plural paid tiers work?' },
-    ],
-  },
-  {
     path: 'resources',
     title: 'Resources',
     sections: [
       { path: 'release-notes', title: 'Release Notes' },
       { path: 'product-updates', title: 'Product Updates' },
+      { path: 'security', title: 'Plural Security Certifications' },
+      // { path: 'paid-tiers', title: 'Plural Pricing Model' },
       {
         path: 'architecture',
         title: 'Advanced Architecture',

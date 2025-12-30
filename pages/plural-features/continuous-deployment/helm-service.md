@@ -4,20 +4,10 @@ description: Source manifests from a helm repository registered anywhere
 ---
 
 You can also source manifests from a https or OCI-compatible helm repository. This is very useful for provisioning
-kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where helms
-versioning independent of git can be valuable. The path here requires creation of a Flux `HelmRepository` CR first, then
-the service, e.g.:
+kubernetes add-ons, which are usually packaged using helm, or occasionally for complex release processes where Helm's
+versioning independent of git can be valuable. 
 
 ```yaml
-# the Cluster resource should ideally be defined in separate files in your infra repo
-apiVersion: deployments.plural.sh/v1alpha1
-kind: Cluster
-metadata:
-  name: k3s
-  namespace: infra
-spec:
-  handle: k3s
----
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
 metadata:
@@ -26,6 +16,7 @@ metadata:
 spec:
   namespace: ingress-nginx
   name: ingress-nginx
+  cluster: k3s
   helm:
     version: 4.4.x
     chart: ingress-nginx
@@ -38,13 +29,6 @@ spec:
           digestChroot: null
         admissionWebhooks:
           enabled: false
-    repository:
-      namespace: infra
-      name: nginx # referenced helm repository above
-  clusterRef:
-    kind: Cluster
-    name: k3s
-    namespace: infra
 ```
 
 ## Dynamic Helm Configuration via luaScript
@@ -61,6 +45,7 @@ metadata:
 spec:
   namespace: ingress-nginx
   name: ingress-nginx
+  cluster: k3s
   helm:
     version: 4.4.x
     chart: ingress-nginx
@@ -75,13 +60,6 @@ spec:
       values["maxConnections"] = 100
 
       valuesFiles = {"config.json", "secrets.yaml"}
-    repository:
-      namespace: infra
-      name: nginx # referenced helm repository above
-  clusterRef:
-    kind: Cluster
-    name: k3s
-    namespace: infra
 ```
 For more information, see [Dynamic Helm Configuration with Lua Scripts](lua.md).
 
@@ -106,11 +84,9 @@ metadata:
 spec:
   namespace: ingress-nginx
   name: ingress-nginx
-  repositoryRef:
-    kind: GitRepository
-    name: infra # points to the CRD above
-    namespace: infra
+  cluster: k3s
   git: 
+    url: git@github.com:pluralsh/infra-example.git
     ref: main
     folder: helm # where helm values files are stored
   helm:
@@ -127,10 +103,6 @@ spec:
           enabled: false
     valuesFiles:
     - ingress-nginx.values.yaml # using helm/ingress-nginx.values.yaml as our values file
-  clusterRef:
-    kind: Cluster
-    name: k3s
-    namespace: infra
 ```
 
 ## Helm Repositories Stored in Git
@@ -146,19 +118,13 @@ metadata:
 spec:
   namespace: helm-app
   name: helm-app
-  repositoryRef:
-    kind: GitRepository
-    name: infra # points to the CRD above
-    namespace: infra
+  cluster: k3s
   git: 
+    url: git@github.com:pluralsh/infra-example.git
     ref: main
     folder: chart # where the helm chart lives
   helm:
     values:
       image:
         tag: override-tag # example in-line helm values
-  clusterRef:
-    kind: Cluster
-    name: k3s
-    namespace: infra
 ```
