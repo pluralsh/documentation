@@ -217,6 +217,13 @@ export const docsStructure: DocSection[] = [
         title: 'Projects and multi-tenancy',
       },
       { path: 'notifications', title: 'Notification configuration' },
+      {
+        path: 'runtime',
+        title: 'Runtime',
+        sections: [
+          { path: 'getting-started', title: 'Getting started with Runtime' },
+        ],
+      },
     ],
   },
   {
