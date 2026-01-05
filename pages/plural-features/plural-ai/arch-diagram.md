@@ -15,7 +15,7 @@ We are also actively working on ebpf network inspection which will improve this 
 
 That enables our AI to draft basic arch diagrams with a simple prompt.
 
-## Create An Research Session
+## Create a Research Session
 
 Diagram creation is simple and UI-based. Navigate to `AI -> Infra Research`.  You'll have a prompt button to spawn a new research, and from there you'll see a few threads spawn in as the AI is working in the background.  The process takes about 1-2 minutes, and is completely headless, so feel free to grab a coffee while its churning. Once done, you'll have a full result looking something like (using the prompt `Show me the architecture of the grafana deployment`):
 
@@ -35,6 +35,6 @@ The graph itself is created in [Mermaid](https://mermaid.js.org/) format, and ca
 1. AI fix - we provide a fix with ai button that will take any javascript errors from mermaid parsing and attempt to correct them.
 2. Try it again - in other cases, it's oftentimes easier to just rerun the generation.  You can use the `Try Again` button to do this. 
 
-## Publish Your Researc
+## Publish Your Research
 
 Once you feel like the diagram and research is suitable for broader acceptance, you can chose to publish it.  From there, anyone can view your research results and we'll index it for use in other investigations in the future.
