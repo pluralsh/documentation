@@ -26,8 +26,8 @@ We provide simple installers if you'd like to deploy the control plane layer to 
 
 A thin deployment agent is installed onto each cluster and perpetually managed by Plural from then on. It will perpetually poll the control plane for new services to apply and if there are any changes to make, apply them into your cluster. It also can do a few other things like:
 
-- establish the bidectional grpc channel for the auth proxy layer (this does require an ingress with websocket support)
-- execute integration tests
+- Establish the bi-directional grpc channel for the auth proxy layer (this does require an ingress with websocket support)
+- Execute integration tests
 
 There were a few design considerations involved in our agent that are worth understanding as well:
 
