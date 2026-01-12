@@ -264,6 +264,10 @@ export const docsStructure: DocSection[] = [
       },
     ],
   },
+  {
+    path: 'about',
+    title: 'About',
+  },
 ]
 
 /**
