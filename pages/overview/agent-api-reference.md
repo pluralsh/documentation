@@ -256,6 +256,7 @@ _Appears in:_
 | `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
 | `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
 | `aiProxy` _boolean_ | AiProxy specifies whether the agent runtime should be proxied through the AI proxy. |  |  |
+| `dind` _boolean_ | Enable Docker-in-Docker for this agent runtime.<br />When true, the runtime will be configured to run with DinD support. |  | Optional: \{\} <br /> |
 
 
 #### Binding
