@@ -111,6 +111,10 @@ export const docsStructure: DocSection[] = [
             path: 'github-actions-ci',
             title: 'Integration with Github Actions/CI',
           },
+          {
+            path: 'management-controllers-reconciliation-logic',
+            title: 'Management Controllers Reconciliation Logic',
+          },
         ],
       },
       {
