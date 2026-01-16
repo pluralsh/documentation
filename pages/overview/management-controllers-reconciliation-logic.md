@@ -64,8 +64,8 @@ To maintain system stability and prevent API rate-limiting, the controllers use 
 
 The following table categorizes resources based on their supported reconciliation behavior.
 
-| Resource                         | Standard Creation | Read-Only Support | Adoption Mode Support |
-|:---------------------------------|:-----------------:|:-----------------:| :---: |
+| Resource                         | Standard Creation | Read-Only Support |        Adoption Mode Support         |
+|:---------------------------------|:-----------------:|:-----------------:|:------------------------------------:|
 | **Project**                      |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
 | **Catalog**                      |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
 | **GitRepository**                |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
@@ -73,43 +73,43 @@ The following table categorizes resources based on their supported reconciliatio
 | **ServiceAccount**               |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
 | **PRAutomation**                 |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
 | **ServiceContext**               |         ✅         |         ✅         | **Yes** (via `driftDetection: true`) |
-| **BootstrapToken**               |         ✅         |        No         | No |
-| **Cluster**                      |        No         |         ✅         | No |
-| **ClusterRestore**               |         ✅         |         ✅         | No |
-| **ClusterRestoreTrigger**        |         ✅         |        No         | No |
-| **CloudConnection**              |         ✅         |         ✅         | No |
-| **ComplianceReportGenerator**    |         ✅         |        No         | No |
-| **CustomCompatibilityMatrix**    |         ✅         |        No         | No |
-| **CustomStackRun**               |         ✅         |        No         | No |
-| **DeploymentSettings**           |         ✅         |        No         | No |
-| **FederatedCredential**          |         ✅         |        No         | No |
-| **Flow**                         |         ✅         |        No         | No |
-| **GlobalService**                |         ✅         |        No         | No |
-| **Group**                        |         ✅         |         ✅         | No |
-| **HelmRepository**               |         ✅         |        No         | No |
-| **InfrastructureStack**          |         ✅         |        No         | No |
-| **ManagedNamespace**             |         ✅         |         ✅         | No |
-| **MCPServer**                    |         ✅         |        No         | No |
-| **NamespaceCredentials**         |        No         |         ✅         | No |
-| **NotificationRouter**           |         ✅         |        No         | No |
-| **ObservabilityProvider**        |         ✅         |         ✅         | No |
-| **Observer**                     |         ✅         |        No         | No |
-| **OIDCProvider**                 |         ✅         |        No         | No |
-| **Persona**                      |         ✅         |        No         | No |
-| **Pipeline**                     |         ✅         |        No         | No |
-| **PipelineContext**              |         ✅         |        No         | No |
-| **PrAutomationTrigger**          |         ✅         |        No         | No |
-| **PreviewEnvironmentTemplate**   |         ✅         |        No         | No |
-| **PrGovernance**                 |         ✅         |        No         | No |
-| **SCMConnection**                |         ✅         |         ✅         | No |
-| **Sentinel**                     |         ✅         |        No         | No |
-| **ServiceDeployment**            |         ✅         |        No         | No |
-| **StackDefinition**              |         ✅         |        No         | No |
-| **UpgradePlanCallout**           |         ✅         |        No         | No |
+| **BootstrapToken**               |         ✅         |        No         |                  No                  |
+| **Cluster**                      |        No         |         ✅         |                  ✅                   |
+| **ClusterRestore**               |         ✅         |         ✅         |                  No                  |
+| **ClusterRestoreTrigger**        |         ✅         |        No         |                  No                  |
+| **CloudConnection**              |         ✅         |         ✅         |                  No                  |
+| **ComplianceReportGenerator**    |         ✅         |        No         |                  No                  |
+| **CustomCompatibilityMatrix**    |         ✅         |        No         |                  ✅                   |
+| **CustomStackRun**               |         ✅         |        No         |                  No                  |
+| **DeploymentSettings**           |         ✅         |        No         |                  No                  |
+| **FederatedCredential**          |         ✅         |        No         |                  No                  |
+| **Flow**                         |         ✅         |        No         |                  ✅                  |
+| **GlobalService**                |         ✅         |        No         |                  ✅                  |
+| **Group**                        |         ✅         |         ✅         |                  No                  |
+| **HelmRepository**               |         ✅         |        No         |                  ✅                  |
+| **InfrastructureStack**          |         ✅         |        No         |                  ✅                   |
+| **ManagedNamespace**             |         ✅         |         ✅         |                  ✅                  |
+| **MCPServer**                    |         ✅         |        No         |                  ✅                  |
+| **NamespaceCredentials**         |        No         |         ✅         |                  No                  |
+| **NotificationRouter**           |         ✅         |        No         |                  ✅                  |
+| **ObservabilityProvider**        |         ✅         |         ✅         |                  No                  |
+| **Observer**                     |         ✅         |        No         |                  ✅                  |
+| **OIDCProvider**                 |         ✅         |        No         |                  ✅                  |
+| **Persona**                      |         ✅         |        No         |                  No                  |
+| **Pipeline**                     |         ✅         |        No         |                  No                  |
+| **PipelineContext**              |         ✅         |        No         |                  No                  |
+| **PrAutomationTrigger**          |         ✅         |        No         |                  No                  |
+| **PreviewEnvironmentTemplate**   |         ✅         |        No         |                  ✅                  |
+| **PrGovernance**                 |         ✅         |        No         |                  ✅                  |
+| **SCMConnection**                |         ✅         |         ✅         |                  No                  |
+| **Sentinel**                     |         ✅         |        No         |                  No                  |
+| **ServiceDeployment**            |         ✅         |        No         |                  ✅                   |
+| **StackDefinition**              |         ✅         |        No         |                  No                  |
+| **UpgradePlanCallout**           |         ✅         |        No         |                  ✅                  |
 
 
 
 ### Legend:
 *   **Standard Creation**: Controller creates the resource if it doesn't exist.
 *   **Read-Only Support**: Controller can link to an existing resource by name/ID without modifying it.
-*   **Adoption Mode Support**: Controller can transition from Read-Only to Ownership if `driftDetection` is enabled.
+*   **Adoption Mode Support**: Controller can transition from Read-Only to Ownership if `driftDetection` is enabled or if the logic allows to upsert the resource.
