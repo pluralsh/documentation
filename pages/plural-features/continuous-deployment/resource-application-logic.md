@@ -119,6 +119,15 @@ Only jobs and pods are automatically deleted. Other resources will need to be de
 When a manifest of a hook is updated, the operator will reapply the resource even if it has already completed.
 {% /callout %}
 
+{% callout severity="warning" %}
+If a Job manifest sets `ttlSecondsAfterFinished`, Kubernetes will delete it after it completes.
+The agent will then see the resource as missing and recreate it unless the manifest also
+includes a hook delete policy via `deployment.plural.sh/sync-hook-delete-policy` or `helm.sh/hook-delete-policy`.
+
+To avoid a delete/recreate loop, ensure the delete policy contains a value we accept: `hook-succeeded` and/or
+`hook-failed`. With a valid delete policy set, completed hooks won’t be recreated unless their manifest changes.
+{% /callout %}
+
 ### Example
 
 ```yaml
