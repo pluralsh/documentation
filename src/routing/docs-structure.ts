@@ -20,6 +20,10 @@ export const docsStructure: DocSection[] = [
       { path: 'architecture', title: 'Architecture' },
       { path: 'management-api-reference', title: 'Management API Reference' },
       { path: 'agent-api-reference', title: 'Agent API Reference' },
+      {
+        path: 'management-controllers-reconciliation-logic',
+        title: 'Management Controllers Reconciliation Logic',
+      },
     ],
   },
   {

@@ -9,15 +9,19 @@
   },
   "/overview/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2026-01-05T19:57:57.000Z"
   },
   "/overview/management-api-reference": {
     "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2025-12-22T07:46:07.000Z"
+    "lastmod": "2026-01-14T08:27:46.000Z"
   },
   "/overview/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-12-29T11:00:04.000Z"
+    "lastmod": "2026-01-14T08:27:46.000Z"
+  },
+  "/overview/management-controllers-reconciliation-logic": {
+    "relPath": "/overview/management-controllers-reconciliation-logic.md",
+    "lastmod": "2026-01-16T12:18:52.365Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -117,11 +121,11 @@
   },
   "/plural-features/continuous-deployment/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/continuous-deployment/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
@@ -129,11 +133,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2025-12-30T05:57:04.477Z"
+    "lastmod": "2026-01-16T12:18:52.654Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2025-12-30T05:57:04.494Z"
+    "lastmod": "2026-01-16T12:18:52.668Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -141,7 +145,7 @@
   },
   "/plural-features/continuous-deployment/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/continuous-deployment/observer": {
     "relPath": "/plural-features/continuous-deployment/observer.md",
@@ -149,7 +153,7 @@
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
@@ -241,7 +245,7 @@
   },
   "/plural-features/plural-ai/arch-diagram": {
     "relPath": "/plural-features/plural-ai/arch-diagram.md",
-    "lastmod": "2025-11-08T16:45:39.000Z"
+    "lastmod": "2026-01-05T19:58:20.000Z"
   },
   "/plural-features/plural-ai/cost": {
     "relPath": "/plural-features/plural-ai/cost.md",
@@ -253,7 +257,7 @@
   },
   "/plural-features/flows": {
     "relPath": "/plural-features/flows/index.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/flows/create-a-flow": {
     "relPath": "/plural-features/flows/create-a-flow.md",
@@ -273,7 +277,7 @@
   },
   "/plural-features/flows/mcp-auth": {
     "relPath": "/plural-features/flows/mcp-auth.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/plural-features/flows/scm-webhooks-and-pr-linking": {
     "relPath": "/plural-features/flows/scm-webhooks-and-pr-linking.md",
@@ -349,19 +353,19 @@
   },
   "/examples/continuous-deployment/helm-basic-with-inline-values": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/examples/continuous-deployment/helm-basic-with-values-file": {
     "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/examples/continuous-deployment/kustomize-inflate-helm": {
     "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/examples/continuous-deployment/kustomize-stack-with-liquid": {
     "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/resources": {
     "relPath": "/resources/index.md",
@@ -389,7 +393,7 @@
   },
   "/getting-started/agent-api-reference": {
     "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2025-12-29T11:00:04.000Z"
+    "lastmod": "2026-01-14T08:27:46.000Z"
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
@@ -401,7 +405,7 @@
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2026-01-05T19:57:57.000Z"
   },
   "/reference/architecture": {
     "relPath": null,
@@ -477,15 +481,15 @@
   },
   "/deployments/operator/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/deployments/operator/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/deployments/operator/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
-    "lastmod": "2025-12-30T05:54:16.000Z"
+    "lastmod": "2025-12-30T16:00:47.000Z"
   },
   "/deployments/using-operator": {
     "relPath": "/plural-features/continuous-deployment/index.md",
