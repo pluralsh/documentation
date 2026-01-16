@@ -20,10 +20,6 @@ export const docsStructure: DocSection[] = [
       { path: 'architecture', title: 'Architecture' },
       { path: 'management-api-reference', title: 'Management API Reference' },
       { path: 'agent-api-reference', title: 'Agent API Reference' },
-      {
-        path: 'management-controllers-reconciliation-logic',
-        title: 'Management Controllers Reconciliation Logic',
-      },
     ],
   },
   {
@@ -114,6 +110,10 @@ export const docsStructure: DocSection[] = [
           {
             path: 'github-actions-ci',
             title: 'Integration with Github Actions/CI',
+          },
+          {
+            path: 'management-controllers-reconciliation-logic',
+            title: 'Management Controllers Reconciliation Logic',
           },
         ],
       },

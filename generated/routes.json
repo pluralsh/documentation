@@ -19,10 +19,6 @@
     "relPath": "/overview/agent-api-reference.md",
     "lastmod": "2026-01-14T08:27:46.000Z"
   },
-  "/overview/management-controllers-reconciliation-logic": {
-    "relPath": "/overview/management-controllers-reconciliation-logic.md",
-    "lastmod": "2026-01-16T12:18:52.365Z"
-  },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -133,11 +129,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-01-16T12:18:52.654Z"
+    "lastmod": "2026-01-16T15:43:05.678Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-01-16T12:18:52.668Z"
+    "lastmod": "2026-01-16T15:43:05.697Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -158,6 +154,10 @@
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
     "lastmod": "2025-08-04T17:41:39.000Z"
+  },
+  "/plural-features/continuous-deployment/management-controllers-reconciliation-logic": {
+    "relPath": "/plural-features/continuous-deployment/management-controllers-reconciliation-logic.md",
+    "lastmod": "2026-01-16T15:43:05.767Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
