@@ -111,16 +111,12 @@ annotation. Multiple policies can be comma-separated.
 Use `hook-succeeded` and/or `hook-failed` to delete the resource after it completes successfully or fails, respectively.
 If no delete policy is set, the resource will be kept.
 
-{% callout severity="info" %}
-Only jobs and pods are automatically deleted. Other resources will need to be deleted manually or via other automation.
-{% /callout %}
+Only jobs and pods are automatically deleted. Other resources need to be deleted manually or via other automation.
 
-{% callout severity="warning" %}
 When a manifest of a hook is updated, the operator will reapply the resource even if it has already completed.
-{% /callout %}
 
 {% callout severity="warning" %}
-If a Job manifest sets `ttlSecondsAfterFinished`, Kubernetes will delete it after it completes.
+If a job manifest sets `ttlSecondsAfterFinished`, Kubernetes will delete it after it completes.
 The agent will then see the resource as missing and recreate it unless the manifest also
 includes a hook delete policy via `deployment.plural.sh/sync-hook-delete-policy` or `helm.sh/hook-delete-policy`.
 
