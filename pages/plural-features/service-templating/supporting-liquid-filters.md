@@ -2217,7 +2217,7 @@ _Implementation_: `github.com/huandu/xstrings.Shuffle`
 
 
 
-_Implementation_: `github.com/Masterminds/sprig/v3.slice`
+_Implementation_: `github.com/pluralsh/polly/template.slice`
 
 ##  `snakecase`
 Converts a string from camelCase to snake_case.
