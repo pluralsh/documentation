@@ -25,7 +25,7 @@ spec:
   issuer: https://token.actions.githubusercontent.com # the oidc issuer url for gh actions, can be swapped for any other platform with oidc federation support
   user: someone@example.com # should point to the user email you want the federated credential to auth as
   scopes:
-    - createPullRequest
+    - catalog.write
   claimsLike:
     sub: "repo:pluralsh/console:ref:refs/heads/master" # any regex is supported
 ```
@@ -134,17 +134,17 @@ jobs:
       ###############################################################
       - name: setup plural
         id: plural
-        uses: pluralsh/setup-plural@v1
+        uses: pluralsh/setup-plural@v2
         with:
           email: console@plural.sh
-          consoleUrl: https://my.console.cloud.plurall.sh
+          consoleUrl: https://my.console.cloud.plural.sh
       - name: Set outputs
         id: sha
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT # unfortunately gh actions doesn't expose this natively lol
       - name: Trigger PR
-        uses: pluralsh/trigger-pull-request@v1
+        uses: pluralsh/trigger-pull-request@v2
         with:
-          url: https://my.console.cloud.plurall.sh
+          url: https://my.console.cloud.plural.sh
           token: ${{ steps.plural.outputs.consoleToken }}
           branch: plrl/console/update-${{ steps.sha.outputs.sha_short }}
           prAutomation: console-updater # the pr automation name above
