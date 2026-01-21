@@ -134,7 +134,7 @@ jobs:
       ###############################################################
       - name: setup plural
         id: plural
-        uses: pluralsh/setup-plural@v1
+        uses: pluralsh/setup-plural@v2
         with:
           email: console@plural.sh
           consoleUrl: https://my.console.cloud.plural.sh
@@ -142,7 +142,7 @@ jobs:
         id: sha
         run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT # unfortunately gh actions doesn't expose this natively lol
       - name: Trigger PR
-        uses: pluralsh/trigger-pull-request@v1
+        uses: pluralsh/trigger-pull-request@v2
         with:
           url: https://my.console.cloud.plural.sh
           token: ${{ steps.plural.outputs.consoleToken }}
