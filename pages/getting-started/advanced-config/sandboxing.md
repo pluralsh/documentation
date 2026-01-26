@@ -38,6 +38,15 @@ To set it up, you need to configure a few env vars as well, in particular:
 
 To simplify permission management, you can also configure specific emails to automatically be made admins via another env var: `CONSOLE_ADMIN_EMAILS`. It should be a comma seperated list, and on login we'll provision that user to be an admin w/in your Plural console instance. We'd recommend only setting this for a small set of users, then using group bindings for permissions from then on
 
+## Fallback To Password Auth
+
+The best practice for configuring auth in an enterprise environment is to use OIDC-based SSO described above. Sometimes in POC usecases, or similar scenarios, it's easier to use standard username/password auth.  This can be done by disabling oidc entirely, which requires two things:
+
+1. Don't set the `OIDC_CLIENT_ID` env var
+2. ensure `secrets.plural_client_id` is also not in the helm values or is empty (this is what handles using the "log in with plural" experience that is our default).
+
+You usually should only need this if SSO access is logistically hard + you have an egress proxy that prevents usage of "Login With Plural".
+
 ## Sandboxed Compatibility Tables
 
 We also bundle the compatibility and deprecation data in our docker images, and you can disable live polling github by setting the env var:
