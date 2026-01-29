@@ -18,6 +18,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [KubecostExtractor](#kubecostextractor)
 - [MetricsAggregate](#metricsaggregate)
 - [PipelineGate](#pipelinegate)
+- [PluralCAPICluster](#pluralcapicluster)
 - [UpgradeInsights](#upgradeinsights)
 - [VirtualCluster](#virtualcluster)
 
@@ -91,6 +92,7 @@ _Appears in:_
 
 
 _Appears in:_
+- [CapiConfigurationClusterSpec](#capiconfigurationclusterspec)
 - [HelmSpec](#helmspec)
 
 | Field | Description | Default | Validation |
@@ -299,6 +301,25 @@ _Appears in:_
 | `write` _[Binding](#binding) array_ | Write bindings. |  | Optional: \{\} <br /> |
 
 
+#### CapiConfigurationClusterSpec
+
+
+
+
+
+
+
+_Appears in:_
+- [PluralCAPICluster](#pluralcapicluster)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cluster` _[ClusterSpec](#clusterspec)_ | Cluster is a simplified representation of the Console API cluster<br />object. See [ClusterSpec] for more information. |  | Optional: \{\} <br /> |
+| `consoleTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef contains the reference to the secret holding the token to access the Console API |  | Required: \{\} <br /> |
+| `capiClusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | CapiClusterRef contains the reference to the CAPI cluster |  | Required: \{\} <br /> |
+| `agent` _[AgentHelmConfiguration](#agenthelmconfiguration)_ | Agent allows configuring agent specific helm chart options. |  | Optional: \{\} <br /> |
+
+
 #### ClaudeConfig
 
 
@@ -385,6 +406,7 @@ _Appears in:_
 
 
 _Appears in:_
+- [CapiConfigurationClusterSpec](#capiconfigurationclusterspec)
 - [VirtualClusterSpec](#virtualclusterspec)
 
 | Field | Description | Default | Validation |
@@ -750,6 +772,24 @@ _Appears in:_
 | `gateSpec` _[GateSpec](#gatespec)_ |  |  |  |
 
 
+
+
+#### PluralCAPICluster
+
+
+
+PluralCAPICluster is the Schema for the CAPI cluster configuration
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `PluralCAPICluster` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[CapiConfigurationClusterSpec](#capiconfigurationclusterspec)_ | Spec of the CAPI cluster configuration |  | Required: \{\} <br /> |
 
 
 
