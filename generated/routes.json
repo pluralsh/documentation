@@ -11,14 +11,6 @@
     "relPath": "/overview/architecture.md",
     "lastmod": "2026-01-05T19:57:57.000Z"
   },
-  "/overview/management-api-reference": {
-    "relPath": "/overview/management-api-reference.md",
-    "lastmod": "2026-01-14T08:27:46.000Z"
-  },
-  "/overview/agent-api-reference": {
-    "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2026-01-14T08:27:46.000Z"
-  },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -93,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-11-21T23:34:41.000Z"
+    "lastmod": "2026-01-26T19:35:11.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -102,6 +94,34 @@
   "/getting-started/advanced-config/private-ca": {
     "relPath": "/getting-started/advanced-config/private-ca.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/api-reference": {
+    "relPath": "/api-reference/index.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/kubernetes": {
+    "relPath": "/api-reference/kubernetes/index.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/kubernetes/management-api-reference": {
+    "relPath": "/api-reference/kubernetes/management-api-reference.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/kubernetes/agent-api-reference": {
+    "relPath": "/api-reference/kubernetes/agent-api-reference.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/graphql": {
+    "relPath": "/api-reference/graphql.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/rest": {
+    "relPath": "/api-reference/rest.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/api-reference/terraform": {
+    "relPath": "/api-reference/terraform.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
   },
   "/plural-features": {
     "relPath": "/plural-features/index.md",
@@ -125,15 +145,15 @@
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
-    "lastmod": "2025-12-22T19:54:38.000Z"
+    "lastmod": "2026-01-16T15:34:34.000Z"
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-01-16T15:43:05.678Z"
+    "lastmod": "2026-02-03T20:13:57.978Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-01-16T15:43:05.697Z"
+    "lastmod": "2026-02-03T20:13:57.997Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -153,11 +173,11 @@
   },
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
-    "lastmod": "2025-08-04T17:41:39.000Z"
+    "lastmod": "2026-01-21T22:44:46.000Z"
   },
   "/plural-features/continuous-deployment/management-controllers-reconciliation-logic": {
     "relPath": "/plural-features/continuous-deployment/management-controllers-reconciliation-logic.md",
-    "lastmod": "2026-01-16T15:43:05.767Z"
+    "lastmod": "2026-01-16T15:49:48.000Z"
   },
   "/plural-features/k8s-upgrade-assistant": {
     "relPath": "/plural-features/k8s-upgrade-assistant/index.md",
@@ -343,30 +363,6 @@
     "relPath": "/plural-features/notifications/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
-  "/examples": {
-    "relPath": null,
-    "lastmod": null
-  },
-  "/examples/continuous-deployment": {
-    "relPath": "/examples/continuous-deployment/index.md",
-    "lastmod": "2025-05-10T04:28:20.000Z"
-  },
-  "/examples/continuous-deployment/helm-basic-with-inline-values": {
-    "relPath": "/examples/continuous-deployment/helm-basic-with-inline-values.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
-  },
-  "/examples/continuous-deployment/helm-basic-with-values-file": {
-    "relPath": "/examples/continuous-deployment/helm-basic-with-values-file.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
-  },
-  "/examples/continuous-deployment/kustomize-inflate-helm": {
-    "relPath": "/examples/continuous-deployment/kustomize-inflate-helm.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
-  },
-  "/examples/continuous-deployment/kustomize-stack-with-liquid": {
-    "relPath": "/examples/continuous-deployment/kustomize-stack-with-liquid.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
-  },
   "/resources": {
     "relPath": "/resources/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
@@ -392,8 +388,8 @@
     "lastmod": "2025-08-11T16:38:17.000Z"
   },
   "/getting-started/agent-api-reference": {
-    "relPath": "/overview/agent-api-reference.md",
-    "lastmod": "2026-01-14T08:27:46.000Z"
+    "relPath": null,
+    "lastmod": null
   },
   "/getting-started/readme": {
     "relPath": "/getting-started/index.md",
@@ -465,7 +461,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2025-11-21T23:34:41.000Z"
+    "lastmod": "2026-01-26T19:35:11.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -598,5 +594,13 @@
   "/reference/release-notes": {
     "relPath": "/resources/release-notes.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/management-api-reference": {
+    "relPath": "/api-reference/kubernetes/management-api-reference.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
+  },
+  "/agent-api-reference": {
+    "relPath": "/api-reference/kubernetes/agent-api-reference.md",
+    "lastmod": "2026-02-03T20:04:53.000Z"
   }
 }
