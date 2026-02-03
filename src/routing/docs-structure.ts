@@ -18,8 +18,6 @@ export const docsStructure: DocSection[] = [
     sections: [
       { path: 'introduction', title: 'Introduction' },
       { path: 'architecture', title: 'Architecture' },
-      { path: 'management-api-reference', title: 'Management API Reference' },
-      { path: 'agent-api-reference', title: 'Agent API Reference' },
     ],
   },
   {
@@ -72,6 +70,36 @@ export const docsStructure: DocSection[] = [
           { path: 'network-configuration', title: 'Network configuration' },
           { path: 'private-ca', title: 'Handling private CAs' },
         ],
+      },
+    ],
+  },
+
+  {
+    path: 'api-reference',
+    title: 'API Reference',
+    sections: [
+      {
+        path: 'kubernetes',
+        title: 'Kubernetes API Reference',
+        sections: [
+          {
+            path: 'management-api-reference',
+            title: 'Management API Reference',
+          },
+          { path: 'agent-api-reference', title: 'Agent API Reference' },
+        ],
+      },
+      {
+        path: 'graphql',
+        title: 'GraphQL API Reference',
+      },
+      {
+        path: 'rest',
+        title: 'REST API Reference',
+      },
+      {
+        path: 'terraform',
+        title: 'Terraform Provider reference',
       },
     ],
   },
@@ -221,34 +249,6 @@ export const docsStructure: DocSection[] = [
         title: 'Projects and multi-tenancy',
       },
       { path: 'notifications', title: 'Notification configuration' },
-    ],
-  },
-  {
-    path: 'examples',
-    title: 'Examples',
-    sections: [
-      {
-        path: 'continuous-deployment',
-        title: 'Continuous deployment',
-        sections: [
-          {
-            path: 'helm-basic-with-inline-values',
-            title: 'Deploy a helm chart with inline values',
-          },
-          {
-            path: 'helm-basic-with-values-file',
-            title: 'Deploy a helm chart with git-sourced values file',
-          },
-          {
-            path: 'kustomize-inflate-helm',
-            title: 'Use kustomize to inflate a helm chart',
-          },
-          {
-            path: 'kustomize-stack-with-liquid',
-            title: 'Extend a helm chart with kustomize and liquid',
-          },
-        ],
-      },
     ],
   },
   {
@@ -533,6 +533,16 @@ export const redirects = [
   {
     source: '/reference/release-notes',
     destination: '/resources/release-notes',
+    permanent: true,
+  },
+  {
+    source: '/management-api-reference',
+    destination: '/api-reference/kubernetes/management-api-reference',
+    permanent: true,
+  },
+  {
+    source: '/agent-api-reference',
+    destination: '/api-reference/kubernetes/agent-api-reference',
     permanent: true,
   },
 ]
