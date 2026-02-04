@@ -188,6 +188,20 @@ export const docsStructure: DocSection[] = [
         title: 'Plural AI',
         sections: [
           { path: 'setup', title: 'Setup Plural AI' },
+          {
+            path: 'ai-agent',
+            title: 'AI agent',
+            sections: [
+              {
+                path: 'configure-agent',
+                title: 'Agent configuration and usage',
+              },
+              {
+                path: 'remote-browser',
+                title: 'Remote browser setup',
+              },
+            ],
+          },
           { path: 'architecture', title: 'Plural AI Architecture' },
           {
             path: 'sentinels',
