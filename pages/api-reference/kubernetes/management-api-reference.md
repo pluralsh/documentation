@@ -2583,7 +2583,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `type` _[ObserverActionType](#observeractiontype)_ | Type specifies the kind of action to perform when changes are detected.<br />PIPELINE actions trigger pipeline context updates, while PR actions create pull requests<br />using PR automation templates with the discovered values. |  | Enum: [PIPELINE PR] <br />Required: \{\} <br />Type: string <br /> |
+| `type` _[ObserverActionType](#observeractiontype)_ | Type specifies the kind of action to perform when changes are detected.<br />PIPELINE actions trigger pipeline context updates, while PR actions create pull requests<br />using PR automation templates with the discovered values. |  | Enum: [PIPELINE PR AGENT] <br />Required: \{\} <br />Type: string <br /> |
 | `configuration` _[ObserverConfiguration](#observerconfiguration)_ | Configuration contains the specific settings for this action type.<br />The structure depends on the Type field - PR actions use PR configuration,<br />while PIPELINE actions use pipeline configuration. |  | Required: \{\} <br /> |
 
 
@@ -2607,6 +2607,25 @@ _Appears in:_
 | `kubernetesVersions` _string array_ | KubernetesVersions specifies multiple Kubernetes versions for compatibility checking.<br />Useful when managing clusters with different Kubernetes versions or during upgrade periods.<br />The observer will only suggest add-on versions compatible with all specified versions. |  | Optional: \{\} <br /> |
 
 
+#### ObserverAgentAction
+
+
+
+
+
+
+
+_Appears in:_
+- [ObserverConfiguration](#observerconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `runtime` _string_ | Runtime specifies the runtime to use for the agent run. |  | Required: \{\} <br /> |
+| `prompt` _string_ | Prompt specifies the prompt to give the agent to explain how to handle the observed value. |  | Required: \{\} <br /> |
+| `repository` _string_ | Repository specifies the repository to use for the agent run. |  | Required: \{\} <br /> |
+| `cluster` _string_ | Cluster references the cluster handle associated with the agent runtime, used to uniquely identify the runtime if needed. |  |  |
+
+
 #### ObserverConfiguration
 
 
@@ -2624,6 +2643,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `pr` _[ObserverPrAction](#observerpraction)_ | Pr contains configuration for pull request actions.<br />Used when the action type is PR to automatically create pull requests<br />when new versions are detected by the observer. |  | Optional: \{\} <br /> |
 | `pipeline` _[ObserverPipelineAction](#observerpipelineaction)_ | Pipeline contains configuration for pipeline actions.<br />Used when the action type is PIPELINE to trigger pipeline context updates<br />when new versions are detected by the observer. |  | Optional: \{\} <br /> |
+| `agent` _[ObserverAgentAction](#observeragentaction)_ | Agent contains configuration for agent actions.<br />Used when the action type is AGENT to execute coding agent runs when new versions are detected by the observer. |  | Optional: \{\} <br /> |
 
 
 #### ObserverGit
@@ -4127,6 +4147,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this Sentinel.<br />If not provided, the name from Sentinel.ObjectMeta will be used. |  | Optional: \{\} <br /> |
 | `description` _string_ | Description provides a human-readable explanation of what this Sentinel. |  |  |
+| `crontab` _string_ | Crontab defines a schedule at which sentinels will automatically run. Can be left empty to run manually or via the API.<br />Examples: "0 */6 * * *" (every 6 hours), "*/15 * * * *" (every 15 minutes). |  | Optional: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ProjectRef references the project this object belongs to, enabling<br />project-scoped organization and access control. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | The git location to use for this sentinel. |  |  |
@@ -4341,6 +4362,7 @@ _Appears in:_
 | `luaScript` _string_ | LuaScript to use to generate Helm configuration.<br />This can ultimately return a lua table with keys "values" and "valuesFiles"<br />to supply overlays for either dynamically based on git state or other metadata. |  | Optional: \{\} <br /> |
 | `luaFile` _string_ | LuaFile to use to generate Helm configuration.<br />This can ultimately return a Lua table with keys "values" and "valuesFiles"<br />to supply overlays for either dynamically based on Git state or other metadata. |  | Optional: \{\} <br /> |
 | `luaFolder` _string_ | a folder of lua files to include in the final script used |  | Optional: \{\} <br /> |
+| `kustomizePostrender` _string_ | KustomizePostrender is a folder containing a kustomization to apply to the result of rendering this service's manifests. |  | Optional: \{\} <br /> |
 
 
 #### ServiceImport
