@@ -190,7 +190,7 @@ export const docsStructure: DocSection[] = [
           { path: 'setup', title: 'Setup Plural AI' },
           {
             path: 'ai-agent',
-            title: 'AI agent',
+            title: 'AI Background Agent',
             sections: [
               {
                 path: 'configure-agent',

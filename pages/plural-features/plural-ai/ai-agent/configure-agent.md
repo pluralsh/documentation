@@ -17,9 +17,9 @@ apiVersion: deployments.plural.sh/v1alpha1
 kind: AgentRuntime
 metadata:
   name: claude-default
-  namespace: plrl-deploy-operator
+  namespace: plrl-agents
 spec:
-  targetNamespace: plrl-deploy-operator
+  targetNamespace: plrl-agents
   type: CLAUDE
   default: true
   aiProxy: true
@@ -32,6 +32,76 @@ spec:
 ```
 
 Supported runtime types are `CLAUDE`, `OPENCODE`, and `GEMINI`.
+
+## Tune runtime resources
+
+`AgentRuntime` accepts a pod template so you can set CPU/memory requests and limits for the agent container. Use the `default` container name to target the main agent container.
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: AgentRuntime
+metadata:
+  name: claude-default
+  namespace: plrl-agents
+spec:
+  targetNamespace: plrl-agents
+  type: CLAUDE
+  template:
+    spec:
+      containers:
+        - name: default
+          resources:
+            requests:
+              cpu: "1"
+              memory: 2Gi
+            limits:
+              cpu: "4"
+              memory: 8Gi
+```
+
+If you enable a browser sidecar, use `spec.browser.container.resources` to tune the browser container resources.
+
+## Add network policies for the runtime
+
+Agent runs execute inside `spec.targetNamespace`, so apply NetworkPolicies in that namespace. Use an empty `podSelector` to apply the policy to all pods in the namespace.
+
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: agent-runtime-egress
+  namespace: plrl-agents
+spec:
+  podSelector: {}
+  policyTypes:
+    - Egress
+  egress:
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: kube-system
+      podSelector:
+        matchLabels:
+          k8s-app: kube-dns
+    ports:
+    - protocol: UDP
+      port: 53
+    - protocol: TCP
+      port: 53
+  - to:
+    - namespaceSelector:
+        matchLabels:
+          kubernetes.io/metadata.name: egress
+      podSelector:
+        matchLabels:
+          app: egress-proxy
+    ports:
+    - protocol: TCP
+      port: 3128
+
+```
+
+Replace the `ipBlock` entries with the CIDRs or egress proxy that your agents must reach (SCM, AI endpoints, package registries, etc.).
 
 ## Run an agent from the Console UI
 
