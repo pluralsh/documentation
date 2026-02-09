@@ -31,3 +31,5 @@ To add a new document:
 If you change the documentation structure (e.g., move, rename, or remove pages), you may need to add redirects to prevent broken links. Redirects are managed directly in [`docs-structure.ts`](/src/routing/docs-structure.ts) via the `redirects` array at the bottom of the file. Redirects on a path already defined by `docsStructure` will override where it reconciles to, which can be confirmed in [`routes.json`](/generated/routes.json)
 
 Whenever you update the structure or add redirects, review internal links throughout the documentation to ensure there are no broken references.
+
+dummy change
