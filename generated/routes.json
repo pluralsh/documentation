@@ -149,11 +149,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-02-04T14:38:01.718Z"
+    "lastmod": "2026-02-09T15:26:18.860Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-02-04T14:38:01.729Z"
+    "lastmod": "2026-02-09T15:26:18.872Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -257,15 +257,15 @@
   },
   "/plural-features/plural-ai/ai-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/index.md",
-    "lastmod": "2026-02-04T14:38:01.917Z"
+    "lastmod": "2026-02-04T16:02:00.000Z"
   },
   "/plural-features/plural-ai/ai-agent/configure-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/configure-agent.md",
-    "lastmod": "2026-02-04T14:38:01.928Z"
+    "lastmod": "2026-02-04T16:02:00.000Z"
   },
   "/plural-features/plural-ai/ai-agent/remote-browser": {
     "relPath": "/plural-features/plural-ai/ai-agent/remote-browser.md",
-    "lastmod": "2026-02-04T14:38:01.939Z"
+    "lastmod": "2026-02-04T16:02:00.000Z"
   },
   "/plural-features/plural-ai/architecture": {
     "relPath": "/plural-features/plural-ai/architecture.md",
