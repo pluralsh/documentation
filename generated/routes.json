@@ -105,11 +105,11 @@
   },
   "/api-reference/kubernetes/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-02-03T22:03:47.000Z"
+    "lastmod": "2026-02-10T15:31:54.000Z"
   },
   "/api-reference/kubernetes/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-02-03T22:03:47.000Z"
+    "lastmod": "2026-02-10T15:31:54.000Z"
   },
   "/api-reference/graphql": {
     "relPath": "/api-reference/graphql.md",
@@ -149,11 +149,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-02-09T15:26:18.860Z"
+    "lastmod": "2026-02-11T11:54:22.624Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-02-09T15:26:18.872Z"
+    "lastmod": "2026-02-11T11:54:22.636Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -257,11 +257,11 @@
   },
   "/plural-features/plural-ai/ai-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/index.md",
-    "lastmod": "2026-02-04T16:02:00.000Z"
+    "lastmod": "2026-02-09T15:30:15.000Z"
   },
   "/plural-features/plural-ai/ai-agent/configure-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/configure-agent.md",
-    "lastmod": "2026-02-04T16:02:00.000Z"
+    "lastmod": "2026-02-09T15:30:15.000Z"
   },
   "/plural-features/plural-ai/ai-agent/remote-browser": {
     "relPath": "/plural-features/plural-ai/ai-agent/remote-browser.md",
@@ -609,10 +609,10 @@
   },
   "/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-02-03T22:03:47.000Z"
+    "lastmod": "2026-02-10T15:31:54.000Z"
   },
   "/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-02-03T22:03:47.000Z"
+    "lastmod": "2026-02-10T15:31:54.000Z"
   }
 }
