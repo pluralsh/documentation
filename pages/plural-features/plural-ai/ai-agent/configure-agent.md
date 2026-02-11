@@ -65,6 +65,7 @@ If you enable a browser sidecar, use `spec.browser.container.resources` to tune 
 ## Add network policies for the runtime
 
 Agent runs execute inside `spec.targetNamespace`, so apply NetworkPolicies in that namespace. Use an empty `podSelector` to apply the policy to all pods in the namespace.
+For more background on how NetworkPolicies work, see the Kubernetes [Network Policies documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
 
 ```yaml
 apiVersion: networking.k8s.io/v1
