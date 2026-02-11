@@ -14,6 +14,7 @@ Using the browser sidecar is recommended when possible because it lets you set d
 ## AgentRuntime browser configuration
 
 Enable DinD and the browser sidecar in `AgentRuntime`:
+For field-level details, see the [BrowserConfig API reference](/api-reference/kubernetes/agent-api-reference#browserconfig) and [Browser enum API reference](/api-reference/kubernetes/agent-api-reference#browser).
 
 ```yaml
 spec:

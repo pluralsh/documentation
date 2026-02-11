@@ -11,6 +11,7 @@ description: Configure agent runtimes and run agent tasks.
 ## Configure an AgentRuntime
 
 Use `AgentRuntime` to define the provider, credentials, and runtime options.
+For field-level details, see the [AgentRuntime API reference](/api-reference/kubernetes/agent-api-reference#agentruntime) and [AgentRuntimeSpec API reference](/api-reference/kubernetes/agent-api-reference#agentruntimespec).
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
