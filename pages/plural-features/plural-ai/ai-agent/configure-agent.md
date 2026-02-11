@@ -103,7 +103,7 @@ spec:
 
 ```
 
-Replace the `ipBlock` entries with the CIDRs or egress proxy that your agents must reach (SCM, AI endpoints, package registries, etc.).
+Replace the namespace selectors and pod selectors with the destinations your agents must reach (SCM, AI endpoints, package registries, etc.).
 
 ## Run an agent from the Console UI
 
