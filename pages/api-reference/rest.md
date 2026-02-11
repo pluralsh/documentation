@@ -8,7 +8,7 @@ description: >-
 
 Plural's primary underlying api is written in GraphQl, as discussed in [our GQL docs](/api-reference/graphql).  That said, REST is often a lot more convenient to use for programmatic access, and a subset of the full functionality for most targeted usecases you might need.
 
-You can inspect our OpenAPI schema using [OpenAPI Viewer](https://rest.wiki/?https://raw.githubusercontent.com/pluralsh/console/refs/heads/master/schema/openapi.json)
+You can inspect our OpenAPI schema using [Redocly API Viewer](https://redocly.github.io/redoc/?url=https://raw.githubusercontent.com/pluralsh/console/refs/heads/master/schema/openapi.json)
 
 To authenticate to the REST api, just do the following:
 
