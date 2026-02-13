@@ -4069,6 +4069,81 @@ _Appears in:_
 | `parallel` _string_ | the value of the parallel flag for gotestsum |  | Optional: \{\} <br /> |
 
 
+#### SentinelCheckIntegrationTestCase
+
+
+
+
+
+
+
+_Appears in:_
+- [SentinelCheckIntegrationTestConfiguration](#sentinelcheckintegrationtestconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `type` _[SentinelIntegrationTestCaseType](#sentinelintegrationtestcasetype)_ | Type the type of test case to run |  | Enum: [COREDNS LOADBALANCER RAW PVC] <br /> |
+| `name` _string_ | Name the name of the test case |  |  |
+| `coredns` _[SentinelCheckIntegrationTestCaseCoredns](#sentinelcheckintegrationtestcasecoredns)_ | Coredns the coredns configuration to use for this test case |  | Optional: \{\} <br /> |
+| `loadbalancer` _[SentinelCheckIntegrationTestCaseLoadbalancer](#sentinelcheckintegrationtestcaseloadbalancer)_ | Loadbalancer the load balancer configuration to use for this test case |  | Optional: \{\} <br /> |
+| `pvc` _[SentinelCheckIntegrationTestCasePVC](#sentinelcheckintegrationtestcasepvc)_ | PVC the pvc configuration to use for this test case |  | Optional: \{\} <br /> |
+| `raw` _[SentinelCheckIntegrationTestCaseRaw](#sentinelcheckintegrationtestcaseraw)_ | Raw the raw configuration to use for this test case |  | Optional: \{\} <br /> |
+
+
+#### SentinelCheckIntegrationTestCaseCoredns
+
+_Underlying type:_ _[struct{DialFqdns []string "json:\"dialFqdns,omitempty\""; Delay *string "json:\"delay,omitempty\""; Retries *int64 "json:\"retries,omitempty\""}](#struct{dialfqdns-[]string-"json:\"dialfqdns,omitempty\"";-delay-*string-"json:\"delay,omitempty\"";-retries-*int64-"json:\"retries,omitempty\""})_
+
+
+
+
+
+_Appears in:_
+- [SentinelCheckIntegrationTestCase](#sentinelcheckintegrationtestcase)
+
+
+
+
+
+#### SentinelCheckIntegrationTestCaseLoadbalancer
+
+_Underlying type:_ _[struct{Namespace string "json:\"namespace\""; NamePrefix string "json:\"namePrefix\""; Annotations map[string]string "json:\"annotations,omitempty\""; Labels map[string]string "json:\"labels,omitempty\""; DNSProbe *SentinelCheckIntegrationTestCaseDNSProbe "json:\"dnsProbe,omitempty\""}](#struct{namespace-string-"json:\"namespace\"";-nameprefix-string-"json:\"nameprefix\"";-annotations-map[string]string-"json:\"annotations,omitempty\"";-labels-map[string]string-"json:\"labels,omitempty\"";-dnsprobe-*sentinelcheckintegrationtestcasednsprobe-"json:\"dnsprobe,omitempty\""})_
+
+
+
+
+
+_Appears in:_
+- [SentinelCheckIntegrationTestCase](#sentinelcheckintegrationtestcase)
+
+
+
+#### SentinelCheckIntegrationTestCasePVC
+
+_Underlying type:_ _[struct{NamePrefix string "json:\"namePrefix\""; Size string "json:\"size\""; StorageClass string "json:\"storageClass\""}](#struct{nameprefix-string-"json:\"nameprefix\"";-size-string-"json:\"size\"";-storageclass-string-"json:\"storageclass\""})_
+
+
+
+
+
+_Appears in:_
+- [SentinelCheckIntegrationTestCase](#sentinelcheckintegrationtestcase)
+
+
+
+#### SentinelCheckIntegrationTestCaseRaw
+
+_Underlying type:_ _[struct{Yaml k8s.io/apimachinery/pkg/runtime.RawExtension "json:\"yaml\""; ExpectedResult *github.com/pluralsh/console/go/client.SentinelRawResult "json:\"expectedResult,omitempty\""}](#struct{yaml-k8sioapimachinerypkgruntimerawextension-"json:\"yaml\"";-expectedresult-*githubcompluralshconsolegoclientsentinelrawresult-"json:\"expectedresult,omitempty\""})_
+
+
+
+
+
+_Appears in:_
+- [SentinelCheckIntegrationTestCase](#sentinelcheckintegrationtestcase)
+
+
+
 #### SentinelCheckIntegrationTestConfiguration
 
 
@@ -4089,6 +4164,7 @@ _Appears in:_
 | `tags` _object (keys:string, values:string)_ | the cluster tags to select where to run this job |  |  |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository to use for this integration test. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | The git location to use for this integration test. |  |  |
+| `cases` _[SentinelCheckIntegrationTestCase](#sentinelcheckintegrationtestcase) array_ |  |  |  |
 
 
 #### SentinelCheckKubernetesConfiguration

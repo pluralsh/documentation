@@ -258,8 +258,9 @@ _Appears in:_
 | `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
 | `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
 | `aiProxy` _boolean_ | AiProxy specifies whether the agent runtime should be proxied through the AI proxy. |  |  |
-| `dind` _boolean_ | Enable Docker-in-Docker for this agent runtime.<br />When true, the runtime will be configured to run with DinD support. |  | Optional: \{\} <br /> |
+| `dind` _boolean_ | Dind enables Docker-in-Docker for this agent runtime.<br />When true, the runtime will be configured to run with DinD support. |  | Optional: \{\} <br /> |
 | `allowedRepositories` _string array_ | AllowedRepositories the git repositories allowed to be used with this runtime. |  | Optional: \{\} <br /> |
+| `browser` _[BrowserConfig](#browserconfig)_ | Browser configuration augments agent runtime with a headless browser.<br />When provided, the runtime will be configured to run with a headless browser available<br />for the agent to use. |  | Optional: \{\} <br /> |
 
 
 #### Binding
@@ -300,6 +301,49 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `read` _[Binding](#binding) array_ | Read bindings. |  | Optional: \{\} <br /> |
 | `write` _[Binding](#binding) array_ | Write bindings. |  | Optional: \{\} <br /> |
+
+
+#### Browser
+
+_Underlying type:_ _string_
+
+Browser defines the browser to use for the agent runtime.
+
+
+
+_Appears in:_
+- [BrowserConfig](#browserconfig)
+
+| Field | Description |
+| --- | --- |
+| `chrome` |  |
+| `chromium` |  |
+| `firefox` |  |
+| `selenium-chrome` |  |
+| `selenium-chromium` |  |
+| `selenium-firefox` |  |
+| `selenium-edge` |  |
+| `puppeteer` |  |
+| `custom` |  |
+
+
+#### BrowserConfig
+
+
+
+BrowserConfig is the configuration for the browser runtime.
+It allows AgentRuntime to leverage a headless browser for executing and testing code.
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ | Enabled controls whether the browser runtime is enabled for this agent runtime. |  | Required: \{\} <br /> |
+| `browser` _[Browser](#browser)_ | Browser defines the browser to use. When using non-custom options,<br />predefined images with validated configurations will be used. Default configuration<br />can be overridden by specifying a custom Container. When using a "custom" browser,<br />a custom Container configuration must be provided.<br />Available options are:<br />- chrome - uses browserless/chrome image<br />- chromium - uses browserless/chromium image<br />- firefox - uses browserless/firefox image<br />- selenium-chrome - uses selenium/standalone-chrome image<br />- selenium-chromium - uses selenium/standalone-chromium image<br />- selenium-firefox - uses selenium/standalone-firefox image<br />- selenium-edge - uses selenium/standalone-edge image<br />- puppeteer - uses browserless/chromium image<br />- custom<br />Default: chrome | chrome | Enum: [chrome chromium firefox selenium-chrome selenium-chromium selenium-firefox selenium-edge puppeteer custom] <br />Optional: \{\} <br /> |
+| `container` _[Container](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#container-v1-core)_ | Container defines the container to use for the browser runtime.<br />For custom images, ensure the container starts a browser server and binds to<br />the predetermined port 3000 for remote access from the main agent container.<br />When using a predefined image, only partial overrides are allowed, including:<br />- environment variables<br />- resource limits<br />- image pull policy<br /># Examples<br />Selenium:<br />  name: browser<br />  image: selenium/standalone-chrome:144.0<br />  env:<br />  - name: SE_OPTS<br />    value: "--port 3000" |  | Optional: \{\} <br /> |
 
 
 #### CapiConfigurationClusterSpec
