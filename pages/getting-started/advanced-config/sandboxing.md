@@ -19,6 +19,69 @@ The former is much more important as it hosts upgrades to our deployment agent (
 
 Also our deprecation and compatibility tracking ultimately source their data from the https://github.com/pluralsh/console repo.
 
+## TLDR
+
+You should read below to get a feel for what these configuration fields all mean, but a near-working setup of our chart for all these settings is given below (with the expectation of you plugging in your install-specific values).  These should be overlayed on the values that the plural cli generates by default:
+
+```yaml
+console:
+  config:
+    airgap: true # if you cannot allow egress
+    agentHelmValues:
+      image:
+        repository: your.enterprise.registry/pluralsh/deployment-operator
+
+      # configure agentk (if this isn't pullable kubernetes dashboarding functionality will break but deployments can still proceed)
+      agentk:
+        image:
+          repository: your.enterprise.registry/pluralsh/agentk
+  customOidc:
+    enabled: true # if you want to bring your own OIDC provider
+    clientId: some-client-id
+    clientSecret: some-client-secret
+    discoveryUrl: https://{your-idp-domain}/.well-known/openid-configuration
+
+extraSecretEnv:
+  CONSOLE_LICENSE_KEY: your-license-key # if you're using an airgapped license.
+  CONSOLE_ADMIN_EMAILS: someone@example.com # if you want to auto-configure some emails as admins 
+
+# If you need to disable built-in ingress tls
+# main plural ingress
+# ingress:
+#   tls:
+#     enabled: false
+
+# # disable for KAS ingress too
+# kas:
+#   ingress:
+#     tls:
+#       enabled: false
+
+global:
+  registry: your.enterprise.registry
+
+# configure kas image for the kubernetes proxy server setup
+kas:
+  agent:
+    proxy:
+      image:
+        repository: your.enteprise.registry/some/nginx
+
+  image:
+    repository: your.enterprise.registry/pluralsh/kas
+
+  redis:
+    registry: your.enterprise.registry
+    repository: redis
+
+# if you need to enable the internal git server
+gitServer:
+  enabled: true # if you want to enable the built-in git server for our default repos, especially for sourcing the deployment operator
+  repository: your.enterprise.registry/git-server
+```
+
+The exact images you'll want to vendor are listed below as well.
+
 ## Sandboxed Licensing
 
 As part of an enterprise agreement, we can issue you a year-long license key that can then be configured into your console instance via setting the `CONSOLE_LICENSE_KEY` env var. We are happy to help configure that as part of setting up your instance as well.
