@@ -46,6 +46,10 @@ spec:
   template:
     namespace: "flow-test-pr-{{ pr.number }}"
     name: "flow-test-pr-{{ pr.number }}"
+
+    syncConfig:
+      deleteNamespace: true # ensure the temp namespace is deleted on cleanup
+      
     helm:
       values:
         image:
