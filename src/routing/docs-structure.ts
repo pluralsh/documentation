@@ -238,6 +238,15 @@ export const docsStructure: DocSection[] = [
         title: 'Pull request automation',
         sections: [
           { path: 'crds', title: 'PR automation custom resources' },
+          {
+            path: 'governance',
+            title: 'PR Governance Controller',
+            sections: [
+              { path: 'servicenow', title: 'ServiceNow Governance' },
+              { path: 'webhook', title: 'Custom Webhook Governance' },
+            ],
+          },
+          { path: 'description-patterns', title: 'PR Description Patterns' },
           { path: 'testing', title: 'PR automation testing' },
           { path: 'lua', title: 'Lua-based Pre-Processing' },
           { path: 'pipelines', title: 'PR automation pipelines' },
