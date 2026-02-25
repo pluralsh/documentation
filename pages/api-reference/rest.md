@@ -1,7 +1,7 @@
 ---
-title: Plural GraphQl API
+title: REST API
 description: >-
-  Documentation about how to interact with the Plural GraphQl api directly.
+  Documentation about how to interact with our REST api.
 ---
 
 # REST API
