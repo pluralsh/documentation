@@ -2246,6 +2246,8 @@ export type PlatformPlan = {
   id: Scalars['ID']['output'];
   insertedAt?: Maybe<Scalars['DateTime']['output']>;
   lineItems?: Maybe<Array<Maybe<PlatformPlanItem>>>;
+  maximumClusters?: Maybe<Scalars['Int']['output']>;
+  maximumUsers?: Maybe<Scalars['Int']['output']>;
   name: Scalars['String']['output'];
   period: PaymentPeriod;
   trial?: Maybe<Scalars['Boolean']['output']>;
