@@ -53,6 +53,29 @@ The ServiceNow controller will do the following once it is tied to a PR:
 3. Once the PR is merged, the change is moved to `Close` state, and marked successful with reason that the pull request is merged.
 4. If the PR is ever closed, the change request is moved to `Cancelled` state.
 
+Here's a state diagram for the visually inclined as well:
+
+{% mermaid %}
+stateDiagram-v2
+    [\*] --> PRCreate : PR tied to governance
+    state PRCreate : PR created with governance tag
+    PRCreate --> ChangeCreated : Create change request in ServiceNow
+    state ChangeCreated : Create change via REST API, fill blanks from PR/AI if needed
+    ChangeCreated --> WaitingForScheduled : Change in ServiceNow
+    state WaitingForScheduled : Wait for change to reach Scheduled (or later)
+    WaitingForScheduled --> Implementing : Change is Scheduled, approve PR, move to Implement
+    state Implementing : Change in Implement state
+    Implementing --> Closed : PR merged
+    state Closed : Move change to Close, mark successful
+    PRCreate --> Cancelled : PR closed
+    ChangeCreated --> Cancelled : PR closed
+    WaitingForScheduled --> Cancelled : PR closed
+    Implementing --> Cancelled : PR closed
+    state Cancelled : Change request moved to Cancelled state
+    Closed --> [\*]
+    Cancelled --> [\*]
+{% /mermaid %}
+
 # Requiring ServiceNow Approvals before PR Approval
 
 This is acheived in the following way:

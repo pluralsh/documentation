@@ -69,6 +69,25 @@ The webhook controller will do the following once it is tied to a PR:
 3. If `/v1/confirm` returns 200, the pull request is approved.
 4. Once the pull request is merged or closed, a call to `POST /v1/close` is made.
 
+Here's a state diagram for the visually inclined as well:
+
+{% mermaid %}
+stateDiagram-v2
+    [\*] --> PRCreate : PR tied to governance
+    state PRCreate : PR opened with governance tag
+    PRCreate --> OpenSent : Call POST /v1/open
+    state OpenSent : Response persisted as state for later calls
+    OpenSent --> WaitingForConfirm : Periodically call POST /v1/confirm with state
+    state WaitingForConfirm : Poll until 200 or PR merged/closed
+    WaitingForConfirm --> Approved : /v1/confirm returns 200
+    state Approved : Pull request is approved
+    OpenSent --> Closed : PR merged or closed
+    WaitingForConfirm --> Closed : PR merged or closed
+    Approved --> Closed : PR merged or closed
+    state Closed : Call POST /v1/close
+    Closed --> [*]
+{% /mermaid %}
+
 {% callout severity="info" %}
 For this to gate pull request merges appropriately, you'll need to ensure the SCM credential given to the governance controller is a required approver of the repository or at least a CODEOWNER of the files that are being changed  
 {% /callout %}
