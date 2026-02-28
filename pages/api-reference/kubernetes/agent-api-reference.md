@@ -19,6 +19,8 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [MetricsAggregate](#metricsaggregate)
 - [PipelineGate](#pipelinegate)
 - [PluralCAPICluster](#pluralcapicluster)
+- [SentinelRunJob](#sentinelrunjob)
+- [StackRunJob](#stackrunjob)
 - [UpgradeInsights](#upgradeinsights)
 - [VirtualCluster](#virtualcluster)
 
@@ -892,6 +894,78 @@ _Appears in:_
 | `requireAnnotations` _object (keys:string, values:string)_ |  |  |  |
 
 
+#### SentinelRunJob
+
+
+
+SentinelRunJob is the Schema for the sentinel run job
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `SentinelRunJob` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[SentinelRunJobSpec](#sentinelrunjobspec)_ |  |  |  |
+
+
+#### SentinelRunJobSpec
+
+
+
+
+
+
+
+_Appears in:_
+- [SentinelRunJob](#sentinelrunjob)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `runId` _string_ | RunID from Console API |  |  |
+
+
+
+
+#### StackRunJob
+
+
+
+StackRunJob is the Schema for the stack run job
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `StackRunJob` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[StackRunJobSpec](#stackrunjobspec)_ |  |  |  |
+
+
+#### StackRunJobSpec
+
+
+
+
+
+
+
+_Appears in:_
+- [StackRunJob](#stackrunjob)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `runId` _string_ | RunID from Console API |  |  |
+
+
+
+
 #### Status
 
 
@@ -902,6 +976,8 @@ _Appears in:_
 
 _Appears in:_
 - [AgentRunStatus](#agentrunstatus)
+- [SentinelRunJobStatus](#sentinelrunjobstatus)
+- [StackRunJobStatus](#stackrunjobstatus)
 - [VirtualClusterStatus](#virtualclusterstatus)
 
 | Field | Description | Default | Validation |
