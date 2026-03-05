@@ -25,6 +25,7 @@ import {
 } from '@pluralsh/design-system'
 
 import { type Nullable } from '@pluralsh/design-system/dist/types'
+import { useCopyText } from '@src/hooks/useCopyText'
 import styled, { useTheme } from 'styled-components'
 
 // helps prevent flickering (and potentially expensive recalculations) in virutalized lists
@@ -369,23 +370,4 @@ function useGlobalPan(setPosition: Dispatch<SetStateAction<Position>>) {
   }, [isDragging, setPosition])
 
   return { isDragging, handleMouseDown }
-}
-
-function useCopyText(text: string) {
-  const [copied, setCopied] = useState(false)
-  const handleCopy = useCallback(
-    () =>
-      window.navigator.clipboard.writeText(text).then(() => setCopied(true)),
-    [text]
-  )
-
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 1000)
-
-      return () => clearTimeout(timeout)
-    }
-  }, [copied])
-
-  return { copied, handleCopy }
 }

@@ -154,40 +154,44 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
         <HtmlHead {...headProps} />
         <PageHeader />
         <Page>
-          <PageGrid>
-            <SideNavContainer>
-              {isClient ? (
-                <Suspense fallback={<div>Loading navigation...</div>}>
+          {(Component as any).customLayout ? (
+            <Component {...pageProps} />
+          ) : (
+            <PageGrid>
+              <SideNavContainer>
+                {isClient ? (
+                  <Suspense fallback={<div>Loading navigation...</div>}>
+                    <FullNav desktop />
+                  </Suspense>
+                ) : (
                   <FullNav desktop />
-                </Suspense>
-              ) : (
-                <FullNav desktop />
-              )}
-            </SideNavContainer>
-            <ContentContainer>
-              <MainContent
-                Component={Component}
-                title={displayTitle}
-                description={displayDescription}
-              />
-              <PageFooter />
-            </ContentContainer>
-            <SideCarContainer>
-              {isClient ? (
-                <Suspense fallback={<div>Loading table of contents...</div>}>
+                )}
+              </SideNavContainer>
+              <ContentContainer>
+                <MainContent
+                  Component={Component}
+                  title={displayTitle}
+                  description={displayDescription}
+                />
+                <PageFooter />
+              </ContentContainer>
+              <SideCarContainer>
+                {isClient ? (
+                  <Suspense fallback={<div>Loading table of contents...</div>}>
+                    <TableOfContents
+                      key={router.asPath}
+                      toc={toc}
+                    />
+                  </Suspense>
+                ) : (
                   <TableOfContents
                     key={router.asPath}
                     toc={toc}
                   />
-                </Suspense>
-              ) : (
-                <TableOfContents
-                  key={router.asPath}
-                  toc={toc}
-                />
-              )}
-            </SideCarContainer>
-          </PageGrid>
+                )}
+              </SideCarContainer>
+            </PageGrid>
+          )}
         </Page>
         <ExternalScripts />
       </PagePropsContext.Provider>
