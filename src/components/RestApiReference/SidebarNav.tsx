@@ -3,12 +3,14 @@
  */
 
 import { useMemo, useState } from 'react'
+
 import styled from 'styled-components'
 
 import { MethodBadge } from './MethodBadge'
+
 import type { ApiSection, Endpoint } from '@src/lib/openapi-rest'
 
-const Sidebar = styled.aside(({ theme }) => ({
+const Sidebar = styled.aside(({ theme: _theme }) => ({
   position: 'sticky',
   top: 'var(--top-nav-height)',
   height: 'calc(100vh - var(--top-nav-height))',
@@ -199,6 +201,7 @@ export function SidebarNav({
           ...section,
           endpoints: section.endpoints.filter((ep: Endpoint) => {
             const q = filter.toLowerCase()
+
             return (
               !q ||
               ep.path.toLowerCase().includes(q) ||
@@ -240,8 +243,8 @@ export function SidebarNav({
               <TopNavDivider />
             </>
           )}
-          {filteredSections.map((section, si) => (
-            <SectionGroup key={si}>
+          {filteredSections.map((section) => (
+            <SectionGroup key={section.title}>
               <SectionHeader>{section.title}</SectionHeader>
               {section.endpoints.map((ep) => (
                 <EndpointRow

@@ -26,3 +26,6 @@ yarn-error.log*
 /build
 /dist
 .env.local
+
+# OpenAPI schema (fetched at Docker build time)
+schema/

@@ -4,9 +4,9 @@
 
 import styled from 'styled-components'
 
-import type { Parameter } from '@src/lib/openapi-rest'
+import { Table, Td, TdLight, Th, TypeTag } from './shared'
 
-import { Table, Th, Td, TdLight, TypeTag } from './shared'
+import type { Parameter } from '@src/lib/openapi-rest'
 
 const RequiredBadge = styled.span(() => ({
   fontSize: 10,

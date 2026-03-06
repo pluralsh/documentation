@@ -8,6 +8,9 @@
 const OPENAPI_URL =
   'https://raw.githubusercontent.com/pluralsh/console/refs/heads/master/schema/openapi.json'
 
+/** Local schema path for build environments without network (e.g. Docker). */
+const LOCAL_OPENAPI_PATH = 'schema/openapi.json'
+
 export type HttpMethod = 'GET' | 'POST' | 'DELETE' | 'PATCH' | 'PUT'
 
 export interface Endpoint {
@@ -125,33 +128,38 @@ interface OpenAPIDoc {
 
 const METHODS = ['get', 'post', 'put', 'patch', 'delete'] as const
 
+function capitalizeWord(w: string): string {
+  if (!w) return w
+
+  return w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
+}
+
 function operationIdToTitle(opId: string): string {
   const words = opId
     .replace(/([A-Z])/g, ' $1')
     .trim()
     .split(/\s+/)
+
   return words
-    .map((w, i) =>
-      i === 0
-        ? w.charAt(0).toUpperCase() + w.slice(1).toLowerCase()
-        : w.toLowerCase()
-    )
+    .map((w, i) => (i === 0 ? capitalizeWord(w) : w.toLowerCase()))
     .join(' ')
 }
 
 function tagToSection(tag: string): string {
-  return tag.toUpperCase().replace(/-/g, '-')
+  return tag.split('-').map(capitalizeWord).join(' ')
 }
 
 function getSchemaFromRef(doc: OpenAPIDoc, ref: string): OpenAPISchema | null {
   if (!ref.startsWith('#/components/schemas/')) return null
   const name = ref.replace('#/components/schemas/', '')
+
   return doc.components?.schemas?.[name] ?? null
 }
 
 /** Strips undefined values so the result is safe for Next.js serialization. */
 function cleanSchemaProperty(p: SchemaProperty): SchemaProperty {
   const out: SchemaProperty = { name: p.name, type: p.type }
+
   if (p.description != null) out.description = p.description
   if (p.required) out.required = true
   if (p.enum && p.enum.length > 0) out.enum = p.enum
@@ -161,6 +169,7 @@ function cleanSchemaProperty(p: SchemaProperty): SchemaProperty {
     out.properties = p.properties.map(cleanSchemaProperty)
   if (p.arrayItemProperties && p.arrayItemProperties.length > 0)
     out.arrayItemProperties = p.arrayItemProperties.map(cleanSchemaProperty)
+
   return out
 }
 
@@ -173,11 +182,13 @@ function resolveSchemaProperty(
 ): SchemaProperty {
   if (prop.$ref) {
     const refName = prop.$ref.replace('#/components/schemas/', '')
+
     if (seen.has(refName)) {
       return cleanSchemaProperty({ name, type: refName, required: isRequired })
     }
     seen.add(refName)
     const resolved = getSchemaFromRef(doc, prop.$ref)
+
     if (resolved?.properties) {
       return cleanSchemaProperty({
         name,
@@ -187,6 +198,7 @@ function resolveSchemaProperty(
         properties: resolveSchemaProperties(doc, resolved, new Set(seen)),
       })
     }
+
     return cleanSchemaProperty({
       name,
       type: resolved?.type ?? 'object',
@@ -196,12 +208,15 @@ function resolveSchemaProperty(
   }
 
   if (prop.type === 'array' && prop.items) {
-    const items = prop.items
+    const { items } = prop
+
     if (items.$ref) {
       const refName = items.$ref.replace('#/components/schemas/', '')
+
       if (!seen.has(refName)) {
         seen.add(refName)
         const resolved = getSchemaFromRef(doc, items.$ref)
+
         if (resolved?.properties) {
           return cleanSchemaProperty({
             name,
@@ -217,6 +232,7 @@ function resolveSchemaProperty(
           })
         }
       }
+
       return cleanSchemaProperty({
         name,
         type: 'array',
@@ -225,6 +241,7 @@ function resolveSchemaProperty(
         description: prop.description ?? null,
       })
     }
+
     return cleanSchemaProperty({
       name,
       type: 'array',
@@ -266,9 +283,11 @@ function resolveSchemaProperties(
 
   if (schema.$ref) {
     const refName = schema.$ref.replace('#/components/schemas/', '')
+
     if (seen.has(refName)) return []
     seen.add(refName)
     const resolved = getSchemaFromRef(doc, schema.$ref)
+
     return resolveSchemaProperties(doc, resolved, seen)
   }
 
@@ -276,6 +295,7 @@ function resolveSchemaProperties(
 
   const required = schema.required ?? []
   const properties: SchemaProperty[] = []
+
   for (const [propName, prop] of Object.entries(schema.properties)) {
     properties.push(
       resolveSchemaProperty(
@@ -287,6 +307,7 @@ function resolveSchemaProperties(
       )
     )
   }
+
   return properties
 }
 
@@ -299,9 +320,11 @@ function buildExampleFromProp(
 
   if ('$ref' in prop && prop.$ref) {
     const refName = prop.$ref.replace('#/components/schemas/', '')
+
     if (seen.has(refName)) return {}
     seen.add(refName)
     const resolved = getSchemaFromRef(doc, prop.$ref)
+
     return buildExampleFromSchema(doc, resolved, seen)
   }
 
@@ -310,6 +333,7 @@ function buildExampleFromProp(
     const item = itemSchema?.$ref
       ? buildExampleFromProp(doc, itemSchema, new Set(seen))
       : {}
+
     return [item]
   }
 
@@ -340,11 +364,13 @@ function buildExampleFromSchema(
     const item = itemSchema?.$ref
       ? buildExampleFromProp(doc, itemSchema, new Set(seen))
       : {}
+
     return [item]
   }
 
   if (schema.type === 'object' || schema.properties) {
     const obj: Record<string, unknown> = {}
+
     for (const [key, prop] of Object.entries(schema.properties ?? {})) {
       if (prop?.$ref) {
         obj[key] = buildExampleFromProp(doc, prop, new Set(seen))
@@ -352,6 +378,7 @@ function buildExampleFromSchema(
         const item = prop.items?.$ref
           ? buildExampleFromProp(doc, prop.items, new Set(seen))
           : {}
+
         obj[key] = [item]
       } else if (prop?.type === 'string') {
         obj[key] = prop.enum?.[0] ?? 'string'
@@ -363,6 +390,7 @@ function buildExampleFromSchema(
         obj[key] = 'string'
       }
     }
+
     return obj
   }
 
@@ -374,10 +402,12 @@ function getResponseSchemaForStatus(
   response: OpenAPIResponse
 ): OpenAPISchema | null {
   const responseSchema = response?.content?.['application/json']?.schema
+
   if (!responseSchema) return null
   if (responseSchema.$ref) {
     return getSchemaFromRef(doc, responseSchema.$ref)
   }
+
   return responseSchema
 }
 
@@ -385,6 +415,7 @@ function getResponseSchemaForStatus(
 function parseStatusCode(code: string): number {
   if (code === 'default') return 200
   const n = parseInt(code, 10)
+
   return Number.isNaN(n) ? 200 : n
 }
 
@@ -393,7 +424,33 @@ function sortResponses(a: ResponseSample, b: ResponseSample): number {
   const order = (s: number) =>
     s >= 200 && s < 300 ? 0 : s >= 400 && s < 500 ? 1 : s >= 500 ? 2 : 3
   const diff = order(a.status) - order(b.status)
+
   return diff !== 0 ? diff : a.status - b.status
+}
+
+async function loadOpenApiDoc(): Promise<OpenAPIDoc> {
+  if (typeof window === 'undefined') {
+    try {
+      const path = await import('path')
+      const fs = await import('fs')
+      const cwd = process.cwd()
+      const localPath = path.join(cwd, LOCAL_OPENAPI_PATH)
+
+      if (fs.existsSync(localPath)) {
+        const raw = fs.readFileSync(localPath, 'utf-8')
+
+        return JSON.parse(raw) as OpenAPIDoc
+      }
+    } catch {
+      // Fall through to fetch
+    }
+  }
+
+  const res = await fetch(OPENAPI_URL)
+
+  if (!res.ok) throw new Error(`Failed to fetch OpenAPI: ${res.status}`)
+
+  return (await res.json()) as OpenAPIDoc
 }
 
 export async function fetchRestApiData(): Promise<{
@@ -401,9 +458,7 @@ export async function fetchRestApiData(): Promise<{
   endpointDetails: Record<string, EndpointDetail>
   defaultEndpointId: string
 }> {
-  const res = await fetch(OPENAPI_URL)
-  if (!res.ok) throw new Error(`Failed to fetch OpenAPI: ${res.status}`)
-  const doc: OpenAPIDoc = await res.json()
+  const doc = await loadOpenApiDoc()
 
   const sectionsMap = new Map<string, Endpoint[]>()
   const endpointDetails: Record<string, EndpointDetail> = {}
@@ -413,6 +468,7 @@ export async function fetchRestApiData(): Promise<{
       const op = pathItem[method as keyof OpenAPIPathItem] as
         | OpenAPIOperation
         | undefined
+
       if (!op) continue
 
       const opId = op.operationId ?? `${method}-${path}`
@@ -428,6 +484,7 @@ export async function fetchRestApiData(): Promise<{
       const tag = op.tags?.[0] ?? 'other'
       const sectionTitle = tagToSection(tag)
       const existing = sectionsMap.get(sectionTitle) ?? []
+
       existing.push(endpoint)
       sectionsMap.set(sectionTitle, existing)
 
@@ -435,7 +492,9 @@ export async function fetchRestApiData(): Promise<{
 
       for (const p of op.parameters ?? []) {
         const kind =
-          p.in === 'path' ? 'path' : p.in === 'query' ? 'query' : 'query'
+          p.in === 'path' ? 'path' : p.in === 'query' ? 'query' : null
+
+        if (!kind) continue
         params.push({
           name: p.name,
           type: p.schema?.type ?? 'string',
@@ -451,11 +510,13 @@ export async function fetchRestApiData(): Promise<{
           ? getSchemaFromRef(doc, bodySchema.$ref)
           : bodySchema
         const required = (resolved?.required ?? []) as string[]
+
         if (resolved?.properties) {
           for (const [name, prop] of Object.entries(resolved.properties)) {
             const propSchema = prop?.$ref
               ? getSchemaFromRef(doc, prop.$ref)
               : (prop as OpenAPISchema)
+
             params.push({
               name,
               type: propSchema?.type ?? prop?.type ?? 'string',
@@ -469,6 +530,7 @@ export async function fetchRestApiData(): Promise<{
 
       const responses: ResponseSample[] = []
       const responseSchemas: ResponseSchemaInfo[] = []
+
       for (const [code, responseSpec] of Object.entries(op.responses ?? {}) as [
         string,
         OpenAPIResponse,
@@ -481,6 +543,7 @@ export async function fetchRestApiData(): Promise<{
           : desc
             ? { error: desc }
             : { message: `HTTP ${status}` }
+
         responses.push({
           status,
           body: JSON.stringify(example, null, 2),
@@ -500,6 +563,7 @@ export async function fetchRestApiData(): Promise<{
         const order = (s: number) =>
           s >= 200 && s < 300 ? 0 : s >= 400 && s < 500 ? 1 : s >= 500 ? 2 : 3
         const diff = order(a.status) - order(b.status)
+
         return diff !== 0 ? diff : a.status - b.status
       })
 
@@ -528,16 +592,20 @@ export async function fetchRestApiData(): Promise<{
   const sortedTitles = [...sectionsMap.keys()].sort((a, b) => {
     if (a === 'OTHER') return 1
     if (b === 'OTHER') return -1
+
     return a.localeCompare(b)
   })
+
   for (const title of sortedTitles) {
     const endpoints = sectionsMap.get(title) ?? []
+
     if (endpoints.length > 0) {
       apiSections.push({ title, endpoints })
     }
   }
 
   const firstOp = apiSections[0]?.endpoints[0]?.id
+
   return {
     apiSections,
     endpointDetails,

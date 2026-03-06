@@ -10,8 +10,9 @@
 import type { GetStaticPaths, GetStaticProps } from 'next'
 
 import RestApiReference from '@src/components/RestApiReference'
-import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
 import { AUTH_PAGE_ID } from '@src/components/RestApiReference/SidebarNav'
+
+import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
 
 type RestPageProps = {
   apiSections: ApiSection[]
@@ -40,7 +41,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   const { endpointDetails } = await fetchRestApiData()
 
   const paths = [
-    { params: { slug: false as any } },
+    { params: { slug: [] } },
     { params: { slug: ['authentication'] } },
     ...Object.keys(endpointDetails).map((id) => ({
       params: { slug: [id] },

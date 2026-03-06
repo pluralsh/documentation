@@ -4,21 +4,22 @@
  */
 
 import { useState } from 'react'
+
 import styled from 'styled-components'
 
-import type { ResponseSchemaInfo, SchemaProperty } from '@src/lib/openapi-rest'
-
 import {
-  getStatusColor,
-  StatusTabs,
-  StatusTab,
   StatusDot,
+  StatusTab,
+  StatusTabs,
   Table,
-  Th,
   Td,
   TdLight,
+  Th,
   TypeTag,
+  getStatusColor,
 } from './shared'
+
+import type { ResponseSchemaInfo, SchemaProperty } from '@src/lib/openapi-rest'
 
 /* ─── Styled Components ──────────────────────────────────────────────────── */
 
@@ -95,11 +96,13 @@ function flattenProperties(
   prefix: string
 ): FlatRow[] {
   const rows: FlatRow[] = []
+
   for (const prop of props) {
     const key = prefix ? `${prefix}.${prop.name}` : prop.name
     const isArray = prop.type === 'array'
 
-    let type = prop.type
+    let { type } = prop
+
     if (isArray && prop.arrayItemType) {
       type = `Array<${prop.arrayItemType}>`
     } else if (isArray) {
@@ -120,10 +123,12 @@ function flattenProperties(
     })
 
     const children = prop.arrayItemProperties ?? prop.properties
+
     if (children && children.length > 0) {
       rows.push(...flattenProperties(children, depth + 1, key))
     }
   }
+
   return rows
 }
 
@@ -145,6 +150,7 @@ export function ResponseSchemaView({
   }
 
   const selected = schemas[selectedIndex]
+
   if (!selected) return null
 
   const rows = flattenProperties(selected.properties, 0, '')

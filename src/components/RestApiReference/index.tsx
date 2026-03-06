@@ -5,8 +5,6 @@
  */
 
 import { useCallback, useMemo, useState } from 'react'
-import { useRouter } from 'next/router'
-import styled from 'styled-components'
 
 import {
   Breadcrumbs,
@@ -15,15 +13,19 @@ import {
   GitHubLogoIcon,
   Tab,
 } from '@pluralsh/design-system'
+import { useRouter } from 'next/router'
+
+import styled from 'styled-components'
 
 import { useCopyText } from '@src/hooks/useCopyText'
-import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
 
 import { MethodBadge } from './MethodBadge'
 import { ParameterTable } from './ParameterTable'
 import { ResponsePanel } from './ResponsePanel'
 import { ResponseSchemaView } from './ResponseSchemaView'
 import { AUTH_PAGE_ID, SidebarNav } from './SidebarNav'
+
+import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
 
 type TabId = 'query' | 'responses'
 
@@ -154,7 +156,7 @@ const EditOnGithubRow = styled.div(({ theme }) => ({
   },
 }))
 
-const AuthContent = styled.div(({ theme }) => ({
+const AuthContent = styled.div(({ theme: _theme }) => ({
   maxWidth: 760,
 }))
 
@@ -202,7 +204,9 @@ export type RestApiReferenceProps = {
 
 function slugToId(slug: string | string[] | undefined): string {
   const s = Array.isArray(slug) ? slug[0] : slug
+
   if (!s || s === 'authentication') return AUTH_PAGE_ID
+
   return s
 }
 
@@ -227,6 +231,7 @@ export default function RestApiReference({
   const handleSelect = useCallback(
     (id: string) => {
       const slug = id === AUTH_PAGE_ID ? 'authentication' : id
+
       router.push(`/api-reference/rest/${slug}`, undefined, { shallow: true })
       setActiveTab('query')
     },

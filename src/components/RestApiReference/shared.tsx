@@ -24,6 +24,7 @@ export function getStatusColor(status: number): string {
   if (status >= 200 && status < 300) return '#3DD68C'
   if (status >= 400 && status < 500) return '#FF8B3E'
   if (status >= 500) return '#FF6369'
+
   return '#9E8CFC'
 }
 

@@ -4,19 +4,22 @@
  */
 
 import { useState } from 'react'
+
 import {
-  Card,
-  Highlight,
   Button,
-  CopyIcon,
+  Card,
   CheckIcon,
+  CopyIcon,
+  Highlight,
 } from '@pluralsh/design-system'
+
 import styled from 'styled-components'
 
 import { useCopyText } from '@src/hooks/useCopyText'
-import type { EndpointDetail, ResponseSample } from '@src/lib/openapi-rest'
 
-import { getStatusColor, StatusTabs, StatusTab, StatusDot } from './shared'
+import { StatusDot, StatusTab, StatusTabs, getStatusColor } from './shared'
+
+import type { EndpointDetail, ResponseSample } from '@src/lib/openapi-rest'
 
 const Panel = styled.div(({ theme }) => ({
   marginBottom: theme.spacing.large,
@@ -73,6 +76,7 @@ export function ResponsePanel({ detail }: { detail: EndpointDetail }) {
   if (responses.length === 0) return null
 
   const selected = responses[selectedIndex] as ResponseSample | undefined
+
   if (!selected) return null
 
   return (

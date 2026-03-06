@@ -15,6 +15,7 @@ export function useCopyText(text: string) {
   useEffect(() => {
     if (copied) {
       const timeout = setTimeout(() => setCopied(false), 1000)
+
       return () => clearTimeout(timeout)
     }
   }, [copied])
