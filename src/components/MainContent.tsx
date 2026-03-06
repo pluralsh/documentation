@@ -36,7 +36,7 @@ const Description = styled.p(({ theme }) => ({
   marginBottom: theme.spacing.small,
 }))
 
-const EditOnGithub = styled.div(({ theme }) => ({
+export const EditOnGithub = styled.div(({ theme }) => ({
   marginBottom: theme.spacing.xxxlarge,
 }))
 
@@ -46,7 +46,7 @@ const EditOnGithubLink = styled(FooterLink)(({ theme }) => ({
   gap: theme.spacing.small,
 }))
 
-const PageDivider = styled.div(({ theme }) => ({
+export const PageDivider = styled.div(({ theme }) => ({
   marginTop: theme.spacing.xxxlarge,
   marginBottom: theme.spacing.xxxlarge,
   borderTop: theme.borders.default,

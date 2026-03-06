@@ -2,6 +2,7 @@
  * API parameter table. Displays name, type, required, description.
  */
 
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 
 import { Table, Td, TdLight, Th, TypeTag } from './shared'
@@ -16,7 +17,7 @@ const RequiredBadge = styled.span(() => ({
 }))
 
 export function ParameterTable({ parameters }: { parameters: Parameter[] }) {
-  if (parameters.length === 0) return null
+  if (isEmpty(parameters)) return null
 
   return (
     <Table>

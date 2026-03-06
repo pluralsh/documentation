@@ -1,9 +1,13 @@
 /**
  * Sidebar navigation for REST API endpoints. Search + section list.
+ * Uses Next.js Link for proper navigation and accessibility.
  */
 
 import { useMemo, useState } from 'react'
 
+import NextLink from 'next/link'
+
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 
 import { MethodBadge } from './MethodBadge'
@@ -93,7 +97,7 @@ const EndpointLabel = styled.span(({ theme }) => ({
   color: theme.colors['text-light'],
 }))
 
-const EndpointRow = styled.button<{ $active: boolean }>(
+const EndpointRowLink = styled(NextLink)<{ $active: boolean }>(
   ({ theme, $active }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -104,6 +108,8 @@ const EndpointRow = styled.button<{ $active: boolean }>(
     border: 'none',
     cursor: 'pointer',
     textAlign: 'left',
+    textDecoration: 'none',
+    color: 'inherit',
     borderStartStartRadius: theme.borderRadiuses.medium,
     borderEndStartRadius: theme.borderRadiuses.medium,
     borderStartEndRadius: 0,
@@ -148,8 +154,9 @@ function SearchIcon() {
 
 export const AUTH_PAGE_ID = '__authentication__'
 
-const TopNavItem = styled.button<{ $active: boolean }>(
+const TopNavItemLink = styled(NextLink)<{ $active: boolean }>(
   ({ theme, $active }) => ({
+    ...theme.partials.text.body1Bold,
     display: 'flex',
     alignItems: 'center',
     gap: theme.spacing.small,
@@ -159,12 +166,12 @@ const TopNavItem = styled.button<{ $active: boolean }>(
     border: 'none',
     cursor: 'pointer',
     textAlign: 'left',
+    textDecoration: 'none',
     borderStartStartRadius: theme.borderRadiuses.medium,
     borderEndStartRadius: theme.borderRadiuses.medium,
     borderStartEndRadius: 0,
     borderEndEndRadius: 0,
     backgroundColor: $active ? theme.colors['action-primary'] : 'transparent',
-    ...theme.partials.text.body1Bold,
     color: $active ? theme.colors.text : theme.colors['text-light'],
     '&:hover': {
       backgroundColor: $active
@@ -181,17 +188,13 @@ const TopNavDivider = styled.hr(({ theme }) => ({
   margin: `${theme.spacing.small}px ${theme.spacing.medium}px`,
 }))
 
-export type SidebarNavProps = {
-  sections: ApiSection[]
-  selectedId: string
-  onSelect: (id: string) => void
-}
-
 export function SidebarNav({
   sections,
   selectedId,
-  onSelect,
-}: SidebarNavProps) {
+}: {
+  sections: ApiSection[]
+  selectedId: string
+}) {
   const [filter, setFilter] = useState('')
 
   const filteredSections = useMemo(
@@ -210,7 +213,7 @@ export function SidebarNav({
             )
           }),
         }))
-        .filter((s) => s.endpoints.length > 0),
+        .filter((s) => !isEmpty(s.endpoints)),
     [sections, filter]
   )
 
@@ -221,25 +224,30 @@ export function SidebarNav({
       <SidebarInner>
         <SearchWrapper>
           <SearchInput>
-            <span className="icon">
+            <span
+              className="icon"
+              aria-hidden
+            >
               <SearchIcon />
             </span>
             <input
+              type="search"
               placeholder="Filter API"
               value={filter}
               onChange={(e) => setFilter(e.target.value)}
+              aria-label="Filter API endpoints"
             />
           </SearchInput>
         </SearchWrapper>
-        <nav>
+        <nav aria-label="REST API endpoints">
           {showAuthItem && (
             <>
-              <TopNavItem
+              <TopNavItemLink
+                href="/api-reference/rest/authentication"
                 $active={selectedId === AUTH_PAGE_ID}
-                onClick={() => onSelect(AUTH_PAGE_ID)}
               >
                 Authentication
-              </TopNavItem>
+              </TopNavItemLink>
               <TopNavDivider />
             </>
           )}
@@ -247,14 +255,14 @@ export function SidebarNav({
             <SectionGroup key={section.title}>
               <SectionHeader>{section.title}</SectionHeader>
               {section.endpoints.map((ep) => (
-                <EndpointRow
+                <EndpointRowLink
                   key={ep.id}
+                  href={`/api-reference/rest/${ep.id}`}
                   $active={ep.id === selectedId}
-                  onClick={() => onSelect(ep.id)}
                 >
                   <EndpointLabel>{ep.name || ep.path}</EndpointLabel>
                   <MethodBadge method={ep.method} />
-                </EndpointRow>
+                </EndpointRowLink>
               ))}
             </SectionGroup>
           ))}

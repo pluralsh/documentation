@@ -5,11 +5,13 @@
  *   /api-reference/rest                → Authentication page
  *   /api-reference/rest/authentication → Authentication page
  *   /api-reference/rest/{operationId}  → Endpoint detail page
+ *
+ * Data is loaded at runtime via getServerSideProps and cached per-pod.
  */
 
-import type { GetStaticPaths, GetStaticProps } from 'next'
+import type { GetServerSideProps } from 'next'
 
-import RestApiReference from '@src/components/RestApiReference'
+import { RestApiReference, slugToId } from '@src/components/RestApiReference'
 import { AUTH_PAGE_ID } from '@src/components/RestApiReference/SidebarNav'
 
 import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
@@ -20,7 +22,7 @@ type RestPageProps = {
   selectedId: string
 }
 
-function RestPage({
+export function RestPage({
   apiSections = [],
   endpointDetails = {},
   selectedId,
@@ -36,45 +38,23 @@ function RestPage({
 
 RestPage.customLayout = true
 
-export const getStaticPaths: GetStaticPaths = async () => {
-  const { fetchRestApiData } = await import('@src/lib/openapi-rest')
-  const { endpointDetails } = await fetchRestApiData()
-
-  const paths = [
-    { params: { slug: [] } },
-    { params: { slug: ['authentication'] } },
-    ...Object.keys(endpointDetails).map((id) => ({
-      params: { slug: [id] },
-    })),
-  ]
-
-  return { paths, fallback: 'blocking' }
-}
-
-export const getStaticProps: GetStaticProps<RestPageProps> = async ({
+export const getServerSideProps: GetServerSideProps<RestPageProps> = async ({
   params,
 }) => {
   const { fetchRestApiData } = await import('@src/lib/openapi-rest')
   const { apiSections, endpointDetails } = await fetchRestApiData()
 
-  const slug = (params?.slug as string[] | undefined)?.[0]
+  const slugId = slugToId(params?.slug)
 
-  let selectedId: string
-
-  if (!slug || slug === 'authentication') {
-    selectedId = AUTH_PAGE_ID
-  } else if (endpointDetails[slug]) {
-    selectedId = slug
-  } else {
+  if (!(endpointDetails[slugId] || slugId === AUTH_PAGE_ID))
     return { notFound: true }
-  }
 
   return {
     props: {
       displayTitle: 'REST API Reference',
       apiSections,
       endpointDetails,
-      selectedId,
+      selectedId: slugId,
     },
   }
 }

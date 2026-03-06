@@ -1,29 +1,14 @@
 import styled from 'styled-components'
 
-// ─── Page layout ─────────────────────────────────────────────────────────────
+// ─── Content layout (uses shared PageGrid from PageGrid.tsx) ───────────────────
 
-export const PageContainer = styled.div(({ theme }) => ({
-  display: 'flex',
-  flexDirection: 'row',
-  height: 'calc(100vh - var(--top-nav-height))',
-  overflow: 'hidden',
-  background: theme.colors['fill-zero'],
-}))
-
-export const MainArea = styled.main({
-  flex: 1,
-  display: 'flex',
-  flexDirection: 'column',
-  overflow: 'hidden',
-})
-
-export const MainScrollArea = styled.div(({ theme }) => ({
-  flex: 1,
-  overflowY: 'auto',
-  padding: `${theme.spacing.xlarge}px ${theme.spacing.xlarge}px`,
+export const RestContentWrapper = styled.div(({ theme }) => ({
+  marginTop: theme.spacing.xlarge,
+  padding: `0 ${theme.spacing.xlarge}px`,
 }))
 
 export const BreadcrumbsWrapper = styled.div(({ theme }) => ({
+  marginTop: theme.spacing.xlarge,
   marginBottom: theme.spacing.large,
 }))
 
@@ -114,19 +99,6 @@ export const TabBar = styled.div(({ theme }) => ({
   display: 'flex',
   gap: 0,
   marginBottom: theme.spacing.xlarge,
-}))
-
-// ─── Footer ──────────────────────────────────────────────────────────────────
-// Spacing matches MainContent + PageFooter: divider (xxxlarge + line + xxxlarge),
-// then Edit on Github link, then xxxlarge gap, then PageFooter.
-
-export const FooterSection = styled.div(({ theme }) => ({
-  marginTop: theme.spacing.xxxlarge,
-  paddingTop: theme.spacing.xxxlarge,
-  borderTop: theme.borders.default,
-  display: 'flex',
-  flexDirection: 'column',
-  gap: theme.spacing.xxxlarge,
 }))
 
 // ─── Auth page ───────────────────────────────────────────────────────────────

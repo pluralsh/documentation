@@ -1,5 +1,6 @@
 import {
   type ComponentProps,
+  type ComponentType,
   Suspense,
   forwardRef,
   useEffect,
@@ -61,6 +62,11 @@ import { collectHeadings } from '@src/markdoc/utils/parseHeadings'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
+
+/** Page component type; some pages opt into a full-width custom layout (e.g. REST API reference). */
+type PageComponentWithLayout = ComponentType<MyPageProps> & {
+  customLayout?: boolean
+}
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   displayTitle?: string
@@ -154,7 +160,7 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
         <HtmlHead {...headProps} />
         <PageHeader />
         <Page>
-          {(Component as any).customLayout ? (
+          {(Component as PageComponentWithLayout).customLayout ? (
             <Component {...pageProps} />
           ) : (
             <PageGrid>

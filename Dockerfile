@@ -2,7 +2,7 @@ FROM node:22-alpine AS base
 
 WORKDIR /app
 
-RUN apk add --no-cache curl git
+RUN apk add --no-cache git
 
 COPY package.json yarn.lock ./
 COPY .yarnrc.docker.yml ./.yarnrc.yml
@@ -22,11 +22,6 @@ ENV NEXT_PUBLIC_GA_ID=$NEXT_PUBLIC_GA_ID
 ENV NEXT_PUBLIC_ALGOLIA_APP_ID=$NEXT_PUBLIC_ALGOLIA_APP_ID
 ENV NEXT_PUBLIC_ALGOLIA_APP_ID_KEY=$NEXT_PUBLIC_ALGOLIA_APP_ID_KEY
 ENV NEXT_PUBLIC_ALGOLIA_INDEX_NAME=$NEXT_PUBLIC_ALGOLIA_INDEX_NAME
-
-# Fetch OpenAPI schema so REST API reference page can build without network at build time
-RUN mkdir -p schema && \
-  curl -sSL -o schema/openapi.json \
-  https://raw.githubusercontent.com/pluralsh/console/refs/heads/master/schema/openapi.json
 
 RUN yarn build
 

@@ -3,7 +3,7 @@
  * green/amber/red status dot, Copy button without icon.
  */
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
 import {
   Button,
@@ -13,6 +13,7 @@ import {
   Highlight,
 } from '@pluralsh/design-system'
 
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 
 import { useCopyText } from '@src/hooks/useCopyText'
@@ -48,10 +49,6 @@ const StatusBadge = styled.div(({ theme }) => ({
 
 const CodeWrapper = styled.div(() => ({
   position: 'relative' as const,
-  '&:hover [data-copy-btn]': {
-    opacity: 1,
-    pointerEvents: 'auto' as const,
-  },
 }))
 
 const CopyBtnWrap = styled.div(({ theme }) => ({
@@ -59,9 +56,6 @@ const CopyBtnWrap = styled.div(({ theme }) => ({
   zIndex: 1,
   right: theme.spacing.medium,
   top: theme.spacing.medium,
-  opacity: 0,
-  pointerEvents: 'none' as const,
-  transition: 'opacity 0.2s ease',
 }))
 
 const CodeContent = styled.div(({ theme }) => ({
@@ -71,11 +65,18 @@ const CodeContent = styled.div(({ theme }) => ({
 
 export function ResponsePanel({ detail }: { detail: EndpointDetail }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const responses = detail.responses ?? []
+  const { responses } = detail
 
-  if (responses.length === 0) return null
+  useEffect(() => {
+    setSelectedIndex((prev) =>
+      isEmpty(responses) ? 0 : Math.min(prev, responses.length - 1)
+    )
+  }, [responses])
 
-  const selected = responses[selectedIndex] as ResponseSample | undefined
+  if (isEmpty(responses)) return null
+
+  const safeIndex = Math.min(selectedIndex, responses.length - 1)
+  const selected = responses[safeIndex] as ResponseSample | undefined
 
   if (!selected) return null
 
@@ -86,7 +87,7 @@ export function ResponsePanel({ detail }: { detail: EndpointDetail }) {
           {responses.map((r, i) => (
             <StatusTab
               key={r.status}
-              $active={i === selectedIndex}
+              $active={i === safeIndex}
               onClick={() => setSelectedIndex(i)}
               type="button"
             >
@@ -119,12 +120,13 @@ function ResponseCodeBlock({ content }: { content: string }) {
 
   return (
     <CodeWrapper>
-      <CopyBtnWrap data-copy-btn>
+      <CopyBtnWrap>
         <Button
           small
           floating
           startIcon={copied ? <CheckIcon /> : <CopyIcon />}
           onClick={handleCopy}
+          aria-label={copied ? 'Copied' : 'Copy response'}
         >
           {copied ? 'Copied' : 'Copy'}
         </Button>

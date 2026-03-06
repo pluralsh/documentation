@@ -4,12 +4,17 @@
  * Data passed as props; no fetching.
  */
 
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import { Breadcrumbs, CheckIcon, CopyIcon, Tab } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
 
-import PageFooter, { EditOnGitHubLink } from '@src/components/PageFooter'
+import { PageDivider } from '@src/components/MainContent'
+import {
+  ContentContainer,
+  PageGrid,
+  SideNavContainer,
+} from '@src/components/PageGrid'
 import { useCopyText } from '@src/hooks/useCopyText'
 
 import { AuthPageContent } from './AuthPageContent'
@@ -25,12 +30,9 @@ import {
   EndpointName,
   EndpointPath,
   EndpointTitleRow,
-  FooterSection,
-  MainArea,
-  MainScrollArea,
-  PageContainer,
   PageDescription,
   PathGroup,
+  RestContentWrapper,
   TabBar,
 } from './RestApiReference.styles'
 import { AUTH_PAGE_ID, SidebarNav } from './SidebarNav'
@@ -45,7 +47,7 @@ export type RestApiReferenceProps = {
   selectedId: string
 }
 
-function slugToId(slug: string | string[] | undefined): string {
+export function slugToId(slug: string | string[] | undefined) {
   const s = Array.isArray(slug) ? slug[0] : slug
 
   if (!s || s === 'authentication') return AUTH_PAGE_ID
@@ -53,7 +55,7 @@ function slugToId(slug: string | string[] | undefined): string {
   return s
 }
 
-export default function RestApiReference({
+export function RestApiReference({
   apiSections = [],
   endpointDetails = {},
   selectedId: initialSelectedId,
@@ -71,23 +73,13 @@ export default function RestApiReference({
     detail?.path ?? ''
   )
 
-  const handleSelect = useCallback(
-    (id: string) => {
-      const slug = id === AUTH_PAGE_ID ? 'authentication' : id
-
-      router.push(`/api-reference/rest/${slug}`, undefined, { shallow: true })
-      setActiveTab('query')
-    },
-    [router]
-  )
-
   const currentLabel = isAuthPage
     ? 'Authentication'
     : detail?.operationName ?? selectedId
 
   const breadcrumbs = useMemo(
     () => [
-      { label: 'Docs' },
+      { label: 'Docs', url: '/' },
       { label: 'API Reference', url: '/api-reference' },
       { label: 'REST API Reference', url: '/api-reference/rest' },
       { label: currentLabel },
@@ -96,15 +88,15 @@ export default function RestApiReference({
   )
 
   return (
-    <PageContainer>
-      <SidebarNav
-        sections={apiSections}
-        selectedId={selectedId}
-        onSelect={handleSelect}
-      />
-
-      <MainArea>
-        <MainScrollArea>
+    <PageGrid>
+      <SideNavContainer>
+        <SidebarNav
+          sections={apiSections}
+          selectedId={selectedId}
+        />
+      </SideNavContainer>
+      <ContentContainer>
+        <RestContentWrapper>
           <BreadcrumbsWrapper>
             <Breadcrumbs breadcrumbs={breadcrumbs} />
           </BreadcrumbsWrapper>
@@ -160,26 +152,21 @@ export default function RestApiReference({
                 )}
 
                 {activeTab === 'responses' && (
-                  <ResponseSchemaView schemas={detail.responseSchemas ?? []} />
+                  <ResponseSchemaView
+                    key={detail.id}
+                    schemas={detail.responseSchemas ?? []}
+                  />
                 )}
               </div>
-
-              <ResponsePanel detail={detail} />
+              <ResponsePanel
+                key={detail.id}
+                detail={detail}
+              />
             </ContentGrid>
           )}
-
-          <FooterSection>
-            {isAuthPage && (
-              <EditOnGitHubLink
-                href="https://github.com/pluralsh/documentation/blob/main/src/components/RestApiReference/AuthPageContent.tsx"
-                target="_blank"
-                rel="noopener noreferrer"
-              />
-            )}
-            <PageFooter />
-          </FooterSection>
-        </MainScrollArea>
-      </MainArea>
-    </PageContainer>
+        </RestContentWrapper>
+        <PageDivider />
+      </ContentContainer>
+    </PageGrid>
   )
 }

@@ -3,8 +3,9 @@
  * Nested properties are indented; no collapsible sections.
  */
 
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 
+import isEmpty from 'lodash/isEmpty'
 import styled from 'styled-components'
 
 import {
@@ -124,7 +125,7 @@ function flattenProperties(
 
     const children = prop.arrayItemProperties ?? prop.properties
 
-    if (children && children.length > 0) {
+    if (children && !isEmpty(children)) {
       rows.push(...flattenProperties(children, depth + 1, key))
     }
   }
@@ -141,7 +142,13 @@ export function ResponseSchemaView({
 }) {
   const [selectedIndex, setSelectedIndex] = useState(0)
 
-  if (schemas.length === 0) {
+  useEffect(() => {
+    setSelectedIndex((prev) =>
+      isEmpty(schemas) ? 0 : Math.min(prev, schemas.length - 1)
+    )
+  }, [schemas])
+
+  if (isEmpty(schemas)) {
     return (
       <SchemaContainer>
         <FallbackText>No response schema available.</FallbackText>
@@ -149,7 +156,8 @@ export function ResponseSchemaView({
     )
   }
 
-  const selected = schemas[selectedIndex]
+  const safeIndex = Math.min(selectedIndex, schemas.length - 1)
+  const selected = schemas[safeIndex]
 
   if (!selected) return null
 
@@ -162,7 +170,7 @@ export function ResponseSchemaView({
           {schemas.map((s, i) => (
             <StatusTab
               key={s.status}
-              $active={i === selectedIndex}
+              $active={i === safeIndex}
               onClick={() => setSelectedIndex(i)}
               type="button"
             >
@@ -178,7 +186,7 @@ export function ResponseSchemaView({
         <ContentTypeBadge>{selected.contentType}</ContentTypeBadge>
       </SchemaHeader>
 
-      {rows.length > 0 ? (
+      {!isEmpty(rows) ? (
         <Table>
           <thead>
             <tr>
@@ -200,10 +208,10 @@ export function ResponseSchemaView({
                 </Td>
                 <TdLight>
                   {row.description ?? '—'}
-                  {row.enum && row.enum.length > 0 && (
+                  {!isEmpty(row.enum) && (
                     <EnumWrap>
                       <EnumLabel>Enum:</EnumLabel>
-                      {row.enum.map((v) => (
+                      {(row.enum ?? []).map((v) => (
                         <EnumBadge key={v}>{`"${v}"`}</EnumBadge>
                       ))}
                     </EnumWrap>
