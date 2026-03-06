@@ -9,6 +9,8 @@
 import SwaggerParser from '@apidevtools/swagger-parser'
 import isEmpty from 'lodash/isEmpty'
 
+import type { OpenAPIV3, OpenAPIV3_1 as OpenApiV31 } from 'openapi-types'
+
 const DEFAULT_OPENAPI_URL =
   'https://raw.githubusercontent.com/pluralsh/console/refs/heads/master/schema/openapi.json'
 
@@ -19,9 +21,8 @@ function getOpenApiSpecUrl(): string {
   if (
     typeof process.env.OPENAPI_SPEC_URL === 'string' &&
     process.env.OPENAPI_SPEC_URL
-  ) {
+  )
     return process.env.OPENAPI_SPEC_URL
-  }
 
   return DEFAULT_OPENAPI_URL
 }
@@ -104,68 +105,17 @@ export interface EndpointDetail {
   responseSchemas: ResponseSchemaInfo[]
 }
 
-interface OpenAPIPathItem {
-  get?: OpenAPIOperation
-  post?: OpenAPIOperation
-  put?: OpenAPIOperation
-  patch?: OpenAPIOperation
-  delete?: OpenAPIOperation
-}
+type MethodKey = 'get' | 'post' | 'put' | 'patch' | 'delete'
+type OpenApiDoc = OpenAPIV3.Document | OpenApiV31.Document
+type MaybeSchema =
+  | OpenAPIV3.ReferenceObject
+  | OpenAPIV3.SchemaObject
+  | OpenApiV31.ReferenceObject
+  | OpenApiV31.SchemaObject
+  | null
+  | undefined
 
-interface OpenAPIResponse {
-  description?: string
-  content?: { 'application/json'?: { schema?: OpenAPISchema } }
-}
-
-interface OpenAPIOperation {
-  tags?: string[]
-  operationId?: string
-  summary?: string
-  description?: string
-  parameters?: OpenAPIParameter[]
-  requestBody?: {
-    content?: { 'application/json'?: { schema?: OpenAPISchema } }
-  }
-  responses?: Record<string, OpenAPIResponse>
-}
-
-interface OpenAPIParameter {
-  name: string
-  in: 'query' | 'path' | 'header'
-  required?: boolean
-  schema?: { type?: string; enum?: string[] }
-  description?: string
-}
-
-interface OpenAPISchema {
-  type?: string
-  $ref?: string
-  description?: string
-  enum?: string[]
-  format?: string
-  properties?: Record<string, OpenAPIProp>
-  items?: OpenAPISchema
-  required?: string[]
-}
-
-interface OpenAPIProp {
-  type?: string
-  $ref?: string
-  enum?: string[]
-  format?: string
-  items?: OpenAPISchema
-  description?: string
-  properties?: Record<string, OpenAPIProp>
-  required?: string[]
-}
-
-interface OpenAPIDoc {
-  paths: Record<string, OpenAPIPathItem>
-  components?: { schemas?: Record<string, OpenAPISchema> }
-}
-
-type SchemaLike = OpenAPISchema | OpenAPIProp
-const METHODS = ['get', 'post', 'put', 'patch', 'delete'] as const
+const METHODS: MethodKey[] = ['get', 'post', 'put', 'patch', 'delete']
 
 function capitalizeWord(w: string): string {
   if (!w) return w
@@ -188,95 +138,104 @@ function tagToSection(tag: string): string {
   return tag.split('-').map(capitalizeWord).join(' ')
 }
 
-function hasSchemaProperties(
-  schema: SchemaLike | null | undefined
-): schema is SchemaLike & { properties: Record<string, OpenAPIProp> } {
-  return !isEmpty(schema?.properties)
+function hasSchemaProperties(schema: MaybeSchema): schema is
+  | (OpenAPIV3.SchemaObject & {
+      properties: Record<
+        string,
+        OpenAPIV3.ReferenceObject | OpenAPIV3.SchemaObject
+      >
+    })
+  | (OpenApiV31.SchemaObject & {
+      properties: Record<
+        string,
+        OpenApiV31.ReferenceObject | OpenApiV31.SchemaObject
+      >
+    }) {
+  return !!schema && !('$ref' in schema) && !isEmpty(schema.properties)
 }
 
-function getSchemaType(schema: SchemaLike | null | undefined): string {
-  if (!schema) return 'string'
-  if (schema.type) return schema.type
+function getSchemaType(schema: MaybeSchema): string {
+  if (!schema || '$ref' in schema) return 'string'
+  if (typeof schema.type === 'string') return schema.type
   if (hasSchemaProperties(schema)) return 'object'
 
   return 'string'
 }
 
-/** Strips undefined values so the result is safe for Next.js serialization. */
-function cleanSchemaProperty(p: SchemaProperty): SchemaProperty {
-  const out: SchemaProperty = { name: p.name, type: p.type }
-  const { properties, arrayItemProperties } = p
-
-  if (p.description != null) out.description = p.description
-  if (p.required) out.required = true
-  if (!isEmpty(p.enum)) out.enum = p.enum
-  if (p.format) out.format = p.format
-  if (p.arrayItemType) out.arrayItemType = p.arrayItemType
-  if (!isEmpty(properties)) {
-    out.properties = (properties ?? []).map(cleanSchemaProperty)
-  }
-  if (!isEmpty(arrayItemProperties)) {
-    out.arrayItemProperties = (arrayItemProperties ?? []).map(
-      cleanSchemaProperty
-    )
-  }
-
-  return out
-}
-
 function resolveSchemaProperty(
   name: string,
-  prop: SchemaLike,
+  prop: MaybeSchema,
   isRequired: boolean,
   seen: Set<object>
 ): SchemaProperty {
+  if (!prop || '$ref' in prop) {
+    return {
+      name,
+      type: 'string',
+      ...(isRequired ? { required: true } : {}),
+    }
+  }
+
   if (prop.type === 'array' && prop.items) {
-    const arrayItemProperties = hasSchemaProperties(prop.items)
-      ? resolveSchemaProperties(prop.items, new Set(seen))
+    if ('$ref' in prop.items) {
+      return {
+        name,
+        type: 'array',
+        ...(isRequired ? { required: true } : {}),
+        ...(prop.description && { description: prop.description }),
+        arrayItemType: 'string',
+      }
+    }
+
+    const { items } = prop
+    const arrayItemProperties = hasSchemaProperties(items)
+      ? resolveSchemaProperties(items, new Set(seen))
       : undefined
 
-    return cleanSchemaProperty({
+    return {
       name,
       type: 'array',
-      required: isRequired,
-      description: prop.description ?? null,
-      arrayItemType: getSchemaType(prop.items),
-      arrayItemProperties,
-    })
+      arrayItemType: getSchemaType(items),
+      ...(isRequired && { required: true }),
+      ...(prop.description && { description: prop.description }),
+      ...(!isEmpty(arrayItemProperties) && { arrayItemProperties }),
+    }
   }
 
   if (hasSchemaProperties(prop)) {
-    return cleanSchemaProperty({
+    const properties = resolveSchemaProperties(prop, new Set(seen))
+
+    return {
       name,
       type: 'object',
-      required: isRequired,
-      description: prop.description ?? null,
-      properties: resolveSchemaProperties(prop, new Set(seen)),
-    })
+      ...(isRequired ? { required: true } : {}),
+      ...(prop.description && { description: prop.description }),
+      ...(!isEmpty(properties) ? { properties } : {}),
+    }
   }
 
-  return cleanSchemaProperty({
+  return {
     name,
     type: getSchemaType(prop),
-    required: isRequired,
-    description: prop.description ?? null,
-    enum: prop.enum,
-    format: prop.format,
-  })
+    ...(isRequired ? { required: true } : {}),
+    ...(prop.description && { description: prop.description }),
+    ...(!isEmpty(prop.enum) ? { enum: prop.enum } : {}),
+    ...(prop.format ? { format: prop.format } : {}),
+  }
 }
 
 function resolveSchemaProperties(
-  schema: SchemaLike | null,
+  schema: MaybeSchema,
   seen = new Set<object>()
 ): SchemaProperty[] {
-  if (!schema || !hasSchemaProperties(schema)) return []
+  if (!schema || '$ref' in schema || !hasSchemaProperties(schema)) return []
   if (seen.has(schema)) return []
 
   seen.add(schema)
   const required = schema.required ?? []
   const properties: SchemaProperty[] = []
 
-  for (const [propName, prop] of Object.entries(schema.properties)) {
+  for (const [propName, prop] of Object.entries(schema.properties ?? {})) {
     properties.push(
       resolveSchemaProperty(
         propName,
@@ -291,17 +250,19 @@ function resolveSchemaProperties(
 }
 
 function buildExampleFromSchema(
-  schema: SchemaLike | null,
+  schema: MaybeSchema,
   seen = new Set<object>()
 ): unknown {
-  if (!schema) return {}
+  if (!schema || '$ref' in schema) return {}
   if (seen.has(schema)) return {}
 
-  if (schema.type === 'array') {
-    const itemSchema = schema.items
-    const item = itemSchema
-      ? buildExampleFromSchema(itemSchema, new Set([...seen, schema]))
-      : {}
+  if (schema.type === 'array' && schema.items) {
+    if ('$ref' in schema.items) return [{}]
+
+    const item = buildExampleFromSchema(
+      schema.items,
+      new Set([...seen, schema])
+    )
 
     return [item]
   }
@@ -312,7 +273,7 @@ function buildExampleFromSchema(
     nextSeen.add(schema)
     const obj: Record<string, unknown> = {}
 
-    for (const [key, prop] of Object.entries(schema.properties)) {
+    for (const [key, prop] of Object.entries(schema.properties ?? {})) {
       obj[key] = buildExampleFromSchema(prop, new Set(nextSeen))
     }
 
@@ -326,9 +287,7 @@ function buildExampleFromSchema(
   return {}
 }
 
-function getResponseSchemaForStatus(
-  response: OpenAPIResponse
-): OpenAPISchema | null {
+function getResponseSchema(response: OpenAPIV3.ResponseObject): MaybeSchema {
   return response?.content?.['application/json']?.schema ?? null
 }
 
@@ -345,16 +304,7 @@ function responseStatusOrder(s: number): number {
   return s >= 200 && s < 300 ? 0 : s >= 400 && s < 500 ? 1 : s >= 500 ? 2 : 3
 }
 
-function sortResponses(a: ResponseSample, b: ResponseSample): number {
-  const diff = responseStatusOrder(a.status) - responseStatusOrder(b.status)
-
-  return diff !== 0 ? diff : a.status - b.status
-}
-
-function sortResponseSchemas(
-  a: ResponseSchemaInfo,
-  b: ResponseSchemaInfo
-): number {
+function sortByStatus(a: { status: number }, b: { status: number }): number {
   const diff = responseStatusOrder(a.status) - responseStatusOrder(b.status)
 
   return diff !== 0 ? diff : a.status - b.status
@@ -363,17 +313,25 @@ function sortResponseSchemas(
 /** Section title used for the "other" tag; sort this last in section order. */
 const SECTION_OTHER_TITLE = 'Other'
 
-async function fetchOpenApiDocRaw(url: string): Promise<OpenAPIDoc> {
+async function fetchOpenApiDocRaw(url: string): Promise<OpenApiDoc> {
   const res = await fetch(url)
 
   if (!res.ok) throw new Error(`Failed to fetch OpenAPI: ${res.status}`)
 
-  const rawDoc = (await res.json()) as OpenAPIDoc
+  const rawDoc: OpenApiDoc = await res.json()
+  const dereferenced = await SwaggerParser.dereference(rawDoc)
 
-  return (await SwaggerParser.dereference(rawDoc)) as OpenAPIDoc
+  if (
+    !dereferenced ||
+    typeof dereferenced !== 'object' ||
+    !('openapi' in dereferenced)
+  )
+    throw new Error('Invalid OpenAPI document')
+
+  return dereferenced
 }
 
-function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
+function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
   apiSections: ApiSection[]
   endpointDetails: Record<string, EndpointDetail>
 } {
@@ -381,10 +339,10 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
   const endpointDetails: Record<string, EndpointDetail> = {}
 
   for (const [path, pathItem] of Object.entries(doc.paths ?? {})) {
+    if (!pathItem || '$ref' in pathItem) continue
+
     for (const method of METHODS) {
-      const op = pathItem[method as keyof OpenAPIPathItem] as
-        | OpenAPIOperation
-        | undefined
+      const op = pathItem[method]
 
       if (!op) continue
 
@@ -408,22 +366,32 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
       const params: Parameter[] = []
 
       for (const p of op.parameters ?? []) {
+        if ('$ref' in p) continue
+
         const kind =
           p.in === 'path' ? 'path' : p.in === 'query' ? 'query' : null
 
         if (!kind) continue
+        const pSchema = p.schema && !('$ref' in p.schema) ? p.schema : undefined
+
         params.push({
           name: p.name,
-          type: p.schema?.type ?? 'string',
+          type: pSchema?.type ?? 'string',
           required: p.required ?? false,
           description: p.description ?? null,
           kind,
         })
       }
 
-      if (op.requestBody?.content?.['application/json']?.schema) {
-        const bodySchema = op.requestBody.content['application/json'].schema
-        const required = bodySchema.required ?? []
+      const requestBody =
+        op.requestBody && !('$ref' in op.requestBody) ? op.requestBody : null
+      const bodySchema = requestBody?.content?.['application/json']?.schema
+
+      if (bodySchema) {
+        const required =
+          !('$ref' in bodySchema) && bodySchema.required
+            ? bodySchema.required
+            : []
 
         if (hasSchemaProperties(bodySchema)) {
           for (const [name, prop] of Object.entries(bodySchema.properties)) {
@@ -431,7 +399,8 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
               name,
               type: getSchemaType(prop),
               required: required.includes(name),
-              description: prop.description ?? null,
+              description:
+                prop && !('$ref' in prop) ? prop.description ?? null : null,
               kind: 'body',
             })
           }
@@ -441,12 +410,12 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
       const responses: ResponseSample[] = []
       const responseSchemas: ResponseSchemaInfo[] = []
 
-      for (const [code, responseSpec] of Object.entries(op.responses ?? {}) as [
-        string,
-        OpenAPIResponse,
-      ][]) {
+      for (const [code, responseRef] of Object.entries(op.responses ?? {})) {
+        if ('$ref' in responseRef) continue
+
+        const responseSpec = responseRef
         const status = parseStatusCode(code)
-        const schema = getResponseSchemaForStatus(responseSpec)
+        const schema = getResponseSchema(responseSpec)
         const desc = responseSpec?.description
         const example = schema
           ? buildExampleFromSchema(schema)
@@ -468,12 +437,10 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
           })
         }
       }
-      responses.sort(sortResponses)
-      responseSchemas.sort(sortResponseSchemas)
+      responses.sort(sortByStatus)
+      responseSchemas.sort(sortByStatus)
 
-      if (isEmpty(responses)) {
-        responses.push({ status: 200, body: '{}' })
-      }
+      if (isEmpty(responses)) responses.push({ status: 200, body: '{}' })
 
       const rawDesc = op.description ?? ''
       const description =
@@ -505,9 +472,7 @@ function parseOpenApiDocIntoRestData(doc: OpenAPIDoc): {
   for (const title of sortedTitles) {
     const endpoints = sectionsMap.get(title) ?? []
 
-    if (!isEmpty(endpoints)) {
-      apiSections.push({ title, endpoints })
-    }
+    if (!isEmpty(endpoints)) apiSections.push({ title, endpoints })
   }
 
   return { apiSections, endpointDetails }
@@ -528,13 +493,9 @@ export async function fetchRestApiData(): Promise<{
   const ttlMs = getCacheTtlMs()
   const now = Date.now()
 
-  if (cachedPayload != null && now - cachedAt < ttlMs) {
-    return cachedPayload
-  }
+  if (!!cachedPayload && now - cachedAt < ttlMs) return cachedPayload
 
-  if (inFlight != null) {
-    return inFlight
-  }
+  if (inFlight) return inFlight
 
   const url = getOpenApiSpecUrl()
   const doRefresh = async (): Promise<{
