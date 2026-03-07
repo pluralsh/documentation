@@ -169,13 +169,13 @@ export function ResponseSchemaView({
         <StatusTabs>
           {schemas.map((s, i) => (
             <StatusTab
-              key={s.status}
+              key={s.statusLabel}
               $active={i === safeIndex}
               onClick={() => setSelectedIndex(i)}
               type="button"
             >
               <StatusDot $color={getStatusColor(s.status)} />
-              {s.status}
+              {s.statusLabel}
             </StatusTab>
           ))}
         </StatusTabs>

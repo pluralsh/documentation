@@ -29,8 +29,8 @@ export function ParameterTable({ parameters }: { parameters: Parameter[] }) {
         </tr>
       </thead>
       <tbody>
-        {parameters.map((param) => (
-          <tr key={param.name}>
+        {parameters.map((param, index) => (
+          <tr key={`${param.kind ?? 'unknown'}-${param.name}-${index}`}>
             <Td>
               <code>{param.name}</code>
               {param.required && <RequiredBadge>required</RequiredBadge>}

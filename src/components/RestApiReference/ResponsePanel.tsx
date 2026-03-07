@@ -86,19 +86,19 @@ export function ResponsePanel({ detail }: { detail: EndpointDetail }) {
         <StatusTabs>
           {responses.map((r, i) => (
             <StatusTab
-              key={r.status}
+              key={r.statusLabel}
               $active={i === safeIndex}
               onClick={() => setSelectedIndex(i)}
               type="button"
             >
               <StatusDot $color={getStatusColor(r.status)} />
-              {r.status}
+              {r.statusLabel}
             </StatusTab>
           ))}
         </StatusTabs>
       )}
       <Card
-        key={`${detail.id}-${selected.status}`}
+        key={`${detail.id}-${selected.statusLabel}`}
         fillLevel={1}
         borderColor="border-fill-two"
       >
@@ -106,7 +106,7 @@ export function ResponsePanel({ detail }: { detail: EndpointDetail }) {
           <span>Response samples</span>
           <StatusBadge>
             <StatusDot $color={getStatusColor(selected.status)} />
-            {selected.status}
+            {selected.statusLabel}
           </StatusBadge>
         </ResponseHeader>
         <ResponseCodeBlock content={selected.body} />

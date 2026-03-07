@@ -96,7 +96,6 @@ export function Mermaid({
         } catch (err) {
           console.error('Failed to register ELK layout with mermaid:', err)
         }
-        console.log(id, diagram)
         const { svg } = await mermaid.render(id, diagram)
 
         if (!isMounted) return

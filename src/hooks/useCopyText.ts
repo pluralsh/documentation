@@ -6,11 +6,19 @@ import { useCallback, useEffect, useState } from 'react'
  */
 export function useCopyText(text: string) {
   const [copied, setCopied] = useState(false)
-  const handleCopy = useCallback(
-    () =>
-      window.navigator.clipboard.writeText(text).then(() => setCopied(true)),
-    [text]
-  )
+  const handleCopy = useCallback(async () => {
+    try {
+      await window.navigator.clipboard.writeText(text)
+      setCopied(true)
+
+      return true
+    } catch (error) {
+      console.error('Failed to copy text to clipboard:', error)
+      setCopied(false)
+
+      return false
+    }
+  }, [text])
 
   useEffect(() => {
     if (copied) {

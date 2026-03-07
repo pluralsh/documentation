@@ -72,6 +72,7 @@ export interface Parameter {
 
 export interface ResponseSample {
   status: number
+  statusLabel: string
   body: string
 }
 
@@ -89,6 +90,7 @@ export interface SchemaProperty {
 
 export interface ResponseSchemaInfo {
   status: number
+  statusLabel: string
   description?: string
   contentType: string
   properties: SchemaProperty[]
@@ -425,12 +427,14 @@ function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
 
         responses.push({
           status,
+          statusLabel: code,
           body: JSON.stringify(example, null, 2),
         })
 
         if (schema) {
           responseSchemas.push({
             status,
+            statusLabel: code,
             description: desc,
             contentType: 'application/json',
             properties: resolveSchemaProperties(schema),
@@ -440,7 +444,8 @@ function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
       responses.sort(sortByStatus)
       responseSchemas.sort(sortByStatus)
 
-      if (isEmpty(responses)) responses.push({ status: 200, body: '{}' })
+      if (isEmpty(responses))
+        responses.push({ status: 200, statusLabel: '200', body: '{}' })
 
       const rawDesc = op.description ?? ''
       const description =

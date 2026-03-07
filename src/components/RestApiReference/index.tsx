@@ -37,7 +37,11 @@ import {
 } from './RestApiReference.styles'
 import { AUTH_PAGE_ID, SidebarNav } from './SidebarNav'
 
-import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
+import type {
+  ApiSection,
+  EndpointDetail,
+  Parameter,
+} from '@src/lib/openapi-rest'
 
 type TabId = 'query' | 'responses'
 
@@ -135,9 +139,7 @@ export function RestApiReference({
                     active={activeTab === 'query'}
                     onClick={() => setActiveTab('query')}
                   >
-                    {(detail.parameters ?? []).some((p) => p.kind === 'body')
-                      ? 'Body parameters'
-                      : 'Query parameters'}
+                    {getParameterTabLabel(detail.parameters ?? [])}
                   </Tab>
                   <Tab
                     active={activeTab === 'responses'}
@@ -169,4 +171,18 @@ export function RestApiReference({
       </ContentContainer>
     </PageGrid>
   )
+}
+
+function getParameterTabLabel(parameters: Parameter[]): string {
+  const kinds = new Set(
+    parameters
+      .map((parameter) => parameter.kind)
+      .filter((kind): kind is NonNullable<Parameter['kind']> => !!kind)
+  )
+
+  if (kinds.size !== 1) return 'Parameters'
+  if (kinds.has('body')) return 'Body parameters'
+  if (kinds.has('path')) return 'Path parameters'
+
+  return 'Query parameters'
 }
