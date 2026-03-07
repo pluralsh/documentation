@@ -27,6 +27,8 @@ import {
 import { type Nullable } from '@pluralsh/design-system/dist/types'
 import styled, { useTheme } from 'styled-components'
 
+import { useCopyText } from '@src/hooks/useCopyText'
+
 // helps prevent flickering (and potentially expensive recalculations) in virutalized lists
 // need to do this outside of React lifecycle memoization (useMemo etc) so it can persist across component mounts/unmounts
 const cachedRenders: Record<string, string | Error> = {}
@@ -94,7 +96,6 @@ export function Mermaid({
         } catch (err) {
           console.error('Failed to register ELK layout with mermaid:', err)
         }
-        console.log(id, diagram)
         const { svg } = await mermaid.render(id, diagram)
 
         if (!isMounted) return
@@ -369,23 +370,4 @@ function useGlobalPan(setPosition: Dispatch<SetStateAction<Position>>) {
   }, [isDragging, setPosition])
 
   return { isDragging, handleMouseDown }
-}
-
-function useCopyText(text: string) {
-  const [copied, setCopied] = useState(false)
-  const handleCopy = useCallback(
-    () =>
-      window.navigator.clipboard.writeText(text).then(() => setCopied(true)),
-    [text]
-  )
-
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => setCopied(false), 1000)
-
-      return () => clearTimeout(timeout)
-    }
-  }, [copied])
-
-  return { copied, handleCopy }
 }

@@ -1,5 +1,6 @@
 import {
   type ComponentProps,
+  type ComponentType,
   Suspense,
   forwardRef,
   useEffect,
@@ -61,6 +62,11 @@ import { collectHeadings } from '@src/markdoc/utils/parseHeadings'
 import { getNavData } from '@src/NavData'
 
 import type { MarkdocNextJsPageProps } from '@markdoc/next.js'
+
+/** Page component type; some pages opt into a full-width custom layout (e.g. REST API reference). */
+type PageComponentWithLayout = ComponentType<MyPageProps> & {
+  customLayout?: boolean
+}
 
 export type MyPageProps = MarkdocNextJsPageProps & {
   displayTitle?: string
@@ -154,40 +160,44 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
         <HtmlHead {...headProps} />
         <PageHeader />
         <Page>
-          <PageGrid>
-            <SideNavContainer>
-              {isClient ? (
-                <Suspense fallback={<div>Loading navigation...</div>}>
+          {(Component as PageComponentWithLayout).customLayout ? (
+            <Component {...pageProps} />
+          ) : (
+            <PageGrid>
+              <SideNavContainer>
+                {isClient ? (
+                  <Suspense fallback={<div>Loading navigation...</div>}>
+                    <FullNav desktop />
+                  </Suspense>
+                ) : (
                   <FullNav desktop />
-                </Suspense>
-              ) : (
-                <FullNav desktop />
-              )}
-            </SideNavContainer>
-            <ContentContainer>
-              <MainContent
-                Component={Component}
-                title={displayTitle}
-                description={displayDescription}
-              />
-              <PageFooter />
-            </ContentContainer>
-            <SideCarContainer>
-              {isClient ? (
-                <Suspense fallback={<div>Loading table of contents...</div>}>
+                )}
+              </SideNavContainer>
+              <ContentContainer>
+                <MainContent
+                  Component={Component}
+                  title={displayTitle}
+                  description={displayDescription}
+                />
+                <PageFooter />
+              </ContentContainer>
+              <SideCarContainer>
+                {isClient ? (
+                  <Suspense fallback={<div>Loading table of contents...</div>}>
+                    <TableOfContents
+                      key={router.asPath}
+                      toc={toc}
+                    />
+                  </Suspense>
+                ) : (
                   <TableOfContents
                     key={router.asPath}
                     toc={toc}
                   />
-                </Suspense>
-              ) : (
-                <TableOfContents
-                  key={router.asPath}
-                  toc={toc}
-                />
-              )}
-            </SideCarContainer>
-          </PageGrid>
+                )}
+              </SideCarContainer>
+            </PageGrid>
+          )}
         </Page>
         <ExternalScripts />
       </PagePropsContext.Provider>

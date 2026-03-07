@@ -26,3 +26,7 @@ yarn-error.log*
 /build
 /dist
 .env.local
+*.tsbuildinfo
+
+# OpenAPI schema (fetched at Docker build time)
+schema/

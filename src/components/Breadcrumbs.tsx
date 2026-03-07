@@ -32,7 +32,7 @@ export default function Breadcrumbs() {
   const navData = useNavMenu()
 
   const crumbs = useMemo(
-    () => [{ label: 'Docs' }, ...findCrumbs(path, navData)],
+    () => [{ label: 'Docs', url: '/' }, ...findCrumbs(path, navData)],
     [navData, path]
   )
 
