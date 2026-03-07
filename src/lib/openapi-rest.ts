@@ -109,6 +109,7 @@ export interface EndpointDetail {
 
 type MethodKey = 'get' | 'post' | 'put' | 'patch' | 'delete'
 type OpenApiDoc = OpenAPIV3.Document | OpenApiV31.Document
+type SchemaObject = OpenAPIV3.SchemaObject | OpenApiV31.SchemaObject
 type MaybeSchema =
   | OpenAPIV3.ReferenceObject
   | OpenAPIV3.SchemaObject
@@ -118,6 +119,10 @@ type MaybeSchema =
   | undefined
 
 const METHODS: MethodKey[] = ['get', 'post', 'put', 'patch', 'delete']
+
+function isSchemaObject(schema: MaybeSchema): schema is SchemaObject {
+  return !!schema && !('$ref' in schema)
+}
 
 function capitalizeWord(w: string): string {
   if (!w) return w
@@ -156,8 +161,38 @@ function hasSchemaProperties(schema: MaybeSchema): schema is
   return !!schema && !('$ref' in schema) && !isEmpty(schema.properties)
 }
 
+function getComposedSchemaKind(
+  schema: MaybeSchema
+): 'allOf' | 'oneOf' | 'anyOf' | null {
+  if (!isSchemaObject(schema)) return null
+  if (!isEmpty(schema.allOf)) return 'allOf'
+  if (!isEmpty(schema.oneOf)) return 'oneOf'
+  if (!isEmpty(schema.anyOf)) return 'anyOf'
+
+  return null
+}
+
+function getComposedSchemas(schema: MaybeSchema): SchemaObject[] {
+  if (!isSchemaObject(schema)) return []
+
+  const kind = getComposedSchemaKind(schema)
+
+  if (!kind) return []
+
+  return (schema[kind] ?? []).filter(isSchemaObject)
+}
+
 function getSchemaType(schema: MaybeSchema): string {
   if (!schema || '$ref' in schema) return 'string'
+  const composedSchemas = getComposedSchemas(schema)
+
+  if (!isEmpty(composedSchemas)) {
+    if (getComposedSchemaKind(schema) === 'allOf') return 'object'
+
+    const composedTypes = [...new Set(composedSchemas.map(getSchemaType))]
+
+    return composedTypes.join(' | ') || 'string'
+  }
   if (typeof schema.type === 'string') return schema.type
   if (hasSchemaProperties(schema)) return 'object'
 
@@ -190,9 +225,7 @@ function resolveSchemaProperty(
     }
 
     const { items } = prop
-    const arrayItemProperties = hasSchemaProperties(items)
-      ? resolveSchemaProperties(items, new Set(seen))
-      : undefined
+    const arrayItemProperties = resolveSchemaProperties(items, new Set(seen))
 
     return {
       name,
@@ -230,10 +263,29 @@ function resolveSchemaProperties(
   schema: MaybeSchema,
   seen = new Set<object>()
 ): SchemaProperty[] {
-  if (!schema || '$ref' in schema || !hasSchemaProperties(schema)) return []
+  if (!schema || '$ref' in schema) return []
   if (seen.has(schema)) return []
 
   seen.add(schema)
+  const composedSchemas = getComposedSchemas(schema)
+
+  if (!isEmpty(composedSchemas)) {
+    const mergedProperties = new Map<string, SchemaProperty>()
+
+    for (const composedSchema of composedSchemas) {
+      for (const property of resolveSchemaProperties(
+        composedSchema,
+        new Set(seen)
+      )) {
+        mergedProperties.set(property.name, property)
+      }
+    }
+
+    return [...mergedProperties.values()]
+  }
+
+  if (!hasSchemaProperties(schema)) return []
+
   const required = schema.required ?? []
   const properties: SchemaProperty[] = []
 
@@ -257,6 +309,49 @@ function buildExampleFromSchema(
 ): unknown {
   if (!schema || '$ref' in schema) return {}
   if (seen.has(schema)) return {}
+
+  const composedSchemas = getComposedSchemas(schema)
+
+  if (!isEmpty(composedSchemas)) {
+    const nextSeen = new Set(seen)
+
+    nextSeen.add(schema)
+
+    if (getComposedSchemaKind(schema) === 'allOf') {
+      const mergedExample: Record<string, unknown> = {}
+
+      for (const composedSchema of composedSchemas) {
+        const example = buildExampleFromSchema(
+          composedSchema,
+          new Set(nextSeen)
+        )
+
+        if (
+          example &&
+          typeof example === 'object' &&
+          !Array.isArray(example) &&
+          !isEmpty(example)
+        ) {
+          Object.assign(mergedExample, example)
+        }
+      }
+
+      if (!isEmpty(mergedExample)) return mergedExample
+    }
+
+    for (const composedSchema of composedSchemas) {
+      const example = buildExampleFromSchema(composedSchema, new Set(nextSeen))
+
+      if (
+        example != null &&
+        (typeof example !== 'object' ||
+          Array.isArray(example) ||
+          !isEmpty(example))
+      ) {
+        return example
+      }
+    }
+  }
 
   if (schema.type === 'array' && schema.items) {
     if ('$ref' in schema.items) return [{}]
@@ -315,8 +410,19 @@ function sortByStatus(a: { status: number }, b: { status: number }): number {
 /** Section title used for the "other" tag; sort this last in section order. */
 const SECTION_OTHER_TITLE = 'Other'
 
+const FETCH_TIMEOUT_MS = 30_000
+
 async function fetchOpenApiDocRaw(url: string): Promise<OpenApiDoc> {
-  const res = await fetch(url)
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), FETCH_TIMEOUT_MS)
+
+  let res: Response
+
+  try {
+    res = await fetch(url, { signal: controller.signal })
+  } finally {
+    clearTimeout(timeout)
+  }
 
   if (!res.ok) throw new Error(`Failed to fetch OpenAPI: ${res.status}`)
 
@@ -378,7 +484,7 @@ function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
 
         params.push({
           name: p.name,
-          type: pSchema?.type ?? 'string',
+          type: pSchema ? getSchemaType(pSchema) : 'string',
           required: p.required ?? false,
           description: p.description ?? null,
           kind,
@@ -390,22 +496,14 @@ function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
       const bodySchema = requestBody?.content?.['application/json']?.schema
 
       if (bodySchema) {
-        const required =
-          !('$ref' in bodySchema) && bodySchema.required
-            ? bodySchema.required
-            : []
-
-        if (hasSchemaProperties(bodySchema)) {
-          for (const [name, prop] of Object.entries(bodySchema.properties)) {
-            params.push({
-              name,
-              type: getSchemaType(prop),
-              required: required.includes(name),
-              description:
-                prop && !('$ref' in prop) ? prop.description ?? null : null,
-              kind: 'body',
-            })
-          }
+        for (const property of resolveSchemaProperties(bodySchema)) {
+          params.push({
+            name: property.name,
+            type: property.type,
+            ...(property.required != null && { required: property.required }),
+            description: property.description ?? null,
+            kind: 'body',
+          })
         }
       }
 
@@ -435,7 +533,7 @@ function parseOpenApiDocIntoRestData(doc: OpenApiDoc): {
           responseSchemas.push({
             status,
             statusLabel: code,
-            description: desc,
+            ...(desc != null && { description: desc }),
             contentType: 'application/json',
             properties: resolveSchemaProperties(schema),
           })

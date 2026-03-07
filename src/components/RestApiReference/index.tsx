@@ -47,7 +47,7 @@ type TabId = 'query' | 'responses'
 
 export type RestApiReferenceProps = {
   apiSections: ApiSection[]
-  endpointDetails: Record<string, EndpointDetail>
+  endpointDetail?: EndpointDetail | null
   selectedId: string
 }
 
@@ -61,7 +61,7 @@ export function slugToId(slug: string | string[] | undefined) {
 
 export function RestApiReference({
   apiSections = [],
-  endpointDetails = {},
+  endpointDetail = null,
   selectedId: initialSelectedId,
 }: RestApiReferenceProps) {
   const router = useRouter()
@@ -72,7 +72,8 @@ export function RestApiReference({
     : initialSelectedId
 
   const isAuthPage = selectedId === AUTH_PAGE_ID
-  const detail = !isAuthPage ? endpointDetails[selectedId] : null
+  const detail =
+    !isAuthPage && endpointDetail?.id === selectedId ? endpointDetail : null
   const { copied: pathCopied, handleCopy: handleCopyPath } = useCopyText(
     detail?.path ?? ''
   )

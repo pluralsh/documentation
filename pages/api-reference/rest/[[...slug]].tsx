@@ -18,19 +18,19 @@ import type { ApiSection, EndpointDetail } from '@src/lib/openapi-rest'
 
 type RestPageProps = {
   apiSections: ApiSection[]
-  endpointDetails: Record<string, EndpointDetail>
+  endpointDetail: EndpointDetail | null
   selectedId: string
 }
 
 export function RestPage({
   apiSections = [],
-  endpointDetails = {},
+  endpointDetail = null,
   selectedId,
 }: RestPageProps) {
   return (
     <RestApiReference
       apiSections={apiSections}
-      endpointDetails={endpointDetails}
+      endpointDetail={endpointDetail}
       selectedId={selectedId}
     />
   )
@@ -45,15 +45,15 @@ export const getServerSideProps: GetServerSideProps<RestPageProps> = async ({
   const { apiSections, endpointDetails } = await fetchRestApiData()
 
   const slugId = slugToId(params?.slug)
+  const endpointDetail = endpointDetails[slugId] ?? null
 
-  if (!(endpointDetails[slugId] || slugId === AUTH_PAGE_ID))
-    return { notFound: true }
+  if (!(endpointDetail || slugId === AUTH_PAGE_ID)) return { notFound: true }
 
   return {
     props: {
       displayTitle: 'REST API Reference',
       apiSections,
-      endpointDetails,
+      endpointDetail,
       selectedId: slugId,
     },
   }
