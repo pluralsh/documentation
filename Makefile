@@ -21,4 +21,4 @@ sync-operator-crd-docs:
 	curl -L https://raw.githubusercontent.com/pluralsh/deployment-operator/main/docs/api.md --output pages/api-reference/kubernetes/agent-api-reference.md
 
 sync-liquid-docs:
-	curl -L https://raw.githubusercontent.com/pluralsh/polly/main/docs/liquid-filters.md --output pages/plural-features/service-templating/supporting-liquid-filters.md
+	curl -L https://raw.githubusercontent.com/pluralsh/console/master/go/polly/docs/liquid-filters.md --output pages/plural-features/service-templating/supporting-liquid-filters.md
