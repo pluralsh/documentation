@@ -36,15 +36,15 @@ There were a few design considerations involved in our agent that are worth unde
 
 ## Product Architecture
 
-Plural splits infrastructure management into a simple heirarchy:
+Plural splits infrastructure management into a simple hierarchy:
 
 1. All infrastructure is owned by a `Project`.  This is both an organizational container and a permission boundary.  It can be useful for segregating permissions to large scopes of resources.
 2. Projects can own either `Stacks` or `Clusters`.  Stacks are basically IaC codebases, and can encapsulate any base cloud infrastructure defined via Terraform or some other framework.  Clusters are simply running Kubernetes clusters.
 3. Clusters can own `Services` which are GitOps constructs syncing kubernetes YAML into those clusters.
 
-Along this heirarchy, any permission attached to a parent resource is communicated down.  So if a user has write access to a `Cluster`, that user also has write access to the cluster's `Service` objects.
+Along this hierarchy, any permission attached to a parent resource is communicated down.  So if a user has write access to a `Cluster`, that user also has write access to the cluster's `Service` objects.
 
-The heirarchy can by represented like so:
+The hierarchy can be represented like so:
 
 {% mermaid %}
 graph TD

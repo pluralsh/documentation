@@ -21,14 +21,12 @@ Plural solves this by:
 
 There are two ways to accomplish a pipeline with Plural:
 
-* Determistic PR automation based pipelining
+* Deterministic [PR Automation](/plural-features/pr-automation/crds) based pipelining
 * AI based PR based pipelining
 
 The main difference is the second uses prompting plus lightweight coding agents to accomplish the needed yaml changes to promote your software.  Since they are usually small config changes, this is usually very reliable, and often much easier to setup for developers of all skill levels, but for teams that desire the security of determinism, that is available as well.
 
 Before we go into exact pipeline examples, assume we have two plural services defined in a file `bootstrap/guestbook.yaml` like so:
-
-```yaml
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
@@ -99,7 +97,7 @@ spec:
           type: APPROVAL
 ```
 
-{% callout serverity="info" %}
+{% callout severity="info" %}
 Notice in each case, there's a pr automation specified as the promotion criteria.  You would need to define this as a separate `PrAutomation` crd.
 {% /callout %}
 
