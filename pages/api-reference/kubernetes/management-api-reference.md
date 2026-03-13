@@ -143,6 +143,25 @@ _Appears in:_
 | `template` _string_ | Template the template to use for this callout |  |  |
 
 
+#### AgentRuntimeRef
+
+
+
+AgentRuntimeRef identifies an agent runtime by cluster handle and runtime name.
+Resolution is done similarly to Observer agent actions: cluster handle is resolved to a cluster ID,
+then the runtime is looked up by name and cluster ID.
+
+
+
+_Appears in:_
+- [FlowSpec](#flowspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cluster` _string_ | Cluster is the handle of the cluster that owns the agent runtime. |  | Required: \{\} <br /> |
+| `runtime` _string_ | Runtime is the name of the agent runtime within that cluster. |  | Required: \{\} <br /> |
+
+
 #### AiApprovalConfiguration
 
 
@@ -160,6 +179,26 @@ _Appears in:_
 | `git` _[GitRef](#gitref)_ | Git references the Git repository containing the rules file. |  | Required: \{\} <br /> |
 | `file` _string_ | File is the name of the rules file within the Git repository. |  | Required: \{\} <br /> |
 | `ignoreCancel` _boolean_ | IgnoreCancel indicates if the cancellation of a stack run should be ignored by AI. |  | Optional: \{\} <br /> |
+
+
+#### AiCriteria
+
+
+
+AiCriteria defines the configuration for AI pull request based service promotion.
+This can be a simpler path to construct the GitOps modifications needed to modify your services.
+
+
+
+_Appears in:_
+- [PipelineStageServicePromotionCriteria](#pipelinestageservicepromotioncriteria)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ | Whether AI based service promotion is enabled for this promotion. |  | Optional: \{\} <br /> |
+| `prompt` _string_ | The prompt to use to generate the pull request used in this promotion (liquid templating is supported). |  | Required: \{\} <br /> |
+| `title` _string_ | The title of the pull request used in this promotion (liquid templating is supported). If not provided, the AI will generate a title. |  | Optional: \{\} <br /> |
+| `message` _string_ | The message of the pull request used in this promotion (liquid templating is supported). If not provided, the AI will generate a message. |  | Optional: \{\} <br /> |
 
 
 #### AnalysisRates
@@ -196,6 +235,9 @@ _Appears in:_
 | `inventory` _string_ | Inventory is the ansible inventory file to use.  We recommend checking this into git alongside your playbook files, and referencing it with a relative path. |  | Optional: \{\} <br /> |
 | `additionalArgs` _string array_ | Additional args for the ansible playbook command. |  | Optional: \{\} <br /> |
 | `privateKeyFile` _string_ | PrivateKeyFile is the path to the private key file for SSH authentication. |  | Optional: \{\} <br /> |
+| `configFile` _string_ | ConfigFile is the path to the ansible config file to use. |  | Optional: \{\} <br /> |
+| `supportsCheck` _boolean_ | SupportsCheck indicates whether the ansible playbook supports the check flag. |  | Optional: \{\} <br /> |
+| `deletePlaybook` _string_ | DeletePlaybook is the playbook to run when deleting the stack. |  | Optional: \{\} <br /> |
 
 
 
@@ -256,6 +298,7 @@ _Appears in:_
 | `model` _string_ | Model - the OpenAi model you wish to use. If not specified, Plural will provide a default. |  | Optional: \{\} <br /> |
 | `toolModel` _string_ | ToolModel to use for tool calling, which is less frequent and often requires more advanced reasoning. |  | Optional: \{\} <br /> |
 | `embeddingModel` _string_ | EmbeddingModel to use for generating embeddings. |  | Optional: \{\} <br /> |
+| `deployments` _object (keys:string, values:string)_ | Deployments is a mapping from model id to azure OpenAI deployment if those require additional configuration |  | Optional: \{\} <br /> |
 | `proxyModels` _string array_ | ProxyModels are additional models to support within the integrated ai proxy. |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: \{\} <br /> |
 
@@ -281,6 +324,7 @@ _Appears in:_
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Optional: \{\} <br /> |
 | `awsAccessKeyId` _string_ | AWS Access Key ID to use for authentication |  | Optional: \{\} <br /> |
 | `awsSecretAccessKeyRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | AWS Secret Access Key to use for authentication |  | Optional: \{\} <br /> |
+| `deployments` _object (keys:string, values:string)_ | Deployments is a mapping from model id to bedrock deployment if those require additional configuration |  | Optional: \{\} <br /> |
 
 
 #### Binding
@@ -1504,6 +1548,8 @@ _Appears in:_
 | `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this Flow. |  | Optional: \{\} <br /> |
 | `repositories` _string array_ | Repositories contains a list of git https urls of the application code repositories used in this flow. |  | Optional: \{\} <br /> |
 | `serverAssociations` _[FlowServerAssociation](#flowserverassociation) array_ | ServerAssociations contains a list of MCP services you wish to associate with this flow.<br />Can also be managed within the Plural Console UI securely. |  | Optional: \{\} <br /> |
+| `metadata` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  | Optional: \{\} <br /> |
+| `agentRuntime` _[AgentRuntimeRef](#agentruntimeref)_ | AgentRuntime references the agent runtime to use for this flow by cluster handle and runtime name.<br />The controller resolves this to an agent runtime ID when syncing to the Console API. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
@@ -2185,6 +2231,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name specifies the name for this MCP server.<br />If not provided, the name from the resource metadata will be used.<br />This name is used for identification and referencing in AI workflows. |  | Optional: \{\} <br /> |
+| `protocol` _[McpServerProtocol](#mcpserverprotocol)_ | Protocol specifies the MCP transport protocol (SSE or STREAMABLE_HTTP).<br />STREAMABLE_HTTP is the modern protocol and is the default when omitted. | STREAMABLE_HTTP | Enum: [SSE STREAMABLE_HTTP] <br />Optional: \{\} <br /> |
 | `url` _string_ | URL is the HTTP endpoint where the MCP server is hosted.<br />This must be a valid HTTP or HTTPS URL that the AI system can reach<br />to execute tool calls and interact with the server's capabilities. |  | Required: \{\} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings define the read and write access policies for this MCP server.<br />These control which users and groups can view, modify, or execute tools<br />provided by this server, enabling fine-grained access control. |  | Optional: \{\} <br /> |
 | `authentication` _[MCPServerAuthentication](#mcpserverauthentication)_ | Authentication specifies the authentication configuration for accessing this MCP server.<br />Different authentication methods are supported including built-in Plural JWT<br />and custom HTTP headers for integration with various authentication systems. |  | Optional: \{\} <br /> |
@@ -3245,6 +3292,8 @@ _Appears in:_
 | `serviceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ServiceRef pointing to a source ServiceDeployment to promote from. |  | Optional: \{\} <br /> |
 | `prAutomationRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | PrAutomationRef pointing to a source PrAutomation to promote from. |  | Optional: \{\} <br /> |
 | `repository` _string_ | The repository slug the PrAutomation will use.<br />E.g., pluralsh/console if PR is done against https://github.com/pluralsh/console. |  | Optional: \{\} <br /> |
+| `ai` _[AiCriteria](#aicriteria)_ | AI configuration for this promotion. |  | Optional: \{\} <br /> |
+| `connectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | SCM connection to use for ai pr based service promotion. |  | Optional: \{\} <br /> |
 | `secrets` _string array_ | Secrets to copy over in a promotion. |  | Optional: \{\} <br /> |
 
 
@@ -3306,6 +3355,23 @@ for users to configure parameters before generating the PR.
 | `kind` _string_ | `PrAutomation` | | |
 | `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
 | `spec` _[PrAutomationSpec](#prautomationspec)_ | Spec defines the desired state of the PrAutomation, including the operations<br />to perform, target repository, and user interface configuration. |  | Required: \{\} <br /> |
+
+
+#### PrAutomationAIConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [PrAutomationSpec](#prautomationspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ | Enabled controls whether AI assistance is enabled for this PR automation. |  | Optional: \{\} <br /> |
+| `prompt` _string_ | Prompt is a custom prompt to guide AI-generated updates for this automation.  Templating is supported. |  | Required: \{\} <br /> |
 
 
 #### PrAutomationBindings
@@ -3536,6 +3602,7 @@ _Appears in:_
 | `creates` _[PrAutomationCreateConfiguration](#prautomationcreateconfiguration)_ | Creates defines specifications for generating new files from templates,<br />allowing the automation to add new configuration files to the repository. |  | Optional: \{\} <br /> |
 | `updates` _[PrAutomationUpdateConfiguration](#prautomationupdateconfiguration)_ | Updates specifies how to modify existing files using regex replacements<br />or YAML overlays, enabling precise changes to infrastructure code. |  | Optional: \{\} <br /> |
 | `deletes` _[PrAutomationDeleteConfiguration](#prautomationdeleteconfiguration)_ | Deletes specifies files and folders to remove from the repository as part<br />of the PR, useful for cleanup or migration scenarios. |  | Optional: \{\} <br /> |
+| `ai` _[PrAutomationAIConfiguration](#prautomationaiconfiguration)_ | AI configuration controls whether AI assistance is enabled for this automation<br />and allows specifying a custom prompt to guide AI-generated updates. |  | Optional: \{\} <br /> |
 | `lua` _[PrAutomationLuaConfiguration](#prautomationluaconfiguration)_ | Lua specification to source lua scripts to preprocess the PR automation. |  | Optional: \{\} <br /> |
 | `vendor` _[PrAutomationVendorConfiguration](#prautomationvendorconfiguration)_ | Software vendoring logic to perform in this PR |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
@@ -4212,6 +4279,8 @@ _Appears in:_
 | `gotestsum` _[SentinelCheckGotestsumConfiguration](#sentinelcheckgotestsumconfiguration)_ | the configuration for the gotestsum test runner for this check |  | Optional: \{\} <br /> |
 | `distro` _[ClusterDistro](#clusterdistro)_ | the distro to run the check on |  | Enum: [GENERIC EKS AKS GKE RKE K3S OPENSHIFT] <br />Optional: \{\} <br /> |
 | `tags` _object (keys:string, values:string)_ | the cluster tags to select where to run this job |  | Optional: \{\} <br /> |
+| `rerunFailures` _boolean_ | RerunFailures when true, failed tests will be rerun (e.g. to reduce flakiness). Defaults to false. |  | Optional: \{\} <br /> |
+| `rerunFailuresCount` _integer_ | RerunFailuresCount is the number of times to rerun failed tests when RerunFailures is true. Defaults to 2. |  | Optional: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a Git repository to use for this integration test. |  | Optional: \{\} <br /> |
 | `git` _[GitRef](#gitref)_ | The git location to use for this integration test. |  | Optional: \{\} <br /> |
 | `default` _[SentinelCheckIntegrationTestDefault](#sentinelcheckintegrationtestdefault)_ | Default configures default test cases and global behavior (e.g. namespace labels and annotations for created resources). |  | Optional: \{\} <br /> |
