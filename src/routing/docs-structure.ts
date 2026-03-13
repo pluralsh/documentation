@@ -188,6 +188,7 @@ export const docsStructure: DocSection[] = [
         title: 'Plural AI',
         sections: [
           { path: 'setup', title: 'Setup Plural AI' },
+          { path: 'architecture', title: 'Plural AI Architecture' },
           {
             path: 'ai-agent',
             title: 'AI Background Agent',
@@ -202,7 +203,6 @@ export const docsStructure: DocSection[] = [
               },
             ],
           },
-          { path: 'architecture', title: 'Plural AI Architecture' },
           {
             path: 'sentinels',
             title: 'At-Scale Infrastructure Testing with Sentinels',
@@ -259,6 +259,10 @@ export const docsStructure: DocSection[] = [
               { path: 'servicenow', title: 'ServiceNow Governance' },
               { path: 'webhook', title: 'Custom Webhook Governance' },
             ],
+          },
+          {
+            path: 'ai-based-pr-automations',
+            title: 'Prompt-to-PR Automations',
           },
           { path: 'description-patterns', title: 'PR Description Patterns' },
           { path: 'testing', title: 'PR automation testing' },

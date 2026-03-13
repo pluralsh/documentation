@@ -3,49 +3,32 @@ title: Pipelines
 description: Automate the journey of code from development to production
 ---
 
-Plural Pipelines automate Service Deployments across environments by promoting git-based changes through defined stages.
-With support for approval and job gates, they offer safe, customizable delivery flows.
+Plural Pipelines provide a way to automate the GitOps changes necessary to promote software across environments. The standard approach would be something like this:
 
-## Pipeline CRD in a Continuous Deployment Context
+1. Create a PR for dev, wait for review and merge
+2. Create a PR for staging, same as above
+3. finally create a PR for prod and you're done.
 
-The Pipeline CRD defines a custom Kubernetes resource to model and automate complex, multi-stage deployment pipelines.
-It integrates well with continuous deployment (CD) systems by enabling declarative configuration of deployment flows,
-including gating, promotions, and service progression.
+This is tedious and completely unnecessary.  In addition, you'll also want to automate a variety of confirmation tests along the promotion process, which can be missed in a manual pattern.
 
-### The top-level resource that encapsulates the deployment workflow.
- - Stages represent discrete steps in your deployment pipeline.
- - Edges define the dependencies and ordering between stages.
- - FlowRef & ProjectRef provide contextual linkage to a broader application ecosystem.
- - Bindings can control RBAC policies for reading/writing pipeline data.
+Plural solves this by:
 
-#### PipelineStage and PipelineStageService
-Each stage is a logical unit within the pipeline. These can represent environments (e.g., dev, staging, prod) or specific deployment phases.
- - PipelineStageService includes:
-    - ServiceRef: the Deployment Service being deployed.
-    - Criteria: optional promotion rules that dictate when and how a service is allowed to advance.
+1. Allowing users to define their promotion flow via CRD
+2. Across all stages, a PR is auto-generated using Plural's pr automation capabilities.
+3. Between stages, gates can be used to control promotion, with a variety of different checks that can be performed.
 
-This design fits CD by enabling conditional promotions, a critical part of automating production pushes safely.
+## Pipeline Flavors
 
-#### PipelineEdge – Controlling Flow
-Edges define the flow of execution between stages. You can specify edges by name or ID and attach promotion Gates.
+There are two ways to accomplish a pipeline with Plural:
 
-#### PipelineGate – Promotion Control
-Gates serve as checkpoints between pipeline stages and enforce promotion policies.
-Three supported gate types:
- - APPROVAL: requires human sign-off (e.g., manager approval).
- - WINDOW: defines time-based constraints (e.g., deploy only during business hours).
- - JOB: runs a custom job (e.g., integration tests, security scans) before allowing promotion.
+* Determistic PR automation based pipelining
+* AI based PR based pipelining
 
-#### JobSpec and GateSpec – Custom Execution
-For Job gates, the CRD allows inline definition of Kubernetes Jobs to be executed:
- - Specify namespace, containers, and Kubernetes-native configurations like annotations, labels, and serviceAccount.
- - Use Raw if you prefer to define jobs using full Kubernetes manifests.
- - Resource configurations help manage cluster efficiency and enforce compute limits.
+The main difference is the second uses prompting plus lightweight coding agents to accomplish the needed yaml changes to promote your software.  Since they are usually small config changes, this is usually very reliable, and often much easier to setup for developers of all skill levels, but for teams that desire the security of determinism, that is available as well.
 
-## Setup
-You're defining a simple two-stage continuous deployment pipeline using Plural’s Kubernetes-native CRDs.
- 1. dev stage – deployed to a cluster named dev
- 2. prod stage – promoted after passing a job and approval gate
+Before we go into exact pipeline examples, assume we have two plural services defined in a file `bootstrap/guestbook.yaml` like so:
+
+```yaml
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
@@ -55,10 +38,12 @@ metadata:
   namespace: infra
 spec:
   cluster: dev
+  configuration:
+    image: 0.0.1
   git:
     folder: guestbook
     ref: master
-    url: git@github.com:pluralsh/guestbook.git # replace with valid git repo
+    url: git@github.com:pluralsh/guestbook.git
 ---
 apiVersion: deployments.plural.sh/v1alpha1
 kind: ServiceDeployment
@@ -67,12 +52,15 @@ metadata:
   namespace: infra
 spec:
   cluster: prod
+  configuration:
+    image: 0.0.1
   git:
     folder: guestbook
     ref: master
-    url: git@github.com:pluralsh/guestbook.git # replace with valid git repo
+    url: git@github.com:pluralsh/guestbook.git 
 ```
-### Pipeline CRD
+
+We have either a deterministic or AI based method to define these pipelines. For a **deterministic** Pipeline:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
@@ -87,17 +75,17 @@ spec:
         - serviceRef:
             name: guestbook-dev
             namespace: infra
+          criteria:
+            prAutomationRef:
+              name: guestbook-updater # use this pr automation to update this service
     - name: prod
       services:
         - serviceRef:
             name: guestbook-prod
             namespace: infra
           criteria:
-            serviceRef:
-              name: guestbook-dev
-              namespace: infra
-            secrets:
-              - test-secret
+            prAutomationRef:
+              name: guestbook-updater # same as above
   edges:
     - from: dev
       to: prod
@@ -110,8 +98,67 @@ spec:
         - name: approval-gate
           type: APPROVAL
 ```
-This edge controls the transition from dev → prod. It includes:
 
- 1. Sentinel Gate: leverages a [Plural Sentinel](/plural-features/plural-ai/sentinels) to do deep integration testing for dev.
- 2. Approval Gate: Requires manual approval before deploying to prod
+{% callout serverity="info" %}
+Notice in each case, there's a pr automation specified as the promotion criteria.  You would need to define this as a separate `PrAutomation` crd.
+{% /callout %}
 
+An AI pipeline is simpler and more self-contained:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: Pipeline
+metadata:
+  name: test
+  namespace: infra
+spec:
+  stages:
+    - name: dev
+      services:
+        - serviceRef:
+            name: guestbook-dev
+            namespace: infra
+          criteria:
+            repository: pluralsh/demo-infra # github slug for our GitOps repository
+            ai:
+              enabled: true
+              prompt: |
+                Update the dev guestbook service for me to {{ context.image }}. it should be in the `bootstrap/guestbook.yaml` file.
+    - name: prod
+      services:
+        - serviceRef:
+            name: guestbook-prod
+            namespace: infra
+          criteria:
+            repository: pluralsh/demo-infra
+            ai:
+              enabled: true
+              prompt: |
+                Update the prod guestbook service for me to {{ context.image }}. it should be in the `bootstrap/guestbook.yaml` file.
+  edges:
+    - from: dev
+      to: prod
+      gates:
+        - name: sentinel
+          type: SENTINEL # organize integration testing with a sentinel
+          sentinelRef:
+            name: dev-sentinel
+            namespace: infra
+        - name: approval-gate
+          type: APPROVAL
+```
+
+Obviously a lot simpler and easier to manage if you wish to do so.  Another thing you might have noticed is the Gates on the edge definition. We can explain those as well.
+
+## Pipeline Gates Variants
+
+Gates serve as checkpoints between pipeline stages ensuring a change is safe to promote.  They have four main variants:
+
+1. APPROVAL - manual signoff in the Plural UI.
+2. WINDOW - time based constraint for promotion
+3. JOB - allows you to run a dedicated integration test job on a cluster
+4. SENTINEL - run a full [Plural Sentinel](/plural-features/plural-ai/sentinels) to blast integration tests throughout your infrastructure.  Useful for wide testing, eg when you're doing cluster upgrades throughout your dev fleet.
+
+{% callout severity="info" %}
+We often use Pipelines to manage fleet-wide promotions, for instance mass cluster upgrades, or mass kubernetes operator upgrades.  A GitOps approach is ideal for those one-to-many deployment scenarios, and the Sentinel promotion gate naturally pairs with that in giving you a mass test lifecycle to confirm those changes alongside just executing them.
+{% /callout %}
