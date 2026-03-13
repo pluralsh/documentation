@@ -33,3 +33,28 @@ There were a few design considerations involved in our agent that are worth unde
 
 - The expectation is the agent is deployed independently at scale, potentially hundreds of times for a large organization, so it must be maximally simple to reduce operational complexity to near 0.
 - It is designed to be extensible to arbitrarily many frameworks for defining kubernetes manifests. We aren't actually huge fans of helm or kustomize and want organizations to have the flexibility to ultimately use other toolchains for managing their kubernetes YAML codebase (or ultimately de-YAML themselves)
+
+## Product Architecture
+
+Plural splits infrastructure management into a simple hierarchy:
+
+1. All infrastructure is owned by a `Project`.  This is both an organizational container and a permission boundary.  It can be useful for segregating permissions to large scopes of resources.
+2. Projects can own either `Stacks` or `Clusters`.  Stacks are basically IaC codebases, and can encapsulate any base cloud infrastructure defined via Terraform or some other framework.  Clusters are simply running Kubernetes clusters.
+3. Clusters can own `Services` which are GitOps constructs syncing kubernetes YAML into those clusters.
+
+Along this hierarchy, any permission attached to a parent resource is communicated down.  So if a user has write access to a `Cluster`, that user also has write access to the cluster's `Service` objects.
+
+The hierarchy can be represented like so:
+
+{% mermaid %}
+graph TD
+  Project["Project"]
+  Stack["Stack (Terraform)"]
+  Cluster["Cluster (Kubernetes)"]
+  Service["Service (GitOps Construct)"]
+
+  Project --> Stack
+  Project --> Cluster
+  Cluster --> Service
+{% /mermaid %}
+

@@ -8,7 +8,7 @@
     "dev:watch": "concurrently \"next dev -p 3004\" \"yarn graphql:codegen:watch\"",
     "build": "run-s generate:route-index build:next",
     "build:next": "next build",
-    "start": "next start -p 3005",
+    "start": "next start -p 3000",
     "lint": "run-p lint:format lint:js lint:css",
     "lint:format": "prettier --check --no-error-on-unmatched-pattern ./{src,pages}/**/*.{js,jsx,ts,tsx,graphql,md,mdpart}",
     "lint:js": "eslint {src,pages} --ext ts,tsx,js,jsx",

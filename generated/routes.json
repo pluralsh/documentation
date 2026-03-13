@@ -9,7 +9,7 @@
   },
   "/overview/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2026-01-05T19:57:57.000Z"
+    "lastmod": "2026-03-13T04:05:45.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -149,11 +149,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-03-07T00:10:03.027Z"
+    "lastmod": "2026-03-13T04:10:16.060Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-03-07T00:10:03.057Z"
+    "lastmod": "2026-03-13T04:10:16.090Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -169,7 +169,7 @@
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
+    "lastmod": "2026-03-13T04:05:45.000Z"
   },
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
@@ -255,6 +255,10 @@
     "relPath": "/plural-features/plural-ai/setup.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/plural-ai/architecture": {
+    "relPath": "/plural-features/plural-ai/architecture.md",
+    "lastmod": "2025-03-12T14:59:41.000Z"
+  },
   "/plural-features/plural-ai/ai-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/index.md",
     "lastmod": "2026-03-04T02:33:39.000Z"
@@ -266,10 +270,6 @@
   "/plural-features/plural-ai/ai-agent/remote-browser": {
     "relPath": "/plural-features/plural-ai/ai-agent/remote-browser.md",
     "lastmod": "2026-03-04T02:33:39.000Z"
-  },
-  "/plural-features/plural-ai/architecture": {
-    "relPath": "/plural-features/plural-ai/architecture.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
   },
   "/plural-features/plural-ai/sentinels": {
     "relPath": "/plural-features/plural-ai/sentinels.md",
@@ -363,6 +363,10 @@
     "relPath": "/plural-features/pr-automation/governance/webhook.md",
     "lastmod": "2026-02-26T22:47:50.000Z"
   },
+  "/plural-features/pr-automation/ai-based-pr-automations": {
+    "relPath": "/plural-features/pr-automation/ai-based-pr-automations.md",
+    "lastmod": "2026-03-13T04:05:45.000Z"
+  },
   "/plural-features/pr-automation/description-patterns": {
     "relPath": "/plural-features/pr-automation/description-patterns.md",
     "lastmod": "2026-02-23T00:07:19.000Z"
@@ -429,7 +433,7 @@
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2026-01-05T19:57:57.000Z"
+    "lastmod": "2026-03-13T04:05:45.000Z"
   },
   "/reference/architecture": {
     "relPath": null,
@@ -605,7 +609,7 @@
   },
   "/deployments/templating": {
     "relPath": "/plural-features/service-templating/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2026-03-13T04:05:45.000Z"
   },
   "/deployments/multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
