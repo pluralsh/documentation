@@ -219,6 +219,7 @@ _Appears in:_
 | `claude` _[ClaudeConfig](#claudeconfig)_ | Config for Claude CLI runtime. |  | Optional: \{\} <br /> |
 | `opencode` _[OpenCodeConfig](#opencodeconfig)_ | Config for OpenCode CLI runtime. |  | Optional: \{\} <br /> |
 | `gemini` _[GeminiConfig](#geminiconfig)_ | Config for Gemini CLI runtime. |  | Optional: \{\} <br /> |
+| `codex` _[CodexConfig](#codexconfig)_ | Codex config for Codex CLI runtime. |  | Optional: \{\} <br /> |
 
 
 
@@ -255,7 +256,7 @@ _Appears in:_
 | `name` _string_ | Name of this AgentRuntime.<br />If not provided, the name from AgentRuntime.ObjectMeta will be used. |  | Optional: \{\} <br /> |
 | `default` _boolean_ | Default indicates whether this is the default agent runtime for coding agents. |  | Optional: \{\} <br /> |
 | `targetNamespace` _string_ |  |  | Required: \{\} <br /> |
-| `type` _[AgentRuntimeType](#agentruntimetype)_ | Type specifies the agent runtime to use for executing the stack.<br />One of CLAUDE, OPENCODE, GEMINI, CUSTOM. |  | Enum: [CLAUDE OPENCODE GEMINI CUSTOM] <br />Required: \{\} <br /> |
+| `type` _[AgentRuntimeType](#agentruntimetype)_ | Type specifies the agent runtime to use for executing the stack.<br />One of CLAUDE, OPENCODE, GEMINI, CODEX, CUSTOM. |  | Enum: [CLAUDE OPENCODE GEMINI CODEX CUSTOM] <br />Required: \{\} <br /> |
 | `bindings` _[AgentRuntimeBindings](#agentruntimebindings)_ | Bindings define the creation permissions for this agent runtime. |  | Optional: \{\} <br /> |
 | `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
 | `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
@@ -462,6 +463,40 @@ _Appears in:_
 | `tags` _object (keys:string, values:string)_ | Tags used to filter clusters. |  | Optional: \{\} <br /> |
 | `metadata` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  | Optional: \{\} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings contain read and write policies of this cluster |  | Optional: \{\} <br /> |
+
+
+#### CodexConfig
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRuntimeConfig](#agentruntimeconfig)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Codex API key. |  |  |
+| `model` _string_ | Model to use. |  |  |
+
+
+#### CodexConfigRaw
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRuntimeConfigRaw](#agentruntimeconfigraw)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
+| `model` _string_ | Model to use. |  |  |
 
 
 
