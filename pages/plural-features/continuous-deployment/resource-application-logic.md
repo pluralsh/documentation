@@ -19,10 +19,29 @@ and strictly order dependencies across services.
 You can specify how resources are applied during a sync with the `deployment.plural.sh/sync-options` annotation.
 We also support the Argo CD `argocd.argoproj.io/sync-options` annotation for compatibility.
 
-Currently, only one option is supported:
-- `Force=True` - If resource application fails, e.g., due to immutable field changes, the operator will delete and recreate the resource.
+Supported options:
+- `Replace=True` - Use replace semantics (`GET` and `PUT`) instead of Server-Side Apply. This lets you remove fields from the live resource if they are absent from your desired manifest.
+- `Force=True` - If apply/replace fails (for example due to immutable field changes), the operator will delete and recreate the resource.
 
-Options are comma-separated key-value case-insensitive pairs. All whitespace is ignored.
+Options are comma-separated, case-insensitive key-value pairs. All whitespace is ignored.
+Both annotation namespaces are supported and values are normalized, so variants like `Replace=True`, `replace=true`, and `REPLACE=true` are accepted.
+
+Behavior notes:
+- Default behavior uses Server-Side Apply.
+- With `Replace=True`, the operator first fetches the existing resource and uses its `resourceVersion` for the update. If the resource does not exist, it creates it.
+- With `Replace=True,Force=True`, if replace fails the operator escalates to delete and recreate. This mirrors existing `Force=True` behavior in the apply path.
+- In dry-run mode, delete and recreate escalation is never executed, and dry-run options are propagated to create/update operations.
+
+### Example
+
+```yaml
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  annotations:
+    deployment.plural.sh/sync-options: Replace=True,Force=True
+```
 
 ## Sync waves
 
