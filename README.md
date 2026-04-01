@@ -2,6 +2,8 @@ Documentation site for [Plural](https://www.plural.sh/), the open-source, unifie
 
 Built with [Next.js](https://nextjs.org/) and [Markdoc](https://markdoc.dev/).
 
+📖 **View the live documentation:** [docs.plural.sh](https://docs.plural.sh)
+
 ## Contributing
 
 ### Running the docs locally
