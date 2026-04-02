@@ -384,6 +384,9 @@ _Appears in:_
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Claude API key. |  |  |
 | `model` _string_ | Model Name of the model to use. |  |  |
 | `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single claude CLI run invocation. |  | Optional: \{\} <br /> |
+| `bashTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashTimeout is the default timeout for any bash command Claude execute. |  | Optional: \{\} <br /> |
+| `bashMaxTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashMaxTimeout is the maximum time Claude is permitted to wait<br />for a command before it is terminated. |  | Optional: \{\} <br /> |
 
 
 #### ClaudeConfigRaw
@@ -406,6 +409,9 @@ _Appears in:_
 | `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
 | `model` _string_ | Model Name of the model to use. |  |  |
 | `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single claude CLI run invocation. |  | Optional: \{\} <br /> |
+| `bashTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashTimeout is the default timeout for any bash command Claude executes. |  | Optional: \{\} <br /> |
+| `bashMaxTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashMaxTimeout is the maximum time Claude is permitted to wait<br />for a command before it is terminated. |  | Optional: \{\} <br /> |
 
 
 #### ClusterDrain
@@ -480,6 +486,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Codex API key. |  |  |
 | `model` _string_ | Model to use. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single codex run invocation. |  | Optional: \{\} <br /> |
 
 
 #### CodexConfigRaw
@@ -497,6 +504,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
 | `model` _string_ | Model to use. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single codex run invocation. |  | Optional: \{\} <br /> |
 
 
 
@@ -616,7 +624,9 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | APIKeySecretRef is a reference to a Kubernetes Secret containing the Gemini API key. |  |  |
-| `model` _string_ | Model is the name of the model to use.<br />gemini-2.5-flash-lite and gemini-2.0-flash-lite are the smallest models and are not fit for write (agent) mode.<br />They should only be used for analysis. |  | Enum: [gemini-3-pro-preview gemini-2.5-pro gemini-2.5-flash gemini-2.5-flash-lite gemini-2.0-flash gemini-2.0-flash-lite] <br />Optional: \{\} <br /> |
+| `model` _string_ | Model is the name of the model to use.<br />NOTE: gemini flash lite models and are not fit for the write (agent) mode, and<br />should only be used for analysis. |  | Optional: \{\} <br /> |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single gemini run invocation. |  | Optional: \{\} <br /> |
+| `inactivityTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | InactivityTimeout is the timeout for inactivity during a gemini run. |  | Optional: \{\} <br /> |
 
 
 #### GeminiConfigRaw
@@ -638,6 +648,8 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKey` _string_ | APIKey is the raw Gemini API key to use. |  |  |
 | `model` _string_ | Model is the name of the model to use. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single gemini run invocation. |  | Optional: \{\} <br /> |
+| `inactivityTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | InactivityTimeout is the timeout for inactivity during gemini run. |  | Optional: \{\} <br /> |
 
 
 
@@ -792,6 +804,7 @@ _Appears in:_
 | `model` _string_ | Model is the LLM model to use. |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to a Kubernetes Secret containing the API token for OpenCode. |  | Required: \{\} <br /> |
 | `extraArgs` _string array_ | ExtraArgs args for advanced or experimental CLI flags.<br />Deprecated: It is being ignored by the agent harness. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single opencode run invocation. |  | Optional: \{\} <br /> |
 
 
 #### OpenCodeConfigRaw
@@ -815,6 +828,7 @@ _Appears in:_
 | `endpoint` _string_ | Endpoint API endpoint for the OpenCode service. |  |  |
 | `model` _string_ | Model is the LLM model to use. |  |  |
 | `tokenSecretRef` _string_ | Token is the raw API token for OpenCode. |  |  |
+| `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single opencode run invocation. |  | Optional: \{\} <br /> |
 
 
 #### PipelineGate
