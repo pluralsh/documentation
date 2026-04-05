@@ -83,6 +83,9 @@ _Appears in:_
 | `maxConcurrentReconciles` _integer_ | MaxConcurrentReconciles controls the maximum number of concurrent reconcile loops.<br />Higher values can increase throughput at the cost of resource usage. |  |  |
 | `vulnerabilityReportUploadInterval` _string_ | VulnerabilityReportUploadInterval sets how often vulnerability reports are uploaded.<br />Set to "0s" to disable vulnerability report uploads. |  |  |
 | `baseRegistryURL` _string_ | BaseRegistryURL allows overriding the default base registry URL.<br />For stack run jobs, agent run pods, sentinel run jobs. |  |  |
+| `maxSentinelRunJobs` _integer_ | MaxSentinelRunJobs limits the number of concurrent SentinelRunJobs that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
+| `maxStackRunJobs` _integer_ | MaxStackRunJobs limits the number of concurrent StackRunJobs that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
+| `maxAgentRunPods` _integer_ | MaxAgentRunPods limits the number of concurrent agent run pods that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
 
 
 #### AgentHelmConfiguration
