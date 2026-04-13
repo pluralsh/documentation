@@ -1388,6 +1388,7 @@ _Appears in:_
 | `ai` _[AISettings](#aisettings)_ | AI settings specifies a configuration for LLM provider clients |  | Optional: \{\} <br /> |
 | `logging` _[LoggingSettings](#loggingsettings)_ | Logging settings for connections to log aggregation datastores |  | Optional: \{\} <br /> |
 | `cost` _[CostSettings](#costsettings)_ | Cost settings for managing Plural's cost management features |  | Optional: \{\} <br /> |
+| `metrics` _[MetricsSettings](#metricssettings)_ | Metrics settings for OpenTelemetry metrics export |  | Optional: \{\} <br /> |
 | `deploymentRepositoryRef` _[NamespacedName](#namespacedname)_ | DeploymentRepositoryRef is a pointer to the deployment GIT repository to use |  | Optional: \{\} <br /> |
 | `scaffoldsRepositoryRef` _[NamespacedName](#namespacedname)_ | ScaffoldsRepositoryRef is a pointer to the Scaffolds GIT repository to use |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
@@ -1677,6 +1678,7 @@ GitRef represents a reference to a Git repository.
 _Appears in:_
 - [AiApprovalConfiguration](#aiapprovalconfiguration)
 - [InfrastructureStackSpec](#infrastructurestackspec)
+- [PolicyEngine](#policyengine)
 - [PrAutomationCreateConfiguration](#prautomationcreateconfiguration)
 - [PrAutomationSpec](#prautomationspec)
 - [SentinelCheckIntegrationTestConfiguration](#sentinelcheckintegrationtestconfiguration)
@@ -2304,6 +2306,24 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `name` _string_ | Name is a short, unique human-readable name used to identify this cluster. |  | Required: \{\} <br /> |
 | `namespace` _string_ | Namespace specifies an optional namespace for categorizing or scoping related resources.<br />If empty then the ClusterSync's namespace will be used. |  | Optional: \{\} <br /> |
+
+
+#### MetricsSettings
+
+
+
+MetricsSettings holds configuration for OpenTelemetry metrics export.
+
+
+
+_Appears in:_
+- [DeploymentSettingsSpec](#deploymentsettingsspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ | Enabled defines whether to enable the metrics export or not. | false | Optional: \{\} <br /> |
+| `endpoint` _string_ | Endpoint is the OpenTelemetry collector endpoint to send metrics to. |  | Optional: \{\} <br /> |
+| `crontab` _string_ | Crontab is the cron expression for how often to export metrics.<br />Example: "*/5 * * * *" for every 5 minutes. |  | Optional: \{\} <br /> |
 
 
 #### NamespaceCredentials
@@ -3394,7 +3414,10 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `type` _[PolicyEngineType](#policyenginetype)_ | Type of the policy engine to use with this stack.<br />At the moment only TRIVY is supported. |  | Enum: [TRIVY] <br />Required: \{\} <br /> |
+| `customPolicies` _boolean_ | CustomPolicies enables loading custom policies from the configured repository. |  | Optional: \{\} <br /> |
 | `maxSeverity` _[VulnSeverity](#vulnseverity)_ | MaxSeverity is the maximum allowed severity without failing the stack run.<br />One of UNKNOWN, LOW, MEDIUM, HIGH, CRITICAL, NONE. |  | Enum: [UNKNOWN LOW MEDIUM HIGH CRITICAL NONE] <br />Optional: \{\} <br /> |
+| `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references a GitRepository for policy configuration.<br />Leave unset when policies live in the stack repository, or use git.url instead of this ref. |  | Optional: \{\} <br /> |
+| `git` _[GitRef](#gitref)_ | Git is the ref and folder (within the policy repository or stack repository) for policy files.<br />If git.url is set, it resolves the repository in Console (same as the stack-level git field); ref and folder are still used for the API. |  | Optional: \{\} <br /> |
 
 
 #### PrAutomation
@@ -5119,6 +5142,8 @@ _Appears in:_
 | `parallelism` _integer_ | Parallelism is the number of concurrent operations to run,<br />equivalent to the -parallelism flag in Terraform. |  | Optional: \{\} <br /> |
 | `refresh` _boolean_ | Refresh is whether to refresh the state of the stack,<br />equivalent to the -refresh flag in Terraform. |  | Optional: \{\} <br /> |
 | `approveEmpty` _boolean_ | ApproveEmpty is whether to auto-approve a plan if there are no changes, preventing a stack from being blocked. |  | Optional: \{\} <br /> |
+| `tofu` _boolean_ | Tofu is whether to use OpenTofu instead of Terraform for this stack. |  | Optional: \{\} <br /> |
+| `tofuRegistry` _boolean_ | TofuRegistry is whether to use the OpenTofu registry for provider and module sources. |  | Optional: \{\} <br /> |
 
 
 #### Tools
