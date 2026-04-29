@@ -141,7 +141,7 @@ Because log-based alerts flow through the same `Alert` pipeline as third-party p
 * **Alert resolutions** authored against firing monitors are vectorized into ElasticSearch (see below) and reused by Plural AI to suggest fixes the next time a similar monitor fires.
 * **AI Insights** can correlate the firing monitor with recent service logs, deployments, and pull requests to produce a Root Cause Analysis without you having to leave the alert view.
 
-![elastic-setup](/assets/observability/monitor-insight.png)
+![monitor-insight](/assets/observability/monitor-insight.png)
 
 This makes log-based monitors a particularly low-friction way to bootstrap alerting on a new service: write a query you'd run in the logs view anyway, set a threshold, and Plural handles scheduling, deduplication, notification, and AI-assisted triage from there.
 
