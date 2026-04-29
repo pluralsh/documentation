@@ -89,6 +89,62 @@ spec:
         key: password
 ```
 
+## Log-Based Alerts
+
+Once log aggregation is wired up, you can build alerts directly off of your log stream using Plural's log-based monitors.  A monitor is a recurring, server-side log query that evaluates on a cron schedule, buckets results over a lookback window, and fires a Plural alert whenever an aggregate (max, min, or avg) crosses a threshold you define.  Because monitors run as part of the Plural control plane, they work multi-cluster out of the box and reuse the same ElasticSearch (or other) backend you've already configured for log search.
+
+### How it works
+
+Each monitor is attached to a Service Deployment and is composed of three pieces:
+
+* **Log query** -- the query string, lookback `duration` (e.g. `1h`, `30m`), `bucketSize` used to aggregate matches over time (e.g. `5m`), an `operator` (`AND` / `OR`) for multi-term queries, and an optional list of key/value `facets` (for example `namespace=payments` or a pod label) layered on top of the query.
+* **Threshold** -- an `aggregate` function (`max`, `min`, or `avg`) applied across the bucketed counts and a numeric `value` the aggregate must cross to trigger the alert.
+* **Schedule** -- a standard cron expression (for example `*/5 * * * *` or `@daily`) that controls how often the monitor is re-evaluated.
+
+On every tick, Plural runs the log query against your configured logging driver, builds a vector of per-bucket counts, and aggregates that vector into a single number. If it crosses the threshold the monitor transitions to `firing` and a Plural alert is created (or updated); when the next evaluation comes back under the threshold, the alert is automatically marked `resolved`. Alerts produced this way are first-class `Alert` objects in the Plural Console -- they show up alongside Datadog/Grafana alerts and can be routed through your existing notification routers, attached to AI insights, and surfaced in service dashboards.
+
+### Creating a monitor in the UI
+
+![create-monitor](/assets/observability/create-monitor.png)
+
+
+Monitors are managed per-service under `Service` -> `Observability` -> `Monitors`. Click `Create Monitor` and the wizard walks through three steps:
+
+1. **Log query** -- pick a lookback duration and bucket size, type a query, and optionally pin facet filters from the same label picker used in the standard logs view.  A live preview of matching log lines is rendered in the side panel so you can validate the query before saving.
+
+![log-query](/assets/observability/log-query.png)
+
+2. **Threshold config** -- enter the numeric threshold and choose the aggregate (`max` / `min` / `avg`) used to compare against it.
+
+![threshold-config](/assets/observability/threshold-config.png)
+
+3. **Description** -- give the monitor a name, an evaluation cron, an optional severity, and an optional alert template.
+
+![monitor-description](/assets/observability/monitor-description.png)
+
+
+The alert template is rendered with [Liquid](https://shopify.github.io/liquid/) and has access to the full monitor context, so you can interpolate dynamic values into the alert body, e.g.:
+
+```text
+Monitor {{ monitor.name }} is firing for {{ monitor.service.name }} on
+{{ monitor.service.cluster.name }} -- threshold {{ monitor.threshold.value }}
+({{ monitor.threshold.aggregate }}) was breached.
+```
+
+If no template is provided, Plural renders a default Markdown summary that includes the firing service, the threshold settings, and a JSON dump of the log query and the bucketed results that triggered the alert -- handy for triage and for the AI insight engine.
+
+### Routing and AI integration
+
+Because log-based alerts flow through the same `Alert` pipeline as third-party providers, they automatically benefit from the rest of the Plural observability stack:
+
+* **NotificationRouters** can fan them out to Slack, email, or any configured sink, with the same severity- and tag-based filters used for other alert sources.
+* **Alert resolutions** authored against firing monitors are vectorized into ElasticSearch (see below) and reused by Plural AI to suggest fixes the next time a similar monitor fires.
+* **AI Insights** can correlate the firing monitor with recent service logs, deployments, and pull requests to produce a Root Cause Analysis without you having to leave the alert view.
+
+![elastic-setup](/assets/observability/monitor-insight.png)
+
+This makes log-based monitors a particularly low-friction way to bootstrap alerting on a new service: write a query you'd run in the logs view anyway, set a threshold, and Plural handles scheduling, deduplication, notification, and AI-assisted triage from there.
+
 ## ElasticSearch as a Vector Store
 
 Beyond the single-pane-of-glass benefits, log data significantly enhances the dataset used by Plural AI, which is why we highly recommend enabling log aggregation for production deployments. We lean on ElasticSearch as the default log store because it's a broadly usable data store with recent support for vector search, enabling Plural AI to:
