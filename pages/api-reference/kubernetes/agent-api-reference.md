@@ -269,6 +269,8 @@ _Appears in:_
 | `browser` _[BrowserConfig](#browserconfig)_ | Browser configuration augments agent runtime with a headless browser.<br />When provided, the runtime will be configured to run with a headless browser available<br />for the agent to use. |  | Optional: \{\} <br /> |
 | `bootstrapScript` _string_ | BootstrapScript is a bash script that will be executed inside the cloned repository<br />directory before the coding agent starts. It can be used to install dependencies,<br />configure tooling, or perform any other setup required by the agent. |  | Optional: \{\} <br /> |
 | `git` _[GitSpec](#gitspec)_ | Git configure commit signing on agent run. When provided, the runtime will be configured to sign git commits using the provided key reference. |  |  |
+| `babysitInterval` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BabysitInterval configures the interval for the operator to check on the health of the agent runtime and perform necessary babysitting actions (e.g. restarting unhealthy runtimes). When not provided, a default interval of 1 minute will be used. |  |  |
+| `exaMcpServers` _[ExaMcpServerConfig](#examcpserverconfig) array_ | ExaMcpServers defines external MCP servers that the agent runtime should connect to. When provided, the runtime will be configured to connect to these external MCP servers for tool and action execution. |  |  |
 
 
 #### Binding
@@ -388,6 +390,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Claude API key. |  |  |
 | `model` _string_ | Model Name of the model to use. |  |  |
+| `endpoint` _string_ | Endpoint is the base URL for the Claude API (supports Bedrock/Anthropic-compatible endpoints). |  | Optional: \{\} <br /> |
 | `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single claude CLI run invocation. |  | Optional: \{\} <br /> |
 | `bashTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashTimeout is the default timeout for any bash command Claude execute. |  | Optional: \{\} <br /> |
@@ -413,6 +416,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
 | `model` _string_ | Model Name of the model to use. |  |  |
+| `endpoint` _string_ | Endpoint is the base URL for the Claude API (supports Bedrock/Anthropic-compatible endpoints). |  | Optional: \{\} <br /> |
 | `extraArgs` _string array_ | ExtraArgs CLI args for advanced flags not modeled here |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single claude CLI run invocation. |  | Optional: \{\} <br /> |
 | `bashTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BashTimeout is the default timeout for any bash command Claude executes. |  | Optional: \{\} <br /> |
@@ -491,6 +495,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ApiKeySecretRef Reference to a Kubernetes Secret containing the Codex API key. |  |  |
 | `model` _string_ | Model to use. |  |  |
+| `endpoint` _string_ | Endpoint is the base URL for the Codex API (supports OpenAI/Azure-compatible endpoints). |  | Optional: \{\} <br /> |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single codex run invocation. |  | Optional: \{\} <br /> |
 
 
@@ -509,6 +514,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `apiKey` _string_ | ApiKey is the raw API key to use. |  |  |
 | `model` _string_ | Model to use. |  |  |
+| `endpoint` _string_ | Endpoint is the base URL for the Codex API (supports OpenAI/Azure-compatible endpoints). |  | Optional: \{\} <br /> |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single codex run invocation. |  | Optional: \{\} <br /> |
 
 
@@ -550,6 +556,26 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `script` _string_ |  |  |  |
+
+
+
+
+#### ExaMcpServerConfig
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ |  |  |  |
+| `url` _string_ |  |  |  |
+| `apiKey` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ |  |  |  |
 
 
 
@@ -632,6 +658,7 @@ _Appears in:_
 | `model` _string_ | Model is the name of the model to use.<br />NOTE: gemini flash lite models and are not fit for the write (agent) mode, and<br />should only be used for analysis. |  | Optional: \{\} <br /> |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single gemini run invocation. |  | Optional: \{\} <br /> |
 | `inactivityTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | InactivityTimeout is the timeout for inactivity during a gemini run. |  | Optional: \{\} <br /> |
+| `endpoint` _string_ |  |  | Optional: \{\} <br /> |
 
 
 #### GeminiConfigRaw
@@ -655,6 +682,7 @@ _Appears in:_
 | `model` _string_ | Model is the name of the model to use. |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single gemini run invocation. |  | Optional: \{\} <br /> |
 | `inactivityTimeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | InactivityTimeout is the timeout for inactivity during gemini run. |  | Optional: \{\} <br /> |
+| `endpoint` _string_ |  |  | Optional: \{\} <br /> |
 
 
 #### GitSpec
@@ -822,7 +850,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `provider` _string_ | Provider is the OpenCode provider to use. |  | Enum: [plural openai] <br />Required: \{\} <br /> |
-| `endpoint` _string_ | Endpoint API endpoint for the OpenCode service. |  | Required: \{\} <br /> |
+| `endpoint` _string_ | Endpoint API endpoint for the OpenCode service.<br />Endpoint for the OpenCode service (can be any OpenAI-compatible API endpoint). |  | Required: \{\} <br /> |
 | `model` _string_ | Model is the LLM model to use. |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to a Kubernetes Secret containing the API token for OpenCode. |  | Required: \{\} <br /> |
 | `extraArgs` _string array_ | ExtraArgs args for advanced or experimental CLI flags.<br />Deprecated: It is being ignored by the agent harness. |  |  |
