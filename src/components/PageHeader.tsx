@@ -12,7 +12,7 @@ import { DISCORD_LINK } from '@src/consts'
 import { BreakpointIsGreaterOrEqual, mqs, useBreakpoint } from './Breakpoints'
 import GithubStars from './GithubStars'
 import MobileMenu from './MobileMenu'
-import { HamburgerButton, SearchButton, SocialLink } from './PageHeaderButtons'
+import { HamburgerButton, SocialLink } from './PageHeaderButtons'
 
 const Filler = styled.div((_) => ({
   flexGrow: 1,
@@ -90,7 +90,6 @@ function PageHeaderUnstyled({ ...props }) {
             Sign in
           </Button>
         </div>
-        <SearchButton />
         <HamburgerButton
           isOpen={menuIsOpen}
           onClick={() => {

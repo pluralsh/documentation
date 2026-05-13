@@ -30,7 +30,6 @@ import styled, { ThemeProvider as StyledThemeProvider } from 'styled-components'
 import { SWRConfig } from 'swr'
 
 import { BreakpointProvider } from '@src/components/Breakpoints'
-import DocSearchStyles from '@src/components/DocSearchStyles'
 import ExternalScripts from '@src/components/ExternalScripts'
 import { FullNav } from '@src/components/FullNav'
 import {
@@ -155,7 +154,6 @@ function App({ Component, pageProps = {}, swrConfig }: MyAppProps) {
       <CssBaseline />
       <PluralGlobalStyle />
       <GlobalStyles />
-      <DocSearchStyles />
       <PagePropsContext.Provider value={pageProps}>
         <HtmlHead {...headProps} />
         <PageHeader />

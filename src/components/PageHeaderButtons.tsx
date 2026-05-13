@@ -4,33 +4,10 @@ import {
   HamburgerMenuCollapsedIcon as MenuCloseIcon,
   HamburgerMenuIcon as MenuOpenIcon,
 } from '@pluralsh/design-system'
-import { useRouter } from 'next/router'
 
-import { DocSearch } from '@docsearch/react'
 import styled from 'styled-components'
 
 import { mqs } from './Breakpoints'
-
-export function SearchButton() {
-  const router = useRouter()
-
-  return (
-    <DocSearch
-      appId={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID || ''}
-      indexName={process.env.NEXT_PUBLIC_ALGOLIA_INDEX_NAME || ''}
-      apiKey={process.env.NEXT_PUBLIC_ALGOLIA_APP_ID_KEY || ''}
-      placeholder="Search Plural docs"
-      navigator={{
-        navigate: ({ itemUrl }) => {
-          router.push(itemUrl)
-        },
-      }}
-      getMissingResultsUrl={({ query }) =>
-        `https://github.com/pluralsh/documentation/issues/new?title=${query}`
-      }
-    />
-  )
-}
 
 export const ButtonFillTwo = styled.a(({ theme }) => ({
   display: 'flex',

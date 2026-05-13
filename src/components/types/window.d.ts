@@ -28,6 +28,8 @@ interface Window {
       optinMarketing: boolean
     ): void
   }
+  // Kapa docs widget (stub queue or loaded API)
+  Kapa?: (command: string, ...args: unknown[]) => void
   // Hubspot
   _hsq?: any[]
   // Gtag
