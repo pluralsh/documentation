@@ -86,6 +86,7 @@ _Appears in:_
 | `maxSentinelRunJobs` _integer_ | MaxSentinelRunJobs limits the number of concurrent SentinelRunJobs that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
 | `maxStackRunJobs` _integer_ | MaxStackRunJobs limits the number of concurrent StackRunJobs that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
 | `maxAgentRunPods` _integer_ | MaxAgentRunPods limits the number of concurrent agent run pods that can be active at any given time.<br />Must be greater than 0. Set this field to nil (omit) to disable the limit. |  | Minimum: 1 <br /> |
+| `disableWebsocket` _boolean_ | DisableWebsocket disables the cluster websocket connection to the Console.<br />When enabled, the agent will rely exclusively on polling instead of receiving<br />push updates. This is useful in large-scale edge deployments where maintaining<br />persistent websocket connections has an infeasible network cost. |  |  |
 
 
 #### AgentHelmConfiguration
