@@ -106,6 +106,7 @@ function KapaWidget() {
       data-modal-open-on-command-k="true"
       data-search-mode-enabled="true"
       data-mcp-enabled="true"
+      data-mcp-server-url="https://plural.mcp.kapa.ai"
       data-project-color="#5D63F4"
       data-project-logo="https://docs.plural.sh/favicon-192.png"
     />
