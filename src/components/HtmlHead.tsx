@@ -93,11 +93,6 @@ function HtmlHead({
           href="https://fonts.gstatic.com"
           crossOrigin=""
         />
-        <link
-          rel="preconnect"
-          href={`https://${process.env.NEXT_PUBLIC_ALGOLIA_APP_ID}-dsn.algolia.net`}
-          crossOrigin=""
-        />
       </Head>
       <Favicons />
       <OpenGraph

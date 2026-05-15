@@ -24,7 +24,6 @@
   "dependencies": {
     "@apidevtools/swagger-parser": "^12.1.0",
     "@apollo/client": "3.7.15",
-    "@docsearch/react": "3.5.1",
     "@emotion/react": "11.11.1",
     "@emotion/styled": "11.11.0",
     "@graphql-codegen/add": "5.0.0",
@@ -43,7 +42,6 @@
     "@react-stately/list": "3.8.1",
     "@react-stately/select": "3.5.1",
     "@react-stately/selection": "3.19.0",
-    "algoliasearch": "4.17.2",
     "chroma-js": "2.4.2",
     "classnames": "2.3.2",
     "deep-freeze": "0.0.1",
