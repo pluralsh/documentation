@@ -10,7 +10,7 @@ A workbench job is a single execution of the workbench agent against a prompt. I
 * A live **activity stream** of every step the agent took
 * A structured **result** — a conclusion, optional todos, topology references, observability pointers, and any pull requests opened during the run
 
-Jobs can be started manually from the UI, by a [cron schedule](./automation#cron-schedules), by a [webhook trigger](./automation#webhook-triggers), or from a [Plural Flow](../flows/index).
+Jobs can be started manually from the UI, by a [cron schedule](./automation#cron-schedules), by a [webhook trigger](./automation#webhook-triggers), or from a [Plural Flow](../flows/index.md).
 
 ---
 

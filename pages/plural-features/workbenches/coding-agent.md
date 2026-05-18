@@ -15,7 +15,7 @@ Coding capabilities are optional. Workbenches that are purely operational (query
 
 The coding agent runs inside a sandboxed Kubernetes pod managed by an `AgentRuntime` resource on your management cluster. You must deploy and configure an `AgentRuntime` before enabling coding in a workbench.
 
-See **[Configure an AgentRuntime](/plural-features/plural-ai/ai-agent/configure-agent)** for full setup instructions, including:
+See **[Configure an AgentRuntime](/plural-features/plural-ai/ai-agent/configure-agent.md)** for full setup instructions, including:
 
 * Deploying the `AgentRuntime` CRD with your AI provider credentials (Claude, OpenCode, or Gemini)
 * Tuning pod resource requests and limits

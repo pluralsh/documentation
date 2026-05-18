@@ -7,9 +7,9 @@ description: End-to-end guide to creating, configuring, and running your first w
 
 Before creating a workbench you need:
 
-* A Plural project to scope the workbench to. If you have not created one yet, see [Projects and multi-tenancy](../projects-and-multi-tenancy/index).
+* A Plural project to scope the workbench to. If you have not created one yet, see [Projects and multi-tenancy](../projects-and-multi-tenancy/index.md).
 * Any external tools (Datadog, Prometheus, GitHub, Slack, etc.) configured in **Workbenches → Integrations**. Tools can be added later, but it is easiest to have them ready before creating the workbench. See [Workbench tools](./tools).
-* If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](../plural-ai/ai-agent/configure-agent).
+* If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](../plural-ai/ai-agent/configure-agent.md).
 
 ---
 
@@ -57,7 +57,7 @@ Enable the data sources the agent needs. All access still respects your underlyi
 | **Log aggregation** | Search and aggregate logs from Loki, Elastic, or other configured log backends |
 
 {% callout severity="info" %}
-The **Observability** capabilities use the backends you set up under [Observability Integration](../observability/index). **Pod logs** is a separate, direct Kubernetes log stream — it works without any observability backend.
+The **Observability** capabilities use the backends you set up under [Observability Integration](../observability/index.md). **Pod logs** is a separate, direct Kubernetes log stream — it works without any observability backend.
 {% /callout %}
 
 ---
@@ -89,7 +89,7 @@ Skill files are fetched from Git at job start, so they stay current as your runb
 
 This step configures optional code-reading and code-writing capabilities. Skip it (leave the runtime unset) if your workbench is purely operational and does not need to touch source code.
 
-For detailed guidance on setting up and using the coding agent, see [Coding agent](./coding-agent).
+For detailed guidance on setting up and using the coding agent, see [Coding agent](./coding-agent.md).
 
 ---
 

@@ -23,7 +23,7 @@ The parent configuration object. It defines the agent's identity (name, system p
 
 ### Workbench job
 
-A single run of the agent against a prompt. Jobs are created manually in the UI, by a cron schedule, by a webhook trigger, or from a [Plural Flow](../flows/index). Each job has a status (`pending`, `running`, `complete`, `failed`) and a streaming activity log you can follow in real time.
+A single run of the agent against a prompt. Jobs are created manually in the UI, by a cron schedule, by a webhook trigger, or from a [Plural Flow](../flows/index.md). Each job has a status (`pending`, `running`, `complete`, `failed`) and a streaming activity log you can follow in real time.
 
 ### Activities
 
@@ -43,7 +43,7 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 
 | Integration | How it connects |
 |---|---|
-| [Flows](../flows/index) | A flow can launch a workbench job directly from its UI or via `FlowWorkbenchJobLauncher`, scoping the job to that flow's services and pipelines |
+| [Flows](../flows/index.md) | A flow can launch a workbench job directly from its UI or via `FlowWorkbenchJobLauncher`, scoping the job to that flow's services and pipelines |
 | Alerts | Observability alerts can automatically trigger workbench jobs via [webhook triggers](./automation#webhook-triggers) |
 | Issues | Issue tracker events can trigger workbench jobs the same way, and the job has access to the originating issue |
 | Pull requests | Jobs that open PRs record them on the job |
