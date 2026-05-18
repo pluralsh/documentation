@@ -1,6 +1,6 @@
 ---
 title: Automating workbench jobs
-description: Trigger workbench runs on a schedule, from incidents, or from chat
+description: Trigger workbench runs on a schedule, from incidents, or from ticketing integrations
 ---
 
 ## Overview

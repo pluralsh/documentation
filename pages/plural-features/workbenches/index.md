@@ -13,7 +13,7 @@ Key things you can do with a workbench:
 
 * Run an AI agent against your Plural-managed services, stacks, and Kubernetes clusters — respecting your existing RBAC
 * Connect external tools like Datadog, Prometheus, Elasticsearch, Slack, GitHub, and custom HTTP APIs so the agent has full operational context
-* Trigger jobs automatically from observability alerts, issue trackers, cron schedules, or chat messages
+* Trigger jobs automatically from observability alerts, issue trackers, or cron schedules
 
 ## Core concepts
 
