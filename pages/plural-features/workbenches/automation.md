@@ -48,7 +48,7 @@ The **Cron schedules** page lists all schedules for the workbench. Click the pen
 
 Webhook triggers fire a workbench job when an incoming webhook payload matches a pattern you define. Plural supports two categories of webhook source:
 
-* **Observability webhooks** — payloads from alerting systems (Datadog, Grafana, PagerDuty, etc.) registered under [Observability Webhooks](../observability/observability-webhooks/index)
+* **Observability webhooks** — payloads from alerting systems (Datadog, Grafana, PagerDuty, etc.) registered under [Observability Webhooks](../observability/index.md)
 * **Issue webhooks** — payloads from issue trackers (Jira, Linear, GitHub Issues, etc.) registered as issue webhook sources in Plural
 
 ### Creating a webhook trigger
