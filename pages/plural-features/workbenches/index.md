@@ -14,7 +14,6 @@ Key things you can do with a workbench:
 * Run an AI agent against your Plural-managed services, stacks, and Kubernetes clusters — respecting your existing RBAC
 * Connect external tools like Datadog, Prometheus, Elasticsearch, Slack, GitHub, and custom HTTP APIs so the agent has full operational context
 * Trigger jobs automatically from observability alerts, issue trackers, cron schedules, or chat messages
-* Grade agent output over time with evaluations so you can track quality and PR merge rates
 
 ## Core concepts
 
@@ -38,10 +37,6 @@ External integrations the agent can call during a job. Tools are managed globall
 
 Instruction files that extend what the agent knows how to do. Skills can be loaded from a Git repository or defined inline in the workbench. They are included in the agent's context alongside the system prompt.
 
-### Evaluations
-
-Optional grading rules that score every job's output across prompt quality, progress thoughts, and conclusion quality. Eval results roll up into trend graphs on the workbench's **Evals** tab so you can measure whether the agent is improving over time. See [Evaluations](./evaluations).
-
 ## How workbenches fit into Plural
 
 Workbenches live under a **project**, inheriting and extending that project's RBAC. Within a project they complement the rest of the Plural surface:
@@ -51,7 +46,7 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 | [Flows](../flows/index) | A flow can launch a workbench job directly from its UI or via `FlowWorkbenchJobLauncher`, scoping the job to that flow's services and pipelines |
 | Alerts | Observability alerts can automatically trigger workbench jobs via [webhook triggers](./automation#webhook-triggers) |
 | Issues | Issue tracker events can trigger workbench jobs the same way, and the job has access to the originating issue |
-| Pull requests | Jobs that open PRs record them on the job, and eval metrics include PR merge rates over time |
+| Pull requests | Jobs that open PRs record them on the job |
 | Agent runtime | The AI model and sandbox environment that executes each job; configured at the workbench level |
 
 ![](/assets/workbenches/workbenches-overview.png)
@@ -63,4 +58,4 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 3. (Optional) Set up shared [tools](./tools) your workbench can call.
 4. Run your first job from the workbench's **Jobs** tab.
 
-Once you have a job running, you can layer in [automation](./automation) to trigger jobs on a schedule or from incidents, and [evaluations](./evaluations) to measure quality over time.
+Once you have a job running, you can layer in [automation](./automation) to trigger jobs on a schedule or from incidents.
