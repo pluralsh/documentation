@@ -94,6 +94,6 @@ Each webhook source has its own setup guide available during trigger creation. C
 
 ## Flow-triggered jobs
 
-Workbenches can also be triggered from a [Plural Flow](../flows/index). On the flow detail page, click **Start workbench job** to select a workbench and enter a prompt. The resulting job is scoped to the flow's services and pipelines, giving the agent the right context for that application boundary.
+Workbenches can also be triggered from a [Plural Flow](../flows). On the flow detail page, click **Start workbench job** to select a workbench and enter a prompt. The resulting job is scoped to the flow's services and pipelines, giving the agent the right context for that application boundary.
 
-See [Plural Flows](../flows/index) for more on how flows and workbenches work together.
+See [Plural Flows](../flows) for more on how flows and workbenches work together.
