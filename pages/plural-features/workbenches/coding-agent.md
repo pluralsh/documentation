@@ -52,13 +52,15 @@ The agent only accesses the repositories you list here. Narrow this list to what
 
 ### Babysitting (Write mode only)
 
-When **Enable babysitting** is on, the agent pauses before pushing each commit and waits for a human to review and approve the diff. This is useful for:
+When **Enable babysitting** is on, the agent opens a pull request and then continues to monitor it — watching for PR review comments and CI failures and pushing additional commits to address them. The session ends automatically when the PR is merged or when the session times out.
 
-* Repositories where automated commits require a second pair of eyes before landing
-* Getting comfortable with a new workbench before allowing it to operate fully autonomously
-* Compliance environments where all changes must have a human approver
+This is useful for:
 
-With babysitting off, the agent commits and pushes immediately, then opens a pull request that your normal review process handles.
+* Iterating on a change until CI is green without manual re-runs
+* Automatically incorporating reviewer feedback as follow-up commits
+* Letting the agent drive a change to completion while humans stay in the review loop
+
+With babysitting off, the agent opens a pull request and exits, leaving your normal review process to handle the rest.
 
 ---
 
@@ -66,7 +68,10 @@ With babysitting off, the agent commits and pushes immediately, then opens a pul
 
 When a job completes with Write mode and the agent has opened pull requests, they appear in the job's **Result** panel under **Pull requests**. Each entry links directly to the PR in your SCM provider.
 
-On the workbench's **Evals** tab, the **PR merge rate** metric tracks what percentage of agent-opened PRs are ultimately merged by humans — a strong signal of whether the agent's code changes are actually useful.
+![](/assets/workbenches/workbench-fix-created.png)
+![](/assets/workbenches/workbench-conclusion-dashboard.png)
+![](/assets/workbenches/workbench-conclusion-dashboard-prs.png)
+
 
 ---
 

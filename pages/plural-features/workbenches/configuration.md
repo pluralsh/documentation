@@ -7,7 +7,6 @@ description: End-to-end guide to creating, configuring, and running your first w
 
 Before creating a workbench you need:
 
-* A Plural project to scope the workbench to. If you have not created one yet, see [Projects and multi-tenancy](../projects-and-multi-tenancy/index.md).
 * Any external tools (Datadog, Prometheus, GitHub, Slack, etc.) configured in **Workbenches → Integrations**. Tools can be added later, but it is easiest to have them ready before creating the workbench. See [Workbench tools](./tools).
 * If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](../plural-ai/ai-agent/configure-agent.md).
 
@@ -27,19 +26,11 @@ Navigate to **Workbenches** in the Plural Console sidebar and click **Create wor
 
 Choose a name that reflects the agent's role — for example, `platform-incidents`, `cost-analysis`, or `infra-self-service`. The name must be unique within your Plural instance and is used in job logs, webhook confirmations, and chatbot messages.
 
-### System prompt
+### Plural-native capabilities
 
-The system prompt sets the agent's standing context — its role, the scope of infrastructure it covers, and any behavioral guidelines that apply to every job. You do not need to write one from scratch. Plural's **skills** system (Step 2) provides pre-built and custom instruction documents that the agent reads before each job, and these can do most of the heavy lifting for common use cases like incident response, cost analysis, or self-service infrastructure.
+These capabilities give the agent access to Plural's own internal tooling — the same data and controls available in the Plural Console, exposed as agent-callable tools. No external credentials are required; Plural handles authentication internally and all access still respects your existing RBAC.
 
-A system prompt is most useful for short, workbench-specific framing — the name of your platform, which team the agent is acting on behalf of, and any hard constraints you always want enforced. The detailed operational guidance belongs in skills.
-
-{% callout severity="info" %}
-You can leave the system prompt blank entirely and rely on skills and per-job prompts. Automation scenarios (crons, webhooks) work better with at least a brief system prompt to orient the agent, but it does not need to be long.
-{% /callout %}
-
-### Infrastructure capabilities
-
-Enable the data sources the agent needs. All access still respects your underlying RBAC — enabling a capability does not grant the agent permissions it does not already have.
+#### Infrastructure
 
 | Capability | Enable when you need the agent to... |
 |---|---|
@@ -49,7 +40,7 @@ Enable the data sources the agent needs. All access still respects your underlyi
 | **Pod logs** | Stream raw container stdout/stderr from Kubernetes pods |
 | **Vulnerabilities** | Read Trivy vulnerability findings auto-associated with Plural services |
 
-### Observability capabilities
+#### Observability
 
 | Capability | Enable when you need the agent to... |
 |---|---|
@@ -138,4 +129,4 @@ Open the **•••** overflow menu on any workbench and select **Edit** to reo
 
 ## Deleting a workbench
 
-From the overflow menu, select **Delete**. This permanently removes the workbench and all associated job history, schedules, webhooks, saved prompts, and eval settings.
+From the overflow menu, select **Delete**. This permanently removes the workbench and all associated job history, schedules, webhooks and saved prompts.

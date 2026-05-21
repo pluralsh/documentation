@@ -66,11 +66,15 @@ Query cloud spend, surface cost anomalies, and deliver accurate cost reports to 
 
 ### How it works
 
-The Cloud tool uses [CloudQuery](https://www.cloudquery.io/) to expose your cloud provider's APIs as queryable PostgreSQL-compatible SQL tables. Rather than asking the LLM to estimate or recall numbers, the agent:
+Plural runs its own automation around [Steampipe](https://steampipe.io/) to expose your cloud provider's APIs as queryable foreign tables inside a PostgreSQL-compatible database. Under the hood, the `cloud-query` service loads Steampipe's Postgres FDW extensions (`steampipe_postgres_aws`, `steampipe_postgres_gcp`, `steampipe_postgres_azure`) and imports a per-connection foreign schema so every cloud API becomes a regular SQL table.
 
-1. Calls `cloud_tables` to discover what tables are available (e.g. `aws_costexplorer_cost_and_usage`, `gcp_billing_budget`)
-2. Runs precise SQL queries via `cloud_query` to fetch the actual data
-3. Uses a **built-in calculator tool** for all arithmetic — percentage changes, totals, deltas — so the numbers in the final report are computed, not guessed
+The agent gets three tools for each attached Cloud connection:
+
+1. `cloud_schema` — inspect column definitions for a specific table
+2. `cloud_tables` — discover what tables are available (e.g. `aws_costexplorer_cost_and_usage`, `gcp_billing_budget`)
+3. `cloud_query` — run arbitrary PostgreSQL-compatible SQL against the imported foreign schema to fetch real data
+
+Rather than asking the LLM to estimate or recall numbers, the agent queries the actual billing APIs through SQL and uses a **built-in calculator tool** for all arithmetic — percentage changes, totals, deltas — so the numbers in the final report are computed, not guessed.
 
 This SQL + calculator approach is a deliberate design choice to eliminate hallucination. LLMs are unreliable at arithmetic; the agent never does math in its head.
 

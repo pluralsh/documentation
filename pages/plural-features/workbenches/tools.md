@@ -67,7 +67,7 @@ All native integrations respect your existing RBAC — enabling a capability her
 
 ### Cloud
 
-Cloud tools are backed by a **cloud connection** (an IAM role or credential set stored in Plural) and give the agent SQL-queryable access to cloud-provider data via [CloudQuery](https://www.cloudquery.io/).
+Cloud tools are backed by a **cloud connection** (an IAM role or credential set stored in Plural) and give the agent SQL-queryable access to cloud-provider data via Plural's Steampipe-based cloud query service.
 
 Rather than asking the LLM to reason about cloud state from natural language descriptions, the agent uses three dedicated tools to work with cloud data precisely:
 
@@ -96,101 +96,15 @@ The agent is also always equipped with a **calculator tool** that evaluates arit
 
 ## Creating a tool
 
-From **Workbenches → Integrations**, click the card for the tool type you want to add. Each type has its own credential form:
+From **Workbenches → Integrations**, click the card for the tool type you want to add.
 
-### Observability tools (Prometheus, Loki, Tempo)
+![](/assets/workbenches/workbench-tool-setup.png)
 
-All three use the same form:
+Each tool type has a setup form for its required credentials (API keys, endpoint URLs, tokens, etc.). For many tool types, Plural includes an inline **setup guide** in the form that walks you through where to find the credentials and what permissions to grant — look for the guide link next to the relevant fields.
 
-* **Name** — a unique label for this tool instance
-* **URL** — the base URL of the endpoint
-* **Username / Password** — optional basic auth credentials
-* **Bearer token** — optional token authentication
-* **Tenant ID** — optional tenant header (used for multi-tenant Loki/Cortex deployments)
+![](/assets/workbenches/workbench-tool-setup-guide.png)
 
-### Datadog
-
-* **Name**
-* **API key** — your Datadog API key
-* **App key** — your Datadog application key
-* **Site** — the Datadog site (e.g. `datadoghq.com`, `datadoghq.eu`)
-
-### Elastic
-
-* **Name**
-* **URL** — Elasticsearch cluster URL
-* **Username / Password** — basic auth (or leave blank for API key auth)
-* **API key** — alternative to username/password
-
-### Jaeger
-
-* **Name**
-* **URL** — Jaeger query service URL
-* **Bearer token** — optional token authentication
-
-### SCM tools (GitHub, GitLab, Bitbucket)
-
-* **Name**
-* **Token** — a personal access token or app token with the required scopes
-
-Bitbucket Data Center also accepts **username + password** authentication.
-
-### Slack
-
-* **Name**
-* **Bot token** — a Slack bot OAuth token (`xoxb-...`) with the `chat:write` and `channels:history` scopes
-
-### Microsoft Teams
-
-* **Name**
-* **Webhook URL** — an incoming webhook URL for the target Teams channel
-
-### Atlassian (Jira)
-
-* **Name**
-* **Domain** — your Atlassian domain (e.g. `yourorg.atlassian.net`)
-* **Email** — the account email to authenticate as
-* **API token** — an Atlassian API token for that account
-
-### Linear
-
-* **Name**
-* **API key** — a Linear personal API key
-
-### Cloud connection tools
-
-Cloud tools are backed by a **cloud connection** stored in Plural. When creating a cloud tool you will be asked to either select an existing cloud connection or create a new one.
-
-To create a cloud connection, click **Create cloud connection** and provide:
-
-* **Name**
-* **Provider** — AWS, GCP, or Azure
-* The relevant credentials or IAM configuration for that provider
-
-{% callout severity="info" %}
-Cloud connections are shared across tools and can be reused. If you already have a connection configured for use elsewhere in Plural (for example, with a Stack or Cluster), you can select it here without re-entering credentials.
-{% /callout %}
-
-The IAM permissions needed depend on what you want the agent to query. For cost analysis, the minimum is read-only access to your cloud's billing API (AWS Cost Explorer, GCP Billing, or Azure Cost Management). For infrastructure queries (instance types, resource tags, capacity), you will also need read access to the relevant resource APIs.
-
-### HTTP tool
-
-* **Name**
-* **Base URL** — the root URL the agent will call
-* **Method** — GET, POST, PUT, PATCH, or DELETE
-* **Headers** — any fixed headers to include (e.g. `Authorization: Bearer ...`)
-* **Request body** — a fixed JSON body, if applicable
-* **JSON schema** — a JSON Schema describing the input the agent should provide; the agent uses this schema to construct the request body when calling the tool
-
-### MCP tool
-
-* **Name**
-* **URL** — the SSE endpoint of the MCP server
-* **Authentication** — optional Plural JWT authentication (the server can verify the token to implement authz)
-
-{% callout severity="info" %}
-Plural logs every MCP tool call for audit purposes. If you need confirmation workflows before the agent executes an MCP call, configure that on the MCP server's registration rather than at the workbench level.
-{% /callout %}
+Once saved, the tool appears in **Workbenches → Configured tools** and can be attached to any workbench.
 
 ---
 

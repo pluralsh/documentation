@@ -8,7 +8,7 @@ description: Trigger workbench runs on a schedule, from incidents, or from ticke
 Workbenches can run jobs automatically through two mechanisms:
 
 * **Cron schedules** — run a prompt on a recurring schedule
-* **Webhook triggers** — fire a job when an observability alert or issue tracker event matches a pattern
+* **Webhook triggers** — fire a job when an observability alert or issue tracker event matches a pattern, including when someone writes `Plural fix this` on a PR or ticket
 
 Both are managed from the overflow menu (**•••**) on a workbench.
 
@@ -80,6 +80,19 @@ When Plural receives a webhook event, it evaluates all triggers registered acros
 * The job appears in the workbench **Jobs** tab
 * The originating event appears in the workbench **Alerts** or **Issues** tab
 * The agent has access to the full alert or issue context when constructing its response
+
+### Triggering jobs with "Plural" mentions
+
+A common pattern is to configure a trigger with **Match value: `Plural`** (substring, case-insensitive). With this in place, anyone on your team can kick off a workbench job simply by writing something like:
+
+> *Plural deploy this* — on a pull request comment
+> *Plural fix this* — on a Jira ticket or GitHub issue or Linear issue
+
+When Plural receives the webhook for that comment or issue, the text matches the trigger and a job is created automatically. The full issue or comment body is forwarded to the agent as its prompt, so the instruction you wrote — "fix this", "deploy this", "investigate the memory leak" — becomes the agent's task.
+
+![](/assets/workbenches/workbench-start-job-from-linear.png)
+
+This works across the supported provider matrix: GitHub PR comments, GitLab MR notes, Jira issues, Linear, Bitbucket, Azure DevOps, and others. Note that for Jira the match runs against the **issue description** rather than individual comments, so the "Plural ..." text should be in the description or title.
 
 ### Setting up the webhook in your external system
 

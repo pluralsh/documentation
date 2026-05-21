@@ -10,7 +10,7 @@ A workbench job is a single execution of the workbench agent against a prompt. I
 * A live **activity stream** of every step the agent took
 * A structured **result** — a conclusion, optional todos, topology references, observability pointers, and any pull requests opened during the run
 
-Jobs can be started manually from the UI, by a [cron schedule](./automation#cron-schedules), by a [webhook trigger](./automation#webhook-triggers), or from a [Plural Flow](../flows/index.md).
+Jobs can be started manually from the UI, by a [cron schedule](./automation#cron-schedules), by a [webhook trigger](./automation#webhook-triggers), or from a [Plural Flow](../flows/index.md). You can also trigger a job by writing `Plural fix this` or `Plural deploy this` (or any instruction prefixed with "Plural") in a Jira ticket, GitHub PR comment, or other connected issue source — see [Triggering jobs with "Plural" mentions](./automation#triggering-jobs-with-plural-mentions).
 
 ---
 
@@ -23,10 +23,6 @@ Open a workbench and click **Start job** (or the prompt input at the top of the 
 ### Saved prompts
 
 Frequently-used prompts can be saved under **•••  → Saved prompts** so your team can launch common investigations without retyping. When starting a job, select a saved prompt from the dropdown to pre-fill the prompt field.
-
-### Overriding the bot user
-
-By default, automated jobs run as the workbench's configured **bot user** — a service account that represents the agent in audit logs and PR authorship. When starting a job manually you can override this so the job runs as your own user, which is useful for traceability on ad-hoc investigations.
 
 ---
 
