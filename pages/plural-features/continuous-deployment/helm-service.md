@@ -67,6 +67,8 @@ For more information, see [Dynamic Helm Configuration with Lua Scripts](lua.md).
 
 Say you want to source the helm templates from an upstream helm repository, but the values files from a Git repository.  In that case, you can define a multi-sourced service, which has both a git and helm repository defined.  It would look like so:
 
+For more advanced compositions—such as deploying an operator from Helm alongside custom resources from Git using explicit `sources` and `renderers`—see [Multi-source services](multi-source-services.md).
+
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: GitReposiotry
