@@ -9,7 +9,7 @@
   },
   "/overview/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2026-03-13T04:05:45.000Z"
+    "lastmod": "2026-03-13T12:49:45.000Z"
   },
   "/getting-started": {
     "relPath": "/getting-started/index.md",
@@ -105,11 +105,11 @@
   },
   "/api-reference/kubernetes/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-02-28T17:53:44.000Z"
+    "lastmod": "2026-05-22T20:31:36.000Z"
   },
   "/api-reference/kubernetes/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-02-28T17:53:44.000Z"
+    "lastmod": "2026-05-22T20:31:36.000Z"
   },
   "/api-reference/graphql": {
     "relPath": "/api-reference/graphql.md",
@@ -141,19 +141,23 @@
   },
   "/plural-features/continuous-deployment/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
+    "lastmod": "2026-05-25T02:36:01.000Z"
+  },
+  "/plural-features/continuous-deployment/multi-source-services": {
+    "relPath": "/plural-features/continuous-deployment/multi-source-services.md",
+    "lastmod": "2026-05-25T02:36:01.000Z"
   },
   "/plural-features/continuous-deployment/resource-application-logic": {
     "relPath": "/plural-features/continuous-deployment/resource-application-logic.md",
-    "lastmod": "2026-01-16T15:34:34.000Z"
+    "lastmod": "2026-03-31T16:44:35.000Z"
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-03-13T04:10:16.060Z"
+    "lastmod": "2026-05-25T02:38:46.936Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-03-13T04:10:16.090Z"
+    "lastmod": "2026-05-25T02:38:46.962Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -169,7 +173,7 @@
   },
   "/plural-features/continuous-deployment/pipelines": {
     "relPath": "/plural-features/continuous-deployment/pipelines.md",
-    "lastmod": "2026-03-13T04:05:45.000Z"
+    "lastmod": "2026-03-13T12:49:45.000Z"
   },
   "/plural-features/continuous-deployment/github-actions-ci": {
     "relPath": "/plural-features/continuous-deployment/github-actions-ci.md",
@@ -325,7 +329,7 @@
   },
   "/plural-features/observability/logging": {
     "relPath": "/plural-features/observability/logging.md",
-    "lastmod": "2025-12-03T21:39:43.000Z"
+    "lastmod": "2026-05-11T20:29:08.000Z"
   },
   "/plural-features/observability/cost": {
     "relPath": "/plural-features/observability/cost.md",
@@ -365,7 +369,7 @@
   },
   "/plural-features/pr-automation/ai-based-pr-automations": {
     "relPath": "/plural-features/pr-automation/ai-based-pr-automations.md",
-    "lastmod": "2026-03-13T04:05:45.000Z"
+    "lastmod": "2026-03-13T12:49:45.000Z"
   },
   "/plural-features/pr-automation/description-patterns": {
     "relPath": "/plural-features/pr-automation/description-patterns.md",
@@ -433,7 +437,7 @@
   },
   "/deployments/architecture": {
     "relPath": "/overview/architecture.md",
-    "lastmod": "2026-03-13T04:05:45.000Z"
+    "lastmod": "2026-03-13T12:49:45.000Z"
   },
   "/reference/architecture": {
     "relPath": null,
@@ -513,7 +517,7 @@
   },
   "/deployments/operator/helm-service": {
     "relPath": "/plural-features/continuous-deployment/helm-service.md",
-    "lastmod": "2025-12-30T16:00:47.000Z"
+    "lastmod": "2026-05-25T02:36:01.000Z"
   },
   "/deployments/operator/global-service": {
     "relPath": "/plural-features/continuous-deployment/global-service.md",
@@ -609,7 +613,7 @@
   },
   "/deployments/templating": {
     "relPath": "/plural-features/service-templating/index.md",
-    "lastmod": "2026-03-13T04:05:45.000Z"
+    "lastmod": "2026-03-13T12:49:45.000Z"
   },
   "/deployments/multi-tenancy": {
     "relPath": "/plural-features/projects-and-multi-tenancy/index.md",
@@ -629,10 +633,10 @@
   },
   "/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-02-28T17:53:44.000Z"
+    "lastmod": "2026-05-22T20:31:36.000Z"
   },
   "/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-02-28T17:53:44.000Z"
+    "lastmod": "2026-05-22T20:31:36.000Z"
   }
 }

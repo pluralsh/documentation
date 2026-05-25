@@ -115,6 +115,10 @@ export const docsStructure: DocSection[] = [
           { path: 'git-service', title: 'Git-sourced services' },
           { path: 'helm-service', title: 'Helm-sourced services' },
           {
+            path: 'multi-source-services',
+            title: 'Multi-source services',
+          },
+          {
             path: 'resource-application-logic',
             title: 'Resource Application Logic',
           },
