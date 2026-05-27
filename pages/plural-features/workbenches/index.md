@@ -23,7 +23,7 @@ The parent configuration object. It defines the agent's identity (name, system p
 
 ### Workbench job
 
-A single run of the agent against a prompt. Jobs are created manually in the UI, by a cron schedule, by a webhook trigger, or from a [Plural Flow](../flows/index.md). Each job has a status (`pending`, `running`, `complete`, `failed`) and a streaming activity log you can follow in real time.
+A single run of the agent against a prompt. Jobs are created manually in the UI, by a cron schedule, by a webhook trigger, or from a [Plural Flow](/plural-features/flows). Each job has a status (`pending`, `running`, `complete`, `failed`) and a streaming activity log you can follow in real time.
 
 ### Activities
 
@@ -31,7 +31,7 @@ Step-by-step records produced while a job runs — tool calls, subagent results,
 
 ### Tools
 
-External integrations the agent can call during a job. Tools are managed globally under the **Tools** section and then attached to individual workbenches. See [Tools](./tools) for the full list of supported integrations.
+External integrations the agent can call during a job. Tools are managed globally under the **Tools** section and then attached to individual workbenches. See [Tools](/plural-features/workbenches/tools) for the full list of supported integrations.
 
 ### Skills
 
@@ -43,8 +43,8 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 
 | Integration | How it connects |
 |---|---|
-| [Flows](../flows/index.md) | A flow can launch a workbench job directly from its UI or via `FlowWorkbenchJobLauncher`, scoping the job to that flow's services and pipelines |
-| Alerts | Observability alerts can automatically trigger workbench jobs via [webhook triggers](./automation#webhook-triggers) |
+| [Flows](/plural-features/flows) | A flow can launch a workbench job directly from its UI or via `FlowWorkbenchJobLauncher`, scoping the job to that flow's services and pipelines |
+| Alerts | Observability alerts can automatically trigger workbench jobs via [webhook triggers](/plural-features/workbenches/automation#webhook-triggers) |
 | Issues | Issue tracker events can trigger workbench jobs the same way, and the job has access to the originating issue |
 | Pull requests | Jobs that open PRs record them on the job |
 | Agent runtime | The AI model and sandbox environment that executes each job; configured at the workbench level |
@@ -54,8 +54,8 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 ## Getting started
 
 1. Navigate to **Workbenches** in the Plural Console sidebar.
-2. Click **Create workbench** and step through the [creation wizard](./configuration).
-3. (Optional) Set up shared [tools](./tools) your workbench can call.
+2. Click **Create workbench** and step through the [creation wizard](/plural-features/workbenches/configuration).
+3. (Optional) Set up shared [tools](/plural-features/workbenches/tools) your workbench can call.
 4. Run your first job from the workbench's **Jobs** tab.
 
-Once you have a job running, you can layer in [automation](./automation) to trigger jobs on a schedule or from incidents.
+Once you have a job running, you can layer in [automation](/plural-features/workbenches/automation) to trigger jobs on a schedule or from incidents.

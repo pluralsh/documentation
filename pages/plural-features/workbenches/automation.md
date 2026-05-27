@@ -48,7 +48,7 @@ The **Cron schedules** page lists all schedules for the workbench. Click the pen
 
 Webhook triggers fire a workbench job when an incoming webhook payload matches a pattern you define. Plural supports two categories of webhook source:
 
-* **Observability webhooks** — payloads from alerting systems (Datadog, Grafana, PagerDuty, etc.) registered under [Observability Webhooks](../observability/index.md)
+* **Observability webhooks** — payloads from alerting systems (Datadog, Grafana, PagerDuty, etc.) registered under [Observability Webhooks](/plural-features/observability/observability-webhooks)
 * **Issue webhooks** — payloads from issue trackers (Jira, Linear, GitHub Issues, etc.) registered as issue webhook sources in Plural
 
 ### Creating a webhook trigger
@@ -107,6 +107,6 @@ Each webhook source has its own setup guide available during trigger creation. C
 
 ## Flow-triggered jobs
 
-Workbenches can also be triggered from a [Plural Flow](../flows). On the flow detail page, click **Start workbench job** to select a workbench and enter a prompt. The resulting job is scoped to the flow's services and pipelines, giving the agent the right context for that application boundary.
+Workbenches can also be triggered from a [Plural Flow](/plural-features/flows). On the flow detail page, click **Start workbench job** to select a workbench and enter a prompt. The resulting job is scoped to the flow's services and pipelines, giving the agent the right context for that application boundary.
 
-See [Plural Flows](../flows) for more on how flows and workbenches work together.
+See [Plural Flows](/plural-features/flows) for more on how flows and workbenches work together.

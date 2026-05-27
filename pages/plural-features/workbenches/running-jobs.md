@@ -10,7 +10,7 @@ A workbench job is a single execution of the workbench agent against a prompt. I
 * A live **activity stream** of every step the agent took
 * A structured **result** — a conclusion, optional todos, topology references, observability pointers, and any pull requests opened during the run
 
-Jobs can be started manually from the UI, by a [cron schedule](./automation#cron-schedules), by a [webhook trigger](./automation#webhook-triggers), or from a [Plural Flow](../flows/index.md). You can also trigger a job by writing `Plural fix this` or `Plural deploy this` (or any instruction prefixed with "Plural") in a Jira ticket, GitHub PR comment, or other connected issue source — see [Triggering jobs with "Plural" mentions](./automation#triggering-jobs-with-plural-mentions).
+Jobs can be started manually from the UI, by a [cron schedule](/plural-features/workbenches/automation#cron-schedules), by a [webhook trigger](/plural-features/workbenches/automation#webhook-triggers), or from a [Plural Flow](/plural-features/flows). You can also trigger a job by writing `Plural fix this` or `Plural deploy this` (or any instruction prefixed with "Plural") in a Jira ticket, GitHub PR comment, or other connected issue source — see [Triggering jobs with "Plural" mentions](/plural-features/workbenches/automation#triggering-jobs-with-plural-mentions).
 
 ---
 
@@ -81,7 +81,7 @@ And here is one for an alert analysis:
 
 ## Alerts and issues tabs
 
-If your workbench has [webhook triggers](./automation#webhook-triggers) configured for observability alerts or issue tracker events, the workbench will also surface an **Alerts** and/or **Issues** tab. These tabs list every alert or issue that has triggered a workbench job, with a link to the job that handled it.
+If your workbench has [webhook triggers](/plural-features/workbenches/automation#webhook-triggers) configured for observability alerts or issue tracker events, the workbench will also surface an **Alerts** and/or **Issues** tab. These tabs list every alert or issue that has triggered a workbench job, with a link to the job that handled it.
 
 This gives you an at-a-glance view of how automated incident response is performing without having to dig through the full job list.
 

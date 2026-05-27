@@ -3,7 +3,7 @@ title: Common use cases
 description: Worked examples for alert RCA, Slack incident response, cost analysis, and infrastructure self-service
 ---
 
-The patterns below each represent a complete workbench setup for a common operational need. For each one, the agent's behavior is shaped by [skills](./configuration#step-2-skills-configuration) — pre-built instruction documents from Plural's skills library, or custom runbooks from your own Git repository. You do not need to write a system prompt from scratch; attach the relevant skills for the use case and add a brief system prompt to orient the agent to your platform if needed.
+The patterns below each represent a complete workbench setup for a common operational need. For each one, the agent's behavior is shaped by [skills](/plural-features/workbenches/configuration#step-2-skills-configuration) — pre-built instruction documents from Plural's skills library, or custom runbooks from your own Git repository. You do not need to write a system prompt from scratch; attach the relevant skills for the use case and add a brief system prompt to orient the agent to your platform if needed.
 
 ---
 
@@ -48,7 +48,7 @@ A webhook trigger fires on high-severity alerts. The agent creates a named Slack
 
 * Infrastructure: Services, Kubernetes, Pod logs
 
-**Tools:** Attach a [Slack tool](./tools#slack) configured with a bot token that has `channels:manage`, `channels:join`, and `chat:write` scopes.
+**Tools:** Attach a [Slack tool](/plural-features/workbenches/tools#slack) configured with a bot token that has `channels:manage`, `channels:join`, and `chat:write` scopes.
 
 **Webhook trigger:**
 
@@ -86,7 +86,7 @@ A cron schedule fires weekly (or on demand) and the agent queries cost tables, a
 
 **Tools:**
 
-* Attach a [Cloud tool](./tools#cloud) (AWS, GCP, or Azure) backed by an IAM role with read-only billing access. For AWS this means `ce:GetCostAndUsage` and `ce:GetCostForecast` on Cost Explorer. For GCP, the Billing Account Viewer role. For Azure, Billing Reader.
+* Attach a [Cloud tool](/plural-features/workbenches/tools#cloud) (AWS, GCP, or Azure) backed by an IAM role with read-only billing access. For AWS this means `ce:GetCostAndUsage` and `ce:GetCostForecast` on Cost Explorer. For GCP, the Billing Account Viewer role. For Azure, Billing Reader.
 * Optionally attach a Datadog or Prometheus tool to correlate cost with resource utilization metrics.
 * Optionally attach a Slack tool to deliver reports to a channel automatically.
 
@@ -118,15 +118,15 @@ An engineer creates a Jira or Linear ticket describing the infrastructure change
 
 * Infrastructure: Services, Stacks, Kubernetes
 
-**Coding agent:** Enable with **Write** mode. Add your GitOps infrastructure repository to the allowed repositories list. See [Coding agent](./coding-agent) for setup instructions.
+**Coding agent:** Enable with **Write** mode. Add your GitOps infrastructure repository to the allowed repositories list. See [Coding agent](/plural-features/workbenches/coding-agent) for setup instructions.
 
 **Tools:**
 
-* Attach a [Jira (Atlassian)](./tools#atlassian-jira) or [Linear](./tools#linear) tool so the agent can read ticket details and post comments.
+* Attach a [Jira (Atlassian)](/plural-features/workbenches/tools#atlassian-jira) or [Linear](/plural-features/workbenches/tools#linear) tool so the agent can read ticket details and post comments.
 * Optionally attach a GitHub, GitLab, or Bitbucket tool if you want the agent to directly interact with your SCM beyond what the coding agent handles.
 
 **Webhook trigger:**
 
-Register a [Jira issue webhook](./automation#webhook-triggers) in Plural and configure the Jira webhook to fire on issue creation. Set the trigger to match on the label or project that signals an infra request — for example, substring match on `"infra-request"` in the payload, or a regex that matches your specific Jira project key.
+Register a [Jira issue webhook](/plural-features/workbenches/automation#webhook-triggers) in Plural and configure the Jira webhook to fire on issue creation. Set the trigger to match on the label or project that signals an infra request — for example, substring match on `"infra-request"` in the payload, or a regex that matches your specific Jira project key.
 
-**Babysitting:** Consider enabling [babysitting](./coding-agent#babysitting-write-mode-only) on the coding agent while the workbench is new. This lets you review every proposed commit before it lands, giving you confidence in the agent's output before allowing it to operate fully autonomously.
+**Babysitting:** Consider enabling [babysitting](/plural-features/workbenches/coding-agent#babysitting-write-mode-only) on the coding agent while the workbench is new. This lets you review every proposed commit before it lands, giving you confidence in the agent's output before allowing it to operate fully autonomously.

@@ -7,8 +7,8 @@ description: End-to-end guide to creating, configuring, and running your first w
 
 Before creating a workbench you need:
 
-* Any external tools (Datadog, Prometheus, GitHub, Slack, etc.) configured in **Workbenches → Integrations**. Tools can be added later, but it is easiest to have them ready before creating the workbench. See [Workbench tools](./tools).
-* If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](../plural-ai/ai-agent/configure-agent.md).
+* Any external tools (Datadog, Prometheus, GitHub, Slack, etc.) configured in **Workbenches → Integrations**. Tools can be added later, but it is easiest to have them ready before creating the workbench. See [Workbench tools](/plural-features/workbenches/tools).
+* If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](/plural-features/plural-ai/ai-agent/configure-agent).
 
 ---
 
@@ -48,7 +48,7 @@ These capabilities give the agent access to Plural's own internal tooling — th
 | **Log aggregation** | Search and aggregate logs from Loki, Elastic, or other configured log backends |
 
 {% callout severity="info" %}
-The **Observability** capabilities use the backends you set up under [Observability Integration](../observability/index.md). **Pod logs** is a separate, direct Kubernetes log stream — it works without any observability backend.
+The **Observability** capabilities use the backends you set up under [Observability Integration](/plural-features/observability). **Pod logs** is a separate, direct Kubernetes log stream — it works without any observability backend.
 {% /callout %}
 
 ---
@@ -80,7 +80,7 @@ Skill files are fetched from Git at job start, so they stay current as your runb
 
 This step configures optional code-reading and code-writing capabilities. Skip it (leave the runtime unset) if your workbench is purely operational and does not need to touch source code.
 
-For detailed guidance on setting up and using the coding agent, see [Coding agent](./coding-agent.md).
+For detailed guidance on setting up and using the coding agent, see [Coding agent](/plural-features/workbenches/webhooks/coding-agent).
 
 ---
 
@@ -117,9 +117,9 @@ A few prompts to start with:
 
 The agent will stream activities as it works and produce a structured conclusion when it finishes. From there you can:
 
-* [Save the prompt](./running-jobs#saved-prompts) for the team to reuse
-* [Set up a cron schedule](./automation#cron-schedules) to run it automatically
-* [Add a webhook trigger](./automation#webhook-triggers) to fire it on alerts
+* [Save the prompt](/plural-features/workbenches/running-jobs#saved-prompts) for the team to reuse
+* [Set up a cron schedule](/plural-features/workbenches/automation#cron-schedules) to run it automatically
+* [Add a webhook trigger](/plural-features/workbenches/automation#webhook-triggers) to fire it on alerts
 
 ---
 
