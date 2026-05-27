@@ -67,7 +67,15 @@ Once a job completes, the **Result** panel appears on the right side of the job 
 
 ## Canvas view
 
-For jobs that produce a topology result, a **Canvas** button appears in the job detail header. The canvas renders an interactive graph of the infrastructure components the agent examined and any relationships it discovered — useful for understanding blast radius during an incident investigation.
+For jobs that produce a topology result, a **Canvas** button appears in the job detail header. The canvas renders an interactive dashboard of the data associated with a workbench job.  This could be timseries metrics, bar/pie charts, or any other visualization the AI considers useful to give you a clean view of a potentially complex analysis.  Think of it as a datadog dashboard on demand whenever you need it.
+
+Here's an example for a cost analysis job:
+
+![](/assets/workbenches/canvas.png)
+
+And here is one for an alert analysis:
+
+![](/assets/workbenches/metrics-canvas.png)
 
 ---
 
