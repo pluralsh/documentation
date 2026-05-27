@@ -235,6 +235,18 @@ export const docsStructure: DocSection[] = [
         ],
       },
       {
+        path: 'workbenches',
+        title: 'Workbenches',
+        sections: [
+          { path: 'configuration', title: 'Setting up a workbench' },
+          { path: 'coding-agent', title: 'Coding agent' },
+          { path: 'tools', title: 'Workbench tools' },
+          { path: 'running-jobs', title: 'Running workbench jobs' },
+          { path: 'automation', title: 'Automating workbench jobs' },
+          { path: 'use-cases', title: 'Common use cases' },
+        ],
+      },
+      {
         path: 'observability',
         title: 'Observability Integration',
         sections: [
