@@ -126,3 +126,84 @@ additionalVolumeMounts:
     name: ca-certificate-only
     readOnly: true
 ```
+
+## Configuring Operator-Driven Pod Creation
+
+Plural's deployment-operator can spawn pod-like workloads through two means:
+
+1. InfrastuctureStacks - for running IaC like terraform
+2. AgentRuntimes - for running coding agents
+
+Both of these support providing a full pod template to customize their generated pods, here's an example of how it would work:
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: AgentRuntime
+metadata:
+  name: codex
+  namespace: agents
+spec:
+  targetNamespace: agents
+  type: CODEX
+  aiProxy: true
+  template:
+    spec:
+      containers:
+      - name: default # the main agent container
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/
+          name: ca-certificate-only
+          readOnly: true
+      initContainers:
+      - name: agent-bootstrap # init container that clones the repo
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/
+          name: ca-certificate-only
+          readOnly: true
+      - name: mcpserver # sidecar mcp server for plural-specific tools
+        volumeMounts:
+        - mountPath: /etc/ssl/certs/
+          name: ca-certificate-only
+          readOnly: true
+      volumes:
+      - name: ca-certificate-only
+        configMap:
+          name: plrl-bundle
+          defaultMode: 0644
+          optional: false
+          items:
+            - key: ca-certificates.crt
+              path: ca-certificates.crt
+```
+
+Similarly for stacks
+
+
+```yaml
+apiVersion: deployments.plural.sh/v1alpha1
+kind: InfrastructureStack
+metadata:
+  name: example
+  namespace: infra
+spec:
+  ...
+  jobSpec:
+    raw:
+      template:
+        spec:
+          containers:
+          - name: default # the main stack run container
+            volumeMounts:
+            - mountPath: /etc/ssl/certs/
+              name: ca-certificate-only
+              readOnly: true
+          volumes:
+          - name: ca-certificate-only
+            configMap:
+              name: plrl-bundle
+              defaultMode: 0644
+              optional: false
+              items:
+                - key: ca-certificates.crt
+                  path: ca-certificates.crt
+```
