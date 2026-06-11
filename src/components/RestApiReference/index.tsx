@@ -8,7 +8,9 @@ import { useMemo, useState } from 'react'
 
 import { Breadcrumbs, CheckIcon, CopyIcon, Tab } from '@pluralsh/design-system'
 import { useRouter } from 'next/router'
+import styled from 'styled-components'
 
+import { mqs } from '@src/components/Breakpoints'
 import { PageDivider } from '@src/components/MainContent'
 import {
   ContentContainer,
@@ -42,6 +44,13 @@ import type {
   EndpointDetail,
   Parameter,
 } from '@src/lib/openapi-rest'
+
+// REST API has no right TOC column; SideNavContainer's auto margin is for centering regular docs.
+const RestSideNavContainer = styled(SideNavContainer)({
+  [mqs.twoColumn]: {
+    marginRight: 0,
+  },
+})
 
 type TabId = 'query' | 'responses'
 
@@ -94,12 +103,12 @@ export function RestApiReference({
 
   return (
     <PageGrid>
-      <SideNavContainer>
+      <RestSideNavContainer>
         <SidebarNav
           sections={apiSections}
           selectedId={selectedId}
         />
-      </SideNavContainer>
+      </RestSideNavContainer>
       <ContentContainer>
         <RestContentWrapper>
           <BreadcrumbsWrapper>
