@@ -111,7 +111,26 @@ export const docsStructure: DocSection[] = [
         path: 'continuous-deployment',
         title: 'Continuous deployment',
         sections: [
-          { path: 'deployment-operator', title: 'The deployment operator' },
+          {
+            path: 'management-controller',
+            title: 'Management controller',
+            sections: [
+              {
+                path: 'deployment-settings',
+                title: 'DeploymentSettings',
+              },
+            ],
+          },
+          {
+            path: 'deployment-operator',
+            title: 'The deployment operator',
+            sections: [
+              {
+                path: 'agent-configuration',
+                title: 'AgentConfiguration',
+              },
+            ],
+          },
           { path: 'git-service', title: 'Git-sourced services' },
           { path: 'helm-service', title: 'Helm-sourced services' },
           {
@@ -426,6 +445,13 @@ export const redirects = [
   {
     source: '/deployments/operator/architecture',
     destination: '/plural-features/continuous-deployment/deployment-operator',
+    permanent: true,
+  },
+  {
+    source:
+      '/plural-features/continuous-deployment/deployment-operator/deployment-settings',
+    destination:
+      '/plural-features/continuous-deployment/management-controller/deployment-settings',
     permanent: true,
   },
   {

@@ -85,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2026-02-19T20:33:28.000Z"
+    "lastmod": "2026-06-26T10:42:27.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -131,9 +131,21 @@
     "relPath": "/plural-features/continuous-deployment/index.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
   },
+  "/plural-features/continuous-deployment/management-controller": {
+    "relPath": "/plural-features/continuous-deployment/management-controller/index.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
+  },
+  "/plural-features/continuous-deployment/management-controller/deployment-settings": {
+    "relPath": "/plural-features/continuous-deployment/management-controller/deployment-settings.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
+  },
   "/plural-features/continuous-deployment/deployment-operator": {
-    "relPath": "/plural-features/continuous-deployment/deployment-operator.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "relPath": "/plural-features/continuous-deployment/deployment-operator/index.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
+  },
+  "/plural-features/continuous-deployment/deployment-operator/agent-configuration": {
+    "relPath": "/plural-features/continuous-deployment/deployment-operator/agent-configuration.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
   },
   "/plural-features/continuous-deployment/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
@@ -153,11 +165,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-06-11T11:13:44.082Z"
+    "lastmod": "2026-06-26T11:13:43.903Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-06-11T11:13:44.104Z"
+    "lastmod": "2026-06-26T11:13:43.916Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -525,7 +537,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2026-02-19T20:33:28.000Z"
+    "lastmod": "2026-06-26T10:42:27.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -536,8 +548,12 @@
     "lastmod": "2026-06-02T22:54:32.000Z"
   },
   "/deployments/operator/architecture": {
-    "relPath": "/plural-features/continuous-deployment/deployment-operator.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "relPath": "/plural-features/continuous-deployment/deployment-operator/index.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
+  },
+  "/plural-features/continuous-deployment/deployment-operator/deployment-settings": {
+    "relPath": "/plural-features/continuous-deployment/management-controller/deployment-settings.md",
+    "lastmod": "2026-06-26T10:42:27.000Z"
   },
   "/deployments/operator/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
