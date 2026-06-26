@@ -53,8 +53,8 @@ These control how often the agent talks to the Console or uploads cluster data.
 | --- | --- |
 | `servicePollInterval` | How often the agent polls for service updates |
 | `clusterPingInterval` | How often the agent sends cluster heartbeat pings |
-| `stackPollInterval` | How often the agent polls for stack run changes |
-| `pipelineGateInterval` | How often pipeline gates are evaluated |
+| `stackPollInterval` | How often the agent polls for stack run changes. Set to `"0s"` to disable. |
+| `pipelineGateInterval` | How often pipeline gates are evaluated. Set to `"0s"` to disable. |
 | `compatibilityUploadInterval` | How often compatibility data is uploaded |
 | `vulnerabilityReportUploadInterval` | How often vulnerability reports are uploaded |
 
@@ -62,8 +62,8 @@ These control how often the agent talks to the Console or uploads cluster data.
 spec:
   servicePollInterval: "30s"
   clusterPingInterval: "10s"
-  stackPollInterval: "20s"
-  pipelineGateInterval: "1m"
+  stackPollInterval: "0s"
+  pipelineGateInterval: "0s"
   compatibilityUploadInterval: "15m"
   vulnerabilityReportUploadInterval: "10m"
 ```
@@ -125,7 +125,7 @@ metadata:
   name: default
 spec:
   clusterPingInterval: "10s"
-  stackPollInterval: "20s"
+  stackPollInterval: "0s"
   pipelineGateInterval: "0s"
   vulnerabilityReportUploadInterval: "10m"
   maxConcurrentReconciles: 5
