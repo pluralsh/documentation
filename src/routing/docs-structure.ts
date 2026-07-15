@@ -163,6 +163,7 @@ export const docsStructure: DocSection[] = [
         title: 'Stacks — IaC management',
         sections: [
           { path: 'customize-runners', title: 'Customize stack runners' },
+          { path: 'pulumi', title: 'Pulumi stacks' },
           { path: 'pr-workflow', title: 'Stack PR workflow' },
           { path: 'manual-runs', title: 'Manual runs' },
           {

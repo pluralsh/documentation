@@ -153,11 +153,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-06-11T11:13:44.082Z"
+    "lastmod": "2026-07-14T13:15:49.255Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-06-11T11:13:44.104Z"
+    "lastmod": "2026-07-14T13:15:49.275Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -206,6 +206,10 @@
   "/plural-features/stacks-iac-management/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/plural-features/stacks-iac-management/pulumi": {
+    "relPath": "/plural-features/stacks-iac-management/pulumi.md",
+    "lastmod": "2026-07-14T13:15:49.496Z"
   },
   "/plural-features/stacks-iac-management/pr-workflow": {
     "relPath": "/plural-features/stacks-iac-management/pr-workflow.md",

@@ -2,7 +2,7 @@
 title: Stacks — IaC management
 description: How to manage Infrastructure as Code at Scale Using Plural
 ---
-The goal of Plural Stacks is to provide a scalable framework to manage infrastructure as code like Terraform, Ansible and Pulumi with a kubernetes-friendly, api-driven approach.  The core workflow is as follows:
+The goal of Plural Stacks is to provide a scalable framework to manage infrastructure as code with a Kubernetes-friendly, API-driven approach. Stacks support Terraform, Terragrunt, Pulumi, Ansible, and custom runner workflows. The core workflow is as follows:
 
 * Declaratively define a stack with a type (terraform, ansible, etc), a location in a git repository to source code from, and a cluster on which it will execute
 * On each commit to the tracked git repository, a run is created which the Plural deployment operator will detect and execute on the targeted cluster
@@ -14,9 +14,21 @@ To get a better idea of the full power of the experience, feel free to take a lo
 
 {% embed url="https://youtu.be/06WXbvw6p3w" aspectRatio="16 / 9" /%}
 
+# Supported stack types
+
+| Type | Use it for |
+| --- | --- |
+| `TERRAFORM` | Terraform configurations |
+| `TERRAGRUNT` | Terraform configurations orchestrated with Terragrunt |
+| `PULUMI` | Pulumi programs in supported runtimes |
+| `ANSIBLE` | Ansible playbooks |
+| `CUSTOM` | A custom runner image and command workflow |
+
+Pulumi stacks use Pulumi's own state backends. See {% doclink to="plural_features_stacks_iac_management_pulumi" %}Pulumi stacks{% /doclink %} for Pulumi Cloud and self-managed backend authentication.
+
 # A Basic Stack
 
-The most common way to instantiate a stack is via Kubernetes CRD.  This gives a flexible, modular way of recreating infrastructure with Terraform and pairs nicely with our PR Automation tooling for full self-service around IaC.
+The most common way to instantiate a stack is via Kubernetes CRD. This gives a flexible, modular way to recreate infrastructure and pairs nicely with our PR Automation tooling for full self-service around IaC.
 
 Here's an example:
 
