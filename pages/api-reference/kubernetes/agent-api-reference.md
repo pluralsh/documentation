@@ -165,6 +165,7 @@ _Appears in:_
 | `runtimeRef` _[AgentRuntimeReference](#agentruntimereference)_ |  |  | Required: \{\} <br /> |
 | `prompt` _string_ | Prompt is the task/prompt given to the agent |  | Required: \{\} <br /> |
 | `repository` _string_ | Repository is the git repository the agent will work with |  | Required: \{\} <br /> |
+| `branch` _string_ | Branch is the repository branch the agent should operate on. If omitted, the repository default branch is used. |  | Optional: \{\} <br /> |
 | `mode` _[AgentRunMode](#agentrunmode)_ | Mode defines how the agent should run (ANALYZE, WRITE) |  | Required: \{\} <br /> |
 | `flowId` _string_ | FlowID is the flow this agent run is associated with (optional) |  | Optional: \{\} <br /> |
 | `language` _[AgentRunLanguage](#agentrunlanguage)_ | Language is the programming language used in the agent run.<br />Deprecated: No longer used for image selection. Enable dind on the AgentRuntime instead. |  | Optional: \{\} <br /> |
@@ -265,12 +266,15 @@ _Appears in:_
 | `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
 | `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
 | `aiProxy` _boolean_ | AiProxy routes LLM requests through the Console AI proxy (/ext/ai) using the deploy token,<br />so provider API keys in spec.config are optional.<br />Set the model on the runtime-specific config block (for example spec.config.codex.model).<br />The proxy expects models in provider/name format (for example openai/gpt-5.4,<br />anthropic/claude-sonnet-4-5, vertex/gemini-2.5-pro). Values that already include a "/"<br />are passed through unchanged.<br />When only a bare model id is given, the harness may prefix it by runtime type:<br />  - CLAUDE: anthropic/\{model\} (for example claude-sonnet-4-5 -> anthropic/claude-sonnet-4-5)<br />  - CODEX, OPENCODE: openai/\{model\} (for example gpt-5.4 -> openai/gpt-5.4)<br />  - GEMINI: vertex/\{model\}<br />  - CUSTOM: no automatic prefix; use provider/name explicitly |  |  |
+| `streamingProxy` _boolean_ | StreamingProxy routes OpenAI-compatible LLM requests through the in-pod mcpserver<br />sse conversion proxy before they reach the Console AI proxy (/ext/ai). Only valid when aiProxy<br />is enabled. Applies to CODEX and OPENCODE runtimes. |  | Optional: \{\} <br /> |
 | `dind` _boolean_ | Dind enables Docker-in-Docker for this agent runtime.<br />When true, the runtime will be configured to run with DinD support. |  | Optional: \{\} <br /> |
+| `memory` _boolean_ | Memory enables team-shared codebase-memory persistence for this agent runtime.<br />When true, agents may create and commit .codebase-memory/ graph artifacts<br />by default so future runs can bootstrap from the persisted index. When false<br />or unset, codebase-memory indexes stay in the pod-local cache and generated<br />.codebase-memory/ artifacts are excluded from commits. |  | Optional: \{\} <br /> |
 | `allowedRepositories` _string array_ | AllowedRepositories the git repositories allowed to be used with this runtime. |  | Optional: \{\} <br /> |
 | `browser` _[BrowserConfig](#browserconfig)_ | Browser configuration augments agent runtime with a headless browser.<br />When provided, the runtime will be configured to run with a headless browser available<br />for the agent to use. |  | Optional: \{\} <br /> |
 | `bootstrapScript` _string_ | BootstrapScript is a bash script that will be executed inside the cloned repository<br />directory before the coding agent starts. It can be used to install dependencies,<br />configure tooling, or perform any other setup required by the agent. |  | Optional: \{\} <br /> |
 | `git` _[GitSpec](#gitspec)_ | Git configure commit signing on agent run. When provided, the runtime will be configured to sign git commits using the provided key reference. |  |  |
 | `babysitInterval` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BabysitInterval configures the interval for the operator to check on the health of the agent runtime and perform necessary babysitting actions (e.g. restarting unhealthy runtimes). When not provided, a default interval of 1 minute will be used. |  |  |
+| `agentTTL` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | AgentTTL configures the maximum lifetime for agent run pods on this runtime. When not provided, a default TTL of 12 hours will be used. |  | Optional: \{\} <br /> |
 | `scmConnection` _string_ | ScmConnection is the name of an ScmConnection in Console to use for git operations on agent runs using this runtime.<br />This should match the name of an existing ScmConnection resource or connection created in the Plural UI. |  | Optional: \{\} <br /> |
 | `exaConnection` _[ExaConnection](#exaconnection)_ | ExaConnection enables Exa web search and content retrieval tools on the Plural MCP server. |  |  |
 
@@ -528,6 +532,23 @@ _Appears in:_
 
 
 
+#### CostProvider
+
+_Underlying type:_ _string_
+
+CostProvider identifies which cost allocation backend to query.
+
+
+
+_Appears in:_
+- [KubecostExtractorSpec](#kubecostextractorspec)
+
+| Field | Description |
+| --- | --- |
+| `Kubecost` |  |
+| `OpenCost` |  |
+
+
 #### CustomHealth
 
 
@@ -560,6 +581,9 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `script` _string_ |  |  |  |
+| `group` _string_ |  |  | Optional: \{\} <br /> |
+| `version` _string_ |  |  | Optional: \{\} <br /> |
+| `kind` _string_ |  |  | Optional: \{\} <br /> |
 
 
 
@@ -814,8 +838,9 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
+| `provider` _[CostProvider](#costprovider)_ | Provider selects which cost backend to query. Defaults to Kubecost. | Kubecost | Enum: [Kubecost OpenCost] <br />Optional: \{\} <br /> |
 | `interval` _string_ |  | 1h | Optional: \{\} <br /> |
-| `kubecostServiceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ |  |  |  |
+| `kubecostServiceRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | KubecostServiceRef points at the cost analyzer Service. When omitted, defaults<br />are chosen from provider: kubecost-cost-analyzer/kubecost or opencost/opencost. |  | Optional: \{\} <br /> |
 | `kubecostPort` _integer_ |  |  | Optional: \{\} <br /> |
 | `recommendationThreshold` _string_ | RecommendationThreshold float value for example: `1.2 or 0.001` |  |  |
 | `recommendationsSettings` _[RecommendationsSettings](#recommendationssettings)_ |  |  | Optional: \{\} <br /> |
