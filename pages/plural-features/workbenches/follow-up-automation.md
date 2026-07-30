@@ -1,11 +1,11 @@
 ---
 title: Automating workbench follow-up
-description: Send a follow-up prompt after a pull request merges and GitOps reconciliation completes
+description: Send a follow-up prompt after a pull request merges, deployment completes, and GitOps reconciliation settles
 ---
 
 ## Overview
 
-Follow-up automation lets the workbench associated with a pull request verify changes after they merge and reconcile. The workbench can inspect the live system and infrastructure state, then report or fix issues that are only visible after deployment.
+Follow-up automation lets the workbench associated with a pull request verify changes after they merge, build, and deploy. The workbench can inspect the live system and infrastructure state, then report or fix issues that are only visible after deployment.
 
 The automation method depends on your source control and CI provider. The following section documents GitHub Actions.
 
@@ -28,10 +28,10 @@ The workflow requires:
 
 ### Configure the workflow
 
-The recommended workflow runs when a pull request closes, checks that it was merged, and defers the prompt long enough for GitOps reconciliation to complete:
+A common pattern is to run the follow-up after the same workflow builds the image, deploys the application, and then gives GitOps reconciliation time to settle before asking the workbench to verify the live result:
 
 ```yaml
-name: Verify merged changes
+name: Build, deploy, and verify merged changes
 
 on:
   pull_request:
@@ -42,10 +42,20 @@ permissions:
   id-token: write
 
 jobs:
-  follow-up:
+  deploy-and-follow-up:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t ghcr.io/acme/example:${{ github.sha }} .
+          docker push ghcr.io/acme/example:${{ github.sha }}
+
+      - name: Deploy application
+        run: ./scripts/deploy.sh ghcr.io/acme/example:${{ github.sha }}
+
       - name: Set up Plural
         uses: pluralsh/setup-plural@v2
         with:
@@ -53,13 +63,14 @@ jobs:
           email: ${{ vars.PLURAL_CONSOLE_EMAIL }}
           vsn: 0.12.60
 
-      - name: Verify merged changes
+      - name: Verify deployed changes
         id: follow-up
         uses: pluralsh/workbench-followup-action@v1
         with:
           prompt: |
             Pull request #${{ github.event.pull_request.number }} was merged into ${{ github.event.pull_request.base.ref }}.
-            Verify the merged changes against the reconciled system and infrastructure state. Fix any issues you find.
+            The Docker image was built and the application was deployed.
+            Verify the live deployment, confirm the expected change is working, and fix any issues you find.
           url: ${{ github.event.pull_request.html_url }}
           defer: 5m
           skip-missing: true
@@ -69,7 +80,7 @@ jobs:
         run: echo '${{ steps.follow-up.outputs.workbench-job-url }}'
 ```
 
-Adjust `defer` to match the time your deployment normally needs to reconcile. `skip-missing: true` lets the workflow succeed when the pull request is not associated with a workbench job.
+Replace the example build and deploy commands with your own pipeline steps. Adjust `defer` to match the time your deployment normally needs to finish reconciling. `skip-missing: true` lets the workflow succeed when the pull request is not associated with a workbench job.
 
 When `url` and `commit` are omitted, the action uses `github.event.pull_request.html_url`, so the explicit `url` input above is optional for a `pull_request` workflow.
 
