@@ -244,6 +244,10 @@ export const docsStructure: DocSection[] = [
           { path: 'tools', title: 'Workbench tools' },
           { path: 'running-jobs', title: 'Running workbench jobs' },
           { path: 'automation', title: 'Automating workbench jobs' },
+          {
+            path: 'follow-up-automation',
+            title: 'Automating workbench follow-up',
+          },
           { path: 'use-cases', title: 'Common use cases' },
         ],
       },
