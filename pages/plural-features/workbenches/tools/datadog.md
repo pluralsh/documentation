@@ -21,6 +21,23 @@ Before you begin, make sure you have:
 The Console currently labels **Application key** as optional, but Datadog queries require both an API key and an application key. Configure both keys before using the integration.
 {% /callout %}
 
+### Create credentials in Datadog
+
+Create the organization API key:
+
+1. Open your account menu in Datadog and select **Organization Settings**.
+2. Select **API Keys**, then click **New Key**.
+3. Enter a descriptive name, create the key, and copy its value.
+
+For the application key, a [service account](https://docs.datadoghq.com/account_management/org_settings/service_accounts/) is recommended because its credentials are not tied to an individual user's lifecycle:
+
+1. Go to **Organization Settings → Accounts → Service Accounts**.
+2. Click **New Service Account**, enter its details, and assign it a role with the permissions described below.
+3. Create the account, select it from the service account list, and click **New Key**.
+4. Name the application key, click **Create Key**, and copy its value immediately. A service-account application key is displayed only once.
+
+As an alternative, go to **Organization Settings → Application Keys → New Key** to create a user-owned application key. This key inherits its owner's permissions and is revoked if that user is disabled, so use this option only when tying the integration to an individual account is acceptable.
+
 ### Datadog permissions
 
 An application key uses the permissions of the Datadog user or service account that owns it. Assign that identity a [Datadog role](https://docs.datadoghq.com/account_management/rbac/) with only the permissions needed for the capabilities you plan to enable:
