@@ -100,6 +100,7 @@ export const docsStructure: DocSection[] = [
       {
         path: 'terraform',
         title: 'Terraform Provider reference',
+        sections: [{ path: 'pulumi', title: 'Using from Pulumi' }],
       },
     ],
   },

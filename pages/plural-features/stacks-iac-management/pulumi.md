@@ -32,6 +32,8 @@ spec:
 
 `configuration.pulumi.stack` defaults to `dev`. Omit `backendUrl` to use Pulumi Cloud, or set it to a Pulumi-supported self-managed backend URL. Unlike Terraform, `manageState` does not manage Pulumi state; configure the state backend with `backendUrl`.
 
+For using the Plural Terraform provider from a Pulumi program, see [Using from Pulumi](/api-reference/terraform/pulumi).
+
 ## Pulumi Cloud
 
 Pulumi Cloud is the default backend. Authenticate the runner with a `PULUMI_ACCESS_TOKEN` sourced from a Kubernetes Secret in the same namespace as the `InfrastructureStack`.
