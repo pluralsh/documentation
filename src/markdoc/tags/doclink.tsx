@@ -88,6 +88,8 @@ const oldDocIDtoRouteMap: Record<string, string> = {
     '/plural-features/k8s-upgrade-assistant/upgrade-insights',
   plural_features_stacks_iac_management:
     '/plural-features/stacks-iac-management',
+  plural_features_stacks_iac_management_pulumi:
+    '/plural-features/stacks-iac-management/pulumi',
   plural_features_stacks_iac_management_customize_runners:
     '/plural-features/stacks-iac-management/customize-runners',
   plural_features_stacks_iac_management_pr_workflow:
