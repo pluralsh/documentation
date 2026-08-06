@@ -16,7 +16,7 @@ Jobs can be started manually from the UI, by a [cron schedule](/plural-features/
 
 ## Starting a job manually
 
-Open a workbench and click **Start job** (or the prompt input at the top of the **Jobs** tab). Type your prompt and press **Run**.
+Open a workbench, select the **Launch** tab, and type your prompt into the new-job input. Submit the prompt to start the job.
 
 ![](/assets/workbenches/workbench-start-job.png)
 

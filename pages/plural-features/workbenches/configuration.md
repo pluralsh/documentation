@@ -107,7 +107,7 @@ Attach only the tools this specific workbench needs. A tightly-scoped tool list 
 
 ## Running your first job
 
-Once the workbench is created, open it from the **Workbenches** list and type a prompt into the input field at the top of the **Jobs** tab.
+Once the workbench is created, open it from the **Workbenches** list and type a prompt into the input field on the **Launch** tab.
 
 A few prompts to start with:
 

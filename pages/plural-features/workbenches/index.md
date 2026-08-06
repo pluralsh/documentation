@@ -56,6 +56,6 @@ Workbenches live under a **project**, inheriting and extending that project's RB
 1. Navigate to **Workbenches** in the Plural Console sidebar.
 2. Click **Create workbench** and step through the [creation wizard](/plural-features/workbenches/configuration).
 3. (Optional) Set up shared [tools](/plural-features/workbenches/tools) your workbench can call.
-4. Run your first job from the workbench's **Jobs** tab.
+4. Run your first job from the workbench's **Launch** tab.
 
 Once you have a job running, you can layer in [automation](/plural-features/workbenches/automation) to trigger jobs on a schedule or from incidents.

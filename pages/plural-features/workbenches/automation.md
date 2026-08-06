@@ -5,12 +5,13 @@ description: Trigger workbench runs on a schedule, from incidents, or from ticke
 
 ## Overview
 
-Workbenches can run jobs automatically through two mechanisms:
+Workbenches can run jobs automatically through several mechanisms:
 
 * **Cron schedules** — run a prompt on a recurring schedule
 * **Webhook triggers** — fire a job when an observability alert or issue tracker event matches a pattern, including when someone writes `Plural fix this` on a PR or ticket
+* **Post-merge follow-ups** — ask the workbench associated with a merged pull request to verify the reconciled system state
 
-Both are managed from the overflow menu (**•••**) on a workbench.
+Cron schedules and webhook triggers are managed from the overflow menu (**•••**) on a workbench. Follow-up prompts are configured in your source control or CI automation.
 
 ---
 
@@ -102,6 +103,14 @@ Each webhook source has its own setup guide available during trigger creation. C
 2. Copy the webhook secret
 3. Configure the URL and secret in your alerting tool or issue tracker
 4. Send a test payload to verify connectivity
+
+---
+
+## Post-merge follow-up jobs
+
+When a workbench opens a pull request, a GitHub Actions workflow can send a follow-up prompt after the pull request merges and GitOps reconciliation completes. This lets the same workbench verify the live system or infrastructure state and address issues that are not visible from the source diff alone.
+
+See [Automating workbench follow-up](/plural-features/workbenches/follow-up-automation) for provider-specific setup. The current guide includes authentication, inputs, and a complete GitHub Actions workflow.
 
 ---
 

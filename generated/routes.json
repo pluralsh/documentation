@@ -341,11 +341,11 @@
   },
   "/plural-features/workbenches": {
     "relPath": "/plural-features/workbenches/index.md",
-    "lastmod": "2026-05-27T21:33:58.000Z"
+    "lastmod": "2026-07-31T10:05:04.000Z"
   },
   "/plural-features/workbenches/configuration": {
     "relPath": "/plural-features/workbenches/configuration.md",
-    "lastmod": "2026-05-27T21:33:58.000Z"
+    "lastmod": "2026-07-31T10:05:04.000Z"
   },
   "/plural-features/workbenches/coding-agent": {
     "relPath": "/plural-features/workbenches/coding-agent.md",
@@ -353,15 +353,23 @@
   },
   "/plural-features/workbenches/tools": {
     "relPath": "/plural-features/workbenches/tools.md",
-    "lastmod": "2026-05-27T21:33:58.000Z"
+    "lastmod": "2026-07-31T10:05:04.000Z"
+  },
+  "/plural-features/workbenches/tools/datadog": {
+    "relPath": "/plural-features/workbenches/tools/datadog.md",
+    "lastmod": "2026-07-31T10:05:04.000Z"
   },
   "/plural-features/workbenches/running-jobs": {
     "relPath": "/plural-features/workbenches/running-jobs.md",
-    "lastmod": "2026-05-27T21:33:58.000Z"
+    "lastmod": "2026-07-31T10:05:04.000Z"
   },
   "/plural-features/workbenches/automation": {
     "relPath": "/plural-features/workbenches/automation.md",
-    "lastmod": "2026-05-27T21:33:58.000Z"
+    "lastmod": "2026-07-30T14:01:51.000Z"
+  },
+  "/plural-features/workbenches/follow-up-automation": {
+    "relPath": "/plural-features/workbenches/follow-up-automation.md",
+    "lastmod": "2026-07-30T15:19:23.000Z"
   },
   "/plural-features/workbenches/use-cases": {
     "relPath": "/plural-features/workbenches/use-cases.md",

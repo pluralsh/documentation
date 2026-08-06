@@ -261,9 +261,17 @@ export const docsStructure: DocSection[] = [
         sections: [
           { path: 'configuration', title: 'Setting up a workbench' },
           { path: 'coding-agent', title: 'Coding agent' },
-          { path: 'tools', title: 'Workbench tools' },
+          {
+            path: 'tools',
+            title: 'Workbench tools',
+            sections: [{ path: 'datadog', title: 'Datadog integration' }],
+          },
           { path: 'running-jobs', title: 'Running workbench jobs' },
           { path: 'automation', title: 'Automating workbench jobs' },
+          {
+            path: 'follow-up-automation',
+            title: 'Automating workbench follow-up',
+          },
           { path: 'use-cases', title: 'Common use cases' },
         ],
       },
