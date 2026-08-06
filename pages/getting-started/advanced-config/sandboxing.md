@@ -175,13 +175,12 @@ The product experience of all these allow bring-your-own image, but if you confi
 apiVersion: deployments.plural.sh/v1alpha1
 kind: AgentConfiguration
 metadata:
-  name: global
-  namespace: plrl-deploy-operator
+  name: default
 spec:
   baseRegistryURL: your.enterprise.registry
 ```
 
-See more about this resource [here](/overview/agent-api-reference#agentconfigurationspec)
+See more about this resource in the [AgentConfiguration](/plural-features/continuous-deployment/deployment-operator/agent-configuration) guide.
 
 {% callout severity="info" %}
 All of these images follow semver, and are also published to `gcr.io` and `docker.io` as well for convenience, in the event that either of those are eligible for internal pull-through caches.  The redis instance is not meaningfully customized and any bitnami or equivalent redis container image can theoretically work there.

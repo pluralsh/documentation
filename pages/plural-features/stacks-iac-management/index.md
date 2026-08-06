@@ -24,7 +24,7 @@ To get a better idea of the full power of the experience, feel free to take a lo
 | `ANSIBLE` | Ansible playbooks |
 | `CUSTOM` | A custom runner image and command workflow |
 
-Pulumi stacks use Pulumi's own state backends. See {% doclink to="plural_features_stacks_iac_management_pulumi" %}Pulumi stacks{% /doclink %} for Pulumi Cloud and self-managed backend authentication.
+Pulumi stacks use Pulumi's own state backends. See [Pulumi stacks](/plural-features/stacks-iac-management/pulumi) for Pulumi Cloud and self-managed backend authentication. To drive Console resources from Pulumi via the Terraform provider, see [Using from Pulumi](/api-reference/terraform/pulumi).
 
 # A Basic Stack
 
