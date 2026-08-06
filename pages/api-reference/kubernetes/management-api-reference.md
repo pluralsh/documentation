@@ -97,12 +97,14 @@ _Appears in:_
 | `enabled` _boolean_ | Enabled defines whether to enable the AI integration or not. | false | Optional: \{\} <br /> |
 | `analysisRates` _[AnalysisRates](#analysisrates)_ | Configure the pace at which AI insight analysis should run. Useful if you want to minimize impacts on inference costs. |  | Optional: \{\} <br /> |
 | `tools` _[Tools](#tools)_ | Tools holds the configuration for the tools that can be used with the AI integration. |  | Optional: \{\} <br /> |
-| `provider` _[AiProvider](#aiprovider)_ | Provider defines which of the supported LLM providers should be used. | OPENAI | Enum: [OPENAI OPENAI_COMPATIBLE ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: \{\} <br /> |
-| `toolProvider` _[AiProvider](#aiprovider)_ | ToolProvider to use for tool calling, in case you want to use a different LLM more optimized to those tasks |  | Enum: [OPENAI OPENAI_COMPATIBLE ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: \{\} <br /> |
+| `provider` _[AiProvider](#aiprovider)_ | Provider defines which of the supported LLM providers should be used. | OPENAI | Enum: [OPENAI OPENAI_COMPATIBLE XAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: \{\} <br /> |
+| `toolProvider` _[AiProvider](#aiprovider)_ | ToolProvider to use for tool calling, in case you want to use a different LLM more optimized to those tasks |  | Enum: [OPENAI OPENAI_COMPATIBLE XAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: \{\} <br /> |
+| `streaming` _boolean_ | Streaming defines whether to stream responses from LLM providers. | true | Optional: \{\} <br /> |
 | `embeddingProvider` _[AiProvider](#aiprovider)_ | EmbeddingProvider to use for generating embeddings. Oftentimes foundational<br />model providers do not have embeddings models, and it's better to simply use OpenAI. |  | Enum: [OPENAI OPENAI_COMPATIBLE ANTHROPIC OLLAMA AZURE BEDROCK VERTEX] <br />Optional: \{\} <br /> |
 | `logAnalysis` _boolean_ | LogAnalysis defines whether to enable log analysis in AI insights (turn off to save on log query costs) |  | Optional: \{\} <br /> |
 | `openAI` _[OpenAISettings](#openaisettings)_ | OpenAI holds the OpenAI provider configuration. |  | Optional: \{\} <br /> |
 | `openAICompatible` _[OpenAISettings](#openaisettings)_ | OpenAICompatible holds the OpenAI-compatible provider configuration. |  | Optional: \{\} <br /> |
+| `xai` _[OpenAISettings](#openaisettings)_ | XAI holds the xAI provider configuration.  This is OpenAI compatible, so uses an equivalent typing. |  | Optional: \{\} <br /> |
 | `anthropic` _[AIProviderSettings](#aiprovidersettings)_ | Anthropic holds the Anthropic provider configuration. |  | Optional: \{\} <br /> |
 | `ollama` _[OllamaSettings](#ollamasettings)_ | Ollama holds configuration for a self-hosted Ollama deployment,<br />more details available at https://github.com/ollama/ollama |  | Optional: \{\} <br /> |
 | `azure` _[AzureOpenAISettings](#azureopenaisettings)_ | Azure holds configuration for using AzureOpenAI to generate LLM insights |  | Optional: \{\} <br /> |
@@ -351,6 +353,7 @@ _Appears in:_
 - [NotificationSinkSpec](#notificationsinkspec)
 - [PersonaSpec](#personaspec)
 - [PrAutomationBindings](#prautomationbindings)
+- [ServiceAccountSpec](#serviceaccountspec)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
@@ -378,6 +381,7 @@ _Appears in:_
 - [ProjectSpec](#projectspec)
 - [ServiceSpec](#servicespec)
 - [WorkbenchSpec](#workbenchspec)
+- [WorkbenchToolSpec](#workbenchtoolspec)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
@@ -582,6 +586,7 @@ _Appears in:_
 | `aws` _[AWSCloudConnection](#awscloudconnection)_ |  |  |  |
 | `gcp` _[GCPCloudConnection](#gcpcloudconnection)_ |  |  |  |
 | `azure` _[AzureCloudConnection](#azurecloudconnection)_ |  |  |  |
+| `vsphere` _[VsphereCloudConnection](#vspherecloudconnection)_ |  |  |  |
 
 
 
@@ -600,7 +605,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this CloudConnection. If not provided CloudConnection's own name<br />from CloudConnection.ObjectMeta will be used. |  | Optional: \{\} <br /> |
-| `provider` _[CloudProvider](#cloudprovider)_ | Provider is the name of the cloud service for the Provider.<br />One of (CloudProvider): [gcp, aws, azure] |  | Enum: [gcp aws azure] <br />Required: \{\} <br />Type: string <br /> |
+| `provider` _[CloudProvider](#cloudprovider)_ | Provider is the name of the cloud service for the Provider.<br />One of (CloudProvider): [gcp, aws, azure, vsphere] |  | Enum: [gcp aws azure vsphere] <br />Required: \{\} <br />Type: string <br /> |
 | `configuration` _[CloudConnectionConfiguration](#cloudconnectionconfiguration)_ | Configuration contains the cloud connection configuration. |  | Required: \{\} <br /> |
 | `readBindings` _[Binding](#binding) array_ | ReadBindings is a list of bindings that defines<br />who can use this CloudConnection. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
@@ -622,6 +627,7 @@ _Appears in:_
 | `aws` | AWS represents Amazon Web Services as a cloud provider<br /> |
 | `azure` | Azure represents Microsoft Azure as a cloud provider<br /> |
 | `gcp` | GCP represents Google Cloud Platform as a cloud provider<br /> |
+| `vsphere` | Vsphere represents VMware vSphere as a cloud provider<br /> |
 
 
 #### Cluster
@@ -1004,6 +1010,7 @@ _Appears in:_
 | `cmd` _string_ | Cmd is the command to execute |  | Required: \{\} <br /> |
 | `args` _string array_ | Args are the arguments to pass to the command. |  | Optional: \{\} <br /> |
 | `dir` _string_ | Dir is the working directory for the command. |  | Optional: \{\} <br /> |
+| `approve` _boolean_ | Approve determines whether this command should run in the approval-gated stage. |  | Optional: \{\} <br /> |
 
 
 #### CompatibilityMatrixSummary
@@ -1394,6 +1401,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `agentHelmValues` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | AgentHelmValues custom helm values to apply<br />to all agents (useful for things like adding<br />customary annotations/labels) |  | Optional: \{\} <br /> |
+| `agentHelmValuesTemplateable` _boolean_ | AgentHelmValuesTemplateable indicates whether to render<br />agent helm values as a template. |  | Optional: \{\} <br /> |
 | `managementRepo` _string_ | ManagementRepo is the root repo for setting up<br />your infrastructure with Plural. Usually this<br />will be your `plural up repo` |  | Optional: \{\} <br /> |
 | `stacks` _[StackSettings](#stacksettings)_ | Stacks global configuration for stack execution. |  | Optional: \{\} <br /> |
 | `bindings` _[DeploymentSettingsBindings](#deploymentsettingsbindings)_ | Bindings global configuration for access control. |  | Optional: \{\} <br /> |
@@ -1897,6 +1905,23 @@ _Appears in:_
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | PasswordSecretRef is a reference to a secret containing the password to connect with basic auth. |  | Optional: \{\} <br /> |
 
 
+#### HTTPHeader
+
+
+
+
+
+
+
+_Appears in:_
+- [OpenAISettings](#openaisettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the HTTP header name. |  | Required: \{\} <br /> |
+| `value` _string_ | Value is the HTTP header value. |  | Required: \{\} <br /> |
+
+
 
 
 #### HelmMinimal
@@ -1953,9 +1978,11 @@ _Appears in:_
 - [HelmRepositorySpec](#helmrepositoryspec)
 - [ObserverHelm](#observerhelm)
 - [ObserverOci](#observeroci)
+- [WorkbenchToolDockerConfig](#workbenchtooldockerconfig)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
+| `proxy` _[HttpProxyConfiguration](#httpproxyconfiguration)_ | Proxy configures an HTTP proxy for requests to this Helm repository or OCI registry. |  | Optional: \{\} <br /> |
 | `basic` _[HelmRepositoryAuthBasic](#helmrepositoryauthbasic)_ | Basic specifies username/password authentication for repositories that support HTTP Basic Auth.<br />Commonly used with private Helm repositories, Harbor registries, and other traditional<br />repository managers that implement standard HTTP authentication. |  | Optional: \{\} <br /> |
 | `bearer` _[HelmRepositoryAuthBearer](#helmrepositoryauthbearer)_ | Bearer specifies token-based authentication for repositories that support Bearer tokens.<br />Used with modern container registries and repositories that implement OAuth2 or similar<br />token-based authentication schemes. |  | Optional: \{\} <br /> |
 | `aws` _[HelmRepositoryAuthAWS](#helmrepositoryauthaws)_ | Aws specifies AWS-specific authentication for Amazon ECR and other AWS-hosted repositories.<br />Supports both static credentials and IAM role-based authentication for secure access<br />to private repositories hosted in Amazon Web Services. |  | Optional: \{\} <br /> |
@@ -2092,6 +2119,7 @@ _Appears in:_
 
 
 _Appears in:_
+- [HelmRepositoryAuth](#helmrepositoryauth)
 - [PrAutomationSpec](#prautomationspec)
 - [ScmConnectionSpec](#scmconnectionspec)
 
@@ -2136,7 +2164,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | Name of this stack.<br />If not provided, the name from InfrastructureStack.ObjectMeta will be used. |  | Optional: \{\} <br /> |
-| `type` _[StackType](#stacktype)_ | Type specifies the IaC tool to use for executing the stack.<br />One of TERRAFORM, TERRAGRUNT, ANSIBLE, CUSTOM. |  | Enum: [TERRAFORM TERRAGRUNT ANSIBLE CUSTOM] <br />Required: \{\} <br /> |
+| `type` _[StackType](#stacktype)_ | Type specifies the IaC tool to use for executing the stack.<br />One of TERRAFORM, TERRAGRUNT, PULUMI, ANSIBLE, CUSTOM. |  | Enum: [TERRAFORM TERRAGRUNT PULUMI ANSIBLE CUSTOM] <br />Required: \{\} <br /> |
 | `interval` _string_ | Interval specifies the interval at which the stack will be reconciled, default is 5m |  | Optional: \{\} <br /> |
 | `repositoryRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | RepositoryRef references the GitRepository containing the IaC source code. Leave empty to use git:url instead. |  | Optional: \{\} <br /> |
 | `clusterRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | ClusterRef references the target Cluster where this stack will be executed. |  | Optional: \{\} <br /> |
@@ -2604,6 +2632,7 @@ _Appears in:_
 - [AWSCloudConnection](#awscloudconnection)
 - [AzureCloudConnection](#azurecloudconnection)
 - [GCPCloudConnection](#gcpcloudconnection)
+- [VsphereCloudConnection](#vspherecloudconnection)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
@@ -2943,6 +2972,22 @@ _Appears in:_
 | `prompt` _string_ | The prompt to use to guide the AI code change for this PR. |  | Required: \{\} <br /> |
 
 
+#### ObserverRenovate
+
+
+
+ObserverRenovate defines Renovate regex versioning options for observer target ordering.
+
+
+
+_Appears in:_
+- [ObserverTarget](#observertarget)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `ignoreUnstable` _boolean_ | IgnoreUnstable skips prerelease values captured by the target format regex. |  | Optional: \{\} <br /> |
+
+
 #### ObserverSpec
 
 
@@ -2984,7 +3029,8 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `type` _[ObserverTargetType](#observertargettype)_ | Type specifies the kind of external source to monitor.<br />Each type has different configuration requirements and polling mechanisms.<br />Supported types include Helm charts, OCI images, Git tags, and Kubernetes add-ons. |  | Enum: [OCI HELM GIT ADDON EKS_ADDON] <br />Required: \{\} <br />Type: string <br /> |
 | `format` _string_ | Format is a regex pattern with a capture group for extracting version information.<br />Useful when version strings are embedded in larger release names or tags.<br />The first capture group is used as the version value.<br />Example: "app-v([0-9]+.[0-9]+.[0-9]+)" extracts "1.2.3" from "app-v1.2.3". |  | Optional: \{\} <br /> |
-| `order` _[ObserverTargetOrder](#observertargetorder)_ | Order determines how discovered versions are sorted and which one is selected.<br />SEMVER sorts by semantic version rules, while LATEST uses chronological ordering.<br />SEMVER is recommended for most use cases as it provides predictable version ordering. |  | Enum: [SEMVER LATEST] <br />Required: \{\} <br />Type: string <br /> |
+| `order` _[ObserverTargetOrder](#observertargetorder)_ | Order determines how discovered versions are sorted and which one is selected.<br />SEMVER sorts by semantic version rules, LATEST uses chronological ordering,<br />and RENOVATE uses regex capture groups with Renovate-style version comparison. |  | Enum: [SEMVER LATEST RENOVATE] <br />Required: \{\} <br />Type: string <br /> |
+| `renovate` _[ObserverRenovate](#observerrenovate)_ | Renovate contains options for RENOVATE target ordering.<br />Used when Order is RENOVATE to control prerelease filtering and related behavior. |  | Optional: \{\} <br /> |
 | `helm` _[ObserverHelm](#observerhelm)_ | Helm contains configuration for monitoring Helm chart repositories.<br />Used when Type is HELM to specify the repository URL, chart name, and authentication. |  | Optional: \{\} <br /> |
 | `oci` _[ObserverOci](#observeroci)_ | OCI contains configuration for monitoring OCI (container) registries.<br />Used when Type is OCI to specify the registry URL and authentication credentials. |  | Optional: \{\} <br /> |
 | `git` _[ObserverGit](#observergit)_ | Git contains configuration for monitoring Git repository tags.<br />Used when Type is GIT to specify which Git repository to monitor for new tags. |  | Optional: \{\} <br /> |
@@ -3030,6 +3076,7 @@ _Appears in:_
 | `proxyModels` _string array_ | ProxyModels are additional models to support within our integrated ai proxy. |  | Optional: \{\} <br /> |
 | `baseUrl` _string_ | BaseUrl is a custom base url to use, for reimplementations of the same API scheme (for instance Together.ai uses the OpenAI API spec).  Should be similar to https://api.openai.com/v1 |  | Optional: \{\} <br /> |
 | `tokenExchange` _[OAuth2TokenExchange](#oauth2tokenexchange)_ | TokenExchange configures OAuth2 client credentials against a token endpoint to obtain access tokens for OpenAI-compatible APIs. |  | Optional: \{\} <br /> |
+| `headers` _[HTTPHeader](#httpheader) array_ | Headers are custom HTTP headers to include in OpenAI-compatible API requests. |  | Optional: \{\} <br /> |
 | `method` _[OpenAiMethod](#openaimethod)_ | Method to use for openai api calls (defaults to auto, but can be used to restrict to only responses or chart completions apis, useful for configuring against common AI proxies) |  | Enum: [CHAT RESPONSES AUTO] <br />Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: \{\} <br /> |
 
@@ -3134,6 +3181,7 @@ _Appears in:_
 | `all` _boolean_ | All enables the complete UI interface for this persona when set to true.<br />This overrides individual feature settings and provides full access to all Console features.<br />Useful for administrative personas that need unrestricted access to all functionality. |  | Optional: \{\} <br /> |
 | `home` _[PersonaHome](#personahome)_ | Home configures the homepage layout and content for this persona.<br />Different personas can have customized homepages that highlight the most relevant<br />information and workflows for their specific role and responsibilities. |  | Optional: \{\} <br /> |
 | `deployments` _[PersonaDeployment](#personadeployment)_ | Deployments controls access to deployment-related features and sections.<br />This includes clusters, services, pipelines, and other deployment management tools.<br />Useful for controlling which teams can view or manage different aspects of deployments. |  | Optional: \{\} <br /> |
+| `flows` _[PersonaFlows](#personaflows)_ | Flows controls access to flow-related features and sections.<br />This includes workbenches, pipelines, and preview environments grouped under flows. |  | Optional: \{\} <br /> |
 | `sidebar` _[PersonaSidebar](#personasidebar)_ | Sidebar configures which navigation items and sections are visible in the main sidebar.<br />This allows personas to have streamlined navigation focused on their primary workflows<br />while hiding irrelevant or restricted functionality. |  | Optional: \{\} <br /> |
 | `services` _[PersonaServices](#personaservices)_ | Services controls access to service-specific features and configuration options.<br />This includes service configuration, secrets management, and other service-level operations. |  | Optional: \{\} <br /> |
 | `ai` _[PersonaAI](#personaai)_ | AI configures access to AI-powered features and capabilities within the Console.<br />This includes AI-assisted operations, automated suggestions, and other intelligent features. |  | Optional: \{\} <br /> |
@@ -3161,6 +3209,28 @@ _Appears in:_
 | `pipelines` _boolean_ | Pipelines enables access to CI/CD pipeline features when set to true.<br />This includes viewing pipeline status, managing pipeline configurations,<br />and triggering pipeline executions for automated deployments. |  | Optional: \{\} <br /> |
 | `providers` _boolean_ | Providers enables access to cloud provider management features when set to true.<br />This includes managing cloud provider credentials, configuring provider settings,<br />and other provider-related operations for infrastructure management. |  | Optional: \{\} <br /> |
 | `addOns` _boolean_ | AddOns enables access to Kubernetes add-on management features when set to true.<br />This includes installing, configuring, and managing cluster add-ons. |  | Optional: \{\} <br /> |
+
+
+#### PersonaFlows
+
+
+
+PersonaFlows defines access controls for flow-related features and views.
+These settings determine which flow management capabilities are visible and
+accessible to users assigned to this persona.
+
+
+
+_Appears in:_
+- [PersonaConfiguration](#personaconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `permissions` _boolean_ | Permissions enables the permissions action in the flow header when set to true.<br />This allows personas to manage flow permissions from the flow detail page. |  | Optional: \{\} <br /> |
+| `startWorkbenchJob` _boolean_ | StartWorkbenchJob enables the "Start workbench job" action in the flow header when set to true.<br />This allows personas to launch workbench jobs directly from the flow detail page. |  | Optional: \{\} <br /> |
+| `workbenches` _boolean_ | Workbenches enables access to flow workbench features when set to true.<br />This includes viewing and using workbenches associated with flows. |  | Optional: \{\} <br /> |
+| `pipelines` _boolean_ | Pipelines enables access to flow pipeline features when set to true.<br />This includes viewing and managing pipelines associated with flows. |  | Optional: \{\} <br /> |
+| `previews` _boolean_ | Previews enables access to flow preview environment features when set to true.<br />This includes viewing and managing preview environments associated with flows. |  | Optional: \{\} <br /> |
 
 
 #### PersonaHome
@@ -3216,14 +3286,18 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
+| `cd` _boolean_ | CD enables access to the Plural Continuous Deployment tab when set to true.<br />This is the entry point for clusters, services, pipelines, and other deployment<br />management views. Use the Deployments configuration to control the individual<br />views within it. |  | Optional: \{\} <br /> |
 | `audits` _boolean_ | Audits enables access to audit logs and compliance reporting features when set to true.<br />This includes viewing system audit trails, user activity logs, and compliance reports.<br />Typically enabled for security teams and compliance officers. |  | Optional: \{\} <br /> |
 | `kubernetes` _boolean_ | Kubernetes enables access to direct Kubernetes management features when set to true.<br />This includes raw Kubernetes resource management, kubectl-like operations,<br />and low-level cluster administration tasks. |  | Optional: \{\} <br /> |
 | `pullRequests` _boolean_ | PullRequests enables access to pull request management features when set to true.<br />This includes viewing and managing pull requests and Git-based deployment automation features. |  | Optional: \{\} <br /> |
+| `flows` _boolean_ | Flows enables access to the flows navigation item when set to true.<br />This includes viewing and managing flow resources from the main sidebar. |  | Optional: \{\} <br /> |
+| `workbenches` _boolean_ | Workbenches enables access to the workbenches navigation item when set to true.<br />This includes viewing and managing workbenches from the main sidebar. |  | Optional: \{\} <br /> |
 | `settings` _boolean_ | Settings enables access to system configuration and administrative settings when set to true.<br />This includes user management, system configuration, integration settings,<br />and other administrative functions. Typically restricted to administrators. |  | Optional: \{\} <br /> |
 | `backups` _boolean_ | Backups enables access to backup and restore management features when set to true.<br />This includes configuring backup policies, managing backup storage,<br />and performing restore operations for disaster recovery. |  | Optional: \{\} <br /> |
 | `stacks` _boolean_ | Stacks enables access to Infrastructure as Code (IaC) stack management when set to true.<br />This includes managing Terraform stacks and other IaC<br />automation tools for infrastructure provisioning and management. |  | Optional: \{\} <br /> |
 | `security` _boolean_ | Security enables access to security management features when set to true.<br />This includes security scanning results, vulnerability management,<br />policy enforcement, and other security-related tools and dashboards. |  | Optional: \{\} <br /> |
 | `cost` _boolean_ | Cost enables access to cost management and optimization features when set to true.<br />This includes cost tracking or resource optimization recommendations. |  | Optional: \{\} <br /> |
+| `ai` _boolean_ | AI enables access to the Plural AI tab when set to true.<br />This includes AI insights, chat threads, and other AI-driven investigation tools.<br />Use the AI configuration to control individual AI capabilities within it. |  | Optional: \{\} <br /> |
 
 
 #### PersonaSpec
@@ -4067,6 +4141,27 @@ _Appears in:_
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
+#### PulumiConfiguration
+
+
+
+
+
+
+
+_Appears in:_
+- [StackConfiguration](#stackconfiguration)
+- [StackOverrides](#stackoverrides)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `parallel` _integer_ | Parallel is the number of resource operations to run concurrently,<br />equivalent to the --parallel flag in pulumi preview, up, and destroy. |  | Optional: \{\} <br /> |
+| `refresh` _boolean_ | Refresh is whether to refresh the state of the stack,<br />equivalent to the --refresh flag in pulumi preview, up, and destroy. |  | Optional: \{\} <br /> |
+| `approveEmpty` _boolean_ | ApproveEmpty is whether to auto-approve a plan if there are no changes, preventing a stack from being blocked. |  | Optional: \{\} <br /> |
+| `stack` _string_ | Stack is the pulumi stack name to operate on,<br />equivalent to the --stack flag in pulumi preview, up, and destroy. |  | Optional: \{\} <br /> |
+| `backendUrl` _string_ | BackendUrl is an opaque URL passed to pulumi login for the state backend. When omitted, Pulumi Cloud is used.<br />It supports self-hosted Pulumi Cloud, S3, GCS, Azure Blob, and other Pulumi-supported login URLs. |  | Optional: \{\} <br /> |
+
+
 
 
 #### Reconciliation
@@ -4622,6 +4717,7 @@ _Appears in:_
 | `scopes` _[ServiceAccountScope](#serviceaccountscope) array_ | Scopes define the access boundaries for this service account, controlling<br />which Console APIs and resources it can interact with. Each scope can restrict<br />access to specific API endpoints and resource identifiers, enabling fine-grained<br />permission control for automated processes. |  | Optional: \{\} <br /> |
 | `tokenExpiry` _string_ | TokenExpiry is the TTL of the access token, e.g. 1h, 1d, 1w |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | TokenSecretRef references a Kubernetes secret that should contain the<br />authentication token for this service account. This enables secure storage<br />and management of credentials within the cluster. |  | Optional: \{\} <br /> |
+| `assumeBindings` _[Binding](#binding) array_ | AssumeBindings define which users and groups can assume this service account. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
@@ -4987,6 +5083,7 @@ _Appears in:_
 | `hooks` _[StackHook](#stackhook) array_ | Hooks to run at various stages of the stack run. |  | Optional: \{\} <br /> |
 | `terraform` _[TerraformConfiguration](#terraformconfiguration)_ | Terraform configuration for this stack. |  | Optional: \{\} <br /> |
 | `terragrunt` _[TerragruntConfiguration](#terragruntconfiguration)_ | Terragrunt configuration for this stack. |  | Optional: \{\} <br /> |
+| `pulumi` _[PulumiConfiguration](#pulumiconfiguration)_ | Pulumi configuration for this stack. |  | Optional: \{\} <br /> |
 | `ansible` _[AnsibleConfiguration](#ansibleconfiguration)_ | Ansible configuration for this stack. |  | Optional: \{\} <br /> |
 | `aiApproval` _[AiApprovalConfiguration](#aiapprovalconfiguration)_ | AiApproval configuration for this stack to be auto-approved by AI according to rules sourced from Git. |  | Optional: \{\} <br /> |
 
@@ -5121,6 +5218,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `terraform` _[TerraformConfiguration](#terraformconfiguration)_ | Terraform is the terraform configuration for this stack |  | Optional: \{\} <br /> |
 | `terragrunt` _[TerragruntConfiguration](#terragruntconfiguration)_ | Terragrunt is the terragrunt configuration for this stack |  | Optional: \{\} <br /> |
+| `pulumi` _[PulumiConfiguration](#pulumiconfiguration)_ | Pulumi is the pulumi configuration for this stack |  | Optional: \{\} <br /> |
 
 
 #### StackSettings
@@ -5367,6 +5465,26 @@ _Appears in:_
 | `location` _string_ | Location is the GCP region Vertex is queried from |  | Required: \{\} <br /> |
 | `endpoint` _string_ | Endpoint is a custom endpoint for self-deployed models |  | Optional: \{\} <br /> |
 | `serviceAccountJsonSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ServiceAccountJsonSecretRef is a Service Account json file stored w/in a kubernetes secret to use for authentication to GCP |  | Optional: \{\} <br /> |
+
+
+#### VsphereCloudConnection
+
+
+
+VsphereCloudConnection contains VMware vSphere authentication configuration.
+Provides credentials for discovering and querying vSphere resources.
+
+
+
+_Appears in:_
+- [CloudConnectionConfiguration](#cloudconnectionconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `server` _string_ | The vCenter SDK endpoint, for example https://vcenter.example.com/sdk |  |  |
+| `user` _string_ | The vCenter user |  |  |
+| `password` _[ObjectKeyReference](#objectkeyreference)_ | The vCenter password |  |  |
+| `allowUnverifiedSsl` _boolean_ | Whether to allow unverified vCenter TLS certificates |  | Optional: \{\} <br /> |
 
 
 #### Workbench
@@ -5649,6 +5767,94 @@ _Appears in:_
 | `tenantId` _string_ | Azure tenant id. |  | Required: \{\} <br /> |
 | `clientId` _string_ | Azure client id. |  | Required: \{\} <br /> |
 | `clientSecretSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the azure client secret. |  | Required: \{\} <br /> |
+| `prometheusUrl` _string_ | Optional azure managed prometheus url if you wish to use it for metrics. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolAzureDevopsConfig
+
+
+
+WorkbenchToolAzureDevopsConfig defines an azure devops connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Optional REST API root (defaults to https://dev.azure.com). |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the Azure DevOps personal access token. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolAzureFunctionConfig
+
+
+
+WorkbenchToolAzureFunctionConfig defines an Azure Function / Cloud Function configuration.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `identifier` _string_ | Cloud Function identifier. |  | Required: \{\} <br /> |
+| `description` _string_ | Description of the function exposed to the agent. |  | Required: \{\} <br /> |
+| `inputSchema` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | JSON schema for the tool input. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolBitbucketConfig
+
+
+
+WorkbenchToolBitbucketConfig defines a bitbucket cloud connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Optional Bitbucket Cloud API base URL. |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the Bitbucket app password or access token. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolBitbucketDatacenterConfig
+
+
+
+WorkbenchToolBitbucketDatacenterConfig defines a bitbucket data center connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Bitbucket Data Center REST API base URL. |  | Required: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the HTTP access token or personal access token. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolCloudRunConfig
+
+
+
+WorkbenchToolCloudRunConfig defines a Google Cloud Run service configuration.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `identifier` _string_ | Cloud Run service identifier. |  | Required: \{\} <br /> |
+| `description` _string_ | Description of the function exposed to the agent. |  | Required: \{\} <br /> |
+| `inputSchema` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | JSON schema for the tool input. |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchToolCloudwatchConfig
@@ -5688,6 +5894,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `http` _[WorkbenchToolHTTPConfig](#workbenchtoolhttpconfig)_ | Http tool configuration. |  | Optional: \{\} <br /> |
 | `elastic` _[WorkbenchToolElasticConfig](#workbenchtoolelasticconfig)_ | Elasticsearch connection (logs). |  | Optional: \{\} <br /> |
+| `opensearch` _[WorkbenchToolOpensearchConfig](#workbenchtoolopensearchconfig)_ | AWS OpenSearch connection (logs). |  | Optional: \{\} <br /> |
 | `prometheus` _[WorkbenchToolPrometheusConfig](#workbenchtoolprometheusconfig)_ | Prometheus connection (metrics). |  | Optional: \{\} <br /> |
 | `loki` _[WorkbenchToolLokiConfig](#workbenchtoollokiconfig)_ | Loki connection (logs). |  | Optional: \{\} <br /> |
 | `tempo` _[WorkbenchToolTempoConfig](#workbenchtooltempoconfig)_ | Tempo connection (traces). |  | Optional: \{\} <br /> |
@@ -5697,8 +5904,22 @@ _Appears in:_
 | `dynatrace` _[WorkbenchToolDynatraceConfig](#workbenchtooldynatraceconfig)_ | Dynatrace connection (metrics, logs, traces). |  | Optional: \{\} <br /> |
 | `cloudwatch` _[WorkbenchToolCloudwatchConfig](#workbenchtoolcloudwatchconfig)_ | Cloudwatch connection (metrics, logs). |  | Optional: \{\} <br /> |
 | `azure` _[WorkbenchToolAzureConfig](#workbenchtoolazureconfig)_ | Azure monitor connection (metrics). |  | Optional: \{\} <br /> |
+| `sentry` _[WorkbenchToolSentryConfig](#workbenchtoolsentryconfig)_ | Sentry connection (error tracking). |  | Optional: \{\} <br /> |
 | `linear` _[WorkbenchToolLinearConfig](#workbenchtoollinearconfig)_ | Linear connection (ticketing). |  | Optional: \{\} <br /> |
+| `slack` _[WorkbenchToolSlackConfig](#workbenchtoolslackconfig)_ | Slack connection (integration). |  | Optional: \{\} <br /> |
+| `pagerduty` _[WorkbenchToolPagerdutyConfig](#workbenchtoolpagerdutyconfig)_ | PagerDuty connection (integration). |  | Optional: \{\} <br /> |
+| `teams` _[WorkbenchToolTeamsConfig](#workbenchtoolteamsconfig)_ | Microsoft Teams / Graph connection (integration). |  | Optional: \{\} <br /> |
 | `atlassian` _[WorkbenchToolAtlassianConfig](#workbenchtoolatlassianconfig)_ | Atlassian/jira connection (ticketing). |  | Optional: \{\} <br /> |
+| `exa` _[WorkbenchToolExaConfig](#workbenchtoolexaconfig)_ | Exa connection (search). |  | Optional: \{\} <br /> |
+| `github` _[WorkbenchToolGithubConfig](#workbenchtoolgithubconfig)_ | GitHub connection (integration). |  | Optional: \{\} <br /> |
+| `gitlab` _[WorkbenchToolGitlabConfig](#workbenchtoolgitlabconfig)_ | GitLab connection (scm). |  | Optional: \{\} <br /> |
+| `bitbucket` _[WorkbenchToolBitbucketConfig](#workbenchtoolbitbucketconfig)_ | Bitbucket Cloud connection (scm). |  | Optional: \{\} <br /> |
+| `bitbucketDatacenter` _[WorkbenchToolBitbucketDatacenterConfig](#workbenchtoolbitbucketdatacenterconfig)_ | Bitbucket Data Center connection (scm). |  | Optional: \{\} <br /> |
+| `azureDevops` _[WorkbenchToolAzureDevopsConfig](#workbenchtoolazuredevopsconfig)_ | Azure DevOps connection (scm). |  | Optional: \{\} <br /> |
+| `lambda` _[WorkbenchToolLambdaConfig](#workbenchtoollambdaconfig)_ | AWS Lambda function configuration. |  | Optional: \{\} <br /> |
+| `cloudRun` _[WorkbenchToolCloudRunConfig](#workbenchtoolcloudrunconfig)_ | Google Cloud Run service configuration. |  | Optional: \{\} <br /> |
+| `azureFunction` _[WorkbenchToolAzureFunctionConfig](#workbenchtoolazurefunctionconfig)_ | Azure Function / Cloud Function configuration. |  | Optional: \{\} <br /> |
+| `docker` _[WorkbenchToolDockerConfig](#workbenchtooldockerconfig)_ | Docker/OCI registry connection. |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchToolDatadogConfig
@@ -5717,6 +5938,25 @@ _Appears in:_
 | `site` _string_ | Datadog site (e.g. datadoghq.com). |  | Optional: \{\} <br /> |
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the datadog API key. |  | Optional: \{\} <br /> |
 | `appKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the datadog application key. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolDockerConfig
+
+
+
+WorkbenchToolDockerConfig defines a docker/OCI registry connection.
+Auth secrets are resolved by the reconciler via HelmRepositoryAuth helpers.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Registry host or base URL (defaults to registry-1.docker.io). |  | Optional: \{\} <br /> |
+| `provider` _[HelmAuthProvider](#helmauthprovider)_ | Registry authentication provider: BASIC, BEARER, AWS, AZURE, or GCP. |  | Enum: [BASIC BEARER GCP AZURE AWS] <br />Optional: \{\} <br /> |
+| `auth` _[HelmRepositoryAuth](#helmrepositoryauth)_ | Registry authentication credentials and optional proxy. |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchToolDynatraceConfig
@@ -5755,6 +5995,60 @@ _Appears in:_
 | `index` _string_ | Elasticsearch index. |  | Required: \{\} <br /> |
 
 
+#### WorkbenchToolExaConfig
+
+
+
+WorkbenchToolExaConfig defines an exa connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the exa API key. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolGithubConfig
+
+
+
+WorkbenchToolGithubConfig defines a github connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Optional GitHub REST API base URL (defaults to https://api.github.com/; set for GitHub Enterprise Server). |  | Optional: \{\} <br /> |
+| `accessTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing an optional GitHub personal access token or fine-grained token. |  | Optional: \{\} <br /> |
+| `toolset` _string_ | Optional native tool subset: issues, pull_requests, repos, security, default/all, or omit for all tools. |  | Optional: \{\} <br /> |
+| `appId` _string_ | GitHub App ID (use with installationId and privateKey instead of accessToken). |  | Optional: \{\} <br /> |
+| `installationId` _string_ | GitHub App installation ID for this organization or account. |  | Optional: \{\} <br /> |
+| `privateKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the PEM private key for the GitHub App. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolGitlabConfig
+
+
+
+WorkbenchToolGitlabConfig defines a gitlab connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Optional GitLab API base URL (defaults to https://gitlab.com when omitted). |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the GitLab personal access token or project/group token. |  | Optional: \{\} <br /> |
+
+
 #### WorkbenchToolHTTPConfig
 
 
@@ -5770,6 +6064,7 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `url` _string_ | The request URL. |  | Format: uri <br />Required: \{\} <br />Type: string <br /> |
 | `method` _[WorkbenchToolHTTPMethod](#workbenchtoolhttpmethod)_ | The HTTP method. |  | Enum: [GET POST PUT DELETE PATCH] <br />Required: \{\} <br /> |
+| `function` _boolean_ | When true, exposes this HTTP tool as a workbench action; execution may require approval when tool approval is enabled. |  | Optional: \{\} <br /> |
 | `headers` _[WorkbenchToolHTTPHeader](#workbenchtoolhttpheader) array_ | Request headers. |  | Optional: \{\} <br /> |
 | `body` _string_ | Request body. |  | Optional: \{\} <br />Type: string <br /> |
 | `inputSchema` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | JSON schema for the tool input. |  | Required: \{\} <br /> |
@@ -5811,6 +6106,24 @@ _Appears in:_
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 
 
+#### WorkbenchToolLambdaConfig
+
+
+
+WorkbenchToolLambdaConfig defines an AWS Lambda function configuration.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `lambdaArn` _string_ | AWS Lambda function ARN. |  | Required: \{\} <br /> |
+| `description` _string_ | Description of the function exposed to the agent. |  | Required: \{\} <br /> |
+| `inputSchema` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | JSON schema for the tool input. |  | Optional: \{\} <br /> |
+
+
 #### WorkbenchToolLinearConfig
 
 
@@ -5847,6 +6160,44 @@ _Appears in:_
 | `tenantId` _string_ | Optional tenant id. |  | Optional: \{\} <br /> |
 
 
+#### WorkbenchToolOpensearchConfig
+
+
+
+WorkbenchToolOpensearchConfig defines an AWS OpenSearch connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `host` _string_ | AWS OpenSearch endpoint. |  | Required: \{\} <br /> |
+| `index` _string_ | OpenSearch index. |  | Required: \{\} <br /> |
+| `awsAccessKeyIdSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the AWS access key id for SigV4 authentication. |  | Optional: \{\} <br /> |
+| `awsSecretAccessKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the AWS secret access key for SigV4 authentication. |  | Optional: \{\} <br /> |
+| `awsRegion` _string_ | AWS region for SigV4 authentication. |  | Optional: \{\} <br /> |
+| `assumeRoleArn` _string_ | Optional IAM role ARN to assume before signing OpenSearch requests. |  | Optional: \{\} <br /> |
+| `usePodIdentity` _boolean_ | Whether to use pod identity (IRSA/Workload Identity) for AWS authentication instead of static credentials. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolPagerdutyConfig
+
+
+
+WorkbenchToolPagerdutyConfig defines a pagerduty connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the pagerduty REST API key. |  | Optional: \{\} <br /> |
+
+
 #### WorkbenchToolPrometheusConfig
 
 
@@ -5865,6 +6216,43 @@ _Appears in:_
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 | `tenantId` _string_ | Optional tenant id (e.g. for Mimir). |  | Optional: \{\} <br /> |
+| `awsSigv4` _boolean_ | Whether to sign requests with AWS SigV4. |  | Optional: \{\} <br /> |
+| `awsAccessKeyIdSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the AWS access key id for SigV4 authentication. |  | Optional: \{\} <br /> |
+| `awsSecretAccessKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the AWS secret access key for SigV4 authentication. |  | Optional: \{\} <br /> |
+| `awsRegion` _string_ | AWS region for SigV4 authentication. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolSentryConfig
+
+
+
+WorkbenchToolSentryConfig defines a sentry connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Optional Sentry API host (defaults to https://sentry.io; set for self-hosted). |  | Optional: \{\} <br /> |
+| `accessTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the Sentry user auth token or internal integration token. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolSlackConfig
+
+
+
+WorkbenchToolSlackConfig defines a slack connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `botTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the slack bot user OAuth token (xoxb-...). |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchToolSpec
@@ -5881,11 +6269,14 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | The name of the tool (a-z, 0-9, underscores). If not set, metadata.name is used. |  | Optional: \{\} <br />Pattern: `^[a-z0-9_]+$` <br />Type: string <br /> |
-| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER] <br />Required: \{\} <br /> |
+| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER EXA GITHUB SLACK TEAMS GITLAB BITBUCKET BITBUCKET_DATACENTER AZURE_DEVOPS PAGERDUTY OPENSEARCH LAMBDA CLOUD_RUN AZURE_FUNCTION DOCKER] <br />Required: \{\} <br /> |
 | `categories` _WorkbenchToolCategory array_ | Categories for the tool. |  | Optional: \{\} <br /> |
+| `approval` _boolean_ | Whether this tool requires approval before execution. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The project for this tool. |  | Optional: \{\} <br /> |
 | `mcpServerRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The mcp server for this tool. |  | Optional: \{\} <br /> |
 | `cloudConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The cloud connection for this tool (e.g. infrastructure cloud tools). |  | Optional: \{\} <br /> |
+| `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The SCM connection for this tool (e.g. shared Git provider credentials). |  | Optional: \{\} <br /> |
+| `bindings` _[Bindings](#bindings)_ | Bindings define the read and write access policies for this tool. |  | Optional: \{\} <br /> |
 | `configuration` _[WorkbenchToolConfiguration](#workbenchtoolconfiguration)_ | Tool configuration (e.g. HTTP). |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ |  |  | Optional: \{\} <br /> |
 
@@ -5907,6 +6298,24 @@ _Appears in:_
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the bearer token. |  | Optional: \{\} <br /> |
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolTeamsConfig
+
+
+
+WorkbenchToolTeamsConfig defines a microsoft teams / graph connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `clientId` _string_ | Microsoft Entra application (client) id. |  | Required: \{\} <br /> |
+| `clientSecretSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the microsoft entra client secret. |  | Required: \{\} <br /> |
+| `tenantId` _string_ | Microsoft Entra tenant (directory) id. |  | Required: \{\} <br /> |
 
 
 #### WorkbenchToolTempoConfig
