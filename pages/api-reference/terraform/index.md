@@ -8,7 +8,7 @@ description: >-
 
 For ingesting clusters or creating net new infrastructure, our terraform provider is usually the most natural surface for integrating Plural with your existing processes or adopting a full IaC based infrastructure management approach from the ground up.
 
-Our provider is available on the Terraform Registry's [Plural Provider page](https://registry.terraform.io/providers/pluralsh/plural/latest/docs)
+Our provider is available on the Terraform Registry's [Plural Provider page](https://registry.terraform.io/providers/pluralsh/plural/latest/docs). It can also be used from Pulumi — see [Using from Pulumi](/api-reference/terraform/pulumi).
 
 You can see snippets throughout our getting started guides, but some common usecases are as follows:
 

@@ -120,8 +120,12 @@
     "lastmod": null
   },
   "/api-reference/terraform": {
-    "relPath": "/api-reference/terraform.md",
-    "lastmod": "2026-02-03T22:03:47.000Z"
+    "relPath": "/api-reference/terraform/index.md",
+    "lastmod": "2026-08-04T13:27:26.025Z"
+  },
+  "/api-reference/terraform/pulumi": {
+    "relPath": "/api-reference/terraform/pulumi.md",
+    "lastmod": "2026-08-04T13:27:26.046Z"
   },
   "/plural-features": {
     "relPath": "/plural-features/index.md",
@@ -165,11 +169,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-06-26T11:13:43.903Z"
+    "lastmod": "2026-08-04T13:27:26.172Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-06-26T11:13:43.916Z"
+    "lastmod": "2026-08-04T13:27:26.192Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -213,11 +217,15 @@
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2026-07-15T09:31:13.000Z"
   },
   "/plural-features/stacks-iac-management/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
     "lastmod": "2025-03-12T14:59:41.000Z"
+  },
+  "/plural-features/stacks-iac-management/pulumi": {
+    "relPath": "/plural-features/stacks-iac-management/pulumi.md",
+    "lastmod": "2026-07-15T09:31:13.000Z"
   },
   "/plural-features/stacks-iac-management/pr-workflow": {
     "relPath": "/plural-features/stacks-iac-management/pr-workflow.md",
@@ -605,7 +613,7 @@
   },
   "/deployments/stacks": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2025-03-12T14:59:41.000Z"
+    "lastmod": "2026-07-15T09:31:13.000Z"
   },
   "/service-catalog/creation": {
     "relPath": "/plural-features/service-catalog/creation.md",
