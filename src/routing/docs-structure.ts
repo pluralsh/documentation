@@ -130,6 +130,10 @@ export const docsStructure: DocSection[] = [
                 path: 'agent-configuration',
                 title: 'AgentConfiguration',
               },
+              {
+                path: 'custom-health',
+                title: 'CustomHealth Lua authoring',
+              },
             ],
           },
           { path: 'git-service', title: 'Git-sourced services' },
