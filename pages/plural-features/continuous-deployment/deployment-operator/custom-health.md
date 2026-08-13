@@ -7,14 +7,13 @@ description: Define CustomHealth Lua scripts for a target Kubernetes GVK
 
 `CustomHealth` is a deployment-operator API, so apply it to each cluster where it should be used. To distribute the same resource across a fleet, use a [GlobalService](/plural-features/continuous-deployment/global-service).
 
-Start with a complete manifest. This example targets `example.io/v1`, `Example` resources and evaluates their `Ready` condition.
+Here's an example manifest:
 
 ```yaml
 apiVersion: deployments.plural.sh/v1alpha1
 kind: CustomHealth
 metadata:
   name: example-ready-condition
-  namespace: <namespace>
 spec:
   group: example.io
   version: v1
@@ -30,7 +29,7 @@ spec:
     end
 ```
 
-Set `metadata.name` and `metadata.namespace` for the `CustomHealth` resource. Set `spec.group`, `spec.kind`, and, when needed, the optional `spec.version` to identify the target GVK. Put the Lua code in `spec.script`.
+Set `spec.group`, `spec.kind`, and, when needed, the optional `spec.version` to identify the target GVK. Put the Lua code in `spec.script`.
 
 ## Script inputs
 
