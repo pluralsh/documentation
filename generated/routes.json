@@ -151,6 +151,10 @@
     "relPath": "/plural-features/continuous-deployment/deployment-operator/agent-configuration.md",
     "lastmod": "2026-06-26T10:42:27.000Z"
   },
+  "/plural-features/continuous-deployment/deployment-operator/custom-health": {
+    "relPath": "/plural-features/continuous-deployment/deployment-operator/custom-health.md",
+    "lastmod": "2026-08-13T14:53:31.804Z"
+  },
   "/plural-features/continuous-deployment/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
     "lastmod": "2025-12-30T16:00:47.000Z"
