@@ -5490,6 +5490,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@styra/highlightjs-rego@npm:^0.1.2":
+  version: 0.1.2
+  resolution: "@styra/highlightjs-rego@npm:0.1.2"
+  checksum: f6a47f85f12a523a8104e281d26e9e44bd7d07d4886528812d4cd67991cc02a0ef00278cf717d35e12d63552014577aac7454389968f285e283416b181742646
+  languageName: node
+  linkType: hard
+
 "@swc/counter@npm:^0.1.3":
   version: 0.1.3
   resolution: "@swc/counter@npm:0.1.3"
@@ -14834,6 +14841,7 @@ __metadata:
     "@react-stately/list": 3.8.1
     "@react-stately/select": 3.5.1
     "@react-stately/selection": 3.19.0
+    "@styra/highlightjs-rego": ^0.1.2
     "@types/glob": 8.1.0
     "@types/node": 20.4.2
     "@types/react": 18.3.3
@@ -14859,6 +14867,7 @@ __metadata:
     fuse.js: 6.6.2
     graphql: 16.6.0
     gray-matter: 4.0.3
+    highlight.js: 11.9.0
     honorable: 0.194.0
     honorable-theme-default: 0.77.0
     htmlparser2: 9.1.0

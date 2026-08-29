@@ -280,6 +280,19 @@ export const docsStructure: DocSection[] = [
         ],
       },
       {
+        path: 'policy-management',
+        title: 'Policy management',
+        sections: [
+          { path: 'stack-policies', title: 'Stack policies' },
+          { path: 'workbench-policies', title: 'Workbench policies' },
+          {
+            path: 'simulating-policies',
+            title: 'Simulating and testing policies',
+          },
+          { path: 'common-use-cases', title: 'Common use cases' },
+        ],
+      },
+      {
         path: 'observability',
         title: 'Observability Integration',
         sections: [

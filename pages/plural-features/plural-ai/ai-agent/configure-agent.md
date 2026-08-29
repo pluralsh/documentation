@@ -34,6 +34,19 @@ spec:
 
 Supported runtime types are `CLAUDE`, `OPENCODE`, and `GEMINI`.
 
+## Optional: Enable codebase memory persistence
+
+Agent runtimes include the `codebase-memory-mcp` server for graph-backed code search. By default, its indexes are stored only in the agent pod cache and generated `.codebase-memory/` artifacts are excluded from commits.
+
+Set `spec.memory: true` to enable team-shared memory persistence by default:
+
+```yaml
+spec:
+  memory: true
+```
+
+When enabled, agents index repositories with persistent artifact export enabled, allowing `.codebase-memory/graph.db.zst` and the related `.gitattributes` update to be committed so future runs can bootstrap from the shared graph. Leave this unset or `false` if you want every run to keep its codebase-memory index local to the runtime cache.
+
 ## Tune runtime resources
 
 `AgentRuntime` accepts a pod template so you can set CPU/memory requests and limits for the agent container. Use the `default` container name to target the main agent container.
