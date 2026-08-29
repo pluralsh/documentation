@@ -85,7 +85,7 @@
   },
   "/getting-started/advanced-config/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/getting-started/advanced-config/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -105,11 +105,11 @@
   },
   "/api-reference/kubernetes/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-06-10T12:45:04.000Z"
+    "lastmod": "2026-08-13T15:31:21.000Z"
   },
   "/api-reference/kubernetes/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-06-10T12:45:04.000Z"
+    "lastmod": "2026-08-11T20:00:52.000Z"
   },
   "/api-reference/graphql": {
     "relPath": "/api-reference/graphql.md",
@@ -121,11 +121,11 @@
   },
   "/api-reference/terraform": {
     "relPath": "/api-reference/terraform/index.md",
-    "lastmod": "2026-08-04T13:27:26.025Z"
+    "lastmod": "2026-08-04T15:01:58.000Z"
   },
   "/api-reference/terraform/pulumi": {
     "relPath": "/api-reference/terraform/pulumi.md",
-    "lastmod": "2026-08-04T13:27:26.046Z"
+    "lastmod": "2026-08-04T15:01:58.000Z"
   },
   "/plural-features": {
     "relPath": "/plural-features/index.md",
@@ -137,23 +137,23 @@
   },
   "/plural-features/continuous-deployment/management-controller": {
     "relPath": "/plural-features/continuous-deployment/management-controller/index.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/plural-features/continuous-deployment/management-controller/deployment-settings": {
     "relPath": "/plural-features/continuous-deployment/management-controller/deployment-settings.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/plural-features/continuous-deployment/deployment-operator": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator/index.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/plural-features/continuous-deployment/deployment-operator/agent-configuration": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator/agent-configuration.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/plural-features/continuous-deployment/deployment-operator/custom-health": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator/custom-health.md",
-    "lastmod": "2026-08-13T15:06:28.330Z"
+    "lastmod": "2026-08-13T15:30:45.000Z"
   },
   "/plural-features/continuous-deployment/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
@@ -173,11 +173,11 @@
   },
   "/plural-features/continuous-deployment/service-templating": {
     "relPath": "/plural-features/continuous-deployment/service-templating/index.md",
-    "lastmod": "2026-08-04T13:27:26.172Z"
+    "lastmod": "2026-08-29T16:19:38.379Z"
   },
   "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters": {
     "relPath": "/plural-features/continuous-deployment/service-templating/supporting-liquid-filters.md",
-    "lastmod": "2026-08-04T13:27:26.192Z"
+    "lastmod": "2026-08-29T16:19:38.402Z"
   },
   "/plural-features/continuous-deployment/lua": {
     "relPath": "/plural-features/continuous-deployment/lua.md",
@@ -221,7 +221,7 @@
   },
   "/plural-features/stacks-iac-management": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2026-07-15T09:31:13.000Z"
+    "lastmod": "2026-08-04T15:01:58.000Z"
   },
   "/plural-features/stacks-iac-management/customize-runners": {
     "relPath": "/plural-features/stacks-iac-management/customize-runners.md",
@@ -229,7 +229,7 @@
   },
   "/plural-features/stacks-iac-management/pulumi": {
     "relPath": "/plural-features/stacks-iac-management/pulumi.md",
-    "lastmod": "2026-07-15T09:31:13.000Z"
+    "lastmod": "2026-08-04T15:01:58.000Z"
   },
   "/plural-features/stacks-iac-management/pr-workflow": {
     "relPath": "/plural-features/stacks-iac-management/pr-workflow.md",
@@ -293,7 +293,7 @@
   },
   "/plural-features/plural-ai/ai-agent/configure-agent": {
     "relPath": "/plural-features/plural-ai/ai-agent/configure-agent.md",
-    "lastmod": "2026-03-04T02:33:39.000Z"
+    "lastmod": "2026-08-29T16:16:14.000Z"
   },
   "/plural-features/plural-ai/ai-agent/remote-browser": {
     "relPath": "/plural-features/plural-ai/ai-agent/remote-browser.md",
@@ -345,11 +345,11 @@
   },
   "/plural-features/workbenches": {
     "relPath": "/plural-features/workbenches/index.md",
-    "lastmod": "2026-07-31T10:05:04.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/configuration": {
     "relPath": "/plural-features/workbenches/configuration.md",
-    "lastmod": "2026-07-31T10:05:04.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/coding-agent": {
     "relPath": "/plural-features/workbenches/coding-agent.md",
@@ -357,27 +357,47 @@
   },
   "/plural-features/workbenches/tools": {
     "relPath": "/plural-features/workbenches/tools.md",
-    "lastmod": "2026-07-31T10:05:04.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/tools/datadog": {
     "relPath": "/plural-features/workbenches/tools/datadog.md",
-    "lastmod": "2026-07-31T10:05:04.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/running-jobs": {
     "relPath": "/plural-features/workbenches/running-jobs.md",
-    "lastmod": "2026-07-31T10:05:04.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/automation": {
     "relPath": "/plural-features/workbenches/automation.md",
-    "lastmod": "2026-07-30T14:01:51.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/follow-up-automation": {
     "relPath": "/plural-features/workbenches/follow-up-automation.md",
-    "lastmod": "2026-07-30T15:19:23.000Z"
+    "lastmod": "2026-08-06T15:20:26.000Z"
   },
   "/plural-features/workbenches/use-cases": {
     "relPath": "/plural-features/workbenches/use-cases.md",
     "lastmod": "2026-05-27T21:33:58.000Z"
+  },
+  "/plural-features/policy-management": {
+    "relPath": "/plural-features/policy-management/index.md",
+    "lastmod": "2026-08-29T16:16:14.000Z"
+  },
+  "/plural-features/policy-management/stack-policies": {
+    "relPath": "/plural-features/policy-management/stack-policies.md",
+    "lastmod": "2026-08-29T16:16:14.000Z"
+  },
+  "/plural-features/policy-management/workbench-policies": {
+    "relPath": "/plural-features/policy-management/workbench-policies.md",
+    "lastmod": "2026-08-29T16:16:14.000Z"
+  },
+  "/plural-features/policy-management/simulating-policies": {
+    "relPath": "/plural-features/policy-management/simulating-policies.md",
+    "lastmod": "2026-08-29T16:16:14.000Z"
+  },
+  "/plural-features/policy-management/common-use-cases": {
+    "relPath": "/plural-features/policy-management/common-use-cases.md",
+    "lastmod": "2026-08-29T16:16:14.000Z"
   },
   "/plural-features/observability": {
     "relPath": "/plural-features/observability/index.md",
@@ -557,7 +577,7 @@
   },
   "/deployments/sandboxing": {
     "relPath": "/getting-started/advanced-config/sandboxing.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/deployments/network-configuration": {
     "relPath": "/getting-started/advanced-config/network-configuration.md",
@@ -569,11 +589,11 @@
   },
   "/deployments/operator/architecture": {
     "relPath": "/plural-features/continuous-deployment/deployment-operator/index.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/plural-features/continuous-deployment/deployment-operator/deployment-settings": {
     "relPath": "/plural-features/continuous-deployment/management-controller/deployment-settings.md",
-    "lastmod": "2026-06-26T10:42:27.000Z"
+    "lastmod": "2026-08-06T14:42:58.000Z"
   },
   "/deployments/operator/git-service": {
     "relPath": "/plural-features/continuous-deployment/git-service.md",
@@ -625,7 +645,7 @@
   },
   "/deployments/stacks": {
     "relPath": "/plural-features/stacks-iac-management/index.md",
-    "lastmod": "2026-07-15T09:31:13.000Z"
+    "lastmod": "2026-08-04T15:01:58.000Z"
   },
   "/service-catalog/creation": {
     "relPath": "/plural-features/service-catalog/creation.md",
@@ -697,10 +717,10 @@
   },
   "/management-api-reference": {
     "relPath": "/api-reference/kubernetes/management-api-reference.md",
-    "lastmod": "2026-06-10T12:45:04.000Z"
+    "lastmod": "2026-08-13T15:31:21.000Z"
   },
   "/agent-api-reference": {
     "relPath": "/api-reference/kubernetes/agent-api-reference.md",
-    "lastmod": "2026-06-10T12:45:04.000Z"
+    "lastmod": "2026-08-11T20:00:52.000Z"
   }
 }

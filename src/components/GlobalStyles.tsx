@@ -27,6 +27,13 @@ const GlobalStyles = createGlobalStyle(({ theme }) => ({
     color: 'unset',
     textDecoration: 'unset',
   },
+  '.primary-content table td': {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    alignContent: 'center',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+  },
   html: {
     ...fillAvailable('height'),
   },
