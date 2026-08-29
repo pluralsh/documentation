@@ -113,10 +113,10 @@ const oldDocIDtoRouteMap: Record<string, string> = {
     '/plural-features/service-catalog/contribution-program',
   plural_features_kubernetes_dashboard: '/plural-features/kubernetes-dashboard',
   plural_features_plural_ai: '/plural-features/plural-ai',
-  plural_features_plural_ai_setup: '/plural-features/plural-ai/setup',
-  plural_features_plural_ai_architecture:
-    '/plural-features/plural-ai/architecture',
-  plural_features_plural_ai_cost: '/plural-features/plural-ai/cost',
+  plural_features_plural_ai_setup:
+    '/plural-features/plural-ai/multi-model-configuration',
+  plural_features_plural_ai_architecture: '/plural-features/plural-ai',
+  plural_features_plural_ai_cost: '/plural-features/plural-ai',
   plural_features_pr_automation: '/plural-features/pr-automation',
   plural_features_pr_automation_crds: '/plural-features/pr-automation/crds',
   plural_features_pr_automation_testing:

@@ -5,7 +5,6 @@ description: Worked examples for alert RCA, Slack incident response, cost analys
 
 The patterns below each represent a complete workbench setup for a common operational need. For each one, the agent's behavior is shaped by [skills](/plural-features/workbenches/configuration#step-2-skills-configuration) — pre-built instruction documents from Plural's skills library, or custom runbooks from your own Git repository. You do not need to write a system prompt from scratch; attach the relevant skills for the use case and add a brief system prompt to orient the agent to your platform if needed.
 
----
 
 ## Alert root cause analysis
 
@@ -32,7 +31,6 @@ Navigate to **••• → Webhook trigger** and create a trigger on your Datad
 
 **Cron schedule (optional):** Add a `@daily` cron with a prompt asking for a summary of all alerts that fired in the last 24 hours and their current status, to get a morning digest.
 
----
 
 ## Slack incident channel creation
 
@@ -58,7 +56,6 @@ Create a trigger on your observability webhook targeting high-severity or produc
 The Slack bot token must have permission to create public channels and invite members. If your workspace requires admin approval for channel creation, coordinate with your Slack admin to pre-approve the bot.
 {% /callout %}
 
----
 
 ## Cost information and reporting
 
@@ -102,7 +99,6 @@ Because the workbench is also available for manual jobs, engineers can open it a
 * `Which EKS nodes are driving the most compute cost this week?`
 * `Is our staging environment spend unusually high right now?`
 
----
 
 ## Ticket-driven infrastructure self-service
 

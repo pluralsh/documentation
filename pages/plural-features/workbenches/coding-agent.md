@@ -9,7 +9,6 @@ The coding agent extends a workbench with the ability to read source code, propo
 
 Coding capabilities are optional. Workbenches that are purely operational (querying metrics, triaging alerts, summarizing Kubernetes state) do not need a coding agent configured.
 
----
 
 ## Prerequisites
 
@@ -23,7 +22,6 @@ See **[Configure an AgentRuntime](/plural-features/plural-ai/ai-agent)** for ful
 
 Once an `AgentRuntime` is deployed and set as `default: true` (or you have at least one runtime available), it will appear in the workbench coding agent step.
 
----
 
 ## Enabling the coding agent
 
@@ -62,7 +60,6 @@ This is useful for:
 
 With babysitting off, the agent opens a pull request and exits, leaving your normal review process to handle the rest.
 
----
 
 ## How coding shows up in job results
 
@@ -73,7 +70,6 @@ When a job completes with Write mode and the agent has opened pull requests, the
 ![](/assets/workbenches/workbench-conclusion-dashboard-prs.png)
 
 
----
 
 ## Combining coding with operational capabilities
 

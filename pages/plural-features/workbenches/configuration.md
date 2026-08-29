@@ -10,7 +10,6 @@ Before creating a workbench you need:
 * Any external tools (Datadog, Prometheus, GitHub, Slack, etc.) configured in **Workbenches → Integrations**. Tools can be added later, but it is easiest to have them ready before creating the workbench. See [Workbench tools](/plural-features/workbenches/tools).
 * If you plan to enable the coding agent, an `AgentRuntime` resource deployed to your management cluster. See [Configure an AgentRuntime](/plural-features/plural-ai/ai-agent/configure-agent).
 
----
 
 ## Creating a workbench
 
@@ -18,7 +17,6 @@ Navigate to **Workbenches** in the Plural Console sidebar and click **Create wor
 
 ![](/assets/workbenches/workbench-create-wizard.png)
 
----
 
 ## Step 1: Workbench setup
 
@@ -51,7 +49,6 @@ These capabilities give the agent access to Plural's own internal tooling — th
 The **Observability** capabilities use the backends you set up under [Observability Integration](/plural-features/observability). **Pod logs** is a separate, direct Kubernetes log stream — it works without any observability backend.
 {% /callout %}
 
----
 
 ## Step 2: Skills configuration
 
@@ -74,7 +71,6 @@ Skill files are fetched from Git at job start, so they stay current as your runb
 
 ![](/assets/workbenches/workbench-skills-step.png)
 
----
 
 ## Step 3: Coding agent
 
@@ -82,7 +78,6 @@ This step configures optional code-reading and code-writing capabilities. Skip i
 
 For detailed guidance on setting up and using the coding agent, see [Coding agent](/plural-features/workbenches/webhooks/coding-agent).
 
----
 
 ## Step 4: Access policy
 
@@ -93,7 +88,6 @@ Control who can view and trigger jobs.
 
 Bindings use the same user and group model as the rest of Plural. If you leave both lists empty, access falls through to the parent project's policy.
 
----
 
 ## Step 5: Attach tools
 
@@ -103,7 +97,6 @@ Attach only the tools this specific workbench needs. A tightly-scoped tool list 
 
 ![](/assets/workbenches/workbench-attach-tools-step.png)
 
----
 
 ## Running your first job
 
@@ -121,7 +114,6 @@ The agent will stream activities as it works and produce a structured conclusion
 * [Set up a cron schedule](/plural-features/workbenches/automation#cron-schedules) to run it automatically
 * [Add a webhook trigger](/plural-features/workbenches/automation#webhook-triggers) to fire it on alerts
 
----
 
 ## Editing a workbench
 

@@ -196,7 +196,7 @@ spec:
         key: openai
 ```
 
-For a complete AI configuration guide, see [Setup Plural AI](/plural-features/plural-ai/setup). For observability + AI together, see [Observability Configuration](/plural-features/observability).
+For a complete AI configuration guide, see [Set Up and Configure Plural AI](/plural-features/plural-ai/multi-model-configuration). For observability + AI together, see [Observability Configuration](/plural-features/observability).
 
 ### `reconciliation`
 
