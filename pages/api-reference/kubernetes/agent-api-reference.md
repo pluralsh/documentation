@@ -282,6 +282,7 @@ _Appears in:_
 | `agentTTL` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | AgentTTL configures the maximum lifetime for agent run pods on this runtime. When not provided, a default TTL of 12 hours will be used. |  | Optional: \{\} <br /> |
 | `scmConnection` _string_ | ScmConnection is the name of an ScmConnection in Console to use for git operations on agent runs using this runtime.<br />This should match the name of an existing ScmConnection resource or connection created in the Plural UI. |  | Optional: \{\} <br /> |
 | `exaConnection` _[ExaConnection](#exaconnection)_ | ExaConnection enables Exa web search and content retrieval tools on the Plural MCP server. |  |  |
+| `mcpServers` _[MCPServer](#mcpserver) array_ | MCPServers are additional remote MCP servers made available to coding agents<br />on this runtime. Servers are expected to already be deployed and reachable<br />at the given URL. Built-in servers named "plural" and "codebase-memory-mcp"<br />are reserved and cannot be overridden. |  | Optional: \{\} <br /> |
 
 
 #### Binding
@@ -585,7 +586,7 @@ _Appears in:_
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
-| `script` _string_ |  |  |  |
+| `script` _string_ | Script is a Lua health-assessment script. The target resource is available as the global `Obj`.<br />The script must assign a Lua table to the global `healthStatus`; a Lua `return \{ ... \}` is not consumed.<br />The table uses `status` and an optional `message`, for example: `healthStatus = \{ status = "Healthy", message = "resource is ready" \}`.<br />Supported/intended status values are `Healthy`, `Degraded`, `Paused`, `Unknown`, `Progressing`, `Suspended`, and `Missing`.<br />See https://docs.plural.sh/plural-features/continuous-deployment/deployment-operator/custom-health for the full guide. |  |  |
 | `group` _string_ |  |  | Optional: \{\} <br /> |
 | `version` _string_ |  |  | Optional: \{\} <br /> |
 | `kind` _string_ |  |  | Optional: \{\} <br /> |
@@ -849,6 +850,43 @@ _Appears in:_
 | `kubecostPort` _integer_ |  |  | Optional: \{\} <br /> |
 | `recommendationThreshold` _string_ | RecommendationThreshold float value for example: `1.2 or 0.001` |  |  |
 | `recommendationsSettings` _[RecommendationsSettings](#recommendationssettings)_ |  |  | Optional: \{\} <br /> |
+
+
+#### MCPServer
+
+
+
+MCPServer is a remote MCP server exposed to agent runtimes.
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the MCP server identifier used by the coding agent. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `url` _string_ | URL is the remote streamable HTTP MCP endpoint. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `allowedTools` _string array_ | AllowedTools is an optional allowlist of tool names from this server.<br />When omitted or empty, all tools advertised by the server are exposed. |  | Optional: \{\} <br /> |
+| `headers` _[MCPServerHeader](#mcpserverheader) array_ | Headers are HTTP headers sent with requests to this MCP server.<br />Each header must set exactly one of value or valueFrom. |  | Optional: \{\} <br /> |
+
+
+#### MCPServerHeader
+
+
+
+MCPServerHeader is an HTTP header for a remote MCP server.
+
+
+
+_Appears in:_
+- [MCPServer](#mcpserver)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the HTTP header name. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `value` _string_ | Value is a literal header value. |  | Optional: \{\} <br /> |
+| `valueFrom` _[EnvVarSource](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#envvarsource-v1-core)_ | ValueFrom sources the header value the same way as a pod env var. |  | Optional: \{\} <br /> |
 
 
 #### MetricsAggregate
