@@ -1,9 +1,60 @@
 ---
-title: Configure Against Multiple Providers
-description: How to mix and match models to optimize cost and performance
+title: Set Up and Configure Plural AI
+description: Configure Plural AI and mix models to optimize cost and performance
 ---
 
 The current state of GenerativeAI is a sprawl of vendors offering products with different specialties and price points, and its common to have an optimal AI setup involve usage of models across multiple different vendors or multiple models within the same vendor.  Plural provides a number of knobs that are designed to make that degree of customization seamless, and compatible w/in a GitOps workflow.
+
+## Set Up Plural AI
+
+Plural AI can be configured through **Settings → AI settings** in the Plural Console or with the `DeploymentSettings` CRD. If you installed Plural with `plural up`, the resource is already defined at `bootstrap/settings.yaml`.
+
+For a basic OpenAI configuration, create a credential secret and reference it from `DeploymentSettings`:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ai-config
+  namespace: plrl-deploy-operator
+stringData:
+  openai: <access-token>
+---
+apiVersion: deployments.plural.sh/v1alpha1
+kind: DeploymentSettings
+metadata:
+  name: global
+  namespace: plrl-deploy-operator
+spec:
+  ai:
+    enabled: true
+    provider: OPENAI
+    openAI:
+      tokenSecretRef:
+        name: ai-config
+        key: openai
+```
+
+Provider credentials are always read from secrets in the `plrl-deploy-operator` namespace. Use additional keys in the same secret when configuring other providers:
+
+```yaml
+apiVersion: v1
+kind: Secret
+metadata:
+  name: ai-config
+  namespace: plrl-deploy-operator
+stringData:
+  openai: <access-token>
+  anthropic: <access-token>
+  azure: <access-token>
+  vertex: <service-account-json>
+```
+
+{% callout severity="warning" %}
+Never commit provider credentials to Git in plain text. Encrypt the secret with your organization's preferred secret-management workflow before storing it in a GitOps repository.
+{% /callout %}
+
+The full `DeploymentSettings` schema is available in the [Management API reference](/api-reference/kubernetes/management-api-reference#deploymentsettingsspec).
 
 ## Provider Selection within Plural AI
 
@@ -15,7 +66,32 @@ There are three main usecases where we can differentiate models:
 
 Often toggling these individual can give you the best cost/feature tradeoff for your usecase.
 
-## Example Configuration
+## Configure Models in the Console
+
+You can configure the same multi-provider setup from the Plural Console:
+
+1. Go to **Settings → AI settings**.
+2. Open the **AI providers** tab.
+3. Click **Connect provider**, select a provider, and enter its credentials and model configuration.
+4. Repeat for each LLM or embedding provider you want Plural to use. Use the edit button beside an existing provider to change its configuration.
+
+![Configured AI providers in Plural Console](/assets/ai/ai-providers.png)
+
+After connecting your providers, open the **Model routing** tab. Select the provider Plural should use for each role:
+
+* **Chat model** for low-compute chat and completion use cases.
+* **Embedding model** for indexing Kubernetes and IaC state for semantic search.
+* **Tool model** for complex agentic inference and tool calling.
+
+![Model routing configuration in Plural Console](/assets/ai/model-routing.png)
+
+Models are configured on each provider in the **AI providers** tab. Model routing pins a provider to each role and displays the model that role will use. If a role-specific model is not configured, the router falls back to that provider's default model.
+
+{% callout severity="info" %}
+Use the **Disable AI in Plural** toggle on the AI providers page to turn off AI features globally. For reproducible and auditable configuration, prefer the GitOps workflow below.
+{% /callout %}
+
+## Configure Multiple Providers with DeploymentSettings
 
 To tune your AI configuration, the recommended approach is to do it within a GitOps workflow using our `DeploymentSettings` Kubernetes CRD.  If you set up Plural with `plural up`, this will already be defined for you at `bootstrap/settings.yaml`.  Here's a basically complete example of how to configure its AI model settings:
 
@@ -63,23 +139,6 @@ spec:
         name: ai-config
         key: vertex
 ```
-
-{% callout severity="info" %}
-All the secretRef's below reference a kubernetes secret defined like:
-
-```yaml
-apiVersion: v1
-kind: Secret
-metadata:
-    namespace: plrl-deploy-operator
-    name: ai-config
-stringData:
-  openai: ...
-  anthropic: ...
-  azure: ...
-  vertex: ...
-```
-{% /callout %}
 
 ## Model Selection Logic
 
@@ -134,4 +193,4 @@ Configuring a default model is usually optional, we chose sane defaults for all 
 
 ## Learn More
 
-You can see the full docs for this resource at our [Agent API docs](https://docs.plural.sh/overview/management-api-reference#deploymentsettingsspec)
+See the complete [`DeploymentSettings` schema](/api-reference/kubernetes/management-api-reference#deploymentsettingsspec) in the Management API reference.

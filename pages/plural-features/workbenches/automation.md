@@ -13,7 +13,6 @@ Workbenches can run jobs automatically through several mechanisms:
 
 Cron schedules and webhook triggers are managed from the overflow menu (**•••**) on a workbench. Follow-up prompts are configured in your source control or CI automation.
 
----
 
 ## Cron schedules
 
@@ -43,7 +42,6 @@ Cron expressions use UTC. The UI shows a preview of upcoming fire times in your 
 
 The **Cron schedules** page lists all schedules for the workbench. Click the pencil icon to edit a schedule or the trash icon to delete it.
 
----
 
 ## Webhook triggers
 
@@ -104,7 +102,6 @@ Each webhook source has its own setup guide available during trigger creation. C
 3. Configure the URL and secret in your alerting tool or issue tracker
 4. Send a test payload to verify connectivity
 
----
 
 ## Post-merge follow-up jobs
 
@@ -112,7 +109,6 @@ When a workbench opens a pull request, a GitHub Actions workflow can send a foll
 
 See [Automating workbench follow-up](/plural-features/workbenches/follow-up-automation) for provider-specific setup. The current guide includes authentication, inputs, and a complete GitHub Actions workflow.
 
----
 
 ## Flow-triggered jobs
 

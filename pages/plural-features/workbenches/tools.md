@@ -11,7 +11,6 @@ Navigate to **Workbenches → Integrations** to browse the available tool types,
 
 ![](/assets/workbenches/workbench-tools-list.png)
 
----
 
 ## Tool types
 
@@ -92,7 +91,6 @@ The agent is also always equipped with a **calculator tool** that evaluates arit
 | **HTTP** | A custom REST endpoint. You define the request shape (URL, method, headers, body, JSON schema) and the agent can call it as a named tool |
 | **MCP** | Any [Model Context Protocol](https://modelcontextprotocol.io) server. Plural handles authentication and audit-logs every call |
 
----
 
 ## Creating a tool
 
@@ -106,16 +104,34 @@ Each tool type has a setup form for its required credentials (API keys, endpoint
 
 Once saved, the tool appears in **Workbenches → Configured tools** and can be attached to any workbench.
 
----
 
 ## Attaching tools to a workbench
 
 Tools are attached to workbenches during creation (Step 5) or via **Edit** on an existing workbench. A workbench can only call the tools explicitly attached to it — this gives you fine-grained control over what each agent can reach.
 
----
 
-## Tool RBAC
+## Tool policies
 
-Each tool has its own **read** and **write bindings**. Users or groups without at least read access to a tool cannot attach it to their workbenches. This is particularly useful for restricting access to production cloud connections or sensitive API credentials.
+Tools are governed in two layers: who can attach and edit the tool, and what the agent is allowed to do when it calls the tool during a job.
 
-Tool permissions are configured by navigating to a tool in **Workbenches → Configured tools** and clicking **Edit**.
+### Access policy
+
+Each tool has its own **read** and **write bindings**:
+
+* **Read permissions** control who can see the tool and attach it to a workbench
+* **Write permissions** control who can modify the tool configuration and access policy
+
+Users or groups without at least read access cannot attach the tool to their workbenches. This is particularly useful for restricting production cloud connections or sensitive API credentials.
+
+Configure bindings by opening a tool in **Workbenches → Configured tools** and clicking **Edit**. If both lists are empty, access falls through to the parent project's policy.
+
+Built-in tools also enforce authorization against the resource they access at execution time. For example, Kubernetes tools federate the user running the job to the target cluster using their Console email and groups. The Kubernetes API server then applies that identity's native RBAC rules to each request. Attaching or enabling a built-in tool therefore does not give the agent broader access than the user already has.
+
+### Workbench policies
+
+[Workbench policies](/plural-features/policy-management/workbench-policies) evaluate each matching tool call the agent makes. They extend tool access bindings with Rego rules that can:
+
+* **Deny** a call based on the actor, tool name, and arguments — for example, blocking deletes in `kube-system`
+* **Automatically approve** a call that would otherwise wait for human approval
+
+A policy cannot make an unavailable tool accessible or grant permissions the actor does not already have. Attach a policy to a workbench (optionally scoped to selected tool names) from **Security → Policies**, or use a binding policy to attach it automatically. See [Workbench policies](/plural-features/policy-management/workbench-policies) for the input schema, decision model, and examples, and [Simulating and testing policies](/plural-features/policy-management/simulating-policies) to inspect real tool-call inputs before writing rules.

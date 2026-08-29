@@ -12,7 +12,6 @@ A workbench job is a single execution of the workbench agent against a prompt. I
 
 Jobs can be started manually from the UI, by a [cron schedule](/plural-features/workbenches/automation#cron-schedules), by a [webhook trigger](/plural-features/workbenches/automation#webhook-triggers), or from a [Plural Flow](/plural-features/flows). You can also trigger a job by writing `Plural fix this` or `Plural deploy this` (or any instruction prefixed with "Plural") in a Jira ticket, GitHub PR comment, or other connected issue source — see [Triggering jobs with "Plural" mentions](/plural-features/workbenches/automation#triggering-jobs-with-plural-mentions).
 
----
 
 ## Starting a job manually
 
@@ -24,7 +23,6 @@ Open a workbench, select the **Launch** tab, and type your prompt into the new-j
 
 Frequently-used prompts can be saved under **•••  → Saved prompts** so your team can launch common investigations without retyping. When starting a job, select a saved prompt from the dropdown to pre-fill the prompt field.
 
----
 
 ## The Jobs tab
 
@@ -32,7 +30,6 @@ The **Jobs** tab on each workbench shows all runs in reverse-chronological order
 
 You can filter the list to show only jobs triggered by an **alert** or **issue** using the filter controls at the top of the table.
 
----
 
 ## Job detail: activities
 
@@ -49,7 +46,6 @@ While a job is running, activities stream in real time. You do not need to refre
 
 ![](/assets/workbenches/workbench-job-activities.png)
 
----
 
 ## Job detail: result
 
@@ -63,7 +59,6 @@ Once a job completes, the **Result** panel appears on the right side of the job 
 
 ![](/assets/workbenches/workbench-job-result.png)
 
----
 
 ## Canvas view
 
@@ -77,7 +72,6 @@ And here is one for an alert analysis:
 
 ![](/assets/workbenches/metrics-canvas.png)
 
----
 
 ## Alerts and issues tabs
 
@@ -85,7 +79,6 @@ If your workbench has [webhook triggers](/plural-features/workbenches/automation
 
 This gives you an at-a-glance view of how automated incident response is performing without having to dig through the full job list.
 
----
 
 ## Re-running a job
 

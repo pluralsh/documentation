@@ -67,6 +67,7 @@ export const docsStructure: DocSection[] = [
         title: 'Advanced configuration',
         sections: [
           { path: 'sandboxing', title: 'Sandboxing your cluster' },
+          { path: 'edge-configuration', title: 'Edge configuration' },
           { path: 'network-configuration', title: 'Network configuration' },
           { path: 'private-ca', title: 'Handling private CAs' },
         ],
@@ -211,54 +212,6 @@ export const docsStructure: DocSection[] = [
           { path: 'contribution-program', title: 'Contribution program' },
         ],
       },
-      { path: 'kubernetes-dashboard', title: 'Kubernetes dashboard' },
-      {
-        path: 'plural-ai',
-        title: 'Plural AI',
-        sections: [
-          { path: 'setup', title: 'Setup Plural AI' },
-          { path: 'architecture', title: 'Plural AI Architecture' },
-          {
-            path: 'ai-agent',
-            title: 'AI Background Agent',
-            sections: [
-              {
-                path: 'configure-agent',
-                title: 'Agent configuration and usage',
-              },
-              {
-                path: 'remote-browser',
-                title: 'Remote browser setup',
-              },
-            ],
-          },
-          {
-            path: 'sentinels',
-            title: 'At-Scale Infrastructure Testing with Sentinels',
-          },
-          { path: 'arch-diagram', title: 'Infrastructure Deep Research' },
-          { path: 'cost', title: 'Plural AI cost analysis' },
-          {
-            path: 'multi-model-configuration',
-            title: 'Configure Against Multiple Providers',
-          },
-        ],
-      },
-      {
-        path: 'flows',
-        title: 'Plural Flows',
-        sections: [
-          { path: 'create-a-flow', title: 'Create a flow' },
-          { path: 'flow-ai', title: 'Plural AI and Flows' },
-          { path: 'preview-environments', title: 'Preview Environments' },
-          { path: 'mcp', title: 'Flow MCP Server Integration' },
-          { path: 'mcp-auth', title: 'Flow MCP Server Authentication' },
-          {
-            path: 'scm-webhooks-and-pr-linking',
-            title: 'SCM webhooks and PR linking',
-          },
-        ],
-      },
       {
         path: 'workbenches',
         title: 'Workbenches',
@@ -290,6 +243,50 @@ export const docsStructure: DocSection[] = [
             title: 'Simulating and testing policies',
           },
           { path: 'common-use-cases', title: 'Common use cases' },
+        ],
+      },
+      { path: 'kubernetes-dashboard', title: 'Kubernetes dashboard' },
+      {
+        path: 'plural-ai',
+        title: 'Plural AI',
+        sections: [
+          {
+            path: 'ai-agent',
+            title: 'AI Background Agent',
+            sections: [
+              {
+                path: 'configure-agent',
+                title: 'Agent configuration and usage',
+              },
+              {
+                path: 'remote-browser',
+                title: 'Remote browser setup',
+              },
+            ],
+          },
+          {
+            path: 'sentinels',
+            title: 'At-Scale Infrastructure Testing with Sentinels',
+          },
+          {
+            path: 'multi-model-configuration',
+            title: 'Set Up and Configure Plural AI',
+          },
+        ],
+      },
+      {
+        path: 'flows',
+        title: 'Plural Flows',
+        sections: [
+          { path: 'create-a-flow', title: 'Create a flow' },
+          { path: 'flow-ai', title: 'Plural AI and Flows' },
+          { path: 'preview-environments', title: 'Preview Environments' },
+          { path: 'mcp', title: 'Flow MCP Server Integration' },
+          { path: 'mcp-auth', title: 'Flow MCP Server Authentication' },
+          {
+            path: 'scm-webhooks-and-pr-linking',
+            title: 'SCM webhooks and PR linking',
+          },
         ],
       },
       {
@@ -568,17 +565,37 @@ export const redirects = [
   },
   {
     source: '/ai/setup',
-    destination: '/plural-features/plural-ai/setup',
+    destination: '/plural-features/plural-ai/multi-model-configuration',
+    permanent: true,
+  },
+  {
+    source: '/plural-features/plural-ai/setup',
+    destination: '/plural-features/plural-ai/multi-model-configuration',
     permanent: true,
   },
   {
     source: '/ai/architecture',
-    destination: '/plural-features/plural-ai/architecture',
+    destination: '/plural-features/plural-ai',
     permanent: true,
   },
   {
     source: '/ai/cost',
-    destination: '/plural-features/plural-ai/cost',
+    destination: '/plural-features/plural-ai',
+    permanent: true,
+  },
+  {
+    source: '/plural-features/plural-ai/architecture',
+    destination: '/plural-features/plural-ai',
+    permanent: true,
+  },
+  {
+    source: '/plural-features/plural-ai/arch-diagram',
+    destination: '/plural-features/plural-ai',
+    permanent: true,
+  },
+  {
+    source: '/plural-features/plural-ai/cost',
+    destination: '/plural-features/plural-ai',
     permanent: true,
   },
   {
