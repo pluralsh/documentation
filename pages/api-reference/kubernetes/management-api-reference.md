@@ -372,6 +372,23 @@ _Appears in:_
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: \{\} <br /> |
 
 
+#### BedrockModelSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [BedrockSettings](#bedrocksettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `modelId` _string_ | ModelID is the foundation model served by the application inference profile. |  | Required: \{\} <br /> |
+| `inferenceProfileArn` _string_ | InferenceProfileARN is the full ARN of the Bedrock application inference profile. |  | Required: \{\} <br /> |
+
+
 #### BedrockSettings
 
 
@@ -388,12 +405,14 @@ _Appears in:_
 | `modelId` _string_ | ModelID is the primary AWS Bedrock model or inference profile identifier.<br />Use a egional inference profile ID with three dot-separated segments (e.g. us.anthropic.claude-3-5-sonnet-20241022-v2:0,<br />global.anthropic.claude-haiku-4-5-20251001-v1:0). |  | Optional: \{\} <br /> |
 | `toolModelId` _string_ | ToolModelId is the Bedrock model or inference profile for tool calling. Same ID formats as modelId. |  | Optional: \{\} <br /> |
 | `embeddingModel` _string_ | EmbeddingModel is the Bedrock model or inference profile for embeddings. Same ID formats as modelId. |  | Optional: \{\} <br /> |
+| `endpoint` _[BedrockEndpoint](#bedrockendpoint)_ | Endpoint selects the AWS Bedrock API surface. RUNTIME (the default) uses InvokeModel or<br />Converse on bedrock-runtime; MANTLE uses the Bedrock Mantle Anthropic/OpenAI-compatible APIs. | RUNTIME | Enum: [RUNTIME MANTLE] <br />Optional: \{\} <br /> |
 | `proxyModels` _string array_ | ProxyModels lists additional Bedrock model or inference profile IDs exposed through the Nexus<br />OpenAI-compatible proxy beyond modelId, toolModelId, and embeddingModel. Same ID formats as modelId. |  | Optional: \{\} <br /> |
 | `region` _string_ | Region is the AWS region the model is hosted in |  | Required: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Optional: \{\} <br /> |
 | `awsAccessKeyId` _string_ | AWS Access Key ID to use for authentication |  | Optional: \{\} <br /> |
 | `awsSecretAccessKeyRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | AWS Secret Access Key to use for authentication |  | Optional: \{\} <br /> |
 | `deployments` _object (keys:string, values:string)_ | Deployments is deprecated for most configurations: prefer regional-prefixed inference profile IDs in<br />modelId, toolModelId, embeddingModel, or proxyModels (Nexus infers Bifrost aliases automatically).<br />Still needed when clients use a logical model name that must resolve to a different Bedrock identifier,<br />for application inference profile resource IDs (use the profile resource suffix, not the full ARN),<br />or other explicit alias overrides. Maps client-facing model ID to inference profile ID. Example:<br />\{"anthropic.claude-3-5-sonnet-20241022-v2:0": "us.anthropic.claude-3-5-sonnet-20241022-v2:0"\} |  | Optional: \{\} <br /> |
+| `modelSettings` _[BedrockModelSettings](#bedrockmodelsettings) array_ | ModelSettings configures per-model Bedrock options, including application inference profiles. |  | Optional: \{\} <br /> |
 
 
 #### Binding
@@ -3324,6 +3343,7 @@ _Appears in:_
 | `flows` _[PersonaFlows](#personaflows)_ | Flows controls access to flow-related features and sections.<br />This includes workbenches, pipelines, and preview environments grouped under flows. |  | Optional: \{\} <br /> |
 | `sidebar` _[PersonaSidebar](#personasidebar)_ | Sidebar configures which navigation items and sections are visible in the main sidebar.<br />This allows personas to have streamlined navigation focused on their primary workflows<br />while hiding irrelevant or restricted functionality. |  | Optional: \{\} <br /> |
 | `services` _[PersonaServices](#personaservices)_ | Services controls access to service-specific features and configuration options.<br />This includes service configuration, secrets management, and other service-level operations. |  | Optional: \{\} <br /> |
+| `settings` _[PersonaSettings](#personasettings)_ | Settings controls which tabs are visible within the Console settings page.<br />Tabs are visible by default and can be hidden by explicitly setting them to false. |  | Optional: \{\} <br /> |
 | `ai` _[PersonaAI](#personaai)_ | AI configures access to AI-powered features and capabilities within the Console.<br />This includes AI-assisted operations, automated suggestions, and other intelligent features. |  | Optional: \{\} <br /> |
 
 
@@ -3409,6 +3429,31 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `secrets` _boolean_ | Secrets enables access to service secrets management when set to true.<br />This includes viewing, creating, and modifying secrets associated with services.<br />Typically restricted to platform engineers and senior developers who need<br />to manage service authentication and configuration secrets. |  | Optional: \{\} <br /> |
 | `configuration` _boolean_ | Configuration enables access to service configuration management when set to true.<br />This includes modifying service deployment settings, environment variables,<br />and other configuration parameters that affect service behavior. |  | Optional: \{\} <br /> |
+
+
+#### PersonaSettings
+
+
+
+PersonaSettings defines the visibility of tabs on the Console settings page.
+
+
+
+_Appears in:_
+- [PersonaConfiguration](#personaconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `userManagement` _boolean_ |  |  | Optional: \{\} <br /> |
+| `global` _boolean_ |  |  | Optional: \{\} <br /> |
+| `ai` _boolean_ |  |  | Optional: \{\} <br /> |
+| `webhooks` _boolean_ |  |  | Optional: \{\} <br /> |
+| `chatbots` _boolean_ |  |  | Optional: \{\} <br /> |
+| `cloudConnections` _boolean_ |  |  | Optional: \{\} <br /> |
+| `projects` _boolean_ |  |  | Optional: \{\} <br /> |
+| `notifications` _boolean_ |  |  | Optional: \{\} <br /> |
+| `audits` _boolean_ |  |  | Optional: \{\} <br /> |
+| `accessTokens` _boolean_ |  |  | Optional: \{\} <br /> |
 
 
 #### PersonaSidebar
@@ -4900,6 +4945,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `email` _string_ | Email address that will be bound to this service account for identification<br />and authentication purposes. This email serves as the unique identifier<br />for the service account within the Console API. |  | Required: \{\} <br />Type: string <br /> |
+| `allowedScopes` _string array_ | AllowedScopes define the Console API endpoints that can be granted to access<br />tokens created for this service account. An empty list imposes no restriction. |  | Optional: \{\} <br /> |
 | `scopes` _[ServiceAccountScope](#serviceaccountscope) array_ | Scopes define the access boundaries for this service account, controlling<br />which Console APIs and resources it can interact with. Each scope can restrict<br />access to specific API endpoints and resource identifiers, enabling fine-grained<br />permission control for automated processes. |  | Optional: \{\} <br /> |
 | `tokenExpiry` _string_ | TokenExpiry is the TTL of the access token, e.g. 1h, 1d, 1w |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | TokenSecretRef references a Kubernetes secret that should contain the<br />authentication token for this service account. This enables secure storage<br />and management of credentials within the cluster. |  | Optional: \{\} <br /> |
@@ -6103,6 +6149,7 @@ _Appears in:_
 | `opensearch` _[WorkbenchToolOpensearchConfig](#workbenchtoolopensearchconfig)_ | AWS OpenSearch connection (logs). |  | Optional: \{\} <br /> |
 | `prometheus` _[WorkbenchToolPrometheusConfig](#workbenchtoolprometheusconfig)_ | Prometheus connection (metrics). |  | Optional: \{\} <br /> |
 | `loki` _[WorkbenchToolLokiConfig](#workbenchtoollokiconfig)_ | Loki connection (logs). |  | Optional: \{\} <br /> |
+| `victoriaLogs` _[WorkbenchToolVictoriaLogsConfig](#workbenchtoolvictorialogsconfig)_ | VictoriaLogs connection (logs). |  | Optional: \{\} <br /> |
 | `tempo` _[WorkbenchToolTempoConfig](#workbenchtooltempoconfig)_ | Tempo connection (traces). |  | Optional: \{\} <br /> |
 | `jaeger` _[WorkbenchToolJaegerConfig](#workbenchtooljaegerconfig)_ | Jaeger connection (traces). |  | Optional: \{\} <br /> |
 | `splunk` _[WorkbenchToolSplunkConfig](#workbenchtoolsplunkconfig)_ | Splunk connection (logs). |  | Optional: \{\} <br /> |
@@ -6475,7 +6522,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | The name of the tool (a-z, 0-9, underscores). If not set, metadata.name is used. |  | Optional: \{\} <br />Pattern: `^[a-z0-9_]+$` <br />Type: string <br /> |
-| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER EXA GITHUB SLACK TEAMS GITLAB BITBUCKET BITBUCKET_DATACENTER AZURE_DEVOPS PAGERDUTY OPENSEARCH LAMBDA CLOUD_RUN AZURE_FUNCTION DOCKER] <br />Required: \{\} <br /> |
+| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER EXA GITHUB SLACK TEAMS GITLAB BITBUCKET BITBUCKET_DATACENTER AZURE_DEVOPS PAGERDUTY OPENSEARCH LAMBDA CLOUD_RUN AZURE_FUNCTION DOCKER VICTORIA_LOGS] <br />Required: \{\} <br /> |
 | `categories` _WorkbenchToolCategory array_ | Categories for the tool. |  | Optional: \{\} <br /> |
 | `approval` _boolean_ | Whether this tool requires approval before execution. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The project for this tool. |  | Optional: \{\} <br /> |
@@ -6501,7 +6548,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `url` _string_ | Splunk base URL. |  | Required: \{\} <br /> |
-| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the bearer token. |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the authentication token. |  | Optional: \{\} <br /> |
+| `tokenType` _[SplunkTokenType](#splunktokentype)_ | Authorization realm used for token authentication. | BEARER | Enum: [BEARER SPLUNK] <br />Optional: \{\} <br /> |
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 
@@ -6542,6 +6590,27 @@ _Appears in:_
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 | `tenantId` _string_ | Optional tenant id. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolVictoriaLogsConfig
+
+
+
+WorkbenchToolVictoriaLogsConfig defines a VictoriaLogs connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | VictoriaLogs base URL. |  | Required: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the bearer token or api key. |  | Optional: \{\} <br /> |
+| `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
+| `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
+| `accountId` _string_ | Optional AccountID tenant header. |  | Optional: \{\} <br /> |
+| `projectId` _string_ | Optional ProjectID tenant header. |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchWebhook
