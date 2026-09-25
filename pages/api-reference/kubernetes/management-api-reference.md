@@ -21,6 +21,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [ComplianceReportGenerator](#compliancereportgenerator)
 - [CustomCompatibilityMatrix](#customcompatibilitymatrix)
 - [CustomStackRun](#customstackrun)
+- [Dashboard](#dashboard)
 - [DeploymentSettings](#deploymentsettings)
 - [FederatedCredential](#federatedcredential)
 - [Flow](#flow)
@@ -32,6 +33,7 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [InfrastructureStack](#infrastructurestack)
 - [MCPServer](#mcpserver)
 - [ManagedNamespace](#managednamespace)
+- [Monitor](#monitor)
 - [NamespaceCredentials](#namespacecredentials)
 - [NotificationRouter](#notificationrouter)
 - [NotificationSink](#notificationsink)
@@ -372,6 +374,23 @@ _Appears in:_
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Required: \{\} <br /> |
 
 
+#### BedrockModelSettings
+
+
+
+
+
+
+
+_Appears in:_
+- [BedrockSettings](#bedrocksettings)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `modelId` _string_ | ModelID is the foundation model served by the application inference profile. |  | Required: \{\} <br /> |
+| `inferenceProfileArn` _string_ | InferenceProfileARN is the full ARN of the Bedrock application inference profile. |  | Required: \{\} <br /> |
+
+
 #### BedrockSettings
 
 
@@ -388,12 +407,14 @@ _Appears in:_
 | `modelId` _string_ | ModelID is the primary AWS Bedrock model or inference profile identifier.<br />Use a egional inference profile ID with three dot-separated segments (e.g. us.anthropic.claude-3-5-sonnet-20241022-v2:0,<br />global.anthropic.claude-haiku-4-5-20251001-v1:0). |  | Optional: \{\} <br /> |
 | `toolModelId` _string_ | ToolModelId is the Bedrock model or inference profile for tool calling. Same ID formats as modelId. |  | Optional: \{\} <br /> |
 | `embeddingModel` _string_ | EmbeddingModel is the Bedrock model or inference profile for embeddings. Same ID formats as modelId. |  | Optional: \{\} <br /> |
+| `endpoint` _[BedrockEndpoint](#bedrockendpoint)_ | Endpoint selects the AWS Bedrock API surface. RUNTIME (the default) uses InvokeModel or<br />Converse on bedrock-runtime; MANTLE uses the Bedrock Mantle Anthropic/OpenAI-compatible APIs. | RUNTIME | Enum: [RUNTIME MANTLE] <br />Optional: \{\} <br /> |
 | `proxyModels` _string array_ | ProxyModels lists additional Bedrock model or inference profile IDs exposed through the Nexus<br />OpenAI-compatible proxy beyond modelId, toolModelId, and embeddingModel. Same ID formats as modelId. |  | Optional: \{\} <br /> |
 | `region` _string_ | Region is the AWS region the model is hosted in |  | Required: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef is a reference to the local secret holding the token to access<br />the configured AI provider. |  | Optional: \{\} <br /> |
 | `awsAccessKeyId` _string_ | AWS Access Key ID to use for authentication |  | Optional: \{\} <br /> |
 | `awsSecretAccessKeyRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | AWS Secret Access Key to use for authentication |  | Optional: \{\} <br /> |
 | `deployments` _object (keys:string, values:string)_ | Deployments is deprecated for most configurations: prefer regional-prefixed inference profile IDs in<br />modelId, toolModelId, embeddingModel, or proxyModels (Nexus infers Bifrost aliases automatically).<br />Still needed when clients use a logical model name that must resolve to a different Bedrock identifier,<br />for application inference profile resource IDs (use the profile resource suffix, not the full ARN),<br />or other explicit alias overrides. Maps client-facing model ID to inference profile ID. Example:<br />\{"anthropic.claude-3-5-sonnet-20241022-v2:0": "us.anthropic.claude-3-5-sonnet-20241022-v2:0"\} |  | Optional: \{\} <br /> |
+| `modelSettings` _[BedrockModelSettings](#bedrockmodelsettings) array_ | ModelSettings configures per-model Bedrock options, including application inference profiles. |  | Optional: \{\} <br /> |
 
 
 #### Binding
@@ -1436,6 +1457,131 @@ _Appears in:_
 | `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource.<br />Controls drift detection and reconciliation intervals. |  | Optional: \{\} <br /> |
 
 
+#### Dashboard
+
+
+
+Dashboard represents an observability dashboard owned by a Workbench. It consists of graphs
+arranged on a grid, each backed by an observability tool datasource, and optional user-configurable inputs.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `Dashboard` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[DashboardSpec](#dashboardspec)_ | Spec defines the desired state of the Dashboard. |  | Required: \{\} <br /> |
+
+
+#### DashboardDatasource
+
+
+
+DashboardDatasource defines an observability tool call used to fetch dashboard data.
+
+
+
+_Appears in:_
+- [DashboardGraph](#dashboardgraph)
+- [DashboardInput](#dashboardinput)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `type` _[DashboardDatasourceType](#dashboarddatasourcetype)_ | Type is the kind of data returned by the datasource. |  | Enum: [LOGS METRICS TRACES LABELS] <br />Required: \{\} <br /> |
+| `tool` _string_ | Tool is the name of the observability tool used to fetch the data. |  | MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+| `input` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Input is passed to the observability tool. |  | Required: \{\} <br /> |
+
+
+#### DashboardGraph
+
+
+
+DashboardGraph is a single graph placed on the dashboard grid.
+
+
+
+_Appears in:_
+- [DashboardSpec](#dashboardspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `identifier` _string_ | Identifier is a stable identifier unique within the dashboard. |  | MaxLength: 128 <br />MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+| `title` _string_ | Title is the graph title. |  | Optional: \{\} <br />Type: string <br /> |
+| `description` _string_ | Description is an optional graph description. |  | Optional: \{\} <br />Type: string <br /> |
+| `type` _[DashboardGraphType](#dashboardgraphtype)_ | Type is the graph visualization type. |  | Enum: [TIMESERIES GAUGE LOGS MARKDOWN TABLE STAT BAR PIE HEATMAP TRACES SECTION] <br />MaxLength: 16 <br />Required: \{\} <br />Type: string <br /> |
+| `sectionId` _string_ | SectionID is the identifier of the SECTION graph containing this graph. Sections cannot be nested. |  | MaxLength: 128 <br />Optional: \{\} <br />Type: string <br /> |
+| `markdown` _string_ | Markdown is the content for MARKDOWN graphs. |  | Optional: \{\} <br />Type: string <br /> |
+| `options` _[RawExtension](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#rawextension-runtime-pkg)_ | Options are visualization-specific display options. Sections may set collapsed. |  | Optional: \{\} <br /> |
+| `layout` _[DashboardGraphLayout](#dashboardgraphlayout)_ | Layout is the grid position and size of the graph. |  | Required: \{\} <br /> |
+| `datasource` _[DashboardDatasource](#dashboarddatasource)_ | Datasource is the tool call used to fetch external data. |  | Optional: \{\} <br /> |
+
+
+#### DashboardGraphLayout
+
+
+
+DashboardGraphLayout defines the grid position and size of a graph.
+
+
+
+_Appears in:_
+- [DashboardGraph](#dashboardgraph)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `x` _integer_ | X is the zero-based horizontal grid coordinate. |  | Minimum: 0 <br />Required: \{\} <br /> |
+| `y` _integer_ | Y is the zero-based vertical grid coordinate. |  | Minimum: 0 <br />Required: \{\} <br /> |
+| `w` _integer_ | W is the width in grid columns. |  | Minimum: 1 <br />Required: \{\} <br /> |
+| `h` _integer_ | H is the height in grid rows. |  | Minimum: 1 <br />Required: \{\} <br /> |
+
+
+#### DashboardInput
+
+
+
+DashboardInput is a user-configurable dashboard variable.
+
+
+
+_Appears in:_
+- [DashboardSpec](#dashboardspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the variable name referenced by graph datasource inputs. |  | MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+| `label` _string_ | Label is a human-readable input label. |  | Optional: \{\} <br />Type: string <br /> |
+| `description` _string_ | Description is an optional input description. |  | Optional: \{\} <br />Type: string <br /> |
+| `type` _[DashboardInputType](#dashboardinputtype)_ | Type is the input control type. |  | Enum: [TEXT NUMBER BOOLEAN SELECT TIME_RANGE] <br />Required: \{\} <br /> |
+| `default` _string_ | Default is the default input value. |  | Optional: \{\} <br />Type: string <br /> |
+| `options` _string array_ | Options are the allowed values for select inputs. |  | Optional: \{\} <br /> |
+| `required` _boolean_ | Required defines whether a value is required when rendering. |  | Optional: \{\} <br /> |
+| `datasource` _[DashboardDatasource](#dashboarddatasource)_ | Datasource is the tool query used to populate input options, such as metric label search. |  | Optional: \{\} <br /> |
+
+
+#### DashboardSpec
+
+
+
+DashboardSpec defines the desired state of a Dashboard.
+
+
+
+_Appears in:_
+- [Dashboard](#dashboard)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `workbenchRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ | WorkbenchRef references the Workbench that owns this dashboard.<br />The Workbench must be in the same namespace as the dashboard.<br />It is immutable, a dashboard cannot be moved to a different workbench. |  | Required: \{\} <br /> |
+| `name` _string_ | Name is the dashboard name, unique within its workbench.<br />If not set, metadata.name is used. |  | Optional: \{\} <br />Type: string <br /> |
+| `description` _string_ | Description is an optional dashboard description. |  | Optional: \{\} <br />Type: string <br /> |
+| `graphs` _[DashboardGraph](#dashboardgraph) array_ | Graphs arranged on the dashboard grid. Graph identifiers must be unique within the dashboard.<br />Graphs can be grouped by setting sectionId to the identifier of a SECTION graph.<br />Note that overlapping graph layouts are only validated by the Console API. |  | MaxItems: 200 <br />Optional: \{\} <br /> |
+| `inputs` _[DashboardInput](#dashboardinput) array_ | Inputs are user-configurable dashboard variables. |  | Optional: \{\} <br /> |
+| `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource. |  | Optional: \{\} <br /> |
+
+
 #### DeploymentSettings
 
 
@@ -2417,6 +2563,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `plural` _boolean_ | Plural enables built-in Plural JWT authentication for this MCP server.<br />When true, the server will receive a valid Plural JWT token in requests,<br />allowing it to authenticate and authorize operations within the Plural ecosystem. |  | Optional: \{\} <br /> |
+| `oauth` _[OAuth2TokenExchange](#oauth2tokenexchange)_ | OAuth configures client credentials token exchange for requests to this server. |  | Optional: \{\} <br /> |
 | `headers` _object (keys:string, values:string)_ | Headers specify custom HTTP headers required for authentication with this MCP server.<br />This allows integration with servers that use API keys, bearer tokens, or other<br />header-based authentication schemes. Common examples include "Authorization",<br />"X-API-Key", or custom authentication headers. |  | Optional: \{\} <br /> |
 
 
@@ -2523,6 +2670,219 @@ _Appears in:_
 | `enabled` _boolean_ | Enabled defines whether to enable the metrics export or not. | false | Optional: \{\} <br /> |
 | `endpoint` _string_ | Endpoint is the OpenTelemetry collector endpoint to send metrics to. |  | Optional: \{\} <br /> |
 | `crontab` _string_ | Crontab is the cron expression for how often to export metrics.<br />Example: "*/5 * * * *" for every 5 minutes. |  | Optional: \{\} <br /> |
+
+
+#### Monitor
+
+
+
+Monitor represents an observability monitor attached to a service deployment. It periodically
+evaluates a log or metrics query against a threshold and fires alerts when it is crossed.
+Optionally, it can be attached to a workbench to start an investigation when it fires.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `Monitor` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[MonitorSpec](#monitorspec)_ | Spec defines the desired state of the Monitor. |  | Required: \{\} <br /> |
+
+
+#### MonitorFacet
+
+
+
+MonitorFacet is a key/value facet used to further filter log queries.
+
+
+
+_Appears in:_
+- [MonitorLogQuery](#monitorlogquery)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `key` _string_ | Key is the facet key (e.g. kubernetes namespace or pod label name). |  | Required: \{\} <br />Type: string <br /> |
+| `value` _string_ | Value is the facet value to match for the given key. |  | Required: \{\} <br />Type: string <br /> |
+
+
+#### MonitorLogAzureOptions
+
+
+
+MonitorLogAzureOptions are Azure-specific log query options.
+
+
+
+_Appears in:_
+- [MonitorLogOptions](#monitorlogoptions)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `resourceId` _string_ | ResourceID is the Azure resource ID to query logs for. |  | Optional: \{\} <br />Type: string <br /> |
+
+
+#### MonitorLogOptions
+
+
+
+MonitorLogOptions are provider-specific log query options.
+
+
+
+_Appears in:_
+- [MonitorLogQuery](#monitorlogquery)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `azure` _[MonitorLogAzureOptions](#monitorlogazureoptions)_ | Azure log query options. |  | Optional: \{\} <br /> |
+
+
+#### MonitorLogQuery
+
+
+
+MonitorLogQuery is the log query configuration for a monitor.
+
+
+
+_Appears in:_
+- [MonitorQuery](#monitorquery)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `tool` _string_ | Tool is the named workbench logs tool. When omitted, the native Plural logs provider is used. |  | Optional: \{\} <br />Type: string <br /> |
+| `query` _string_ | Query is the log query string passed through to the underlying log provider. |  | MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+| `bucketSize` _string_ | BucketSize is the time bucket size (e.g. 5m) used when aggregating log results. |  | Pattern: `^[0-9]+[dmhs]$` <br />Required: \{\} <br />Type: string <br /> |
+| `duration` _string_ | Duration is the lookback duration for the log query (e.g. 1h, 10m, 30s). |  | Optional: \{\} <br />Pattern: `^[0-9]+[dmhs]$` <br />Type: string <br /> |
+| `operator` _[MonitorOperator](#monitoroperator)_ | Operator to use when combining multiple log queries.<br />Defaults to OR, which is also the Console API default. | OR | Enum: [OR AND] <br />Optional: \{\} <br /> |
+| `facets` _[MonitorFacet](#monitorfacet) array_ | Facets are optional key/value facets applied as additional filters on the log query. |  | Optional: \{\} <br /> |
+| `options` _[MonitorLogOptions](#monitorlogoptions)_ | Options are provider-specific log query options. |  | Optional: \{\} <br /> |
+
+
+#### MonitorMetricsAzureOptions
+
+
+
+MonitorMetricsAzureOptions are Azure-specific metrics query options.
+
+
+
+_Appears in:_
+- [MonitorMetricsOptions](#monitormetricsoptions)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `resourceId` _string_ | ResourceID is the Azure resource ID to query metrics for. |  | Optional: \{\} <br />Type: string <br /> |
+| `metricsNamespace` _string_ | MetricsNamespace is the Azure metrics namespace. |  | Optional: \{\} <br />Type: string <br /> |
+| `aggregation` _string_ | Aggregation is the Azure metrics aggregation type. |  | Optional: \{\} <br />Type: string <br /> |
+| `filter` _string_ | Filter is the Azure metrics filter expression. |  | Optional: \{\} <br />Type: string <br /> |
+| `orderBy` _string_ | OrderBy is the Azure metrics ordering expression. |  | Optional: \{\} <br />Type: string <br /> |
+| `rollUpBy` _string_ | RollUpBy is the Azure metrics dimension to roll up by. |  | Optional: \{\} <br />Type: string <br /> |
+| `metricsEndpoint` _string_ | MetricsEndpoint is the Azure metrics endpoint override. |  | Optional: \{\} <br />Type: string <br /> |
+
+
+#### MonitorMetricsOptions
+
+
+
+MonitorMetricsOptions are provider-specific metrics query options.
+
+
+
+_Appears in:_
+- [MonitorMetricsQuery](#monitormetricsquery)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `azure` _[MonitorMetricsAzureOptions](#monitormetricsazureoptions)_ | Azure metrics query options. |  | Optional: \{\} <br /> |
+
+
+#### MonitorMetricsQuery
+
+
+
+MonitorMetricsQuery is the metrics query configuration for a monitor.
+
+
+
+_Appears in:_
+- [MonitorQuery](#monitorquery)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `tool` _string_ | Tool is the named workbench metrics tool. When omitted, the native Plural metrics provider is used. |  | Optional: \{\} <br />Type: string <br /> |
+| `query` _string_ | Query is the metrics query string passed through to the underlying metrics provider. |  | MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+| `step` _string_ | Step is the metrics query step (e.g. 5m). |  | Optional: \{\} <br />Pattern: `^[0-9]+[dmhs]$` <br />Type: string <br /> |
+| `duration` _string_ | Duration is the lookback duration for the metrics query (e.g. 1h). |  | Optional: \{\} <br />Pattern: `^[0-9]+[dmhs]$` <br />Type: string <br /> |
+| `options` _[MonitorMetricsOptions](#monitormetricsoptions)_ | Options are provider-specific metrics query options. |  | Optional: \{\} <br /> |
+
+
+#### MonitorQuery
+
+
+
+MonitorQuery is a wrapper for the underlying query definition for a monitor.
+Exactly one of log or metrics should be set, matching the monitor type.
+
+
+
+_Appears in:_
+- [MonitorSpec](#monitorspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `log` _[MonitorLogQuery](#monitorlogquery)_ | Log query used when the monitor type is LOG. |  | Optional: \{\} <br /> |
+| `metrics` _[MonitorMetricsQuery](#monitormetricsquery)_ | Metrics query used when the monitor type is METRICS. |  | Optional: \{\} <br /> |
+
+
+#### MonitorSpec
+
+
+
+MonitorSpec defines the desired state of a Monitor.
+
+
+
+_Appears in:_
+- [Monitor](#monitor)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `name` _string_ | Name is the short name used to identify this monitor in the Console API.<br />If not set, metadata.name is used. |  | Optional: \{\} <br />Type: string <br /> |
+| `serviceRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ | ServiceRef references the ServiceDeployment resource this monitor is attached to.<br />The ServiceDeployment must be in the same namespace as the monitor.<br />Either ServiceRef or Service must be set. |  | Optional: \{\} <br /> |
+| `service` _string_ | Service references an existing service in the Console API this monitor is attached to,<br />in the format "cluster-handle/service-name" (e.g. mgmt/console). Use it to attach<br />a monitor to a service that is not managed by a ServiceDeployment resource.<br />Either ServiceRef or Service must be set. |  | Optional: \{\} <br />Pattern: `^[^/]+/[^/]+$` <br />Type: string <br /> |
+| `workbenchRef` _[LocalObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#localobjectreference-v1-core)_ | WorkbenchRef references the Workbench this monitor is attached to.<br />When set, the monitor can start a workbench investigation when it fires.<br />It is required if the query uses a named workbench tool.<br />The Workbench must be in the same namespace as the monitor. |  | Optional: \{\} <br /> |
+| `prompt` _string_ | Prompt is used when the monitor starts a workbench investigation. |  | MaxLength: 2048 <br />Optional: \{\} <br />Type: string <br /> |
+| `modes` _[WorkbenchJobModes](#workbenchjobmodes)_ | Modes defines mode-specific options for monitor-triggered workbench jobs. |  | Optional: \{\} <br /> |
+| `description` _string_ | Description is an optional free-form description of what this monitor is checking. |  | Optional: \{\} <br />Type: string <br /> |
+| `alertTemplate` _string_ | AlertTemplate is an optional template used when rendering alert messages for this monitor. |  | Optional: \{\} <br />Type: string <br /> |
+| `severity` _[AlertSeverity](#alertseverity)_ | Severity is the severity level applied to alerts generated by this monitor. |  | Enum: [LOW MEDIUM HIGH CRITICAL UNDEFINED] <br />Required: \{\} <br /> |
+| `type` _[MonitorType](#monitortype)_ | Type is the monitor data type. |  | Enum: [LOG METRICS] <br />Required: \{\} <br /> |
+| `evaluationCron` _string_ | EvaluationCron is the cron schedule defining when the monitor is evaluated (e.g. */5 * * * *).<br />It must be a cron expression with 5 fields (or 6 with an optional year), separated by single spaces,<br />or one of the @yearly, @annually, @monthly, @weekly, @daily, @midnight, @hourly, @minutely,<br />@secondly or @reboot shortcuts. Field values are validated by the Console API. |  | MinLength: 1 <br />Pattern: `^(@(?i:yearly\|annually\|monthly\|weekly\|daily\|midnight\|hourly\|minutely\|secondly\|reboot)\|[^ ]+( [^ ]+)\{4,5\})$` <br />Required: \{\} <br />Type: string <br /> |
+| `query` _[MonitorQuery](#monitorquery)_ | Query is the underlying query configuration used to fetch data for this monitor. |  | Required: \{\} <br /> |
+| `threshold` _[MonitorThreshold](#monitorthreshold)_ | Threshold is the configuration that determines when the monitor should fire. |  | Required: \{\} <br /> |
+| `reconciliation` _[Reconciliation](#reconciliation)_ | Reconciliation settings for this resource. |  | Optional: \{\} <br /> |
+
+
+#### MonitorThreshold
+
+
+
+MonitorThreshold is the threshold configuration used to decide when a monitor should fire.
+
+
+
+_Appears in:_
+- [MonitorSpec](#monitorspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `aggregate` _[MonitorAggregate](#monitoraggregate)_ | Aggregate is the aggregation function applied over the result set. |  | Enum: [MAX MIN AVG] <br />Required: \{\} <br /> |
+| `value` _string_ | Value is the numeric value the aggregated metric must cross to trigger the alert.<br />It is a string to allow decimal values (e.g. "0.95"). |  | Pattern: `^-?[0-9]+(\.[0-9]+)?$` <br />Required: \{\} <br />Type: string <br /> |
 
 
 #### NamespaceCredentials
@@ -2699,19 +3059,27 @@ _Appears in:_
 
 
 
-OAuth2TokenExchange configures OAuth2 client credentials token endpoint exchange for OpenAI-compatible APIs.
+OAuth2TokenExchange configures OAuth2 client credentials token endpoint exchange.
 
 
 
 _Appears in:_
+- [MCPServerAuthentication](#mcpserverauthentication)
 - [OpenAISettings](#openaisettings)
+- [WorkbenchToolSpec](#workbenchtoolspec)
 
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `enabled` _boolean_ | Enabled turns token exchange on for obtaining access tokens via the configured token endpoint. |  | Optional: \{\} <br /> |
+| `type` _[OauthTokenExchangeType](#oauthtokenexchangetype)_ | Type selects client secret or signed JWT client assertion authentication. | CLIENT_SECRET | Enum: [CLIENT_SECRET CLIENT_ASSERTION] <br />Optional: \{\} <br /> |
 | `tokenUrl` _string_ | TokenURL is the OAuth2 token endpoint URL. |  | Optional: \{\} <br /> |
 | `clientId` _string_ | ClientID is the OAuth2 client identifier. |  | Optional: \{\} <br /> |
 | `clientSecretSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | ClientSecretSecretRef is a reference to a Kubernetes secret key holding the OAuth2 client secret. |  | Optional: \{\} <br /> |
+| `privateKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | PrivateKeySecretRef references a PEM-encoded RSA private key used to sign client assertions. |  | Optional: \{\} <br /> |
+| `keyId` _string_ | KeyID is added to the signed JWT header as kid when configured. |  | Optional: \{\} <br /> |
+| `audience` _string_ | Audience overrides the JWT aud claim. It defaults to tokenUrl. |  | Optional: \{\} <br /> |
+| `resource` _string_ | Resource is the OAuth resource parameter requested from the token endpoint. |  | Optional: \{\} <br /> |
+| `scopes` _string array_ | Scopes are sent as a space-separated OAuth scope parameter. |  | Optional: \{\} <br /> |
 
 
 #### OIDCProvider
@@ -3324,6 +3692,7 @@ _Appears in:_
 | `flows` _[PersonaFlows](#personaflows)_ | Flows controls access to flow-related features and sections.<br />This includes workbenches, pipelines, and preview environments grouped under flows. |  | Optional: \{\} <br /> |
 | `sidebar` _[PersonaSidebar](#personasidebar)_ | Sidebar configures which navigation items and sections are visible in the main sidebar.<br />This allows personas to have streamlined navigation focused on their primary workflows<br />while hiding irrelevant or restricted functionality. |  | Optional: \{\} <br /> |
 | `services` _[PersonaServices](#personaservices)_ | Services controls access to service-specific features and configuration options.<br />This includes service configuration, secrets management, and other service-level operations. |  | Optional: \{\} <br /> |
+| `settings` _[PersonaSettings](#personasettings)_ | Settings controls which tabs are visible within the Console settings page.<br />Tabs are visible by default and can be hidden by explicitly setting them to false. |  | Optional: \{\} <br /> |
 | `ai` _[PersonaAI](#personaai)_ | AI configures access to AI-powered features and capabilities within the Console.<br />This includes AI-assisted operations, automated suggestions, and other intelligent features. |  | Optional: \{\} <br /> |
 
 
@@ -3409,6 +3778,31 @@ _Appears in:_
 | --- | --- | --- | --- |
 | `secrets` _boolean_ | Secrets enables access to service secrets management when set to true.<br />This includes viewing, creating, and modifying secrets associated with services.<br />Typically restricted to platform engineers and senior developers who need<br />to manage service authentication and configuration secrets. |  | Optional: \{\} <br /> |
 | `configuration` _boolean_ | Configuration enables access to service configuration management when set to true.<br />This includes modifying service deployment settings, environment variables,<br />and other configuration parameters that affect service behavior. |  | Optional: \{\} <br /> |
+
+
+#### PersonaSettings
+
+
+
+PersonaSettings defines the visibility of tabs on the Console settings page.
+
+
+
+_Appears in:_
+- [PersonaConfiguration](#personaconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `userManagement` _boolean_ |  |  | Optional: \{\} <br /> |
+| `global` _boolean_ |  |  | Optional: \{\} <br /> |
+| `ai` _boolean_ |  |  | Optional: \{\} <br /> |
+| `webhooks` _boolean_ |  |  | Optional: \{\} <br /> |
+| `chatbots` _boolean_ |  |  | Optional: \{\} <br /> |
+| `cloudConnections` _boolean_ |  |  | Optional: \{\} <br /> |
+| `projects` _boolean_ |  |  | Optional: \{\} <br /> |
+| `notifications` _boolean_ |  |  | Optional: \{\} <br /> |
+| `audits` _boolean_ |  |  | Optional: \{\} <br /> |
+| `accessTokens` _boolean_ |  |  | Optional: \{\} <br /> |
 
 
 #### PersonaSidebar
@@ -4367,6 +4761,7 @@ _Appears in:_
 - [ComplianceReportGeneratorSpec](#compliancereportgeneratorspec)
 - [CustomCompatibilityMatrixSpec](#customcompatibilitymatrixspec)
 - [CustomStackRunSpec](#customstackrunspec)
+- [DashboardSpec](#dashboardspec)
 - [DeploymentSettingsSpec](#deploymentsettingsspec)
 - [FederatedCredentialSpec](#federatedcredentialspec)
 - [FlowSpec](#flowspec)
@@ -4378,6 +4773,7 @@ _Appears in:_
 - [InfrastructureStackSpec](#infrastructurestackspec)
 - [MCPServerSpec](#mcpserverspec)
 - [ManagedNamespaceSpec](#managednamespacespec)
+- [MonitorSpec](#monitorspec)
 - [NamespaceCredentialsSpec](#namespacecredentialsspec)
 - [NotificationRouterSpec](#notificationrouterspec)
 - [NotificationSinkSpec](#notificationsinkspec)
@@ -4900,6 +5296,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `email` _string_ | Email address that will be bound to this service account for identification<br />and authentication purposes. This email serves as the unique identifier<br />for the service account within the Console API. |  | Required: \{\} <br />Type: string <br /> |
+| `allowedScopes` _string array_ | AllowedScopes define the Console API endpoints that can be granted to access<br />tokens created for this service account. An empty list imposes no restriction. |  | Optional: \{\} <br /> |
 | `scopes` _[ServiceAccountScope](#serviceaccountscope) array_ | Scopes define the access boundaries for this service account, controlling<br />which Console APIs and resources it can interact with. Each scope can restrict<br />access to specific API endpoints and resource identifiers, enabling fine-grained<br />permission control for automated processes. |  | Optional: \{\} <br /> |
 | `tokenExpiry` _string_ | TokenExpiry is the TTL of the access token, e.g. 1h, 1d, 1w |  | Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretreference-v1-core)_ | TokenSecretRef references a Kubernetes secret that should contain the<br />authentication token for this service account. This enables secure storage<br />and management of credentials within the cluster. |  | Optional: \{\} <br /> |
@@ -5804,6 +6201,100 @@ _Appears in:_
 | `kubernetes` _boolean_ | Kubernetes enables the Kubernetes capability. |  | Optional: \{\} <br /> |
 
 
+#### WorkbenchJobBudget
+
+
+
+WorkbenchJobBudget defines budget limits for a workbench job.
+
+
+
+_Appears in:_
+- [WorkbenchJobModes](#workbenchjobmodes)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cost` _string_ | Cost is the maximum cost budget for the job.<br />It is a string to allow decimal values (e.g. "12.5"). |  | Optional: \{\} <br />Pattern: `^[0-9]+(\.[0-9]+)?$` <br />Type: string <br /> |
+| `tokens` _integer_ | Tokens is the maximum token budget for the job. |  | Minimum: 0 <br />Optional: \{\} <br /> |
+
+
+#### WorkbenchJobCodingModes
+
+
+
+WorkbenchJobCodingModes defines coding mode options for a workbench job.
+
+
+
+_Appears in:_
+- [WorkbenchJobModes](#workbenchjobmodes)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `babysit` _boolean_ | Babysit enables babysit mode for coding agent runs. |  | Optional: \{\} <br /> |
+| `approval` _boolean_ | Approval requires approval before coding agent runs continue. |  | Optional: \{\} <br /> |
+| `review` _boolean_ | Review enables pull request review mode for coding agent runs. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchJobKubernetesModes
+
+
+
+WorkbenchJobKubernetesModes defines kubernetes action options for a workbench job.
+
+
+
+_Appears in:_
+- [WorkbenchJobModes](#workbenchjobmodes)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `update` _boolean_ | Update enables kubernetes update actions. |  | Optional: \{\} <br /> |
+| `delete` _boolean_ | Delete enables kubernetes delete actions. |  | Optional: \{\} <br /> |
+| `exec` _boolean_ | Exec enables kubernetes exec actions. |  | Optional: \{\} <br /> |
+| `drain` _boolean_ | Drain enables kubernetes node drain actions. |  | Optional: \{\} <br /> |
+| `excludeNamespaces` _string array_ | ExcludeNamespaces are namespaces the agent can never act in. |  | Optional: \{\} <br /> |
+| `requireNamespaces` _string array_ | RequireNamespaces, if set, are the only namespaces the agent is allowed to act in. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchJobModel
+
+
+
+WorkbenchJobModel defines the AI model override for a workbench job.
+
+
+
+_Appears in:_
+- [WorkbenchJobModes](#workbenchjobmodes)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `provider` _[AiProvider](#aiprovider)_ | Provider is the AI provider for the job. |  | Enum: [OPENAI ANTHROPIC OLLAMA AZURE BEDROCK VERTEX OPENAI_COMPATIBLE XAI] <br />Required: \{\} <br /> |
+| `model` _string_ | Model is the model name for the job. |  | MinLength: 1 <br />Required: \{\} <br />Type: string <br /> |
+
+
+#### WorkbenchJobModes
+
+
+
+WorkbenchJobModes defines mode-specific options for workbench jobs.
+
+
+
+_Appears in:_
+- [MonitorSpec](#monitorspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `plan` _boolean_ | Plan enables planning mode for the job. |  | Optional: \{\} <br /> |
+| `verification` _boolean_ | Verification enables verification mode for the job. |  | Optional: \{\} <br /> |
+| `model` _[WorkbenchJobModel](#workbenchjobmodel)_ | Model overrides the AI model used for the job. |  | Optional: \{\} <br /> |
+| `coding` _[WorkbenchJobCodingModes](#workbenchjobcodingmodes)_ | Coding defines coding mode options for the job. |  | Optional: \{\} <br /> |
+| `budget` _[WorkbenchJobBudget](#workbenchjobbudget)_ | Budget defines budget limits for the job. |  | Optional: \{\} <br /> |
+| `kubernetes` _[WorkbenchJobKubernetesModes](#workbenchjobkubernetesmodes)_ | Kubernetes defines kubernetes action options for the job. |  | Optional: \{\} <br /> |
+
+
 #### WorkbenchObservabilityConfig
 
 
@@ -6103,6 +6594,7 @@ _Appears in:_
 | `opensearch` _[WorkbenchToolOpensearchConfig](#workbenchtoolopensearchconfig)_ | AWS OpenSearch connection (logs). |  | Optional: \{\} <br /> |
 | `prometheus` _[WorkbenchToolPrometheusConfig](#workbenchtoolprometheusconfig)_ | Prometheus connection (metrics). |  | Optional: \{\} <br /> |
 | `loki` _[WorkbenchToolLokiConfig](#workbenchtoollokiconfig)_ | Loki connection (logs). |  | Optional: \{\} <br /> |
+| `victoriaLogs` _[WorkbenchToolVictoriaLogsConfig](#workbenchtoolvictorialogsconfig)_ | VictoriaLogs connection (logs). |  | Optional: \{\} <br /> |
 | `tempo` _[WorkbenchToolTempoConfig](#workbenchtooltempoconfig)_ | Tempo connection (traces). |  | Optional: \{\} <br /> |
 | `jaeger` _[WorkbenchToolJaegerConfig](#workbenchtooljaegerconfig)_ | Jaeger connection (traces). |  | Optional: \{\} <br /> |
 | `splunk` _[WorkbenchToolSplunkConfig](#workbenchtoolsplunkconfig)_ | Splunk connection (logs). |  | Optional: \{\} <br /> |
@@ -6116,6 +6608,7 @@ _Appears in:_
 | `pagerduty` _[WorkbenchToolPagerdutyConfig](#workbenchtoolpagerdutyconfig)_ | PagerDuty connection (integration). |  | Optional: \{\} <br /> |
 | `teams` _[WorkbenchToolTeamsConfig](#workbenchtoolteamsconfig)_ | Microsoft Teams / Graph connection (integration). |  | Optional: \{\} <br /> |
 | `atlassian` _[WorkbenchToolAtlassianConfig](#workbenchtoolatlassianconfig)_ | Atlassian/jira connection (ticketing). |  | Optional: \{\} <br /> |
+| `jiraDatacenter` _[WorkbenchToolJiraDatacenterConfig](#workbenchtooljiradatacenterconfig)_ | Jira Data Center connection (ticketing). |  | Optional: \{\} <br /> |
 | `exa` _[WorkbenchToolExaConfig](#workbenchtoolexaconfig)_ | Exa connection (search). |  | Optional: \{\} <br /> |
 | `github` _[WorkbenchToolGithubConfig](#workbenchtoolgithubconfig)_ | GitHub connection (integration). |  | Optional: \{\} <br /> |
 | `gitlab` _[WorkbenchToolGitlabConfig](#workbenchtoolgitlabconfig)_ | GitLab connection (scm). |  | Optional: \{\} <br /> |
@@ -6312,6 +6805,23 @@ _Appears in:_
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 
 
+#### WorkbenchToolJiraDatacenterConfig
+
+
+
+WorkbenchToolJiraDatacenterConfig defines a Jira Data Center connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | Jira Data Center base URL. |  | Required: \{\} <br /> |
+| `apiTokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | APITokenSecretRef references a personal access token when OAuth is not used. |  | Optional: \{\} <br /> |
+
+
 #### WorkbenchToolLambdaConfig
 
 
@@ -6475,7 +6985,7 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `name` _string_ | The name of the tool (a-z, 0-9, underscores). If not set, metadata.name is used. |  | Optional: \{\} <br />Pattern: `^[a-z0-9_]+$` <br />Type: string <br /> |
-| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER EXA GITHUB SLACK TEAMS GITLAB BITBUCKET BITBUCKET_DATACENTER AZURE_DEVOPS PAGERDUTY OPENSEARCH LAMBDA CLOUD_RUN AZURE_FUNCTION DOCKER] <br />Required: \{\} <br /> |
+| `tool` _[WorkbenchToolType](#workbenchtooltype)_ | The type of tool. |  | Enum: [HTTP ELASTIC DATADOG PROMETHEUS LOKI TEMPO SENTRY MCP LINEAR ATLASSIAN SPLUNK DYNATRACE CLOUDWATCH AZURE CLOUD JAEGER EXA GITHUB SLACK TEAMS GITLAB BITBUCKET BITBUCKET_DATACENTER AZURE_DEVOPS PAGERDUTY OPENSEARCH LAMBDA CLOUD_RUN AZURE_FUNCTION DOCKER VICTORIA_LOGS JIRA JIRA_DATACENTER] <br />Required: \{\} <br /> |
 | `categories` _WorkbenchToolCategory array_ | Categories for the tool. |  | Optional: \{\} <br /> |
 | `approval` _boolean_ | Whether this tool requires approval before execution. |  | Optional: \{\} <br /> |
 | `projectRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The project for this tool. |  | Optional: \{\} <br /> |
@@ -6484,6 +6994,7 @@ _Appears in:_
 | `scmConnectionRef` _[ObjectReference](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectreference-v1-core)_ | The SCM connection for this tool (e.g. shared Git provider credentials). |  | Optional: \{\} <br /> |
 | `bindings` _[Bindings](#bindings)_ | Bindings define the read and write access policies for this tool. |  | Optional: \{\} <br /> |
 | `configuration` _[WorkbenchToolConfiguration](#workbenchtoolconfiguration)_ | Tool configuration (e.g. HTTP). |  | Optional: \{\} <br /> |
+| `oauth` _[OAuth2TokenExchange](#oauth2tokenexchange)_ | OAuth configures client credentials token exchange for this tool. |  | Optional: \{\} <br /> |
 | `reconciliation` _[Reconciliation](#reconciliation)_ |  |  | Optional: \{\} <br /> |
 
 
@@ -6501,7 +7012,8 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `url` _string_ | Splunk base URL. |  | Required: \{\} <br /> |
-| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the bearer token. |  | Optional: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the authentication token. |  | Optional: \{\} <br /> |
+| `tokenType` _[SplunkTokenType](#splunktokentype)_ | Authorization realm used for token authentication. | BEARER | Enum: [BEARER SPLUNK] <br />Optional: \{\} <br /> |
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 
@@ -6542,6 +7054,27 @@ _Appears in:_
 | `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
 | `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
 | `tenantId` _string_ | Optional tenant id. |  | Optional: \{\} <br /> |
+
+
+#### WorkbenchToolVictoriaLogsConfig
+
+
+
+WorkbenchToolVictoriaLogsConfig defines a VictoriaLogs connection.
+
+
+
+_Appears in:_
+- [WorkbenchToolConfiguration](#workbenchtoolconfiguration)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `url` _string_ | VictoriaLogs base URL. |  | Required: \{\} <br /> |
+| `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the bearer token or api key. |  | Optional: \{\} <br /> |
+| `username` _string_ | Basic auth username. |  | Optional: \{\} <br /> |
+| `passwordSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | Reference to a secret key containing the basic auth password. |  | Optional: \{\} <br /> |
+| `accountId` _string_ | Optional AccountID tenant header. |  | Optional: \{\} <br /> |
+| `projectId` _string_ | Optional ProjectID tenant header. |  | Optional: \{\} <br /> |
 
 
 #### WorkbenchWebhook
