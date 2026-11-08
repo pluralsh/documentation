@@ -14,6 +14,8 @@ Package v1alpha1 contains API Schema definitions for the deployments v1alpha1 AP
 - [AgentRuntime](#agentruntime)
 - [ClusterDrain](#clusterdrain)
 - [CustomHealth](#customhealth)
+- [CustomInsightPriority](#custominsightpriority)
+- [ImageWarmer](#imagewarmer)
 - [IngressReplica](#ingressreplica)
 - [KubecostExtractor](#kubecostextractor)
 - [MetricsAggregate](#metricsaggregate)
@@ -170,8 +172,10 @@ _Appears in:_
 | `prompt` _string_ | Prompt is the task/prompt given to the agent |  | Required: \{\} <br /> |
 | `repository` _string_ | Repository is the git repository the agent will work with |  | Required: \{\} <br /> |
 | `branch` _string_ | Branch is the repository branch the agent should operate on. If omitted, the repository default branch is used. |  | Optional: \{\} <br /> |
-| `mode` _[AgentRunMode](#agentrunmode)_ | Mode defines how the agent should run (ANALYZE, WRITE) |  | Required: \{\} <br /> |
+| `mode` _[AgentRunMode](#agentrunmode)_ | Mode defines how the agent should run (ANALYZE, WRITE, REVIEW) |  | Required: \{\} <br /> |
+| `reviewDepth` _[AgentReviewDepth](#agentreviewdepth)_ | ReviewDepth controls how far a review run explores code adjacent to the pull request changes. |  | Optional: \{\} <br /> |
 | `flowId` _string_ | FlowID is the flow this agent run is associated with (optional) |  | Optional: \{\} <br /> |
+| `workbenchMcpUrl` _string_ | WorkbenchMCPURL is the Console MCP endpoint for the workbench that<br />originated this run. It is populated by the AgentRuntime controller. |  | Optional: \{\} <br /> |
 | `language` _[AgentRunLanguage](#agentrunlanguage)_ | Language is the programming language used in the agent run.<br />Deprecated: No longer used for image selection. Enable dind on the AgentRuntime instead. |  | Optional: \{\} <br /> |
 | `languageVersion` _string_ | LanguageVersion is the version of the language to use, if you wish to specify.<br />Deprecated: No longer used for image selection. Enable dind on the AgentRuntime instead. |  | Optional: \{\} <br /> |
 
@@ -270,19 +274,26 @@ _Appears in:_
 | `bindings` _[AgentRuntimeBindings](#agentruntimebindings)_ | Bindings define the creation permissions for this agent runtime. |  | Optional: \{\} <br /> |
 | `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template defines the pod template for this agent runtime. |  |  |
 | `config` _[AgentRuntimeConfig](#agentruntimeconfig)_ | Config contains typed configuration depending on the chosen runtime type. |  | Optional: \{\} <br /> |
-| `aiProxy` _boolean_ | AiProxy routes LLM requests through the Console AI proxy (/ext/ai) using the deploy token,<br />so provider API keys in spec.config are optional.<br />Set the model on the runtime-specific config block (for example spec.config.codex.model).<br />The proxy expects models in provider/name format (for example openai/gpt-5.4,<br />anthropic/claude-sonnet-4-5, vertex/gemini-2.5-pro). Values that already include a "/"<br />are passed through unchanged.<br />When only a bare model id is given, the harness may prefix it by runtime type:<br />  - CLAUDE: anthropic/\{model\} (for example claude-sonnet-4-5 -> anthropic/claude-sonnet-4-5)<br />  - CODEX, OPENCODE: openai/\{model\} (for example gpt-5.4 -> openai/gpt-5.4)<br />  - GEMINI: vertex/\{model\}<br />  - CUSTOM: no automatic prefix; use provider/name explicitly |  |  |
+| `aiProxy` _boolean_ | AiProxy routes LLM requests through the Console AI proxy (/ext/ai) using the deploy token,<br />which the in-pod mcpserver sidecar adds, so provider API keys in spec.config are optional.<br />Set the model on the runtime-specific config block (for example spec.config.codex.model).<br />The proxy expects models in provider/name format (for example openai/gpt-5.4,<br />anthropic/claude-sonnet-4-5, vertex/gemini-2.5-pro). Values that already include a "/"<br />are passed through unchanged.<br />When only a bare model id is given, the harness may prefix it by runtime type:<br />  - CLAUDE: anthropic/\{model\} (for example claude-sonnet-4-5 -> anthropic/claude-sonnet-4-5)<br />  - CODEX, OPENCODE: openai/\{model\} (for example gpt-5.4 -> openai/gpt-5.4)<br />  - GEMINI: vertex/\{model\}<br />  - CUSTOM: no automatic prefix; use provider/name explicitly |  |  |
 | `streamingProxy` _boolean_ | StreamingProxy routes OpenAI-compatible LLM requests through the in-pod mcpserver<br />sse conversion proxy before they reach the Console AI proxy (/ext/ai). Only valid when aiProxy<br />is enabled. Applies to CODEX and OPENCODE runtimes. |  | Optional: \{\} <br /> |
 | `dind` _boolean_ | Dind enables Docker-in-Docker for this agent runtime.<br />When true, the runtime will be configured to run with DinD support. |  | Optional: \{\} <br /> |
 | `memory` _boolean_ | Memory enables team-shared codebase-memory persistence for this agent runtime.<br />When true, agents may create and commit .codebase-memory/ graph artifacts<br />by default so future runs can bootstrap from the persisted index. When false<br />or unset, codebase-memory indexes stay in the pod-local cache and generated<br />.codebase-memory/ artifacts are excluded from commits. |  | Optional: \{\} <br /> |
+| `repositoryImage` _string_ | RepositoryImage is an OCI image of precloned git repositories plus manifest.json.<br />When set, an init container copies it into /plural/shared/repos before bootstrap<br />so a matching repo can be copied locally instead of git clone. |  | Optional: \{\} <br /> |
+| `prewarm` _[RepositoryImagePrewarm](#repositoryimageprewarm)_ | Prewarm periodically pulls RepositoryImage onto selected nodes before<br />agent runs are scheduled. |  | Optional: \{\} <br /> |
 | `allowedRepositories` _string array_ | AllowedRepositories the git repositories allowed to be used with this runtime. |  | Optional: \{\} <br /> |
 | `browser` _[BrowserConfig](#browserconfig)_ | Browser configuration augments agent runtime with a headless browser.<br />When provided, the runtime will be configured to run with a headless browser available<br />for the agent to use. |  | Optional: \{\} <br /> |
 | `bootstrapScript` _string_ | BootstrapScript is a bash script that will be executed inside the cloned repository<br />directory before the coding agent starts. It can be used to install dependencies,<br />configure tooling, or perform any other setup required by the agent. |  | Optional: \{\} <br /> |
+| `readOnlyRootFilesystem` _boolean_ | ReadOnlyRootFilesystem controls the default container securityContext.<br />When unset, the root filesystem stays writable (the current default).<br />Set true when extending a finished image that already contains compilers.<br />Set false (or leave unset) together with mise.config to run<br />`mise bootstrap --yes` at boot: https://mise.jdx.dev/bootstrap.html |  | Optional: \{\} <br /> |
+| `mise` _[MiseSpec](#misespec)_ | Mise supplies a mise.toml applied before the coding agent starts.<br />When the default container root is writable, the harness runs<br />`mise trust` and `mise bootstrap --yes`. When readOnlyRootFilesystem is true,<br />the config is still mounted so mise exec can use [tools] and [env],<br />but bootstrap is skipped. |  | Optional: \{\} <br /> |
 | `git` _[GitSpec](#gitspec)_ | Git configure commit signing on agent run. When provided, the runtime will be configured to sign git commits using the provided key reference. |  |  |
 | `babysitInterval` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | BabysitInterval configures the interval for the operator to check on the health of the agent runtime and perform necessary babysitting actions (e.g. restarting unhealthy runtimes). When not provided, a default interval of 1 minute will be used. |  |  |
 | `agentTTL` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | AgentTTL configures the maximum lifetime for agent run pods on this runtime. When not provided, a default TTL of 12 hours will be used. |  | Optional: \{\} <br /> |
 | `scmConnection` _string_ | ScmConnection is the name of an ScmConnection in Console to use for git operations on agent runs using this runtime.<br />This should match the name of an existing ScmConnection resource or connection created in the Plural UI. |  | Optional: \{\} <br /> |
 | `exaConnection` _[ExaConnection](#exaconnection)_ | ExaConnection enables Exa web search and content retrieval tools on the Plural MCP server. |  |  |
 | `mcpServers` _[MCPServer](#mcpserver) array_ | MCPServers are additional remote MCP servers made available to coding agents<br />on this runtime. Servers are expected to already be deployed and reachable<br />at the given URL. Built-in servers named "plural" and "codebase-memory-mcp"<br />are reserved and cannot be overridden. |  | Optional: \{\} <br /> |
+| `workbenchMcp` _[WorkbenchMCPConfig](#workbenchmcpconfig)_ | WorkbenchMCP exposes the originating workbench's read-only tools to coding<br />agents through the credential-isolating MCP sidecar. |  | Optional: \{\} <br /> |
+
+
 
 
 #### Binding
@@ -594,6 +605,45 @@ _Appears in:_
 
 
 
+#### CustomInsightPriority
+
+
+
+CustomInsightPriority sets the priority of failing objects in the cluster insights and the cluster health score.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `CustomInsightPriority` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[CustomInsightPrioritySpec](#custominsightpriorityspec)_ |  |  |  |
+
+
+#### CustomInsightPrioritySpec
+
+
+
+CustomInsightPrioritySpec defines how the insight priority of failing objects is decided.
+
+
+
+_Appears in:_
+- [CustomInsightPriority](#custominsightpriority)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `target` _[InsightTarget](#insighttarget)_ | Target selects the failing objects this script sets the priority of. |  | Optional: \{\} <br /> |
+| `precedence` _integer_ | Precedence decides which script owns an object that several targets match: the highest wins and ties are<br />broken by name. A script never sees objects it does not own, and scripts are not chained. |  | Optional: \{\} <br /> |
+| `engine` _[InsightEngine](#insightengine)_ | Engine the script is written for. | python | Enum: [python] <br />Optional: \{\} <br /> |
+| `script` _string_ | Script defines `evaluate(input)`, called with the objects this script owns in `input["rows"]`, and returns a<br />dictionary from the `uid` of a row to `\{"priority": "LOW\|MEDIUM\|HIGH\|CRITICAL\|IGNORE", "reason": "..."\}`.<br />Rows that are left out keep their built-in priority, IGNORE removes a row from the insights and the cluster health score.<br />Objects annotated with deployments.plural.sh/insight-priority are decided by the annotation and never reach the script.<br />See https://docs.plural.sh/plural-features/continuous-deployment/deployment-operator/insight-priority for the full guide. |  |  |
+
+
+
+
 #### ExaConnection
 
 
@@ -776,6 +826,46 @@ _Appears in:_
 | `vcluster` _[VClusterHelmConfiguration](#vclusterhelmconfiguration)_ | VCluster allows configuring vcluster specific helm chart options. |  | Optional: \{\} <br /> |
 
 
+#### ImageWarmer
+
+
+
+ImageWarmer is the Schema for the imagewarmers API.
+
+
+
+
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `apiVersion` _string_ | `deployments.plural.sh/v1alpha1` | | |
+| `kind` _string_ | `ImageWarmer` | | |
+| `metadata` _[ObjectMeta](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#objectmeta-v1-meta)_ | Refer to Kubernetes API documentation for fields of `metadata`. |  |  |
+| `spec` _[ImageWarmerSpec](#imagewarmerspec)_ |  |  |  |
+
+
+#### ImageWarmerSpec
+
+
+
+ImageWarmerSpec defines an image that should periodically be pulled onto
+every selected node.
+
+
+
+_Appears in:_
+- [ImageWarmer](#imagewarmer)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cron` _string_ | Cron is a standard five-field cron expression controlling how often the<br />image is refreshed. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `image` _string_ | Image is the OCI image to warm. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template optionally overrides the secure default warmer pod template. |  | Optional: \{\} <br /> |
+| `selector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#labelselector-v1-meta)_ | Selector restricts warming to nodes matching this label selector. |  | Optional: \{\} <br /> |
+
+
+
+
 #### IngressReplica
 
 
@@ -811,6 +901,80 @@ _Appears in:_
 | `ingressClassName` _string_ |  |  | Optional: \{\} <br /> |
 | `tls` _[IngressTLS](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#ingresstls-v1-networking) array_ |  |  | Optional: \{\} <br /> |
 | `hostMappings` _object (keys:string, values:string)_ |  |  | Required: \{\} <br /> |
+
+
+#### InsightEngine
+
+_Underlying type:_ _string_
+
+InsightEngine is the language an insight priority script is written in.
+
+_Validation:_
+- Enum: [python]
+
+_Appears in:_
+- [CustomInsightPrioritySpec](#custominsightpriorityspec)
+
+| Field | Description |
+| --- | --- |
+| `python` | InsightEnginePython evaluates the script as sandboxed Python.<br /> |
+
+
+#### InsightEvaluation
+
+
+
+InsightEvaluation is the outcome of the last time the script ran.
+
+
+
+_Appears in:_
+- [CustomInsightPriorityStatus](#custominsightprioritystatus)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `time` _[Time](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#time-v1-meta)_ | Time the script last ran with a different outcome than the one before. |  |  |
+| `matched` _integer_ | Matched is the number of failing objects the script owned. |  |  |
+| `overridden` _integer_ | Overridden is the number of objects the script gave a priority. |  |  |
+| `ignored` _integer_ | Ignored is the number of objects the script ignored. |  |  |
+| `durationMs` _integer_ | DurationMs is how long the script took. |  |  |
+
+
+#### InsightTarget
+
+
+
+InsightTarget selects the failing objects a script is responsible for. An object has to match every
+non-empty field, so an empty target matches everything.
+
+
+
+_Appears in:_
+- [CustomInsightPrioritySpec](#custominsightpriorityspec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `kinds` _[InsightTargetKind](#insighttargetkind) array_ | Kinds the script is responsible for. |  | Optional: \{\} <br /> |
+| `namespaces` _string array_ | Namespaces the script is responsible for. Cluster scoped objects only match when this is empty. |  | Optional: \{\} <br /> |
+| `labelSelector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#labelselector-v1-meta)_ | LabelSelector selects objects by their labels. |  | Optional: \{\} <br /> |
+
+
+#### InsightTargetKind
+
+
+
+InsightTargetKind selects objects by kind.
+
+
+
+_Appears in:_
+- [InsightTarget](#insighttarget)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `group` _string_ | Group of the kind, empty for the core group. |  | Optional: \{\} <br /> |
+| `version` _string_ | Version of the kind, any version matches when empty. |  | Optional: \{\} <br /> |
+| `kind` _string_ | Kind of the objects, for example StatefulSet. |  | MinLength: 1 <br /> |
 
 
 #### KubecostExtractor
@@ -908,6 +1072,23 @@ MetricsAggregate
 
 
 
+#### MiseSpec
+
+
+
+MiseSpec is an inline mise.toml used for unattended bootstrap.
+See https://mise.jdx.dev/bootstrap.html
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `config` _string_ | Config is the contents of a mise.toml. |  | Optional: \{\} <br /> |
+
+
 #### OpenCodeConfig
 
 
@@ -922,9 +1103,10 @@ _Appears in:_
 | Field | Description | Default | Validation |
 | --- | --- | --- | --- |
 | `openaiCompatible` _[OpenCodeOpenAICompatibleConfig](#opencodeopenaicompatibleconfig)_ | OpenAICompatible configures a custom OpenAI-compatible provider block in opencode.json.<br />When set (and aiProxy is false), provider and endpoint on this struct are ignored in favor<br />of the nested openaiCompatible fields. |  | Optional: \{\} <br /> |
-| `provider` _string_ | Provider is the OpenCode provider id from https://models.dev (for example openai, anthropic,<br />amazon-bedrock, google-vertex, google). Optional.<br />When the parent AgentRuntime has spec.aiProxy enabled, the harness ignores this field and<br />autowires provider "plural", routing requests through the Console AI proxy at /ext/ai/v1<br />using the deploy token. Set spec.config.opencode.model to a bare model id; the harness<br />prefixes it for proxy routing based on runtime type (for example gpt-5.4 -> openai/gpt-5.4).<br />When aiProxy is false, this selects the native OpenCode provider block; credentials come from<br />tokenSecretRef or the provider's usual environment variables. Defaults to plural when omitted.<br />Use exact models.dev slugs (for example amazon-bedrock, google-vertex, google). |  | MaxLength: 128 <br />Optional: \{\} <br /> |
+| `provider` _string_ | Provider is the OpenCode provider id from https://models.dev (for example openai, anthropic,<br />amazon-bedrock, google-vertex, google). Optional.<br />When the parent AgentRuntime has spec.aiProxy enabled, the harness ignores this field and<br />autowires provider "plural", routing requests through the Console AI proxy at /ext/ai/v1<br />using the deploy token, which the in-pod mcpserver sidecar adds. Set<br />spec.config.opencode.model to a bare model id; the harness<br />prefixes it for proxy routing based on runtime type (for example gpt-5.4 -> openai/gpt-5.4).<br />When aiProxy is false, this selects the native OpenCode provider block; credentials come from<br />tokenSecretRef or the provider's usual environment variables. Defaults to plural when omitted.<br />Use exact models.dev slugs (for example amazon-bedrock, google-vertex, google). |  | MaxLength: 128 <br />Optional: \{\} <br /> |
 | `endpoint` _string_ | Endpoint optionally overrides the provider baseURL in opencode.json.<br />When omitted, the harness omits baseURL so OpenCode uses the models.dev default for the provider. |  | Optional: \{\} <br /> |
 | `model` _string_ | Model is the LLM model to use. |  | Optional: \{\} <br /> |
+| `method` _[OpenAiMethod](#openaimethod)_ | Method configures which OpenAI API OpenCode should use.<br />CHAT selects @ai-sdk/openai-compatible and forces /chat/completions.<br />RESPONSES selects @ai-sdk/openai and forces /responses.<br />AUTO preserves the provider default. |  | Enum: [CHAT RESPONSES AUTO] <br />Optional: \{\} <br /> |
 | `tokenSecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | TokenSecretRef references a Secret containing the API token for OpenCode.<br />Optional when aiProxy is enabled; authentication uses the Console deploy token instead. |  | Optional: \{\} <br /> |
 | `extraArgs` _string array_ | ExtraArgs args for advanced or experimental CLI flags.<br />Deprecated: It is being ignored by the agent harness. |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single opencode run invocation. |  | Optional: \{\} <br /> |
@@ -951,6 +1133,7 @@ _Appears in:_
 | `provider` _string_ | Provider is the OpenCode provider id from https://models.dev. |  |  |
 | `endpoint` _string_ | Endpoint API endpoint for the OpenCode service. |  |  |
 | `model` _string_ | Model is the LLM model to use. |  |  |
+| `method` _[OpenAiMethod](#openaimethod)_ | Method configures which OpenAI API OpenCode should use. |  |  |
 | `token` _string_ | Token is the raw API token for OpenCode. |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single opencode run invocation. |  | Optional: \{\} <br /> |
 
@@ -960,8 +1143,8 @@ _Appears in:_
 
 
 OpenCodeOpenAICompatibleConfig configures a custom OpenAI-compatible API provider in opencode.json.
-The harness writes a provider block with npm @ai-sdk/openai-compatible. Use this for endpoints
-that are not listed on https://models.dev (for example LiteLLM, vLLM, or a private gateway).
+Use this for endpoints that are not listed on https://models.dev (for example LiteLLM, vLLM,
+or a private gateway).
 
 When set and the parent AgentRuntime has spec.aiProxy false, spec.config.opencode.provider and
 spec.config.opencode.endpoint are ignored in favor of this block.
@@ -994,6 +1177,7 @@ _Appears in:_
 | `apiKeySecretRef` _[SecretKeySelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#secretkeyselector-v1-core)_ | APIKeySecretRef references an API key. Optional with aiProxy enabled. |  | Optional: \{\} <br /> |
 | `provider` _string_ | Provider is Pi's provider id. Defaults to openai. |  | Optional: \{\} <br /> |
 | `model` _string_ | Model is the model id to use. |  | Optional: \{\} <br /> |
+| `method` _[OpenAiMethod](#openaimethod)_ | Method configures which OpenAI API Pi should use.<br />CHAT selects openai-completions and forces /chat/completions.<br />RESPONSES selects openai-responses and forces /responses.<br />AUTO preserves the current openai-responses default. |  | Enum: [CHAT RESPONSES AUTO] <br />Optional: \{\} <br /> |
 | `endpoint` _string_ | Endpoint overrides the OpenAI-compatible provider base URL. |  | Optional: \{\} <br /> |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ | Timeout bounds a single Pi invocation. |  | Optional: \{\} <br /> |
 
@@ -1014,6 +1198,7 @@ _Appears in:_
 | `apiKey` _string_ |  |  |  |
 | `provider` _string_ |  |  |  |
 | `model` _string_ |  |  |  |
+| `method` _[OpenAiMethod](#openaimethod)_ |  |  |  |
 | `endpoint` _string_ |  |  |  |
 | `timeout` _[Duration](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#duration-v1-meta)_ |  |  |  |
 
@@ -1130,6 +1315,24 @@ _Appears in:_
 | `requireAnnotations` _object (keys:string, values:string)_ |  |  |  |
 
 
+#### RepositoryImagePrewarm
+
+
+
+RepositoryImagePrewarm configures periodic repository image warming.
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `cron` _string_ | Cron is a standard five-field cron expression controlling how often the<br />repository image is refreshed. |  | MinLength: 1 <br />Required: \{\} <br /> |
+| `template` _[PodTemplateSpec](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#podtemplatespec-v1-core)_ | Template optionally overrides the secure default warmer pod template. |  | Optional: \{\} <br /> |
+| `selector` _[LabelSelector](https://kubernetes.io/docs/reference/generated/kubernetes-api/v1.29/#labelselector-v1-meta)_ | Selector restricts warming to nodes matching this label selector. |  | Optional: \{\} <br /> |
+
+
 #### SentinelRunJob
 
 
@@ -1212,6 +1415,7 @@ _Appears in:_
 
 _Appears in:_
 - [AgentRunStatus](#agentrunstatus)
+- [AgentRuntimeStatus](#agentruntimestatus)
 - [SentinelRunJobStatus](#sentinelrunjobstatus)
 - [StackRunJobStatus](#stackrunjobstatus)
 - [VirtualClusterStatus](#virtualclusterstatus)
@@ -1320,5 +1524,52 @@ _Appears in:_
 | `helm` _[HelmSpec](#helmspec)_ | Helm allows configuring helm chart options of both agent and vcluster.<br />It is then deployed by the [VirtualCluster] CRD controller. |  | Optional: \{\} <br /> |
 
 
+
+
+#### WorkbenchMCPCategory
+
+_Underlying type:_ _string_
+
+WorkbenchMCPCategory is a workbench tool category accepted by the Console MCP endpoint.
+
+_Validation:_
+- Enum: [metrics logs integration ticketing traces error_tracking infrastructure search scm chat function coding verification observability]
+
+_Appears in:_
+- [WorkbenchMCPConfig](#workbenchmcpconfig)
+
+| Field | Description |
+| --- | --- |
+| `metrics` |  |
+| `logs` |  |
+| `integration` |  |
+| `ticketing` |  |
+| `traces` |  |
+| `error_tracking` |  |
+| `infrastructure` |  |
+| `search` |  |
+| `scm` |  |
+| `chat` |  |
+| `function` |  |
+| `coding` |  |
+| `verification` |  |
+| `observability` |  |
+
+
+#### WorkbenchMCPConfig
+
+
+
+
+
+
+
+_Appears in:_
+- [AgentRuntimeSpec](#agentruntimespec)
+
+| Field | Description | Default | Validation |
+| --- | --- | --- | --- |
+| `enabled` _boolean_ | Enabled controls whether workbench tools are available to coding agents. | false |  |
+| `categories` _[WorkbenchMCPCategory](#workbenchmcpcategory) array_ | Categories limits the exposed workbench tools. When omitted, the default<br />set is metrics, logs, traces, ticketing, search, scm, and infrastructure. |  | Enum: [metrics logs integration ticketing traces error_tracking infrastructure search scm chat function coding verification observability] <br />Optional: \{\} <br /> |
 
 
